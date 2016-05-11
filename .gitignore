@@ -2,4 +2,5 @@
 npm-debug.log
 .DS_Store
 .idea
-/build
+build/*
+!build/index.html

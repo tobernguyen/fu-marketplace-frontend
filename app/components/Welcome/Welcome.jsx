@@ -4,7 +4,7 @@ import './Welcome.scss'
 export default class Welcome extends Component {
   render() {
     return <div>
-      Welcome
+      Welcome <i className="fa fa-flag" />
     </div>;
   }
 }

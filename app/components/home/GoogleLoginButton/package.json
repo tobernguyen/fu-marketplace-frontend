@@ -1,0 +1,6 @@
+{
+  "name": "GoogleLoginButton",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./GoogleLoginButton.jsx"
+}

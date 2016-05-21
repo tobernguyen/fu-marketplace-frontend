@@ -1,0 +1,22 @@
+.slideshow {
+  .carousel-inner {
+    .item {
+      img {
+        width: 100%;
+      }
+    }
+
+    position: relative;
+  }
+
+  .intro {
+    position: absolute;
+    width: 100%;
+    top: 160px;
+    h1 {
+      color: #ffffff;
+      font-weight: 300;
+      padding-bottom: 26px;
+    }
+  }
+}

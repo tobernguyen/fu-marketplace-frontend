@@ -8,7 +8,7 @@ process.env.BABEL_ENV = TARGET;
 const PATHS = {
   app: path.join(__dirname, 'app'),
   build: path.join(__dirname, 'build')
-}
+};
 
 const common = {
   // Entry accepts a path or an object of entries. We'll be using the
@@ -19,6 +19,9 @@ const common = {
   output: {
     path: PATHS.build,
     filename: 'bundle.js'
+  },
+  resolve: {
+    root: __dirname
   },
   module: {
     loaders: [
@@ -32,8 +35,8 @@ const common = {
         loaders: ['style', 'css', 'sass']
       },
       {
-        test: /\.(png|woff|woff2|eot|ttf|svg)$/,
-        loader: 'url-loader?limit=100000'
+        test: /\.(png|jpg|gif)$/,
+        loader: 'url-loader?limit=8192'
       },
       {
         test: /\.css$/,

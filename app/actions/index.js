@@ -37,3 +37,17 @@ export const signInGoogle = (authCode) => {
   }
 };
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+export const GOOGLE_SIGN_OUT = 'GOOGLE_SIGN_OUT';
+export function signOutGoogle() {
+  return {
+    type: GOOGLE_SIGN_OUT
+  }
+}
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const AUTH_STATUS_IS_UPDATED = 'AUTH_STATUS_IS_UPDATED';
+export function authStatusIsUpdated() {
+  return {
+    type: AUTH_STATUS_IS_UPDATED
+  }
+}

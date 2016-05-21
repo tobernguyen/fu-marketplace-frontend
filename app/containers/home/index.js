@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { checkAuthStatus, signInGoogle } from '../../actions';
+import { checkAuthStatus, signInGoogle, signOutGoogle, authStatusIsUpdated } from '../../actions';
 import HomePage from './HomePage';
 import WelcomePage from './WelcomePage';
 
@@ -10,7 +10,10 @@ class Home extends Component {
     super(props);
     this.handleSignIn = (authResult) => {
       this.props.signInGoogle(authResult['code']);
-    }
+    };
+    this.handleSignOut = () => {
+      this.props.signOutGoogle();
+    };
   }
 
   componentWillMount() {
@@ -18,17 +21,19 @@ class Home extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.userId) {
+    if (nextProps.shouldUpdateAuthStatus) {
       this.props.checkAuthStatus();
+      // Set shouldUpdateAuthStatus state to false
+      this.props.authStatusIsUpdated();
     }
   }
 
   render() {
     var page;
-    
+
     const { isAuthenticated } = this.props;
     if (isAuthenticated) {
-      page = <HomePage />
+      page = <HomePage onSignOut={this.handleSignOut} />
     } else {
       page = <WelcomePage onSignIn={this.handleSignIn} />
     }
@@ -41,18 +46,21 @@ class Home extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    isAuthenticated:  state.authenticate.isAuthenticated,
-    userId:           state.authenticate.userId
+    isAuthenticated:        state.authenticate.isAuthenticated,
+    shouldUpdateAuthStatus: state.authenticate.shouldUpdateAuthStatus
   }
 };
 
 Home.propTypes = {
   checkAuthStatus:  PropTypes.func.isRequired,
   signInGoogle:     PropTypes.func.isRequired,
+  signOutGoogle:    PropTypes.func.isRequired,
   isAuthenticated:  PropTypes.bool.isRequired
 };
 
 export default connect(mapStateToProps, {
   checkAuthStatus,
-  signInGoogle
+  signInGoogle,
+  signOutGoogle,
+  authStatusIsUpdated
 })(Home)

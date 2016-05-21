@@ -1,11 +1,20 @@
 import React, { Component, PropTypes } from 'react';
+import Header from 'app/components/home/Header';
 
 export default class HomePage extends Component {
+  constructor(props) {
+    super(props);
+  }
+
   render() {
     return (
       <div>
-        This is Home Page
+        <Header onSignOut={this.props.onSignOut} />
       </div>
     );
   }
 }
+
+HomePage.propTypes = {
+  onSignOut: PropTypes.func.isRequired
+};

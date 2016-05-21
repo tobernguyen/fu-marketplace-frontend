@@ -22,7 +22,11 @@ const authenticate = (state = { isAuthenticated: false }, action) => {
       state = Object.assign({}, state, { isAuthenticated: (token != null) });
       break;
     case ActionTypes.GOOGLE_SIGN_IN_SUCCESS:
-      state = Object.assign({}, state, { userId: response.userId });
+    case ActionTypes.GOOGLE_SIGN_OUT:
+      state = Object.assign({}, state, { shouldUpdateAuthStatus: true });
+      break;
+    case ActionTypes.AUTH_STATUS_IS_UPDATED:
+      state = Object.assign({}, state, { shouldUpdateAuthStatus: false });
       break;
     default:
       break;

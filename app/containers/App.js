@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { resetErrorMessage } from '../actions';
 import { browserHistory } from 'react-router';
+import { bindActionCreators } from 'redux';
 import '../styles/App.scss';
 
 class App extends Component {
@@ -41,6 +42,6 @@ const mapStateToProps = state => ({
   errorMessage: state.errorMessage
 });
 
-export default connect(mapStateToProps, {
-  resetErrorMessage
-})(App)
+const mapDispatchToProps = dispatch => bindActionCreators({ resetErrorMessage}, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)

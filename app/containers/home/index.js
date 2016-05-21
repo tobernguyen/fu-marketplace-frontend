@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { checkAuthStatus, signInGoogle, signOutGoogle, authStatusIsUpdated } from '../../actions';
 import HomePage from './HomePage';
 import WelcomePage from './WelcomePage';
+import { bindActionCreators } from 'redux';
 
 
 class Home extends Component {
@@ -44,13 +45,6 @@ class Home extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    isAuthenticated:        state.authenticate.isAuthenticated,
-    shouldUpdateAuthStatus: state.authenticate.shouldUpdateAuthStatus
-  }
-};
-
 Home.propTypes = {
   checkAuthStatus:  PropTypes.func.isRequired,
   signInGoogle:     PropTypes.func.isRequired,
@@ -58,9 +52,19 @@ Home.propTypes = {
   isAuthenticated:  PropTypes.bool.isRequired
 };
 
-export default connect(mapStateToProps, {
+
+const mapStateToProps = (state) => {
+  return {
+    isAuthenticated:        state.authenticate.isAuthenticated,
+    shouldUpdateAuthStatus: state.authenticate.shouldUpdateAuthStatus
+  }
+};
+
+const mapDispatchToProps = (dispatch) => bindActionCreators({
   checkAuthStatus,
   signInGoogle,
   signOutGoogle,
   authStatusIsUpdated
-})(Home)
+  }, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home)

@@ -7,8 +7,8 @@ import Admin from './containers/admin';
 export default (
   <Route path="/" component={App}>
     <IndexRoute component={Home}/>
-    <Route path="/admin" >
-      <IndexRoute component={Admin} />
+    <Route path="/admin" component={Admin}>
+
     </Route>
   </Route>
 )

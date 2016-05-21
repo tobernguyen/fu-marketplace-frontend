@@ -1,10 +1,10 @@
 import React, { Component, PropTypes } from 'react';
 
-export default class LoginPage extends Component {
+export default class LoginForm extends Component {
   render() {
     return (
       <div>
-        This is Login Page
+        This is login form
       </div>
     );
   }

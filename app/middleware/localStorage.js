@@ -17,6 +17,9 @@ export default store => next => action => {
         window.localStorage.setItem(adminAccessTokenKey, response.id);
       }
       break;
+    case ActionTypes.ADMIN_SIGN_OUT:
+      window.localStorage.removeItem(adminAccessTokenKey);
+      break;
     default:
       break;
   }

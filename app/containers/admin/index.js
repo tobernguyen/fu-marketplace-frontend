@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { checkAdminAuthStatus, adminAuthStatusIsUpdated } from '../../actions';
+import { checkAdminAuthStatus, adminAuthStatusIsUpdated, signOutAdmin } from '../../actions';
 import LoginPage from './LoginPage';
 import AdminPage from './AdminPage';
 
@@ -27,7 +27,7 @@ class Admin extends Component {
 
     const { isAdminAuthenticated } = this.props;
     if (isAdminAuthenticated) {
-      page = <AdminPage />
+      page = <AdminPage children={this.props.children} onAdminSignOut={this.props.signOutAdmin} />
     } else {
       page = <LoginPage />
     }
@@ -48,10 +48,12 @@ const mapStateToProps = (state) => {
 
 Admin.propTypes = {
   checkAdminAuthStatus:  PropTypes.func.isRequired,
-  isAdminAuthenticated:  PropTypes.bool.isRequired
+  isAdminAuthenticated:  PropTypes.bool.isRequired,
+  signOutAdmin        :  PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, {
   checkAdminAuthStatus,
-  adminAuthStatusIsUpdated
+  adminAuthStatusIsUpdated,
+  signOutAdmin
 })(Admin)

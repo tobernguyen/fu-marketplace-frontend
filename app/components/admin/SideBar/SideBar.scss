@@ -1,0 +1,44 @@
+@import 'app/styles/variables.scss';
+
+.admin-page {
+  .sidebar {
+    background-color: $dark-color;
+
+    .nav > li > a {
+      color: #a7b1c2;
+      font-weight: 600;
+      padding: 14px 20px 14px 25px;
+      position: relative;
+      display: block;
+
+      i {
+        margin-right: 10px;
+      }
+
+      &:hover {
+        background-color: #293846;
+        color: white;
+      }
+    }
+    li.nav-header {
+      height: 50px;
+      background-color: #222;
+      a {
+        color: #FFF;
+
+      }
+    }
+  }
+  .navbar-static-side {
+    -webkit-transition: all 0.4s;
+    -moz-transition: all 0.4s;
+    -o-transition: all 0.4s;
+    transition: all 0.4s;
+
+    position: fixed;
+    width: 220px;
+    z-index: 2001;
+    height: 100%;
+  }
+}
+

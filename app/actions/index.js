@@ -37,7 +37,6 @@ export const signInGoogle = (authCode) => {
   }
 };
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 export const GOOGLE_SIGN_OUT = 'GOOGLE_SIGN_OUT';
 export function signOutGoogle() {
   return {
@@ -85,5 +84,12 @@ export const ADMIN_AUTH_STATUS_IS_UPDATED = 'ADMIN_AUTH_STATUS_IS_UPDATED';
 export function adminAuthStatusIsUpdated() {
   return {
     type: ADMIN_AUTH_STATUS_IS_UPDATED
+  }
+}
+
+export const ADMIN_SIGN_OUT = 'ADMIN_SIGN_OUT';
+export function signOutAdmin() {
+  return {
+    type: ADMIN_SIGN_OUT
   }
 }

@@ -28,6 +28,7 @@ const authenticate = (state = { isAuthenticated: false, isAdminAuthenticated: fa
     case ActionTypes.CHECK_ADMIN_AUTH_STATUS:
       return Object.assign({}, state, { isAdminAuthenticated: (adminToken != null) });
     case ActionTypes.ADMIN_SIGN_IN_SUCCESS:
+    case ActionTypes.ADMIN_SIGN_OUT:
       return Object.assign({}, state, { shouldUpdateAdminAuthStatus: true });
     case ActionTypes.ADMIN_AUTH_STATUS_IS_UPDATED:
       return Object.assign({}, state, { shouldUpdateAdminAuthStatus: false });

@@ -1,0 +1,36 @@
+@import 'app/styles/variables.scss';
+
+.admin-header {
+  .btn-toggle {
+    //border: 1px solid #ffffff;
+    //height: 40px;
+    //line-height: 10px;
+    //padding: 10px 12px;
+  }
+  > .navbar {
+    background-color: $primary-color;
+    border: 0;
+    border-radius: 0;
+    margin-bottom: 0;
+    ul {
+      li.open {
+        > a {
+          background-color: $dark-color;
+        }
+      }
+      a {
+        color: #fff;
+      }
+    }
+    ul.dropdown-menu {
+      a {
+        color: #222222;
+      }
+    }
+    .navbar-header {
+      a {
+        color: #ffffff;
+      }
+    }
+  }
+}

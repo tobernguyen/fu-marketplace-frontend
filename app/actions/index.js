@@ -1,5 +1,5 @@
 import { CALL_API, HTTP_METHODS } from '../middleware/api';
-import { accessTokenKey } from 'app/config';
+import { accessTokenKey, adminAccessTokenKey } from 'app/config';
 
 export const RESET_ERROR_MESSAGE = 'RESET_ERROR_MESSAGE';
 export function resetErrorMessage() {
@@ -8,6 +8,7 @@ export function resetErrorMessage() {
   }
 }
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const CHECK_AUTH_STATUS = 'CHECK_AUTH_STATUS';
 export const checkAuthStatus = () => {
   const token = window.localStorage.getItem(accessTokenKey);
@@ -16,7 +17,6 @@ export const checkAuthStatus = () => {
     token
   }
 };
-
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const GOOGLE_SIGN_IN_REQUEST = 'GOOGLE_SIGN_IN_REQUEST';
 export const GOOGLE_SIGN_IN_SUCCESS = 'GOOGLE_SIGN_IN_SUCCESS';
@@ -49,5 +49,41 @@ export const AUTH_STATUS_IS_UPDATED = 'AUTH_STATUS_IS_UPDATED';
 export function authStatusIsUpdated() {
   return {
     type: AUTH_STATUS_IS_UPDATED
+  }
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const CHECK_ADMIN_AUTH_STATUS = 'CHECK_ADMIN_AUTH_STATUS';
+export const checkAdminAuthStatus = () => {
+  const adminToken = window.localStorage.getItem(adminAccessTokenKey);
+  return {
+    type: CHECK_ADMIN_AUTH_STATUS,
+    adminToken
+  }
+};
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const ADMIN_SIGN_IN_REQUEST = 'ADMIN_SIGN_IN_REQUEST';
+export const ADMIN_SIGN_IN_SUCCESS = 'ADMIN_SIGN_IN_SUCCESS';
+export const ADMIN_SIGN_IN_FAILURE = 'ADMIN_SIGN_IN_FAILURE';
+const requestSignInAdmin = (formValues) => ({
+  [CALL_API]: {
+    types: [ADMIN_SIGN_IN_REQUEST, ADMIN_SIGN_IN_SUCCESS, ADMIN_SIGN_IN_FAILURE],
+    url: '/api/Clients/login',
+    method: HTTP_METHODS.POST,
+    params: formValues
+  }
+});
+
+// Relies on Redux Thunk middleware.
+export const signInAdmin = (formValues) => {
+  return (dispatch, getState) => {
+    return dispatch(requestSignInAdmin(formValues))
+  }
+};
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const ADMIN_AUTH_STATUS_IS_UPDATED = 'ADMIN_AUTH_STATUS_IS_UPDATED';
+export function adminAuthStatusIsUpdated() {
+  return {
+    type: ADMIN_AUTH_STATUS_IS_UPDATED
   }
 }

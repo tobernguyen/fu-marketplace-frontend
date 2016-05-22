@@ -16,7 +16,8 @@ const fetch = (method = HTTP_METHODS.GET, url = '', params = {}) => {
     url: fullURL,
     method: method,
     responseType: 'json',
-    params: params
+    params: method === HTTP_METHODS.GET ? params : {},
+    data: method !== HTTP_METHODS.GET ? params: {}
   }).then((response) => {
     return response.data
   }).catch((error) => {

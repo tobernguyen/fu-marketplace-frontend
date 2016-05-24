@@ -79,7 +79,7 @@ export default store => next => action => {
     })),
     error => next(actionWith({
       type: failureType,
-      error: error || 'Something bad happened'
+      error: error.message || 'Something bad happened'
     }))
   )
 }

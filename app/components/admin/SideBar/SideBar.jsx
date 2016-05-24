@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import { Link } from 'react-router';
 import './SideBar.scss';
 
 export default class SideBar extends Component {
@@ -8,25 +9,16 @@ export default class SideBar extends Component {
         <div className="sidebar-collapse">
           <ul className="nav">
             <li className="nav-header">
-              <a href="#">FU Marketplace</a>
+              <a href="/admin">FU Marketplace</a>
             </li>
             <li>
-              <a href="#">
-                <i className="fa fa-th-large"></i>
-                <span className="nav-label">Dashboard</span>
-              </a>
+              <Link to="/admin/dashboard"><i className="fa fa-th-large"></i> Dashboard</Link>
             </li>
             <li>
-              <a href="#">
-                <i className="fa fa-user"></i>
-                <span className="nav-label">User Management</span>
-              </a>
+              <Link to="/admin/users"><i className="fa fa-user"></i> User Management</Link>
             </li>
             <li>
-              <a href="#">
-                <i className="fa fa-shopping-bag"></i>
-                <span className="nav-label">Shop Management</span>
-              </a>
+              <Link to="/admin/shops"><i className="fa fa-shopping-bag"></i> Shop Management</Link>
             </li>
           </ul>
         </div>

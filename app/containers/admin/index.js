@@ -49,7 +49,7 @@ const mapStateToProps = (state) => {
 Admin.propTypes = {
   checkAdminAuthStatus:  PropTypes.func.isRequired,
   isAdminAuthenticated:  PropTypes.bool.isRequired,
-  signOutAdmin        :  PropTypes.func.isRequired,
+  signOutAdmin        :  PropTypes.func.isRequired
 };
 
 export default connect(mapStateToProps, {

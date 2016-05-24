@@ -1,11 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import UserManagement from 'app/components/admin/UserManagement';
 
-export default class UserManagement extends Component {
-  render() {
-    return (
-      <div className="dashboard">
-        This is UserManagement container
-      </div>
-    );
-  }
-}
+
+export default UserManagement;

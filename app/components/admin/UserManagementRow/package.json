@@ -1,0 +1,6 @@
+{
+  "name": "UserManagementRow",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./UserManagementRow.jsx"
+}

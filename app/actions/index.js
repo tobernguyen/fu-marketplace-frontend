@@ -93,3 +93,10 @@ export function signOutAdmin() {
     type: ADMIN_SIGN_OUT
   }
 }
+
+export const ADMIN_GET_USERS = 'ADMIN_GET_USERS';
+export function adminGetUsers() {
+  return {
+    type: ADMIN_GET_USERS
+  };
+}

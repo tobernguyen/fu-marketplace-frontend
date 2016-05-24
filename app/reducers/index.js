@@ -37,11 +37,22 @@ const authenticate = (state = { isAuthenticated: false, isAdminAuthenticated: fa
   }
 };
 
+import fakeData from './fakeData';
+
+const userReducer = (state = [], action) => {
+  switch(action.type) {
+    case ActionTypes.ADMIN_GET_USERS:
+      return fakeData
+  }
+  return state;
+}
+
 const rootReducer = combineReducers({
   errorMessage,
   authenticate,
   routing,
-  form: formReducer
+  form: formReducer,
+  users: userReducer
 });
 
 export default rootReducer

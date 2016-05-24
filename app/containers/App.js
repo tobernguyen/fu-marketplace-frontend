@@ -42,6 +42,6 @@ const mapStateToProps = state => ({
   errorMessage: state.errorMessage
 });
 
-const mapDispatchToProps = dispatch => bindActionCreators({ resetErrorMessage}, dispatch);
-
-export default connect(mapStateToProps, mapDispatchToProps)(App)
+export default connect(mapStateToProps, {
+  resetErrorMessage
+})(App)

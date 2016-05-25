@@ -22,9 +22,16 @@ export default class Header extends Component {
           </Navbar.Header>
           <Navbar.Collapse>
             <Nav pullRight>
-              <NavItem eventKey={1}><i className="fa fa-clock-o" aria-hidden="true"></i> 23:23:23</NavItem>
-              <NavItem eventKey={2} href="#"><i className="fa fa-home" aria-hidden="true"></i> Home</NavItem>
-              <NavItem eventKey={3} href="#"><i className="fa fa-bell" aria-hidden="true"></i> Notifications</NavItem>
+              <NavItem eventKey={1}>
+                <i className="fa fa-clock-o"></i> 23:23:23
+              </NavItem>
+              <NavItem eventKey={2} href="#">
+                <i className="fa fa-envelope fa-lg"></i>
+              </NavItem>
+              <NavItem eventKey={3} href="#">
+                <i className="fa fa-bell fa-lg"></i>
+                <span className="badge">3</span>
+              </NavItem>
               <NavDropdown eventKey={4} title="Administrator" id="basic-nav-dropdown">
                 <MenuItem eventKey={4.1} onSelect={onAdminSignOut}>Log out</MenuItem>
               </NavDropdown>

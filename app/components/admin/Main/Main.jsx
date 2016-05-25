@@ -9,7 +9,9 @@ export default class Main extends Component {
       <div className="admin-main">
         <Header onAdminSignOut={this.props.onAdminSignOut} />
         <Breadcrumb />
-        {this.props.children}
+        <div className="admin-content">
+          {this.props.children}
+        </div>
       </div>
     );
   }

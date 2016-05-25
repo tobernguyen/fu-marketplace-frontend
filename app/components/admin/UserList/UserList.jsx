@@ -5,17 +5,17 @@ import './UserList.scss';
 export default class UserList extends Component {
   render() {
     return (
-      <table className="table">
+      <table className="table table-striped">
         <thead>
           <tr>
-            <td>ID</td>
-            <td>User Name</td>
-            <td>Email</td>
-            <td>Full Name</td>
-            <td>Room</td>
-            <td>Phone</td>
-            <td>Ban Status</td>
-            <td>Actions</td>
+            <th>ID</th>
+            <th>User Name</th>
+            <th>Email</th>
+            <th>Full Name</th>
+            <th>Room</th>
+            <th>Phone</th>
+            <th>Banned</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>

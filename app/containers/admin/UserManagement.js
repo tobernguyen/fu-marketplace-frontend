@@ -27,7 +27,6 @@ UserManagement.propTypes = {
 };
 
 const mapStateToProps = state => {
-  console.log(state.admin.users);
   return {
     users: state.admin.users
   }

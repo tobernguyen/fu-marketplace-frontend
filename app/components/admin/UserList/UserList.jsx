@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import UserManagementRow from 'app/components/admin/UserManagementRow';
+import UserListRow from 'app/components/admin/UserListRow';
 import './UserList.scss';
 
 export default class UserList extends Component {
@@ -20,7 +20,7 @@ export default class UserList extends Component {
         </thead>
         <tbody>
         {this.props.users.map(user =>
-          <UserManagementRow key={user.id} user={user} />
+          <UserListRow key={user.id} user={user} editUser={this.props.editUser}/>
         )}
         </tbody>
       </table>
@@ -29,7 +29,8 @@ export default class UserList extends Component {
 }
 
 UserList.propTypes = {
-  users: PropTypes.array.isRequired
+  users: PropTypes.array.isRequired,
+  editUser: PropTypes.func.isRequired
 };
 
 UserList.defaultProps = {

@@ -96,3 +96,15 @@ export const adminGetUsers = () => ({
     method: HTTP_METHODS.GET
   }
 });
+
+export const ADMIN_EDIT_USERS_REQUEST = 'ADMIN_EDIT_USERS_REQUEST';
+export const ADMIN_EDIT_USERS_SUCCESS = 'ADMIN_EDIT_USERS_SUCCESS';
+export const ADMIN_EDIT_USERS_FAILURE = 'ADMIN_EDIT_USERS_FAILURE';
+export const adminEditUser = (user) => ({
+  [CALL_API]: {
+    types: [ADMIN_EDIT_USERS_REQUEST, ADMIN_EDIT_USERS_SUCCESS, ADMIN_EDIT_USERS_FAILURE],
+    url: `/Clients/${user.id}`,
+    params: user,
+    method: HTTP_METHODS.PUT
+  }
+});

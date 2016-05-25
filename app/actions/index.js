@@ -1,14 +1,6 @@
 import { CALL_API, HTTP_METHODS } from '../middleware/api';
 import { accessTokenKey, adminAccessTokenKey } from 'app/config';
 
-export const RESET_ERROR_MESSAGE = 'RESET_ERROR_MESSAGE';
-export function resetErrorMessage() {
-  return {
-    type: RESET_ERROR_MESSAGE
-  }
-}
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const CHECK_AUTH_STATUS = 'CHECK_AUTH_STATUS';
 export const checkAuthStatus = () => {
   const token = window.localStorage.getItem(accessTokenKey);
@@ -17,14 +9,14 @@ export const checkAuthStatus = () => {
     token
   }
 };
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 export const GOOGLE_SIGN_IN_REQUEST = 'GOOGLE_SIGN_IN_REQUEST';
 export const GOOGLE_SIGN_IN_SUCCESS = 'GOOGLE_SIGN_IN_SUCCESS';
 export const GOOGLE_SIGN_IN_FAILURE = 'GOOGLE_SIGN_IN_FAILURE';
 const requestSignInGoogle = (authCode) => ({
   [CALL_API]: {
     types: [GOOGLE_SIGN_IN_REQUEST, GOOGLE_SIGN_IN_SUCCESS, GOOGLE_SIGN_IN_FAILURE],
-    url: '/auth/google/callback',
+    url: '/auth/google',
     method: HTTP_METHODS.GET,
     params: { 'code': authCode }
   }
@@ -36,14 +28,14 @@ export const signInGoogle = (authCode) => {
     return dispatch(requestSignInGoogle(authCode))
   }
 };
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 export const GOOGLE_SIGN_OUT = 'GOOGLE_SIGN_OUT';
 export function signOutGoogle() {
   return {
     type: GOOGLE_SIGN_OUT
   }
 }
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 export const AUTH_STATUS_IS_UPDATED = 'AUTH_STATUS_IS_UPDATED';
 export function authStatusIsUpdated() {
   return {
@@ -51,7 +43,7 @@ export function authStatusIsUpdated() {
   }
 }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 export const CHECK_ADMIN_AUTH_STATUS = 'CHECK_ADMIN_AUTH_STATUS';
 export const checkAdminAuthStatus = () => {
   const adminToken = window.localStorage.getItem(adminAccessTokenKey);
@@ -60,14 +52,14 @@ export const checkAdminAuthStatus = () => {
     adminToken
   }
 };
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 export const ADMIN_SIGN_IN_REQUEST = 'ADMIN_SIGN_IN_REQUEST';
 export const ADMIN_SIGN_IN_SUCCESS = 'ADMIN_SIGN_IN_SUCCESS';
 export const ADMIN_SIGN_IN_FAILURE = 'ADMIN_SIGN_IN_FAILURE';
 const requestSignInAdmin = (formValues) => ({
   [CALL_API]: {
     types: [ADMIN_SIGN_IN_REQUEST, ADMIN_SIGN_IN_SUCCESS, ADMIN_SIGN_IN_FAILURE],
-    url: '/api/Clients/login',
+    url: '/Clients/login',
     method: HTTP_METHODS.POST,
     params: formValues
   }
@@ -79,7 +71,7 @@ export const signInAdmin = (formValues) => {
     return dispatch(requestSignInAdmin(formValues))
   }
 };
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 export const ADMIN_AUTH_STATUS_IS_UPDATED = 'ADMIN_AUTH_STATUS_IS_UPDATED';
 export function adminAuthStatusIsUpdated() {
   return {
@@ -94,9 +86,13 @@ export function signOutAdmin() {
   }
 }
 
-export const ADMIN_GET_USERS = 'ADMIN_GET_USERS';
-export function adminGetUsers() {
-  return {
-    type: ADMIN_GET_USERS
-  };
-}
+export const ADMIN_GET_USERS_REQUEST = 'ADMIN_GET_USERS_REQUEST';
+export const ADMIN_GET_USERS_SUCCESS = 'ADMIN_GET_USERS_SUCCESS';
+export const ADMIN_GET_USERS_FAILURE = 'ADMIN_GET_USERS_FAILURE';
+export const adminGetUsers = () => ({
+  [CALL_API]: {
+    types: [ADMIN_GET_USERS_REQUEST, ADMIN_GET_USERS_SUCCESS, ADMIN_GET_USERS_FAILURE],
+    url: '/Clients',
+    method: HTTP_METHODS.GET
+  }
+});

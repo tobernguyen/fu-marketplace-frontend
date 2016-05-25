@@ -39,10 +39,9 @@ class Admin extends Component {
 }
 
 const mapStateToProps = (state) => {
-
   return {
-    isAdminAuthenticated:        state.authenticate.isAdminAuthenticated,
-    shouldUpdateAdminAuthStatus: state.authenticate.shouldUpdateAdminAuthStatus
+    isAdminAuthenticated:        state.auth.isAdminAuthenticated,
+    shouldUpdateAdminAuthStatus: state.auth.shouldUpdateAdminAuthStatus
   }
 };
 

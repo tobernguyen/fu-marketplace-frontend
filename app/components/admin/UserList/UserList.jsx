@@ -1,15 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import UserManagementRow from 'app/components/admin/UserManagementRow';
-import { adminGetUser } from 'app/actions';
-import './UserManagement.scss';
+import './UserList.scss';
 
-export default class UserManagement extends Component {
-  componentDidMount() {
-    this.props.getUsers();
-  }
-  getData() {
-    return this.props.users;
-  }
+export default class UserList extends Component {
   render() {
     return (
       <table className="table">
@@ -26,11 +19,19 @@ export default class UserManagement extends Component {
           </tr>
         </thead>
         <tbody>
-          {this.getData().map(user =>
-            <UserManagementRow key={user.id} user={user} />
-          )}
+        {this.props.users.map(user =>
+          <UserManagementRow key={user.id} user={user} />
+        )}
         </tbody>
       </table>
     );
   }
 }
+
+UserList.propTypes = {
+  users: PropTypes.array.isRequired
+};
+
+UserList.defaultProps = {
+  users: []
+};

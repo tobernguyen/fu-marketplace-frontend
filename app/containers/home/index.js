@@ -55,8 +55,8 @@ Home.propTypes = {
 
 const mapStateToProps = (state) => {
   return {
-    isAuthenticated:        state.authenticate.isAuthenticated,
-    shouldUpdateAuthStatus: state.authenticate.shouldUpdateAuthStatus
+    isAuthenticated:        state.auth.isAuthenticated,
+    shouldUpdateAuthStatus: state.auth.shouldUpdateAuthStatus
   }
 };
 

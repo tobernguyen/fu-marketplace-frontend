@@ -1,19 +1,38 @@
 import React, { Component, PropTypes } from 'react';
-import UserManagement from 'app/components/admin/UserManagement';
 import { connect } from 'react-redux';
 import { adminGetUsers } from 'app/actions';
-import { bindActionCreators } from 'redux';
+import UserList from 'app/components/admin/UserList';
 
-const mapStateToProps = state => ({
-  users: state.users
-});
+class UserManagement extends Component {
+  constructor(props) {
+    super(props);
+  }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    getUsers: () => {
-      dispatch(adminGetUsers());
-    }
+  componentWillMount() {
+    this.props.adminGetUsers();
+  }
+
+  render() {
+    return (
+      <div>
+        <UserList users={this.props.users} />
+      </div>
+    );
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserManagement);
+UserManagement.propTypes = {
+  adminGetUsers:  PropTypes.func.isRequired,
+  users:          PropTypes.array.isRequired
+};
+
+const mapStateToProps = state => {
+  console.log(state.admin.users);
+  return {
+    users: state.admin.users
+  }
+};
+
+export default connect(mapStateToProps, {
+  adminGetUsers
+})(UserManagement)

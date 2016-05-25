@@ -1,6 +1,7 @@
 import axios from 'axios';
+import { adminAccessTokenKey, accessTokenKey } from 'app/config';
 
-const API_ROOT = 'http://localhost:3000';
+const API_ROOT = 'http://localhost:3000/api';
 
 export const HTTP_METHODS = {
   GET:    'GET',
@@ -10,12 +11,13 @@ export const HTTP_METHODS = {
   PATCH:  'PATCH'
 };
 
-const fetch = (method = HTTP_METHODS.GET, url = '', params = {}) => {
+const fetch = (method = HTTP_METHODS.GET, url = '', params = {}, authHeader = {}) => {
   const fullURL = `${API_ROOT}${url}`;
   return axios({
     url: fullURL,
     method: method,
     responseType: 'json',
+    headers: authHeader,
     params: method === HTTP_METHODS.GET ? params : {},
     data: method !== HTTP_METHODS.GET ? params: {}
   }).then((response) => {
@@ -59,6 +61,7 @@ export default store => next => action => {
     throw new Error('Expected action types to be strings.')
   }
 
+
   /**
    * Create a new action (because original should be immutable) and dispatch it
    * into reducers. It's unnecessary to send request info, so we remove it.
@@ -72,7 +75,20 @@ export default store => next => action => {
   }
   const [ requestType, successType, failureType ] = types;
   next(actionWith({ type: requestType }));
-  return fetch(method, url, params || {}).then(
+
+  var authHeader = {};
+  var token;
+  if (requestType.indexOf('ADMIN_') == 0) {
+    token = window.localStorage.getItem(adminAccessTokenKey);
+  } else {
+    token = window.localStorage.getItem(accessTokenKey);
+  }
+
+  if (token) {
+    authHeader = { 'Authorization': token };
+  }
+
+  return fetch(method, url, params || {}, authHeader).then(
     response => next(actionWith({
       response,
       type: successType

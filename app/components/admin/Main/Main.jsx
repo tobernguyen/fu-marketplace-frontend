@@ -8,7 +8,7 @@ export default class Main extends Component {
     return (
       <div className="admin-main">
         <Header onAdminSignOut={this.props.onAdminSignOut} />
-        <Breadcrumb />
+        <Breadcrumb activeRoute={this.props.activeRoute} />
         <div className="admin-content">
           {this.props.children}
         </div>
@@ -18,5 +18,6 @@ export default class Main extends Component {
 }
 
 Main.propTypes = {
-  onAdminSignOut: PropTypes.func.isRequired
+  onAdminSignOut: PropTypes.func.isRequired,
+  activeRoute: PropTypes.object.isRequired
 };

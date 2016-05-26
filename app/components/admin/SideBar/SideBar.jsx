@@ -13,7 +13,7 @@ export default class SideBar extends Component {
               <a href="/admin">FU Marketplace</a>
             </li>
             {this.props.adminRoutes.map((item, index) =>
-              <li key={index}>
+              <li key={index} className={classNames({'active': index == this.props.activeRouteIndex})}>
                 <Link to={`admin/${item.path}`}>
                   <i className={classNames('fa', item.component.faIcon)}></i> {item.component.title}
                 </Link>
@@ -26,3 +26,6 @@ export default class SideBar extends Component {
   }
 }
 
+SideBar.propsTypes = {
+  activeRouteIndex: PropTypes.bool.isRequired
+};

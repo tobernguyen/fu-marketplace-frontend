@@ -28,6 +28,10 @@
 
       }
     }
+    li.active > a {
+      background-color: #293846;
+      color: white;
+    }
   }
   .navbar-static-side {
     -webkit-transition: all 0.4s;

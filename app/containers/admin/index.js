@@ -28,8 +28,13 @@ class Admin extends Component {
     const { isAdminAuthenticated } = this.props;
     if (isAdminAuthenticated) {
       // TODO: This routes depend on route configuration at routes.js. If order is changed, it wouldn't worked.
-      const adminRoutes = this.props.routes[1].childRoutes || [];
-      page = <AdminPage children={this.props.children} onAdminSignOut={this.props.signOutAdmin} adminRoutes={adminRoutes} />
+      const routes = this.props.routes;
+      const adminRoutes = routes[1].childRoutes || [];
+      const activeRoute = routes[routes.length - 1];
+      page = <AdminPage children={this.props.children}
+                        onAdminSignOut={this.props.signOutAdmin}
+                        adminRoutes={adminRoutes}
+                        activeRoute={activeRoute} />
     } else {
       page = <LoginPage />
     }

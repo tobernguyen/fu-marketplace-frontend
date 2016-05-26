@@ -10,6 +10,7 @@ import ShopManagement from './containers/admin/ShopManagement';
 export default (
   <Route path="/" component={App}>
     <IndexRoute component={Home}/>
+
     <Route path="/admin" component={Admin}>
       <IndexRoute component={Dashboard}/>
       <Route path="dashboard" component={Dashboard} />

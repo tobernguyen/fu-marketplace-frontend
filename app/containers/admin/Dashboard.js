@@ -9,3 +9,9 @@ export default class Dashboard extends Component {
     );
   }
 }
+
+
+Dashboard.path = '/dashboard';
+Dashboard.title = 'Dashboard';
+Dashboard.description = 'Shop opening request & statistics';
+Dashboard.faIcon = 'fa-th-large';

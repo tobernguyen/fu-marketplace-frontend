@@ -27,6 +27,11 @@ UserManagement.propTypes = {
   users:          PropTypes.array.isRequired
 };
 
+UserManagement.path = '/users';
+UserManagement.title = 'User management';
+UserManagement.description = 'User management';
+UserManagement.faIcon = 'fa-users';
+
 const mapStateToProps = state => {
   return {
     users: state.admin.users

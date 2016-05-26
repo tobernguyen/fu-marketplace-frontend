@@ -6,13 +6,14 @@ export default class AdminPage extends Component {
   render() {
     return (
       <div className="admin-page">
-        <SideBar />
-        <Main children={this.props.children} onAdminSignOut={this.props.onAdminSignOut}/>
+        <SideBar adminRoutes={this.props.adminRoutes} />
+        <Main children={this.props.children} onAdminSignOut={this.props.onAdminSignOut} adminRoutes={this.props.adminRoutes}/>
       </div>
     )
   }
 }
 
 AdminPage.propTypes = {
-  onAdminSignOut: PropTypes.func.isRequired
+  onAdminSignOut: PropTypes.func.isRequired,
+  adminRoutes:    PropTypes.array.isRequired
 };

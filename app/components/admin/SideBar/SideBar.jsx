@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 import './SideBar.scss';
+import classNames from 'classnames';
 
 export default class SideBar extends Component {
   render() {
@@ -11,15 +12,13 @@ export default class SideBar extends Component {
             <li className="nav-header">
               <a href="/admin">FU Marketplace</a>
             </li>
-            <li>
-              <Link to="/admin/dashboard"><i className="fa fa-th-large"></i> Dashboard</Link>
-            </li>
-            <li>
-              <Link to="/admin/users"><i className="fa fa-user"></i> User Management</Link>
-            </li>
-            <li>
-              <Link to="/admin/shops"><i className="fa fa-shopping-bag"></i> Shop Management</Link>
-            </li>
+            {this.props.adminRoutes.map((item, index) =>
+              <li key={index}>
+                <Link to={`admin/${item.path}`}>
+                  <i className={classNames('fa', item.component.faIcon)}></i> {item.component.title}
+                </Link>
+              </li>
+            )}
           </ul>
         </div>
       </div>

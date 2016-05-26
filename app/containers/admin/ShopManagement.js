@@ -9,3 +9,9 @@ export default class ShopManagement extends Component {
     );
   }
 }
+
+
+ShopManagement.path = '/shops';
+ShopManagement.title = 'Shop management';
+ShopManagement.description = 'Shop management';
+ShopManagement.faIcon = 'fa-shopping-bag';

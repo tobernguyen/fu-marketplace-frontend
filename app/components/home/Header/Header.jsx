@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import './Header.scss';
 import { Navbar, NavItem, Nav, NavDropdown, MenuItem, FormGroup, FormControl, Button } from 'react-bootstrap';
+import { LinkContainer } from 'react-router-bootstrap';
 
 export default class Header extends Component {
   render() {
@@ -25,7 +26,12 @@ export default class Header extends Component {
               <NavItem eventKey={1} href="#"><i className="fa fa-home" aria-hidden="true"></i> Home</NavItem>
               <NavItem eventKey={2} href="#"><i className="fa fa-bell" aria-hidden="true"></i> Notifications</NavItem>
               <NavDropdown eventKey={3} title="Hieu Tran" id="basic-nav-dropdown">
-                <MenuItem eventKey={3.1}>Profile</MenuItem>
+                <LinkContainer to={{
+                  pathname: '/account',
+                  state: { modal: true }
+                }}>
+                  <MenuItem eventKey={3.1}>Account</MenuItem>
+                </LinkContainer>
                 <MenuItem eventKey={3.2}>My Orders</MenuItem>
                 <MenuItem divider />
                 <MenuItem eventKey={3.3}>Create Shop</MenuItem>

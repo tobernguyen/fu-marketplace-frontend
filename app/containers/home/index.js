@@ -32,9 +32,9 @@ class Home extends Component {
   render() {
     var page;
 
-    const { isAuthenticated } = this.props;
+    const { isAuthenticated, children } = this.props;
     if (isAuthenticated) {
-      page = <HomePage onSignOut={this.handleSignOut} />
+      page = <HomePage onSignOut={this.handleSignOut} children={children} />
     } else {
       page = <WelcomePage onSignIn={this.handleSignIn} />
     }

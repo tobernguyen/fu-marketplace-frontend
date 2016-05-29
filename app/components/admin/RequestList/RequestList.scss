@@ -1,0 +1,18 @@
+.admin-page {
+  .table {
+    td.actions {
+      ul {
+        width: 100%;
+        li {
+          float: left;
+          display: block;
+        }
+      }
+      button {
+        padding: 5px 0;
+        width: 36px;
+        height: 36px;
+      }
+    }
+  }
+}

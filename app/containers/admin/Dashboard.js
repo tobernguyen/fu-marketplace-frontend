@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
+import RequestList from 'app/components/admin/RequestList';
 
 export default class Dashboard extends Component {
   render() {
     return (
       <div className="dashboard">
-        This is dashboard container
+        <RequestList />
       </div>
     );
   }

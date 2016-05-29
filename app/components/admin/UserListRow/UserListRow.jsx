@@ -8,45 +8,40 @@ export default class UserManagementRow extends Component {
 
     this.state = {
       isEditing: false,
+      change : this.props.user
     };
-    let change = this.props.user
 
-    this.toggleEditMode = () => {
+    this.toggleEditMode = this.toggleEditMode.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleOnChange = this.handleOnChange.bind(this);
+    this.handleBanStatusChange = this.handleBanStatusChange.bind(this);
+    this.renderSelect = this.renderSelect.bind(this);
+  }
+
+  toggleEditMode(){
       this.setState({ isEditing: !this.state.isEditing });
+  }
+
+  handleOnChange(e) {
+      let unstagedChange = this.state.change;
+      unstagedChange[e.target.name] = e.target.value;
+      console.log(unstagedChange);
+      this.setState({change: unstagedChange});
     }
 
-    this.handleSubmit = () => {
-      this.props.editUser(change);
+  handleBanStatusChange(e) {
+      let unstagedChange = this.state.change;
+      unstagedChange['banStatus'] = e.target.value === "true" ? true : false;
+      this.setState({change: unstagedChange});
+  }
+  
+  handleSubmit() {
+      this.props.editUser(this.state.change);
 
       this.toggleEditMode();
-    }
-    this.handleUsernameChange = (e) => {
-      change.username = e.target.value;
-    }
-
-    this.handleEmailChange = (e) => {
-      change.email = e.target.value;
-    }
-
-    this.handleFullnameChange = (e) => {
-      change.fullname = e.target.value;
-    }
-
-    this.handleRoomChange = (e) => {
-      change.room = e.target.value;
-    }
-
-    this.handlePhoneChange = (e) => {
-      change.phone = e.target.value;
-    }
-
-    this.handleBanStatusChange = (e) => {
-      let newBanStatus = change.banStatus;
-      newBanStatus = e.target.value === "true" ? true : false;
-      change.banStatus = newBanStatus;
-    }
-
-    this.renderSelect = (banStatus) => {
+  }
+  
+  renderSelect(banStatus) {
       if(banStatus === true) {
         return (
           <FormControl componentClass="select" onChange={this.handleBanStatusChange}>
@@ -62,11 +57,8 @@ export default class UserManagementRow extends Component {
           <option value="false" selected>False</option>
         </FormControl>
       );
-    }
   }
-
-
-
+  
   render() {
     if (this.state.isEditing === false) {
       return (
@@ -108,41 +100,46 @@ export default class UserManagementRow extends Component {
             <td>
               <FormControl
                 type="text"
+                name="username"
                 placeholder="Username"
                 defaultValue={this.props.user.username}
-                onChange={this.handleUsernameChange}
+                onChange={this.handleOnChange}
                 />
             </td>
             <td>
               <FormControl
                 type="email"
+                name="email"
                 placeholder="Email"
                 defaultValue={this.props.user.email}
-                onChange={this.handleEmailChange}
+                onChange={this.handleOnChange}
                 />
             </td>
             <td>
               <FormControl
                 type="text"
+                name="fullname"
                 placeholder="Full Name"
                 defaultValue={this.props.user.fullname}
-                onChange={this.handleFullnameChange}
+                onChange={this.handleOnChange}
                 />
             </td>
             <td>
               <FormControl
                 type="text"
                 placeholder="Room"
+                name="room"
                 defaultValue={this.props.user.room}
-                onChange={this.handleRoomChange}
+                onChange={this.handleOnChange}
                 />
             </td>
             <td>
               <FormControl
                 type="text"
+                name="phone"
                 placeholder="Phone Number"
                 defaultValue={this.props.user.phone}
-                onChange={this.handlePhoneChange}
+                onChange={this.handleOnChange}
                 />
             </td>
             <td>

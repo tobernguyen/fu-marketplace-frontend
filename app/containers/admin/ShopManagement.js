@@ -1,10 +1,11 @@
 import React, { Component, PropTypes } from 'react';
+import ShopList from 'app/components/admin/ShopList';
 
 export default class ShopManagement extends Component {
   render() {
     return (
       <div className="dashboard">
-        This is ShopManagement container
+        <ShopList />
       </div>
     );
   }

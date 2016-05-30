@@ -3,10 +3,14 @@ import ModalHeader from 'app/components/home/ModalHeader';
 import AccountBasic from 'app/components/home/AccountBasic';
 
 class Account extends Component {
+  constructor(props) {
+    super(props);
+  }
+
   render() {
     return (
       <div>
-        <ModalHeader title="Account" subHeader="Change your basic account." />
+        <ModalHeader title="Account" subHeader="Change your basic account."/>
         <div className="modal-body">
           <AccountBasic />
         </div>

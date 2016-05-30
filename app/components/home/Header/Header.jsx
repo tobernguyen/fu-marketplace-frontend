@@ -8,7 +8,7 @@ export default class Header extends Component {
     const { onSignOut } = this.props;
     return (
       <div className="home-header">
-        <Navbar inverse>
+        <Navbar inverse fixedTop>
           <Navbar.Header>
             <Navbar.Brand>
               <a href="#">FU Marketplace</a>

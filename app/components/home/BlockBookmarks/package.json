@@ -1,0 +1,6 @@
+{
+  "name": "BlockBookmarks",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./BlockBookmarks.jsx"
+}

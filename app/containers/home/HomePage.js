@@ -3,6 +3,8 @@ import Header from 'app/components/home/Header';
 import { Modal } from 'react-bootstrap';
 import BlockItemList from 'app/components/home/BlockItemList';
 import BlockDormList from 'app/components/home/BlockDormList';
+import CarouselPinnedItems from 'app/components/home/CarouselPinnedItems';
+import BlockBookmarks from 'app/components/home/BlockBookmarks';
 
 export default class HomePage extends Component {
   constructor(props) {
@@ -39,11 +41,16 @@ export default class HomePage extends Component {
               <BlockItemList />
               <BlockDormList />
             </div>
-            <div className="col-md-6">
-              Center
-            </div>
-            <div className="col-md-3">
-              Right
+            <div className="col-md-9">
+              <CarouselPinnedItems />
+              <div className="row main-column">
+                <div className="col-md-8">
+                  Center
+                </div>
+                <div className="col-md-4">
+                  <BlockBookmarks />
+                </div>
+              </div>
             </div>
           </div>
         </div>

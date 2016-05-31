@@ -1,0 +1,28 @@
+.block-bookmark {
+  .body {
+    .bookmark-items {
+      li {
+        overflow: hidden;
+        position: relative;
+        min-height: 40px;
+        border-bottom: 1px dashed #EEE;
+        > a {
+          padding: 8px 0;
+          float: left;
+          display: block;
+          margin-right: 10px;
+        }
+        > h3 {
+          font-size: 15px;
+          margin: 10px;
+          a {
+            color: #666;
+          }
+        }
+      }
+      li:last-child {
+        border-bottom: 0;
+      }
+    }
+  }
+}

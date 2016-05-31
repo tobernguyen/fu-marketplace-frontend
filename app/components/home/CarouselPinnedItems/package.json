@@ -1,0 +1,6 @@
+{
+  "name": "CarouselPinnedItems",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./CarouselPinnedItems.jsx"
+}

@@ -1,0 +1,20 @@
+.block-dorm-list {
+  h3.title {
+    border-bottom: 0;
+  }
+  .body {
+    ul.dorm-list {
+      li {
+        float: left;
+        width: 25%;
+        padding: 2px;
+        a {
+          text-align: center;
+          font-weight: 700;
+          color: #666;
+          border: 2px dashed #CCC;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,19 @@
+.block-item-list {
+  .body {
+    ul {
+      li.item {
+        a {
+          padding: 8px 0;
+          span {
+            font-weight: 700;
+            color: #666;
+          }
+
+          &:hover {
+            background: none;
+          }
+        }
+      }
+    }
+  }
+}

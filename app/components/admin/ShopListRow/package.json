@@ -1,0 +1,6 @@
+{
+  "name": "ShopListRow",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./ShopListRow.jsx"
+}

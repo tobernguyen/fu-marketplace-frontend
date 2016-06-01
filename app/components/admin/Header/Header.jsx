@@ -14,9 +14,9 @@ export default class Header extends Component {
         <Navbar inverse fluid={true} staticTop={true}>
           <Navbar.Header>
             <Navbar.Brand>
-              <a href="#" className="btn btn-toggle">
+              <Button className="btn btn-toggle" onClick={this.props.toggleExpandSideBar}>
                 <i className="fa fa-bars"></i>
-              </a>
+              </Button>
             </Navbar.Brand>
             <Navbar.Toggle />
           </Navbar.Header>

@@ -5,8 +5,15 @@ import classNames from 'classnames';
 
 export default class SideBar extends Component {
   render() {
+    const sideBarClass = classNames({
+      'sidebar': true,
+      'navbar-default': true,
+      'navbar-static-side': true,
+      'hide': !this.props.isExpand
+    });
+
     return (
-      <div className="sidebar navbar-default navbar-static-side">
+      <div className={sideBarClass}>
         <div className="sidebar-collapse">
           <ul className="nav">
             <li className="nav-header">

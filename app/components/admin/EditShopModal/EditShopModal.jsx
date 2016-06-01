@@ -5,7 +5,7 @@ import TagInput from 'app/components/common/TagInput';
 class EditShopModal extends Component {
   render() {
     return (
-      <Modal show={this.props.showModal} onHide={this.props.closeEditModal} >
+      <Modal show={this.props.showModal} onHide={this.props.closeEditModal} bsSize="large">
         <Modal.Header closeButton>
           <Modal.Title>{this.props.shop.name}</Modal.Title>
         </Modal.Header>

@@ -11,7 +11,7 @@ export default class LoginForm extends Component {
   }
 
   render() {
-    const { fields: {username, password}, handleSubmit, submitting } = this.props;
+    const { fields: {email, password}, handleSubmit, submitting } = this.props;
 
     return (
       <div>
@@ -26,13 +26,13 @@ export default class LoginForm extends Component {
                 </div>
                 <div className="panel-body">
                   <form className="form-horizontal" onSubmit={handleSubmit(this.props.signInAdmin.bind(this))}>
-                    <div className={`input-group ${username.touched && username.invalid ? 'has-error' : ''}`}>
+                    <div className={`input-group ${email.touched && email.invalid ? 'has-error' : ''}`}>
                       <span className="input-group-addon"><i className="glyphicon glyphicon-user"></i></span>
-                      <input type="text" className="form-control" placeholder="Username" {...username} />
+                      <input type="text" className="form-control" placeholder="Email" {...email} />
                     </div>
                     <div className="has-error message">
                       <div className="help-block">
-                        {username.touched ? username.error : ''}
+                        {email.touched ? email.error : ''}
                       </div>
                     </div>
 

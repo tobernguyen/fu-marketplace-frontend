@@ -1,14 +1,20 @@
 import React, { Component, PropTypes } from 'react';
 import Header from 'app/components/home/Header';
 import { Modal } from 'react-bootstrap';
+import { connect } from 'react-redux';
 import BlockItemList from 'app/components/home/BlockItemList';
 import BlockDormList from 'app/components/home/BlockDormList';
 import CarouselPinnedItems from 'app/components/home/CarouselPinnedItems';
 import BlockBookmarks from 'app/components/home/BlockBookmarks';
+import { getCurrentUser } from '../../actions';
 
-export default class HomePage extends Component {
+class HomePage extends Component {
   constructor(props) {
     super(props);
+  }
+
+  componentWillMount() {
+    this.props.getCurrentUser();
   }
 
   render() {
@@ -32,9 +38,10 @@ export default class HomePage extends Component {
       childPage = children;
     }
 
+    const { currentUser, onSignOut } = this.props;
     return (
       <div className="home-page">
-        <Header onSignOut={this.props.onSignOut} />
+        <Header onSignOut={onSignOut} currentUser={currentUser} />
         <div className="container home-body">
           <div className="row">
             <div className="col-md-3">
@@ -61,5 +68,19 @@ export default class HomePage extends Component {
 }
 
 HomePage.propTypes = {
-  onSignOut: PropTypes.func.isRequired
+  onSignOut:      PropTypes.func.isRequired,
+  getCurrentUser: PropTypes.func.isRequired
 };
+
+const mapStateToProps = (state) => {
+  const { user } = state;
+
+  return {
+    currentUser: user.currentUser
+  }
+};
+
+
+export default connect(mapStateToProps, {
+  getCurrentUser
+})(HomePage)

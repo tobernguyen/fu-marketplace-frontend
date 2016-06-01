@@ -7,8 +7,8 @@ import { signInAdmin } from '../../actions';
 function validate(values) {
   var errors = {};
   var hasErrors = false;
-  if (!values.username || values.username.trim() === '') {
-    errors.username = 'Enter username';
+  if (!values.email || values.email.trim() === '') {
+    errors.email = 'Enter email';
     hasErrors = true;
   }
   if(!values.password || values.password.trim() === '') {
@@ -25,7 +25,7 @@ const mapStateToProps = (state) => {
 
 const reduxFormConfig = {
   form: 'LoginForm',
-  fields: ['username', 'password'],
+  fields: ['email', 'password'],
   null,
   null,
   validate

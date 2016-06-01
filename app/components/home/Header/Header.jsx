@@ -5,7 +5,7 @@ import { LinkContainer } from 'react-router-bootstrap';
 
 export default class Header extends Component {
   render() {
-    const { onSignOut } = this.props;
+    const { onSignOut, currentUser } = this.props;
     return (
       <div className="home-header">
         <Navbar inverse fixedTop>
@@ -25,22 +25,22 @@ export default class Header extends Component {
             <Nav pullRight activeKey={1}>
               <NavItem eventKey={1} href="#"><i className="fa fa-home" aria-hidden="true"></i> Home</NavItem>
               <NavItem eventKey={2} href="#"><i className="fa fa-bell" aria-hidden="true"></i> Notifications</NavItem>
-              <NavDropdown eventKey={3} title="Hieu Tran" id="basic-nav-dropdown">
+              <NavDropdown eventKey={3} title={currentUser.fullName || ''} id="basic-nav-dropdown">
                 <LinkContainer to={{
                   pathname: '/account',
                   state: { modal: true }
                 }}>
-                  <MenuItem eventKey={3.1}>Account</MenuItem>
+                  <MenuItem eventKey={3.1}>Tài khoản</MenuItem>
                 </LinkContainer>
-                <MenuItem eventKey={3.2}>My Orders</MenuItem>
+                <MenuItem eventKey={3.2}>Đơn hàng</MenuItem>
                 <MenuItem divider />
-                <MenuItem eventKey={3.3}>Create Shop</MenuItem>
+                <MenuItem eventKey={3.3}>Mở shop</MenuItem>
                 <MenuItem divider />
-                <MenuItem eventKey={3.4}>Settings</MenuItem>
-                <MenuItem eventKey={3.5} onSelect={onSignOut}>Log out</MenuItem>
+                <MenuItem eventKey={3.4}>Thiết đặt</MenuItem>
+                <MenuItem eventKey={3.5} onSelect={onSignOut}>Đăng xuất</MenuItem>
                 <MenuItem divider />
-                <MenuItem eventKey={3.5}>Support</MenuItem>
-                <MenuItem eventKey={3.5}>Report an Issue</MenuItem>
+                <MenuItem eventKey={3.5}>Hỗ trợ</MenuItem>
+                <MenuItem eventKey={3.5}>Báo cáo vấn đề</MenuItem>
               </NavDropdown>
             </Nav>
           </Navbar.Collapse>
@@ -51,5 +51,10 @@ export default class Header extends Component {
 }
 
 Header.propTypes = {
-  onSignOut: PropTypes.func.isRequired
+  onSignOut: PropTypes.func.isRequired,
+  currentUser: PropTypes.object.isRequired
+};
+
+Header.defaultProps = {
+  currentUser: {}
 };

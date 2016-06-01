@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { adminAccessTokenKey, accessTokenKey } from 'app/config';
 
-const API_ROOT = 'http://localhost:3000/api';
+const API_ROOT = 'http://localhost:3000';
 
 export const HTTP_METHODS = {
   GET:    'GET',
@@ -85,7 +85,7 @@ export default store => next => action => {
   }
 
   if (token) {
-    authHeader = { 'Authorization': token };
+    authHeader = { 'X-Access-Token': token };
   }
 
   return fetch(method, url, params || {}, authHeader).then(

@@ -14,12 +14,20 @@
     }
 
     .category {
-      a {
-        background-color: $primary-color;
-        color: #ffffff;
-        padding: 5px 8px;
-        border-radius: 3px;
+      ul {
+        li {
+          float: left;
+          a {
+            padding: 2px 5px;
+            margin-right: 5px;
+            color: $primary-text-color;
+            background-color: $primary-color;
+            color: #ffffff;
+            border-radius: 3px;
+          }
+        }
       }
+
     }
 
     .description {
@@ -36,6 +44,28 @@
       line-height: 0.1em;
       margin-right: 0.25em;
       vertical-align: -0.4em;
+    }
+
+    .ship-dorms {
+      ul {
+        float: left;
+        li {
+          float: left;
+
+          a {
+            color: $primary-text-color;
+            background-color: #eff1f5;
+            border-radius: 50%;
+            margin-left: 5px;
+            padding: 5px 10px;
+          }
+
+          a.active {
+            background-color: #84C977;
+            color: #eff1f5;
+          }
+        }
+      }
     }
   }
 }

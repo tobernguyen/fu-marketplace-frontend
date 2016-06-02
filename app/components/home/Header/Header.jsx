@@ -35,28 +35,35 @@ export default class Header extends Component {
                   state: { modal: true }
                 }}>
                   <MenuItem eventKey={2.1}>
+                    <i className="fa fa-user"></i>
                     <FormattedMessage {...links.account} />
                   </MenuItem>
                 </LinkContainer>
                 <MenuItem eventKey={2.2}>
+                  <i className="fa fa-list-ol"></i>
                   <FormattedMessage {...links.myOrders} />
                 </MenuItem>
                 <MenuItem divider />
                 <MenuItem eventKey={2.3}>
+                  <i className="fa fa-opencart"></i>
                   <FormattedMessage {...links.openShop} />
                 </MenuItem>
                 <MenuItem divider />
                 <MenuItem eventKey={2.4}>
+                  <i className="fa fa-cog"></i>
                   <FormattedMessage {...links.settings} />
                 </MenuItem>
                 <MenuItem eventKey={2.5} onSelect={onSignOut}>
+                  <i className="fa fa-sign-in"></i>
                   <FormattedMessage {...links.logOut} />
                 </MenuItem>
                 <MenuItem divider />
                 <MenuItem eventKey={2.6}>
+                  <i className="fa fa-life-ring"></i>
                   <FormattedMessage {...links.support} />
                 </MenuItem>
                 <MenuItem eventKey={2.7}>
+                  <i className="fa fa-bug"></i>
                   <FormattedMessage {...links.reportIssue} />
                 </MenuItem>
               </NavDropdown>

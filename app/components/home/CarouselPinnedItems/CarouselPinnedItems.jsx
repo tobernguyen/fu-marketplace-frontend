@@ -6,7 +6,7 @@ export default class CarouselPinnedItems extends Component {
   render() {
     return (
       <div className="carousel-pinned-items">
-        <Carousel>
+        <Carousel controls={false}>
           <Carousel.Item>
             <img width={900} height={500} alt="900x500" src="//media.foody.vn/biz_banner/foody-bannerhome_1000x375_khaisilk-new-635949338423039610.png"/>
             <Carousel.Caption>

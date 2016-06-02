@@ -7,7 +7,7 @@ import BlockDormList from 'app/components/home/BlockDormList';
 import CarouselPinnedItems from 'app/components/home/CarouselPinnedItems';
 import BlockBookmarks from 'app/components/home/BlockBookmarks';
 import ShopsFeed from './ShopsFeed';
-import { getCurrentUser } from '../../actions';
+import { getCurrentUser, signOutGoogle } from '../../actions';
 
 class HomePage extends Component {
   constructor(props) {
@@ -16,6 +16,15 @@ class HomePage extends Component {
 
   componentWillMount() {
     this.props.getCurrentUser();
+  }
+  
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.error) {
+      const { message, message_code, status } = nextProps.error;
+      if (status === 401) {
+        this.props.signOutGoogle();
+      }
+    }
   }
 
   render() {
@@ -72,18 +81,21 @@ class HomePage extends Component {
 
 HomePage.propTypes = {
   onSignOut:      PropTypes.func.isRequired,
-  getCurrentUser: PropTypes.func.isRequired
+  getCurrentUser: PropTypes.func.isRequired,
+  signOutGoogle:  PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => {
   const { user } = state;
 
   return {
-    currentUser: user.currentUser
+    currentUser: user.currentUser,
+    error: user.error
   }
 };
 
 
 export default connect(mapStateToProps, {
-  getCurrentUser
+  getCurrentUser,
+  signOutGoogle
 })(HomePage)

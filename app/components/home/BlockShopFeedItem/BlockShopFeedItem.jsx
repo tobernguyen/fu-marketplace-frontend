@@ -14,10 +14,28 @@ export default class BlockShopFeedItem extends Component {
           <div className="row content">
             <h3>Bánh mỳ Kebab</h3>
             <div className="category">
-              <a href="#">Đồ ăn nhanh</a>
+              <ul className="nav">
+                <li>
+                  <a href="#">Đồ ăn</a>
+                </li>
+                <li>
+                  <a href="#">Đồ uống</a>
+                </li>
+                <li>
+                  <a href="#">Cơm</a>
+                </li>
+              </ul>
             </div>
             <div className="description">
               Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
+            </div>
+            <div className="ship-dorms">
+              <ul className="nav">
+                <li><a href="#">A</a></li>
+                <li><a href="#" className="active">B</a></li>
+                <li><a href="#">D</a></li>
+                <li><a href="#">E</a></li>
+              </ul>
             </div>
           </div>
         </div>

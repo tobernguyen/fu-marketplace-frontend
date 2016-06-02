@@ -19,6 +19,11 @@ body {
 
     .main-column {
       margin-top: 15px;
+      .col-md-4 {
+        .block {
+          margin-right: -15px;
+        }
+      }
     }
   }
 }
@@ -80,7 +85,7 @@ body {
 
 .block {
   background: #FFF;
-  padding: 10px 15px;
+  padding: 10px;
   border-top: 1px solid #E6E6E6;
   box-shadow: 0 1px 1px rgba(0,0,0,.25);
   margin-bottom: 15px;
@@ -100,4 +105,25 @@ body {
 .ellipsis {
   white-space: nowrap;
   text-overflow: ellipsis;
+}
+
+ul.navbar-nav > li {
+  position: relative;
+}
+ul.navbar-nav > li .badge {
+  background: #ff2d55;
+  border-radius: 9px;
+  font-size: 10px !important;
+  font-weight: 400;
+  text-align: center;
+  padding: 3px 5px;
+  z-index: 100;
+  min-width: 18px;
+  height: 18px;
+}
+
+ul.navbar-nav > li .badge {
+  position: absolute;
+  right: 5px;
+  top: 10px;
 }

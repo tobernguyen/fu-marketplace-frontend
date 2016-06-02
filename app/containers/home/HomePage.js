@@ -6,6 +6,7 @@ import BlockItemList from 'app/components/home/BlockItemList';
 import BlockDormList from 'app/components/home/BlockDormList';
 import CarouselPinnedItems from 'app/components/home/CarouselPinnedItems';
 import BlockBookmarks from 'app/components/home/BlockBookmarks';
+import ShopsFeed from './ShopsFeed';
 import { getCurrentUser } from '../../actions';
 
 class HomePage extends Component {
@@ -49,13 +50,15 @@ class HomePage extends Component {
               <BlockDormList />
             </div>
             <div className="col-md-9">
-              <CarouselPinnedItems />
-              <div className="row main-column">
-                <div className="col-md-8">
-                  Center
-                </div>
-                <div className="col-md-4">
-                  <BlockBookmarks />
+              <div className="row">
+                <CarouselPinnedItems />
+                <div className="main-column">
+                  <div className="col-md-8 feed">
+                    <ShopsFeed />
+                  </div>
+                  <div className="col-md-4">
+                    <BlockBookmarks />
+                  </div>
                 </div>
               </div>
             </div>

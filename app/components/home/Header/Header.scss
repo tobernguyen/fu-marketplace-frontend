@@ -16,6 +16,23 @@
       }
     }
     ul.dropdown-menu {
+      &:before {
+        position: absolute;
+        display: inline-block;
+        content: "";
+        top: -8px;
+        right: 9px;
+        left: auto;
+
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 0 8px 8px 8px;
+        border-color: transparent transparent #fff transparent;
+
+      }
+
+
       a {
         color: #222222;
       }
@@ -26,4 +43,5 @@
       }
     }
   }
+
 }

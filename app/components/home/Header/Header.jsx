@@ -25,7 +25,10 @@ export default class Header extends Component {
               <Button type="submit"><i className="fa fa-search" aria-hidden="true"></i></Button>
             </Navbar.Form>
             <Nav pullRight>
-              <NavItem eventKey={1} href="#"><i className="fa fa-bell fa-lg" aria-hidden="true"></i></NavItem>
+              <NavItem eventKey={1} href="#">
+                <i className="fa fa-bell fa-lg"></i>
+                <span className="badge">3</span>
+              </NavItem>
               <NavDropdown eventKey={2} title={currentUser.fullName || ''} id="basic-nav-dropdown">
                 <LinkContainer to={{
                   pathname: '/account',

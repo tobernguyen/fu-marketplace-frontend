@@ -18,7 +18,7 @@ export default class Header extends Component {
             <Navbar.Toggle />
           </Navbar.Header>
           <Navbar.Collapse>
-            <Navbar.Form pullLeft>
+            <Navbar.Form pullLeft className="search-form">
               <FormGroup>
                 <FormControl type="text" placeholder="Search" />
               </FormGroup>

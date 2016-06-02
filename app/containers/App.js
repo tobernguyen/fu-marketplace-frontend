@@ -1,5 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import '../styles/App.scss';
+import { IntlProvider } from 'react-intl';
+import { connect } from 'react-redux';
+import messages from '../translations';
+
 
 class App extends Component {
   constructor(props) {
@@ -7,10 +11,11 @@ class App extends Component {
   }
 
   render() {
+    const { language, children } = this.props;
     return (
-      <div>
-        {this.props.children}
-      </div>
+      <IntlProvider locale={language} messages={messages[language]}>
+        {children}
+      </IntlProvider>
     );
   }
 }
@@ -22,8 +27,11 @@ App.propTypes = {
   children: PropTypes.node
 };
 
-const mapStateToProps = state => ({
-  errorMessage: state.errorMessage
-});
+const mapStateToProps = state => {
+  return {
+    errorMessage: state.errorMessage,
+    language: state.language.language
+  }
+};
 
-export default App
+export default connect(mapStateToProps)(App);

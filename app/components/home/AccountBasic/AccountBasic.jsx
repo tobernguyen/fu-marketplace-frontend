@@ -1,9 +1,12 @@
 import React, { Component, PropTypes } from 'react';
+import { messages } from './AccountBasic.i18n';
+import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import './AccountBasic.scss';
 
-export default class AccountBasic extends Component {
+class AccountBasic extends Component {
   render() {
     const { currentUser } = this.props;
+    const { formatMessage } = this.props.intl;
     return (
       <div className="account-basic">
         <div className="row">
@@ -21,19 +24,25 @@ export default class AccountBasic extends Component {
             <div className="body">
               <form className="form-horizontal">
                 <div className="form-group">
-                  <label for="accountPhoneNumber" className="col-sm-4 control-label">Điện thoại</label>
+                  <label for="accountPhoneNumber" className="col-sm-4 control-label">
+                    <FormattedMessage {...messages.phone.label} />
+                  </label>
                   <div className="col-sm-8">
-                    <input type="text" className="form-control" id="accountPhoneNumber" placeholder="Số điện thoại" />
+                    <input type="text" className="form-control" id="accountPhoneNumber" placeholder={formatMessage(messages.phone.placeholder)} />
                   </div>
                 </div>
                 <div className="form-group">
-                  <label for="accountRoomNumber" className="col-sm-4 control-label">Phòng KTX</label>
+                  <label for="accountRoomNumber" className="col-sm-4 control-label">
+                    <FormattedMessage {...messages.roomNo.label} />
+                  </label>
                   <div className="col-sm-8">
-                    <input type="text" className="form-control" id="accountRoomNumber" placeholder="Số phòng KTX" />
+                    <input type="text" className="form-control" id="accountRoomNumber" placeholder={formatMessage(messages.roomNo.placeholder)} />
                   </div>
                 </div>
                 <div className="col-sm-offset-4 col-sm-8">
-                  <button type="submit" className="btn btn-default">Lưu thông tin</button>
+                  <button type="submit" className="btn btn-default">
+                    <FormattedMessage {...messages.save} />
+                  </button>
                 </div>
               </form>
             </div>
@@ -45,6 +54,7 @@ export default class AccountBasic extends Component {
 }
 
 AccountBasic.propTypes = {
+  intl: intlShape.isRequired,
   currentUser: PropTypes.object.isRequired
 };
 
@@ -58,3 +68,5 @@ AccountBasic.defaultProps = {
     room: ''
   }
 };
+
+export default injectIntl(AccountBasic);

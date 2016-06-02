@@ -127,3 +127,12 @@ export const getCurrentUser = () => {
     return dispatch(requestGetCurrentUser())
   }
 };
+
+
+export const CHANGE_LANGUAGE = '@@language/CHANGE_LANGUAGE';
+export function changeLanguage(language) {
+  return {
+    type: CHANGE_LANGUAGE,
+    language: language
+  };
+}

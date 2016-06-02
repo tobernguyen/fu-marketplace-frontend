@@ -2,6 +2,8 @@ import React, { Component, PropTypes } from 'react';
 import './Header.scss';
 import { Navbar, NavItem, Nav, NavDropdown, MenuItem, FormGroup, FormControl, Button } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
+import { FormattedMessage } from 'react-intl';
+import { links } from 'app/shared/links';
 
 export default class Header extends Component {
   render() {
@@ -22,25 +24,38 @@ export default class Header extends Component {
               </FormGroup>
               <Button type="submit"><i className="fa fa-search" aria-hidden="true"></i></Button>
             </Navbar.Form>
-            <Nav pullRight activeKey={1}>
-              <NavItem eventKey={1} href="#"><i className="fa fa-home" aria-hidden="true"></i> Home</NavItem>
-              <NavItem eventKey={2} href="#"><i className="fa fa-bell" aria-hidden="true"></i> Notifications</NavItem>
-              <NavDropdown eventKey={3} title={currentUser.fullName || ''} id="basic-nav-dropdown">
+            <Nav pullRight>
+              <NavItem eventKey={1} href="#"><i className="fa fa-bell fa-lg" aria-hidden="true"></i></NavItem>
+              <NavDropdown eventKey={2} title={currentUser.fullName || ''} id="basic-nav-dropdown">
                 <LinkContainer to={{
                   pathname: '/account',
                   state: { modal: true }
                 }}>
-                  <MenuItem eventKey={3.1}>Tài khoản</MenuItem>
+                  <MenuItem eventKey={2.1}>
+                    <FormattedMessage {...links.account} />
+                  </MenuItem>
                 </LinkContainer>
-                <MenuItem eventKey={3.2}>Đơn hàng</MenuItem>
+                <MenuItem eventKey={2.2}>
+                  <FormattedMessage {...links.myOrders} />
+                </MenuItem>
                 <MenuItem divider />
-                <MenuItem eventKey={3.3}>Mở shop</MenuItem>
+                <MenuItem eventKey={2.3}>
+                  <FormattedMessage {...links.openShop} />
+                </MenuItem>
                 <MenuItem divider />
-                <MenuItem eventKey={3.4}>Thiết đặt</MenuItem>
-                <MenuItem eventKey={3.5} onSelect={onSignOut}>Đăng xuất</MenuItem>
+                <MenuItem eventKey={2.4}>
+                  <FormattedMessage {...links.settings} />
+                </MenuItem>
+                <MenuItem eventKey={2.5} onSelect={onSignOut}>
+                  <FormattedMessage {...links.logOut} />
+                </MenuItem>
                 <MenuItem divider />
-                <MenuItem eventKey={3.5}>Hỗ trợ</MenuItem>
-                <MenuItem eventKey={3.5}>Báo cáo vấn đề</MenuItem>
+                <MenuItem eventKey={2.6}>
+                  <FormattedMessage {...links.support} />
+                </MenuItem>
+                <MenuItem eventKey={2.7}>
+                  <FormattedMessage {...links.reportIssue} />
+                </MenuItem>
               </NavDropdown>
             </Nav>
           </Navbar.Collapse>

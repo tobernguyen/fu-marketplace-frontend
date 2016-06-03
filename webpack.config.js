@@ -72,7 +72,8 @@ if(TARGET === 'start' || !TARGET) {
   module.exports = merge(common, {
     devtool: 'eval-source-map',
     watchOptions: {
-      poll: true
+      aggregateTimeout: 300,
+      poll: 10000
     },
     devServer: {
       contentBase: PATHS.build,

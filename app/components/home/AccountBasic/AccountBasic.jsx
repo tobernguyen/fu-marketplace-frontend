@@ -83,6 +83,7 @@ class AccountBasic extends Component {
             image={this.state.img}
             width={250}
             height={250}
+            onCrop={this.props.uploadAvatar}
           />
         }
       </div>

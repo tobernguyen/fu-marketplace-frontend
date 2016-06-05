@@ -1,18 +1,25 @@
 import React, { Component, PropTypes } from 'react';
 import './BlockShopFeedItem.scss';
+import { Link } from 'react-router';
 
 export default class BlockShopFeedItem extends Component {
   render() {
     return (
       <div className="block row block-shop-feed-item">
-        <div className="col-md-4 col-sm-4">
+        <div className="col-md-3 col-sm-4">
           <div className="row thumbnail">
-            <img src="http://mcg.matart.ru/01.Default/html/img/pl3.jpg" className="img-responsive"/>
+            <Link to='shops/1'>
+              <img src="http://mcg.matart.ru/01.Default/html/img/pl3.jpg" className="img-responsive"/>
+            </Link>
           </div>
         </div>
-        <div className="col-md-8 col-sm-8">
+        <div className="col-md-9 col-sm-8">
           <div className="row content">
-            <h3>Bánh mỳ Kebab</h3>
+            <h3>
+              <Link to='shops/1'>
+                Bánh mỳ Kebab
+              </Link>
+            </h3>
             <div className="category">
               <ul className="nav">
                 <li>

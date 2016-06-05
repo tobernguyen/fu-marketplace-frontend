@@ -10,7 +10,9 @@
     padding-left: 10px;
     h3 {
       margin-top: 10px;
-      color: $primary-text-color;
+      a {
+        color: $primary-text-color;
+      }
     }
 
     .category {

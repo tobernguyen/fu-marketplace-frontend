@@ -17,7 +17,7 @@ class HomePage extends Component {
   componentWillMount() {
     this.props.getCurrentUser();
   }
-  
+
   componentWillReceiveProps(nextProps) {
     if (nextProps.error) {
       const { message, message_code, status } = nextProps.error;
@@ -57,17 +57,13 @@ class HomePage extends Component {
             <div className="col-md-3">
               <BlockItemList />
               <BlockDormList />
+              <BlockBookmarks />
             </div>
             <div className="col-md-9">
               <div className="row">
                 <CarouselPinnedItems />
-                <div className="main-column">
-                  <div className="col-md-8 feed">
-                    <ShopsFeed />
-                  </div>
-                  <div className="col-md-4">
-                    <BlockBookmarks />
-                  </div>
+                <div className="main-column col-md-12">
+                  <ShopsFeed />
                 </div>
               </div>
             </div>

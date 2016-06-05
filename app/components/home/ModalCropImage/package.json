@@ -1,0 +1,6 @@
+{
+  "name": "ModalCropImage",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./ModalCropImage.jsx"
+}

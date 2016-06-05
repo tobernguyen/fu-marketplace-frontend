@@ -1,0 +1,8 @@
+.avatar-cropper-canvas {
+  canvas {
+    cursor: move;
+  }
+  input[type="range"] {
+    cursor: ew-resize;
+  }
+}

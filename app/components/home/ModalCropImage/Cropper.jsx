@@ -255,11 +255,4 @@ export default class Cropper extends Component {
   }
 }
 
-// Cropper.propTypes = {
-//   image: React.PropTypes.string.isRequired,
-//   width: numberableType,
-//   height: numberableType,
-//   zoom: numberableType
-// };
-
 Cropper.defaultProps = { width: 400, height: 400, zoom: 1 };

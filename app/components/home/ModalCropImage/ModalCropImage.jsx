@@ -18,6 +18,7 @@ export default class ModalCropImage extends Component {
             width={this.props.width}
             height={this.props.height}
             onRequestHide={this.props.onRequestHide}
+            onCrop={this.props.onCrop}
           />
         </div>
       </Modal>

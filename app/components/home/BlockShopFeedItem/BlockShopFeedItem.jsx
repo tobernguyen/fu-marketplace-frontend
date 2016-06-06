@@ -43,6 +43,7 @@ export default class BlockShopFeedItem extends Component {
                 <li><a href="#">D</a></li>
                 <li><a href="#">E</a></li>
               </ul>
+              <i>Last updated: 23:51 05/06/2016</i>
             </div>
           </div>
         </div>

@@ -6,6 +6,10 @@ import { connect } from 'react-redux';
 class Account extends Component {
   constructor(props) {
     super(props);
+
+    this.handleUploadAvatar = (avatar) => {
+      console.log(avatar);
+    }
   }
 
   render() {
@@ -13,7 +17,7 @@ class Account extends Component {
       <div>
         <ModalHeader title="Tài khoản" subHeader="Thay đổi thông tin cơ bản."/>
         <div className="modal-body">
-          <AccountBasic currentUser={this.props.currentUser} />
+          <AccountBasic currentUser={this.props.currentUser} uploadAvatar={this.handleUploadAvatar} />
         </div>
       </div>
     );

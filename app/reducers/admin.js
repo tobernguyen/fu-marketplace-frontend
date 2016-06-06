@@ -1,6 +1,8 @@
 import * as ActionTypes from '../actions';
 import _ from 'lodash';
 
+
+//TODO: Refactor this
 function updateInUserArray(state, value) {
   let newState = state;
   for(let i in newState) {
@@ -19,8 +21,8 @@ export const admin = (state = { users: [] }, action) => {
     case ActionTypes.ADMIN_GET_USERS_FAILURE:
       return _.assign({}, state, { users: [] });
     case ActionTypes.ADMIN_EDIT_USERS_SUCCESS:
-      return _.assign({}, state, { users: updateInUserArray(state.users, response.users)});
+      return _.assign({}, state, { users: updateInUserArray(state.users, response)});
     default:
       return state;
-  }
+  } 
 };

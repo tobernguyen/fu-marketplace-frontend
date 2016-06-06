@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import './LoginForm.scss';
 
-export default class LoginForm extends Component {
+class LoginForm extends Component {
   componentWillMount() {
     document.body.classList.add('admin-page');
   }

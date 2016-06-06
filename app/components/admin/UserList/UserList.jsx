@@ -1,29 +1,65 @@
 import React, { Component, PropTypes } from 'react';
 import UserListRow from 'app/components/admin/UserListRow';
+import ModalEditUser from 'app/components/admin/ModalEditUser';
 import './UserList.scss';
 
-export default class UserList extends Component {
+class UserList extends Component {
+  constructor(props) {
+    super(props);
+    
+    this.state = {
+      showUserEditModal: false,
+      userToBeEdited: {}
+    };
+    
+    this.openEditModal = this.openEditModal.bind(this);
+    this.closeEditModal = this.closeEditModal.bind(this);
+  }
+  
+  openEditModal(userToBeEdited) {
+    this.setState({
+      userToBeEdited,
+      showUserEditModal: true
+    });
+  }
+  
+  closeEditModal() {
+    this.setState({
+      showUserEditModal: false
+    });
+  }
+  
   render() {
     return (
-      <table className="table table-striped">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>User Name</th>
-            <th>Email</th>
-            <th>Full Name</th>
-            <th>Room</th>
-            <th>Phone</th>
-            <th>Banned</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-        {this.props.users.map(user =>
-          <UserListRow key={user.id} user={user} editUser={this.props.editUser}/>
-        )}
-        </tbody>
-      </table>
+      <div>
+        <table className="table table-striped">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Email</th>
+              <th>Full Name</th>
+              <th>Gender</th>
+              <th>Identity Number</th>
+              <th>Room</th>
+              <th>Phone</th>
+              <th>Roles</th>
+              <th>Banned</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+          {this.props.users.map(user =>
+            <UserListRow key={user.id} user={user} openEditModal={this.openEditModal} />
+          )}
+          </tbody>
+        </table>
+        <ModalEditUser
+          showModal={this.state.showUserEditModal}
+          closeModal={this.closeEditModal}
+          user={this.state.userToBeEdited}
+          saveUser={this.props.editUser}
+          />
+      </div>
     );
   }
 }
@@ -36,3 +72,5 @@ UserList.propTypes = {
 UserList.defaultProps = {
   users: []
 };
+
+export default UserList;

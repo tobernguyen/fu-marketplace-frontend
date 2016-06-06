@@ -141,11 +141,11 @@ export function changeLanguage(language) {
 export const UPLOAD_AVATAR_REQUEST = 'UPLOAD_AVATAR_REQUEST';
 export const UPLOAD_AVATAR_SUCCESS = 'UPLOAD_AVATAR_SUCCESS';
 export const UPLOAD_AVATAR_FAILURE = 'UPLOAD_AVATAR_FAILURE';
-const requestUploadAvatar = (avatarBlob) => ({
+const requestUploadAvatar = (formFileData) => ({
   [CALL_API]: {
     types: [UPLOAD_AVATAR_REQUEST, UPLOAD_AVATAR_SUCCESS, UPLOAD_AVATAR_FAILURE],
     url: '/api/v1/users/me/uploadAvatar',
-    method: HTTP_METHODS.GET,
+    method: HTTP_METHODS.POST,
     params: formFileData
   }
 });

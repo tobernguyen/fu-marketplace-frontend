@@ -24,5 +24,5 @@ export const admin = (state = { users: [] }, action) => {
       return _.assign({}, state, { users: updateInUserArray(state.users, response)});
     default:
       return state;
-  } 
+  }
 };

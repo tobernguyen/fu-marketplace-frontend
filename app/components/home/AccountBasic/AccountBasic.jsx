@@ -4,6 +4,8 @@ import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import  ModalCropImage from '../ModalCropImage';
 import ImageUploader from 'app/components/common/ImageUploader';
 import './AccountBasic.scss';
+import './react-select.scss';
+import Select from 'react-select';
 
 const AVATAR_SMALL_SIZE_EXT = '-small.jpg';
 const AVATAR_MEDIUM_SIZE_EXT = '-medium.jpg';
@@ -14,7 +16,8 @@ class AccountBasic extends Component {
 
     this.state = {
       modalCropImageShown: false,
-      img: null
+      img: null,
+      roomNo: ""
     };
 
     this.handleFileChange = (dataURI) => {
@@ -27,6 +30,12 @@ class AccountBasic extends Component {
     this.handleRequestHide = () => {
       this.setState({
         modalCropImageShown: false
+      })
+    };
+
+    this.roomSelected = (dorm) => {
+      this.setState({
+        roomNo: dorm ? dorm.value : ''
       })
     }
   }
@@ -47,6 +56,19 @@ class AccountBasic extends Component {
 
     if (userAvatar.endsWith(AVATAR_SMALL_SIZE_EXT)) {
       userAvatar = userAvatar.replace(AVATAR_SMALL_SIZE_EXT, AVATAR_MEDIUM_SIZE_EXT);
+    }
+
+    let roomList = [];
+    for (let dorm of ['A', 'B', 'C', 'D', 'E', 'F']) {
+      for (let floor of [1, 2, 3, 4]) {
+        for (let floorRoomNo = 1; floorRoomNo <= 14; floorRoomNo ++) {
+          const roomNo = `${dorm}${floor * 100 + floorRoomNo}`;
+          roomList.push({
+            value: roomNo,
+            label: roomNo
+          });
+        }
+      }
     }
 
     return (
@@ -82,7 +104,13 @@ class AccountBasic extends Component {
                     <FormattedMessage {...messages.roomNo.label} />
                   </label>
                   <div className="col-sm-8">
-                    <input type="text" className="form-control" id="accountRoomNumber" placeholder={formatMessage(messages.roomNo.placeholder)} />
+                    <Select
+                      name="form-field-name"
+                      value={this.state.roomNo}
+                      options={roomList}
+                      onChange={this.roomSelected}
+                      placeholder={formatMessage(messages.roomNo.placeholder)}
+                    />
                   </div>
                 </div>
                 <div className="col-sm-offset-4 col-sm-8">

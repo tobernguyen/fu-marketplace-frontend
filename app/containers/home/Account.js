@@ -2,13 +2,17 @@ import React, { Component } from 'react';
 import ModalHeader from 'app/components/home/ModalHeader';
 import AccountBasic from 'app/components/home/AccountBasic';
 import { connect } from 'react-redux';
+import dataURLtoBlob from 'blueimp-canvas-to-blob';
+import { uploadAvatar } from '../../actions';
 
 class Account extends Component {
   constructor(props) {
     super(props);
 
-    this.handleUploadAvatar = (avatar) => {
-      console.log(avatar);
+    this.handleUploadAvatar = (avatarDataURL) => {
+      let formFileData = new FormData();
+      formFileData.append('file', dataURLtoBlob(avatarDataURL));
+      this.props.uploadAvatar(formFileData);
     }
   }
 
@@ -33,5 +37,5 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps, {
-
+  uploadAvatar
 })(Account)

@@ -27,6 +27,7 @@
   "dependencies": {
     "axios": "^0.11.1",
     "babel": "^6.5.2",
+    "blueimp-canvas-to-blob": "^3.3.0",
     "bootstrap": "^3.3.6",
     "font-awesome": "^4.6.1",
     "lodash": "^4.13.1",

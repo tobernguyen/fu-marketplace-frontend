@@ -136,3 +136,23 @@ export function changeLanguage(language) {
     language: language
   };
 }
+
+
+export const UPLOAD_AVATAR_REQUEST = 'UPLOAD_AVATAR_REQUEST';
+export const UPLOAD_AVATAR_SUCCESS = 'UPLOAD_AVATAR_SUCCESS';
+export const UPLOAD_AVATAR_FAILURE = 'UPLOAD_AVATAR_FAILURE';
+const requestUploadAvatar = (avatarBlob) => ({
+  [CALL_API]: {
+    types: [UPLOAD_AVATAR_REQUEST, UPLOAD_AVATAR_SUCCESS, UPLOAD_AVATAR_FAILURE],
+    url: '/api/v1/users/me/uploadAvatar',
+    method: HTTP_METHODS.GET,
+    params: formFileData
+  }
+});
+
+// Relies on Redux Thunk middleware.
+export const uploadAvatar = (formFileData) => {
+  return (dispatch, getState) => {
+    return dispatch(requestUploadAvatar(formFileData))
+  }
+};

@@ -5,6 +5,9 @@ import  ModalCropImage from '../ModalCropImage';
 import ImageUploader from 'app/components/common/ImageUploader';
 import './AccountBasic.scss';
 
+const AVATAR_SMALL_SIZE_EXT = '-small.jpg';
+const AVATAR_MEDIUM_SIZE_EXT = '-medium.jpg';
+
 class AccountBasic extends Component {
   constructor(props) {
     super(props);
@@ -28,16 +31,31 @@ class AccountBasic extends Component {
     }
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.currentUser) {
+      this.setState({
+        modalCropImageShown: false
+      })
+    }
+  }
+
   render() {
     const { currentUser } = this.props;
     const { formatMessage } = this.props.intl;
+
+    let userAvatar = currentUser.avatar;
+
+    if (userAvatar.endsWith(AVATAR_SMALL_SIZE_EXT)) {
+      userAvatar = userAvatar.replace(AVATAR_SMALL_SIZE_EXT, AVATAR_MEDIUM_SIZE_EXT);
+    }
+
     return (
       <div className="account-basic">
         <div className="row">
           <div className="col-md-5 user-avatar">
             <ImageUploader handleFileChange={this.handleFileChange} />
             <img
-              src={currentUser.avatar}
+              src={userAvatar}
               alt={`Hình đại diện của ${currentUser.fullName}`}
               title={`Hình đại diện của ${currentUser.fullName}`} />
             <span className="camera-icon">

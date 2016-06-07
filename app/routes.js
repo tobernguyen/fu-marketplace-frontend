@@ -8,6 +8,7 @@ import Admin from './containers/admin';
 import Dashboard from './containers/admin/Dashboard';
 import UserManagement from './containers/admin/UserManagement';
 import ShopManagement from './containers/admin/ShopManagement';
+import ChangePassword from './containers/admin/ChangePassword';
 
 export default (
   <Route path="/" component={App}>
@@ -22,6 +23,7 @@ export default (
       <Route path="dashboard" component={Dashboard} />
       <Route path="users" component={UserManagement} />
       <Route path="shops" component={ShopManagement} />
+      <Route path="changepwd" component={ChangePassword} />
     </Route>
   </Route>
 )

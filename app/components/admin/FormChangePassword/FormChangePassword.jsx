@@ -2,13 +2,12 @@ import React, { Component, PropTypes } from 'react';
 import { Button, FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
 
 class FormChangePassword extends Component {
-  constructor(props) {
-    super(props);
+  constructor(props, context) {
+    super(props, context);
     
     this.state = {
       passwordToBeChanged: {},
-      errors: {},
-      errorCount: 0
+      errors: {}
     };
     
     this.onChange = this.onChange.bind(this);
@@ -79,11 +78,16 @@ class FormChangePassword extends Component {
     if(errors.oldPassword || errors.newPassword || errors.repeatNewPassword) {
       console.log('here');
     } else {
-      this.props.changePassword(this.state.passwordToBeChanged);
+      let passwordToBeChanged = {
+        password: this.state.passwordToBeChanged.newPassword,
+        oldPassword: this.state.passwordToBeChanged.oldPassword
+      };
+      this.props.changePassword(passwordToBeChanged);
     }
   }
   
   render() {
+    const { isSubmitting, response } = this.props.formStatus
     return (
       <form>
         <FormGroup>
@@ -128,7 +132,8 @@ class FormChangePassword extends Component {
               </div>
             </div>
         </FormGroup>
-        <Button bsStyle="primary" onClick={this.handleSubmit}>Save</Button>
+        <Button bsStyle="primary" onClick={this.handleSubmit} disabled={isSubmitting}>{isSubmitting ? '...Saving' : 'Save'}</Button>
+        <div>{response}</div>
       </form>
     );
   }

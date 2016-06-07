@@ -20,6 +20,9 @@ export default store => next => action => {
     case ActionTypes.ADMIN_SIGN_OUT:
       window.localStorage.removeItem(adminAccessTokenKey);
       break;
+    case ActionTypes.ADMIN_CHANGE_PASSWORD_SUCCESS:
+      window.localStorage.removeItem(adminAccessTokenKey);
+      break;
     case ActionTypes.CHANGE_LANGUAGE:
       localStorage.setItem(languageKey, language);
       break;

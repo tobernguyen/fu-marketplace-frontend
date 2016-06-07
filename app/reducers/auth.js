@@ -28,6 +28,7 @@ export const auth = (state = INITIAL_STATE, action) => {
       });
     case ActionTypes.ADMIN_SIGN_IN_SUCCESS:
     case ActionTypes.ADMIN_SIGN_OUT:
+    case ActionTypes.ADMIN_CHANGE_PASSWORD_SUCCESS:
       return _.assign({}, state, {
         shouldUpdateAdminAuthStatus: true
       });

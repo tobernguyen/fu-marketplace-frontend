@@ -10,8 +10,7 @@ class ModalEditUser extends Component {
     
     this.state = {
       userToBeEdited: {},
-      errors: {},
-      errorCount: 0
+      errors: {}
     };
     
     this.onFieldChange = this.onFieldChange.bind(this);
@@ -29,15 +28,13 @@ class ModalEditUser extends Component {
       let errors = this.state.errors;
       errors[e.target.name] = 'Must not be blank';
       this.setState({
-        errors,
-        errorCount: ++this.state.errorCount
+        errors
       });
     } else {
       let errors = this.state.errors;
       errors[e.target.name] = undefined;
       this.setState({
-        errors,
-        errorCount: --this.state.errorCount
+        errors
       });
     }
   }

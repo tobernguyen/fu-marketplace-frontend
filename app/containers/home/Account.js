@@ -3,7 +3,7 @@ import ModalHeader from 'app/components/home/ModalHeader';
 import AccountBasic from 'app/components/home/AccountBasic';
 import { connect } from 'react-redux';
 import dataURLtoBlob from 'blueimp-canvas-to-blob';
-import { uploadAvatar } from '../../actions';
+import { uploadAvatar, changeUserInfo, updateUserInfo } from '../../actions';
 
 class Account extends Component {
   constructor(props) {
@@ -13,7 +13,13 @@ class Account extends Component {
       let formFileData = new FormData();
       formFileData.append('file', dataURLtoBlob(avatarDataURL));
       this.props.uploadAvatar(formFileData);
+    };
+
+    this.saveUserInfo = (evt) => {
+      evt.preventDefault();
+      this.props.updateUserInfo(this.props.currentUser);
     }
+
   }
 
   render() {
@@ -21,7 +27,12 @@ class Account extends Component {
       <div>
         <ModalHeader title="Tài khoản" subHeader="Thay đổi thông tin cơ bản."/>
         <div className="modal-body">
-          <AccountBasic currentUser={this.props.currentUser} uploadAvatar={this.handleUploadAvatar} />
+          <AccountBasic
+            currentUser={this.props.currentUser}
+            userUpdated={this.props.userUpdated}
+            uploadAvatar={this.handleUploadAvatar}
+            userInfoChanged={this.props.changeUserInfo}
+            saveUserInfo={this.saveUserInfo}/>
         </div>
       </div>
     );
@@ -32,10 +43,13 @@ class Account extends Component {
 const mapStateToProps = (state) => {
   const { user } = state;
   return {
-    currentUser: user.currentUser
+    currentUser:  user.currentUser,
+    userUpdated:  user.userUpdated
   }
 };
 
 export default connect(mapStateToProps, {
-  uploadAvatar
+  uploadAvatar,
+  changeUserInfo,
+  updateUserInfo
 })(Account)

@@ -6,6 +6,7 @@ import ImageUploader from 'app/components/common/ImageUploader';
 import './AccountBasic.scss';
 import './react-select.scss';
 import Select from 'react-select';
+import { Alert } from 'react-bootstrap';
 
 const AVATAR_SMALL_SIZE_EXT = '-small.jpg';
 const AVATAR_MEDIUM_SIZE_EXT = '-medium.jpg';
@@ -17,7 +18,7 @@ class AccountBasic extends Component {
     this.state = {
       modalCropImageShown: false,
       img: null,
-      roomNo: ""
+      alertVisible: false
     };
 
     this.handleFileChange = (dataURI) => {
@@ -33,10 +34,25 @@ class AccountBasic extends Component {
       })
     };
 
-    this.roomSelected = (dorm) => {
-      this.setState({
-        roomNo: dorm ? dorm.value : ''
+    this.phoneChanged = (evt) => {
+      const phone = evt.target.value;
+      const numericRegex = /^\d+$/;
+      if (numericRegex.test(phone)) {
+        this.props.userInfoChanged({
+          'phone': phone
+        })
+      }
+    };
+
+    this.roomSelected = (room) => {
+      const roomNo = room ? room.value : '';
+      this.props.userInfoChanged({
+        'room': roomNo
       })
+    };
+
+    this.handleAlertDismiss = () => {
+      this.setState({alertVisible: false});
     }
   }
 
@@ -44,6 +60,11 @@ class AccountBasic extends Component {
     if (nextProps.currentUser) {
       this.setState({
         modalCropImageShown: false
+      })
+    }
+    if (nextProps.userUpdated) {
+      this.setState({
+        alertVisible: nextProps.userUpdated
       })
     }
   }
@@ -58,6 +79,8 @@ class AccountBasic extends Component {
       userAvatar = userAvatar.replace(AVATAR_SMALL_SIZE_EXT, AVATAR_MEDIUM_SIZE_EXT);
     }
 
+    userAvatar += `?${new Date().getTime()}`;
+
     let roomList = [];
     for (let dorm of ['A', 'B', 'C', 'D', 'E', 'F']) {
       for (let floor of [1, 2, 3, 4]) {
@@ -71,6 +94,15 @@ class AccountBasic extends Component {
       }
     }
 
+    const { fullName, email, room, phone } = currentUser;
+
+    let alert;
+    if (this.state.alertVisible) {
+      alert = <Alert bsStyle="success" onDismiss={this.handleAlertDismiss}>
+        <p>Your information have been updated.</p>
+      </Alert>
+    }
+
     return (
       <div className="account-basic">
         <div className="row">
@@ -78,35 +110,41 @@ class AccountBasic extends Component {
             <ImageUploader handleFileChange={this.handleFileChange} />
             <img
               src={userAvatar}
-              alt={`Hình đại diện của ${currentUser.fullName}`}
-              title={`Hình đại diện của ${currentUser.fullName}`} />
+              alt={`Hình đại diện của ${fullName}`}
+              title={`Hình đại diện của ${fullName}`} />
             <span className="camera-icon">
               <i className="fa fa-camera fa-2x"></i>
             </span>
           </div>
           <div className="col-md-7 user-info">
             <div className="header">
-              <h3>{currentUser.fullName}</h3>
-              <p>{currentUser.email}</p>
+              <h3>{fullName}</h3>
+              <p>{email}</p>
             </div>
             <div className="body">
+              {alert}
               <form className="form-horizontal">
                 <div className="form-group">
-                  <label for="accountPhoneNumber" className="col-sm-4 control-label">
+                  <label className="col-sm-4 control-label">
                     <FormattedMessage {...messages.phone.label} />
                   </label>
                   <div className="col-sm-8">
-                    <input type="text" className="form-control" id="accountPhoneNumber" placeholder={formatMessage(messages.phone.placeholder)} />
+                    <input
+                      type="text"
+                      className="form-control"
+                      value={phone || ''}
+                      onChange={this.phoneChanged}
+                      placeholder={formatMessage(messages.phone.placeholder)} />
                   </div>
                 </div>
                 <div className="form-group">
-                  <label for="accountRoomNumber" className="col-sm-4 control-label">
+                  <label className="col-sm-4 control-label">
                     <FormattedMessage {...messages.roomNo.label} />
                   </label>
                   <div className="col-sm-8">
                     <Select
                       name="form-field-name"
-                      value={this.state.roomNo}
+                      value={room || ''}
                       options={roomList}
                       onChange={this.roomSelected}
                       placeholder={formatMessage(messages.roomNo.placeholder)}
@@ -114,7 +152,10 @@ class AccountBasic extends Component {
                   </div>
                 </div>
                 <div className="col-sm-offset-4 col-sm-8">
-                  <button type="submit" className="btn btn-default">
+                  <button
+                    type="submit"
+                    className="btn btn-default"
+                    onClick={this.props.saveUserInfo}>
                     <FormattedMessage {...messages.save} />
                   </button>
                 </div>
@@ -139,7 +180,9 @@ class AccountBasic extends Component {
 
 AccountBasic.propTypes = {
   intl: intlShape.isRequired,
-  currentUser: PropTypes.object.isRequired
+  currentUser: PropTypes.object.isRequired,
+  userInfoChanged: PropTypes.func.isRequired,
+  saveUserInfo: PropTypes.func.isRequired
 };
 
 AccountBasic.defaultProps = {

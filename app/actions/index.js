@@ -156,3 +156,29 @@ export const uploadAvatar = (formFileData) => {
     return dispatch(requestUploadAvatar(formFileData))
   }
 };
+
+
+export const ACCOUNT_INFO_CHANGED = 'ACCOUNT_INFO_CHANGED';
+export const changeUserInfo = (user) => ({
+  type: ACCOUNT_INFO_CHANGED,
+  user: user
+});
+
+
+export const UPDATE_USER_INFO_REQUEST = 'UPDATE_USER_INFO_REQUEST';
+export const UPDATE_USER_INFO_SUCCESS = 'UPDATE_USER_INFO_SUCCESS';
+export const UPDATE_USER_INFO_FAILURE = 'UPDATE_USER_INFO_FAILURE';
+const requestUpdateUserInfo = (newUserInfo) => ({
+  [CALL_API]: {
+    types: [UPDATE_USER_INFO_REQUEST, UPDATE_USER_INFO_SUCCESS, UPDATE_USER_INFO_FAILURE],
+    url: '/api/v1/users/me',
+    method: HTTP_METHODS.PUT,
+    params: newUserInfo
+  }
+});
+
+export const updateUserInfo = (newUserInfo) => {
+  return (dispatch) => {
+    return dispatch(requestUpdateUserInfo(newUserInfo))
+  }
+};

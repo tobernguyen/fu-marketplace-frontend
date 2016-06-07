@@ -1,10 +1,15 @@
 import React, { Component } from 'react';
 import ModalHeader from 'app/components/home/ModalHeader';
 import { connect } from 'react-redux';
+import { updateModalSize } from '../../actions';
 
 class Shop extends Component {
   constructor(props) {
     super(props);
+  }
+
+  componentWillMount() {
+    this.props.updateModalSize('lg');
   }
 
   render() {
@@ -27,5 +32,7 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps, {
-
+  updateModalSize
 })(Shop)
+
+Shop.modalSize = 'lg';

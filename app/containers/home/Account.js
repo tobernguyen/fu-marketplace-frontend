@@ -3,7 +3,7 @@ import ModalHeader from 'app/components/home/ModalHeader';
 import AccountBasic from 'app/components/home/AccountBasic';
 import { connect } from 'react-redux';
 import dataURLtoBlob from 'blueimp-canvas-to-blob';
-import { uploadAvatar, changeUserInfo, updateUserInfo } from '../../actions';
+import { uploadAvatar, changeUserInfo, updateUserInfo, updateModalSize } from '../../actions';
 
 class Account extends Component {
   constructor(props) {
@@ -20,6 +20,10 @@ class Account extends Component {
       this.props.updateUserInfo(this.props.currentUser);
     }
 
+  }
+
+  componentWillMount() {
+    this.props.updateModalSize(null);
   }
 
   render() {
@@ -51,5 +55,6 @@ const mapStateToProps = (state) => {
 export default connect(mapStateToProps, {
   uploadAvatar,
   changeUserInfo,
-  updateUserInfo
+  updateUserInfo,
+  updateModalSize
 })(Account)

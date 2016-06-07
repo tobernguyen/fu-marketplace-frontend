@@ -5,6 +5,7 @@ import { auth } from './auth';
 import { admin } from './admin';
 import { user } from './user';
 import { language } from './language';
+import { common } from './common';
 
 const rootReducer = combineReducers({
   auth,
@@ -12,6 +13,7 @@ const rootReducer = combineReducers({
   admin,
   routing,
   language,
+  common,
   form: formReducer
 });
 

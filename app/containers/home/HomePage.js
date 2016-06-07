@@ -30,16 +30,15 @@ class HomePage extends Component {
   render() {
     const { children } = this.props;
     var overlayMode = false;
-    var bsSize = null;
     if (children) {
       overlayMode = children.props.route.overlayMode;
-      bsSize = children.props.route.bsSize || null;
     }
+
     var childPage;
     if (overlayMode) {
       childPage = (
         <div>
-          <Modal show={true} bsSize={bsSize}>
+          <Modal show={true} bsSize={this.props.modalSize}>
             {children}
           </Modal>
         </div>
@@ -82,11 +81,12 @@ HomePage.propTypes = {
 };
 
 const mapStateToProps = (state) => {
-  const { user } = state;
+  const { user, common } = state;
 
   return {
     currentUser: user.currentUser,
-    error: user.error
+    error: user.error,
+    modalSize: common.modalSize
   }
 };
 

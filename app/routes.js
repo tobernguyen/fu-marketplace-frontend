@@ -14,7 +14,7 @@ export default (
     <IndexRoute component={Home}/>
     <Route path="/" component={Home}>
       <Route path="account" component={Account} overlayMode={true} />
-      <Route path="shops/:shopId" component={Shop} overlayMode={true} bsSize="lg"/>
+      <Route path="shops/:shopId" component={Shop} overlayMode={true} />
     </Route>
 
     <Route path="/admin" component={Admin}>

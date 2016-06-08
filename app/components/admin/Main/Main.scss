@@ -1,12 +1,21 @@
 .admin-page {
   .admin-main {
     min-height: 290px;
+    -webkit-transition: all 0.4s;
+    -moz-transition: all 0.4s;
+    -o-transition: all 0.4s;
+    transition: all 0.4s;
   }
   .admin-content {
     padding: 10px;
   }
+  
 }
 
 .margin-left-220px {
   margin: 0 0 0 220px;
+}
+
+.margin-left-50px {
+  margin: 0 0 0 50px;
 }

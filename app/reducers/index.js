@@ -6,10 +6,12 @@ import { admin } from './admin';
 import { user } from './user';
 import { language } from './language';
 import { common } from './common';
+import { shop } from './shop';
 
 const rootReducer = combineReducers({
   auth,
   user,
+  shop,
   admin,
   routing,
   language,

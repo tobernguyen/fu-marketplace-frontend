@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { Button } from 'react-bootstrap';
+import { Link } from 'react-router';
 import TagInput from 'app/components/common/TagInput';
 import './UserListRow.scss';
 
@@ -19,7 +20,9 @@ export default class UserManagementRow extends Component {
               {this.props.user.id || 'N/A'}
             </td>
             <td>
+              <Link to={`admin/users/${this.props.user.id}/edit`}>
               {this.props.user.email || 'N/A'}
+              </Link>
             </td>
             <td>
               {this.props.user.fullName || 'N/A'}

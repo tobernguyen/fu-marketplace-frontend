@@ -30,10 +30,7 @@ export default class Header extends Component {
                 <span className="badge">3</span>
               </NavItem>
               <NavDropdown eventKey={2} title={currentUser.fullName || ''} id="basic-nav-dropdown">
-                <LinkContainer to={{
-                  pathname: '/account',
-                  state: { modal: true }
-                }}>
+                <LinkContainer to='/account'>
                   <MenuItem eventKey={2.1}>
                     <i className="fa fa-user"></i>
                     <FormattedMessage {...links.account} />
@@ -44,10 +41,12 @@ export default class Header extends Component {
                   <FormattedMessage {...links.myOrders} />
                 </MenuItem>
                 <MenuItem divider />
-                <MenuItem eventKey={2.3}>
-                  <i className="fa fa-opencart"></i>
-                  <FormattedMessage {...links.openShop} />
-                </MenuItem>
+                <LinkContainer to='/shops/request_create'>
+                  <MenuItem eventKey={2.3}>
+                    <i className="fa fa-opencart"></i>
+                    <FormattedMessage {...links.openShop} />
+                  </MenuItem>
+                </LinkContainer>
                 <MenuItem divider />
                 <MenuItem eventKey={2.4}>
                   <i className="fa fa-cog"></i>

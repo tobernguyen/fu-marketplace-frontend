@@ -5,17 +5,20 @@ import Home from './containers/home';
 import Account from './containers/home/Account';
 import Shop from './containers/home/Shop';
 import Admin from './containers/admin';
+import RequestCreateShop from './containers/home/RequestCreateShop';
 import Dashboard from './containers/admin/Dashboard';
 import UserManagement from './containers/admin/UserManagement';
 import ShopManagement from './containers/admin/ShopManagement';
 import ChangePassword from './containers/admin/ChangePassword';
 import EditUser from './containers/admin/EditUser';
 
+
 export default (
   <Route path="/" component={App}>
     <IndexRoute component={Home}/>
     <Route path="/" component={Home}>
       <Route path="account" component={Account} overlayMode={true} />
+      <Route path="shops/request_create" component={RequestCreateShop} overlayMode={true} />
       <Route path="shops/:shopId" component={Shop} overlayMode={true} />
     </Route>
 

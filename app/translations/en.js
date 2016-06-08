@@ -15,5 +15,16 @@ export default {
   'account.form.roomNo.label': 'Room no.',
   'account.header.title': 'Account',
   'account.header.subTitle': 'Change your basic information.',
-  'account.form.save': 'Save changes'
+  'account.form.save': 'Save changes',
+  'page.title.openShop': 'Request to open shop',
+  'button.next': 'Next',
+  'button.previous': 'Previous',
+  'button.submit': 'Submit',
+  'button.register': 'Register',
+  'shop.form.identityNo.placeholder': 'Identity number',
+  'shop.form.identityNo.label': 'Identity no',
+  'shop.form.shopName.placeholder': 'Shop name',
+  'shop.form.shopName.label': 'Shop name',
+  'shop.form.headOffice.placeholder': 'Head office',
+  'shop.form.headOffice.label': 'Head office'
 };

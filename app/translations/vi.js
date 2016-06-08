@@ -15,5 +15,16 @@ export default {
   'account.form.roomNo.label': 'Phòng KTX',
   'account.header.title': 'Tài khoản',
   'account.header.subTitle': 'Thay đổi thông tin cơ bản.',
-  'account.form.save': 'Lưu thông tin'
+  'account.form.save': 'Lưu thông tin',
+  'page.title.openShop': 'Đăng ký mở shop bán hàng',
+  'button.next': 'Tiếp',
+  'button.previous': 'Trước',
+  'button.submit': 'Submit',
+  'button.register': 'Đăng ký',
+  'shop.form.identityNo.placeholder': 'Số chứng minh thư nhân dân',
+  'shop.form.identityNo.label': 'Số chứng minh thư',
+  'shop.form.shopName.placeholder': 'Tên shop',
+  'shop.form.shopName.label': 'Tên shop',
+  'shop.form.headOffice.placeholder': 'Trụ sở',
+  'shop.form.headOffice.label': 'Trự sở'
 };

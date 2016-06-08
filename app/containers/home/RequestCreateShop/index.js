@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { injectIntl } from 'react-intl';
 import ModalHeader from 'app/components/home/ModalHeader';
 import RequestCreateShopForm from './RequestCreateShopForm';
 import { updateModalSize } from 'app/actions';
 import { requestCreateShop } from 'app/actions/shop';
+import { titles } from 'app/shared/titles';
 
 class RequestCreateShop extends Component {
   constructor(props) {
@@ -15,9 +17,10 @@ class RequestCreateShop extends Component {
   }
 
   render() {
+    const { formatMessage } = this.props.intl;
     return (
       <div>
-        <ModalHeader title="Đăng ký mở shop"/>
+        <ModalHeader title={formatMessage(titles.openShop.title)}/>
         <div className="modal-body">
           <RequestCreateShopForm onSubmit={this.props.requestCreateShop} />
         </div>
@@ -33,7 +36,7 @@ const mapStateToProps = (state) => {
   }
 };
 
-export default connect(mapStateToProps, {
+export default injectIntl(connect(mapStateToProps, {
   updateModalSize,
   requestCreateShop
-})(RequestCreateShop)
+})(RequestCreateShop))

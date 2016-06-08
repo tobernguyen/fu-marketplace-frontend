@@ -113,7 +113,7 @@ class AccountBasic extends Component {
               alt={`Hình đại diện của ${fullName}`}
               title={`Hình đại diện của ${fullName}`} />
             <span className="camera-icon">
-              <i className="fa fa-camera fa-2x"></i>
+              <i className="fa fa-camera fa-2x" />
             </span>
           </div>
           <div className="col-md-7 user-info">

@@ -6,15 +6,15 @@ export const fields = [ 'phone', 'identityNumber', 'shopName', 'description', 'h
 const validate = values => {
   const errors = {};
   if (!values.shopName) {
-    errors.shopName = 'Required';
+    errors.shopName = 'shop.form.validation.shopName.required';
   }
 
   if (!values.description) {
-    errors.description = 'Required';
+    errors.description = 'shop.form.validation.description.required';
   }
 
   if (!values.headOffice) {
-    errors.headOffice = 'Required';
+    errors.headOffice = 'shop.form.validation.headOffice.required';
   }
 
   return errors;

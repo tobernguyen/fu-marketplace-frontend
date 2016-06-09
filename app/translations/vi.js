@@ -26,5 +26,5 @@ export default {
   'shop.form.shopName.placeholder': 'Tên shop',
   'shop.form.shopName.label': 'Tên shop',
   'shop.form.headOffice.placeholder': 'Trụ sở',
-  'shop.form.headOffice.label': 'Trự sở'
+  'shop.form.headOffice.label': 'Trụ sở'
 };

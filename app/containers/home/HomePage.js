@@ -12,6 +12,10 @@ import { getCurrentUser, signOutGoogle } from '../../actions';
 class HomePage extends Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+        hasChildren: false
+    }
   }
 
   componentWillMount() {
@@ -25,17 +29,16 @@ class HomePage extends Component {
         this.props.signOutGoogle();
       }
     }
+
+    this.setState({
+      hasChildren: !(nextProps.children === null)
+    });
   }
 
   render() {
     const { children } = this.props;
-    var overlayMode = false;
-    if (children) {
-      overlayMode = children.props.route.overlayMode;
-    }
-
     var childPage;
-    if (overlayMode) {
+    if (this.props.modalMode) {
       childPage = (
         <div>
           <Modal show={true} bsSize={this.props.modalSize}>
@@ -48,11 +51,12 @@ class HomePage extends Component {
     }
 
     const { currentUser, onSignOut } = this.props;
+    
     return (
       <div className="home-page">
         <Header onSignOut={onSignOut} currentUser={currentUser} />
         <div className="container home-body">
-          <div className="row">
+          {(this.props.modalMode || !this.state.hasChildren) && <div className="row">
             <div className="col-md-3">
               <BlockItemList />
               <BlockDormList />
@@ -66,9 +70,9 @@ class HomePage extends Component {
                 </div>
               </div>
             </div>
-          </div>
+          </div>}
+          {childPage}
         </div>
-        {childPage}
       </div>
     );
   }
@@ -86,7 +90,8 @@ const mapStateToProps = (state) => {
   return {
     currentUser: user.currentUser,
     error: user.error,
-    modalSize: common.modalSize
+    modalSize: common.modalSize,
+    modalMode: common.modalMode
   }
 };
 

@@ -14,6 +14,7 @@ class FormRequestCreateShopOwner extends Component {
 
     return (
       <form onSubmit={handleSubmit}>
+        <h4 className="page-header">Thông tin chủ shop</h4>
         <div className={`form-group ${phone.touched && phone.invalid ? 'has-error' : ''}`}>
           <label className="control-label">
             <FormattedMessage {...messages.phone.label} />

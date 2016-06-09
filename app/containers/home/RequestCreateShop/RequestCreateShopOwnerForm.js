@@ -6,11 +6,11 @@ export const fields = [ 'phone', 'identityNumber' ];
 const validate = values => {
   const errors = {};
   if (!values.phone) {
-    errors.phone = 'Required';
+    errors.phone = 'shop.form.validation.phone.required';
   }
 
   if (!values.identityNumber) {
-    errors.identityNumber = 'Required';
+    errors.identityNumber = 'shop.form.validation.identityNumber.required';
   }
 
   return errors;

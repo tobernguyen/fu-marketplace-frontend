@@ -16,6 +16,7 @@ class FormRequestCreateShopInfo extends Component {
 
     return (
       <form onSubmit={handleSubmit}>
+        <h4 className="page-header">Thông tin shop</h4>
         <div className={`form-group ${shopName.touched && shopName.invalid ? 'has-error' : ''}`}>
           <label className="control-label">
             <FormattedMessage {...messages.shopName.label} />
@@ -51,11 +52,11 @@ class FormRequestCreateShopInfo extends Component {
           </div>
         </div>
 
-        <div className="form-group">
-          <button type="button" disabled={submitting} onClick={previousPage} className="btn btn-primary">
+        <div className="form-group clearfix">
+          <button type="button" disabled={submitting} onClick={previousPage} className="btn btn-primary pull-left">
             <i className="fa fa-chevron-left"/> <FormattedMessage {...buttons.previous} />
           </button>
-          <button type="submit" disabled={submitting} className="btn btn-primary">
+          <button type="submit" disabled={submitting} className="btn btn-success pull-right">
             {submitting ? <i className="fa fa-spinner" /> : <i className="fa fa-paper-plane"/>} <FormattedMessage {...buttons.register} />
           </button>
         </div>

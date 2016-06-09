@@ -127,3 +127,21 @@ ul.navbar-nav > li .badge {
   right: 5px;
   top: 10px;
 }
+
+.request-create-shop {
+  .modal-body {
+    form {
+      .page-header {
+        margin: 0 0 20px;
+      }
+    }
+  }
+}
+
+.form-control:focus, .has-error .form-control:focus {
+  box-shadow: none;
+}
+
+.btn {
+  border-radius: 3px;
+}

@@ -143,7 +143,7 @@ class AccountBasic extends Component {
                   </label>
                   <div className="col-sm-8">
                     <Select
-                      name="form-field-name"
+                      name="form-field-room"
                       value={room || ''}
                       options={roomList}
                       onChange={this.roomSelected}

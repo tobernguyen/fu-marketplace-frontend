@@ -5,6 +5,7 @@ import ModalHeader from 'app/components/home/ModalHeader';
 import RequestCreateShopForm from './RequestCreateShopForm';
 import { updateModalSize } from 'app/actions';
 import { requestCreateShop } from 'app/actions/shop';
+import { updateModalMode } from 'app/actions/common';
 import { titles } from 'app/shared/titles';
 
 class RequestCreateShop extends Component {
@@ -14,12 +15,17 @@ class RequestCreateShop extends Component {
 
   componentWillMount() {
     this.props.updateModalSize(null);
+    this.props.updateModalMode(true);
+  }
+
+  componentWillUnmount() {
+    this.props.updateModalMode(false);
   }
 
   render() {
     const { formatMessage } = this.props.intl;
     return (
-      <div>
+      <div className="request-create-shop">
         <ModalHeader title={formatMessage(titles.openShop.title)}/>
         <div className="modal-body">
           <RequestCreateShopForm onSubmit={this.props.requestCreateShop} />
@@ -38,5 +44,6 @@ const mapStateToProps = (state) => {
 
 export default injectIntl(connect(mapStateToProps, {
   updateModalSize,
-  requestCreateShop
+  requestCreateShop,
+  updateModalMode
 })(RequestCreateShop))

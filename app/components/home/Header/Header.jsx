@@ -47,6 +47,11 @@ export default class Header extends Component {
                     <FormattedMessage {...links.openShop} />
                   </MenuItem>
                 </LinkContainer>
+                <LinkContainer to='/seller/dashboard'>
+                  <MenuItem eventKey={2.3}>
+                    <i className="fa fa-opencart"/> Seller Dashboard
+                  </MenuItem>
+                </LinkContainer>
                 <MenuItem divider />
                 <MenuItem eventKey={2.4}>
                   <i className="fa fa-cog"></i>

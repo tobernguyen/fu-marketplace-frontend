@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import RequestCreateShopInfoForm from './RequestCreateShopInfoForm';
 import RequestCreateShopOwnerForm from './RequestCreateShopOwnerForm';
+import FormRequestCreateShopIntro from 'app/components/home/FormRequestCreateShopIntro';
 
 export default class RequestCreateShopForm extends Component {
   constructor(props) {
@@ -25,8 +26,9 @@ export default class RequestCreateShopForm extends Component {
     const { onSubmit } = this.props;
     const { page } = this.state;
     return (<div>
-        {page === 1 && <RequestCreateShopOwnerForm onSubmit={this.nextPage}/>}
-        {page === 2 && <RequestCreateShopInfoForm previousPage={this.previousPage} onSubmit={onSubmit}/>}
+        {page === 1 && <FormRequestCreateShopIntro onSubmit={this.nextPage} />}
+        {page === 2 && <RequestCreateShopOwnerForm onSubmit={this.nextPage} previousPage={this.previousPage} />}
+        {page === 3 && <RequestCreateShopInfoForm previousPage={this.previousPage} onSubmit={onSubmit} />}
       </div>
     )
   }

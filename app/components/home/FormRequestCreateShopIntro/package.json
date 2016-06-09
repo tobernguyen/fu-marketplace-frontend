@@ -1,0 +1,6 @@
+{
+  "name": "FormRequestCreateShopIntro",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./FormRequestCreateShopIntro.jsx"
+}

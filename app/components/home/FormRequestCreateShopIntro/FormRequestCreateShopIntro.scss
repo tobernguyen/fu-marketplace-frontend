@@ -1,0 +1,132 @@
+.form-request-create-shop-intro {
+  .action-points {
+    width: 100%;
+    height: 265px;
+    background: url('https://static.shorte.st/bundles/smeweb/img/action-points-bg.png') repeat-x;
+    margin: 20px auto 0;
+    position: relative;
+    overflow: hidden;
+
+    .arrow {
+      width: 1400px;
+      height: 35px;
+      background: url('https://static.shorte.st/bundles/smeweb/img/action-points-arrow.png');
+      position: absolute;
+      right: 0;
+      top: 61px;
+      -webkit-animation-name: arrow-moving;
+      -webkit-animation-duration: 2s;
+      -webkit-animation-iteration-count: infinite;
+      -webkit-animation-timing-function: linear;
+      -moz-animation-name: arrow-moving;
+      -moz-animation-duration: 2s;
+      -moz-animation-iteration-count: infinite;
+      -moz-animation-timing-function: linear;
+      animation-name: arrow-moving;
+      animation-duration: 2s;
+      animation-iteration-count: infinite;
+      animation-timing-function: linear;
+      -o-animation-name: arrow-moving;
+      -o-animation-duration: 2s;
+      -o-animation-iteration-count: infinite;
+      -o-animation-timing-function: linear;
+    }
+
+    .circle.orange {
+      left: 0;
+
+      h5 {
+        text-shadow: 1px 1px 0 #e1563e;
+      }
+    }
+
+    .circle.green {
+      left: 204px;
+      background-position: -165px 0px;
+      width: 160px;
+
+      h5 {
+        text-shadow: 1px 1px 0 #3f8e71;
+      }
+    }
+
+    .circle.yellow {
+
+      right: 0;
+      background-position: -322px 0px;
+      width: 166px;
+
+      h5 {
+        text-shadow: 1px 1px 0 #db8f30;
+      }
+    }
+
+    .circle {
+      width: 157px;
+      height: 265px;
+      background: url('https://static.shorte.st/bundles/smeweb/img/action-points-circle.png') no-repeat;
+      position: absolute;
+      top: 0;
+      text-align: center;
+
+      h5 {
+        color: #ffffff;
+        font-size: 75px;
+        font-weight: 900;
+        width: 100%;
+        margin: 0;
+        padding-top: 48px;
+        text-align: center;
+        line-height: 20px;
+
+        span {
+          font-size: 13px;
+          text-transform: uppercase;
+          padding-top: 28px;
+          display: inline-block;
+        }
+      }
+
+      p {
+        font-size: 18px;
+        line-height: 19px;
+        margin: 55px 0 0;
+        padding: 0;
+        font-weight: 300;
+      }
+    }
+  }
+}
+
+@-webkit-keyframes arrow-moving {
+  0% {
+    right: -19px;
+  }
+  100% {
+    right: -290px;
+  }
+}
+@-moz-keyframes arrow-moving {
+  0% {
+    right: -19px;
+  }
+  100% {
+    right: -290px;
+  }
+}
+@keyframes arrow-moving {
+  0% {
+    right: -19px;
+  }
+  100% {
+    right: -290px;
+  }
+}
+@-o-keyframes arrow-moving {
+  0% {
+    right: -19px;
+  }
+  100% {
+    right: -290px;
+  }
+}

@@ -7,7 +7,6 @@
     .nav > li > a {
       color: #a7b1c2;
       font-weight: 600;
-      padding: 14px 20px 14px 25px;
       position: relative;
       display: block;
 
@@ -43,6 +42,28 @@
     width: 220px;
     z-index: 2001;
     height: 100%;
+  }
+  
+  .sidebar-expanded {
+    .nav > li > a {
+      padding: 14px 20px 14px 25px;
+    }
+    
+    .nav-header {
+      a {
+        padding: 15px 0;
+      }
+    }
+  }
+  
+  .sidebar-collapsed {
+    width: 50px;
+    
+    .nav-header {
+      a {
+        padding: 15px 0;
+      }
+    }
   }
 }
 

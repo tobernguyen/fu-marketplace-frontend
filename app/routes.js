@@ -11,6 +11,7 @@ import Dashboard from './containers/admin/Dashboard';
 import UserManagement from './containers/admin/UserManagement';
 import ShopManagement from './containers/admin/ShopManagement';
 import ChangePassword from './containers/admin/ChangePassword';
+import EditUser from './containers/admin/EditUser';
 
 
 export default (
@@ -27,6 +28,7 @@ export default (
       <IndexRoute component={Dashboard}/>
       <Route path="dashboard" component={Dashboard} />
       <Route path="users" component={UserManagement} />
+      <Route path="users/:userId/edit" component={EditUser} />
       <Route path="shops" component={ShopManagement} />
       <Route path="changepwd" component={ChangePassword} />
     </Route>

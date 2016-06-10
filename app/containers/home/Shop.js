@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import ModalHeader from 'app/components/home/ModalHeader';
 import { connect } from 'react-redux';
-import { updateModalSize } from '../../actions';
-import { updateModalMode } from '../../actions/common';
+import { updateModalMode, updateModalSize } from '../../actions/common';
 
 class Shop extends Component {
   constructor(props) {

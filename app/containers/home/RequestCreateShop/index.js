@@ -3,9 +3,8 @@ import { connect } from 'react-redux';
 import { injectIntl } from 'react-intl';
 import ModalHeader from 'app/components/home/ModalHeader';
 import RequestCreateShopForm from './RequestCreateShopForm';
-import { updateModalSize } from 'app/actions';
 import { requestCreateShop } from 'app/actions/shop';
-import { updateModalMode } from 'app/actions/common';
+import { updateModalMode, updateModalSize } from 'app/actions/common';
 import { titles } from 'app/shared/titles';
 
 class RequestCreateShop extends Component {

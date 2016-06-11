@@ -5,9 +5,13 @@ export const user = (state = {}, action) => {
   const { type, response, error, user } = action;
   switch (type) {
     case ActionTypes.CURRENT_USER_SUCCESS:
-    case ActionTypes.UPLOAD_AVATAR_SUCCESS:
       return _.assign({}, state, {
         currentUser: response
+      });
+    case ActionTypes.UPLOAD_AVATAR_SUCCESS:
+      return _.assign({}, state, {
+        currentUser: response,
+        newAvatar: response.avatar
       });
     case ActionTypes.UPDATE_USER_INFO_SUCCESS:
       return _.assign({}, state, {
@@ -22,7 +26,10 @@ export const user = (state = {}, action) => {
       });
     case ActionTypes.ACCOUNT_INFO_CHANGED:
       const newUserInfo = _.merge(state.currentUser, user);
-      return _.merge({}, state, { currentUser: newUserInfo });
+      return _.merge({}, state, {
+        currentUser: newUserInfo,
+        newAvatar: null
+      });
     default:
       return state;
   }

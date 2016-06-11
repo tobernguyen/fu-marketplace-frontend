@@ -7,9 +7,9 @@ import './AccountBasic.scss';
 import './react-select.scss';
 import Select from 'react-select';
 import { Alert } from 'react-bootstrap';
+import { getImageURLWithMediumSize } from 'app/helpers/image';
 
-const AVATAR_SMALL_SIZE_EXT = '-small.jpg';
-const AVATAR_MEDIUM_SIZE_EXT = '-medium.jpg';
+
 
 class AccountBasic extends Component {
   constructor(props) {
@@ -18,7 +18,9 @@ class AccountBasic extends Component {
     this.state = {
       modalCropImageShown: false,
       img: null,
-      alertVisible: false
+      alertVisible: false,
+      userAvatar: '',
+      avatarLoaded: false
     };
 
     this.handleFileChange = (dataURI) => {
@@ -35,7 +37,7 @@ class AccountBasic extends Component {
     };
 
     this.phoneChanged = (evt) => {
-      const phone = evt.target.value;
+      const phone = evt.target.value || '';
       const numericRegex = /^\d+$/;
       if (numericRegex.test(phone)) {
         this.props.userInfoChanged({
@@ -58,13 +60,24 @@ class AccountBasic extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.currentUser) {
-      this.setState({
-        modalCropImageShown: false
-      })
+      if (!this.state.avatarLoaded) {
+        let userAvatar = getImageURLWithMediumSize(nextProps.currentUser.avatar);
+        this.setState({
+          avatarLoaded: true,
+          userAvatar: userAvatar
+        })
+      }
     }
     if (nextProps.userUpdated) {
       this.setState({
         alertVisible: nextProps.userUpdated
+      })
+    }
+    if (nextProps.newAvatar) {
+      let userAvatar = getImageURLWithMediumSize(nextProps.newAvatar);
+      this.setState({
+        userAvatar: userAvatar,
+        modalCropImageShown: false
       })
     }
   }
@@ -73,26 +86,7 @@ class AccountBasic extends Component {
     const { currentUser } = this.props;
     const { formatMessage } = this.props.intl;
 
-    let userAvatar = currentUser.avatar;
 
-    if (userAvatar.endsWith(AVATAR_SMALL_SIZE_EXT)) {
-      userAvatar = userAvatar.replace(AVATAR_SMALL_SIZE_EXT, AVATAR_MEDIUM_SIZE_EXT);
-    }
-
-    userAvatar += `?${new Date().getTime()}`;
-
-    let roomList = [];
-    for (let dorm of ['A', 'B', 'C', 'D', 'E', 'F']) {
-      for (let floor of [1, 2, 3, 4]) {
-        for (let floorRoomNo = 1; floorRoomNo <= 14; floorRoomNo ++) {
-          const roomNo = `${dorm}${floor * 100 + floorRoomNo}`;
-          roomList.push({
-            value: roomNo,
-            label: roomNo
-          });
-        }
-      }
-    }
 
     const { fullName, email, room, phone } = currentUser;
 
@@ -109,7 +103,7 @@ class AccountBasic extends Component {
           <div className="col-md-5 user-avatar">
             <ImageUploader handleFileChange={this.handleFileChange} />
             <img
-              src={userAvatar}
+              src={this.state.userAvatar}
               alt={`Hình đại diện của ${fullName}`}
               title={`Hình đại diện của ${fullName}`} />
             <span className="camera-icon">
@@ -145,7 +139,7 @@ class AccountBasic extends Component {
                     <Select
                       name="form-field-room"
                       value={room || ''}
-                      options={roomList}
+                      options={this.props.roomList}
                       onChange={this.roomSelected}
                       placeholder={formatMessage(messages.roomNo.placeholder)}
                     />
@@ -182,7 +176,8 @@ AccountBasic.propTypes = {
   intl: intlShape.isRequired,
   currentUser: PropTypes.object.isRequired,
   userInfoChanged: PropTypes.func.isRequired,
-  saveUserInfo: PropTypes.func.isRequired
+  saveUserInfo: PropTypes.func.isRequired,
+  roomList: PropTypes.array.isRequired
 };
 
 AccountBasic.defaultProps = {

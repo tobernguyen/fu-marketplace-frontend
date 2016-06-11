@@ -3,8 +3,8 @@ import ModalHeader from 'app/components/home/ModalHeader';
 import AccountBasic from 'app/components/home/AccountBasic';
 import { connect } from 'react-redux';
 import dataURLtoBlob from 'blueimp-canvas-to-blob';
-import { uploadAvatar, changeUserInfo, updateUserInfo, updateModalSize } from '../../actions';
-import { updateModalMode } from '../../actions/common';
+import { uploadAvatar, changeUserInfo, updateUserInfo } from '../../actions';
+import { updateModalMode, updateModalSize } from '../../actions/common';
 
 class Account extends Component {
   constructor(props) {
@@ -33,6 +33,18 @@ class Account extends Component {
   }
 
   render() {
+    let roomList = [];
+    for (let dorm of ['A', 'B', 'C', 'D', 'E', 'F']) {
+      for (let floor of [1, 2, 3, 4]) {
+        for (let floorRoomNo = 1; floorRoomNo <= 14; floorRoomNo ++) {
+          const roomNo = `${dorm}${floor * 100 + floorRoomNo}`;
+          roomList.push({
+            value: roomNo,
+            label: roomNo
+          });
+        }
+      }
+    }
     return (
       <div>
         <ModalHeader title="Tài khoản" subHeader="Thay đổi thông tin cơ bản."/>
@@ -42,6 +54,8 @@ class Account extends Component {
             userUpdated={this.props.userUpdated}
             uploadAvatar={this.handleUploadAvatar}
             userInfoChanged={this.props.changeUserInfo}
+            roomList={roomList}
+            newAvatar={this.props.newAvatar}
             saveUserInfo={this.saveUserInfo}/>
         </div>
       </div>
@@ -54,7 +68,8 @@ const mapStateToProps = (state) => {
   const { user } = state;
   return {
     currentUser:  user.currentUser,
-    userUpdated:  user.userUpdated
+    userUpdated:  user.userUpdated,
+    newAvatar:    user.newAvatar
   }
 };
 

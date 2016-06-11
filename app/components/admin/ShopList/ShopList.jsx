@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react';
 import ShopListRow from 'app/components/admin/ShopListRow';
-import EditShopModal from 'app/components/admin/EditShopModal';
 import './ShopList.scss';
 
 const mockData = [
@@ -32,81 +31,6 @@ const mockData = [
 export default class ShopList extends Component {
   constructor(props, context) {
     super(props, context);
-
-    this.state = {
-      showModal: false,
-      selectedShop: {},
-      updatedShop: {}
-    };
-
-    this.openEditModal = this.openEditModal.bind(this);
-    this.closeEditModal = this.closeEditModal.bind(this);
-    this.renderEditModal = this.renderEditModal.bind(this);
-    this.updateDormsTag = this.updateDormsTag.bind(this);
-    this.updateTypeTag = this.updateTypeTag.bind(this);
-    this.handleOnChange = this.handleOnChange.bind(this);
-    this.toggleBan = this.toggleBan.bind(this);
-    this.saveChanges = this.saveChanges.bind(this);
-  }
-
-  openEditModal(shop) {
-    this.setState({
-      showModal: true,
-      selectedShop: shop
-    });
-  }
-
-  closeEditModal() {
-    this.setState({
-      showModal: false,
-      selectedShop: {}
-    });
-  }
-
-  updateDormsTag(tags) {
-    const newSelectedShop = this.state.selectedShop;
-    newSelectedShop['dorms'] = tags;
-    this.setState({ selectedShop: newSelectedShop });
-  }
-
-  updateTypeTag(tags) {
-    const newSelectedShop = this.state.selectedShop;
-    newSelectedShop['type'] = tags;
-    this.setState({ selectedShop: newSelectedShop });
-  }
-
-  handleOnChange(e) {
-    const newSelectedShop = this.state.selectedShop;
-    newSelectedShop[e.target.name] = e.target.value;
-    this.setState({ selectedShop: newSelectedShop });
-  }
-
-  toggleBan(e) {
-    const newSelectedShop = this.state.selectedShop;
-    newSelectedShop['banStatus'] = !newSelectedShop['banStatus']
-    this.setState({
-      selectedShop: newSelectedShop
-    });
-  }
-
-  saveChanges(e) {
-    console.log(this.state.selectedShop);
-  }
-
-  renderEditModal() {
-    if(this.state.selectedShop !== {}) {
-      return (
-        <EditShopModal
-          shop={this.state.selectedShop}
-          showModal={this.state.showModal}
-          closeEditModal={this.closeEditModal}
-          onChange={this.handleOnChange}
-          updateDormsTag={this.updateDormsTag}
-          updateTypeTag={this.updateTypeTag}
-          toggleBan={this.toggleBan}
-          saveChanges={this.saveChanges}/>
-      );
-    }
   }
 
   render() {
@@ -124,11 +48,10 @@ export default class ShopList extends Component {
           </thead>
           <tbody>
             {mockData.map(shop =>
-              <ShopListRow key={shop.id} shop={shop} openEditModal={this.openEditModal} />
+              <ShopListRow key={shop.id} shop={shop} />
             )}
           </tbody>
         </table>
-        {this.renderEditModal()}
       </div>
     );
   }

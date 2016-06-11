@@ -8,37 +8,18 @@ class UserManagement extends Component {
     super(props);
   }
 
-  componentWillMount() {
-    this.props.adminGetUsers();
-  }
-
   render() {
     return (
       <div>
-        <UserList users={this.props.users} editUser={this.props.adminEditUser} />
+        {this.props.children}
       </div>
     );
   }
 }
-
-UserManagement.propTypes = {
-  adminGetUsers:  PropTypes.func.isRequired,
-  adminEditUser:  PropTypes.func.isRequired,
-  users:          PropTypes.array.isRequired
-};
 
 UserManagement.path = '/users';
 UserManagement.title = 'User management';
 UserManagement.description = 'User management';
 UserManagement.faIcon = 'fa-users';
 
-const mapStateToProps = state => {
-  return {
-    users: state.admin.users
-  }
-};
-
-export default connect(mapStateToProps, {
-  adminGetUsers,
-  adminEditUser
-})(UserManagement)
+export default UserManagement

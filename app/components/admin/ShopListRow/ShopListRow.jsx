@@ -5,12 +5,6 @@ import './ShopListRow.scss';
 class ShopListRow extends Component {
   constructor(props, context) {
     super(props,context);
-
-    this.handleEditButtonClicked = this.handleEditButtonClicked.bind(this);
-  }
-
-  handleEditButtonClicked() {
-    this.props.openEditModal(this.props.shop);
   }
 
   render() {
@@ -21,7 +15,7 @@ class ShopListRow extends Component {
         <td>{this.props.shop.shopOwner}</td>
         <td>{this.props.shop.banStatus}</td>
         <td className="actions">
-          <Button bsStyle="warning" onClick={this.handleEditButtonClicked}>
+          <Button bsStyle="warning">
             <i className="fa fa-pencil-square-o"></i>
           </Button>
         </td>

@@ -12,7 +12,13 @@ const initialState = {
     isSubmitting: false,
     submitResult: ''
   },
-  shops: [],
+  shopManagement: {
+    isFetching: false,
+    shopList: [],
+    selectedShop: {},
+    isSubmitting: false,
+    submitResult: ''
+  },
   changePasswordFormStatus: {
     isSubmitting: false,
     response: ''
@@ -123,6 +129,102 @@ export const admin = (state = initialState, action) => {
       return _.assign({}, state, {
         userManagement: {
           submitResult: AsyncResultCode.UNBAN_USER_FAIL
+        }
+      });
+    case AdminActionTypes.ADMIN_GET_SHOPS_REQUEST:
+      return _.assign({}, state, {
+        shopManagement: {
+          isFetching: true
+        }
+      });
+    case AdminActionTypes.ADMIN_GET_SHOPS_SUCCESS:
+      return _.assign({}, state, {
+        shopManagement: {
+          isFetching: false,
+          shopList: response.shops
+        }
+      });
+    case AdminActionTypes.ADMIN_GET_SHOPS_FAILURE:
+      return _.assign({}, state, {
+        shopManagement: {
+          isFetching: false,
+          shopList: []
+        }
+      });
+    case AdminActionTypes.ADMIN_GET_SHOP_REQUEST:
+      return _.assign({}, state, {
+        shopManagement: {
+          isFetching: true
+        }
+      });
+    case AdminActionTypes.ADMIN_GET_SHOP_SUCCESS:
+      return _.assign({}, state, {
+        shopManagement: {
+          isFetching: false,
+          selectedShop: response
+        }
+      });
+    case AdminActionTypes.ADMIN_UPDATE_SHOP_INFORMATION_REQUEST:
+      return _.assign({}, state, {
+        shopManagement: {
+          isSubmitting: true
+        }
+      });
+    case AdminActionTypes.ADMIN_UPDATE_SHOP_INFORMATION_SUCCESS:
+      return _.assign({}, state, {
+        shopManagement: {
+          isSubmitting: false,
+          selectedShop: response,
+          submitResult: AsyncResultCode.UPDATE_SHOP_INFORMATION_SUCCESS
+        }
+      });
+    case AdminActionTypes.ADMIN_UPDATE_SHOP_INFORMATION_FAILURE:
+      return _.assign({}, state, {
+        shopManagement: {
+          isSubmitting: false,
+          submitResult: AsyncResultCode.UPDATE_SHOP_INFORMATION_FAIL
+        }
+      });
+    case AdminActionTypes.ADMIN_BAN_SHOP_REQUEST:
+      return _.assign({}, state, {
+        shopManagement: {
+          isSubmitting: true,
+          selectedShop: state.shopManagement.selectedShop
+        }
+      });
+    case AdminActionTypes.ADMIN_BAN_SHOP_SUCCESS:
+      return _.assign({}, state, {
+        shopManagement: {
+          selectedShop: response,
+          submitResult: AsyncResultCode.BAN_SHOP_SUCCESS
+        }
+      });
+    case AdminActionTypes.ADMIN_BAN_SHOP_FAILURE:
+      return _.assign({}, state, {
+        shopManagement: {
+          submitResult: AsyncResultCode.BAN_SHOP_FAIL,
+          selectedShop: state.shopManagement.selectedShop
+        }
+      });
+    case AdminActionTypes.ADMIN_UNBAN_SHOP_REQUEST:
+      return _.assign({}, state, {
+        shopManagement: {
+          isSubmitting: true,
+          selectedShop: state.shopManagement.selectedShop
+        }
+      });
+    case AdminActionTypes.ADMIN_UNBAN_SHOP_SUCCESS:
+      return _.assign({}, state, {
+        shopManagement: {
+          selectedShop: response,
+          submitResult: AsyncResultCode.UNBAN_SHOP_SUCCESS
+        }
+      });
+    case AdminActionTypes.ADMIN_UNBAN_SHOP_FAILURE:
+      return _.assign({}, state, {
+        shopManagement: {
+          submitResult: AsyncResultCode.UNBAN_SHOP_FAIL,
+          selectedShop: state.shopManagement.selectedShop
         }
       });
     case ActionTypes.ADMIN_CHANGE_PASSWORD_REQUEST:

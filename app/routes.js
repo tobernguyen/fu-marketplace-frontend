@@ -1,8 +1,8 @@
 import React from 'react';
-import { 
-  Route, 
+import {
+  Route,
   IndexRoute,
-  IndexRedirect 
+  IndexRedirect
 } from 'react-router';
 import App from './containers/App';
 import Home from './containers/home';
@@ -16,6 +16,8 @@ import UserManagement from './containers/admin/UserManagement';
 import ContainerListUser from './containers/admin/User/ContainerListUser';
 import ContainerEditUser from './containers/admin/User/ContainerEditUser';
 import ShopManagement from './containers/admin/ShopManagement';
+import ContainerListShop from './containers/admin/Shop/ContainerListShop';
+import ContainerEditShop from './containers/admin/Shop/ContainerEditShop';
 import ChangePassword from './containers/admin/ChangePassword';
 
 
@@ -30,14 +32,12 @@ export default (
     </Route>
 
     <Route path="/admin" component={Admin}>
-      <IndexRoute component={Dashboard}/>
+      <IndexRedirect to="dashboard" />
       <Route path="dashboard" component={Dashboard} />
-      <Route path="users" component={UserManagement} >
-        <IndexRedirect to="list" />
-        <Route path="list" component={ContainerListUser} />
-        <Route path=":userId/edit" component={ContainerEditUser} />
-      </Route>
-      <Route path="shops" component={ShopManagement} />
+      <Route path="users" component={ContainerListUser} />
+      <Route path="users/:userId/edit" component={ContainerEditUser} />
+      <Route path="shops" component={ContainerListShop} />
+      <Route path="shops/:shopId/edit" component={ContainerEditShop} />
       <Route path="changepwd" component={ChangePassword} />
     </Route>
   </Route>

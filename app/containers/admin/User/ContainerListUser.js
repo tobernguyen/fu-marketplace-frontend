@@ -29,6 +29,11 @@ const mapStateToProps = (state) => ({
    userManagement: state.admin.userManagement
 });
 
+UserListContainer.path = '/users';
+UserListContainer.title = 'User management';
+UserListContainer.description = 'User management';
+UserListContainer.faIcon = 'fa-users';
+
 export default connect(mapStateToProps, {
   adminGetUsers
 })(UserListContainer);

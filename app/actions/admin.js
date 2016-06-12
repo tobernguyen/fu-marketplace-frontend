@@ -91,3 +91,77 @@ export const adminUnbanUser = (user) => ({
     method: HTTP_METHODS.PUT
   }
 });
+
+export const ADMIN_GET_SHOPS_REQUEST = 'ADMIN_GET_SHOPS_REQUEST';
+export const ADMIN_GET_SHOPS_SUCCESS = 'ADMIN_GET_SHOPS_SUCCESS';
+export const ADMIN_GET_SHOPS_FAILURE = 'ADMIN_GET_SHOPS_FAILURE';
+export const adminGetShops = () => ({
+  [CALL_API]: {
+    types: [ADMIN_GET_SHOPS_REQUEST, ADMIN_GET_SHOPS_SUCCESS, ADMIN_GET_SHOPS_FAILURE],
+    url: '/api/v1/admin/shops',
+    method: HTTP_METHODS.GET
+  }
+});
+
+export const ADMIN_GET_SHOP_REQUEST = 'ADMIN_GET_SHOP_REQUEST';
+export const ADMIN_GET_SHOP_SUCCESS = 'ADMIN_GET_SHOP_SUCCESS';
+export const ADMIN_GET_SHOP_FAILURE = 'ADMIN_GET_SHOP_FAILURE';
+export const adminGetShop = (shopId) => ({
+  [CALL_API]: {
+    types: [ADMIN_GET_SHOP_REQUEST, ADMIN_GET_SHOP_SUCCESS, ADMIN_GET_SHOP_FAILURE],
+    url: `/api/v1/admin/shops/${shopId}`,
+    method: HTTP_METHODS.GET
+  }
+});
+
+export const ADMIN_UPDATE_SHOP_INFORMATION_REQUEST = 'ADMIN_UPDATE_SHOP_INFORMATION_REQUEST';
+export const ADMIN_UPDATE_SHOP_INFORMATION_SUCCESS = 'ADMIN_UPDATE_SHOP_INFORMATION_SUCCESS';
+export const ADMIN_UPDATE_SHOP_INFORMATION_FAILURE = 'ADMIN_UPDATE_SHOP_INFORMATION_FAILURE';
+export const adminUpdateShopInformation = (shopId, shop) => ({
+  [CALL_API]: {
+    types: [
+      ADMIN_UPDATE_SHOP_INFORMATION_REQUEST,
+      ADMIN_UPDATE_SHOP_INFORMATION_SUCCESS,
+      ADMIN_UPDATE_SHOP_INFORMATION_FAILURE
+      ],
+    url: `/api/v1/admin/shops/${shopId}`,
+    params: shop,
+    method: HTTP_METHODS.PUT
+  }
+});
+
+export const ADMIN_BAN_SHOP_REQUEST = 'ADMIN_BAN_SHOP_REQUEST';
+export const ADMIN_BAN_SHOP_SUCCESS = 'ADMIN_BAN_SHOP_SUCCESS';
+export const ADMIN_BAN_SHOP_FAILURE = 'ADMIN_BAN_SHOP_FAILURE';
+export const adminBanShop = (shopId) => ({
+  [CALL_API]: {
+    types: [
+      ADMIN_BAN_SHOP_REQUEST,
+      ADMIN_BAN_SHOP_SUCCESS,
+      ADMIN_BAN_SHOP_FAILURE
+    ],
+    url: `/api/v1/admin/shops/${shopId}`,
+    params: {
+      banned: true
+    },
+    method: HTTP_METHODS.PUT
+  }
+});
+
+export const ADMIN_UNBAN_SHOP_REQUEST = 'ADMIN_UNBAN_SHOP_REQUEST';
+export const ADMIN_UNBAN_SHOP_SUCCESS = 'ADMIN_UNBAN_SHOP_SUCCESS';
+export const ADMIN_UNBAN_SHOP_FAILURE = 'ADMIN_UNBAN_SHOP_FAILURE';
+export const adminUnbanShop = (shopId) => ({
+  [CALL_API]: {
+    types: [
+      ADMIN_UNBAN_SHOP_REQUEST,
+      ADMIN_UNBAN_SHOP_SUCCESS,
+      ADMIN_UNBAN_SHOP_FAILURE
+    ],
+    url: `/api/v1/admin/shops/${shopId}`,
+    params: {
+      banned: false
+    },
+    method: HTTP_METHODS.PUT
+  }
+});

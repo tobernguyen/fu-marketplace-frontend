@@ -30,6 +30,7 @@
     "blueimp-canvas-to-blob": "^3.3.0",
     "bootstrap": "^3.3.6",
     "font-awesome": "^4.6.1",
+    "halogen": "^0.2.0",
     "lodash": "^4.13.1",
     "react": "^15.0.2",
     "react-bootstrap": "^0.29.4",

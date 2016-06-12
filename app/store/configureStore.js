@@ -8,7 +8,6 @@ export default function configureStore(initialState) {
   return createStore(
     rootReducer,
     initialState,
-    applyMiddleware(thunk, api, localStorage),
-    window.devToolsExtension ? window.devToolsExtension() : undefined
+    applyMiddleware(thunk, api, localStorage)
   )
 }

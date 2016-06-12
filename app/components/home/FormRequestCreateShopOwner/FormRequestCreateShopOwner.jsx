@@ -8,25 +8,22 @@ class FormRequestCreateShopOwner extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      files: []
-    };
-
     this.onDrop = (files) => {
-      this.setState({
-        files: files
-      });
+      if (files && files[0]) {
+        let formFileData = new FormData();
+        formFileData.append('file', files[0]);
+        this.props.uploadIdentityPhoto(formFileData)
+      }
     }
   }
 
   render() {
     const {
-      fields: { phone, identityNumber },
+      fields: { phone, identityNumber, identityPhoto },
       handleSubmit
     } = this.props;
 
     const { formatMessage } = this.props.intl;
-
     return (
       <form onSubmit={handleSubmit}>
         <h4 className="page-header">Thông tin chủ shop</h4>
@@ -55,7 +52,10 @@ class FormRequestCreateShopOwner extends Component {
             {identityNumber.touched ? identityNumber.error : ''}
           </div>
         </div>
-        <div className="form-group">
+        <div className={`form-group ${identityPhoto.touched && identityPhoto.invalid ? 'has-error' : ''}`}>
+          <div className="help-block">
+            {identityPhoto.touched ? identityPhoto.error : ''}
+          </div>
           <label>
             <FormattedMessage {...messages.verificationPhoto.label} />
           </label>
@@ -66,7 +66,7 @@ class FormRequestCreateShopOwner extends Component {
             multiple={false}
             accept="image/*">
             <div>
-              {this.state.files.length == 0 && <div>
+              {!identityPhoto.valid && <div>
                 <h4>
                   <FormattedMessage {...messages.verificationPhoto.fileSelect} />
                 </h4>
@@ -81,7 +81,8 @@ class FormRequestCreateShopOwner extends Component {
                   </li>
                 </ul>
               </div>}
-              {this.state.files.length > 0 && <img className="img-responsive" src={this.state.files[0].preview}/>}
+              {identityPhoto.valid &&
+              <img className="img-responsive" src={identityPhoto.value}/>}
             </div>
           </Dropzone>
         </div>
@@ -100,7 +101,8 @@ class FormRequestCreateShopOwner extends Component {
 FormRequestCreateShopOwner.propTypes = {
   intl: intlShape.isRequired,
   fields: PropTypes.object.isRequired,
-  handleSubmit: PropTypes.func.isRequired
+  handleSubmit: PropTypes.func.isRequired,
+  uploadIdentityPhoto: PropTypes.func.isRequired
 };
 
 export default injectIntl(FormRequestCreateShopOwner);

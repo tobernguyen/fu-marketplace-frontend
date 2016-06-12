@@ -1,0 +1,21 @@
+.block-request-create-shop-status {
+  .loader {
+    > div {
+      margin: 0 auto;
+      width: 100%;
+    }
+    padding: 25px 0;
+  }
+
+  .error {
+    text-align: center;
+    color: #c0392b;
+    .error-icon {
+      font-size: 12em;
+    }
+    .error-text {
+      font-size: 16px;
+      line-height: 50px;
+    }
+  }
+}

@@ -1,7 +1,8 @@
 import { reduxForm } from 'redux-form'
 import FormRequestCreateShopOwner from 'app/components/home/FormRequestCreateShopOwner';
+import { uploadIdentityPhoto } from 'app/actions/user';
 
-export const fields = [ 'phone', 'identityNumber' ];
+export const fields = [ 'phone', 'identityNumber', 'identityPhoto' ];
 
 const validate = values => {
   const errors = {};
@@ -13,14 +14,27 @@ const validate = values => {
     errors.identityNumber = 'shop.form.validation.identityNumber.required';
   }
 
+  if (!values.identityPhoto) {
+    errors.identityPhoto = 'shop.form.validation.identityPhoto.required';
+  }
+
   return errors;
 };
 
-
+const mapStateToProps = (state) => {
+  const { user } = state;
+  return {
+    initialValues: {
+      identityPhoto: user.identityPhoto
+    }
+  }
+};
 
 export default reduxForm({
   form: 'wizard',
   fields,
   destroyOnUnmount: false,
   validate
+}, mapStateToProps, {
+  uploadIdentityPhoto
 })(FormRequestCreateShopOwner)

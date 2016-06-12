@@ -8,10 +8,6 @@ export default class UserManagementRow extends Component {
   constructor(props, context) {
     super(props, context);
     
-    this.handleButtonClicked = this.handleButtonClicked.bind(this);
-  }
-  handleButtonClicked() {
-    this.props.openEditModal(this.props.user);
   }
   render() {
       return (
@@ -20,9 +16,7 @@ export default class UserManagementRow extends Component {
               {this.props.user.id || 'N/A'}
             </td>
             <td>
-              <Link to={`admin/users/${this.props.user.id}/edit`}>
               {this.props.user.email || 'N/A'}
-              </Link>
             </td>
             <td>
               {this.props.user.fullName || 'N/A'}
@@ -46,9 +40,9 @@ export default class UserManagementRow extends Component {
               {this.props.user.banned === true ? 'True' : 'False' }
             </td>
             <td className="actions">
-              <Button bsStyle="warning" onClick={this.handleButtonClicked}>
+              <Link className="btn btn-warning" to={`admin/users/${this.props.user.id}/edit`} bsStyle="warning">
                 <i className="fa fa-pencil-square-o"></i>
-              </Button>
+              </Link>
             </td>
         </tr>
      );

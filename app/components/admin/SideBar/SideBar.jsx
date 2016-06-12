@@ -13,9 +13,9 @@ export default class SideBar extends Component {
       'sidebar-expanded': isExpand,
       'sidebar-collapsed': !isExpand
     });
-    let filteredAdminRoutes = adminRoutes.filter((adminRoute) => {
-      return adminRoute.path.indexOf(':userId') < 0;
-    });
+    console.log('Current ROute: ');
+    console.log(adminRoutes);
+    let filteredAdminRoutes = adminRoutes;
     if(isExpand === true) {
       return (
         <div className={sideBarClass}>
@@ -27,7 +27,8 @@ export default class SideBar extends Component {
               {filteredAdminRoutes.map((item, index) =>
                 <li key={index} className={classNames({'active': index == this.props.activeRouteIndex})}>
                   <Link to={`admin/${item.path}`}>
-                    <i className={classNames('fa', item.component.faIcon)}></i> {item.component.title}
+                    <i className={classNames('fa', item.component.faIcon)}></i> <span>{item.component.title}</span>
+                    
                   </Link>
                 </li>
               )}

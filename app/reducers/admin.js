@@ -1,29 +1,18 @@
 import * as ActionTypes from '../actions';
 import * as AdminActionTypes from '../actions/admin';
+import AsyncResultCode from 'app/shared/asyncResultCodes';
 import _ from 'lodash';
 
 
-//TODO: Refactor this
-function updateInUserArray(state, value) {
-  let newState = state;
-  for(let i in newState) {
-    if(newState[i].id === value.id) {
-      newState[i] = value;
-    }
-  }
-  return newState;
-}
-
 const initialState = {
-  users: [],
-  shops: [],
-  editUserFormStatus: {
+  userManagement: {
     isFetching: false,
-    user: {},
+    userList: [],
+    selectedUser: {},
     isSubmitting: false,
-    responseCode: 0,
-    response: ''
+    submitResult: ''
   },
+  shops: [],
   changePasswordFormStatus: {
     isSubmitting: false,
     response: ''
@@ -33,47 +22,107 @@ const initialState = {
 export const admin = (state = initialState, action) => {
   const { type, response } = action;
   switch (type) {
-    case ActionTypes.ADMIN_GET_USERS_SUCCESS:
-      return _.assign({}, state, { users: response.users });
-    case ActionTypes.ADMIN_GET_USER_REQUEST:
+    case AdminActionTypes.ADMIN_GET_USERS_REQUEST:
       return _.assign({}, state, {
-        editUserFormStatus: {
+        userManagement: {
           isFetching: true
         }
       });
-    case ActionTypes.ADMIN_GET_USER_SUCCESS:
+    case AdminActionTypes.ADMIN_GET_USERS_SUCCESS:
       return _.assign({}, state, {
-        editUserFormStatus: {
+        userManagement: {
           isFetching: false,
-          user: response
+          userList: response.users
         }
       });
-    case ActionTypes.ADMIN_GET_USERS_FAILURE:
-      return _.assign({}, state, { users: [] });
-    case ActionTypes.ADMIN_EDIT_USERS_SUCCESS:
-      return _.assign({}, state, { users: updateInUserArray(state.users, response)});
-    case AdminActionTypes.ADMIN_UPDATE_USER_INFORMATION_SUCCESS:
+    case AdminActionTypes.ADMIN_GET_USER_REQUEST:
       return _.assign({}, state, {
-        editUserFormStatus: {
-          user: response,
-          responseCode: 1,
-          response: 'User information is updated successfully'
+        userManagement: {
+          isFetching: true
+        }
+      });
+    case AdminActionTypes.ADMIN_GET_USER_SUCCESS:
+      return _.assign({}, state, {
+        userManagement: {
+          isFetching: false,
+          selectedUser: response
+        }
+      });
+    case AdminActionTypes.ADMIN_GET_USERS_FAILURE:
+      return _.assign({}, state, { users: [] });
+    case AdminActionTypes.ADMIN_UPDATE_USER_INFORMATION_SUCCESS:
+      console.log('here');
+      return _.assign({}, state, {
+        userManagement: {
+          selectedUser: response,
+          submitResult: AsyncResultCode.UPDATE_USER_INFORMATION_SUCCESS
+        }
+      });
+    case AdminActionTypes.ADMIN_UPDATE_USER_INFORMATION_FAILURE:
+      return _.assign({}, state, {
+        userManagement: {
+          submitResult: AsyncResultCode.UPDATE_USER_INFORMATION_FAIL
+        }
+      });
+    case AdminActionTypes.ADMIN_UPDATE_USER_ROLE_REQUEST:
+      return _.assign({}, state, {
+        userManagement: {
+          isSubmitting: true
+        }
+      });
+    case AdminActionTypes.ADMIN_UPDATE_USER_ROLE_SUCCESS:
+      return _.assign({}, state, {
+        userManagement: {
+          selectedUser: response,
+          isSubmitting: false,
+          submitResult: AsyncResultCode.UPDATE_USER_ROLE_SUCCESS
+        }
+      });
+    case AdminActionTypes.ADMIN_UPDATE_USER_ROLE_FAILURE:
+      return _.assign({}, state, {
+        userManagement: {
+          isSubmitting: false,
+          submitResult: AsyncResultCode.UPDATE_USER_ROLE_FAIL
+        }
+      });
+    case AdminActionTypes.ADMIN_BAN_USER_REQUEST:
+      return _.assign({}, state, {
+        userManagement: {
+          isSubmitting: true,
+          selectedUser: state.userManagement.selectedUser
         }
       });
     case AdminActionTypes.ADMIN_BAN_USER_SUCCESS:
       return _.assign({}, state, {
-        editUserFormStatus: {
-          user: response,
-          responseCode: 3,
-          response: 'User is banned'
+        userManagement: {
+          selectedUser: response,
+          submitResult: AsyncResultCode.BAN_USER_SUCCESS
+        }
+      });
+    case AdminActionTypes.ADMIN_BAN_USER_FAILURE:
+      return _.assign({}, state, {
+        userManagement: {
+          submitResult: AsyncResultCode.BAN_USER_FAIL
+        }
+      });
+    case AdminActionTypes.ADMIN_UNBAN_USER_REQUEST:
+      return _.assign({}, state, {
+        userManagement: {
+          isSubmitting: true,
+          selectedUser: state.userManagement.selectedUser
         }
       });
     case AdminActionTypes.ADMIN_UNBAN_USER_SUCCESS:
       return _.assign({}, state, {
-        editUserFormStatus: {
-          user: response,
-          responseCode: 3,
-          response: 'User is unbanned'
+        userManagement: {
+          selectedUser: response,
+          submitResult: AsyncResultCode.UNBAN_USER_SUCCESS
+        }
+      });
+    case AdminActionTypes.ADMIN_UNBAN_USER_FAILURE:
+      return _.assign({}, state, {
+        userManagement: {
+          submitResult: AsyncResultCode.UNBAN_USER_FAIL
         }
       });
     case ActionTypes.ADMIN_CHANGE_PASSWORD_REQUEST:

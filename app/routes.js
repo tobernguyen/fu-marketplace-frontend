@@ -1,5 +1,9 @@
 import React from 'react';
-import { Route, IndexRoute } from 'react-router';
+import { 
+  Route, 
+  IndexRoute,
+  IndexRedirect 
+} from 'react-router';
 import App from './containers/App';
 import Home from './containers/home';
 import Account from './containers/home/Account';
@@ -9,9 +13,10 @@ import RequestCreateShop from './containers/home/RequestCreateShop';
 import SellerDashboard from './containers/home/SellerDashboard';
 import Dashboard from './containers/admin/Dashboard';
 import UserManagement from './containers/admin/UserManagement';
+import ContainerListUser from './containers/admin/User/ContainerListUser';
+import ContainerEditUser from './containers/admin/User/ContainerEditUser';
 import ShopManagement from './containers/admin/ShopManagement';
 import ChangePassword from './containers/admin/ChangePassword';
-import EditUser from './containers/admin/EditUser';
 
 
 export default (
@@ -27,8 +32,11 @@ export default (
     <Route path="/admin" component={Admin}>
       <IndexRoute component={Dashboard}/>
       <Route path="dashboard" component={Dashboard} />
-      <Route path="users" component={UserManagement} />
-      <Route path="users/:userId/edit" component={EditUser} />
+      <Route path="users" component={UserManagement} >
+        <IndexRedirect to="list" />
+        <Route path="list" component={ContainerListUser} />
+        <Route path=":userId/edit" component={ContainerEditUser} />
+      </Route>
       <Route path="shops" component={ShopManagement} />
       <Route path="changepwd" component={ChangePassword} />
     </Route>

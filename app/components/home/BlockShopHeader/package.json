@@ -1,0 +1,6 @@
+{
+  "name": "BlockShopHeader",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./BlockShopHeader.jsx"
+}

@@ -26,7 +26,7 @@ export default class RequestCreateShopForm extends Component {
     const { onSubmit } = this.props;
     const { page } = this.state;
     return (<div>
-        {page === 1 && <FormRequestCreateShopIntro onSubmit={this.nextPage} />}
+        {page === 1 && <FormRequestCreateShopIntro nextPage={this.nextPage} />}
         {page === 2 && <RequestCreateShopOwnerForm onSubmit={this.nextPage} previousPage={this.previousPage} />}
         {page === 3 && <RequestCreateShopInfoForm previousPage={this.previousPage} onSubmit={onSubmit} />}
       </div>

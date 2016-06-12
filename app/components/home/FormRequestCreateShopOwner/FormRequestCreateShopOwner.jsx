@@ -40,6 +40,14 @@ class FormRequestCreateShopOwner extends Component {
             {identityNumber.touched ? identityNumber.error : ''}
           </div>
         </div>
+        <div class="form-group">
+          <label>Ảnh chụp chứng minh thư</label>
+          <input type="file"/>
+           <p className="help-block">Chỉ sử dụng cho mục đích xác thực thông tin chủ shop.<br/>
+             Ảnh sẽ được xoá và không dùng cho bất cứ mục đích nào khác.
+           </p>
+
+        </div>
         <div>
           <div className="form-group">
             <button type="submit" className="btn btn-primary">

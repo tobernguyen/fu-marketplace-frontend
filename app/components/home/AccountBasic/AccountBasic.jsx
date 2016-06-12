@@ -85,9 +85,6 @@ class AccountBasic extends Component {
   render() {
     const { currentUser } = this.props;
     const { formatMessage } = this.props.intl;
-
-
-
     const { fullName, email, room, phone } = currentUser;
 
     let alert;

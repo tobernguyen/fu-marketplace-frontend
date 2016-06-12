@@ -12,23 +12,23 @@ class FormRequestCreateShopIntro extends Component {
             <h5>1<br/>
               <span>Đăng ký</span>
             </h5>
-            <p>Register</p>
+            <p>Mở shop bán hàng</p>
           </div>
           <div className="circle green">
             <h5>2<br/>
               <span>Đợi accept</span>
             </h5>
-            <p>Register</p>
+            <p>Phản hồi tối đa trong 24 giờ</p>
           </div>
           <div className="circle yellow">
             <h5>3<br/>
               <span>Bán hàng</span>
             </h5>
-            <p>Register</p>
+            <p>Bắt đầu bán hàng luôn!</p>
           </div>
         </div>
-        <button type="submit" className="btn btn-primary">
-          Next <i className="fa fa-chevron-right"/>
+        <button type="submit" className="btn btn-primary" onClick={this.props.nextPage}>
+          Đăng ký ngay hôm nay !
         </button>
       </div>
     );

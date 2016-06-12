@@ -9,14 +9,24 @@ export const messages = {
       defaultMessage: 'shop name'
     }
   },
-  headOffice: {
+  address: {
     placeholder: {
-      id: 'shop.form.headOffice.placeholder',
+      id: 'shop.form.address.placeholder',
       defaultMessage: 'head office'
     },
     label: {
-      id: 'shop.form.headOffice.label',
+      id: 'shop.form.address.label',
       defaultMessage: 'head office'
+    }
+  },
+  description: {
+    placeholder: {
+      id: 'shop.form.description.placeholder',
+      defaultMessage: 'shop description'
+    },
+    label: {
+      id: 'shop.form.description.label',
+      defaultMessage: 'description'
     }
   }
 };

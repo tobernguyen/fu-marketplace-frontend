@@ -25,6 +25,13 @@ export default {
   'shop.form.identityNo.label': 'Số chứng minh thư',
   'shop.form.shopName.placeholder': 'Tên shop',
   'shop.form.shopName.label': 'Tên shop',
-  'shop.form.headOffice.placeholder': 'Trụ sở',
-  'shop.form.headOffice.label': 'Trụ sở'
+  'shop.form.address.placeholder': 'Địa chỉ đặt shop',
+  'shop.form.address.label': 'Địa chỉ',
+  'shop.form.verificationPhoto.label': 'Ảnh chụp chứng minh thư',
+  'shop.form.verificationPhoto.fileSelect': 'Chọn hoặc kéo thả file ảnh...',
+  'shop.form.verificationPhoto.note': 'Lưu ý:',
+  'shop.form.verificationPhoto.note1': 'Ảnh chỉ sử dụng cho mục đích xác thực thông tin chủ shop.',
+  'shop.form.verificationPhoto.note2': 'Ảnh sẽ được xoá và không dùng cho bất cứ mục đích nào khác.',
+  'shop.form.description.placeholder': 'Bạn sẽ bán gì hoặc cung cấp dịch vụ gì?',
+  'shop.form.description.label': 'Miêu tả shop'
 };

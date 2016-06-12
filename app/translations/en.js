@@ -25,6 +25,13 @@ export default {
   'shop.form.identityNo.label': 'Identity no',
   'shop.form.shopName.placeholder': 'Shop name',
   'shop.form.shopName.label': 'Shop name',
-  'shop.form.headOffice.placeholder': 'Head office',
-  'shop.form.headOffice.label': 'Head office'
+  'shop.form.address.placeholder': 'Shop address',
+  'shop.form.address.label': 'Address',
+  'shop.form.verificationPhoto.label': 'Identity photo',
+  'shop.form.verificationPhoto.fileSelect': 'Select or drop an image file...',
+  'shop.form.verificationPhoto.note': 'Note:',
+  'shop.form.verificationPhoto.note1': 'The image is only used for shop owner verification purpose.',
+  'shop.form.verificationPhoto.note2': 'The image will be deleted and not used for any other purposes.',
+  'shop.form.description.placeholder': 'What are products to sell or services to provide?',
+  'shop.form.description.label': 'Shop description'
 };

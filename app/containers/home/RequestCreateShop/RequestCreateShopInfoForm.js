@@ -1,7 +1,7 @@
 import { reduxForm } from 'redux-form'
 import FormRequestCreateShopInfo from 'app/components/home/FormRequestCreateShopInfo';
 
-export const fields = [ 'phone', 'identityNumber', 'shopName', 'description', 'headOffice' ];
+export const fields = [ 'phone', 'identityNumber', 'shopName', 'description', 'address' ];
 
 const validate = values => {
   const errors = {};
@@ -13,8 +13,8 @@ const validate = values => {
     errors.description = 'shop.form.validation.description.required';
   }
 
-  if (!values.headOffice) {
-    errors.headOffice = 'shop.form.validation.headOffice.required';
+  if (!values.address) {
+    errors.address = 'shop.form.validation.address.required';
   }
 
   return errors;

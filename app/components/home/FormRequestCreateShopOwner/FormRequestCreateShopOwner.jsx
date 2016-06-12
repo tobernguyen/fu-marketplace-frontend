@@ -2,8 +2,23 @@ import React, { PropTypes, Component } from 'react';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import { messages } from './FormRequestCreateShopOwner.i18n';
 import { buttons } from 'app/shared/buttons';
+import Dropzone from 'react-dropzone';
 
 class FormRequestCreateShopOwner extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      files: []
+    };
+
+    this.onDrop = (files) => {
+      this.setState({
+        files: files
+      });
+    }
+  }
+
   render() {
     const {
       fields: { phone, identityNumber },
@@ -40,13 +55,35 @@ class FormRequestCreateShopOwner extends Component {
             {identityNumber.touched ? identityNumber.error : ''}
           </div>
         </div>
-        <div class="form-group">
-          <label>Ảnh chụp chứng minh thư</label>
-          <input type="file"/>
-           <p className="help-block">Chỉ sử dụng cho mục đích xác thực thông tin chủ shop.<br/>
-             Ảnh sẽ được xoá và không dùng cho bất cứ mục đích nào khác.
-           </p>
-
+        <div className="form-group">
+          <label>
+            <FormattedMessage {...messages.verificationPhoto.label} />
+          </label>
+          <Dropzone
+            onDrop={this.onDrop}
+            className="dropzone"
+            activeStyle={{borderColor: 'red'}}
+            multiple={false}
+            accept="image/*">
+            <div>
+              {this.state.files.length == 0 && <div>
+                <h4>
+                  <FormattedMessage {...messages.verificationPhoto.fileSelect} />
+                </h4>
+                <br />
+                <FormattedMessage {...messages.verificationPhoto.note} />
+                <ul>
+                  <li>
+                    <FormattedMessage {...messages.verificationPhoto.note1} />
+                  </li>
+                  <li>
+                    <FormattedMessage {...messages.verificationPhoto.note2} />
+                  </li>
+                </ul>
+              </div>}
+              {this.state.files.length > 0 && <img className="img-responsive" src={this.state.files[0].preview}/>}
+            </div>
+          </Dropzone>
         </div>
         <div>
           <div className="form-group">

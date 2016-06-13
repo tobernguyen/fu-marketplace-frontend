@@ -22,18 +22,6 @@ export default class UserManagementRow extends Component {
               {this.props.user.fullName || 'N/A'}
             </td>
             <td>
-              {this.props.user.gender || 'N/A'}
-            </td>
-            <td>
-              {this.props.user.identityNumber || 'N/A'}
-            </td>
-            <td>
-              {this.props.user.room || 'N/A'}
-            </td>
-            <td>
-              {this.props.user.phone || 'N/A'}
-            </td>
-            <td>
               {this.props.user.roles[0]}
             </td>
             <td>

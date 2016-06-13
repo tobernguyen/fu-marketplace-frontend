@@ -13,12 +13,6 @@ export default class Header extends Component {
       <div className="admin-header">
         <Navbar inverse fluid={true} staticTop={true}>
           <Navbar.Header>
-            <Navbar.Brand>
-              <Button className="btn btn-toggle" onClick={this.props.toggleExpandSideBar}>
-                <i className="fa fa-bars"></i>
-              </Button>
-            </Navbar.Brand>
-            <Navbar.Toggle />
           </Navbar.Header>
           <Navbar.Collapse>
             <Nav pullRight>

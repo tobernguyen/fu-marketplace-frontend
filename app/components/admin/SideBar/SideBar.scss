@@ -2,26 +2,33 @@
 
 .admin-page {
   .sidebar {
-    background-color: $dark-color;
+    background-color: #3d454d;
 
     .nav > li > a {
       color: #a7b1c2;
       font-weight: 600;
       position: relative;
       display: block;
-
+      -webkit-transition: all 0.4s;
+      -moz-transition: all 0.4s;
+      -o-transition: all 0.4s;
+      transition: all 0.4s;
       i {
         margin-right: 10px;
       }
 
       &:hover {
-        background-color: #293846;
+        background-color: #353b41;
         color: white;
+      }
+      
+      &.active {
+        background-color: #353b41;
+      color: white;
       }
     }
     li.nav-header {
       height: 50px;
-      background-color: #222;
       a {
         color: #FFF;
 
@@ -47,23 +54,59 @@
   .sidebar-expanded {
     .nav > li > a {
       padding: 14px 20px 14px 25px;
+      
     }
     
     .nav-header {
       a {
         padding: 15px 0;
       }
+    }
+    
+    .toggle-nav-collapse {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 220px;
+      text-align: center;
+      color: #ffffff;
+      background-color: #485157;
+      line-height: 40px;
+      -webkit-transition: all 0.4s;
+      -moz-transition: all 0.4s;
+      -o-transition: all 0.4s;
+      transition: all 0.4s;
     }
   }
   
   .sidebar-collapsed {
-    width: 50px;
-    
+    width: 60px;
+    li > a {
+      padding-left: 20px;
+      
+      span {
+        display: none;
+      }
+    }   
     .nav-header {
       a {
         padding: 15px 0;
       }
     }
+    
+    .toggle-nav-collapse {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 60px;
+      text-align: center;
+      color: #ffffff;
+      background-color: #485157;
+      line-height: 40px;
+      -webkit-transition: all 0.4s;
+      -moz-transition: all 0.4s;
+      -o-transition: all 0.4s;
+      transition: all 0.4s;
+    }
   }
 }
-

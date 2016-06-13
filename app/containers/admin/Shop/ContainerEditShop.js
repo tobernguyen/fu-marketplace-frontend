@@ -8,6 +8,7 @@ import {
   adminBanShop,
   adminUnbanShop
 } from 'app/actions/admin';
+import LoadingSpinner from 'app/components/admin/LoadingSpinner';
 
 class ContainerEditShop extends Component {
   constructor(props) {
@@ -39,14 +40,17 @@ class ContainerEditShop extends Component {
   render() {
     const { shopManagement } = this.props;
     if(shopManagement.isFetching) {
-      return <div>...Loading</div>;
+      return <div className="text-center container-fluid">
+          <LoadingSpinner />
+        </div>;
     } else {
       return (
-       <div className="container">
+       <div className="container-fluid">
         <FormEditShopInformation
           onSubmit={this.handleSubmitShopInformation}
           submitResult={shopManagement.submitResult}
         />
+        <hr />
         <FormEditShopBanStatus
           shop={shopManagement.selectedShop}
           adminBanShop={this.banShop}
@@ -59,6 +63,11 @@ class ContainerEditShop extends Component {
     }
   }
 }
+
+ContainerEditShop.path = ':shopId/edit';
+ContainerEditShop.title = 'Shop edit';
+ContainerEditShop.description = 'Edit shop information/Ban shop';
+ContainerEditShop.faIcon = 'fa-shopping-bag';
 
 const mapStateToProps = (state) => ({
   shopManagement: state.admin.shopManagement

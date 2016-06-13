@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { Button, Modal, FormGroup, FormControl, ControlLabel } from 'react-bootstrap';
+import { Panel } from 'react-bootstrap';
 import RequestListRow from 'app/components/admin/RequestListRow';
 import './RequestList.scss';
 
@@ -31,7 +31,7 @@ export default class RequestList extends Component {
 
   render() {
     return (
-      <div>
+      <Panel>
         <table className="table table-striped">
           <thead>
             <tr>
@@ -51,7 +51,7 @@ export default class RequestList extends Component {
           )}
           </tbody>
         </table>
-      </div>
+      </Panel>
 
     );
   }

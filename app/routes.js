@@ -31,13 +31,17 @@ export default (
       <Route path="seller/dashboard" component={SellerDashboard} />
     </Route>
 
-    <Route path="/admin" component={Admin}>
+    <Route name="admin" path="admin" component={Admin}>
       <IndexRedirect to="dashboard" />
       <Route path="dashboard" component={Dashboard} />
-      <Route path="users" component={ContainerListUser} />
-      <Route path="users/:userId/edit" component={ContainerEditUser} />
-      <Route path="shops" component={ContainerListShop} />
-      <Route path="shops/:shopId/edit" component={ContainerEditShop} />
+      <Route path="users" component={UserManagement} >
+        <IndexRoute component={ContainerListUser} />
+        <Route path=":userId/edit" component={ContainerEditUser} />
+      </Route>
+      <Route path="shops" component={ShopManagement} >
+        <IndexRoute component={ContainerListShop} />
+        <Route path=":shopId/edit" component={ContainerEditShop} />
+      </Route>
       <Route path="changepwd" component={ChangePassword} />
     </Route>
   </Route>

@@ -1,0 +1,42 @@
+.block-selling-item-list {
+  background-color: #ffffff;
+  border: 1px solid #e7e7e7;
+  margin-top: 20px;
+  .header {
+    background-color: #F6F7F9;
+    border-bottom: 1px solid #e7e7e7;
+    .nav-pills {
+      li.active a {
+        font-weight: 700;
+      }
+      a {
+        padding: 20px 10px 5px;
+        font-weight: 400;
+        color: #666;
+        background-color: transparent;
+        &:hover {
+          color: #888;
+          background-color: transparent;
+        }
+        span {
+          font-weight: 400;
+          font-size: 12px;
+          padding: 1px;
+          margin-left: 4px;
+        }
+
+      }
+    }
+  }
+  .body {
+    padding: 5px;
+  }
+
+  .footer {
+    padding-left: 10px;
+
+    ul {
+      margin: 10px 0;
+    }
+  }
+}

@@ -86,7 +86,6 @@ HomePage.propTypes = {
 
 const mapStateToProps = (state) => {
   const { user, common } = state;
-
   return {
     currentUser: user.currentUser,
     error: user.error,

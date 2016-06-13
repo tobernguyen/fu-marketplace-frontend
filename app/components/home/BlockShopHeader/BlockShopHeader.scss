@@ -1,9 +1,19 @@
-.block-shop-header {
-  border: 1px solid #e7e7e7;
+.seller-dashboard {
+  .block-shop-header {
+    border: 1px solid #e7e7e7;
+  }
+}
 
+.block-shop-header {
+  border-bottom: 1px solid #e7e7e7;
   .shop-cover {
     position: relative;
     width: 100%;
+
+    img {
+      border-top-right-radius: 2px;
+      border-top-left-radius: 2px;
+    }
 
     .shop-info-wrapper {
       position: absolute;
@@ -12,7 +22,7 @@
 
       .shop-avatar-wrapper {
         .shop-avatar {
-          z-index: 2000;
+          z-index: 2;
           padding: 20px;
           img {
             border: 1px solid #e7e7e7;

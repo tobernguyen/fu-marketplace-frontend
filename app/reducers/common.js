@@ -10,7 +10,7 @@ const INITIAL_STATE = {
 export const common = (state = INITIAL_STATE, action) => {
   const { type, payload } = action;
   switch (type) {
-    case ActionTypes.UPDATE_MODAL_SIZE:
+    case CommonActionTypes.UPDATE_MODAL_SIZE:
       return _.merge({}, state, {
         modalSize: payload.modalSize
       });

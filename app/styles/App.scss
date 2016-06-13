@@ -157,3 +157,17 @@ ul.navbar-nav > li .badge {
   border-radius: 3px;
   padding: 5px;
 }
+
+.shop-detail-modal {
+  position: relative;
+  a.close {
+    position: absolute;
+    top: 0;
+    right: -25px;
+    opacity: .5;
+    span {
+      font-size: 30px;
+      color: #FFF;
+    }
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "name": "BlockSellingItemList",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./BlockSellingItemList.jsx"
+}

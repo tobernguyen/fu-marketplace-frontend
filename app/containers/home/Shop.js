@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import ModalHeader from 'app/components/home/ModalHeader';
+import BlockShopHeader from 'app/components/home/BlockShopHeader';
 import { connect } from 'react-redux';
 import { updateModalMode, updateModalSize } from '../../actions/common';
+import SellingItemList from './SellingItemList';
+import { Link } from 'react-router';
 
 class Shop extends Component {
   constructor(props) {
@@ -19,11 +21,10 @@ class Shop extends Component {
 
   render() {
     return (
-      <div>
-        <ModalHeader title="Bánh mỳ kebab" subHeader="Ngon nhất Hoà Lạc, ship toàn dom."/>
-        <div className="modal-body">
-          Shop details
-        </div>
+      <div className="shop-detail-modal">
+        <BlockShopHeader/>
+        <SellingItemList />
+        <Link to='/' className="close"><span>×</span></Link>
       </div>
     );
   }

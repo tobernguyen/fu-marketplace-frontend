@@ -40,11 +40,6 @@
     }
   }
   .navbar-static-side {
-    -webkit-transition: all 0.4s;
-    -moz-transition: all 0.4s;
-    -o-transition: all 0.4s;
-    transition: all 0.4s;
-
     position: fixed;
     width: 220px;
     z-index: 2001;
@@ -72,10 +67,6 @@
       color: #ffffff;
       background-color: #485157;
       line-height: 40px;
-      -webkit-transition: all 0.4s;
-      -moz-transition: all 0.4s;
-      -o-transition: all 0.4s;
-      transition: all 0.4s;
     }
   }
   
@@ -103,10 +94,6 @@
       color: #ffffff;
       background-color: #485157;
       line-height: 40px;
-      -webkit-transition: all 0.4s;
-      -moz-transition: all 0.4s;
-      -o-transition: all 0.4s;
-      transition: all 0.4s;
     }
   }
 }

@@ -30,3 +30,21 @@ export const requestCreateShop = (formValues) => {
     return dispatch(requestRequestCreateShop(requestForm))
   }
 };
+
+
+export const GET_PENDING_REQUESTS_REQUEST = 'GET_PENDING_REQUESTS_REQUEST';
+export const GET_PENDING_REQUESTS_SUCCESS = 'GET_PENDING_REQUESTS_SUCCESS';
+export const GET_PENDING_REQUESTS_FAILURE = 'GET_PENDING_REQUESTS_FAILURE';
+const requestGetPendingRequests = () => ({
+  [CALL_API]: {
+    types: [GET_PENDING_REQUESTS_REQUEST, GET_PENDING_REQUESTS_SUCCESS, GET_PENDING_REQUESTS_FAILURE],
+    url: '/api/v1/users/me/shopOpeningRequests',
+    method: HTTP_METHODS.GET
+  }
+});
+
+export const getPendingRequests = () => {
+  return (dispatch) => {
+    return dispatch(requestGetPendingRequests())
+  }
+};

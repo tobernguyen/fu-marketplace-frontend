@@ -14,7 +14,7 @@ class HomePage extends Component {
     super(props);
 
     this.state = {
-        hasChildren: true
+      hasChildren: true
     }
   }
 
@@ -51,7 +51,7 @@ class HomePage extends Component {
     }
 
     const { currentUser, onSignOut } = this.props;
-
+    
     return (
       <div className="home-page">
         <Header onSignOut={onSignOut} currentUser={currentUser} />

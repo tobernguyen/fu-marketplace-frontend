@@ -28,6 +28,7 @@ export default class RequestCreateShopForm extends Component {
     this.props.onSubmit(formValue);
     this.setState({ page: this.state.page + 1 })
   }
+  
 
   render() {
     const { page } = this.state;

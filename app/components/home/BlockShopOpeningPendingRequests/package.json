@@ -1,0 +1,6 @@
+{
+  "name": "BlockShopOpeningPendingRequests",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./BlockShopOpeningPendingRequests.jsx"
+}

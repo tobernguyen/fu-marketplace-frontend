@@ -1,0 +1,6 @@
+{
+  "name": "FormEditShopAvatarAndCover",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./FormEditShopAvatarAndCover.jsx"
+}

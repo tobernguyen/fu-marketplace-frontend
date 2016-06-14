@@ -13,3 +13,13 @@ export function getImageURLWithMediumSize(avatarURL) {
 
   return userAvatar;
 }
+
+export function getImageURLWithTimestamp(avatarURL) {
+  if (!avatarURL || avatarURL === '') {
+    throw new Error('Avatar URL cannot be null or empty!');
+  }
+  let userAvatar = avatarURL;
+  userAvatar += `?${new Date().getTime()}`;
+
+  return userAvatar;
+}

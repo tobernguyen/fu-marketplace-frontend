@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import './BlockShopHeader.scss';
+import Dropzone from 'react-dropzone';
 
 export default class BlockShopHeader extends Component {
   render() {
@@ -35,6 +36,15 @@ export default class BlockShopHeader extends Component {
                 </ul>
               </div>
             </div>
+          </div>
+          <div className="update-cover">
+            <Dropzone ref="dropzone"
+                      onDrop={this.props.onCoverChange}
+                      className="file-upload"
+                      multiple={false}
+                      accept="image/*">
+              <i className="fa fa-magic"/> Update cover
+            </Dropzone>
           </div>
         </div>
       </div>

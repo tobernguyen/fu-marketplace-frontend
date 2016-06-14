@@ -24,9 +24,7 @@ const validate = values => {
 const mapStateToProps = (state) => {
   const { user } = state;
   return {
-    initialValues: {
-      identityPhoto: user.identityPhoto
-    }
+    identityPhoto: user.identityPhoto
   }
 };
 

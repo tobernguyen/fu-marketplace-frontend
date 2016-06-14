@@ -10,6 +10,25 @@
     position: relative;
     width: 100%;
 
+    .update-cover {
+      position: absolute;
+      top: 5px;
+      right: 0;
+      width: 115px;
+
+      .file-upload {
+        border: 1px solid #c7ddef;
+        display: inline-block;
+        background-color: rgba(0, 0, 0, .6);
+        cursor: pointer;
+        color: #EEEEEE;
+        font-size: 12px;
+        padding: 7px;
+        font-weight: 400;
+      }
+    }
+
+
     img {
       border-top-right-radius: 2px;
       border-top-left-radius: 2px;

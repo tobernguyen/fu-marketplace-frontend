@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react';
 import ShopList from 'app/components/admin/ShopList';
 import { connect } from 'react-redux';
 import { adminGetShops } from 'app/actions/admin';
+import LoadingSpinner from 'app/components/admin/LoadingSpinner';
 
 class ContainerListShop extends React.Component {
   componentWillMount() {
@@ -11,7 +12,9 @@ class ContainerListShop extends React.Component {
   render() {
     const { isFetching, shopList } = this.props.shopManagement;
     if(isFetching) {
-      return <div>...Loading</div>;
+      return <div className="text-center container-fluid">
+          <LoadingSpinner />
+        </div>;
     } else {
       return <ShopList shops={shopList} />;
     }

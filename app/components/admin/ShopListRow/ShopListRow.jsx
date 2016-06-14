@@ -8,13 +8,14 @@ class ShopListRow extends Component {
   }
 
   render() {
+    console.log(this.props.shop);
+    const ShipPlacesArray = ['', 'Dom A', 'Dom B', 'Dom C', 'Dom D', 'Dom E', 'Dom F'];
     return (
       <tr>
         <td>{this.props.shop.id}</td>
         <td>{this.props.shop.name}</td>
-        <td>{this.props.shop.address || 'N/A'}</td>
         <td>{this.props.shop.shipPlaces.map(shipPlace =>
-          <span key={shipPlace.id}>|{shipPlace.name}|</span>
+          <div key={shipPlace} className="ship-place-span text-center">{ShipPlacesArray[shipPlace]}</div>
         )}</td>
         <td>{this.props.shop.opening ? 'Open' : 'Close'}</td>
         <td>{this.props.shop.status}</td>

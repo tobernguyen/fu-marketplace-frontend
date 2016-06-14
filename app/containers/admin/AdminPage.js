@@ -25,13 +25,13 @@ export default class AdminPage extends Component {
           adminRoutes={adminRoutes}
           activeRouteIndex={activeRouteIndex}
           isExpand={this.state.sideBarIsExpanded}
+          toggleExpandSideBar={this.toggleExpandSideBar}
           />
         <Main
           children={children}
           onAdminSignOut={onAdminSignOut}
           activeRoute={activeRoute}
           sideBarIsExpanded={this.state.sideBarIsExpanded}
-          toggleExpandSideBar={this.toggleExpandSideBar}
           />
       </div>
     )

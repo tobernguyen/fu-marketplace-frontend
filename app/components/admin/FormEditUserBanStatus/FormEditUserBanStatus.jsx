@@ -1,10 +1,11 @@
 import React, { Component, PropTypes } from 'react';
 import {
-  Panel,
+  ControlLabel,
   Button,
   FormGroup,
   FormControl,
-  Alert
+  Alert,
+  Col
 } from 'react-bootstrap';
 import AsyncResultCode from 'app/shared/asyncResultCodes';
 
@@ -13,7 +14,8 @@ class FormEditUserBanStatus extends Component {
     super(props);
     
     this.state = {
-      email: ''
+      email: '',
+      isValid: false
     };
     
     this.handleOnChange = this.handleOnChange.bind(this);
@@ -24,6 +26,15 @@ class FormEditUserBanStatus extends Component {
     this.setState({
       email: e.target.value
     });
+    if(e.target.value === this.props.user.email) {
+      this.setState({
+        isValid: true
+      });
+    } else {
+      this.setState({
+        isValid: false
+      });
+    }
   }
   
   handleOnClick() {
@@ -43,30 +54,42 @@ class FormEditUserBanStatus extends Component {
     );
     const { user, isSubmitting, submitResult } = this.props;
     return(
-      <Panel bsStyle="danger" header={title}>
-        <p>This action will {user.banned ? 'release' : 'ban'} user,
-        please type <strong>{user.email}</strong> to confirm this action.</p>
-        <FormGroup>
-          <FormControl
-            type="text"
-            name="email"
-            onChange={this.handleOnChange}
-            />
-          <div className="form-actions">
-            {submitResult === AsyncResultCode.BAN_USER_SUCCESS && <Alert bsStyle="danger">User has been banned</Alert>}
-            {submitResult === AsyncResultCode.BAN_USER_FAIL && <Alert bsStyle="danger">Error occurred!</Alert>}
-            {submitResult === AsyncResultCode.UNBAN_USER_SUCCESS && <Alert bsStyle="danger">User has been released</Alert>}
-            {submitResult === AsyncResultCode.UNBAN_USER_FAIL && <Alert bsStyle="danger">Error occurred!</Alert>}
-            
-            <Button
-              bsStyle="danger"
-              onClick={this.handleOnClick}
-              disabled={isSubmitting}>
-              {user.banned ? 'Release' : 'Ban'}
-            </Button>
-          </div>
-        </FormGroup>
-      </Panel>
+      <div className="row">
+        <div className="container">
+          <Col lg={3}>
+            <h4 className="ban-title"><strong>Ban</strong></h4>
+            <p>Ban user from accessing FU Marketplace</p>
+          </Col>
+          <Col lg={9}>
+            <FormGroup>
+              <ControlLabel>Email</ControlLabel>
+              <FormControl
+                type="text"
+                name="email"
+                onChange={this.handleOnChange}
+                />
+            </FormGroup>
+            <ul>
+              <li>User will be banned from accessing FU Marketplace</li>
+              <li>Banned user can be released in the future</li>
+              <li>Type <code>{user.email}</code> to confirm banning this user</li>
+            </ul>
+            <div className="form-actions">
+                {submitResult === AsyncResultCode.BAN_USER_SUCCESS && <Alert bsStyle="danger">User has been banned</Alert>}
+                {submitResult === AsyncResultCode.BAN_USER_FAIL && <Alert bsStyle="danger">Error occurred!</Alert>}
+                {submitResult === AsyncResultCode.UNBAN_USER_SUCCESS && <Alert bsStyle="danger">User has been released</Alert>}
+                {submitResult === AsyncResultCode.UNBAN_USER_FAIL && <Alert bsStyle="danger">Error occurred!</Alert>}
+                
+                <Button
+                  bsStyle="danger"
+                  onClick={this.handleOnClick}
+                  disabled={isSubmitting || !this.state.isValid}>
+                  {user.banned ? 'Release' : 'Ban'}
+                </Button>
+              </div>
+          </Col>
+        </div>
+      </div>
     );
   }
 }

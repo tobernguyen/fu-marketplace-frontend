@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import ShopListRow from 'app/components/admin/ShopListRow';
+import { Panel, Table } from 'react-bootstrap';
 import './ShopList.scss';
 
 
@@ -10,18 +11,17 @@ export default class ShopList extends Component {
 
   render() {
     return (
-      <div>
-        <table className="table table-striped">
+      <div className="container-fluid">
+        <Table striped condensed hover>
           <thead>
             <tr>
-              <th>ID</th>
-              <th>Name</th>
-              <th>Address</th>
-              <th>Ship places</th>
-              <th>Opening</th>
-              <th>Status</th>
-              <th>Ban Status</th>
-              <th></th>
+              <th className="col-lg-1">#</th>
+              <th className="col-lg-2">Name</th>
+              <th className="col-lg-4">Ship places</th>
+              <th className="col-lg-1">Opening</th>
+              <th className="col-lg-1">Status</th>
+              <th className="col-lg-2">Ban Status</th>
+              <th className="col-lg-1">Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -29,8 +29,9 @@ export default class ShopList extends Component {
               <ShopListRow key={shop.id} shop={shop} />
             )}
           </tbody>
-        </table>
+        </Table>
       </div>
+        
     );
   }
 }

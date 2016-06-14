@@ -10,7 +10,7 @@ import {
   adminBanUser,
   adminUnbanUser
 } from 'app/actions/admin';
-
+import LoadingSpinner from 'app/components/admin/LoadingSpinner';
 class ContainerEditUser extends React.Component {
   componentWillMount() {
     this.props.adminGetUser(this.props.params.userId);
@@ -25,16 +25,20 @@ class ContainerEditUser extends React.Component {
       adminBanUser
     } = this.props;
     if(userManagement.isFetching) {
-      return <div>...Loading</div>;
+      return <div className="text-center container-fluid">
+          <LoadingSpinner />
+        </div>;
     } else {
       return (
-        <div className="container">
+        <div className="container-fluid">
           <FormEditUserInformation adminUpdateUserInformation={(user) => adminUpdateUserInformation(user)}/>
+          <hr />
           <FormEditUserRole
             user={userManagement.selectedUser}
             adminUpdateUserRole={adminUpdateUserRole}
             submitResult={userManagement.submitResult}
             isSubmitting={userManagement.isSubmitting}/>
+          <hr />  
           <FormEditUserBanStatus
             user={userManagement.selectedUser}
             adminUnbanUser={adminUnbanUser}
@@ -46,6 +50,11 @@ class ContainerEditUser extends React.Component {
     }
   }
 }
+
+ContainerEditUser.path = ':userId/edit';
+ContainerEditUser.title = 'Edit user';
+ContainerEditUser.description = 'Edit user information/Assign role/Ban and release user';
+ContainerEditUser.faIcon = 'fa-user';
 
 const mapStateToProps = (state) => ({
   userManagement: state.admin.userManagement

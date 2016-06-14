@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import UserListRow from 'app/components/admin/UserListRow';
+import { Panel, Table } from 'react-bootstrap';
 import './UserList.scss';
 
 class UserList extends Component {
@@ -10,20 +11,16 @@ class UserList extends Component {
   
   render() {
     return (
-      <div>
-        <table className="table table-striped">
+      <div className="container-fluid">
+        <Table striped condensed hover>
           <thead>
             <tr>
-              <th>ID</th>
-              <th>Email</th>
-              <th>Full Name</th>
-              <th>Gender</th>
-              <th>Identity Number</th>
-              <th>Room</th>
-              <th>Phone</th>
-              <th>Roles</th>
-              <th>Banned</th>
-              <th></th>
+              <th className="col-lg-1">#</th>
+              <th className="col-lg-2">Email</th>
+              <th className="col-lg-3">Full Name</th>
+              <th className="col-lg-2">Roles</th>
+              <th className="col-lg-1">Banned</th>
+              <th>Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -31,7 +28,7 @@ class UserList extends Component {
             <UserListRow key={user.id} user={user} />
           )}
           </tbody>
-        </table>
+        </Table>
       </div>
     );
   }

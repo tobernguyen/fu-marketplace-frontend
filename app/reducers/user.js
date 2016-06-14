@@ -1,6 +1,7 @@
 import * as ActionTypes from '../actions';
 import * as UserActionTypes from '../actions/user';
 import _ from 'lodash';
+import { getImageURLWithTimestamp } from 'app/helpers/image';
 
 export const user = (state = {}, action) => {
   const { type, response, error, user } = action;
@@ -34,7 +35,7 @@ export const user = (state = {}, action) => {
       });
     case UserActionTypes.UPLOAD_IDENTITY_PHOTO_SUCCESS:
       return _.assign({}, state, {
-        identityPhoto: response.identityPhoto
+        identityPhoto: getImageURLWithTimestamp(response.identityPhoto)
       });
     default:
       return state;

@@ -8,11 +8,29 @@ class FormRequestCreateShopOwner extends Component {
   constructor(props) {
     super(props);
 
+    this.state = {
+      identityPhoto: ''
+    };
+
     this.onDrop = (files) => {
       if (files && files[0]) {
         let formFileData = new FormData();
         formFileData.append('file', files[0]);
         this.props.uploadIdentityPhoto(formFileData)
+      }
+    }
+
+
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.identityPhoto) {
+      if (nextProps.identityPhoto !== this.state.identityPhoto) {
+        this.setState({
+          identityPhoto: nextProps.identityPhoto
+        });
+
+        this.props.fields.identityPhoto.onChange(nextProps.identityPhoto);
       }
     }
   }
@@ -22,7 +40,6 @@ class FormRequestCreateShopOwner extends Component {
       fields: { phone, identityNumber, identityPhoto },
       handleSubmit
     } = this.props;
-
     const { formatMessage } = this.props.intl;
     return (
       <form onSubmit={handleSubmit}>

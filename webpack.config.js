@@ -1,8 +1,11 @@
 const path = require('path');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
-
+const CleanWebpackPlugin = require('clean-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const TARGET = process.env.npm_lifecycle_event;
+const pkg = require('./package.json');
 process.env.BABEL_ENV = TARGET;
 
 const PATHS = {
@@ -23,16 +26,17 @@ const common = {
   resolve: {
     root: __dirname
   },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: 'app/index.html'
+    })
+  ],
   module: {
     loaders: [
       {
         test: /\.jsx?$/,
         loaders: ['babel?cacheDirectory'],
         include: PATHS.app
-      },
-      {
-        test: /\.scss$/,
-        loaders: ['style', 'css', 'sass']
       },
       {
         test: /\.(png|jpg|gif)$/,
@@ -72,8 +76,15 @@ if(TARGET === 'start' || !TARGET) {
   module.exports = merge(common, {
     devtool: 'eval-source-map',
     watchOptions: {
-      aggregateTimeout: 300,
-      poll: 10000
+      poll: true
+    },
+    module: {
+      loaders: [
+        {
+          test: /\.scss$/,
+          loaders: ['style', 'css', 'sass']
+        }
+      ]
     },
     devServer: {
       contentBase: PATHS.build,
@@ -90,5 +101,50 @@ if(TARGET === 'start' || !TARGET) {
 }
 
 if(TARGET === 'build') {
-  module.exports = merge(common, {});
+  const entry = {};
+  entry['vendor'] = Object.keys(pkg.dependencies);
+  const env = {};
+  env['process.env.NODE_ENV'] = JSON.stringify('production');
+  module.exports = merge(common, {
+    entry: entry,
+    except: ['webpackJsonp'],
+    devtool: 'source-map',
+    output: {
+      path: PATHS.build,
+      filename: '[name].[chunkhash].js',
+      chunkFilename: '[chunkhash].js'
+    },
+    module: {
+      loaders: [
+        {
+          test: /\.scss$/,
+          loader: ExtractTextPlugin.extract('style', 'css!sass'),
+          include: PATHS.app
+        }
+      ]
+    },
+    plugins: [
+      new ExtractTextPlugin('[name].[chunkhash].css'),
+      new CleanWebpackPlugin([PATHS.build], {
+        root: process.cwd()
+      }),
+      new webpack.optimize.CommonsChunkPlugin({
+        names: ['vendor','manifest']
+      }),
+      new webpack.optimize.UglifyJsPlugin({
+        beautify: false,
+        comments: false,
+        compress: {
+          warnings: false,
+          drop_console: true
+        },
+        mangle: {
+          except: ['$'],
+          screw_ie8 : true,
+          keep_fnames: true
+        }
+      }),
+      new webpack.DefinePlugin(env)
+    ]
+  });
 }

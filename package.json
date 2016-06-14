@@ -4,6 +4,7 @@
   "description": "",
   "scripts": {
     "start": "webpack-dev-server",
+    "build": "webpack",
     "test": "jest",
     "lint": "eslint ./app"
   },
@@ -26,7 +27,6 @@
   "license": "ISC",
   "dependencies": {
     "axios": "^0.11.1",
-    "babel": "^6.5.2",
     "blueimp-canvas-to-blob": "^3.3.0",
     "bootstrap": "^3.3.6",
     "font-awesome": "^4.6.1",
@@ -48,6 +48,9 @@
     "redux-thunk": "^2.1.0"
   },
   "devDependencies": {
+    "extract-text-webpack-plugin": "^1.0.1",
+    "html-webpack-plugin": "^2.21.0",
+    "clean-webpack-plugin": "^0.1.9",
     "babel-core": "^6.8.0",
     "babel-eslint": "^6.0.4",
     "babel-jest": "^12.0.2",

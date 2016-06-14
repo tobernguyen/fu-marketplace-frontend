@@ -57,7 +57,6 @@ export const admin = (state = initialState, action) => {
     case AdminActionTypes.ADMIN_GET_USERS_FAILURE:
       return _.assign({}, state, { users: [] });
     case AdminActionTypes.ADMIN_UPDATE_USER_INFORMATION_SUCCESS:
-      console.log('here');
       return _.assign({}, state, {
         userManagement: {
           selectedUser: response,

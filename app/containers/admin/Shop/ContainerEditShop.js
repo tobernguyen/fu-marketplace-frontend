@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import FormEditShopInformation from 'app/components/admin/FormEditShopInformation';
 import FormEditShopBanStatus from 'app/components/admin/FormEditShopBanStatus';
+import FormEditShopAvatarAndCover from 'app/components/admin/FormEditShopAvatarAndCover';
 import {
   adminGetShop,
   adminUpdateShopInformation,
@@ -50,6 +51,8 @@ class ContainerEditShop extends Component {
           onSubmit={this.handleSubmitShopInformation}
           submitResult={shopManagement.submitResult}
         />
+        <hr />
+        <FormEditShopAvatarAndCover />
         <hr />
         <FormEditShopBanStatus
           shop={shopManagement.selectedShop}

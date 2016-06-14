@@ -92,4 +92,8 @@ class FormEditShopBanStatus extends Component {
   }
 }
 
+FormEditShopBanStatus.defaultProps = {
+  shop: {}
+};
+
 export default FormEditShopBanStatus;

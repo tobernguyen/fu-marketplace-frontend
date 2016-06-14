@@ -8,12 +8,12 @@ class ShopListRow extends Component {
   }
 
   render() {
-    console.log(this.props.shop);
     const ShipPlacesArray = ['', 'Dom A', 'Dom B', 'Dom C', 'Dom D', 'Dom E', 'Dom F'];
     return (
       <tr>
         <td>{this.props.shop.id}</td>
         <td>{this.props.shop.name}</td>
+        <td><Link to={`admin/users/${this.props.shop.seller.id}/edit`}>{this.props.shop.seller.fullName}</Link></td>
         <td>{this.props.shop.shipPlaces.map(shipPlace =>
           <div key={shipPlace} className="ship-place-span text-center">{ShipPlacesArray[shipPlace]}</div>
         )}</td>
@@ -28,6 +28,10 @@ class ShopListRow extends Component {
       </tr>
     );
   }
+}
+
+ShopListRow.defaultProps = {
+  shop: {}
 }
 
 export default ShopListRow;

@@ -40,7 +40,7 @@ class FormEditUserBanStatus extends Component {
   handleOnClick() {
     const { user } = this.props;
     if(this.state.email === user.email) {
-      if(user.banned === false) {
+      if(user.banned === false || user.banned === null || !user.banned) {
         this.props.adminBanUser(user);
       } else if ( user.banned === true) {
         this.props.adminUnbanUser(user);
@@ -91,5 +91,11 @@ class FormEditUserBanStatus extends Component {
     );
   }
 }
+
+FormEditUserBanStatus.defaultProps={
+  user: {
+    email: ''
+  }
+};
 
 export default FormEditUserBanStatus;

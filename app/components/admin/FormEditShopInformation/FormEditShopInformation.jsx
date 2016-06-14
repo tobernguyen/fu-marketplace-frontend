@@ -94,6 +94,10 @@ const mapStateToProps = (state) => ({
   initialValues: state.admin.shopManagement.selectedShop
 });
 
+FormEditShopInformation.defaultProps = {
+  shop: {}
+};
+
 export default reduxForm({
   form: 'FormEditShopInformation',
   fields: ['name', 'description', 'opening', 'address'],

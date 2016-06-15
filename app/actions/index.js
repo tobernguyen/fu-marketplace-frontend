@@ -114,51 +114,6 @@ export function changeLanguage(language) {
 }
 
 
-export const UPLOAD_AVATAR_REQUEST = 'UPLOAD_AVATAR_REQUEST';
-export const UPLOAD_AVATAR_SUCCESS = 'UPLOAD_AVATAR_SUCCESS';
-export const UPLOAD_AVATAR_FAILURE = 'UPLOAD_AVATAR_FAILURE';
-const requestUploadAvatar = (formFileData) => ({
-  [CALL_API]: {
-    types: [UPLOAD_AVATAR_REQUEST, UPLOAD_AVATAR_SUCCESS, UPLOAD_AVATAR_FAILURE],
-    url: '/api/v1/users/me/uploadAvatar',
-    method: HTTP_METHODS.POST,
-    params: formFileData
-  }
-});
-
-// Relies on Redux Thunk middleware.
-export const uploadAvatar = (formFileData) => {
-  return (dispatch, getState) => {
-    return dispatch(requestUploadAvatar(formFileData))
-  }
-};
-
-
-export const ACCOUNT_INFO_CHANGED = 'ACCOUNT_INFO_CHANGED';
-export const changeUserInfo = (user) => ({
-  type: ACCOUNT_INFO_CHANGED,
-  user: user
-});
-
-
-export const UPDATE_USER_INFO_REQUEST = 'UPDATE_USER_INFO_REQUEST';
-export const UPDATE_USER_INFO_SUCCESS = 'UPDATE_USER_INFO_SUCCESS';
-export const UPDATE_USER_INFO_FAILURE = 'UPDATE_USER_INFO_FAILURE';
-const requestUpdateUserInfo = (newUserInfo) => ({
-  [CALL_API]: {
-    types: [UPDATE_USER_INFO_REQUEST, UPDATE_USER_INFO_SUCCESS, UPDATE_USER_INFO_FAILURE],
-    url: '/api/v1/users/me',
-    method: HTTP_METHODS.PUT,
-    params: newUserInfo
-  }
-});
-
-export const updateUserInfo = (newUserInfo) => {
-  return (dispatch) => {
-    return dispatch(requestUpdateUserInfo(newUserInfo))
-  }
-};
-
 export const ADMIN_CHANGE_PASSWORD_REQUEST = 'ADMIN_CHANGE_PASSWORD_REQUEST';
 export const ADMIN_CHANGE_PASSWORD_SUCCESS = 'ADMIN_CHANGE_PASSWORD_SUCCESS';
 export const ADMIN_CHANGE_PASSWORD_FAILURE = 'ADMIN_CHANGE_PASSWORD_FAILURE';

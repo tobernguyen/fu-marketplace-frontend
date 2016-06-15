@@ -1,4 +1,4 @@
-import { reduxForm } from 'redux-form'
+import { reduxForm } from 'redux-form';
 import FormRequestCreateShopInfo from 'app/components/home/FormRequestCreateShopInfo';
 
 export const fields = [ 'phone', 'identityNumber', 'shopName', 'description', 'address' ];

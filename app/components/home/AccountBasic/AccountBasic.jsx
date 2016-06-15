@@ -17,10 +17,7 @@ class AccountBasic extends Component {
 
     this.state = {
       modalCropImageShown: false,
-      img: null,
-      alertVisible: false,
-      userAvatar: '',
-      avatarLoaded: false
+      img: null
     };
 
     this.handleFileChange = (dataURI) => {
@@ -36,63 +33,15 @@ class AccountBasic extends Component {
       })
     };
 
-    this.phoneChanged = (evt) => {
-      const phone = evt.target.value || '';
-      const numericRegex = /^\d+$/;
-      if (numericRegex.test(phone)) {
-        this.props.userInfoChanged({
-          'phone': phone
-        })
-      }
-    };
-
     this.roomSelected = (room) => {
       const roomNo = room ? room.value : '';
-      this.props.userInfoChanged({
-        'room': roomNo
-      })
-    };
-
-    this.handleAlertDismiss = () => {
-      this.setState({alertVisible: false});
-    }
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.currentUser) {
-      if (!this.state.avatarLoaded) {
-        let userAvatar = getImageURLWithMediumSize(nextProps.currentUser.avatar);
-        this.setState({
-          avatarLoaded: true,
-          userAvatar: userAvatar
-        })
-      }
-    }
-    if (nextProps.userUpdated) {
-      this.setState({
-        alertVisible: nextProps.userUpdated
-      })
-    }
-    if (nextProps.newAvatar) {
-      let userAvatar = getImageURLWithMediumSize(nextProps.newAvatar);
-      this.setState({
-        userAvatar: userAvatar,
-        modalCropImageShown: false
-      })
     }
   }
 
   render() {
     const { currentUser } = this.props;
     const { formatMessage } = this.props.intl;
-    const { fullName, email, room, phone } = currentUser;
-
-    let alert;
-    if (this.state.alertVisible) {
-      alert = <Alert bsStyle="success" onDismiss={this.handleAlertDismiss}>
-        <p>Your information have been updated.</p>
-      </Alert>
-    }
+    const { avatar, fullName, email, room, phone } = currentUser;
 
     return (
       <div className="account-basic">
@@ -100,7 +49,7 @@ class AccountBasic extends Component {
           <div className="col-md-5 user-avatar">
             <ImageUploader handleFileChange={this.handleFileChange} />
             <img
-              src={this.state.userAvatar}
+              src={avatar}
               alt={`Hình đại diện của ${fullName}`}
               title={`Hình đại diện của ${fullName}`} />
             <span className="camera-icon">
@@ -112,46 +61,7 @@ class AccountBasic extends Component {
               <h3>{fullName}</h3>
               <p>{email}</p>
             </div>
-            <div className="body">
-              {alert}
-              <form className="form-horizontal">
-                <div className="form-group">
-                  <label className="col-sm-4 control-label">
-                    <FormattedMessage {...messages.phone.label} />
-                  </label>
-                  <div className="col-sm-8">
-                    <input
-                      type="text"
-                      className="form-control"
-                      value={phone || ''}
-                      onChange={this.phoneChanged}
-                      placeholder={formatMessage(messages.phone.placeholder)} />
-                  </div>
-                </div>
-                <div className="form-group">
-                  <label className="col-sm-4 control-label">
-                    <FormattedMessage {...messages.roomNo.label} />
-                  </label>
-                  <div className="col-sm-8">
-                    <Select
-                      name="form-field-room"
-                      value={room || ''}
-                      options={this.props.roomList}
-                      onChange={this.roomSelected}
-                      placeholder={formatMessage(messages.roomNo.placeholder)}
-                    />
-                  </div>
-                </div>
-                <div className="col-sm-offset-4 col-sm-8">
-                  <button
-                    type="submit"
-                    className="btn btn-default"
-                    onClick={this.props.saveUserInfo}>
-                    <FormattedMessage {...messages.save} />
-                  </button>
-                </div>
-              </form>
-            </div>
+            
           </div>
         </div>
         {this.state.modalCropImageShown &&

@@ -3,35 +3,34 @@ import * as UserActionTypes from '../actions/user';
 import _ from 'lodash';
 import { getImageURLWithTimestamp } from 'app/helpers/image';
 
-export const user = (state = {}, action) => {
+const INITIAL_STATE = {
+  currentUser: {}
+};
+export const user = (state = INITIAL_STATE, action) => {
   const { type, response, error, user } = action;
   switch (type) {
     case ActionTypes.CURRENT_USER_SUCCESS:
       return _.assign({}, state, {
         currentUser: response
       });
-    case ActionTypes.UPLOAD_AVATAR_SUCCESS:
+    case UserActionTypes.UPLOAD_AVATAR_SUCCESS:
+      const newAvatar = response.avatar ? getImageURLWithTimestamp(response.avatar) : '';
+      let modifiedResponse = response;
+      modifiedResponse.avatar = newAvatar;
       return _.assign({}, state, {
-        currentUser: response,
-        newAvatar: response.avatar
+        currentUser: modifiedResponse
       });
-    case ActionTypes.UPDATE_USER_INFO_SUCCESS:
+    case UserActionTypes.UPDATE_USER_INFO_SUCCESS:
       return _.assign({}, state, {
         currentUser: response,
         userUpdated: true
       });
     case ActionTypes.CURRENT_USER_FAILURE:
-    case ActionTypes.UPLOAD_AVATAR_FAILURE:
-    case ActionTypes.UPDATE_USER_INFO_FAILURE:
+    case UserActionTypes.UPLOAD_AVATAR_FAILURE:
+    case UserActionTypes.UPDATE_USER_INFO_FAILURE:
     case UserActionTypes.UPLOAD_IDENTITY_PHOTO_FAILURE:
       return _.assign({}, state, {
         error: error
-      });
-    case ActionTypes.ACCOUNT_INFO_CHANGED:
-      const newUserInfo = _.merge(state.currentUser, user);
-      return _.merge({}, state, {
-        currentUser: newUserInfo,
-        newAvatar: null
       });
     case UserActionTypes.UPLOAD_IDENTITY_PHOTO_SUCCESS:
       return _.assign({}, state, {

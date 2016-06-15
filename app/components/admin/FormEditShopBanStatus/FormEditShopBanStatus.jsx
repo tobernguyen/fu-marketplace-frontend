@@ -55,38 +55,36 @@ class FormEditShopBanStatus extends Component {
     const { shop, isSubmitting, submitResult } = this.props;
     return(
       <div className="row">
-        <div className="container">
-          <Col lg={3}>
-            <h4 className="ban-title"><strong>Ban</strong></h4>
-          </Col>
-          <Col lg={9}>
-            <FormGroup>
-              <FormControl
-                type="text"
-                name="name"
-                onChange={this.handleOnChange}
-                />
-            </FormGroup>
-            <ul>
-              <li>Shop will be banned from FU Marketplace</li>
-              <li>Banned shop won't be list in feeds or access by buyer</li>
-              <li>Type <code>{shop.name}</code> to confirm banning this user</li>
-            </ul>
-            <div className="form-actions">
-                {submitResult === AsyncResultCode.BAN_SHOP_SUCCESS && <Alert bsStyle="danger">Shop has been banned</Alert>}
-                {submitResult === AsyncResultCode.BAN_SHOP_FAIL && <Alert bsStyle="danger">Error occurred!</Alert>}
-                {submitResult === AsyncResultCode.UNBAN_SHOP_SUCCESS && <Alert bsStyle="danger">Shop has been released</Alert>}
-                {submitResult === AsyncResultCode.UNBAN_SHOP_FAIL && <Alert bsStyle="danger">Error occurred!</Alert>}
-                
-                <Button
-                  bsStyle="danger"
-                  onClick={this.handleOnClick}
-                  disabled={isSubmitting || !this.state.isValid}>
-                  {shop.banned ? 'Release' : 'Ban'}
-                </Button>
-              </div>
-          </Col>
-        </div>
+        <Col lg={3}>
+          <h4 className="ban-title"><strong>Ban</strong></h4>
+        </Col>
+        <Col lg={9}>
+          <FormGroup>
+            <FormControl
+              type="text"
+              name="name"
+              onChange={this.handleOnChange}
+              />
+          </FormGroup>
+          <ul>
+            <li>Shop will be banned from FU Marketplace</li>
+            <li>Banned shop won't be list in feeds or access by buyer</li>
+            <li>Type <code>{shop.name}</code> to confirm banning this user</li>
+          </ul>
+          <div className="form-actions">
+              {submitResult === AsyncResultCode.BAN_SHOP_SUCCESS && <Alert bsStyle="danger">Shop has been banned</Alert>}
+              {submitResult === AsyncResultCode.BAN_SHOP_FAIL && <Alert bsStyle="danger">Error occurred!</Alert>}
+              {submitResult === AsyncResultCode.UNBAN_SHOP_SUCCESS && <Alert bsStyle="danger">Shop has been released</Alert>}
+              {submitResult === AsyncResultCode.UNBAN_SHOP_FAIL && <Alert bsStyle="danger">Error occurred!</Alert>}
+              
+              <Button
+                bsStyle="danger"
+                onClick={this.handleOnClick}
+                disabled={isSubmitting || !this.state.isValid}>
+                {shop.banned ? 'Release' : 'Ban'}
+              </Button>
+            </div>
+        </Col>
       </div>
     );
   }

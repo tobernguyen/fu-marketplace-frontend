@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import {
   Panel,
   FormGroup,
@@ -31,60 +31,58 @@ class FormEditShopInformation extends Component {
     );
     return (
       <div className="row">
-        <div className="container">
-          <Col lg={3}>
-            <h4><strong>Information</strong></h4>
-          </Col>
-          <Col lg={9}>
-            <form onSubmit={handleSubmit}>
-              <FormGroup
-                className={`${name.touched && name.invalid ? 'has-error' : ''}`}>
-                <ControlLabel>Name</ControlLabel>
-                <FormControl
-                  type="text"
-                  placeholder="Name"
-                  {...name} />
-                <HelpBlock>{name.touched ? name.error: '' }</HelpBlock>
-              </FormGroup>
-              <FormGroup
-                className={`${description.touched && description.invalid ? 'has-error' : ''}`}>
-                <ControlLabel>Description</ControlLabel>
-                <FormControl
-                  componentClass="textarea"
-                  placeholder="Description"
-                  {...description} />
-                <HelpBlock>{description.touched ? description.error: '' }</HelpBlock>
-              </FormGroup>
-              <FormGroup
-                className={`${opening.touched && opening.invalid ? 'has-error' : ''}`}>
-                <ControlLabel>Opening</ControlLabel>
-                <FormControl
-                  componentClass="select"
-                  {...opening}
-                  >
-                  <option value="true">Open</option>
-                  <option value="false">Close</option>
-                </FormControl>
-              </FormGroup>
-              <FormGroup
-                className={`${address.touched && address.invalid ? 'has-error' : ''}`}>
-                <ControlLabel>Address</ControlLabel>
-                <FormControl
-                  type="text"
-                  placeholder="Address"
-                  {...address} />
-                <HelpBlock>{address.touched ? address.error: '' }</HelpBlock>
-              </FormGroup>
-              <div className ="form-actions">
-                {submitResult === AsyncResultCode.UPDATE_SHOP_INFORMATION_SUCCESS && <Alert bsStyle="success">Shop information has been saved</Alert>}
-                {submitResult === AsyncResultCode.UPDATE_SHOP_INFORMATION_FAIL && <Alert bsStyle="danger">Error occurred!</Alert>}
-                <Button type="submit" bsStyle="success" disabled={submitting}>
-                  Save changes
-                </Button>
-              </div>
-            </form>
-          </Col>
-        </div>
+        <Col lg={3}>
+          <h4><strong>Information</strong></h4>
+        </Col>
+        <Col lg={9}>
+          <form onSubmit={handleSubmit}>
+            <FormGroup
+              className={`${name.touched && name.invalid ? 'has-error' : ''}`}>
+              <ControlLabel>Name</ControlLabel>
+              <FormControl
+                type="text"
+                placeholder="Name"
+                {...name} />
+              <HelpBlock>{name.touched ? name.error: '' }</HelpBlock>
+            </FormGroup>
+            <FormGroup
+              className={`${description.touched && description.invalid ? 'has-error' : ''}`}>
+              <ControlLabel>Description</ControlLabel>
+              <FormControl
+                componentClass="textarea"
+                placeholder="Description"
+                {...description} />
+              <HelpBlock>{description.touched ? description.error: '' }</HelpBlock>
+            </FormGroup>
+            <FormGroup
+              className={`${opening.touched && opening.invalid ? 'has-error' : ''}`}>
+              <ControlLabel>Opening</ControlLabel>
+              <FormControl
+                componentClass="select"
+                {...opening}
+                >
+                <option value="true">Open</option>
+                <option value="false">Close</option>
+              </FormControl>
+            </FormGroup>
+            <FormGroup
+              className={`${address.touched && address.invalid ? 'has-error' : ''}`}>
+              <ControlLabel>Address</ControlLabel>
+              <FormControl
+                type="text"
+                placeholder="Address"
+                {...address} />
+              <HelpBlock>{address.touched ? address.error: '' }</HelpBlock>
+            </FormGroup>
+            <div className ="form-actions">
+              {submitResult === AsyncResultCode.UPDATE_SHOP_INFORMATION_SUCCESS && <Alert bsStyle="success">Shop information has been saved</Alert>}
+              {submitResult === AsyncResultCode.UPDATE_SHOP_INFORMATION_FAIL && <Alert bsStyle="danger">Error occurred!</Alert>}
+              <Button type="submit" bsStyle="success" disabled={submitting}>
+                Save changes
+              </Button>
+            </div>
+          </form>
+        </Col>
       </div>
     );
   } 

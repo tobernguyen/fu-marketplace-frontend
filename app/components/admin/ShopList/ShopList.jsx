@@ -4,7 +4,7 @@ import { Panel, Table } from 'react-bootstrap';
 import './ShopList.scss';
 
 
-export default class ShopList extends Component {
+class ShopList extends Component {
   constructor(props, context) {
     super(props, context);
   }
@@ -36,3 +36,9 @@ export default class ShopList extends Component {
     );
   }
 }
+
+ShopList.defaultProps = {
+  shops: []
+};
+
+export default ShopList;

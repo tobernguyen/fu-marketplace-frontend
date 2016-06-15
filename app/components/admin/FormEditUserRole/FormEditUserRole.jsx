@@ -1,6 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import {
-  Panel,
   Button,
   FormGroup,
   Checkbox,
@@ -51,51 +50,46 @@ class FormEditUserRole extends Component {
   render() {
     const { submitResult, isSubmitting } = this.props;
     const { rolesToBeUpdated } = this.state;
-    const title = (
-      <h3>Change user role</h3>
-    );
     return (
       <div className="row">
-        <div className="container">
-          <Col lg={3}>
-            <h4 className="role-title"><strong>Role</strong></h4>
-            <p>Assign role</p>
-          </Col>
-          <Col lg={9}>
-            <FormGroup defaultChecked="admin" className="role-checkboxes">
-              <Checkbox
-                value="admin"
-                checked={_.includes(rolesToBeUpdated, 'admin')}
-                onChange={this.handleCheckboxChange}>
-                <i className="fa fa-user-secret fa-fw"></i>
-                <div className="role-name">
-                  Admin
-                </div>
-                <div className="role-description">
-                  Admin can access to admin dashboard and manage FU Marketplace system.
-                </div>
-              </Checkbox>
-              {' '}
-              <Checkbox
-                value="seller"
-                checked={_.includes(rolesToBeUpdated, 'seller')}
-                onChange={this.handleCheckboxChange}>
-                <i className="fa fa-shopping-bag fa-fw"></i>
-                <div className="role-name">
-                  Seller
-                </div>
-                <div className="role-description">
-                  Seller can create shop
-                </div>
-              </Checkbox>
-            </FormGroup>
-            <div className="form-actions">
-              {submitResult === AsyncResultCode.UPDATE_USER_ROLE_SUCCESS && <Alert bsStyle="success">User roles has been saved</Alert>}
-              {submitResult === AsyncResultCode.UPDATE_USER_ROLE_FAIL && <Alert bsStyle="danger">Error occurred!</Alert>}
-              <Button bsStyle="warning" onClick={this.updateRole} disabled={isSubmitting}>Update roles</Button>
-            </div>  
-          </Col>
-        </div>
+        <Col lg={3}>
+          <h4 className="role-title"><strong>Role</strong></h4>
+          <p>Assign role</p>
+        </Col>
+        <Col lg={9}>
+          <FormGroup defaultChecked="admin" className="role-checkboxes">
+            <Checkbox
+              value="admin"
+              checked={_.includes(rolesToBeUpdated, 'admin')}
+              onChange={this.handleCheckboxChange}>
+              <i className="fa fa-user-secret fa-fw"></i>
+              <div className="role-name">
+                Admin
+              </div>
+              <div className="role-description">
+                Admin can access to admin dashboard and manage FU Marketplace system.
+              </div>
+            </Checkbox>
+            {' '}
+            <Checkbox
+              value="seller"
+              checked={_.includes(rolesToBeUpdated, 'seller')}
+              onChange={this.handleCheckboxChange}>
+              <i className="fa fa-shopping-bag fa-fw"></i>
+              <div className="role-name">
+                Seller
+              </div>
+              <div className="role-description">
+                Seller can create shop
+              </div>
+            </Checkbox>
+          </FormGroup>
+          <div className="form-actions">
+            {submitResult === AsyncResultCode.UPDATE_USER_ROLE_SUCCESS && <Alert bsStyle="success">User roles has been saved</Alert>}
+            {submitResult === AsyncResultCode.UPDATE_USER_ROLE_FAIL && <Alert bsStyle="danger">Error occurred!</Alert>}
+            <Button bsStyle="warning" onClick={this.updateRole} disabled={isSubmitting}>Update roles</Button>
+          </div>
+        </Col>
       </div>
     );
   }

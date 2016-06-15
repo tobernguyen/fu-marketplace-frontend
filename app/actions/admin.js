@@ -130,6 +130,42 @@ export const adminUpdateShopInformation = (shopId, shop) => ({
   }
 });
 
+export const ADMIN_UPDATE_SHOP_AVATAR_REQUEST = 'ADMIN_UPDATE_SHOP_AVATAR_REQUEST';
+export const ADMIN_UPDATE_SHOP_AVATAR_SUCCESS = 'ADMIN_UPDATE_SHOP_AVATAR_SUCCESS';
+export const ADMIN_UPDATE_SHOP_AVATAR_FAILURE = 'ADMIN_UPDATE_SHOP_AVATAR_FAILURE';
+const adminRequestUpdateShopAvatar = (shopId, formData) => ({
+  [CALL_API]: {
+    types: [ADMIN_UPDATE_SHOP_AVATAR_REQUEST, ADMIN_UPDATE_SHOP_AVATAR_SUCCESS, ADMIN_UPDATE_SHOP_AVATAR_FAILURE],
+    url: `/api/v1/admin/shops/${shopId}/uploadAvatar`,
+    params: formData,
+    method: HTTP_METHODS.POST
+  }
+});
+
+export const adminUpdateShopAvatar = (shopId, formData) =>{
+  return (dispatch) => {
+    return dispatch(adminRequestUpdateShopAvatar(shopId, formData));
+  }
+};
+
+export const ADMIN_UPDATE_SHOP_COVER_REQUEST = 'ADMIN_UPDATE_SHOP_COVER_REQUEST';
+export const ADMIN_UPDATE_SHOP_COVER_SUCCESS = 'ADMIN_UPDATE_SHOP_COVER_SUCCESS';
+export const ADMIN_UPDATE_SHOP_COVER_FAILURE = 'ADMIN_UPDATE_SHOP_COVER_FAILURE';
+const adminRequestUpdateShopCover = (shopId, formData) => ({
+  [CALL_API]: {
+    types: [ADMIN_UPDATE_SHOP_AVATAR_REQUEST, ADMIN_UPDATE_SHOP_AVATAR_SUCCESS, ADMIN_UPDATE_SHOP_AVATAR_FAILURE],
+    url: `/api/v1/admin/shops/${shopId}/uploadCover`,
+    params: formData,
+    method: HTTP_METHODS.POST
+  }
+});
+
+export const adminUpdateShopCover = (shopId, formData) =>{
+  return (dispatch) => {
+    return dispatch(adminRequestUpdateShopCover(shopId, formData));
+  }
+};
+
 export const ADMIN_BAN_SHOP_REQUEST = 'ADMIN_BAN_SHOP_REQUEST';
 export const ADMIN_BAN_SHOP_SUCCESS = 'ADMIN_BAN_SHOP_SUCCESS';
 export const ADMIN_BAN_SHOP_FAILURE = 'ADMIN_BAN_SHOP_FAILURE';

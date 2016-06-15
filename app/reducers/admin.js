@@ -184,6 +184,50 @@ export const admin = (state = initialState, action) => {
           submitResult: AsyncResultCode.UPDATE_SHOP_INFORMATION_FAIL
         }
       });
+    case AdminActionTypes.ADMIN_UPDATE_SHOP_AVATAR_REQUEST:
+      return _.assign({}, state, {
+        shopManagement: {
+          isSubmitting: true,
+          selectedShop: state.shopManagement.selectedShop
+        }
+      });
+    case AdminActionTypes.ADMIN_UPDATE_SHOP_AVATAR_SUCCESS:
+      return _.assign({}, state, {
+        shopManagement: {
+          isSubmitting: false,
+          selectedShop: response,
+          submitResult: AsyncResultCode.UPDATE_SHOP_AVATAR_SUCCESS
+        }
+      });
+    case AdminActionTypes.ADMIN_UPDATE_SHOP_AVATAR_FAILURE:
+      return _.assign({}, state, {
+        shopManagement: {
+          isSubmitting: false,
+          submitResult: AsyncResultCode.UPDATE_SHOP_AVATAR_FAIL
+        }
+      });
+    case AdminActionTypes.ADMIN_UPDATE_SHOP_COVER_REQUEST:
+      return _.assign({}, state, {
+        shopManagement: {
+          isSubmitting: true,
+          selectedShop: state.shopManagement.selectedShop
+        }
+      });
+    case AdminActionTypes.ADMIN_UPDATE_SHOP_COVER_SUCCESS:
+      return _.assign({}, state, {
+        shopManagement: {
+          isSubmitting: false,
+          selectedShop: response,
+          submitResult: AsyncResultCode.UPDATE_SHOP_AVATAR_SUCCESS
+        }
+      });
+    case AdminActionTypes.ADMIN_UPDATE_SHOP_COVER_FAILURE:
+      return _.assign({}, state, {
+        shopManagement: {
+          isSubmitting: false,
+          submitResult: AsyncResultCode.UPDATE_SHOP_AVATAR_FAIL
+        }
+      });
     case AdminActionTypes.ADMIN_BAN_SHOP_REQUEST:
       return _.assign({}, state, {
         shopManagement: {

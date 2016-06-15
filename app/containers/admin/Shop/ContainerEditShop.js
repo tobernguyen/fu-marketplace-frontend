@@ -7,7 +7,9 @@ import {
   adminGetShop,
   adminUpdateShopInformation,
   adminBanShop,
-  adminUnbanShop
+  adminUnbanShop,
+  adminUpdateShopAvatar,
+  adminUpdateShopCover
 } from 'app/actions/admin';
 import LoadingSpinner from 'app/components/admin/LoadingSpinner';
 
@@ -16,6 +18,8 @@ class ContainerEditShop extends Component {
     super(props);
     
     this.handleSubmitShopInformation = this.handleSubmitShopInformation.bind(this);
+    this.uploadAvatar = this.uploadAvatar.bind(this);
+    this.uploadCover = this.uploadCover.bind(this);
     this.banShop = this.banShop.bind(this);
     this.unbanShop = this.unbanShop.bind(this);
   }
@@ -23,6 +27,16 @@ class ContainerEditShop extends Component {
   handleSubmitShopInformation(shop) {
     const shopId = this.props.shopManagement.selectedShop.id;
     this.props.adminUpdateShopInformation(shopId, shop);
+  }
+  
+  uploadAvatar(formData) {
+    const shopId = this.props.shopManagement.selectedShop.id;
+    this.props.adminUpdateShopAvatar(shopId, formData);
+  }
+  
+  uploadCover(formData) {
+    const shopId = this.props.shopManagement.selectedShop.id;
+    this.props.adminUpdateShopCover(shopId, formData);
   }
   
   banShop() {
@@ -52,7 +66,13 @@ class ContainerEditShop extends Component {
           submitResult={shopManagement.submitResult}
         />
         <hr />
-        <FormEditShopAvatarAndCover />
+        <FormEditShopAvatarAndCover
+          shop={shopManagement.selectedShop}
+          uploadAvatar={this.uploadAvatar}
+          uploadCover={this.uploadCover}
+          submitResult={shopManagement.submitResult}
+          isSubmitting={shopManagement.isSubmitting}
+        />
         <hr />
         <FormEditShopBanStatus
           shop={shopManagement.selectedShop}
@@ -80,6 +100,8 @@ export default connect(mapStateToProps, {
   adminGetShop,
   adminUpdateShopInformation,
   adminBanShop,
-  adminUnbanShop
+  adminUnbanShop,
+  adminUpdateShopAvatar,
+  adminUpdateShopCover
 })(ContainerEditShop);
 

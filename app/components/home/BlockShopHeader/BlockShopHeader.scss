@@ -42,11 +42,28 @@
       .shop-avatar-wrapper {
         .shop-avatar {
           z-index: 2;
-          padding: 20px;
+          padding: 21px 20px;
+          position: relative;
           img {
             border: 1px solid #e7e7e7;
             width: 100%;
             height: auto;
+          }
+          .upload-avatar {
+            position: absolute;
+            bottom: 20px;
+            left: 0;
+            width: 100%;
+            padding: 0 20px;
+
+
+            .file-select {
+              background-color: rgba(0,0,0,.7);
+              color: #ffffff;
+              padding: 8px 10px;
+              text-align: center;
+              cursor: pointer;
+            }
           }
         }
       }

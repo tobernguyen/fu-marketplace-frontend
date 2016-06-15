@@ -48,3 +48,41 @@ export const getPendingRequests = () => {
     return dispatch(requestGetPendingRequests())
   }
 };
+
+
+export const UPLOAD_SHOP_AVATAR_REQUEST = 'UPLOAD_SHOP_AVATAR_REQUEST';
+export const UPLOAD_SHOP_AVATAR_SUCCESS = 'UPLOAD_SHOP_AVATAR_SUCCESS';
+export const UPLOAD_SHOP_AVATAR_FAILURE = 'UPLOAD_SHOP_AVATAR_FAILURE';
+const requestShopUploadAvatar = (formFileData, shopID) => ({
+  [CALL_API]: {
+    types: [UPLOAD_SHOP_AVATAR_REQUEST, UPLOAD_SHOP_AVATAR_SUCCESS, UPLOAD_SHOP_AVATAR_FAILURE],
+    url: `/api/v1/seller/shops/${shopID}/uploadAvatar`,
+    method: HTTP_METHODS.POST,
+    params: formFileData
+  }
+});
+
+export const uploadShopAvatar = (formFileData, shopID) => {
+  return (dispatch) => {
+    return dispatch(requestShopUploadAvatar(formFileData, shopID))
+  }
+};
+
+
+export const UPLOAD_SHOP_COVER_REQUEST = 'UPLOAD_SHOP_COVER_REQUEST';
+export const UPLOAD_SHOP_COVER_SUCCESS = 'UPLOAD_SHOP_COVER_SUCCESS';
+export const UPLOAD_SHOP_COVER_FAILURE = 'UPLOAD_SHOP_COVER_FAILURE';
+const requestShopUploadCover = (formFileData, shopID) => ({
+  [CALL_API]: {
+    types: [UPLOAD_SHOP_COVER_REQUEST, UPLOAD_SHOP_COVER_SUCCESS, UPLOAD_SHOP_COVER_FAILURE],
+    url: `/api/v1/seller/shops/${shopID}/uploadCover`,
+    method: HTTP_METHODS.POST,
+    params: formFileData
+  }
+});
+
+export const uploadShopCover = (formFileData, shopID) => {
+  return (dispatch) => {
+    return dispatch(requestShopUploadAvatar(formFileData, shopID))
+  }
+};

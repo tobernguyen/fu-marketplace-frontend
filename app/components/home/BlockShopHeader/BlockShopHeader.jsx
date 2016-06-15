@@ -1,8 +1,42 @@
 import React, { Component, PropTypes } from 'react';
 import './BlockShopHeader.scss';
+import  ModalCropImage from '../ModalCropImage';
 import Dropzone from 'react-dropzone';
 
 export default class BlockShopHeader extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      modalCropImageShown: false,
+      image: null
+    };
+
+    this.handleRequestHide = () => {
+      this.setState({
+        modalCropImageShown: false
+      })
+    };
+
+    this.onAvatarChange = (files) => {
+      const reader = new FileReader();
+      var file = files[0];
+      if (!file) {
+        return;
+      }
+      reader.onload = (image) => {
+        this.refs.dropzone.value = '';
+
+        this.setState({
+          modalCropImageShown: true,
+          image: image.target.result
+        })
+      };
+
+      reader.readAsDataURL(file);
+    }
+  }
+
   render() {
     return (
       <div className="block-shop-header clearfix">
@@ -11,7 +45,16 @@ export default class BlockShopHeader extends Component {
           <div className="shop-info-wrapper col-md-12">
             <div className="shop-avatar-wrapper row">
               <div className="col-sm-3 shop-avatar">
-                  <img src="https://scontent-hkg3-1.xx.fbcdn.net/v/t1.0-1/p160x160/1743702_1584326138447153_1156450258906196077_n.jpg?oh=2a85bb81a677cc086314e0ee194bb9d6&oe=5800EF53"/>
+                <img src="https://scontent-hkg3-1.xx.fbcdn.net/v/t1.0-1/p160x160/1743702_1584326138447153_1156450258906196077_n.jpg?oh=2a85bb81a677cc086314e0ee194bb9d6&oe=5800EF53"/>
+                <div className="upload-avatar">
+                  <Dropzone ref="dropzone"
+                            onDrop={this.onAvatarChange}
+                            className="file-select"
+                            multiple={false}
+                            accept="image/*">
+                    <i className="fa fa-camera"/> Update avatar
+                  </Dropzone>
+                </div>
               </div>
             </div>
           </div>
@@ -47,6 +90,15 @@ export default class BlockShopHeader extends Component {
             </Dropzone>
           </div>
         </div>
+        {this.state.modalCropImageShown &&
+        <ModalCropImage
+          onRequestHide={this.handleRequestHide}
+          modalCropImageShown={this.state.modalCropImageShown}
+          image={this.state.image}
+          width={250}
+          height={250}
+          onCrop={this.props.uploadShopAvatar} />
+        }
       </div>
     )
   }

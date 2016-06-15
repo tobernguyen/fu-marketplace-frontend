@@ -1,17 +1,24 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import dataURLtoBlob from 'blueimp-canvas-to-blob';
 import BlockShopHeader from 'app/components/home/BlockShopHeader';
 import SellingItemList from '../SellingItemList';
+import { uploadShopAvatar, uploadShopCover } from 'app/actions/shop';
 
 class SellerDashboard extends Component {
   constructor(props) {
     super(props);
-    this.handleUploadCover = (files) => {
-      if (files && files[0]) {
-        let formFileData = new FormData();
-        formFileData.append('file', files[0]);
-        // this.props.uploadIdentityPhoto(formFileData)
-      }
+
+    this.handleUploadShopAvatar = (avatarDataURL) => {
+      let formFileData = new FormData();
+      formFileData.append('file', dataURLtoBlob(avatarDataURL));
+      this.props.uploadShopAvatar(formFileData, 1);
+    };
+
+    this.handleUploadShopCover = (coverDataURL) => {
+      let formFileData = new FormData();
+      formFileData.append('file', dataURLtoBlob(coverDataURL));
+      this.props.uploadShopCover(formFileData, 1);
     }
   }
 
@@ -20,7 +27,9 @@ class SellerDashboard extends Component {
       <div className="seller-dashboard">
         <div className="col-md-9">
           <div className="row">
-            <BlockShopHeader onCoverChange={this.handleUploadCover} />
+            <BlockShopHeader
+              uploadShopCover={this.handleUploadShopCover}
+              uploadShopAvatar={this.handleUploadShopAvatar} />
             <SellingItemList />
           </div>
         </div>
@@ -40,5 +49,6 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps, {
-
+  uploadShopAvatar,
+  uploadShopCover
 })(SellerDashboard)

@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import ShopList from 'app/components/admin/ShopList';
 import { connect } from 'react-redux';
 import { adminGetShops } from 'app/actions/admin';

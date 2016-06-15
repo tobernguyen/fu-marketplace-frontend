@@ -56,24 +56,13 @@ class Account extends Component {
           <AccountBasicForm
             currentUser={this.props.currentUser}
             uploadAvatar={this.handleUploadAvatar}
+            roomList={roomList}
             onSubmit={this.handleUpdateAccount} />
         </div>
       </div>
     );
   }
 }
-
-/*
-* <AccountBasic
- currentUser={this.props.currentUser}
- userUpdated={this.props.userUpdated}
- uploadAvatar={this.handleUploadAvatar}
- userInfoChanged={this.props.changeUserInfo}
- roomList={roomList}
- newAvatar={this.props.newAvatar}
- saveUserInfo={this.saveUserInfo}/>
-* */
-
 
 const mapStateToProps = (state) => {
   const { user } = state;

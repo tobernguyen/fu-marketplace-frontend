@@ -1,9 +1,12 @@
 import React, { Component, PropTypes } from 'react';
 import ImageUploader from 'app/components/common/ImageUploader';
 import  ModalCropImage from '../ModalCropImage';
+import { messages } from './FormAccountBasic.i18n';
+import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import './FormAccountBasic.scss';
+import Select from 'react-select';
 
-export default class FormAccountBasic extends Component {
+class FormAccountBasic extends Component {
   constructor(props) {
     super(props);
 
@@ -29,9 +32,13 @@ export default class FormAccountBasic extends Component {
         modalCropImageShown: false
       })
     };
+
+    this.roomSelected = (room) => {
+      const roomNo = room ? room.value : '';
+      this.props.fields.room.onChange(roomNo);
+    };
+
   }
-
-
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.currentUser) {
@@ -47,10 +54,10 @@ export default class FormAccountBasic extends Component {
   }
 
   render() {
-    const { fields: { room, phone }, handleSubmit, submitting, currentUser, dirty } = this.props;
+    const { fields: { room, phone }, handleSubmit, submitting, currentUser, dirty, onBlur } = this.props;
     const fullName = currentUser.fullName || '';
     const email = currentUser.email || '';
-
+    const { formatMessage } = this.props.intl;
     return (
       <div className="form-account-basic">
         <div className="row">
@@ -71,12 +78,13 @@ export default class FormAccountBasic extends Component {
               <form className="form-horizontal" onSubmit={handleSubmit}>
                 <div className={`form-group ${phone.touched && phone.invalid ? 'has-error' : ''}`}>
                   <label className="col-sm-4 control-label">
-                    Phone
+                    <FormattedMessage {...messages.phone.label} />
                   </label>
                   <div className="col-sm-8">
                     <input type="text"
                            className="form-control"
-                      {...phone} />
+                           placeholder={formatMessage(messages.phone.placeholder)}
+                    {...phone} />
                     <div className="help-block">
                       {phone.touched ? phone.error : ''}
                     </div>
@@ -85,21 +93,22 @@ export default class FormAccountBasic extends Component {
 
                 <div className={`form-group ${room.touched && room.invalid ? 'has-error' : ''}`}>
                   <label className="col-sm-4 control-label">
-                    Room
+                    <FormattedMessage {...messages.roomNo.label} />
                   </label>
                   <div className="col-sm-8">
-                    <input type="text"
-                           className="form-control"
-                      {...room} />
-                    <div className="help-block">
-                      {room.touched ? room.error : ''}
-                    </div>
+                    <Select
+                      name="form-field-room"
+                      value={room.value || ''}
+                      options={this.props.roomList}
+                      onChange={this.roomSelected}
+                      placeholder={formatMessage(messages.roomNo.placeholder)} />
+
                   </div>
                 </div>
                 <div className="form-group">
                   <div className="col-sm-offset-4 col-sm-8">
                     <button type="submit" className="btn btn-primary" disabled={submitting || !dirty}>
-                      Submit
+                      <FormattedMessage {...messages.save} />
                     </button>
                   </div>
                 </div>
@@ -115,18 +124,21 @@ export default class FormAccountBasic extends Component {
           image={this.state.img}
           width={250}
           height={250}
-          onCrop={this.props.uploadAvatar}
-        />
+          onCrop={this.props.uploadAvatar} />
         }
-
       </div>
     )
   }
 }
 
 FormAccountBasic.propTypes = {
+  intl: intlShape.isRequired,
   fields:       PropTypes.object.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   submitting:   PropTypes.bool.isRequired,
-  currentUser:  PropTypes.object.isRequired
+  currentUser:  PropTypes.object.isRequired,
+  roomList:     PropTypes.array.isRequired
 };
+
+
+export default injectIntl(FormAccountBasic)

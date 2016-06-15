@@ -201,3 +201,73 @@ export const adminUnbanShop = (shopId) => ({
     method: HTTP_METHODS.PUT
   }
 });
+
+
+export const ADMIN_GET_REQUESTS_REQUEST = 'ADMIN_GET_REQUESTS_REQUEST';
+export const ADMIN_GET_REQUESTS_SUCCESS = 'ADMIN_GET_REQUESTS_SUCCESS';
+export const ADMIN_GET_REQUESTS_FAILURE = 'ADMIN_GET_REQUESTS_FAILURE';
+const adminRequestGetRequests = (filterMode) => ({
+  [CALL_API]: {
+    types: [
+      ADMIN_GET_REQUESTS_REQUEST,
+      ADMIN_GET_REQUESTS_SUCCESS,
+      ADMIN_GET_REQUESTS_FAILURE
+    ],
+    url: `/api/v1/admin/shopOpeningRequests${filterMode || ''}`,
+    method: HTTP_METHODS.GET
+  }
+});
+
+export const adminGetRequests = (filterMode) => {
+  return (dispatch) => {
+    return dispatch(adminRequestGetRequests(filterMode));
+  }
+};
+
+export const ADMIN_ACCEPT_REQUEST_REQUEST = 'ADMIN_ACCEPT_REQUEST_REQUEST';
+export const ADMIN_ACCEPT_REQUEST_SUCCESS = 'ADMIN_ACCEPT_REQUEST_SUCCESS';
+export const ADMIN_ACCEPT_REQUEST_FAILURE = 'ADMIN_ACCEPT_REQUEST_FAILURE';
+const adminRequestAcceptRequest = (requestId, message) => ({
+  [CALL_API]: {
+    types: [
+      ADMIN_ACCEPT_REQUEST_REQUEST,
+      ADMIN_ACCEPT_REQUEST_SUCCESS,
+      ADMIN_ACCEPT_REQUEST_FAILURE
+    ],
+    url: `/api/v1/admin/shopOpeningRequests/${requestId}/accept`,
+    params: {
+      message
+    },
+    method: HTTP_METHODS.POST
+  }
+});
+
+export const adminAcceptRequest = (requestId, message) => {
+  return (dispatch) => {
+    return dispatch(adminRequestAcceptRequest(requestId, message));
+  }
+};
+
+export const ADMIN_REJECT_REQUEST_REQUEST = 'ADMIN_REJECT_REQUEST_REQUEST';
+export const ADMIN_REJECT_REQUEST_SUCCESS = 'ADMIN_REJECT_REQUEST_SUCCESS';
+export const ADMIN_REJECT_REQUEST_FAILURE = 'ADMIN_REJECT_REQUEST_FAILURE';
+const adminRequestRejectRequest = (requestId, message) => ({
+  [CALL_API]: {
+    types: [
+      ADMIN_REJECT_REQUEST_REQUEST,
+      ADMIN_REJECT_REQUEST_SUCCESS,
+      ADMIN_REJECT_REQUEST_FAILURE
+    ],
+    url: `/api/v1/admin/shopOpeningRequests/${requestId}/reject`,
+    params: {
+      message
+    },
+    method: HTTP_METHODS.POST
+  }
+});
+
+export const adminRejectRequest = (requestId, message) => {
+  return (dispatch) => {
+    return dispatch(adminRequestRejectRequest(requestId, message));
+  }
+};

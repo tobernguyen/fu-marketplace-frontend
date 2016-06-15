@@ -12,6 +12,9 @@ import Admin from './containers/admin';
 import RequestCreateShop from './containers/home/RequestCreateShop';
 import SellerDashboard from './containers/home/SellerDashboard';
 import Dashboard from './containers/admin/Dashboard';
+import RequestManagement from './containers/admin/RequestManagement';
+import ContainerListRequest from './containers/admin/Request/ContainerListRequest';
+import ContainerViewRequest from './containers/admin/Request/ContainerViewRequest';
 import UserManagement from './containers/admin/UserManagement';
 import ContainerListUser from './containers/admin/User/ContainerListUser';
 import ContainerEditUser from './containers/admin/User/ContainerEditUser';
@@ -34,6 +37,10 @@ export default (
     <Route name="admin" path="admin" component={Admin}>
       <IndexRedirect to="dashboard" />
       <Route path="dashboard" component={Dashboard} />
+      <Route path="requests" component={RequestManagement}>
+        <IndexRoute component={ContainerListRequest} />
+        <Route path=":requestId/view" component={ContainerViewRequest} />
+      </Route>
       <Route path="users" component={UserManagement} >
         <IndexRoute component={ContainerListUser} />
         <Route path=":userId/edit" component={ContainerEditUser} />

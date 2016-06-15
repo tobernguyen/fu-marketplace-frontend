@@ -19,6 +19,13 @@ const initialState = {
     isSubmitting: false,
     submitResult: ''
   },
+  requestManagement: {
+    isFetching: false,
+    requestList: [],
+    selectedRequest: {},
+    isSubmitting: false,
+    submitResult: ''
+  },
   changePasswordFormStatus: {
     isSubmitting: false,
     response: ''
@@ -268,6 +275,65 @@ export const admin = (state = initialState, action) => {
         shopManagement: {
           submitResult: AsyncResultCode.UNBAN_SHOP_FAIL,
           selectedShop: state.shopManagement.selectedShop
+        }
+      });
+    case AdminActionTypes.ADMIN_GET_REQUESTS_REQUEST:
+      return _.assign({}, state, {
+        requestManagement: {
+          isFetching: true
+        }
+      });
+    case  AdminActionTypes.ADMIN_GET_REQUESTS_SUCCESS:
+      return _.assign({}, state, {
+        requestManagement: {
+          isFetching: false,
+          requestList: response.shopOpeningRequests
+        }
+      });
+    case AdminActionTypes.ADMIN_GET_REQUESTS_FAILURE:
+      return _.assign({}, state, {
+        requestManagement: {
+          isFetching: false
+        }
+      });
+    case AdminActionTypes.ADMIN_ACCEPT_REQUEST_REQUEST:
+      return _.assign({}, state, {
+        requestManagement: {
+          isSubmitting: true
+        }
+      });
+    case AdminActionTypes.ADMIN_ACCEPT_REQUEST_SUCCESS:
+      return _.assign({}, state, {
+        requestManagement: {
+          isSubmitting: false,
+          submitResult: 'OK'
+        }
+      });
+    case AdminActionTypes.ADMIN_ACCEPT_REQUEST_FAILURE:
+      return _.assign({}, state, {
+        requestManagement: {
+          isSubmitting: false,
+          submitResult: response.message_code
+        }
+      });
+    case AdminActionTypes.ADMIN_REJECT_REQUEST_REQUEST:
+      return _.assign({}, state, {
+        requestManagement: {
+          isSubmitting: true
+        }
+      });
+    case AdminActionTypes.ADMIN_REJECT_REQUEST_SUCCESS:
+      return _.assign({}, state, {
+        requestManagement: {
+          isSubmitting: false,
+          submitResult: 'OK'
+        }
+      });
+    case AdminActionTypes.ADMIN_REJECT_REQUEST_FAILURE:
+      return _.assign({}, state, {
+        requestManagement: {
+          isSubmitting: false,
+          submitResult: response.message_code
         }
       });
     case ActionTypes.ADMIN_CHANGE_PASSWORD_REQUEST:

@@ -52,6 +52,11 @@ class SideBar extends Component {
               </Link>
             </li>
             <li>
+              <Link to="admin/requests" activeClassName="active">
+                <i className="fa fa-users"></i><span>Request Management</span>
+              </Link>
+            </li>
+            <li>
               <Link to="admin/changepwd" activeClassName="active">
                 <i className="fa fa-key"></i><span>Change password</span>
               </Link>

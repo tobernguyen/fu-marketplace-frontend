@@ -43,7 +43,7 @@ class ContainerViewRequest extends Component {
 ContainerViewRequest.path = ':requestId/view';
 ContainerViewRequest.title = 'View request';
 ContainerViewRequest.description = 'View and response to request';
-ContainerViewRequest.faIcon = 'fa-shopping-bag';
+ContainerViewRequest.faIcon = 'fa-mail-reply';
 
 const mapStateToProps = (state) => ({
   requestManagement: state.admin.requestManagement

@@ -53,7 +53,7 @@ class SideBar extends Component {
             </li>
             <li>
               <Link to="admin/requests" activeClassName="active">
-                <i className="fa fa-users"></i><span>Request Management</span>
+                <i className="fa fa-envelope"></i><span>Request Management</span>
               </Link>
             </li>
             <li>

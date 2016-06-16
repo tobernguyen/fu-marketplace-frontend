@@ -28,7 +28,7 @@ const mapStateToProps = (state) => ({
 ContainerListRequest.path = '/requests';
 ContainerListRequest.title = 'Request management';
 ContainerListRequest.description = 'Request management';
-ContainerListRequest.faIcon = 'fa-shopping-bag';
+ContainerListRequest.faIcon = 'fa-envelope';
 
 export default connect(mapStateToProps, {
   adminGetRequests

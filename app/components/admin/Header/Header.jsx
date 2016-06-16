@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import './Header.scss';
-import { Navbar, NavItem, Nav, NavDropdown, MenuItem, FormGroup, FormControl, Button } from 'react-bootstrap';
+import { Navbar, NavItem, Nav, NavDropdown, MenuItem } from 'react-bootstrap';
 
 export default class Header extends Component {
   constructor(props) {
@@ -17,13 +17,13 @@ export default class Header extends Component {
           <Navbar.Collapse>
             <Nav pullRight>
               <NavItem eventKey={1}>
-                <i className="fa fa-clock-o"></i> 23:23:23
+                <i className="fa fa-clock-o" /> 23:23:23
               </NavItem>
               <NavItem eventKey={2} href="#">
-                <i className="fa fa-envelope fa-lg"></i>
+                <i className="fa fa-envelope fa-lg" />
               </NavItem>
               <NavItem eventKey={3} href="#">
-                <i className="fa fa-bell fa-lg"></i>
+                <i className="fa fa-bell fa-lg" />
                 <span className="badge">3</span>
               </NavItem>
               <NavDropdown eventKey={4} title="Administrator" id="basic-nav-dropdown">

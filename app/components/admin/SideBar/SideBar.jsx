@@ -8,12 +8,12 @@ class SideBar extends Component {
     super(props);
     this.toggleNavCollapse = this.toggleNavCollapse.bind(this);
   }
-  
+
   toggleNavCollapse(e) {
     e.preventDefault();
     this.props.toggleExpandSideBar();
   }
-    
+
   render() {
     const { isExpand } = this.props;
     const sideBarClass = classNames({
@@ -38,40 +38,40 @@ class SideBar extends Component {
         <div className="sidebar-collapse">
           <ul className="nav">
             <li className={navHeaderClass}>
-              <a href="/admin" className={fullTitleClass}>FU Marketplace</a>
-              <a href="/admin" className={shortTitleClass}>FUM</a>
+              <Link to="admin" className={fullTitleClass}>FU Marketplace</Link>
+              <Link to="admin" className={shortTitleClass}>FU Marketplace</Link>
             </li>
             <li>
               <Link to="admin/users" activeClassName="active">
-                <i className="fa fa-users"></i><span>User Management</span>
+                <i className="fa fa-users" /><span>User Management</span>
               </Link>
             </li>
             <li>
               <Link to="admin/shops" activeClassName="active">
-                <i className="fa fa-shopping-bag"></i><span>Shop Management</span>
+                <i className="fa fa-shopping-bag" /><span>Shop Management</span>
               </Link>
             </li>
             <li>
               <Link to="admin/requests" activeClassName="active">
-                <i className="fa fa-envelope"></i><span>Request Management</span>
+                <i className="fa fa-envelope" /><span>Request Management</span>
               </Link>
             </li>
             <li>
               <Link to="admin/changepwd" activeClassName="active">
-                <i className="fa fa-key"></i><span>Change password</span>
+                <i className="fa fa-key" /><span>Change password</span>
               </Link>
             </li>
           </ul>
           <div className="collapse-nav">
             <a className="toggle-nav-collapse" href="#" onClick={this.toggleNavCollapse}>
-              {isExpand && <i className="fa fa-angle-left"></i>}
-              {!isExpand && <i className="fa fa-angle-right"></i>}
+              {isExpand && <i className="fa fa-angle-left" />}
+              {!isExpand && <i className="fa fa-angle-right" />}
            </a>
           </div>
         </div>
       </div>
     );
-    
+
   }
 }
 

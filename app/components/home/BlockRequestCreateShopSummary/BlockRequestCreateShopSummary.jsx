@@ -1,45 +1,56 @@
 import React, { Component, PropTypes } from 'react';
+import { FormattedMessage } from 'react-intl';
+import { fields } from 'app/shared/fields';
+import { messages } from './BlockRequestCreateShopSummary.i18n';
 import './BlockRequestCreateShopSummary.scss';
 
 export default class BlockRequestCreateShopSummary extends Component {
   render() {
+    const {
+      sellerInfo: { identityNumber, phone  },
+      shopInfo: { address, description, name, note }
+    } = this.props.requestSummary;
     return (
       <div className="block-request-create-shop-summary">
         <h4 className="page-header">
-          Đăng ký tạo shop thành công với thông tin dưới đây:
+          <FormattedMessage {...messages.requestShopSuccessfullyTitle} />:
         </h4>
         <div className="panel panel-info">
           <div className="panel-heading">
-            <h3 className="panel-title">Thông tin người bán</h3>
+            <h3 className="panel-title">
+              <FormattedMessage {...messages.shopOwnerInfo} />:
+            </h3>
           </div>
           <div className="panel-body">
             <ul>
               <li>
-                Phone: 0973658655
+                <FormattedMessage {...fields.phone} />: {phone}
               </li>
               <li>
-                Identity number: 123012939
+                <FormattedMessage {...fields.identityNumber} />: {identityNumber}
               </li>
             </ul>
           </div>
         </div>
         <div className="panel panel-info">
           <div className="panel-heading">
-            <h3 className="panel-title">Thông tin shop</h3>
+            <h3 className="panel-title">
+              <FormattedMessage {...messages.shopInfo} />:
+            </h3>
           </div>
           <div className="panel-body">
             <ul>
               <li>
-                Tên shop: Bánh mỳ C-Bakery
+                <FormattedMessage {...fields.shopName} />: {name}
               </li>
               <li>
-                Miêu tả: Bánh mỳ
+                <FormattedMessage {...fields.shopDescription} />: {description}
               </li>
               <li>
-                Địa chỉ: C302 - Ki ốt số 9
+                <FormattedMessage {...fields.shopAddress} />: {address}
               </li>
               <li>
-                Miêu tả: Bánh mỳ đểu
+                <FormattedMessage {...fields.note} />: {note}
               </li>
             </ul>
           </div>

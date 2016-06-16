@@ -8,10 +8,14 @@ const validate = values => {
   const errors = {};
   if (!values.phone) {
     errors.phone = 'shop.form.validation.phone.required';
+  } else if (isNaN(Number(values.phone))) {
+    errors.phone = 'common.form.validation.phone.number';
   }
 
   if (!values.identityNumber) {
     errors.identityNumber = 'shop.form.validation.identityNumber.required';
+  } else if (!(values.identityNumber.length === 9 || values.identityNumber.length === 12)) {
+    errors.identityNumber = 'shop.form.validation.identityNumber.valid';
   }
 
   if (!values.identityPhoto) {

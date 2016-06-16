@@ -33,5 +33,16 @@ export default {
   'shop.form.verificationPhoto.note1': 'The image is only used for shop owner verification purpose.',
   'shop.form.verificationPhoto.note2': 'The image will be deleted and not used for any other purposes.',
   'shop.form.description.placeholder': 'What are products to sell or services to provide?',
-  'shop.form.description.label': 'Shop description'
+  'shop.form.description.label': 'Shop description',
+  'fields.phone': 'Phone number',
+  'fields.identityNumber': 'Identity number',
+  'fields.shopName': 'Shop name',
+  'fields.shopDescription': 'Shop description',
+  'fields.shopAddress': 'Shop address',
+  'fields.note': 'Note',
+  'shop.opening.request.successful': 'Thank you! Your shop opening request has been successfully with bellow information:',
+  'shop.owner.info': 'Seller information',
+  'shop.info': 'Shop information',
+  'fields.adminMessage': 'System message',
+  'shop.opening.request.pending': 'Pending shop opening requests'
 };

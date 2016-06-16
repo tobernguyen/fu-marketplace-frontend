@@ -33,5 +33,16 @@ export default {
   'shop.form.verificationPhoto.note1': 'Ảnh chỉ sử dụng cho mục đích xác thực thông tin chủ shop.',
   'shop.form.verificationPhoto.note2': 'Ảnh sẽ được xoá và không dùng cho bất cứ mục đích nào khác.',
   'shop.form.description.placeholder': 'Bạn sẽ bán gì hoặc cung cấp dịch vụ gì?',
-  'shop.form.description.label': 'Miêu tả shop'
+  'shop.form.description.label': 'Miêu tả shop',
+  'fields.phone': 'Số điện thoại',
+  'fields.identityNumber': 'Số chứng minh thư',
+  'fields.shopName': 'Tên shop',
+  'fields.shopDescription': 'Miêu tả shop',
+  'fields.shopAddress': 'Địa chỉ shop',
+  'fields.note': 'Ghi chú',
+  'shop.opening.request.successful': 'Bạn đã đăng ký mở cửa hàng với thông tin dưới đây:',
+  'shop.owner.info': 'Thông tin người bán',
+  'shop.info': 'Thông tin cửa hàng',
+  'fields.adminMessage': 'Phản hồi hệ thống',
+  'shop.opening.request.pending': 'Yêu cầu mở shop đang chờ đồng ý'
 };

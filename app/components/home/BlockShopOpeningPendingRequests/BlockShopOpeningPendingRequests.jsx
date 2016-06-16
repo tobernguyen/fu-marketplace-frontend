@@ -1,4 +1,6 @@
 import React, { Component, PropTypes } from 'react';
+import { FormattedMessage } from 'react-intl';
+import { fields } from 'app/shared/fields';
 import './BlockShopOpeningPendingRequests.scss';
 
 export default class BlockShopOpeningPendingRequests extends Component {
@@ -11,10 +13,18 @@ export default class BlockShopOpeningPendingRequests extends Component {
             <thead>
             <tr>
               <th>#</th>
-              <th>Shop Name</th>
-              <th>Description</th>
-              <th>Note</th>
-              <th>Admin message</th>
+              <th>
+                <FormattedMessage {...fields.shopName} />
+              </th>
+              <th>
+                <FormattedMessage {...fields.shopDescription} />
+              </th>
+              <th>
+                <FormattedMessage {...fields.note} />
+              </th>
+              <th>
+                <FormattedMessage {...fields.adminMessage} />
+              </th>
             </tr>
             </thead>
             <tbody>

@@ -105,3 +105,22 @@ export const getSellerShop = (shopID) => {
     return dispatch(requestGetSellerShop(shopID))
   }
 };
+
+
+export const UPDATE_SHOP_INFO_REQUEST = 'UPDATE_SHOP_INFO_REQUEST';
+export const UPDATE_SHOP_INFO_SUCCESS = 'UPDATE_SHOP_INFO_SUCCESS';
+export const UPDATE_SHOP_INFO_FAILURE = 'UPDATE_SHOP_INFO_FAILURE';
+const requestUpdateShopInfo = (shopData, shopID) => ({
+  [CALL_API]: {
+    types: [UPDATE_SHOP_INFO_REQUEST, UPDATE_SHOP_INFO_SUCCESS, UPDATE_SHOP_INFO_FAILURE],
+    url: `/api/v1/seller/shops/${shopID}`,
+    method: HTTP_METHODS.PUT,
+    params: shopData
+  }
+});
+
+export const updateShopInfo = (shopData, shopID) => {
+  return (dispatch) => {
+    return dispatch(requestUpdateShopInfo(shopData, shopID))
+  }
+};

@@ -1,0 +1,6 @@
+{
+  "name": "BlockSellerDashboardSideBar",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./BlockSellerDashboardSideBar.jsx"
+}

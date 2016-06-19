@@ -8,12 +8,14 @@ export default class BlockShopHeader extends Component {
   constructor(props) {
     super(props);
 
-    const { sellerShop: { avatar } } = props;
+    const { sellerShop: { avatar, cover } } = props;
 
     this.state = {
       modalCropImageShown: false,
       image: null,
-      shopAvatar: avatar
+      shopAvatar: avatar,
+      shopCover: cover,
+      error: null
     };
 
     this.handleRequestHide = () => {
@@ -29,12 +31,40 @@ export default class BlockShopHeader extends Component {
         return;
       }
       reader.onload = (image) => {
-        this.refs.dropzone.value = '';
+        this.refs.dropzoneAvatar.value = '';
 
         this.setState({
           modalCropImageShown: true,
           image: image.target.result
         })
+      };
+
+      reader.readAsDataURL(file);
+    };
+
+    this.onCoverChange = (files) => {
+      this.setState({
+        error: null
+      });
+      const reader = new FileReader();
+      var file = files[0];
+      if (!file) {
+        return;
+      }
+      reader.onload = (imageData) => {
+        this.refs.dropzoneCover.value = '';
+
+        const image = new Image();
+        image.onload = () => {
+          if (image.width < 850 || image.height < 250) {
+            this.setState({
+              error: 'Please choose an image that\'s at least 850 pixels wide and at least 250 pixels tall.'
+            })
+          } else {
+            this.props.uploadShopCover(imageData.target.result);
+          }
+        };
+        image.src = imageData.target.result;
       };
 
       reader.readAsDataURL(file);
@@ -50,6 +80,13 @@ export default class BlockShopHeader extends Component {
           modalCropImageShown: false
         });
       }
+
+      let shopCover = nextProps.sellerShop.cover || '';
+      if (shopCover !== this.state.shopCover) {
+        this.setState({
+          shopCover: shopCover
+        });
+      }
     }
   }
 
@@ -58,13 +95,13 @@ export default class BlockShopHeader extends Component {
     return (
       <div className="block-shop-header clearfix">
         <div className="shop-cover">
-          <img src="//media.foody.vn/biz_banner/foody-bannerhome_1000x375_khaisilk-new-635949338423039610.png"/>
+          <img src={cover} />
           <div className="shop-info-wrapper col-md-12">
             <div className="shop-avatar-wrapper row">
               <div className="col-sm-3 shop-avatar">
                 <img src={avatar}/>
                 <div className="upload-avatar">
-                  <Dropzone ref="dropzone"
+                  <Dropzone ref="dropzoneAvatar"
                             onDrop={this.onAvatarChange}
                             className="file-select"
                             multiple={false}
@@ -97,9 +134,13 @@ export default class BlockShopHeader extends Component {
               </div>
             </div>
           </div>
+          {this.state.error && <div className="status-message">
+            <span>{this.state.error}</span>
+          </div>
+          }
           <div className="update-cover">
-            <Dropzone ref="dropzone"
-                      onDrop={this.props.onCoverChange}
+            <Dropzone ref="dropzoneCover"
+                      onDrop={this.onCoverChange}
                       className="file-upload"
                       multiple={false}
                       accept="image/*">
@@ -123,5 +164,7 @@ export default class BlockShopHeader extends Component {
 
 
 BlockShopHeader.propTypes = {
-  sellerShop: PropTypes.object.isRequired
+  sellerShop: PropTypes.object.isRequired,
+  uploadShopAvatar: PropTypes.func.isRequired,
+  uploadShopCover: PropTypes.func.isRequired
 };

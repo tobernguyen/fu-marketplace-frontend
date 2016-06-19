@@ -20,10 +20,17 @@ export const shop = (state = INITIAL_STATE, action) => {
       });
     case ShopActionTypes.UPLOAD_SHOP_AVATAR_SUCCESS:
       const newAvatar = response.avatar ? getImageURLWithTimestamp(response.avatar) : '';
-      let modifiedResponse = response;
+      const modifiedResponse = response;
       modifiedResponse.avatar = newAvatar;
       return _.assign({}, state, {
         sellerShop: modifiedResponse
+      });
+    case ShopActionTypes.UPLOAD_SHOP_COVER_SUCCESS:
+      const newCover = response.cover ? getImageURLWithTimestamp(response.cover) : '';
+      const modifiedCoverResponse = response;
+      modifiedCoverResponse.cover = newCover;
+      return _.assign({}, state, {
+        sellerShop: modifiedCoverResponse
       });
     case ShopActionTypes.GET_PENDING_REQUESTS_SUCCESS:
       return _.assign({}, state, {

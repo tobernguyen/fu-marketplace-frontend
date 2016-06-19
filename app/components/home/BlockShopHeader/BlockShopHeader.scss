@@ -12,8 +12,8 @@
 
     .update-cover {
       position: absolute;
-      top: 5px;
-      right: 0;
+      top: 4px;
+      right: -7px;
       width: 115px;
 
       .file-upload {
@@ -25,6 +25,19 @@
         font-size: 12px;
         padding: 7px;
         font-weight: 400;
+      }
+    }
+
+    .status-message {
+      position: absolute;
+      width: 100%;
+      top: 0;
+      left: 0;
+      background-color: rgba(192, 57,32, 0.8);
+      padding: 10px;
+      span {
+        color: #FFF;
+        padding: 0 10px;
       }
     }
 

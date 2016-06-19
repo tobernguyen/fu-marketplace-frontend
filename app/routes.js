@@ -30,8 +30,8 @@ export default (
     <Route path="/" component={Home}>
       <Route path="account" component={Account} />
       <Route path="shops/request_create" component={RequestCreateShop} />
-      <Route path="shops/:shopId" component={Shop} />
-      <Route path="seller/dashboard" component={SellerDashboard} />
+      <Route path="shops/:shopID" component={Shop} />
+      <Route path="shops/:shopID/dashboard" component={SellerDashboard} />
     </Route>
 
     <Route name="admin" path="admin" component={Admin}>

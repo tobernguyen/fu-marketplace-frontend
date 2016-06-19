@@ -40,7 +40,7 @@ export default {
   'fields.shopDescription': 'Shop description',
   'fields.shopAddress': 'Shop address',
   'fields.note': 'Note',
-  'shop.opening.request.successful': 'Thank you! Your shop opening request has been successfully with bellow information:',
+  'shop.opening.request.successful': 'Thank you! Your shop opening request has been successfully with bellow information',
   'shop.owner.info': 'Seller information',
   'shop.info': 'Shop information',
   'fields.adminMessage': 'System message',

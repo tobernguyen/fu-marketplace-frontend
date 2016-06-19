@@ -2,14 +2,18 @@ import React, { Component, PropTypes } from 'react';
 import './BlockShopHeader.scss';
 import  ModalCropImage from '../ModalCropImage';
 import Dropzone from 'react-dropzone';
+import classNames from 'classnames';
 
 export default class BlockShopHeader extends Component {
   constructor(props) {
     super(props);
 
+    const { sellerShop: { avatar } } = props;
+
     this.state = {
       modalCropImageShown: false,
-      image: null
+      image: null,
+      shopAvatar: avatar
     };
 
     this.handleRequestHide = () => {
@@ -37,7 +41,20 @@ export default class BlockShopHeader extends Component {
     }
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.sellerShop) {
+      let shopAvatar = nextProps.sellerShop.avatar || '';
+      if (shopAvatar !== this.state.shopAvatar) {
+        this.setState({
+          userAvatar: shopAvatar,
+          modalCropImageShown: false
+        });
+      }
+    }
+  }
+
   render() {
+    const { sellerShop: { address, avatar, cover, description, name, opening } } = this.props;
     return (
       <div className="block-shop-header clearfix">
         <div className="shop-cover">
@@ -45,7 +62,7 @@ export default class BlockShopHeader extends Component {
           <div className="shop-info-wrapper col-md-12">
             <div className="shop-avatar-wrapper row">
               <div className="col-sm-3 shop-avatar">
-                <img src="https://scontent-hkg3-1.xx.fbcdn.net/v/t1.0-1/p160x160/1743702_1584326138447153_1156450258906196077_n.jpg?oh=2a85bb81a677cc086314e0ee194bb9d6&oe=5800EF53"/>
+                <img src={avatar}/>
                 <div className="upload-avatar">
                   <Dropzone ref="dropzone"
                             onDrop={this.onAvatarChange}
@@ -62,13 +79,13 @@ export default class BlockShopHeader extends Component {
             <div className="row">
               <div className="col-md-3 col-md-offset-3">
                 <div className="row shop-basic-info">
-                  <h4 className="title">Banh My Bay</h4>
-                  <span className="status"><i className="fa fa fa-circle"/> Đang mở cửa</span>
+                  <h4 className="title">{name}</h4>
+                  <span className={classNames('status', { 'opening' : opening})}><i className="fa fa fa-circle"/> { opening ? 'Đang mở cửa': 'Đang đóng cửa' }</span>
                 </div>
               </div>
               <div className="col-md-3">
                 <ul className="nav shop-info">
-                  <li><i className="fa fa-map-marker" /> Phòng C305</li>
+                  <li><i className="fa fa-map-marker" /> {address}</li>
                   <li><i className="fa fa-mobile" /> 01262338766</li>
                 </ul>
               </div>
@@ -103,3 +120,8 @@ export default class BlockShopHeader extends Component {
     )
   }
 }
+
+
+BlockShopHeader.propTypes = {
+  sellerShop: PropTypes.object.isRequired
+};

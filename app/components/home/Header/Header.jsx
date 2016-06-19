@@ -7,7 +7,8 @@ import { links } from 'app/shared/links';
 
 export default class Header extends Component {
   render() {
-    const { onSignOut, currentUser } = this.props;
+    const { onSignOut, currentUser: { roles, fullName, shops} } = this.props;
+    const normalUser = roles && roles.length == 0;
     return (
       <div className="home-header">
         <Navbar inverse fixedTop>
@@ -22,52 +23,57 @@ export default class Header extends Component {
               <FormGroup>
                 <FormControl type="text" placeholder="Search" />
               </FormGroup>
-              <Button type="submit"><i className="fa fa-search" aria-hidden="true"></i></Button>
+              <Button type="submit"><i className="fa fa-search" aria-hidden="true"/></Button>
             </Navbar.Form>
             <Nav pullRight>
               <NavItem eventKey={1} href="#">
-                <i className="fa fa-bell fa-lg"></i>
+                <i className="fa fa-bell fa-lg"/>
                 <span className="badge">3</span>
               </NavItem>
-              <NavDropdown eventKey={2} title={currentUser.fullName || ''} id="basic-nav-dropdown">
+              <NavDropdown eventKey={2} title={fullName || ''} id="basic-nav-dropdown">
                 <LinkContainer to='/account'>
                   <MenuItem eventKey={2.1}>
-                    <i className="fa fa-user"></i>
+                    <i className="fa fa-user"/>
                     <FormattedMessage {...links.account} />
                   </MenuItem>
                 </LinkContainer>
                 <MenuItem eventKey={2.2}>
-                  <i className="fa fa-list-ol"></i>
+                  <i className="fa fa-list-ol"/>
                   <FormattedMessage {...links.myOrders} />
                 </MenuItem>
                 <MenuItem divider />
+                {normalUser &&
                 <LinkContainer to='/shops/request_create'>
                   <MenuItem eventKey={2.3}>
-                    <i className="fa fa-opencart"></i>
+                    <i className="fa fa-opencart"/>
                     <FormattedMessage {...links.openShop} />
                   </MenuItem>
-                </LinkContainer>
-                <LinkContainer to='/seller/dashboard'>
-                  <MenuItem eventKey={2.3}>
-                    <i className="fa fa-opencart"/> Seller Dashboard
-                  </MenuItem>
-                </LinkContainer>
+                </LinkContainer>}
+                {shops instanceof Array && shops.map((shop) => {
+                  return (
+                    <LinkContainer key={shop.id} to={`/shops/${shop.id}/dashboard`}>
+                      <MenuItem eventKey={2.3}>
+                        <i className="fa fa-opencart"/> {shop.name}
+                      </MenuItem>
+                    </LinkContainer>
+                  )
+                })}
                 <MenuItem divider />
                 <MenuItem eventKey={2.4}>
-                  <i className="fa fa-cog"></i>
+                  <i className="fa fa-cog"/>
                   <FormattedMessage {...links.settings} />
                 </MenuItem>
                 <MenuItem eventKey={2.5} onSelect={onSignOut}>
-                  <i className="fa fa-sign-in"></i>
+                  <i className="fa fa-sign-in"/>
                   <FormattedMessage {...links.logOut} />
                 </MenuItem>
                 <MenuItem divider />
                 <MenuItem eventKey={2.6}>
-                  <i className="fa fa-life-ring"></i>
+                  <i className="fa fa-life-ring"/>
                   <FormattedMessage {...links.support} />
                 </MenuItem>
                 <MenuItem eventKey={2.7}>
-                  <i className="fa fa-bug"></i>
+                  <i className="fa fa-bug"/>
                   <FormattedMessage {...links.reportIssue} />
                 </MenuItem>
               </NavDropdown>

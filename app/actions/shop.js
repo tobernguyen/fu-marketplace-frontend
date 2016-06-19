@@ -1,5 +1,6 @@
 import { CALL_API, HTTP_METHODS } from '../middleware/api';
 
+
 export const SHOP_REQUEST_OPENING_REQUEST = 'SHOP_REQUEST_OPENING_REQUEST';
 export const SHOP_REQUEST_OPENING_SUCCESS = 'SHOP_REQUEST_OPENING_SUCCESS';
 export const SHOP_REQUEST_OPENING_FAILURE = 'SHOP_REQUEST_OPENING_FAILURE';
@@ -63,6 +64,7 @@ const requestShopUploadAvatar = (formFileData, shopID) => ({
 });
 
 export const uploadShopAvatar = (formFileData, shopID) => {
+  debugger;
   return (dispatch) => {
     return dispatch(requestShopUploadAvatar(formFileData, shopID))
   }
@@ -83,6 +85,24 @@ const requestShopUploadCover = (formFileData, shopID) => ({
 
 export const uploadShopCover = (formFileData, shopID) => {
   return (dispatch) => {
-    return dispatch(requestShopUploadAvatar(formFileData, shopID))
+    return dispatch(requestShopUploadCover(formFileData, shopID))
+  }
+};
+
+
+export const SELLER_GET_SHOP_REQUEST = 'SELLER_GET_SHOP_REQUEST';
+export const SELLER_GET_SHOP_SUCCESS = 'SELLER_GET_SHOP_SUCCESS';
+export const SELLER_GET_SHOP_FAILURE = 'SELLER_GET_SHOP_FAILURE';
+const requestGetSellerShop = (shopID) => ({
+  [CALL_API]: {
+    types: [SELLER_GET_SHOP_REQUEST, SELLER_GET_SHOP_SUCCESS, SELLER_GET_SHOP_FAILURE],
+    url: `/api/v1/seller/shops/${shopID}`,
+    method: HTTP_METHODS.GET
+  }
+});
+
+export const getSellerShop = (shopID) => {
+  return (dispatch) => {
+    return dispatch(requestGetSellerShop(shopID))
   }
 };

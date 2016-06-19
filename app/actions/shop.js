@@ -64,7 +64,6 @@ const requestShopUploadAvatar = (formFileData, shopID) => ({
 });
 
 export const uploadShopAvatar = (formFileData, shopID) => {
-  debugger;
   return (dispatch) => {
     return dispatch(requestShopUploadAvatar(formFileData, shopID))
   }

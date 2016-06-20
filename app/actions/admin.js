@@ -1,10 +1,9 @@
 import { CALL_API, HTTP_METHODS } from '../middleware/api';
-import { accessTokenKey, adminAccessTokenKey } from 'app/config';
 
 export const ADMIN_GET_USERS_REQUEST = 'ADMIN_GET_USERS_REQUEST';
 export const ADMIN_GET_USERS_SUCCESS = 'ADMIN_GET_USERS_SUCCESS';
 export const ADMIN_GET_USERS_FAILURE = 'ADMIN_GET_USERS_FAILURE';
-export const adminGetUsers = () => ({
+const adminRequestGetUsers = () => ({
   [CALL_API]: {
     types: [ADMIN_GET_USERS_REQUEST, ADMIN_GET_USERS_SUCCESS, ADMIN_GET_USERS_FAILURE],
     url: '/api/v1/admin/users',
@@ -12,10 +11,16 @@ export const adminGetUsers = () => ({
   }
 });
 
+export const adminGetUsers = () => {
+  return (dispatch) => {
+    return dispatch(adminRequestGetUsers());
+  }
+};
+
 export const ADMIN_GET_USER_REQUEST = 'ADMIN_GET_USER_REQUEST';
 export const ADMIN_GET_USER_SUCCESS = 'ADMIN_GET_USER_SUCCESS';
 export const ADMIN_GET_USER_FAILURE = 'ADMIN_GET_USER_FAILURE';
-export const adminGetUser = (userId) => ({
+export const adminRequestGetUser = (userId) => ({
   [CALL_API]: {
     types: [ADMIN_GET_USER_REQUEST, ADMIN_GET_USER_SUCCESS, ADMIN_GET_USER_FAILURE],
     url: `/api/v1/admin/users/${userId}`,
@@ -23,10 +28,16 @@ export const adminGetUser = (userId) => ({
   }
 });
 
+export const adminGetUser = (userId) => {
+  return (dispatch) => {
+    return dispatch(adminRequestGetUser(userId));
+  }
+};
+
 export const ADMIN_UPDATE_USER_INFORMATION_REQUEST = 'ADMIN_UPDATE_USER_INFORMATION_REQUEST';
 export const ADMIN_UPDATE_USER_INFORMATION_SUCCESS = 'ADMIN_UPDATE_USER_INFORMATION_SUCCESS';
 export const ADMIN_UPDATE_USER_INFORMATION_FAILURE = 'ADMIN_UPDATE_USER_INFORMATION_FAILURE';
-export const adminUpdateUserInformation = (user) => ({
+const adminRequestUpdateUserInformation = (user) => ({
   [CALL_API]: {
     types: [
       ADMIN_UPDATE_USER_INFORMATION_REQUEST,
@@ -39,11 +50,17 @@ export const adminUpdateUserInformation = (user) => ({
   }
 });
 
+export const adminUpdateUserInformation = (user) => {
+  return (dispatch) => {
+    return dispatch(adminRequestUpdateUserInformation(user));
+  }
+};
+
 
 export const ADMIN_UPDATE_USER_ROLE_REQUEST = 'ADMIN_UPDATE_USER_ROLE_REQUEST';
 export const ADMIN_UPDATE_USER_ROLE_SUCCESS = 'ADMIN_UPDATE_USER_ROLE_SUCCESS';
 export const ADMIN_UPDATE_USER_ROLE_FAILURE = 'ADMIN_UPDATE_USER_ROLE_FAILURE';
-export const adminUpdateUserRole = (userId, roles) => ({
+const adminRequestUpdateUserRole = (userId, roles) => ({
   [CALL_API]: {
     types: [
       ADMIN_UPDATE_USER_ROLE_REQUEST,
@@ -56,10 +73,16 @@ export const adminUpdateUserRole = (userId, roles) => ({
   }
 });
 
+export const adminUpdateUserRole = (userId, roles) => {
+  return (dispatch) => {
+    return dispatch(adminRequestUpdateUserRole(userId, roles));
+  }
+}
+
 export const ADMIN_BAN_USER_REQUEST = 'ADMIN_BAN_USER_REQUEST';
 export const ADMIN_BAN_USER_SUCCESS = 'ADMIN_BAN_USER_SUCCESS';
 export const ADMIN_BAN_USER_FAILURE = 'ADMIN_BAN_USER_FAILURE';
-export const adminBanUser = (user) => ({
+const adminRequestBanUser = (user) => ({
   [CALL_API]: {
     types: [
       ADMIN_BAN_USER_REQUEST,
@@ -74,10 +97,16 @@ export const adminBanUser = (user) => ({
   }
 });
 
+export const adminBanUser = (user) => {
+  return (dispatch) => {
+    return dispatch(adminRequestBanUser(user));
+  }
+};
+
 export const ADMIN_UNBAN_USER_REQUEST = 'ADMIN_UNBAN_USER_REQUEST';
 export const ADMIN_UNBAN_USER_SUCCESS = 'ADMIN_UNBAN_USER_SUCCESS';
 export const ADMIN_UNBAN_USER_FAILURE = 'ADMIN_UNBAN_USER_FAILURE';
-export const adminUnbanUser = (user) => ({
+const adminRequestUnbanUser = (user) => ({
   [CALL_API]: {
     types: [
       ADMIN_UNBAN_USER_REQUEST,
@@ -92,10 +121,16 @@ export const adminUnbanUser = (user) => ({
   }
 });
 
+export const adminUnbanUser = (user) => {
+  return (dispatch) => {
+    return dispatch(adminRequestUnbanUser(user));
+  }
+};
+
 export const ADMIN_GET_SHOPS_REQUEST = 'ADMIN_GET_SHOPS_REQUEST';
 export const ADMIN_GET_SHOPS_SUCCESS = 'ADMIN_GET_SHOPS_SUCCESS';
 export const ADMIN_GET_SHOPS_FAILURE = 'ADMIN_GET_SHOPS_FAILURE';
-export const adminGetShops = () => ({
+const adminRequestGetShops = () => ({
   [CALL_API]: {
     types: [ADMIN_GET_SHOPS_REQUEST, ADMIN_GET_SHOPS_SUCCESS, ADMIN_GET_SHOPS_FAILURE],
     url: '/api/v1/admin/shops',
@@ -103,10 +138,16 @@ export const adminGetShops = () => ({
   }
 });
 
+export const adminGetShops = () => {
+  return (dispatch) => {
+    return dispatch(adminRequestGetShops());
+  }
+};
+
 export const ADMIN_GET_SHOP_REQUEST = 'ADMIN_GET_SHOP_REQUEST';
 export const ADMIN_GET_SHOP_SUCCESS = 'ADMIN_GET_SHOP_SUCCESS';
 export const ADMIN_GET_SHOP_FAILURE = 'ADMIN_GET_SHOP_FAILURE';
-export const adminGetShop = (shopId) => ({
+const adminRequestGetShop = (shopId) => ({
   [CALL_API]: {
     types: [ADMIN_GET_SHOP_REQUEST, ADMIN_GET_SHOP_SUCCESS, ADMIN_GET_SHOP_FAILURE],
     url: `/api/v1/admin/shops/${shopId}`,
@@ -114,10 +155,16 @@ export const adminGetShop = (shopId) => ({
   }
 });
 
+export const adminGetShop = (shopId) => {
+  return (dispatch) => {
+    return dispatch(adminRequestGetShop(shopId));
+  }
+};
+
 export const ADMIN_UPDATE_SHOP_INFORMATION_REQUEST = 'ADMIN_UPDATE_SHOP_INFORMATION_REQUEST';
 export const ADMIN_UPDATE_SHOP_INFORMATION_SUCCESS = 'ADMIN_UPDATE_SHOP_INFORMATION_SUCCESS';
 export const ADMIN_UPDATE_SHOP_INFORMATION_FAILURE = 'ADMIN_UPDATE_SHOP_INFORMATION_FAILURE';
-export const adminUpdateShopInformation = (shopId, shop) => ({
+const adminRequestUpdateShopInformation = (shopId, shop) => ({
   [CALL_API]: {
     types: [
       ADMIN_UPDATE_SHOP_INFORMATION_REQUEST,
@@ -129,6 +176,30 @@ export const adminUpdateShopInformation = (shopId, shop) => ({
     method: HTTP_METHODS.PUT
   }
 });
+
+export const adminUpdateShopInformation = (shopId, shop) => {
+  return (dispatch) => {
+    return dispatch(adminRequestUpdateShopInformation(shopId, shop));
+  }
+};
+
+export const ADMIN_UPDATE_SHOP_SHIP_PLACES_REQUEST = 'ADMIN_UPDATE_SHOP_SHIP_PLACES_REQUEST';
+export const ADMIN_UPDATE_SHOP_SHIP_PLACES_SUCCESS = 'ADMIN_UPDATE_SHOP_SHIP_PLACES_SUCCESS';
+export const ADMIN_UPDATE_SHOP_SHIP_PLACES_FAILURE = 'ADMIN_UPDATE_SHOP_SHIP_PLACES_FAILURE';
+const adminRequestUpdateShopShipPlaces = (shopId, shipPlaces) => ({
+  [CALL_API]: {
+    types: [ADMIN_UPDATE_SHOP_SHIP_PLACES_REQUEST, ADMIN_UPDATE_SHOP_SHIP_PLACES_SUCCESS, ADMIN_UPDATE_SHOP_SHIP_PLACES_FAILURE],
+    url: `/api/v1/admin/shops/${shopId}/shipPlaces`,
+    params: shipPlaces,
+    method: HTTP_METHODS.POST
+  }
+});
+
+export const adminUpdateShopShipPlaces = (shopId, shipPlaces) => {
+  return (dispatch) => {
+    return dispatch(adminRequestUpdateShopShipPlaces(shopId, shipPlaces));
+  }
+};
 
 export const ADMIN_UPDATE_SHOP_AVATAR_REQUEST = 'ADMIN_UPDATE_SHOP_AVATAR_REQUEST';
 export const ADMIN_UPDATE_SHOP_AVATAR_SUCCESS = 'ADMIN_UPDATE_SHOP_AVATAR_SUCCESS';
@@ -169,7 +240,7 @@ export const adminUpdateShopCover = (shopId, formData) =>{
 export const ADMIN_BAN_SHOP_REQUEST = 'ADMIN_BAN_SHOP_REQUEST';
 export const ADMIN_BAN_SHOP_SUCCESS = 'ADMIN_BAN_SHOP_SUCCESS';
 export const ADMIN_BAN_SHOP_FAILURE = 'ADMIN_BAN_SHOP_FAILURE';
-export const adminBanShop = (shopId) => ({
+const adminRequestBanShop = (shopId) => ({
   [CALL_API]: {
     types: [
       ADMIN_BAN_SHOP_REQUEST,
@@ -184,10 +255,16 @@ export const adminBanShop = (shopId) => ({
   }
 });
 
+export const adminBanShop = (shopId) => {
+  return (dispatch) => {
+    return dispatch(adminRequestBanShop(shopId));
+  }
+};
+
 export const ADMIN_UNBAN_SHOP_REQUEST = 'ADMIN_UNBAN_SHOP_REQUEST';
 export const ADMIN_UNBAN_SHOP_SUCCESS = 'ADMIN_UNBAN_SHOP_SUCCESS';
 export const ADMIN_UNBAN_SHOP_FAILURE = 'ADMIN_UNBAN_SHOP_FAILURE';
-export const adminUnbanShop = (shopId) => ({
+const adminRequestUnbanShop = (shopId) => ({
   [CALL_API]: {
     types: [
       ADMIN_UNBAN_SHOP_REQUEST,
@@ -202,6 +279,11 @@ export const adminUnbanShop = (shopId) => ({
   }
 });
 
+export const adminUnbanShop = (shopId) => {
+  return (dispatch) => {
+    return dispatch(adminRequestUnbanShop(shopId));
+  }
+};
 
 export const ADMIN_GET_REQUESTS_REQUEST = 'ADMIN_GET_REQUESTS_REQUEST';
 export const ADMIN_GET_REQUESTS_SUCCESS = 'ADMIN_GET_REQUESTS_SUCCESS';

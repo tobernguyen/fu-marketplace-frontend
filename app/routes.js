@@ -7,6 +7,7 @@ import {
 import App from './containers/App';
 import Home from './containers/home';
 import Account from './containers/home/Account';
+import UpdateShop from './containers/home/SellerDashboard/UpdateShop';
 import Shop from './containers/home/Shop';
 import Admin from './containers/admin';
 import RequestCreateShop from './containers/home/RequestCreateShop';
@@ -31,7 +32,9 @@ export default (
       <Route path="account" component={Account} />
       <Route path="shops/request_create" component={RequestCreateShop} />
       <Route path="shops/:shopID" component={Shop} />
-      <Route path="shops/:shopID/dashboard" component={SellerDashboard} />
+      <Route path="shops/:shopID/dashboard" component={SellerDashboard}>
+        <Route path="info" component={UpdateShop} />
+      </Route>
     </Route>
 
     <Route name="admin" path="admin" component={Admin}>

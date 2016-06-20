@@ -54,7 +54,7 @@ class FormAccountBasic extends Component {
   }
 
   render() {
-    const { fields: { room, phone }, handleSubmit, submitting, currentUser, dirty, onBlur } = this.props;
+    const { fields: { room, phone }, handleSubmit, submitting, currentUser, dirty } = this.props;
     const fullName = currentUser.fullName || '';
     const email = currentUser.email || '';
     const { formatMessage } = this.props.intl;

@@ -8,9 +8,10 @@ export default class ModalHeader extends Component {
     if (typeof this.props.subHeader === 'string') {
       subHeader = <p className="sub-header">{this.props.subHeader}</p>;
     }
+    var closeLink = this.props.closeLink || '/';
     return (
       <div className="modal-header">
-        <Link to='/' className="close"><span aria-hidden="true">×</span></Link>
+        <Link to={closeLink} className="close"><span aria-hidden="true">×</span></Link>
         <h2 className="title">{this.props.title}</h2>
         {subHeader}
       </div>

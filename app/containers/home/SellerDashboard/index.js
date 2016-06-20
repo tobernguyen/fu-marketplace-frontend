@@ -4,6 +4,7 @@ import dataURLtoBlob from 'blueimp-canvas-to-blob';
 import BlockShopHeader from 'app/components/home/BlockShopHeader';
 import BlockSellerDashboardSideBar from 'app/components/home/BlockSellerDashboardSideBar';
 import SellingItemList from '../SellingItemList';
+import { Modal } from 'react-bootstrap';
 import { uploadShopAvatar, uploadShopCover, getSellerShop, updateShopInfo } from 'app/actions/shop';
 
 
@@ -14,7 +15,8 @@ class SellerDashboard extends Component {
     const { shopID } = this.props.params;
     if (!isNaN(shopID)) {
       this.state = {
-        shopID: shopID
+        shopID: shopID,
+        hasChildren: false
       };
       this.props.getSellerShop(shopID);
     }
@@ -36,22 +38,37 @@ class SellerDashboard extends Component {
     }
   }
 
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      hasChildren: !(nextProps.children === null)
+    })
+  }
+
   render() {
     return (
-      <div className="seller-dashboard">
-        <div className="col-md-9">
-          <div className="row">
-            <BlockShopHeader
-              sellerShop={this.props.sellerShop}
-              uploadShopCover={this.handleUploadShopCover}
-              uploadShopAvatar={this.handleUploadShopAvatar} />
-            <SellingItemList />
+      <div>
+        <div className="seller-dashboard">
+          <div className="col-md-9">
+            <div className="row">
+              <BlockShopHeader
+                sellerShop={this.props.sellerShop}
+                uploadShopCover={this.handleUploadShopCover}
+                uploadShopAvatar={this.handleUploadShopAvatar} />
+              <SellingItemList />
+            </div>
+          </div>
+          <div className="col-md-3">
+            <BlockSellerDashboardSideBar sellerShop={this.props.sellerShop}
+                                         shopInfoChanged={this.handleShopInfoChanged}
+                                         shopID={this.state.shopID} />
           </div>
         </div>
-        <div className="col-md-3">
-          <BlockSellerDashboardSideBar sellerShop={this.props.sellerShop}
-                                       shopInfoChanged={this.handleShopInfoChanged} />
-        </div>
+
+        {this.props.children && <div>
+          <Modal show={true}>
+            {this.props.children}
+          </Modal>
+        </div>}
       </div>
     );
   }

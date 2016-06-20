@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { ListGroup, ListGroupItem } from 'react-bootstrap';
+import { LinkContainer } from 'react-router-bootstrap';
 
 export default class BlockSellerDashboardSideBar extends Component {
   constructor(props) {
@@ -34,6 +35,7 @@ export default class BlockSellerDashboardSideBar extends Component {
   }
 
   render() {
+    const { shopID } = this.props;
     return (
       <ListGroup>
         <ListGroupItem href="#">
@@ -45,7 +47,9 @@ export default class BlockSellerDashboardSideBar extends Component {
             </label>
           </div>
         </ListGroupItem>
-        <ListGroupItem href="#">Update shop information</ListGroupItem>
+        <LinkContainer to={`/shops/${shopID}/dashboard/info`}>
+          <ListGroupItem>Update shop description</ListGroupItem>
+        </LinkContainer>
         <ListGroupItem href="#">Manage selling items</ListGroupItem>
       </ListGroup>
     )

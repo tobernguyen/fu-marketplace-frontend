@@ -1,0 +1,38 @@
+.block-seller-dashboard-sidebar {
+  .list-group-item {
+    padding: 10px;
+  }
+
+  .action {
+    .icon {
+      float: left;
+      border-radius: 6px;
+      width: 30px;
+      text-align: center;
+      i {
+        padding: 5px 0;
+        font-size: 20px;
+        color: #FFFFFF;
+      }
+    }
+    .title {
+      float: left;
+      padding: 5px 8px;
+    }
+    .control {
+      float: right;
+      width: 40px;
+      margin: 5px 0;
+    }
+  }
+
+  .icon-green {
+    background-color: #5cb85c;
+  }
+  .icon-orange {
+    background-color: orange;
+  }
+  .icon-gray {
+    background-color: darkgray;
+  }
+}

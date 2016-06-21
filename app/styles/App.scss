@@ -987,3 +987,7 @@ Sizes
 .checkbox-slider-lg input:checked + span:after {
   margin-left: 40px;
 }
+
+.checkbox label {
+  padding-left: 0;
+}

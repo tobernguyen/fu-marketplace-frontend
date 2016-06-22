@@ -19,8 +19,6 @@ class FormRequestCreateShopOwner extends Component {
         this.props.uploadIdentityPhoto(formFileData)
       }
     }
-
-
   }
 
   componentWillReceiveProps(nextProps) {

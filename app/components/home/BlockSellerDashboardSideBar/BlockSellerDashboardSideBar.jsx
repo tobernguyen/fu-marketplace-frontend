@@ -70,7 +70,7 @@ export default class BlockSellerDashboardSideBar extends Component {
             </div>
           </ListGroupItem>
         </LinkContainer>
-        <LinkContainer to={`/shops/${shopID}/dashboard/info`}>
+        <LinkContainer to={`/shops/${shopID}/dashboard/items/add`}>
           <ListGroupItem>
             <div className="clearfix action">
               <div className="icon icon-green">

@@ -1,4 +1,4 @@
-import { reduxForm } from 'redux-form'
+import { reduxForm } from 'redux-form';
 import FormUpdateShop from 'app/components/home/FormUpdateShop';
 
 export const fields = [ 'description' ];

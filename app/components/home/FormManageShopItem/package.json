@@ -1,0 +1,6 @@
+{
+  "name": "FormManageShopItem",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./FormManageShopItem.jsx"
+}

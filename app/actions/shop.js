@@ -124,3 +124,36 @@ export const updateShopInfo = (shopData, shopID) => {
     return dispatch(requestUpdateShopInfo(shopData, shopID))
   }
 };
+
+
+export const SHOP_CREATE_ITEM_REQUEST = 'SHOP_CREATE_ITEM_REQUEST';
+export const SHOP_CREATE_ITEM_SUCCESS = 'SHOP_CREATE_ITEM_SUCCESS';
+export const SHOP_CREATE_ITEM_FAILURE = 'SHOP_CREATE_ITEM_FAILURE';
+const requestCreateShopItem = (formValues, shopID) => ({
+  [CALL_API]: {
+    types: [SHOP_CREATE_ITEM_REQUEST, SHOP_CREATE_ITEM_SUCCESS, SHOP_CREATE_ITEM_FAILURE],
+    url: `/api/v1/seller/shops/${shopID}/items`,
+    method: HTTP_METHODS.POST,
+    params: formValues
+  }
+});
+
+export const createShopItem = (formValues, shopID) => {
+  const { name, description, quantity, price, imageData } = formValues;
+  const formShopItem = new FormData();
+  formShopItem.append('name', name);
+  if (description) {
+    formShopItem.append('description', description);
+  }
+  if (quantity) {
+    formShopItem.append('quantity', quantity);
+  }
+  formShopItem.append('price', price);
+  formShopItem.append('imageFile', imageData);
+  formShopItem.append('categoryId', 1);
+  formShopItem.append('sort', 1);
+
+  return (dispatch) => {
+    return dispatch(requestCreateShopItem(formShopItem, shopID))
+  }
+};

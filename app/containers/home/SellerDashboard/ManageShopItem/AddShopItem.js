@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import ManageShopItemForm from './ManageShopItemForm';
 import { connect } from 'react-redux';
 import { createShopItem } from 'app/actions/shop';
+import { getItemCategories } from 'app/actions/item';
 
 class AddShopItem extends Component {
   constructor(props) {
@@ -10,6 +11,10 @@ class AddShopItem extends Component {
     this.handleAddShopItem = (formValues) => {
       this.props.createShopItem(formValues, this.props.params.shopID);
     }
+  }
+
+  componentWillMount() {
+    this.props.getItemCategories();
   }
 
   render() {
@@ -27,5 +32,6 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps, {
-  createShopItem
+  createShopItem,
+  getItemCategories
 })(AddShopItem)

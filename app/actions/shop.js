@@ -139,7 +139,7 @@ const requestCreateShopItem = (formValues, shopID) => ({
 });
 
 export const createShopItem = (formValues, shopID) => {
-  const { name, description, quantity, price, imageData } = formValues;
+  const { name, description, quantity, price, imageData, categoryId } = formValues;
   const formShopItem = new FormData();
   formShopItem.append('name', name);
   if (description) {
@@ -150,7 +150,7 @@ export const createShopItem = (formValues, shopID) => {
   }
   formShopItem.append('price', price);
   formShopItem.append('imageFile', imageData);
-  formShopItem.append('categoryId', 1);
+  formShopItem.append('categoryId', categoryId);
   formShopItem.append('sort', 1);
 
   return (dispatch) => {

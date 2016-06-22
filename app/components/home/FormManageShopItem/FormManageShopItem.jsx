@@ -13,7 +13,7 @@ export default class FormManageShopItem extends Component {
   }
 
   render() {
-    const { shopID, fields: { name, description, quantity, price, imageData }, handleSubmit, submitting, dirty } = this.props;
+    const { shopID, itemCategories, fields: { name, description, quantity, price, categoryId, imageData }, handleSubmit, submitting, dirty } = this.props;
     return (
       <div className="form-manage-shop-item">
         <ModalHeader
@@ -23,10 +23,10 @@ export default class FormManageShopItem extends Component {
         <Modal.Body className="clearfix">
           <form onSubmit={handleSubmit} className="form-horizontal">
             <div className={`form-group ${name.touched && name.invalid ? 'has-error' : ''}`}>
-              <label className="col-sm-2 control-label">
+              <label className="col-sm-3 control-label">
                 Name
               </label>
-              <div className="col-sm-10">
+              <div className="col-sm-9">
                 <input
                   className="form-control" {...name}
                   placeholder="What are you selling?" />
@@ -35,11 +35,31 @@ export default class FormManageShopItem extends Component {
                 </div>
               </div>
             </div>
+            <div className={`form-group ${categoryId.touched && categoryId.invalid ? 'has-error' : ''}`}>
+              <label className="col-sm-3 control-label">
+                Category
+              </label>
+              <div className="col-sm-9">
+                <select className="form-control"
+                  {...categoryId}
+                  value={categoryId.value || ''}>
+                  <option/>
+                  {itemCategories.map((item) => {
+                    return (
+                      <option key={item.id} value={item.id}>{item.name}</option>
+                    )
+                  })}
+                </select>
+                <div className="help-block">
+                  {categoryId.touched ? categoryId.error : ''}
+                </div>
+              </div>
+            </div>
             <div className={`form-group ${price.touched && price.invalid ? 'has-error' : ''}`}>
-              <label className="col-sm-2 control-label">
+              <label className="col-sm-3 control-label">
                 Price
               </label>
-              <div className="col-sm-10">
+              <div className="col-sm-9">
                 <input
                   className="form-control" {...price}
                   placeholder="Add price" />
@@ -49,10 +69,10 @@ export default class FormManageShopItem extends Component {
               </div>
             </div>
             <div className={`form-group ${quantity.touched && quantity.invalid ? 'has-error' : ''}`}>
-              <label className="col-sm-2 control-label">
+              <label className="col-sm-3 control-label">
                 Quantity
               </label>
-              <div className="col-sm-10">
+              <div className="col-sm-9">
                 <input
                   className="form-control" {...quantity}
                   placeholder="Add quantity (optional)" />
@@ -63,10 +83,10 @@ export default class FormManageShopItem extends Component {
             </div>
 
             <div className={`form-group ${description.touched && description.invalid ? 'has-error' : ''}`}>
-              <label className="col-sm-2 control-label">
+              <label className="col-sm-3 control-label">
                 Description
               </label>
-              <div className="col-sm-10">
+              <div className="col-sm-9">
                 <textarea
                   className="form-control" {...description}
                   placeholder="Describe your item (optional)" />
@@ -77,10 +97,10 @@ export default class FormManageShopItem extends Component {
             </div>
 
             <div className={`form-group ${imageData.touched && imageData.invalid ? 'has-error' : ''}`}>
-              <label className="col-sm-2 control-label">
+              <label className="col-sm-3 control-label">
                 Photo
               </label>
-              <div className="col-sm-10">
+              <div className="col-sm-9">
                 <Dropzone
                   onDrop={this.onDrop}
                   className="dropzone"
@@ -110,3 +130,8 @@ export default class FormManageShopItem extends Component {
     );
   }
 }
+
+
+FormManageShopItem.propTypes = {
+  itemCategories: PropTypes.array.isRequired
+};

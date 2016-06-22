@@ -7,11 +7,13 @@ import { user } from './user';
 import { language } from './language';
 import { common } from './common';
 import { shop } from './shop';
+import { item } from './item';
 
 const rootReducer = combineReducers({
   auth,
   user,
   shop,
+  item,
   admin,
   routing,
   language,

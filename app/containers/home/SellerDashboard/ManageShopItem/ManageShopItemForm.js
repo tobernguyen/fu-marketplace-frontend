@@ -1,7 +1,7 @@
 import { reduxForm } from 'redux-form';
 import FormManageShopItem from 'app/components/home/FormManageShopItem';
 
-export const fields = [ 'name', 'description', 'quantity', 'price', 'imageData' ];
+export const fields = [ 'name', 'description', 'quantity', 'price', 'imageData', 'categoryId' ];
 
 const validate = values => {
   const errors = {};
@@ -22,12 +22,17 @@ const validate = values => {
     errors.imageData = 'shop.shopItem.validation.imageData.required';
   }
 
+  if (!values.categoryId) {
+    errors.categoryId = 'shop.shopItem.validation.categoryId.required';
+  }
+
   return errors;
 };
 
 const mapStateToProps = (state) => {
+  const { item } = state;
   return {
-
+    itemCategories: item.categories
   }
 };
 

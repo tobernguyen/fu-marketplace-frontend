@@ -198,6 +198,27 @@ export const admin = (state = initialState, action) => {
           submitResult: AsyncResultCode.UPDATE_SHOP_INFORMATION_FAIL
         }
       });
+    case AdminActionTypes.ADMIN_UPDATE_SHOP_SHIP_PLACES_REQUEST:
+      return _.merge({}, state, {
+        shopManagement: {
+          isSubmitting: true
+        }
+      });
+    case AdminActionTypes.ADMIN_UPDATE_SHOP_SHIP_PLACES_SUCCESS:
+      return _.merge({}, state, {
+        shopManagement: {
+          isSubmitting: false,
+          selectedShop: response,
+          submitResult: AsyncResultCode.UPDATE_SHOP_SHIP_PLACES_SUCCESS
+        }
+      });
+    case AdminActionTypes.ADMIN_UPDATE_SHOP_SHIP_PLACES_FAILURE:
+      return _.merge({}, state, {
+        shopManagement: {
+          isSubmitting: false,
+          submitResult: AsyncResultCode.UPDATE_SHOP_SHIP_PLACES_FAIL
+        }
+      });
     case AdminActionTypes.ADMIN_UPDATE_SHOP_AVATAR_REQUEST:
       return _.merge({}, state, {
         shopManagement: {

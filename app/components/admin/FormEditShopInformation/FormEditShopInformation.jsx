@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import {
-  Panel,
   FormGroup,
   FormControl,
   ControlLabel,
@@ -25,17 +24,21 @@ const validate = (values) => {
 
 class FormEditShopInformation extends Component {
   render() {
-    const { fields: { name, description, opening, address }, handleSubmit, submitting, submitResult } = this.props;
-    const title = (
-      <h3>Edit shop information</h3>
-    );
+    const { fields: { name, description, address }, handleSubmit, submitting, submitResult , seller} = this.props;
     return (
       <div className="row">
         <Col lg={3}>
-          <h4><strong>Information</strong></h4>
+          <h4><strong>Contact information</strong></h4>
+          <p>Shop contact information</p>
         </Col>
         <Col lg={9}>
           <form onSubmit={handleSubmit}>
+            <FormGroup>
+              <ControlLabel>Owner</ControlLabel>
+              <FormControl.Static>
+                {seller.fullName}
+              </FormControl.Static>
+            </FormGroup>
             <FormGroup
               className={`${name.touched && name.invalid ? 'has-error' : ''}`}>
               <ControlLabel>Name</ControlLabel>
@@ -53,17 +56,6 @@ class FormEditShopInformation extends Component {
                 placeholder="Description"
                 {...description} />
               <HelpBlock>{description.touched ? description.error: '' }</HelpBlock>
-            </FormGroup>
-            <FormGroup
-              className={`${opening.touched && opening.invalid ? 'has-error' : ''}`}>
-              <ControlLabel>Opening</ControlLabel>
-              <FormControl
-                componentClass="select"
-                {...opening}
-                >
-                <option value="true">Open</option>
-                <option value="false">Close</option>
-              </FormControl>
             </FormGroup>
             <FormGroup
               className={`${address.touched && address.invalid ? 'has-error' : ''}`}>
@@ -85,21 +77,16 @@ class FormEditShopInformation extends Component {
         </Col>
       </div>
     );
-  } 
+  }
 }
 
 const mapStateToProps = (state) => ({
   initialValues: state.admin.shopManagement.selectedShop
 });
 
-FormEditShopInformation.defaultProps = {
-  shop: {}
-};
-
 export default reduxForm({
   form: 'FormEditShopInformation',
-  fields: ['name', 'description', 'opening', 'address'],
-  null,
+  fields: ['name', 'description', 'address'],
   asyncBlurFields: ['name', 'description', 'opening'],
   validate
 }, mapStateToProps, null)(FormEditShopInformation);

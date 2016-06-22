@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import FormEditShopInformation from 'app/components/admin/FormEditShopInformation';
+import FormEditShopShipPlaces from 'app/components/admin/FormEditShopShipPlaces';
 import FormEditShopBanStatus from 'app/components/admin/FormEditShopBanStatus';
 import FormEditShopAvatarAndCover from 'app/components/admin/FormEditShopAvatarAndCover';
 import {
@@ -9,7 +10,8 @@ import {
   adminBanShop,
   adminUnbanShop,
   adminUpdateShopAvatar,
-  adminUpdateShopCover
+  adminUpdateShopCover,
+  adminUpdateShopShipPlaces
 } from 'app/actions/admin';
 import LoadingSpinner from 'app/components/admin/LoadingSpinner';
 
@@ -22,11 +24,17 @@ class ContainerEditShop extends Component {
     this.uploadCover = this.uploadCover.bind(this);
     this.banShop = this.banShop.bind(this);
     this.unbanShop = this.unbanShop.bind(this);
+    this.handleSubmitShipPlaces = this.handleSubmitShipPlaces.bind(this);
   }
   
   handleSubmitShopInformation(shop) {
     const shopId = this.props.shopManagement.selectedShop.id;
     this.props.adminUpdateShopInformation(shopId, shop);
+  }
+  
+  handleSubmitShipPlaces(shipPlaces) {
+    const shopId = this.props.shopManagement.selectedShop.id;
+    this.props.adminUpdateShopShipPlaces(shopId, shipPlaces)
   }
   
   uploadAvatar(formData) {
@@ -64,6 +72,16 @@ class ContainerEditShop extends Component {
         <FormEditShopInformation
           onSubmit={this.handleSubmitShopInformation}
           submitResult={shopManagement.submitResult}
+          submitting={shopManagement.isSubmitting}
+          seller={shopManagement.selectedShop.seller}
+        />
+        <hr />
+        <FormEditShopShipPlaces
+          shop={shopManagement.selectedShop}
+          submitOpeningStatus={this.handleSubmitShopInformation}
+          submitShipPlaces={this.handleSubmitShipPlaces}
+          submitResult={shopManagement.submitResult}
+          isSubmitting={shopManagement.isSubmitting}
         />
         <hr />
         <FormEditShopAvatarAndCover
@@ -102,6 +120,7 @@ export default connect(mapStateToProps, {
   adminBanShop,
   adminUnbanShop,
   adminUpdateShopAvatar,
-  adminUpdateShopCover
+  adminUpdateShopCover,
+  adminUpdateShopShipPlaces
 })(ContainerEditShop);
 

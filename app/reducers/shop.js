@@ -4,7 +4,8 @@ import { getImageURLWithTimestamp } from 'app/helpers/image';
 
 const INITIAL_STATE = {
   shopOpeningRequests: [],
-  sellerShop: {}
+  sellerShop: {},
+  sellingItems: []
 };
 
 export const shop = (state = INITIAL_STATE, action) => {
@@ -18,6 +19,14 @@ export const shop = (state = INITIAL_STATE, action) => {
     case ShopActionTypes.UPDATE_SHOP_INFO_SUCCESS:
       return _.assign({}, state, {
         sellerShop: response
+      });
+    case ShopActionTypes.SELLER_GET_SHOP_ITEM_LIST_SUCCESS:
+      return _.assign({}, state, {
+        sellingItems: response.items
+      });
+    case ShopActionTypes.SHOP_CREATE_ITEM_SUCCESS:
+      return _.assign({}, state, {
+        sellingItems: [...state.sellingItems, response]
       });
     case ShopActionTypes.UPLOAD_SHOP_AVATAR_SUCCESS:
       const newAvatar = response.avatar ? getImageURLWithTimestamp(response.avatar) : '';

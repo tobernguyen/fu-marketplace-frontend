@@ -157,3 +157,21 @@ export const createShopItem = (formValues, shopID) => {
     return dispatch(requestCreateShopItem(formShopItem, shopID))
   }
 };
+
+
+export const SELLER_GET_SHOP_ITEM_LIST_REQUEST = 'SELLER_GET_SHOP_ITEM_LIST_REQUEST';
+export const SELLER_GET_SHOP_ITEM_LIST_SUCCESS = 'SELLER_GET_SHOP_ITEM_LIST_SUCCESS';
+export const SELLER_GET_SHOP_ITEM_LIST_FAILURE = 'SELLER_GET_SHOP_ITEM_LIST_FAILURE';
+const requestGetSellerShopItems = (shopID) => ({
+  [CALL_API]: {
+    types: [SELLER_GET_SHOP_ITEM_LIST_REQUEST, SELLER_GET_SHOP_ITEM_LIST_SUCCESS, SELLER_GET_SHOP_ITEM_LIST_FAILURE],
+    url: `/api/v1/seller/shops/${shopID}/items`,
+    method: HTTP_METHODS.GET
+  }
+});
+
+export const getSellerShopItems = (shopID) => {
+  return (dispatch) => {
+    return dispatch(requestGetSellerShopItems(shopID))
+  }
+};

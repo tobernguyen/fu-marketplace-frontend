@@ -4,8 +4,9 @@ import './BlockSellingItemList.scss';
 import { Pagination } from 'react-bootstrap';
 
 export default class BlockSellingItemList extends Component {
+
   render() {
-    const data = [1,2,3,4,5,6,7,8];
+    const { items } = this.props;
     return (
       <div className="block-selling-item-list clearfix">
         <div className="header clearfix">
@@ -23,8 +24,8 @@ export default class BlockSellingItemList extends Component {
           </ul>
         </div>
         <div className="body clearfix">
-          {data.map((item) => {
-            return <BlockSellingItem key={item} item={item} />
+          {items.map((item) => {
+            return <BlockSellingItem key={item.id} item={item} />
           })}
         </div>
         <div className="footer clearfix">
@@ -37,3 +38,7 @@ export default class BlockSellingItemList extends Component {
     )
   }
 }
+
+BlockSellingItemList.propTypes = {
+  items: PropTypes.array.isRequired
+};

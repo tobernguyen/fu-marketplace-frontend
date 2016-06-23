@@ -54,7 +54,7 @@ class SellerDashboard extends Component {
                 sellerShop={this.props.sellerShop}
                 uploadShopCover={this.handleUploadShopCover}
                 uploadShopAvatar={this.handleUploadShopAvatar} />
-              <SellingItemList />
+              <SellingItemList shopID={this.state.shopID} />
             </div>
           </div>
           <div className="col-md-3">

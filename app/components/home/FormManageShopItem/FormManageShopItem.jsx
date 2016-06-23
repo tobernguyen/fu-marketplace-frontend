@@ -15,7 +15,7 @@ class FormManageShopItem extends Component {
   }
 
   render() {
-    const { shopID, itemCategories, fields: { name, description, quantity, price, categoryId, imageData }, handleSubmit, submitting, dirty } = this.props;
+    const { shopID, itemCategories, fields: { name, description, quantity, price, categoryId, imageData }, handleSubmit, submitting, dirty, invalid } = this.props;
     const { formatMessage } = this.props.intl;
     return (
       <div className="form-manage-shop-item">
@@ -34,7 +34,7 @@ class FormManageShopItem extends Component {
                   className="form-control" {...name}
                   placeholder={formatMessage(messages.shopItem.name.placeholder)} />
                 <div className="help-block">
-                  {name.touched ? <FormattedMessage {...name.error} /> : ''}
+                  {name.touched && name.error ? <FormattedMessage {...name.error} /> : ''}
                 </div>
               </div>
             </div>
@@ -54,7 +54,7 @@ class FormManageShopItem extends Component {
                   })}
                 </select>
                 <div className="help-block">
-                  {categoryId.touched ? <FormattedMessage {...categoryId.error} /> : ''}
+                  {categoryId.touched && categoryId.error ? <FormattedMessage {...categoryId.error} /> : ''}
                 </div>
               </div>
             </div>
@@ -94,7 +94,7 @@ class FormManageShopItem extends Component {
                   className="form-control" {...description}
                   placeholder={formatMessage(messages.shopItem.description.placeholder)} />
                 <div className="help-block">
-                  {description.touched ? <FormattedMessage {...description.error} /> : ''}
+                  {description.touched && description.error ? <FormattedMessage {...description.error} /> : ''}
                 </div>
               </div>
             </div>
@@ -125,7 +125,7 @@ class FormManageShopItem extends Component {
               <div className="col-sm-9 col-sm-offset-3">
                 <button type="submit"
                         className="btn btn-primary"
-                        disabled={submitting || !dirty}>
+                        disabled={submitting || !dirty || invalid}>
                   Submit
                 </button>
               </div>

@@ -44,5 +44,22 @@ export default {
   'shop.owner.info': 'Seller information',
   'shop.info': 'Shop information',
   'fields.adminMessage': 'System message',
-  'shop.opening.request.pending': 'Pending shop opening requests'
+  'shop.opening.request.pending': 'Pending shop opening requests',
+  'shopItem.photo.validation.required': 'Please add item photo',
+  'shopItem.photo.label': 'Photo',
+  'shopItem.photo.description': 'Add Photo',
+  'shopItem.description.label': 'Description',
+  'shopItem.description.placeholder': 'Describe your item (optional)',
+  'shopItem.quantity.label': 'Quantity',
+  'shopItem.quantity.placeholder': 'Add quantity (optional)',
+  'shopItem.price.label': 'Price',
+  'shopItem.price.placeholder': 'Add price',
+  'shopItem.category': 'Category',
+  'shopItem.name.label': 'Name',
+  'shopItem.name.placeholder': 'What are you selling?',
+  'shopItem.name.validation.required': 'Please enter item name',
+  'shopItem.quantity.validation.number': 'Quantity must be a number',
+  'shopItem.price.validation.required': 'Please enter item price',
+  'shopItem.price.validation.number': 'Price must be a number',
+  'shopItem.categoryId.validation.required': 'Please select category for item'
 };

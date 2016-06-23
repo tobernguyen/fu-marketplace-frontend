@@ -7,23 +7,45 @@ const validate = values => {
   const errors = {};
 
   if (!values.name) {
-    errors.name = 'shop.shopItem.validation.name.required';
+    errors.name = {
+      id: 'shopItem.name.validation.required',
+      defaultMessage: 'name required'
+    };
   }
 
-  if (!values.quantity) {
-    errors.quantity = 'shop.shopItem.validation.quantity.required';
+  if (values.quantity && values.quantity.length > 0) {
+    if (isNaN(values.quantity)) {
+      errors.quantity = {
+        id: 'shopItem.quantity.validation.number',
+        defaultMessage: 'quantity value must be number'
+      };
+    }
   }
 
   if (!values.price) {
-    errors.price = 'shop.shopItem.validation.price.required';
+    errors.price = {
+      id: 'shopItem.price.validation.required',
+      defaultMessage: 'price required'
+    };
+  } else if (isNaN(values.price)) {
+    errors.price = {
+      id: 'shopItem.price.validation.number',
+      defaultMessage: 'price must be number'
+    };
   }
 
   if (!values.imageData) {
-    errors.imageData = 'shop.shopItem.validation.imageData.required';
+    errors.imageData = {
+      id: 'shopItem.photo.validation.required',
+      defaultMessage: 'photo required'
+    };
   }
 
   if (!values.categoryId) {
-    errors.categoryId = 'shop.shopItem.validation.categoryId.required';
+    errors.categoryId = {
+      id: 'shopItem.categoryId.validation.required',
+      defaultMessage: 'categoryId required'
+    };
   }
 
   return errors;

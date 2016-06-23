@@ -44,5 +44,22 @@ export default {
   'shop.owner.info': 'Thông tin người bán',
   'shop.info': 'Thông tin cửa hàng',
   'fields.adminMessage': 'Phản hồi hệ thống',
-  'shop.opening.request.pending': 'Yêu cầu mở shop đang chờ đồng ý'
+  'shop.opening.request.pending': 'Yêu cầu mở shop đang chờ đồng ý',
+  'shopItem.photo.validation.required': 'Hãy thêm ảnh sản phẩm',
+  'shopItem.photo.label': 'Hình ảnh',
+  'shopItem.photo.description': 'Thêm ảnh',
+  'shopItem.description.label': 'Miêu tả',  
+  'shopItem.description.placeholder': 'Miêu tả sản phẩm của bạn (tuỳ chọn)',
+  'shopItem.quantity.label': 'Số lượng',
+  'shopItem.quantity.placeholder': 'Số lượng hiện có (tuỳ chọn)',
+  'shopItem.price.label': 'Giá',
+  'shopItem.price.placeholder': 'Thêm giá sản phẩm',
+  'shopItem.category': 'Thể loại',
+  'shopItem.name.label': 'Tên',
+  'shopItem.name.placeholder': 'Bạn sẽ bán gì?',
+  'shopItem.name.validation.required': 'Hãy điền tên sản phẩm',
+  'shopItem.quantity.validation.number': 'Số lượng phải là số',
+  'shopItem.price.validation.required': 'Hãy điền giá sản phẩm',
+  'shopItem.price.validation.number': 'Giá phải là số',
+  'shopItem.categoryId.validation.required': 'Hãy chọn thể loại cho sản phẩm'
 };

@@ -2,8 +2,10 @@ import React, { Component, PropTypes } from 'react';
 import ModalHeader from '../ModalHeader';
 import { Modal } from 'react-bootstrap';
 import Dropzone from 'react-dropzone';
+import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
+import { messages } from './FormManageShopItem.i18n';
 
-export default class FormManageShopItem extends Component {
+class FormManageShopItem extends Component {
   constructor(props) {
     super(props);
 
@@ -14,6 +16,7 @@ export default class FormManageShopItem extends Component {
 
   render() {
     const { shopID, itemCategories, fields: { name, description, quantity, price, categoryId, imageData }, handleSubmit, submitting, dirty } = this.props;
+    const { formatMessage } = this.props.intl;
     return (
       <div className="form-manage-shop-item">
         <ModalHeader
@@ -24,20 +27,20 @@ export default class FormManageShopItem extends Component {
           <form onSubmit={handleSubmit} className="form-horizontal">
             <div className={`form-group ${name.touched && name.invalid ? 'has-error' : ''}`}>
               <label className="col-sm-3 control-label">
-                Name
+                <FormattedMessage {...messages.shopItem.name.label} />
               </label>
               <div className="col-sm-9">
                 <input
                   className="form-control" {...name}
-                  placeholder="What are you selling?" />
+                  placeholder={formatMessage(messages.shopItem.name.placeholder)} />
                 <div className="help-block">
-                  {name.touched ? name.error : ''}
+                  {name.touched ? <FormattedMessage {...name.error} /> : ''}
                 </div>
               </div>
             </div>
             <div className={`form-group ${categoryId.touched && categoryId.invalid ? 'has-error' : ''}`}>
               <label className="col-sm-3 control-label">
-                Category
+                <FormattedMessage {...messages.shopItem.category} />
               </label>
               <div className="col-sm-9">
                 <select className="form-control"
@@ -51,54 +54,54 @@ export default class FormManageShopItem extends Component {
                   })}
                 </select>
                 <div className="help-block">
-                  {categoryId.touched ? categoryId.error : ''}
+                  {categoryId.touched ? <FormattedMessage {...categoryId.error} /> : ''}
                 </div>
               </div>
             </div>
             <div className={`form-group ${price.touched && price.invalid ? 'has-error' : ''}`}>
               <label className="col-sm-3 control-label">
-                Price
+                <FormattedMessage {...messages.shopItem.price.label} />
               </label>
               <div className="col-sm-9">
                 <input
                   className="form-control" {...price}
-                  placeholder="Add price" />
+                  placeholder={formatMessage(messages.shopItem.price.placeholder)} />
                 <div className="help-block">
-                  {price.touched ? price.error : ''}
+                  {price.touched && price.error ? <FormattedMessage {...price.error} /> : ''}
                 </div>
               </div>
             </div>
             <div className={`form-group ${quantity.touched && quantity.invalid ? 'has-error' : ''}`}>
               <label className="col-sm-3 control-label">
-                Quantity
+                <FormattedMessage {...messages.shopItem.quantity.label} />
               </label>
               <div className="col-sm-9">
                 <input
                   className="form-control" {...quantity}
-                  placeholder="Add quantity (optional)" />
+                  placeholder={formatMessage(messages.shopItem.quantity.placeholder)} />
                 <div className="help-block">
-                  {quantity.touched ? quantity.error : ''}
+                  {quantity.touched && quantity.error ? <FormattedMessage {...quantity.error} /> : ''}
                 </div>
               </div>
             </div>
 
             <div className={`form-group ${description.touched && description.invalid ? 'has-error' : ''}`}>
               <label className="col-sm-3 control-label">
-                Description
+                <FormattedMessage {...messages.shopItem.description.label} />
               </label>
               <div className="col-sm-9">
                 <textarea
                   className="form-control" {...description}
-                  placeholder="Describe your item (optional)" />
+                  placeholder={formatMessage(messages.shopItem.description.placeholder)} />
                 <div className="help-block">
-                  {description.touched ? description.error : ''}
+                  {description.touched ? <FormattedMessage {...description.error} /> : ''}
                 </div>
               </div>
             </div>
 
             <div className={`form-group ${imageData.touched && imageData.invalid ? 'has-error' : ''}`}>
               <label className="col-sm-3 control-label">
-                Photo
+                <FormattedMessage {...messages.shopItem.photo.label} />
               </label>
               <div className="col-sm-9">
                 <Dropzone
@@ -109,21 +112,24 @@ export default class FormManageShopItem extends Component {
                   accept="image/*">
                   <div>
                     {imageData.value ?
-                    <img className="img-responsive" src={imageData.value.preview} /> : <span>Add Photo</span>}
-
+                    <img className="img-responsive" src={imageData.value.preview} /> : <span><FormattedMessage {...messages.shopItem.photo.description} /></span>}
                   </div>
                 </Dropzone>
                 <div className="help-block">
-                  {imageData.error ? imageData.error : ''}
+                  {imageData.error ? <FormattedMessage {...imageData.error} /> : ''}
                 </div>
               </div>
             </div>
 
-            <button type="submit"
-                    className="btn btn-primary"
-                    disabled={submitting || !dirty}>
-              Submit
-            </button>
+            <div className="row">
+              <div className="col-sm-9 col-sm-offset-3">
+                <button type="submit"
+                        className="btn btn-primary"
+                        disabled={submitting || !dirty}>
+                  Submit
+                </button>
+              </div>
+            </div>
           </form>
         </Modal.Body>
       </div>
@@ -131,7 +137,11 @@ export default class FormManageShopItem extends Component {
   }
 }
 
-
 FormManageShopItem.propTypes = {
+  intl: intlShape.isRequired,
   itemCategories: PropTypes.array.isRequired
 };
+
+
+export default injectIntl(FormManageShopItem)
+

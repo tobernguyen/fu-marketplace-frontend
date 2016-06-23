@@ -28,6 +28,12 @@ export const shop = (state = INITIAL_STATE, action) => {
       return _.assign({}, state, {
         sellingItems: [...state.sellingItems, response]
       });
+    case ShopActionTypes.SELLER_DELETE_SHOP_ITEM_SUCCESS:
+      console.log(response);
+      debugger;
+      return _.assign({}, state, {
+
+      });
     case ShopActionTypes.UPLOAD_SHOP_AVATAR_SUCCESS:
       const newAvatar = response.avatar ? getImageURLWithTimestamp(response.avatar) : '';
       const modifiedResponse = response;

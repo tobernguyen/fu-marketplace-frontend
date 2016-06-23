@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import ModalHeader from '../ModalHeader';
-import { Modal } from 'react-bootstrap';
+import { Modal, ButtonToolbar } from 'react-bootstrap';
 import Dropzone from 'react-dropzone';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import { messages } from './FormManageShopItem.i18n';
@@ -15,12 +15,21 @@ class FormManageShopItem extends Component {
   }
 
   render() {
-    const { shopID, itemCategories, fields: { name, description, quantity, price, categoryId, imageData }, handleSubmit, submitting, dirty, invalid } = this.props;
+    const {
+      shopID,
+      itemCategories,
+      updateMode,
+      onDelete,
+      fields: { name, description, quantity, price, categoryId, imageData },
+      handleSubmit,
+      submitting,
+      dirty,
+      invalid } = this.props;
     const { formatMessage } = this.props.intl;
     return (
       <div className="form-manage-shop-item">
         <ModalHeader
-          title="Add Shop Item"
+          title={updateMode ? 'Update shop item' : 'Add shop item'}
           closeLink={`/shops/${shopID}/dashboard`}
         />
         <Modal.Body className="clearfix">
@@ -123,11 +132,18 @@ class FormManageShopItem extends Component {
 
             <div className="row">
               <div className="col-sm-9 col-sm-offset-3">
-                <button type="submit"
-                        className="btn btn-primary"
-                        disabled={submitting || !dirty || invalid}>
-                  Submit
-                </button>
+                <ButtonToolbar>
+                  <button type="submit"
+                          className="btn btn-primary"
+                          disabled={submitting || !dirty || invalid}>
+                    {updateMode ? 'Update' : 'Add'}
+                  </button>
+                  {updateMode &&
+                  <button className="btn btn-danger"
+                          onClick={onDelete}>
+                    Delete
+                  </button>}
+                </ButtonToolbar>
               </div>
             </div>
           </form>

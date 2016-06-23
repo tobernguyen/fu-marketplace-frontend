@@ -13,7 +13,7 @@ class SellingItemList extends Component {
 
   render() {
     return (
-      <BlockSellingItemList items={this.props.sellingItems} />
+      <BlockSellingItemList items={this.props.sellingItems} shopID={this.props.shopID} />
     )
   }
 }

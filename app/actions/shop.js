@@ -175,3 +175,21 @@ export const getSellerShopItems = (shopID) => {
     return dispatch(requestGetSellerShopItems(shopID))
   }
 };
+
+
+export const SELLER_DELETE_SHOP_ITEM_REQUEST = 'SELLER_DELETE_SHOP_ITEM_REQUEST';
+export const SELLER_DELETE_SHOP_ITEM_SUCCESS = 'SELLER_DELETE_SHOP_ITEM_SUCCESS';
+export const SELLER_DELETE_SHOP_ITEM_FAILURE = 'SELLER_DELETE_SHOP_ITEM_FAILURE';
+const requestDeleteShopItem = (shopID, itemID) => ({
+  [CALL_API]: {
+    types: [SELLER_DELETE_SHOP_ITEM_REQUEST, SELLER_DELETE_SHOP_ITEM_SUCCESS, SELLER_DELETE_SHOP_ITEM_FAILURE],
+    url: `/api/v1/seller/shops/${shopID}/items/${itemID}`,
+    method: HTTP_METHODS.DELETE
+  }
+});
+
+export const deleteShopItem = (shopID, itemID) => {
+  return (dispatch) => {
+    return dispatch(requestDeleteShopItem(shopID, itemID))
+  }
+};

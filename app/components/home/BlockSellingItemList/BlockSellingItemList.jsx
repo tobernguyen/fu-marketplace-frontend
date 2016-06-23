@@ -25,7 +25,7 @@ export default class BlockSellingItemList extends Component {
         </div>
         <div className="body clearfix">
           {items.map((item) => {
-            return <BlockSellingItem key={item.id} item={item} />
+            return <BlockSellingItem key={item.id} item={item} shopID={this.props.shopID} />
           })}
         </div>
         <div className="footer clearfix">

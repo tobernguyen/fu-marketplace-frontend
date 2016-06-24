@@ -1,142 +1,80 @@
-import React, { Component, PropTypes } from 'react';
-import { Button, FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
+import React, { Component } from 'react';
+import {
+  Button,
+  FormGroup,
+  ControlLabel,
+  FormControl,
+  Col,
+  Alert,
+  HelpBlock
+} from 'react-bootstrap';
+import { reduxForm } from 'redux-form';
+
+const validate = (values) => {
+  let errors = {};
+  let hasErrors = false;
+  if(!values.oldPassword || values.oldPassword.trim() === '') {
+    errors.oldPassword = 'Old password cannot be blank';
+    hasErrors = true;
+  }
+  if(!values.newPassword || values.newPassword.trim() === '') {
+    errors.newPassword = 'New password cannot be blank';
+    hasErrors = true;
+  } else {
+    
+  }
+
+  if(!values.repeatPassword || values.repeatPassword.trim() === '') {
+    errors.repeatPassword = 'Repeat password cannot be blank';
+    hasErrors = true;
+  }
+
+  return hasErrors && errors;
+}
 
 class FormChangePassword extends Component {
-  constructor(props, context) {
-    super(props, context);
-    
-    this.state = {
-      passwordToBeChanged: {},
-      errors: {}
-    };
-    
-    this.onChange = this.onChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
-  
-  onChange(e) {
-    let passwordToBeChanged = this.state.passwordToBeChanged;
-    passwordToBeChanged[e.target.name] = e.target.value;
-    this.setState({
-      passwordToBeChanged
-    });
-    
-    
-    if(e.target.name == 'oldPassword') {
-      if(e.target.value == '') {
-        let errors = this.state.errors;
-        errors['oldPassword'] = 'Cannot be blank';
-        this.setState({
-          errors
-        });
-      } else {
-        let errors = this.state.errors;
-        errors['oldPassword'] = undefined;
-        this.setState({
-          errors
-        });
-      }
-    } else if (e.target.name == 'newPassword') {
-      if(e.target.value == '') {
-        let errors = this.state.errors;
-        errors['newPassword'] = 'Cannot be blank';
-        this.setState({
-          errors
-        });
-      } if(e.target.value.length < 8) {
-        let errors = this.state.errors;
-        errors['newPassword'] = 'Password must be longer than 8 character';
-        this.setState({
-          errors
-        });
-      } else {
-        let errors = this.state.errors;
-        errors['newPassword'] = undefined;
-        this.setState({
-          errors
-        });
-      }
-    } else if (e.target.name == 'repeatNewPassword') {
-      if(e.target.value !== this.state.passwordToBeChanged.newPassword) {
-        let errors = this.state.errors;
-        errors['repeatNewPassword'] = 'Password does not match';
-        this.setState({
-          errors
-        });
-      } else {
-        let errors = this.state.errors;
-        errors['repeatNewPassword'] = undefined;
-        this.setState({
-          errors
-        });
-      }
-    }
-  }
-  
-  handleSubmit() {
-    const errors = this.state.errors;
-    if(errors.oldPassword || errors.newPassword || errors.repeatNewPassword) {
-      console.log('here');
-    } else {
-      let passwordToBeChanged = {
-        password: this.state.passwordToBeChanged.newPassword,
-        oldPassword: this.state.passwordToBeChanged.oldPassword
-      };
-      this.props.changePassword(passwordToBeChanged);
-    }
-  }
-  
   render() {
-    const { isSubmitting, response } = this.props.formStatus
+    const { fields: { oldPassword, newPassword, repeatPassword }, handleSubmit, submitting, formStatus} = this.props;
     return (
-      <form>
-        <FormGroup>
-          <ControlLabel>Old password</ControlLabel>
-          <FormControl
-            type="password"
-            name="oldPassword"
-            placeholder="Old password"
-            onChange={this.onChange}
-            />
-            <div className="has-error message">
-              <div className="help-block">
-                {this.state.errors['oldPassword']}
-              </div>
+      <div className="row">
+        <Col lg={3}>
+          <h4><strong>Change password</strong></h4>
+        </Col>
+        <Col lg={9}>
+          <form onSubmit={handleSubmit}>
+            <FormGroup className={`${oldPassword.touched && oldPassword.invalid ? 'has-error' : ''}`}>
+              <ControlLabel>Old password</ControlLabel>
+              <FormControl type="password" placeholder="Old password" {...oldPassword} />
+              <HelpBlock>{oldPassword.touched ? oldPassword.error: '' }</HelpBlock>
+            </FormGroup>
+            <FormGroup className={`${newPassword.touched && newPassword.invalid ? 'has-error' : ''}`}>
+              <ControlLabel>New password</ControlLabel>
+              <FormControl type="password" placeholder="New password" {...newPassword} />
+              <HelpBlock>{newPassword.touched ? newPassword.error: '' }</HelpBlock>
+            </FormGroup>
+            <FormGroup className={`${repeatPassword.touched && repeatPassword.invalid ? 'has-error' : ''}`}>
+              <ControlLabel>Repeat password</ControlLabel>
+              <FormControl type="password" placeholder="Repeat password" {...repeatPassword} />
+              <HelpBlock>{repeatPassword.touched ? repeatPassword.error: '' }</HelpBlock>
+            </FormGroup>
+            <div className ="form-actions">
+              {formStatus.response.status == 400 && <Alert bsStyle="danger">{formStatus.response.message}</Alert>}
+              {formStatus.response.status == 401 && <Alert bsStyle="danger">{formStatus.response.message}</Alert>}
+              <Button type="submit" bsStyle="warning" disabled={formStatus.isSubmitting}>
+                Change password
+              </Button>
             </div>
-        </FormGroup>
-        <FormGroup>
-          <ControlLabel>New password</ControlLabel>
-          <FormControl
-            type="password"
-            name="newPassword"
-            placeholder="New Password"
-            onChange={this.onChange}
-            />
-            <div className="has-error message">
-              <div className="help-block">
-                {this.state.errors['newPassword']}
-              </div>
-            </div>
-        </FormGroup>
-        <FormGroup>
-          <ControlLabel>Repeat new password</ControlLabel>
-          <FormControl
-            type="password"
-            name="repeatNewPassword"
-            placeholder="Repeat new password"
-            onChange={this.onChange}
-            />
-            <div className="has-error message">
-              <div className="help-block">
-                {this.state.errors['repeatNewPassword']}
-              </div>
-            </div>
-        </FormGroup>
-        <Button bsStyle="primary" onClick={this.handleSubmit} disabled={isSubmitting}>{isSubmitting ? '...Saving' : 'Save'}</Button>
-        <div>{response}</div>
-      </form>
-    );
+          </form>
+        </Col>
+      </div>
+    )
   }
 }
 
-export default FormChangePassword;
+
+export default reduxForm({
+  form: 'FormChangePassword',
+  fields: ['oldPassword', 'newPassword', 'repeatPassword'],
+  asyncBlurFields: ['oldPassword', 'newPassword', 'repeatPassword'],
+  validate
+}, null)(FormChangePassword);

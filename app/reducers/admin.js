@@ -28,7 +28,7 @@ const initialState = {
   },
   changePasswordFormStatus: {
     isSubmitting: false,
-    response: ''
+    response: {}
   }
 };
 
@@ -360,24 +360,23 @@ export const admin = (state = initialState, action) => {
           submitResult: response.message_code
         }
       });
-    case ActionTypes.ADMIN_CHANGE_PASSWORD_REQUEST:
+    case AdminActionTypes.ADMIN_CHANGE_PASSWORD_REQUEST:
       return _.merge({}, state, {
         changePasswordFormStatus: {
           isSubmitting: true
         }
       });
-    case ActionTypes.ADMIN_CHANGE_PASSWORD_SUCCESS:
+    case AdminActionTypes.ADMIN_CHANGE_PASSWORD_SUCCESS:
       return _.merge({}, state, {
         changePasswordFormStatus: {
-          isSubmitting: false,
-          response: ''
+          isSubmitting: false
         }
       });
-    case ActionTypes.ADMIN_CHANGE_PASSWORD_FAILURE:
+    case AdminActionTypes.ADMIN_CHANGE_PASSWORD_FAILURE:
       return _.merge({}, state, {
         changePasswordFormStatus: {
           isSubmitting: false,
-          response: 'Error happened'
+          response: action.error || ''
         }
       });
     default:

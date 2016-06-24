@@ -193,3 +193,12 @@ export const deleteShopItem = (shopID, itemID) => {
     return dispatch(requestDeleteShopItem(shopID, itemID))
   }
 };
+
+
+export const REMOVE_SHOP_ITEM_FROM_LIST = 'REMOVE_SHOP_ITEM_FROM_LIST';
+export const removeShopItemFromList = (itemID) => ({
+  type: REMOVE_SHOP_ITEM_FROM_LIST,
+  payload: {
+    itemID: itemID
+  }
+});

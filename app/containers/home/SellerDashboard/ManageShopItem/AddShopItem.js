@@ -3,7 +3,7 @@ import ManageShopItemForm from './ManageShopItemForm';
 import { connect } from 'react-redux';
 import { createShopItem } from 'app/actions/shop';
 import { getItemCategories } from 'app/actions/item';
-import { withRouter } from 'react-router'
+import { withRouter } from 'react-router';
 
 
 class AddShopItem extends Component {

@@ -9,7 +9,7 @@ const INITIAL_STATE = {
 };
 
 export const shop = (state = INITIAL_STATE, action) => {
-  const { type, response, error } = action;
+  const { type, response, error, payload } = action;
   switch (type) {
     case ShopActionTypes.SHOP_REQUEST_OPENING_SUCCESS:
       return _.assign({}, state, {
@@ -29,10 +29,15 @@ export const shop = (state = INITIAL_STATE, action) => {
         sellingItems: [...state.sellingItems, response]
       });
     case ShopActionTypes.SELLER_DELETE_SHOP_ITEM_SUCCESS:
-      console.log(response);
-      debugger;
       return _.assign({}, state, {
-
+        itemUpdated: true
+      });
+    case ShopActionTypes.REMOVE_SHOP_ITEM_FROM_LIST:
+      return _.assign({}, state, {
+        itemUpdated: false,
+        sellingItems: _.filter(state.sellingItems, (item) => {
+          return item.id !== payload.itemID
+        })
       });
     case ShopActionTypes.UPLOAD_SHOP_AVATAR_SUCCESS:
       const newAvatar = response.avatar ? getImageURLWithTimestamp(response.avatar) : '';

@@ -61,5 +61,14 @@ export default {
   'shopItem.quantity.validation.number': 'Quantity must be a number',
   'shopItem.price.validation.required': 'Please enter item price',
   'shopItem.price.validation.number': 'Price must be a number',
-  'shopItem.categoryId.validation.required': 'Please select category for item'
+  'shopItem.categoryId.validation.required': 'Please select category for item',
+  'shop.sellerInformation': 'Shop owner information',
+  'shop.form.validation.phone.required': 'Phone number required',
+  'shop.form.validation.identityNumber.required': 'Identity number required',
+  'common.form.validation.phone.number': 'Phone number must be numbers',
+  'shop.form.validation.shopName.required': 'Shop name required',
+  'shop.form.validation.description.required': 'Shop description required',
+  'shop.form.validation.address.required': 'Shop address required',
+  'shop.form.validation.identityPhoto.required': 'Please attach your identity photo',
+  'shop.form.validation.identityNumber.valid': 'Identity number length must be 9 or 12 digits'
 };

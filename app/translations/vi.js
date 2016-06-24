@@ -48,7 +48,7 @@ export default {
   'shopItem.photo.validation.required': 'Hãy thêm ảnh sản phẩm',
   'shopItem.photo.label': 'Hình ảnh',
   'shopItem.photo.description': 'Thêm ảnh',
-  'shopItem.description.label': 'Miêu tả',  
+  'shopItem.description.label': 'Miêu tả',
   'shopItem.description.placeholder': 'Miêu tả sản phẩm của bạn (tuỳ chọn)',
   'shopItem.quantity.label': 'Số lượng',
   'shopItem.quantity.placeholder': 'Số lượng hiện có (tuỳ chọn)',
@@ -61,5 +61,14 @@ export default {
   'shopItem.quantity.validation.number': 'Số lượng phải là số',
   'shopItem.price.validation.required': 'Hãy điền giá sản phẩm',
   'shopItem.price.validation.number': 'Giá phải là số',
-  'shopItem.categoryId.validation.required': 'Hãy chọn thể loại cho sản phẩm'
+  'shopItem.categoryId.validation.required': 'Hãy chọn thể loại cho sản phẩm',
+  'shop.sellerInformation': 'Thông tin chủ shop',
+  'shop.form.validation.phone.required': 'Hãy nhập số điện thoại',
+  'shop.form.validation.identityNumber.required': 'Hãy nhập số chứng minh thư',
+  'common.form.validation.phone.number': 'Số điện thoại phải là số',
+  'shop.form.validation.shopName.required': 'Hãy điền tên shop',
+  'shop.form.validation.description.required': 'Hãy điền miêu tả shop',
+  'shop.form.validation.address.required': 'Hãy điền địa chỉ shop',
+  'shop.form.validation.identityPhoto.required': 'Hãy tải lên ảnh chụp chứng minh thư',
+  'shop.form.validation.identityNumber.valid': 'Số chứng minh thư phải có độ dài là 9 hoặc 12'
 };

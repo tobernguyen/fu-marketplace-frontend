@@ -6,15 +6,24 @@ export const fields = [ 'phone', 'identityNumber', 'shopName', 'description', 'a
 const validate = values => {
   const errors = {};
   if (!values.shopName) {
-    errors.shopName = 'shop.form.validation.shopName.required';
+    errors.shopName = {
+      id: 'shop.form.validation.shopName.required',
+      defaultMessage: 'shop name is required'
+    };
   }
 
   if (!values.description) {
-    errors.description = 'shop.form.validation.description.required';
+    errors.description = {
+      id: 'shop.form.validation.description.required',
+      defaultMessage: 'shop description is required'
+    };
   }
 
   if (!values.address) {
-    errors.address = 'shop.form.validation.address.required';
+    errors.address = {
+      id: 'shop.form.validation.address.required',
+      defaultMessage: 'shop address is required'
+    };
   }
 
   return errors;

@@ -40,5 +40,10 @@ export const messages = {
       id: 'shop.form.verificationPhoto.note2',
       defaultMessage: 'Note 2'
     }
+  },
+  sellerInformation: {
+    id: 'shop.sellerInformation',
+    defaultMessage: 'seller information'
   }
+
 };

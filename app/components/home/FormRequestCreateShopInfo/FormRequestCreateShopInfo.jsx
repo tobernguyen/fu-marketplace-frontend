@@ -26,7 +26,7 @@ class FormRequestCreateShopInfo extends Component {
                  placeholder={formatMessage(messages.shopName.placeholder)}
             {...shopName} />
           <div className="help-block">
-            {shopName.touched ? shopName.error : ''}
+            {shopName.touched && shopName.error ? <FormattedMessage {...shopName.error} /> : ''}
           </div>
         </div>
 
@@ -39,7 +39,7 @@ class FormRequestCreateShopInfo extends Component {
             placeholder={formatMessage(messages.description.placeholder)}
           />
           <div className="help-block">
-            {description.touched ? description.error : ''}
+            {description.touched && description.error ? <FormattedMessage {...description.error} /> : ''}
           </div>
         </div>
 
@@ -53,7 +53,7 @@ class FormRequestCreateShopInfo extends Component {
             placeholder={formatMessage(messages.address.placeholder)}
             {...address} />
           <div className="help-block">
-            {address.touched ? address.error : ''}
+            {address.touched && address.error ? <FormattedMessage {...address.error} /> : ''}
           </div>
         </div>
 

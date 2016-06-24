@@ -41,7 +41,9 @@ class FormRequestCreateShopOwner extends Component {
     const { formatMessage } = this.props.intl;
     return (
       <form onSubmit={handleSubmit}>
-        <h4 className="page-header">Thông tin chủ shop</h4>
+        <h4 className="page-header">
+          <FormattedMessage {...messages.sellerInformation} />
+        </h4>
         <div className={`form-group ${phone.touched && phone.invalid ? 'has-error' : ''}`}>
           <label className="control-label">
             <FormattedMessage {...messages.phone.label} />
@@ -51,7 +53,7 @@ class FormRequestCreateShopOwner extends Component {
                  placeholder={formatMessage(messages.phone.placeholder)}
             {...phone} />
           <div className="help-block">
-            {phone.touched ? phone.error : ''}
+            {phone.touched && phone.error ? <FormattedMessage {...phone.error} /> : ''}
           </div>
         </div>
 
@@ -64,13 +66,10 @@ class FormRequestCreateShopOwner extends Component {
                  placeholder={formatMessage(messages.identityNumber.placeholder)}
             {...identityNumber} />
           <div className="help-block">
-            {identityNumber.touched ? identityNumber.error : ''}
+            {identityNumber.touched && identityNumber.error ? <FormattedMessage {...identityNumber.error} /> : ''}
           </div>
         </div>
         <div className={`form-group ${identityPhoto.touched && identityPhoto.invalid ? 'has-error' : ''}`}>
-          <div className="help-block">
-            {identityPhoto.touched ? identityPhoto.error : ''}
-          </div>
           <label>
             <FormattedMessage {...messages.verificationPhoto.label} />
           </label>
@@ -100,6 +99,9 @@ class FormRequestCreateShopOwner extends Component {
               <img className="img-responsive" src={identityPhoto.value}/>}
             </div>
           </Dropzone>
+          <div className="help-block">
+            {identityPhoto.touched && identityPhoto.error ? <FormattedMessage {...identityPhoto.error} /> : ''}
+          </div>
         </div>
         <div>
           <div className="form-group">

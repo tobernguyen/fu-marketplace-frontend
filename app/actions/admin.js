@@ -353,3 +353,22 @@ export const adminRejectRequest = (requestId, message) => {
     return dispatch(adminRequestRejectRequest(requestId, message));
   }
 };
+
+export const ADMIN_CHANGE_PASSWORD_REQUEST = 'ADMIN_CHANGE_PASSWORD_REQUEST';
+export const ADMIN_CHANGE_PASSWORD_SUCCESS = 'ADMIN_CHANGE_PASSWORD_SUCCESS';
+export const ADMIN_CHANGE_PASSWORD_FAILURE = 'ADMIN_CHANGE_PASSWORD_FAILURE';
+
+const adminRequestChangePassword = (passwordToBeChanged) => ({
+  [CALL_API]: {
+    types: [ADMIN_CHANGE_PASSWORD_REQUEST, ADMIN_CHANGE_PASSWORD_SUCCESS, ADMIN_CHANGE_PASSWORD_FAILURE],
+    url: '/api/v1/admin/changePassword',
+    method: HTTP_METHODS.POST,
+    params: passwordToBeChanged
+  }
+});
+
+export const adminChangePassword = (passwordToBeChanged) => {
+  return (dispatch) => {
+    return dispatch(adminRequestChangePassword(passwordToBeChanged))
+  }
+};

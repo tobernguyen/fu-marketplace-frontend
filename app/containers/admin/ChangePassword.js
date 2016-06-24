@@ -1,14 +1,29 @@
 import React, { Component, PropTypes } from 'react';
 import FormChangePassword from 'app/components/admin/FormChangePassword';
-import { adminChangePassword } from 'app/actions';
+import { adminChangePassword } from 'app/actions/admin';
 import { connect } from 'react-redux';
 
-class ChangePassword extends Component {  
+class ChangePassword extends Component {
+  constructor(props) {
+    super(props);
+
+    this.handleChangePassword = this.handleChangePassword.bind(this);
+  }
+
+  handleChangePassword(formData) {
+    const passwordToBeChanged = {
+      password: formData.newPassword,
+      oldPassword: formData.oldPassword
+    };
+
+    this.props.adminChangePassword(passwordToBeChanged);
+  }
+
   render() {
     return (
-      <div className="dashboard">
+      <div className="container-fluid">
         <FormChangePassword
-          changePassword={this.props.adminChangePassword}
+          onSubmit={this.handleChangePassword}
           formStatus={this.props.admin.changePasswordFormStatus}
           />
       </div>

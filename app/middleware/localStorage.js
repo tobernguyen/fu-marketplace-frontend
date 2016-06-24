@@ -1,4 +1,5 @@
 import * as ActionTypes from '../actions';
+import * as AdminActionTypes from '../actions/admin';
 import { accessTokenKey, adminAccessTokenKey, languageKey } from 'app/config';
 
 export default store => next => action => {
@@ -20,7 +21,7 @@ export default store => next => action => {
     case ActionTypes.ADMIN_SIGN_OUT:
       window.localStorage.removeItem(adminAccessTokenKey);
       break;
-    case ActionTypes.ADMIN_CHANGE_PASSWORD_SUCCESS:
+    case AdminActionTypes.ADMIN_CHANGE_PASSWORD_SUCCESS:
       window.localStorage.removeItem(adminAccessTokenKey);
       break;
     case ActionTypes.CHANGE_LANGUAGE:

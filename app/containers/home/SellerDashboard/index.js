@@ -6,6 +6,7 @@ import BlockSellerDashboardSideBar from 'app/components/home/BlockSellerDashboar
 import SellingItemList from '../SellingItemList';
 import { Modal } from 'react-bootstrap';
 import { uploadShopAvatar, uploadShopCover, getSellerShop, updateShopInfo } from 'app/actions/shop';
+import Sticky from 'react-stickynode';
 
 
 class SellerDashboard extends Component {
@@ -58,9 +59,11 @@ class SellerDashboard extends Component {
             </div>
           </div>
           <div className="col-md-3">
+            <Sticky enabled={true} top={60}>
             <BlockSellerDashboardSideBar sellerShop={this.props.sellerShop}
                                          shopInfoChanged={this.handleShopInfoChanged}
                                          shopID={this.state.shopID} />
+            </Sticky>
           </div>
         </div>
 

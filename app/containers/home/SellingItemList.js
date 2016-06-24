@@ -7,13 +7,17 @@ class SellingItemList extends Component {
   constructor(props) {
     super(props);
 
-    this.props.getSellerShopItems(this.props.shopID);
+    if (this.props.shopID) {
+      this.props.getSellerShopItems(this.props.shopID);
+    }
   }
-
 
   render() {
     return (
-      <BlockSellingItemList items={this.props.sellingItems} shopID={this.props.shopID} />
+      <BlockSellingItemList
+        items={this.props.sellingItems}
+        shopID={this.props.shopID}
+        sellerMode={this.props.sellerMode} />
     )
   }
 }
@@ -25,6 +29,9 @@ const mapStateToProps = (state) => {
   }
 };
 
+SellingItemList.propTypes = {
+  sellerMode: PropTypes.bool.isRequired
+};
 
 export default connect(mapStateToProps, {
   getSellerShopItems

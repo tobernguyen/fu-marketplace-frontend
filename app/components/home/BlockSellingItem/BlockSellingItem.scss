@@ -4,6 +4,13 @@
     a {
       display: block;
     }
+    .item-image {
+      img {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+    }
 
     .info {
       border: 1px solid #eee;

@@ -8,14 +8,15 @@ export default class BlockShopHeader extends Component {
   constructor(props) {
     super(props);
 
-    const { sellerShop: { avatar, cover } } = props;
+    const { shop: { avatar, cover }, sellerMode } = props;
 
     this.state = {
       modalCropImageShown: false,
       image: null,
       shopAvatar: avatar,
       shopCover: cover,
-      error: null
+      error: null,
+      sellerMode: sellerMode
     };
 
     this.handleRequestHide = () => {
@@ -72,8 +73,8 @@ export default class BlockShopHeader extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.sellerShop) {
-      let shopAvatar = nextProps.sellerShop.avatar || '';
+    if (nextProps.shop && this.state.sellerMode) {
+      let shopAvatar = nextProps.shop.avatar || '';
       if (shopAvatar !== this.state.shopAvatar) {
         this.setState({
           userAvatar: shopAvatar,
@@ -81,7 +82,7 @@ export default class BlockShopHeader extends Component {
         });
       }
 
-      let shopCover = nextProps.sellerShop.cover || '';
+      let shopCover = nextProps.shop.cover || '';
       if (shopCover !== this.state.shopCover) {
         this.setState({
           shopCover: shopCover
@@ -91,7 +92,7 @@ export default class BlockShopHeader extends Component {
   }
 
   render() {
-    const { sellerShop: { address, avatar, cover, description, name, opening } } = this.props;
+    const { shop: { address, avatar, cover, description, name, opening }, sellerMode } = this.props;
     return (
       <div className="block-shop-header clearfix">
         <div className="shop-cover">
@@ -100,7 +101,7 @@ export default class BlockShopHeader extends Component {
             <div className="shop-avatar-wrapper row">
               <div className="col-sm-3 shop-avatar">
                 <img src={avatar}/>
-                <div className="upload-avatar">
+                {sellerMode && <div className="upload-avatar">
                   <Dropzone ref="dropzoneAvatar"
                             onDrop={this.onAvatarChange}
                             className="file-select"
@@ -108,7 +109,7 @@ export default class BlockShopHeader extends Component {
                             accept="image/*">
                     <i className="fa fa-camera"/> Update avatar
                   </Dropzone>
-                </div>
+                </div>}
               </div>
             </div>
           </div>
@@ -138,7 +139,7 @@ export default class BlockShopHeader extends Component {
             <span>{this.state.error}</span>
           </div>
           }
-          <div className="update-cover">
+          {sellerMode && <div className="update-cover">
             <Dropzone ref="dropzoneCover"
                       onDrop={this.onCoverChange}
                       className="file-upload"
@@ -147,6 +148,8 @@ export default class BlockShopHeader extends Component {
               <i className="fa fa-magic"/> Update cover
             </Dropzone>
           </div>
+          }
+
         </div>
         {this.state.modalCropImageShown &&
         <ModalCropImage
@@ -164,7 +167,6 @@ export default class BlockShopHeader extends Component {
 
 
 BlockShopHeader.propTypes = {
-  sellerShop: PropTypes.object.isRequired,
-  uploadShopAvatar: PropTypes.func.isRequired,
-  uploadShopCover: PropTypes.func.isRequired
+  shop: PropTypes.object.isRequired,
+  sellerMode: PropTypes.bool.isRequired
 };

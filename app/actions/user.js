@@ -52,9 +52,27 @@ const requestUploadAvatar = (formFileData) => ({
   }
 });
 
+
 // Relies on Redux Thunk middleware.
 export const uploadAvatar = (formFileData) => {
-  return (dispatch, getState) => {
+  return (dispatch) => {
     return dispatch(requestUploadAvatar(formFileData))
+  }
+};
+
+export const USER_GET_SHOP_REQUEST = 'USER_GET_SHOP_REQUEST';
+export const USER_GET_SHOP_SUCCESS = 'USER_GET_SHOP_SUCCESS';
+export const USER_GET_SHOP_FAILURE = 'USER_GET_SHOP_FAILURE';
+const requestGetUserShop = (shopID) => ({
+  [CALL_API]: {
+    types: [USER_GET_SHOP_REQUEST, USER_GET_SHOP_SUCCESS, USER_GET_SHOP_FAILURE],
+    url: `/api/v1/shops/${shopID}`,
+    method: HTTP_METHODS.GET
+  }
+});
+
+export const getUserShop = (shopID) => {
+  return (dispatch) => {
+    return dispatch(requestGetUserShop(shopID))
   }
 };

@@ -5,7 +5,7 @@ import './BlockSellingItem.scss';
 
 export default class BlockSellingItem extends Component {
   render() {
-    const { item, shopID } = this.props;
+    const { item, shopID, sellerMode } = this.props;
     const tooltip = (
       item.description ? <Tooltip id="tooltip">{item.description}</Tooltip> : <span/>
     );
@@ -15,7 +15,7 @@ export default class BlockSellingItem extends Component {
         <OverlayTrigger placement="top" overlay={tooltip}>
         <div className="row item">
           <Link to={updateURL} className="item-image">
-            <img className="img-responsive" src={item.image} />
+            <img src={item.image} />
           </Link>
           <div className="info">
             <Link to={updateURL} className="name">
@@ -32,5 +32,6 @@ export default class BlockSellingItem extends Component {
 
 
 BlockSellingItem.propTypes = {
-  item: PropTypes.object.isRequired
+  item: PropTypes.object.isRequired,
+  sellerMode: PropTypes.bool.isRequired
 };

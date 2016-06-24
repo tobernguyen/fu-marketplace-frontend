@@ -22,7 +22,7 @@ export default class BlockShopFeedItem extends Component {
       <div className="block row block-shop-feed-item">
         <div className="col-md-3 col-sm-4">
           <div className="row thumbnail">
-            <Link to='shops/1'>
+            <Link to='shops/9'>
               <img
                 onMouseMove={this.handleMouseMove}
                 onMouseLeave={this.handleMouseLeave}

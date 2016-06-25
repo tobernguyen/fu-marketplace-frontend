@@ -5,7 +5,10 @@ import { getImageURLWithTimestamp } from 'app/helpers/image';
 const INITIAL_STATE = {
   shopOpeningRequests: [],
   sellerShop: {},
-  sellingItems: []
+  sellingItems: [],
+  toBeUpdatedItem: null,
+  newlyItemAdded: false,
+  itemUpdated: false
 };
 
 export const shop = (state = INITIAL_STATE, action) => {
@@ -26,15 +29,35 @@ export const shop = (state = INITIAL_STATE, action) => {
       });
     case ShopActionTypes.SHOP_CREATE_ITEM_SUCCESS:
       return _.assign({}, state, {
-        sellingItems: [...state.sellingItems, response]
+        sellingItems: [...state.sellingItems, response],
+        newlyItemAdded: true
+      });
+    case ShopActionTypes.SELLER_UPDATE_SHOP_ITEM_SUCCESS:
+      const { sellingItems } = state;
+      const updatedItemIndex = _.findIndex(sellingItems, (p => {
+        return p.id === response.id
+      }));
+
+      return _.assign({}, state, {
+        sellingItems: _.concat(
+          _.slice(sellingItems, 0, updatedItemIndex),
+          response,
+          _.slice(sellingItems, updatedItemIndex + 1, sellingItems.length)
+        ),
+        itemUpdated: true
+      });
+    case ShopActionTypes.RESET_UPDATED_ITEM_STATUS:
+      return _.assign({}, state, {
+        newlyItemAdded: false,
+        itemUpdated: false
       });
     case ShopActionTypes.SELLER_DELETE_SHOP_ITEM_SUCCESS:
       return _.assign({}, state, {
-        itemUpdated: true
+        itemDeleted: true
       });
     case ShopActionTypes.REMOVE_SHOP_ITEM_FROM_LIST:
       return _.assign({}, state, {
-        itemUpdated: false,
+        itemDeleted: false,
         sellingItems: _.filter(state.sellingItems, (item) => {
           return item.id !== payload.itemID
         })
@@ -62,6 +85,10 @@ export const shop = (state = INITIAL_STATE, action) => {
         return _.assign({}, state, {
           error: error
         });
+    case ShopActionTypes.SET_TO_BE_UPDATED_ITEM:
+      return _.merge({}, state, {
+        toBeUpdatedItem: payload.toBeUpdatedItem
+      });
     default:
       return state;
   }

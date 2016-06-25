@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import ManageShopItemForm from './ManageShopItemForm';
 import { connect } from 'react-redux';
-import { createShopItem } from 'app/actions/shop';
+import { createShopItem, resetUpdatedItemStatus } from 'app/actions/shop';
 import { getItemCategories } from 'app/actions/item';
 import { withRouter } from 'react-router';
 
@@ -9,10 +9,6 @@ import { withRouter } from 'react-router';
 class AddShopItem extends Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      totalItems: 0
-    };
 
     this.handleAddShopItem = (formValues) => {
       this.props.createShopItem(formValues, this.props.params.shopID);
@@ -24,13 +20,9 @@ class AddShopItem extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.sellingItems) {
-      if (nextProps.sellingItems.length > this.state.totalItems) {
-        this.setState({
-          totalItems: nextProps.sellingItems.length
-        });
-        this.props.router.push(`/shops/${this.props.params.shopID}/dashboard`);
-      }
+    if (nextProps.newlyItemAdded) {
+      this.props.router.push(`/shops/${this.props.params.shopID}/dashboard`);
+      this.props.resetUpdatedItemStatus();
     }
   }
 
@@ -44,11 +36,13 @@ class AddShopItem extends Component {
 const mapStateToProps = (state) => {
   const { shop } = state;
   return {
+    newlyItemAdded: shop.newlyItemAdded,
     sellingItems: shop.sellingItems
   }
 };
 
 export default withRouter(connect(mapStateToProps, {
   createShopItem,
-  getItemCategories
+  getItemCategories,
+  resetUpdatedItemStatus
 })(AddShopItem))

@@ -20,11 +20,21 @@ class FormManageShopItem extends Component {
       itemCategories,
       updateMode,
       onDelete,
-      fields: { name, description, quantity, price, categoryId, imageData },
+      oldItemImage,
+      fields: { id, name, description, quantity, price, categoryId, imageData },
       handleSubmit,
       submitting,
       dirty,
       invalid } = this.props;
+
+
+    let itemImage = null;
+    if (imageData.value instanceof File) {
+      itemImage = imageData.value.preview;
+    } else if (updateMode && typeof oldItemImage === 'string') {
+      itemImage = oldItemImage.replace('-small', '');
+    }
+
     const { formatMessage } = this.props.intl;
     return (
       <div className="form-manage-shop-item">
@@ -34,6 +44,7 @@ class FormManageShopItem extends Component {
         />
         <Modal.Body className="clearfix">
           <form onSubmit={handleSubmit} className="form-horizontal">
+            {updateMode && <input type="hidden" {...id} />}
             <div className={`form-group ${name.touched && name.invalid ? 'has-error' : ''}`}>
               <label className="col-sm-3 control-label">
                 <FormattedMessage {...messages.shopItem.name.label} />
@@ -120,8 +131,8 @@ class FormManageShopItem extends Component {
                   multiple={false}
                   accept="image/*">
                   <div>
-                    {imageData.value ?
-                    <img className="img-responsive" src={imageData.value.preview} /> : <span><FormattedMessage {...messages.shopItem.photo.description} /></span>}
+                    {itemImage ?
+                    <img className="img-responsive" src={itemImage} /> : <span><FormattedMessage {...messages.shopItem.photo.description} /></span>}
                   </div>
                 </Dropzone>
                 <div className="help-block">
@@ -129,7 +140,6 @@ class FormManageShopItem extends Component {
                 </div>
               </div>
             </div>
-
             <div className="row">
               <div className="col-sm-9 col-sm-offset-3">
                 <ButtonToolbar>

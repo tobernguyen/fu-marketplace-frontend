@@ -194,6 +194,41 @@ export const deleteShopItem = (shopID, itemID) => {
   }
 };
 
+export const SELLER_UPDATE_SHOP_ITEM_REQUEST = 'SELLER_UPDATE_SHOP_ITEM_REQUEST';
+export const SELLER_UPDATE_SHOP_ITEM_SUCCESS = 'SELLER_UPDATE_SHOP_ITEM_SUCCESS';
+export const SELLER_UPDATE_SHOP_ITEM_FAILURE = 'SELLER_UPDATE_SHOP_ITEM_FAILURE';
+const requestUpdateShopItem = (shopID, itemID, formShopItem) => ({
+  [CALL_API]: {
+    types: [SELLER_UPDATE_SHOP_ITEM_REQUEST, SELLER_UPDATE_SHOP_ITEM_SUCCESS, SELLER_UPDATE_SHOP_ITEM_FAILURE],
+    url: `/api/v1/seller/shops/${shopID}/items/${itemID}`,
+    method: HTTP_METHODS.PUT,
+    params: formShopItem
+  }
+});
+
+export const updateShopItem = (shopID, itemID, formValues) => {
+  const { name, description, quantity, price, imageData, categoryId } = formValues;
+  const formShopItem = new FormData();
+  formShopItem.append('name', name);
+  formShopItem.append('price', price);
+  formShopItem.append('categoryId', categoryId);
+  formShopItem.append('sort', 1);
+
+  if (description) {
+    formShopItem.append('description', description);
+  }
+  if (quantity) {
+    formShopItem.append('quantity', quantity);
+  }
+  if (imageData) {
+    formShopItem.append('imageFile', imageData);
+  }
+
+  return (dispatch) => {
+    return dispatch(requestUpdateShopItem(shopID, itemID, formShopItem))
+  }
+};
+
 
 export const REMOVE_SHOP_ITEM_FROM_LIST = 'REMOVE_SHOP_ITEM_FROM_LIST';
 export const removeShopItemFromList = (itemID) => ({
@@ -201,4 +236,19 @@ export const removeShopItemFromList = (itemID) => ({
   payload: {
     itemID: itemID
   }
+});
+
+
+export const SET_TO_BE_UPDATED_ITEM = 'SET_TO_BE_UPDATED_ITEM';
+export const setToBeUpdatedItem = (item) => ({
+  type: SET_TO_BE_UPDATED_ITEM,
+  payload: {
+    toBeUpdatedItem: item
+  }
+});
+
+
+export const RESET_UPDATED_ITEM_STATUS = 'RESET_UPDATED_ITEM_STATUS';
+export const resetUpdatedItemStatus = () => ({
+  type: RESET_UPDATED_ITEM_STATUS
 });

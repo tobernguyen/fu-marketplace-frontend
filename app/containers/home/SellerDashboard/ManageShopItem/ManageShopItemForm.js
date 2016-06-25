@@ -1,9 +1,9 @@
 import { reduxForm } from 'redux-form';
 import FormManageShopItem from 'app/components/home/FormManageShopItem';
 
-export const fields = [ 'name', 'description', 'quantity', 'price', 'imageData', 'categoryId' ];
+export const fields = [ 'id', 'name', 'description', 'quantity', 'price', 'imageData', 'categoryId' ];
 
-const validate = values => {
+const validate = (values, props) => {
   const errors = {};
 
   if (!values.name) {
@@ -34,7 +34,7 @@ const validate = values => {
     };
   }
 
-  if (!values.imageData) {
+  if (!props.updateMode && !values.imageData) {
     errors.imageData = {
       id: 'shopItem.photo.validation.required',
       defaultMessage: 'photo required'
@@ -51,11 +51,29 @@ const validate = values => {
   return errors;
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, ownProps) => {
+
   const { item } = state;
-  return {
+
+  let newState = {
     itemCategories: item.categories
+  };
+
+  if (ownProps.updateMode) {
+    const { shop: { toBeUpdatedItem } } = state;
+    const { id, name, description, price, quantity, categoryId, image } = toBeUpdatedItem || {};
+    newState.oldItemImage = image;
+    newState.initialValues = {
+      id: id || '',
+      name: name || '',
+      description: description  || '',
+      quantity: quantity  || '',
+      price: price  || '',
+      categoryId: categoryId || undefined
+    }
   }
+
+  return newState;
 };
 
 export default reduxForm({

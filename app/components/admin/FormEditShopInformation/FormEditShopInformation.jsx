@@ -25,6 +25,10 @@ const validate = (values) => {
 class FormEditShopInformation extends Component {
   render() {
     const { fields: { name, description, address }, handleSubmit, submitting, submitResult , seller} = this.props;
+    let sellerName = '';
+    if(seller) {
+      sellerName = seller.fullName;
+    }
     return (
       <div className="row">
         <Col lg={3}>
@@ -36,7 +40,7 @@ class FormEditShopInformation extends Component {
             <FormGroup>
               <ControlLabel>Owner</ControlLabel>
               <FormControl.Static>
-                {seller.fullName}
+                {sellerName}
               </FormControl.Static>
             </FormGroup>
             <FormGroup

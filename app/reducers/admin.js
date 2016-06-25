@@ -1,5 +1,5 @@
-import * as ActionTypes from '../actions';
 import * as AdminActionTypes from '../actions/admin';
+import * as CommonActionTypes from '../actions/common';
 import AsyncResultCode from 'app/shared/asyncResultCodes';
 import _ from 'lodash';
 
@@ -17,7 +17,8 @@ const initialState = {
     shopList: [],
     selectedShop: {},
     isSubmitting: false,
-    submitResult: ''
+    submitResult: '',
+    availableShipPlaces: []
   },
   requestManagement: {
     isFetching: false,
@@ -377,6 +378,12 @@ export const admin = (state = initialState, action) => {
         changePasswordFormStatus: {
           isSubmitting: false,
           response: action.error || ''
+        }
+      });
+    case CommonActionTypes.GET_SHIP_PLACES_SUCCESS:
+      return _.merge({}, state, {
+        shopManagement: {
+          availableShipPlaces: response.shipPlaces
         }
       });
     default:

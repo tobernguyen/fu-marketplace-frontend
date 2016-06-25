@@ -42,6 +42,11 @@ class SideBar extends Component {
               <Link to="admin" className={shortTitleClass}>FU Marketplace</Link>
             </li>
             <li>
+              <Link to="admin/dashboard" activeClassName="active">
+                <i className="fa fa-th-large" /><span>Dashboard</span>
+              </Link>
+            </li>
+            <li>
               <Link to="admin/users" activeClassName="active">
                 <i className="fa fa-users" /><span>User Management</span>
               </Link>

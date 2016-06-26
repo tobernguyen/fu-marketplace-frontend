@@ -15,7 +15,7 @@ export default class BlockItemList extends Component {
             <li key={category.id } className="item">
               <a href="#">
                 <span>{category.name}</span>
-                <div>{category.description || 'Chưa có gì cả...'}</div>
+                <div>25 shops, 98 items</div>
               </a>
             </li>
           )}

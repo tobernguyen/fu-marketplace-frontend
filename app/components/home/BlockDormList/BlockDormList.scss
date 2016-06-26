@@ -3,17 +3,18 @@
     border-bottom: 0;
   }
   .body {
-    ul.dorm-list {
-      li {
-        float: left;
-        width: 25%;
-        padding: 2px;
-        a {
-          text-align: center;
-          font-weight: 700;
-          color: #666;
-          border: 2px dashed #CCC;
-        }
+    .tag-list .btn{
+      margin:2px;
+      color: #666;
+      border: 1px dashed #CCC;
+      padding: 5px;
+
+      .badge {
+        background-color: #666;
+      }
+
+      &:hover {
+        background-color: #EEEEEE;
       }
     }
   }

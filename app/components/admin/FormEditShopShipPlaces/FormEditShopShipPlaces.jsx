@@ -11,33 +11,6 @@ import {
 import _ from 'lodash';
 import AsyncResultCode from 'app/shared/asyncResultCodes';
 
-const shipPlaces = [
-    {
-      id: 1,
-      name: "Dom A"
-    },
-    {
-      id: 2,
-      name: "Dom B"
-    },
-    {
-      id: 3,
-      name: "Dom C"
-    },
-    {
-      id: 4,
-      name: "Dom D"
-    },
-    {
-      id: 5,
-      name: "Dom E"
-    },
-    {
-      id: 6,
-      name: "Dom F"
-    }
-];
-
 class FormEditShopShipPlaces extends React.Component {
   constructor(props) {
     super(props);
@@ -117,7 +90,7 @@ class FormEditShopShipPlaces extends React.Component {
           </FormGroup>
           <FormGroup>
             <ControlLabel>Ship places</ControlLabel>
-            {shipPlaces.map(shipPlace =>
+            {this.props.availableShipPlaces.map(shipPlace =>
             <Checkbox
               key={shipPlace.id}
               value={shipPlace.id}

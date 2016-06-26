@@ -3,6 +3,8 @@ import './BlockShopHeader.scss';
 import  ModalCropImage from '../ModalCropImage';
 import Dropzone from 'react-dropzone';
 import classNames from 'classnames';
+import { messages } from './BlockShopHeader.i18n';
+import { FormattedMessage } from 'react-intl';
 
 export default class BlockShopHeader extends Component {
   constructor(props) {
@@ -59,7 +61,7 @@ export default class BlockShopHeader extends Component {
         image.onload = () => {
           if (image.width < 850 || image.height < 250) {
             this.setState({
-              error: 'Please choose an image that\'s at least 850 pixels wide and at least 250 pixels tall.'
+              error: messages.updateCoverWarning
             })
           } else {
             this.props.uploadShopCover(imageData.target.result);
@@ -107,7 +109,7 @@ export default class BlockShopHeader extends Component {
                             className="file-select"
                             multiple={false}
                             accept="image/*">
-                    <i className="fa fa-camera"/> Update avatar
+                    <i className="fa fa-camera"/> <FormattedMessage {...messages.updateAvatar} />
                   </Dropzone>
                 </div>}
               </div>
@@ -136,7 +138,9 @@ export default class BlockShopHeader extends Component {
             </div>
           </div>
           {this.state.error && <div className="status-message">
-            <span>{this.state.error}</span>
+            <span>
+              <FormattedMessage {...this.state.error} />
+            </span>
           </div>
           }
           {sellerMode && <div className="update-cover">
@@ -145,7 +149,7 @@ export default class BlockShopHeader extends Component {
                       className="file-upload"
                       multiple={false}
                       accept="image/*">
-              <i className="fa fa-magic"/> Update cover
+              <i className="fa fa-magic"/> <FormattedMessage {...messages.updateCover} />
             </Dropzone>
           </div>
           }

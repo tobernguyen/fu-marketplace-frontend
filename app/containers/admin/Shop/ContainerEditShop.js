@@ -13,6 +13,7 @@ import {
   adminUpdateShopCover,
   adminUpdateShopShipPlaces
 } from 'app/actions/admin';
+import { getShipPlaces } from 'app/actions/common';
 import LoadingSpinner from 'app/components/admin/LoadingSpinner';
 
 class ContainerEditShop extends Component {
@@ -58,6 +59,7 @@ class ContainerEditShop extends Component {
   }
   
   componentWillMount() {
+    this.props.getShipPlaces();
     this.props.adminGetShop(this.props.params.shopId);
   }
   render() {
@@ -82,6 +84,7 @@ class ContainerEditShop extends Component {
           submitShipPlaces={this.handleSubmitShipPlaces}
           submitResult={shopManagement.submitResult}
           isSubmitting={shopManagement.isSubmitting}
+          availableShipPlaces = {shopManagement.availableShipPlaces}
         />
         <hr />
         <FormEditShopAvatarAndCover
@@ -121,6 +124,7 @@ export default connect(mapStateToProps, {
   adminUnbanShop,
   adminUpdateShopAvatar,
   adminUpdateShopCover,
-  adminUpdateShopShipPlaces
+  adminUpdateShopShipPlaces,
+  getShipPlaces
 })(ContainerEditShop);
 

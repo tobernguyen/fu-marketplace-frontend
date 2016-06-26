@@ -3,6 +3,7 @@ import './BlockDormList.scss';
 
 export default class BlockDormList extends Component {
   render() {
+    const { shipPlaces } = this.props;
     return (
       <div className="block-dorm-list block">
         <h3 className="title">
@@ -10,12 +11,9 @@ export default class BlockDormList extends Component {
         </h3>
         <div className="clearfix body">
           <ul className="nav dorm-list">
-            <li><a href="#">A</a></li>
-            <li><a href="#">B</a></li>
-            <li><a href="#">C</a></li>
-            <li><a href="#">D</a></li>
-            <li><a href="#">E</a></li>
-            <li><a href="#">F</a></li>
+            {shipPlaces.map(shipPlace =>
+            <li key={shipPlace.id}><a href="#">{shipPlace.name.replace('Dom ', '')}</a></li>
+            )}
             <li><a href="#">ALL</a></li>
           </ul>
         </div>

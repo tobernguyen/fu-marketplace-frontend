@@ -38,6 +38,13 @@
         }
       }
 
+      li.active {
+        a {
+          color: #FFF;
+          background-color: $dark-color;
+        }
+      }
+
       a {
         color: #222222;
       }

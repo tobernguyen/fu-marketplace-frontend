@@ -24,6 +24,7 @@ class FormResponseToRequest extends React.Component {
     
     this.handleOnChange = this.handleOnChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.renderResponseForm = this.renderResponseForm.bind(this);
   }
   
   componentWillMount() {
@@ -45,11 +46,71 @@ class FormResponseToRequest extends React.Component {
   
   handleSubmit() {
     const { responseType, responseMessage } = this.state.responseToBeSent;
-    const { id } = this.state.request;
+    let { request } = this.state;
     if(responseType === 'accept' ) {
-      this.props.acceptRequest(id, responseMessage);
+      this.props.acceptRequest(request.id, responseMessage);
+      request.status = 2;
+      this.setState({
+        request
+      });
     } else if (responseType === 'reject') {
-      this.props.rejectRequest(id, responseMessage);
+      this.props.rejectRequest(request.id, responseMessage);
+      request.status = 1;
+      this.setState({
+        request
+      });
+    }
+  }
+  renderResponseForm() {
+    const { isSubmitting, submitResult } = this.props;
+    const { request } = this.state;
+    if(request.status === 0) {
+      return (
+        <Col lg={9}>
+          <FormGroup>
+            <ControlLabel>Response type</ControlLabel>
+            <FormControl
+              name="responseType"
+              componentClass="select"
+              placeholder="Response type"
+              onChange={this.handleOnChange}>
+              <option value="accept">Accept</option>
+              <option value="reject">Reject</option>
+            </FormControl>
+          </FormGroup>
+          <FormGroup>
+            <ControlLabel>Message</ControlLabel>
+            <FormControl
+              name="responseMessage"
+              componentClass="textarea"
+              placeholder="Response message"
+              onChange={this.handleOnChange}
+              />
+          </FormGroup>
+          <div className="form-actions">
+            {submitResult === 'OK' && <Alert bsStyle="success">Response submitted</Alert>}
+            {submitResult === AsyncResultCode.NOT_A_PENDING_REQUEST && <Alert bsStyle="danger">Error! Request is not a pending request</Alert>}
+            <Button
+              bsStyle="warning"
+              onClick={this.handleSubmit}
+              disabled={isSubmitting}>
+              Submit response
+              </Button>
+          </div>
+        </Col>
+      );
+    } else if(request.status === 2) {
+      return (
+        <Col lg={9}>
+          <h5>Request is accepted</h5>
+        </Col>
+      );
+    } else if(request.status === 1) {
+      return (
+        <Col lg={9}>
+          <h5>Request is rejected</h5>
+        </Col>
+      );
     }
   }
   render() {
@@ -83,12 +144,6 @@ class FormResponseToRequest extends React.Component {
                 <ControlLabel>Address</ControlLabel>
                 <FormControl.Static>
                   {request.address}
-                </FormControl.Static>
-              </FormGroup>
-              <FormGroup>
-                <ControlLabel>Status</ControlLabel>
-                <FormControl.Static>
-                  {request.status}
                 </FormControl.Static>
               </FormGroup>
             </Col>
@@ -141,38 +196,7 @@ class FormResponseToRequest extends React.Component {
             <Col lg={3}>
               <h4 className="role-title"><strong>Response</strong></h4>
             </Col>
-            <Col lg={9}>
-              <FormGroup>
-                <ControlLabel>Response type</ControlLabel>
-                <FormControl
-                  name="responseType"
-                  componentClass="select"
-                  placeholder="Response type"
-                  onChange={this.handleOnChange}>
-                  <option value="accept">Accept</option>
-                  <option value="reject">Reject</option>
-                </FormControl>
-              </FormGroup>
-              <FormGroup>
-                <ControlLabel>Message</ControlLabel>
-                <FormControl
-                  name="responseMessage"
-                  componentClass="textarea"
-                  placeholder="Response message"
-                  onChange={this.handleOnChange}
-                  />
-              </FormGroup>
-              <div className="form-actions">
-                {submitResult === 'OK' && <Alert bsStyle="success">Response submitted</Alert>}
-                {submitResult === AsyncResultCode.NOT_A_PENDING_REQUEST && <Alert bsStyle="danger">Error! Request is not a pending request</Alert>}
-                <Button
-                  bsStyle="warning"
-                  onClick={this.handleSubmit}
-                  disabled={isSubmitting}>
-                  Submit response
-                  </Button>
-              </div>
-            </Col>
+            {this.renderResponseForm()}
           </div>
         </div>
       );

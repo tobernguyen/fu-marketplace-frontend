@@ -6,7 +6,7 @@ import LoadingSpinner from 'app/components/admin/LoadingSpinner';
 
 class ContainerListRequest extends Component {
   componentWillMount() {
-    this.props.adminGetRequests('');
+    this.props.adminGetRequests('?showAll=true');
   }
   
   render() {

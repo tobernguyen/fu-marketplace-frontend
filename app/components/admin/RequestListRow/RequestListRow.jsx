@@ -9,7 +9,11 @@ export default class RequestListRow extends Component {
         <td>{this.props.request.name}</td>
         <td>{this.props.request.ownerId}</td>
         <td>{this.props.request.not}</td>
-        <td>{this.props.request.status}</td>
+        <td>
+          {this.props.request.status == 0 && 'Pending'}
+          {this.props.request.status == 1 && 'Rejected'}
+          {this.props.request.status == 2 && 'Accepted'}
+        </td>
         <td className="actions">
           <Link to={`/admin/requests/${this.props.request.id}/view`} className="btn btn-warning">
             <i className="fa fa-eye"></i>

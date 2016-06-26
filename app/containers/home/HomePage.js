@@ -8,7 +8,7 @@ import CarouselPinnedItems from 'app/components/home/CarouselPinnedItems';
 import BlockBookmarks from 'app/components/home/BlockBookmarks';
 import ShopsFeed from './ShopsFeed';
 import { getCurrentUser, signOutGoogle } from '../../actions';
-import { getShipPlaces } from 'app/actions/common';
+import { getShipPlaces, getCategories } from 'app/actions/common';
 
 class HomePage extends Component {
   constructor(props) {
@@ -21,6 +21,7 @@ class HomePage extends Component {
 
   componentWillMount() {
     this.props.getCurrentUser();
+    this.props.getCategories();
     this.props.getShipPlaces();
   }
 
@@ -52,7 +53,7 @@ class HomePage extends Component {
       childPage = children;
     }
 
-    const { currentUser, onSignOut } = this.props;
+    const { currentUser, onSignOut, categories, shipPlaces } = this.props;
     
     return (
       <div className="home-page">
@@ -60,8 +61,8 @@ class HomePage extends Component {
         <div className="container home-body">
           {(this.props.modalMode || !this.state.hasChildren) && <div className="row">
             <div className="col-md-3">
-              <BlockItemList />
-              <BlockDormList shipPlaces={this.props.shipPlaces} />
+              <BlockItemList categories={categories}/>
+              <BlockDormList shipPlaces={shipPlaces} />
               <BlockBookmarks />
             </div>
             <div className="col-md-9">
@@ -93,7 +94,8 @@ const mapStateToProps = (state) => {
     error: user.error,
     modalSize: common.modalSize,
     modalMode: common.modalMode,
-    shipPlaces : common.shipPlaces
+    shipPlaces : common.shipPlaces,
+    categories: common.categories
   }
 };
 
@@ -101,5 +103,6 @@ const mapStateToProps = (state) => {
 export default connect(mapStateToProps, {
   getCurrentUser,
   signOutGoogle,
+  getCategories,
   getShipPlaces
 })(HomePage)

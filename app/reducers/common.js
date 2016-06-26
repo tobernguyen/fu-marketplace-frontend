@@ -5,7 +5,8 @@ import _ from 'lodash';
 const INITIAL_STATE = {
   modalSize: null,
   modalMode: false,
-  shipPlaces: []
+  shipPlaces: [],
+  categories: []
 };
 
 export const common = (state = INITIAL_STATE, action) => {
@@ -22,6 +23,10 @@ export const common = (state = INITIAL_STATE, action) => {
     case CommonActionTypes.GET_SHIP_PLACES_SUCCESS:
       return _.merge({}, state, {
         shipPlaces: action.response.shipPlaces
+      });
+    case CommonActionTypes.GET_CATEGORIES_SUCCESS:
+      return _.merge({}, state, {
+        categories: action.response.categories
       });
     default:
       return state;

@@ -96,7 +96,12 @@ if(TARGET === 'start' || !TARGET) {
     },
     plugins: [
       new webpack.HotModuleReplacementPlugin()
-    ]
+    ],
+    resolve: {
+      alias: {
+        config: path.join(__dirname, 'config', 'development')
+      }
+    }
   });
 }
 
@@ -145,6 +150,11 @@ if(TARGET === 'build') {
         }
       }),
       new webpack.DefinePlugin(env)
-    ]
+    ],
+    resolve: {
+      alias: {
+        config: path.join(__dirname, 'config', 'production')
+      }
+    }
   });
 }

@@ -16,6 +16,7 @@ addLocaleData(vi);
 const store = configureStore();
 const history = syncHistoryWithStore(hashHistory, store);
 
+
 ReactDOM.render(
   <Root store={store} history={history} />,
   document.getElementById('root')

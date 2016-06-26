@@ -1,7 +1,8 @@
 import axios from 'axios';
 import { adminAccessTokenKey, accessTokenKey } from 'app/config';
+import config from 'config';
 
-const API_ROOT = 'http://localhost:3000';
+const API_ROOT = config.API_ROOT;
 
 export const HTTP_METHODS = {
   GET:    'GET',

@@ -1,6 +1,5 @@
-import React, { PropTypes, Component } from 'react';
+import React, { Component } from 'react';
 import {
-  Panel,
   FormGroup,
   FormControl,
   ControlLabel,
@@ -17,11 +16,26 @@ const validate = (values) => {
   let errors = {};
   let hasErrors = false;
   if(!values.email || values.email.trim() === '') {
-    errors.email = 'Email cannot be blank';
+    errors.email = 'common.form.validation.email.blank';
     hasErrors = true;
   }
   if(!values.fullName || values.fullName.trim() === '') {
-    errors.fullName = 'Full name cannot be blank';
+    errors.fullName = 'common.form.validation.name.blank';
+    hasErrors = true;
+  }
+
+  if(values.identityNumber && isNaN(Number(values.identityNumber))) {
+    errors.identityNumber = 'common.form.validation.identityNumber.invalid';
+    hasErrors = true;
+  }
+
+  if(values.phone && isNaN(Number(values.phone))) {
+    errors.phone = 'common.form.validation.phone.number';
+    hasErrors = true;
+  }
+
+  if(values.room && !values.room.match(/([A-F]{1})([0-9]{3})/gi)) {
+    errors.room = 'common.form.validation.room';
     hasErrors = true;
   }
 
@@ -32,7 +46,6 @@ class FormEditUserInformation extends Component {
   render() {
     const {
       fields: {
-        id,
         email,
         fullName,
         gender,
@@ -44,9 +57,6 @@ class FormEditUserInformation extends Component {
       submitting,
       submitResult
     } = this.props;
-    const title = (
-      <h3>Edit user information</h3>
-    );
     return (
       <div className="row">
         <Col lg={3}>
@@ -132,7 +142,6 @@ const mapStateToProps = (state) => ({
 export default reduxForm({
   form: 'FormEditUserInformation',
   fields: ['id', 'email', 'fullName', 'gender', 'identityNumber', 'phone', 'room'],
-  null,
   asyncBlurFields: ['email','fullName', 'gender', 'identityNumber', 'phone', 'room'],
   validate
 }, mapStateToProps, null)(FormEditUserInformation);

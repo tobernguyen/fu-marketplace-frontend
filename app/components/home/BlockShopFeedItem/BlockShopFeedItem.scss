@@ -3,8 +3,12 @@
 .block-shop-feed-item {
   .thumbnail {
     border-radius: 2px;
-    padding: 2px;
+    padding: 4px;
     margin-bottom: 0;
+
+    img.img-responsive {
+      width: 100%;
+    }
   }
   .content {
     padding-left: 10px;

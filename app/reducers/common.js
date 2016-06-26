@@ -1,4 +1,3 @@
-import * as ActionTypes from '../actions';
 import * as CommonActionTypes from '../actions/common';
 import _ from 'lodash';
 
@@ -23,10 +22,6 @@ export const common = (state = INITIAL_STATE, action) => {
     case CommonActionTypes.GET_SHIP_PLACES_SUCCESS:
       return _.merge({}, state, {
         shipPlaces: action.response.shipPlaces
-      });
-    case CommonActionTypes.GET_CATEGORIES_SUCCESS:
-      return _.merge({}, state, {
-        categories: action.response.categories
       });
     default:
       return state;

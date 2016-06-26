@@ -8,6 +8,7 @@ import { language } from './language';
 import { common } from './common';
 import { shop } from './shop';
 import { item } from './item';
+import { feed } from './feed';
 
 const rootReducer = combineReducers({
   auth,
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
   shop,
   item,
   admin,
+  feed,
   routing,
   language,
   common,

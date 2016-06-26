@@ -32,21 +32,4 @@ export const getShipPlaces = () => {
   return (dispatch) => {
     return dispatch(getShipPlacesRequest());
   }
-}
-
-export const GET_CATEGORIES_REQUEST = 'GET_CATEGORIES_REQUEST';
-export const GET_CATEGORIES_SUCCESS = 'GET_CATEGORIES_SUCCESS';
-export const GET_CATEGORIES_FAILURE = 'GET_CATEGORIES_FAILURE';
-const getCategoriesRequest = () => ({
-  [CALL_API]: {
-    types: [GET_CATEGORIES_REQUEST, GET_CATEGORIES_SUCCESS, GET_CATEGORIES_FAILURE],
-    url: '/api/v1/categories',
-    method: HTTP_METHODS.GET
-  }
-});
-
-export const getCategories = () => {
-  return (dispatch) => {
-    return dispatch(getCategoriesRequest());
-  }
-}
+};

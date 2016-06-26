@@ -40,7 +40,7 @@ export default {
   'fields.shopDescription': 'Shop description',
   'fields.shopAddress': 'Shop address',
   'fields.note': 'Note',
-  'shop.opening.request.successful': 'Thank you! Your shop opening request has been successfully with bellow information',
+  'shop.opening.request.successful': 'Thank you! Your shop opening request has been successfully submitted with bellow information',
   'shop.owner.info': 'Seller information',
   'shop.info': 'Shop information',
   'fields.adminMessage': 'System message',
@@ -70,5 +70,11 @@ export default {
   'shop.form.validation.description.required': 'Shop description required',
   'shop.form.validation.address.required': 'Shop address required',
   'shop.form.validation.identityPhoto.required': 'Please attach your identity photo',
-  'shop.form.validation.identityNumber.valid': 'Identity number length must be 9 or 12 digits'
+  'shop.form.validation.identityNumber.valid': 'Identity number length must be 9 or 12 digits',
+  'sellerDashboard.sidebar.openingStatus': 'Opening status',
+  'sellerDashboard.sidebar.updateShop': 'Update shop',
+  'sellerDashboard.sidebar.addShopItem': 'Add selling item',
+  'sellerDashboard.cover.update': 'Update cover',
+  'sellerDashboard.avatar.update': 'Update avatar',
+  'sellerDashboard.cover.warning': 'Please choose an image that\'s at least 850 pixels wide and at least 250 pixels tall.'
 };

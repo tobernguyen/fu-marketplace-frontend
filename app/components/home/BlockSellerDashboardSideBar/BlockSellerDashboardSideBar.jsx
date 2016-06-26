@@ -2,6 +2,8 @@ import React, { Component, PropTypes } from 'react';
 import { ListGroup, ListGroupItem } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import './BlockSellerDashboardSideBar.scss';
+import { messages } from './BlockSellerDashboardSideBar.i18n';
+import { FormattedMessage } from 'react-intl';
 
 
 export default class BlockSellerDashboardSideBar extends Component {
@@ -46,7 +48,7 @@ export default class BlockSellerDashboardSideBar extends Component {
               <i className="fa fa-check-circle-o"/>
             </div>
             <div className="title">
-              Opening Status
+              <FormattedMessage {...messages.openingStatus} />
             </div>
             <div className="checkbox checkbox-slider--b control">
               <label>
@@ -65,7 +67,7 @@ export default class BlockSellerDashboardSideBar extends Component {
                 <i className="fa fa-cog"/>
               </div>
               <div className="title">
-                Update shop
+                <FormattedMessage {...messages.updateShop} />
               </div>
             </div>
           </ListGroupItem>
@@ -77,7 +79,7 @@ export default class BlockSellerDashboardSideBar extends Component {
                 <i className="fa fa-plus-square-o"/>
               </div>
               <div className="title">
-                Add selling item
+                <FormattedMessage {...messages.addShopItem} />
               </div>
             </div>
           </ListGroupItem>

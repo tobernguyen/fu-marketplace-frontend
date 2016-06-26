@@ -70,5 +70,11 @@ export default {
   'shop.form.validation.description.required': 'Hãy điền miêu tả shop',
   'shop.form.validation.address.required': 'Hãy điền địa chỉ shop',
   'shop.form.validation.identityPhoto.required': 'Hãy tải lên ảnh chụp chứng minh thư',
-  'shop.form.validation.identityNumber.valid': 'Số chứng minh thư phải có độ dài là 9 hoặc 12'
+  'shop.form.validation.identityNumber.valid': 'Số chứng minh thư phải có độ dài là 9 hoặc 12',
+  'sellerDashboard.sidebar.openingStatus': 'Trạng thái mở',
+  'sellerDashboard.sidebar.updateShop': 'Thông tin shop',
+  'sellerDashboard.sidebar.addShopItem': 'Thêm sản phẩm',
+  'sellerDashboard.cover.update': 'Đổi ảnh bìa',
+  'sellerDashboard.avatar.update': 'Đổi avatar',
+  'sellerDashboard.cover.warning': 'Hãy chọn ảnh bìa có chiều cao lớn hơn 850px và chiều rộng lớn hơn 250px'
 };

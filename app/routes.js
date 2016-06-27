@@ -8,6 +8,7 @@ import App from './containers/App';
 import Home from './containers/home';
 import Account from './containers/home/Account';
 import UpdateShop from './containers/home/SellerDashboard/UpdateShop';
+import UpdateShipPlaces from './containers/home/SellerDashboard/UpdateShipPlaces';
 import AddShopItem from './containers/home/SellerDashboard/ManageShopItem/AddShopItem';
 import UpdateShopItem from './containers/home/SellerDashboard/ManageShopItem/UpdateShopItem';
 import Shop from './containers/home/Shop';
@@ -36,6 +37,7 @@ export default (
       <Route path="shops/:shopID" component={Shop} />
       <Route path="shops/:shopID/dashboard" component={SellerDashboard}>
         <Route path="info" component={UpdateShop} />
+        <Route path="ship_places" component={UpdateShipPlaces} />
         <Route path="items/add" component={AddShopItem} />
         <Route path="items/:itemID/update" component={UpdateShopItem} />
       </Route>

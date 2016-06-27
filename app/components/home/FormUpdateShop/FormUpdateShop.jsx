@@ -1,8 +1,14 @@
 import React, { Component, PropTypes } from 'react';
 import ModalHeader from '../ModalHeader';
 import { Modal, Alert } from 'react-bootstrap';
+import './FormUpdateShop.scss';
+
 
 export default class UpdateShopForm extends Component {
+  constructor(props) {
+    super(props);
+  }
+
   render() {
     const { shopID, fields: { description }, handleSubmit, submitting, dirty, shopUpdated } = this.props;
     return (

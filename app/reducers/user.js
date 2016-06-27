@@ -9,7 +9,7 @@ const INITIAL_STATE = {
 };
 
 export const user = (state = INITIAL_STATE, action) => {
-  const { type, response, error, user } = action;
+  const { type, response, error } = action;
   switch (type) {
     case ActionTypes.CURRENT_USER_SUCCESS:
       return _.assign({}, state, {

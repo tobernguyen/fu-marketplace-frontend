@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import ManageShopItemForm from './ManageShopItemForm';
 import { getItemCategories } from 'app/actions/item';
 import { withRouter } from 'react-router';
@@ -33,7 +33,7 @@ class UpdateShopItem extends Component {
     };
 
     this.handleDeleteShopItem = () => {
-      if (confirm("Are you sure to delete this item?")) {
+      if (confirm('Are you sure to delete this item?')) {
         this.props.deleteShopItem(shopID, itemID);
       }
     };

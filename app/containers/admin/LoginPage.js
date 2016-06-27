@@ -26,8 +26,6 @@ const mapStateToProps = (state) => {
 const reduxFormConfig = {
   form: 'LoginForm',
   fields: ['email', 'password'],
-  null,
-  null,
   validate
 };
 

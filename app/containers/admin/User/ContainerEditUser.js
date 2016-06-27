@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import FormEditUserInformation from 'app/components/admin/FormEditUserInformation';
 import FormEditUserRole from 'app/components/admin/FormEditUserRole';
@@ -16,7 +16,7 @@ class ContainerEditUser extends React.Component {
     this.props.adminGetUser(this.props.params.userId);
   }
   render() {
-    
+
     const {
       userManagement,
       adminUpdateUserInformation,
@@ -38,7 +38,7 @@ class ContainerEditUser extends React.Component {
             adminUpdateUserRole={adminUpdateUserRole}
             submitResult={userManagement.submitResult}
             isSubmitting={userManagement.isSubmitting}/>
-          <hr />  
+          <hr />
           <FormEditUserBanStatus
             user={userManagement.selectedUser}
             adminUnbanUser={adminUnbanUser}

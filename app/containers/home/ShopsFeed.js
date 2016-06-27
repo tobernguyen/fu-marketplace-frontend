@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import BlockShopFeedItem from 'app/components/home/BlockShopFeedItem';
 import { getShops } from 'app/actions/feed';

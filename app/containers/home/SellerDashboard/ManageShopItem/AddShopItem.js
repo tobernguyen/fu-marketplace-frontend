@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import ManageShopItemForm from './ManageShopItemForm';
 import { connect } from 'react-redux';
 import { createShopItem, resetUpdatedItemStatus } from 'app/actions/shop';

@@ -28,7 +28,7 @@ class HomePage extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.error) {
-      const { message, message_code, status } = nextProps.error;
+      const { status } = nextProps.error;
       if (status === 401) {
         this.props.signOutGoogle();
       }

@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import UserList from 'app/components/admin/UserList';
 import { adminGetUsers } from 'app/actions/admin';
@@ -8,7 +8,7 @@ class UserListContainer extends React.Component {
   componentWillMount() {
     this.props.adminGetUsers();
   }
-  
+
   render() {
     const { userManagement } = this.props;
     if(userManagement.isFetching) {

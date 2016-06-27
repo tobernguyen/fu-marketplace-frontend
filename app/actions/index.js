@@ -24,7 +24,7 @@ const requestSignInGoogle = (authCode) => ({
 
 // Relies on Redux Thunk middleware.
 export const signInGoogle = (authCode) => {
-  return (dispatch, getState) => {
+  return (dispatch) => {
     return dispatch(requestSignInGoogle(authCode))
   }
 };
@@ -67,7 +67,7 @@ const requestSignInAdmin = (formValues) => ({
 
 // Relies on Redux Thunk middleware.
 export const signInAdmin = (formValues) => {
-  return (dispatch, getState) => {
+  return (dispatch) => {
     return dispatch(requestSignInAdmin(formValues))
   }
 };
@@ -99,7 +99,7 @@ const requestGetCurrentUser = () => ({
 
 // Relies on Redux Thunk middleware.
 export const getCurrentUser = () => {
-  return (dispatch, getState) => {
+  return (dispatch) => {
     return dispatch(requestGetCurrentUser())
   }
 };

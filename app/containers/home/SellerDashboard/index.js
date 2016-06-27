@@ -6,6 +6,7 @@ import BlockSellerDashboardSideBar from 'app/components/home/BlockSellerDashboar
 import SellingItemList from '../SellingItemList';
 import { Modal } from 'react-bootstrap';
 import { uploadShopAvatar, uploadShopCover, getSellerShop, updateShopInfo } from 'app/actions/shop';
+import { getShipPlaces } from 'app/actions/common';
 import Sticky from 'react-stickynode';
 
 
@@ -90,5 +91,6 @@ export default connect(mapStateToProps, {
   getSellerShop,
   uploadShopAvatar,
   uploadShopCover,
-  updateShopInfo
+  updateShopInfo,
+  getShipPlaces
 })(SellerDashboard)

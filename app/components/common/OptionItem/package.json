@@ -1,0 +1,6 @@
+{
+  "name": "OptionItem",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./OptionItem.jsx"
+}

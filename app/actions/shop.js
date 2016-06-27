@@ -252,3 +252,32 @@ export const RESET_UPDATED_ITEM_STATUS = 'RESET_UPDATED_ITEM_STATUS';
 export const resetUpdatedItemStatus = () => ({
   type: RESET_UPDATED_ITEM_STATUS
 });
+
+export const TOGGLE_SHIP_PLACE = 'TOGGLE_SHIP_PLACE';
+export const toggleShipPlace = (placeID) => ({
+  type: TOGGLE_SHIP_PLACE,
+  payload: {
+    placeID: placeID
+  }
+});
+
+
+export const SELLER_UPDATE_SHIP_PLACES_REQUEST = 'SELLER_UPDATE_SHIP_PLACES_REQUEST';
+export const SELLER_UPDATE_SHIP_PLACES_SUCCESS = 'SELLER_UPDATE_SHIP_PLACES_SUCCESS';
+export const SELLER_UPDATE_SHIP_PLACES_FAILURE = 'SELLER_UPDATE_SHIP_PLACES_FAILURE';
+const requestUpdateShipPlaces = (shopID, shipPlaces) => ({
+  [CALL_API]: {
+    types: [SELLER_UPDATE_SHIP_PLACES_REQUEST, SELLER_UPDATE_SHIP_PLACES_SUCCESS, SELLER_UPDATE_SHIP_PLACES_FAILURE],
+    url: `/api/v1/seller/shops/${shopID}/shipPlaces`,
+    method: HTTP_METHODS.POST,
+    params: {
+      shipPlaces: shipPlaces
+    }
+  }
+});
+
+export const updateShipPlaces = (shopID, shipPlaces) => {
+  return (dispatch) => {
+    return dispatch(requestUpdateShipPlaces(shopID, shipPlaces))
+  }
+};

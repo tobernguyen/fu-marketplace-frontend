@@ -1,4 +1,5 @@
 import * as ShopActionTypes from '../actions/shop';
+import * as CommonActionTypes from '../actions/common';
 import _ from 'lodash';
 import { getImageURLWithTimestamp } from 'app/helpers/image';
 
@@ -8,7 +9,9 @@ const INITIAL_STATE = {
   sellingItems: [],
   toBeUpdatedItem: null,
   newlyItemAdded: false,
-  itemUpdated: false
+  itemUpdated: false,
+  shipPlacesUpdated: false,
+  places: []
 };
 
 export const shop = (state = INITIAL_STATE, action) => {
@@ -20,8 +23,19 @@ export const shop = (state = INITIAL_STATE, action) => {
       });
     case ShopActionTypes.SELLER_GET_SHOP_SUCCESS:
     case ShopActionTypes.UPDATE_SHOP_INFO_SUCCESS:
+      console.log(type);
       return _.assign({}, state, {
         sellerShop: response
+      });
+    case ShopActionTypes.SELLER_UPDATE_SHIP_PLACES_SUCCESS:
+      console.log(type);
+      return _.assign({}, state, {
+        sellerShop: response,
+        shipPlacesUpdated: true
+      });
+    case ShopActionTypes.SELLER_DELETE_SHOP_ITEM_REQUEST:
+      return _.merge({}, state, {
+        shipPlacesUpdated: false
       });
     case ShopActionTypes.SELLER_GET_SHOP_ITEM_LIST_SUCCESS:
       return _.assign({}, state, {
@@ -46,10 +60,28 @@ export const shop = (state = INITIAL_STATE, action) => {
         ),
         itemUpdated: true
       });
+    case CommonActionTypes.GET_SHIP_PLACES_SUCCESS:
+      console.log(type);
+      let places = action.response.shipPlaces;
+      places.map(place =>
+        place.checked = false
+      );
+      return _.merge({}, state, {
+        places: places
+      });
+    case ShopActionTypes.TOGGLE_SHIP_PLACE:
+      return _.merge({}, state, {
+        places: state.places.map(place =>
+          place.id === payload.placeID ? _.assign({}, place, {
+            checked: !place.checked
+          }) : place
+        )
+      });
     case ShopActionTypes.RESET_UPDATED_ITEM_STATUS:
       return _.assign({}, state, {
         newlyItemAdded: false,
-        itemUpdated: false
+        itemUpdated: false,
+        shipPlacesUpdated: false
       });
     case ShopActionTypes.SELLER_DELETE_SHOP_ITEM_SUCCESS:
       return _.assign({}, state, {

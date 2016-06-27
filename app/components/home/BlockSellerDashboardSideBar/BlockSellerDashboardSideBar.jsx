@@ -30,7 +30,7 @@ export default class BlockSellerDashboardSideBar extends Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps.sellerShop) {
       const { opening } = nextProps.sellerShop;
-      if (this.state.opening !== opening) {
+      if (opening && (this.state.opening !== opening)) {
         this.setState({
           opening: opening
         })

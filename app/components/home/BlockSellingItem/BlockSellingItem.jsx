@@ -4,8 +4,12 @@ import { Link } from 'react-router';
 import './BlockSellingItem.scss';
 
 export default class BlockSellingItem extends Component {
+  constructor(props) {
+    super(props);
+  }
+
   render() {
-    const { item, shopID, sellerMode } = this.props;
+    const { item, shopID } = this.props;
     const tooltip = (
       item.description ? <Tooltip id="tooltip">{item.description}</Tooltip> : <span/>
     );
@@ -13,17 +17,19 @@ export default class BlockSellingItem extends Component {
     return (
       <div className="block-selling-item col-md-3 col-xs-4">
         <OverlayTrigger placement="top" overlay={tooltip}>
-        <div className="row item">
-          <Link to={updateURL} className="item-image">
-            <img src={item.image} />
-          </Link>
-          <div className="info">
-            <Link to={updateURL} className="name">
-              {item.name}
+          <div className="row item">
+            <Link to={updateURL} className="item-image">
+              <img src={item.image} />
             </Link>
-            <span className="price">{item.price} ₫</span>
+            <div className="info">
+              <div>
+                <Link to={updateURL} className="name">
+                  {item.name}
+                </Link>
+                <span className="price">{item.price} ₫</span>
+              </div>
+            </div>
           </div>
-        </div>
         </OverlayTrigger>
       </div>
     )
@@ -32,6 +38,5 @@ export default class BlockSellingItem extends Component {
 
 
 BlockSellingItem.propTypes = {
-  item: PropTypes.object.isRequired,
-  sellerMode: PropTypes.bool.isRequired
+  item: PropTypes.object.isRequired
 };

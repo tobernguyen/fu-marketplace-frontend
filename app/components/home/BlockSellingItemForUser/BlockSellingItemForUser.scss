@@ -1,0 +1,47 @@
+@import 'app/styles/variables.scss';
+
+.block-selling-item.for-user {
+  .item {
+    .item-image {
+      position: relative;
+      .actions {
+        position: absolute;
+        top: 40%;
+        width: 100%;
+
+        p {
+          text-align: center;
+          span {
+            width: 80px;
+            color: #ffffff;
+            background-color: rgba(0, 0, 0, 0.6);
+            padding: 10px 15px;
+            font-weight: 700;
+            border-radius: 18px;
+            cursor: pointer;
+          }
+        }
+      }
+    }
+  }
+  .info {
+    .add-to-cart {
+      span {
+        text-align: center;
+        background-color: $primary-color;
+        color: #ffffff;
+        padding: 6px 10px;
+        cursor: pointer;
+      }
+    }
+
+    table {
+      width: 100%;
+      tr {
+        td:last-child {
+          width: 36px;
+        }
+      }
+    }
+  }
+}

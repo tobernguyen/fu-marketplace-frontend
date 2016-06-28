@@ -1,8 +1,10 @@
 import React, { Component, PropTypes } from 'react';
 import BlockSellingItem from 'app/components/home/BlockSellingItem';
+import BlockSellingItemForUser from 'app/components/home/BlockSellingItemForUser';
 import './BlockSellingItemList.scss';
 import { Pagination } from 'react-bootstrap';
 import _ from 'lodash';
+import classNames from 'classnames';
 
 export default class BlockSellingItemList extends Component {
   constructor(props) {
@@ -34,30 +36,52 @@ export default class BlockSellingItemList extends Component {
     }
   }
   render() {
+    const { sellerMode } = this.props;
     return (
       <div className="block-selling-item-list clearfix">
         <div className="header clearfix">
-          <ul className="nav nav-pills">
-            <li className="active">
-              <a href="#">Tất cả <span>8</span></a>
-            </li>
-            <li>
-              <a href="#">Đồ ăn <span>3</span>
+          <div className={classNames({'col-md-9 col-xs-8': !sellerMode})}>
+            <ul className="nav nav-pills">
+              <li className="active">
+                <a href="#">Tất cả <span>8</span></a>
+              </li>
+              <li>
+                <a href="#">Đồ ăn <span>3</span>
+                </a>
+              </li>
+              <li>
+                <a href="#">Đồ uống <span>5</span></a>
+              </li>
+            </ul>
+          </div>
+          {!sellerMode && <div className="col-md-3 col-xs-4 row">
+            <div className="cart">
+              <a href="#">
+                <h4>
+                  <span className="total">$0.00</span>
+                  <i className="fa fa-shopping-cart"/>
+                </h4>
+                <p>Empty cart</p>
               </a>
-            </li>
-            <li>
-              <a href="#">Đồ uống <span>5</span></a>
-            </li>
-          </ul>
+            </div>
+          </div>}
         </div>
         <div className="body clearfix">
-          {this.state.pagedItems.map((item) => {
+          {this.state.pagedItems.map((item) =>
+          {if (sellerMode) {
             return <BlockSellingItem
               key={item.id}
               item={item}
-              shopID={this.props.shopID}
-              sellerMode={this.props.sellerMode} />
-          })}
+              shopID={this.props.shopID} />
+          } else {
+            return <BlockSellingItemForUser
+              key={item.id}
+              item={item}
+              addToCard={this.props.addToCard}
+              buyNow={this.props.buyNow}
+              shopID={this.props.shopID}/>
+          }}
+          )}
         </div>
         <div className="footer clearfix">
           <Pagination

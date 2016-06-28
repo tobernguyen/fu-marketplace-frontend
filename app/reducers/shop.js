@@ -23,12 +23,10 @@ export const shop = (state = INITIAL_STATE, action) => {
       });
     case ShopActionTypes.SELLER_GET_SHOP_SUCCESS:
     case ShopActionTypes.UPDATE_SHOP_INFO_SUCCESS:
-      console.log(type);
       return _.assign({}, state, {
         sellerShop: response
       });
     case ShopActionTypes.SELLER_UPDATE_SHIP_PLACES_SUCCESS:
-      console.log(type);
       return _.assign({}, state, {
         sellerShop: response,
         shipPlacesUpdated: true
@@ -61,7 +59,6 @@ export const shop = (state = INITIAL_STATE, action) => {
         itemUpdated: true
       });
     case CommonActionTypes.GET_SHIP_PLACES_SUCCESS:
-      console.log(type);
       let places = action.response.shipPlaces;
       places.map(place =>
         place.checked = false

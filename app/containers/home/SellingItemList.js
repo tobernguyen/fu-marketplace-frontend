@@ -10,6 +10,14 @@ class SellingItemList extends Component {
     if (this.props.shopID) {
       this.props.getSellerShopItems(this.props.shopID);
     }
+
+    this.handleAddToCard = (item) => {
+      console.log('Add to card', item);
+    };
+
+    this.handleBuyNow = (item) => {
+      console.log('Buy now', item)
+    }
   }
 
   render() {
@@ -17,6 +25,8 @@ class SellingItemList extends Component {
       <BlockSellingItemList
         items={this.props.sellingItems}
         shopID={this.props.shopID}
+        addToCard={this.handleAddToCard}
+        buyNow={this.handleBuyNow}
         sellerMode={this.props.sellerMode} />
     )
   }

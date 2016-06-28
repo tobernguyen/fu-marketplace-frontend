@@ -6,6 +6,8 @@ import SellingItemList from './SellingItemList';
 import { getUserShop } from 'app/actions/user';
 import { Link } from 'react-router';
 import _ from 'lodash';
+import BuyNowForm from './PlaceOrder/BuyNowForm';
+import classNames from 'classnames';
 
 class Shop extends Component {
   constructor(props) {
@@ -14,9 +16,27 @@ class Shop extends Component {
     const { shopID } = this.props.params;
     if (!isNaN(shopID)) {
       this.state = {
-        shopValid: true
+        shopValid: true,
+        showModal: false
       };
       this.props.getUserShop(shopID);
+    }
+
+    this.handleAddToCard = (item) => {
+      console.log('Add to card', item);
+    };
+
+    this.handleBuyNow = (item) => {
+      this.setState({
+        showModal: true,
+        bsSize: "sm",
+        item: item
+      });
+      console.log('Buy now', item)
+    };
+
+    this.close = () => {
+      this.setState({ showModal: false });
     }
   }
 
@@ -31,12 +51,21 @@ class Shop extends Component {
 
   render() {
     return (
-      <div className="shop-detail-modal">
+      <div className={classNames('shop-detail-modal', {'dim': this.state.showModal})}>
         {this.state.shopValid && <div>
           <BlockShopHeader shop={this.props.shop} sellerMode={false} />
-          <SellingItemList shopID={this.props.params.shopID} sellerMode={false} />
+          <SellingItemList
+            shopID={this.props.params.shopID}
+            sellerMode={false}
+            addToCard={this.handleAddToCard}
+            buyNow={this.handleBuyNow} />
           <Link to='/' className="close"><span>×</span></Link>
         </div>}
+        <BuyNowForm
+          show={this.state.showModal}
+          onHide={this.close}
+          bsSize={this.state.bsSize}
+          item={this.state.item} />
       </div>
     );
   }

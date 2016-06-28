@@ -1,0 +1,49 @@
+.form-buy-now {
+  .modal-body {
+    padding: 10px;
+  }
+
+  .item-preview {
+    border-bottom: 1px dashed #cccccc;
+    margin-bottom: 10px;
+
+    .image {
+      padding: 0 8px;
+
+      .thumbnail {
+        margin-bottom: 10px;
+        border-radius: 3px;
+        padding: 2px;
+      }
+    }
+
+    .info {
+      padding: 0 10px;
+
+      h4 {
+        font-size: 16px;
+        margin-top: 5px;
+        margin-bottom: 5px;
+
+      }
+      p {
+        margin-bottom: 5px;
+      }
+    }
+  }
+
+  .form-group {
+    margin-bottom: 5px;
+
+    .ship-address {
+      .help-block {
+        margin: 0;
+      }
+    }
+
+    .control-label {
+      padding-right: 0;
+      padding-left: 15px;
+    }
+  }
+}

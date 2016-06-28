@@ -30,7 +30,7 @@ export default class BlockSellingItemForUser extends Component {
               <img src={item.image} />
               <div className="actions">
                 <p>
-                  <span onClick={this.handleAddToCard}>
+                  <span onClick={this.handleBuyNow}>
                     Mua ngay
                   </span>
                 </p>
@@ -50,7 +50,7 @@ export default class BlockSellingItemForUser extends Component {
                   </td>
                   <td>
                     <div className="add-to-cart">
-                      <span onClick={this.handleBuyNow}>
+                      <span onClick={this.handleAddToCard}>
                         <i className="fa fa-shopping-bag" />
                       </span>
                     </div>

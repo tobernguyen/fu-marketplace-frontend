@@ -992,3 +992,10 @@ Sizes
 .checkbox label {
   padding-left: 0;
 }
+
+
+.dim {
+  -webkit-filter:brightness(50%);
+  -moz-filter:brightness(50%);
+  filter:brightness(50%);
+}

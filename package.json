@@ -29,6 +29,7 @@
     "axios": "^0.11.1",
     "blueimp-canvas-to-blob": "^3.3.0",
     "bootstrap-css-only": "^3.3.6",
+    "classnames": "^2.2.5",
     "halogen": "^0.2.0",
     "lodash": "^4.13.1",
     "react": "^15.0.2",

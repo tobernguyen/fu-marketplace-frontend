@@ -10,23 +10,16 @@ class SellingItemList extends Component {
     if (this.props.shopID) {
       this.props.getSellerShopItems(this.props.shopID);
     }
-
-    this.handleAddToCard = (item) => {
-      console.log('Add to card', item);
-    };
-
-    this.handleBuyNow = (item) => {
-      console.log('Buy now', item)
-    }
   }
 
   render() {
+    const { addToCard, buyNow } = this.props;
     return (
       <BlockSellingItemList
         items={this.props.sellingItems}
         shopID={this.props.shopID}
-        addToCard={this.handleAddToCard}
-        buyNow={this.handleBuyNow}
+        addToCard={addToCard}
+        buyNow={buyNow}
         sellerMode={this.props.sellerMode} />
     )
   }
@@ -40,7 +33,9 @@ const mapStateToProps = (state) => {
 };
 
 SellingItemList.propTypes = {
-  sellerMode: PropTypes.bool.isRequired
+  sellerMode: PropTypes.bool.isRequired,
+  addToCard: PropTypes.func.isRequired,
+  buyNow: PropTypes.func.isRequired
 };
 
 export default connect(mapStateToProps, {

@@ -132,7 +132,7 @@ class FormAccountBasic extends Component {
 }
 
 FormAccountBasic.propTypes = {
-  intl: intlShape.isRequired,
+  intl:         intlShape.isRequired,
   fields:       PropTypes.object.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   submitting:   PropTypes.bool.isRequired,

@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import BlockSellingItem from 'app/components/home/BlockSellingItem';
 import BlockSellingItemForUser from 'app/components/home/BlockSellingItemForUser';
+import BlockShoppingCart from 'app/components/home/BlockShoppingCart';
 import './BlockSellingItemList.scss';
 import { Pagination } from 'react-bootstrap';
 import _ from 'lodash';
@@ -14,7 +15,8 @@ export default class BlockSellingItemList extends Component {
       activePage: 1,
       totalPage: 0,
       items: [],
-      pagedItems: []
+      pagedItems: [],
+      cartItems: []
     };
 
     this.pageChanged = (eventKey) => {
@@ -22,6 +24,14 @@ export default class BlockSellingItemList extends Component {
         activePage: eventKey,
         pagedItems: _.slice(this.state.items, (eventKey - 1) * 4, (eventKey * 4))
       })
+    };
+
+    this.handleAddToCard = (item) => {
+      let cartItems = this.state.cartItems;
+      cartItems[cartItems.length] = item;
+      this.setState({
+        cartItems: cartItems
+      });
     }
   }
 
@@ -35,6 +45,8 @@ export default class BlockSellingItemList extends Component {
       })
     }
   }
+
+
   render() {
     const { sellerMode } = this.props;
     return (
@@ -55,15 +67,7 @@ export default class BlockSellingItemList extends Component {
             </ul>
           </div>
           {!sellerMode && <div className="col-md-3 col-xs-4 row">
-            <div className="cart">
-              <a href="#">
-                <h4>
-                  <span className="total">$0.00</span>
-                  <i className="fa fa-shopping-cart"/>
-                </h4>
-                <p>Empty cart</p>
-              </a>
-            </div>
+            <BlockShoppingCart cartItems={this.state.cartItems} />
           </div>}
         </div>
         <div className="body clearfix">
@@ -77,7 +81,7 @@ export default class BlockSellingItemList extends Component {
             return <BlockSellingItemForUser
               key={item.id}
               item={item}
-              addToCard={this.props.addToCard}
+              addToCard={this.handleAddToCard}
               buyNow={this.props.buyNow}
               shopID={this.props.shopID}/>
           }}

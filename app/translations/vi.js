@@ -76,5 +76,8 @@ export default {
   'sellerDashboard.sidebar.addShopItem': 'Thêm sản phẩm',
   'sellerDashboard.cover.update': 'Đổi ảnh bìa',
   'sellerDashboard.avatar.update': 'Đổi avatar',
-  'sellerDashboard.cover.warning': 'Hãy chọn ảnh bìa có chiều cao lớn hơn 850px và chiều rộng lớn hơn 250px'
+  'sellerDashboard.cover.warning': 'Hãy chọn ảnh bìa có chiều cao lớn hơn 850px và chiều rộng lớn hơn 250px',
+  'cart.empty': 'Giỏ hàng trống',
+  'cart.item.singular': 'sản phẩm',
+  'cart.item.plural': 'sản phẩm'
 };

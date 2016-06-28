@@ -1,0 +1,21 @@
+.block-shopping-cart {
+  float: right;
+
+  a {
+    color: #666;
+
+    h4 {
+      margin: 5px 0 0;
+
+      i {
+        padding: 0 5px;
+        font-size: 18px;
+      }
+    }
+
+    p {
+      margin: 0;
+      font-size: 13px;
+    }
+  }
+}

@@ -76,5 +76,8 @@ export default {
   'sellerDashboard.sidebar.addShopItem': 'Add selling item',
   'sellerDashboard.cover.update': 'Update cover',
   'sellerDashboard.avatar.update': 'Update avatar',
-  'sellerDashboard.cover.warning': 'Please choose an image that\'s at least 850 pixels wide and at least 250 pixels tall.'
+  'sellerDashboard.cover.warning': 'Please choose an image that\'s at least 850 pixels wide and at least 250 pixels tall.',
+  'cart.empty': 'Empty cart',
+  'cart.item.singular': 'item',
+  'cart.item.plural': 'items'
 };

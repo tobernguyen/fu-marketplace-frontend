@@ -1,0 +1,6 @@
+{
+  "name": "BlockShoppingCart",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./BlockShoppingCart.jsx"
+}

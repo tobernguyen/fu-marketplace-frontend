@@ -3,7 +3,8 @@ import BlockShopHeader from 'app/components/home/BlockShopHeader';
 import { connect } from 'react-redux';
 import { updateModalMode, updateModalSize } from '../../actions/common';
 import SellingItemList from './SellingItemList';
-import { getUserShop, placeOrder } from 'app/actions/user';
+import { getUserShop } from 'app/actions/user';
+import { placeOrder, clearOrderResult } from 'app/actions/order';
 import { Link } from 'react-router';
 import _ from 'lodash';
 import BuyNowForm from './PlaceOrder/BuyNowForm';
@@ -36,6 +37,7 @@ class Shop extends Component {
     };
 
     this.close = () => {
+      this.props.clearOrderResult();
       this.setState({ showModal: false });
     }
 
@@ -83,7 +85,8 @@ class Shop extends Component {
           onHide={this.close}
           bsSize={this.state.bsSize}
           item={this.state.item}
-          onSubmit={this.handleExpressOrder}/>
+          onSubmit={this.handleExpressOrder}
+          />
       </div>
     );
   }
@@ -109,5 +112,6 @@ export default connect(mapStateToProps, {
   updateModalSize,
   updateModalMode,
   getUserShop,
-  placeOrder
+  placeOrder,
+  clearOrderResult
 })(Shop)

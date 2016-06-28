@@ -8,8 +8,6 @@ const validate = values => {
 
   if (!values.shipAddress) {
     errors.shipAddress = 'shipAddress required';
-  } else if (values.shipAddress && !values.shipAddress.match(/([A-F]{1})([0-9]{3})/g)) {
-    errors.shipAddress = 'wrong room format';
   }
 
   if (!values.quantity) {
@@ -24,8 +22,11 @@ const validate = values => {
 const mapStateToProps = (state) => {
   return {
     initialValues: {
-      quantity:  1
-    }
+      quantity:  1,
+      note: '',
+      shipAddress: ''
+    },
+    placeOrderResult: state.order.expressOrderResult
   }
 };
 

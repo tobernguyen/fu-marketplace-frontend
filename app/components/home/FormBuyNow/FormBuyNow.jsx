@@ -6,9 +6,11 @@ export default class FormBuyNow extends Component {
   render() {
     const {
       fields: { shipAddress, quantity, note },
+      dirty,
       handleSubmit,
       item,
-      submitting
+      submitting,
+      placeOrderResult
     } = this.props;
     return (
       <Modal className="form-buy-now" show={this.props.show} onHide={this.props.onHide} bsSize={this.props.bsSize}>
@@ -55,7 +57,7 @@ export default class FormBuyNow extends Component {
               <div className="col-sm-9">
                 <div className="input-group">
                   <span className="input-group-btn">
-                      <button className="btn btn-info btn-number" onClick={() => quantity.onChange(--quantity.value)}>
+                      <button type="button" className="btn btn-info btn-number" onClick={() => quantity.onChange(--quantity.value)}>
                         <span className="glyphicon glyphicon-minus"/>
                       </button>
                   </span>
@@ -84,7 +86,9 @@ export default class FormBuyNow extends Component {
                   </div>
               </div>
             </div>
-            <button type="submit" className="btn btn-danger btn-block" disabled={submitting}>
+            {placeOrderResult === 'SUCCESS' && <div className="alert alert-success">Order has been placed</div>}
+            {placeOrderResult === 'FAIL' && <div className="alert alert-danger">Error occured!</div>}
+            <button type="submit" className="btn btn-danger btn-block" disabled={submitting || !dirty}>
               Place order
             </button>
           </form>

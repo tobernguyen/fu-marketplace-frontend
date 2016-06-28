@@ -46,6 +46,15 @@ export const user = (state = INITIAL_STATE, action) => {
       return _.assign({}, state, {
         identityPhoto: getImageURLWithTimestamp(response.identityPhoto)
       });
+    case UserActionTypes.USER_PLACE_ORDER_REQUEST:
+      console.log('USER_PLACE_ORDER_REQUEST');
+      return state;
+    case UserActionTypes.USER_PLACE_ORDER_SUCCESS:
+      console.log('USER_PLACE_ORDER_SUCCESS');
+      return state;
+    case UserActionTypes.USER_PLACE_ORDER_FAILURE:
+      console.log('USER_PLACE_ORDER_FAILURE');
+      return state;
     default:
       return state;
   }

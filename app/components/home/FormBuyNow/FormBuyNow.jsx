@@ -7,7 +7,8 @@ export default class FormBuyNow extends Component {
     const {
       fields: { shipAddress, quantity, note },
       handleSubmit,
-      item
+      item,
+      submitting
     } = this.props;
     return (
       <Modal className="form-buy-now" show={this.props.show} onHide={this.props.onHide} bsSize={this.props.bsSize}>
@@ -26,11 +27,11 @@ export default class FormBuyNow extends Component {
                 {item.name}
               </h4>
               <p>
-                {item.price}₫ × 3 = 85000₫
+                {item.price}₫ × {quantity.value} = {item.price*quantity.value}₫
               </p>
             </div>
           </div>}
-          <form className="form-horizontal">
+          <form className="form-horizontal" onSubmit={handleSubmit}>
             <div className={`form-group has-feedback ${shipAddress.touched && shipAddress.invalid ? 'has-error' : ''}`}>
               <label className="col-sm-3 control-label">
                 Ship to
@@ -54,13 +55,13 @@ export default class FormBuyNow extends Component {
               <div className="col-sm-9">
                 <div className="input-group">
                   <span className="input-group-btn">
-                      <button className="btn btn-info btn-number">
+                      <button className="btn btn-info btn-number" onClick={() => quantity.onChange(--quantity.value)}>
                         <span className="glyphicon glyphicon-minus"/>
                       </button>
                   </span>
                   <input type="text" className="form-control input-number" {...quantity}/>
                   <span className="input-group-btn">
-                      <button type="button" className="btn btn-success btn-number">
+                      <button type="button" className="btn btn-success btn-number" onClick={() => quantity.onChange(++quantity.value)}>
                           <span className="glyphicon glyphicon-plus"/>
                       </button>
                   </span>
@@ -83,7 +84,7 @@ export default class FormBuyNow extends Component {
                   </div>
               </div>
             </div>
-            <button type="submit" className="btn btn-danger btn-block">
+            <button type="submit" className="btn btn-danger btn-block" disabled={submitting}>
               Place order
             </button>
           </form>

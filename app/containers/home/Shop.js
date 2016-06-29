@@ -73,6 +73,7 @@ class Shop extends Component {
         onSubmit={this.handleExpressOrder} />
     } else {
       orderForm = <CheckOutPage
+        shopID={this.props.params.shopID}
         show={this.state.showModal}
         onHide={this.close}
         bsSize={this.state.bsSize} />

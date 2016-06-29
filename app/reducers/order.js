@@ -6,7 +6,7 @@ const INITIAL_STATE = {
 };
 
 export const order = (state = INITIAL_STATE, action) => {
-  const { type, response } = action;
+  const { type } = action;
   switch(type) {
     case OrderActionTypes.USER_PLACE_ORDER_REQUEST:
     case OrderActionTypes.CLEAR_ORDER_RESULT:
@@ -18,7 +18,6 @@ export const order = (state = INITIAL_STATE, action) => {
         expressOrderResult: AsyncResultCode.PLACE_ORDER_SUCCESS
       });
     case OrderActionTypes.USER_PLACE_ORDER_FAILURE:
-      console.log(response);
       return _.merge({}, state, {
         expressOrderResult: AsyncResultCode.PLACE_ORDER_FAIL
       });

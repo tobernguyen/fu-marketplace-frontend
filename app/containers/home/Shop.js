@@ -21,7 +21,7 @@ class Shop extends Component {
       this.props.getUserShop(shopID);
     }
 
-    this.handleCheckOut = (items) => {
+    this.handleCheckOut = () => {
       this.setState({ showModal: true, bsSize: null });
     };
 
@@ -98,7 +98,7 @@ class Shop extends Component {
 const mapStateToProps = (state) => {
   const { user: { currentViewedShop } } = state;
 
-  const { seller, shipPlaces, Items } = currentViewedShop || {};
+  const { seller, Items } = currentViewedShop || {};
   const shop = _.pickBy(currentViewedShop, (value, key) => {
     return _.indexOf(['Items', 'shipPlaces', 'seller'], key) === -1
   });

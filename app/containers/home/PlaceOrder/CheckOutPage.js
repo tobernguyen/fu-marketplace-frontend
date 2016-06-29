@@ -58,6 +58,10 @@ const mapStateToProps = (state) => {
   }
 };
 
+CheckOutPage.propTypes = {
+  removeItemFromCart: PropTypes.func.isRequired
+}
+
 export default connect(mapStateToProps, {
   removeItemFromCart
 })(CheckOutPage)

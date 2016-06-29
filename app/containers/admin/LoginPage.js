@@ -18,17 +18,12 @@ function validate(values) {
   return hasErrors && errors;
 }
 
-const mapStateToProps = (state) => {
-
-};
-
-
 const reduxFormConfig = {
   form: 'LoginForm',
   fields: ['email', 'password'],
   validate
 };
 
-export default reduxForm(reduxFormConfig, mapStateToProps, {
+export default reduxForm(reduxFormConfig, undefined, {
   signInAdmin
 })(LoginForm);

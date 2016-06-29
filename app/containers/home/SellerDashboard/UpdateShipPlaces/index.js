@@ -49,6 +49,11 @@ const mapStateToProps = (state) => {
   }
 };
 
+UpdateShipPlaces.propTypes = {
+  toggleShipPlace:	      PropTypes.func.isRequired,
+  updateShipPlaces:	      PropTypes.func.isRequired,
+  resetUpdatedItemStatus:	PropTypes.func.isRequired
+}
 
 export default connect(mapStateToProps, {
   toggleShipPlace,

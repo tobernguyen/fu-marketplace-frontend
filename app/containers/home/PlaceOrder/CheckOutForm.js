@@ -1,4 +1,4 @@
-import { reduxForm, addArrayValue } from 'redux-form'
+import { reduxForm } from 'redux-form'
 import FormCheckOut from 'app/components/home/FormCheckOut';
 
 export const fields = [

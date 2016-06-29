@@ -46,6 +46,9 @@ const mapStateToProps = (state) => {
   }
 };
 
+UpdateShop.propTypes = {
+  updateShopInfo: PropTypes.func.isRequired
+}
 
 export default connect(mapStateToProps, {
   updateShopInfo

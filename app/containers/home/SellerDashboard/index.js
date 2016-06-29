@@ -57,7 +57,7 @@ class SellerDashboard extends Component {
                 sellerMode={true}
                 uploadShopCover={this.handleUploadShopCover}
                 uploadShopAvatar={this.handleUploadShopAvatar} />
-              <SellingItemList shopID={this.state.shopID} sellerMode={true} />
+              <SellingItemList shopID={parseInt(this.state.shopID)} sellerMode={true} />
             </div>
           </div>
           <div className="col-md-3">

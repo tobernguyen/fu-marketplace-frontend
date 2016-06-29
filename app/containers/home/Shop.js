@@ -33,7 +33,7 @@ class Shop extends Component {
       this.setState({ showModal: false, item: null });
       this.props.clearOrderResult();
       this.setState({ showModal: false });
-    }
+    };
 
     this.handleExpressOrder = (formData) => {
       const { shopID } = this.props.params;
@@ -82,7 +82,7 @@ class Shop extends Component {
         {this.state.shopValid && <div>
           <BlockShopHeader shop={this.props.shop} sellerMode={false} />
           <SellingItemList
-            shopID={this.props.params.shopID}
+            shopID={parseInt(this.props.params.shopID)}
             sellerMode={false}
             checkOut={this.handleCheckOut}
             buyNow={this.handleBuyNow} />
@@ -98,15 +98,14 @@ class Shop extends Component {
 const mapStateToProps = (state) => {
   const { user: { currentViewedShop } } = state;
 
-  const { seller, Items } = currentViewedShop || {};
+  const { seller } = currentViewedShop;
   const shop = _.pickBy(currentViewedShop, (value, key) => {
     return _.indexOf(['Items', 'shipPlaces', 'seller'], key) === -1
   });
 
   return {
     shop: shop,
-    seller: seller,
-    sellingItems: Items
+    seller: seller
   }
 };
 

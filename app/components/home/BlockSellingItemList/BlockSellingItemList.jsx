@@ -21,7 +21,7 @@ export default class BlockSellingItemList extends Component {
     this.pageChanged = (eventKey) => {
       this.setState({
         activePage: eventKey,
-        pagedItems: _.slice(this.state.items, (eventKey - 1) * 4, (eventKey * 4))
+        pagedItems: _.slice(this.state.items, (eventKey - 1) * 8, (eventKey * 8))
       })
     };
 
@@ -36,10 +36,10 @@ export default class BlockSellingItemList extends Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps.items && nextProps.items.length > 0) {
       this.setState({
-        totalPage: Math.ceil(nextProps.items.length / 4),
+        totalPage: Math.ceil(nextProps.items.length / 8),
         items: nextProps.items,
         activeKey: 1,
-        pagedItems: _.slice(nextProps.items, 0, 4)
+        pagedItems: _.slice(nextProps.items, 0, 8)
       })
     }
   }
@@ -87,11 +87,11 @@ export default class BlockSellingItemList extends Component {
           )}
         </div>
         <div className="footer clearfix">
-          <Pagination
+          {this.state.totalPage > 1 && <Pagination
             bsSize="small"
             items={this.state.totalPage}
             activePage={this.state.activePage}
-            onSelect={this.pageChanged} />
+            onSelect={this.pageChanged} />}
         </div>
       </div>
     )

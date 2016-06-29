@@ -117,19 +117,19 @@ export default class BlockShopHeader extends Component {
           </div>
           <div className="col-md-12 shop-nav-wrapper">
             <div className="row">
-              <div className="col-md-3 col-md-offset-3">
+              <div className="col-md-5 col-md-offset-3">
                 <div className="row shop-basic-info">
                   <h4 className="title">{name}</h4>
                   <span className={classNames('status', { 'opening' : opening})}><i className="fa fa fa-circle"/> { opening ? 'Đang mở cửa': 'Đang đóng cửa' }</span>
                 </div>
               </div>
-              <div className="col-md-3">
+              <div className="col-md-2">
                 <ul className="nav shop-info">
-                  <li><i className="fa fa-map-marker" /> {address}</li>
+                  <li><i className="fa fa-map-marker" /> C305</li>
                   <li><i className="fa fa-mobile" /> 01262338766</li>
                 </ul>
               </div>
-              <div className="col-md-3">
+              <div className="col-md-2">
                 <ul className="nav shop-info">
                   <li><i className="fa fa-envelope-o" /> hieutdse02289</li>
                   <li><i className="fa fa-facebook-official" /> hyhy</li>

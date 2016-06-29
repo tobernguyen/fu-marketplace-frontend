@@ -5,7 +5,7 @@ import { getImageURLWithTimestamp } from 'app/helpers/image';
 
 const INITIAL_STATE = {
   currentUser: {},
-  currentViewedShop: null,
+  currentViewedShop: {},
   cartItems: []
 };
 

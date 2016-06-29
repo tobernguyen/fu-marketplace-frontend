@@ -8,8 +8,9 @@ class SellingItemList extends Component {
   constructor(props) {
     super(props);
 
-    if (this.props.shopID) {
-      this.props.getSellerShopItems(this.props.shopID);
+    const { shopID, sellerMode } = this.props;
+    if (sellerMode) {
+      this.props.getSellerShopItems(shopID);
     }
 
     this.handleAddToCart = (item) => {
@@ -32,18 +33,24 @@ class SellingItemList extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  const { shop, user } = state;
-  return {
-    sellingItems: shop.sellingItems,
-    cartItems: user.cartItems
+const mapStateToProps = (state, ownProps) => {
+  const { shop, user: { cartItems, currentViewedShop } } = state;
+  if (ownProps.sellerMode) {
+    return {
+      sellingItems: shop.sellingItems
+    }
+  } else {
+    return {
+      cartItems: cartItems,
+      sellingItems: currentViewedShop.items || []
+    }
   }
+
 };
 
 SellingItemList.propTypes = {
   sellerMode: PropTypes.bool.isRequired,
-  checkOut: PropTypes.func.isRequired,
-  buyNow: PropTypes.func.isRequired
+  shopID: PropTypes.number.isRequired
 };
 
 export default connect(mapStateToProps, {

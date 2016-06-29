@@ -1,12 +1,23 @@
 import React, { Component, PropTypes } from 'react';
 import CheckOutForm from './CheckOutForm';
 import { Modal } from 'react-bootstrap';
+import _ from 'lodash';
 
 class CheckOutPage extends Component {
   constructor(props) {
     super(props);
     this.handleCheckOutSubmit = (formValues) => {
-      console.log(formValues);
+      const orderValues = _.assign({}, formValues, {
+        note: formValues.note,
+        shipAddress: formValues.shipAddress,
+        items: _.map(formValues.items, (item) => ({
+          id: item.id,
+          quantity: item.quantity,
+          note: item.note
+        }))
+      });
+      // TODO:
+      console.log(orderValues);
     }
   }
 

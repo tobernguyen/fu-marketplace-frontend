@@ -3,10 +3,12 @@ const webpack = require('webpack');
 const merge = require('webpack-merge');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const CompressionPlugin = require('compression-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const TARGET = process.env.npm_lifecycle_event;
 const pkg = require('./package.json');
 process.env.BABEL_ENV = TARGET;
+
 
 const PATHS = {
   app: path.join(__dirname, 'app'),
@@ -41,10 +43,6 @@ const common = {
       {
         test: /\.(png|jpg|gif)$/,
         loader: 'url-loader?limit=8192'
-      },
-      {
-        test: /\.css$/,
-        loader: 'style!css'
       },
       {
         test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,
@@ -106,12 +104,11 @@ if(TARGET === 'start' || !TARGET) {
 }
 
 if(TARGET === 'build') {
-  const entry = {};
-  entry['vendor'] = Object.keys(pkg.dependencies);
-  const env = {};
-  env['process.env.NODE_ENV'] = JSON.stringify('production');
   module.exports = merge(common, {
-    entry: entry,
+    entry: {
+      app: PATHS.app,
+      vendor: Object.keys(pkg.dependencies)
+    },
     except: ['webpackJsonp'],
     devtool: 'source-map',
     output: {
@@ -119,22 +116,19 @@ if(TARGET === 'build') {
       filename: '[name].[chunkhash].js',
       chunkFilename: '[chunkhash].js'
     },
-    module: {
-      loaders: [
-        {
-          test: /\.scss$/,
-          loader: ExtractTextPlugin.extract('style', 'css!sass'),
-          include: PATHS.app
-        }
-      ]
-    },
     plugins: [
-      new ExtractTextPlugin('[name].[chunkhash].css'),
       new CleanWebpackPlugin([PATHS.build], {
         root: process.cwd()
       }),
+      new ExtractTextPlugin('styles.[chunkhash].css'),
       new webpack.optimize.CommonsChunkPlugin({
         names: ['vendor','manifest']
+      }),
+      new webpack.DefinePlugin({
+        'process.env': {
+          // This affects react lib size
+          'NODE_ENV': JSON.stringify('production')
+        }
       }),
       new webpack.optimize.UglifyJsPlugin({
         beautify: false,
@@ -149,12 +143,25 @@ if(TARGET === 'build') {
           keep_fnames: true
         }
       }),
-      new webpack.DefinePlugin(env)
+      new CompressionPlugin({
+        asset: '[file].gz',
+        minRatio: 0,
+        regExp: /\.(js|html|css)$/
+      })
     ],
     resolve: {
       alias: {
         config: path.join(__dirname, 'config', 'production')
       }
+    },
+    module: {
+      loaders: [
+        {
+          test: /\.scss$/,
+          loader: ExtractTextPlugin.extract('style', 'css!sass'),
+          include: PATHS.app
+        }
+      ]
     }
   });
 }

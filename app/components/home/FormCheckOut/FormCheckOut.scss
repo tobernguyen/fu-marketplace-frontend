@@ -1,0 +1,72 @@
+.form-check-out {
+  table.order-items {
+    tbody {
+      tr {
+        td.item {
+          width: 200px;
+          .as-table {
+            display: table;
+            width: 100%;
+            > div {
+              > div {
+                display: table-cell;
+                vertical-align: top;
+              }
+            }
+          }
+          .image {
+            width: 50px;
+            img {
+              width: 50px;
+            }
+
+            .thumbnail {
+              padding: 2px;
+              border-radius: 2px;
+              margin-bottom: 5px;
+            }
+          }
+          .info {
+            padding: 0 5px;
+            h4 {
+              font-size: 15px;
+              font-weight: 700;
+              margin: 5px 0;
+            }
+            p {
+              font-size: 13px;
+              color: #666;
+              margin-bottom: 5px;
+            }
+          }
+        }
+
+        td.quantity {
+          width: 100px;
+          .input-group {
+            .input-group-btn {
+              .btn-number {
+                padding: 2px 5px;
+              }
+            }
+            .input-number {
+              padding: 2px;
+              height: 26px;
+              text-align: center;
+            }
+          }
+        }
+        td.delete {
+          .btn {
+            padding: 5px 8px;
+          }
+        }
+        td.note {
+          textarea {
+            font-size: 13px;
+          }
+        }
+      }
+    }
+  }
+}

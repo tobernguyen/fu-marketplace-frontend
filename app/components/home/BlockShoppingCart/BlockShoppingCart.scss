@@ -1,8 +1,13 @@
 .block-shopping-cart {
   float: right;
 
+  .has-pointer {
+    cursor: pointer;
+  }
   a {
     color: #666;
+    cursor: default;
+    text-decoration: none;
 
     h4 {
       margin: 5px 0 0;

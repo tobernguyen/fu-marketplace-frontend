@@ -13,12 +13,12 @@ class SellingItemList extends Component {
   }
 
   render() {
-    const { addToCard, buyNow } = this.props;
+    const { checkOut, buyNow } = this.props;
     return (
       <BlockSellingItemList
         items={this.props.sellingItems}
         shopID={this.props.shopID}
-        addToCard={addToCard}
+        checkOut={checkOut}
         buyNow={buyNow}
         sellerMode={this.props.sellerMode} />
     )
@@ -34,7 +34,7 @@ const mapStateToProps = (state) => {
 
 SellingItemList.propTypes = {
   sellerMode: PropTypes.bool.isRequired,
-  addToCard: PropTypes.func.isRequired,
+  checkOut: PropTypes.func.isRequired,
   buyNow: PropTypes.func.isRequired
 };
 

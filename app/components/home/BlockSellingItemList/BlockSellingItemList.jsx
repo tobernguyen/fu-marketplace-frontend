@@ -32,6 +32,13 @@ export default class BlockSellingItemList extends Component {
       this.setState({
         cartItems: cartItems
       });
+    };
+
+    this.handleCheckOut = () => {
+      const { cartItems } = this.state;
+      if (cartItems.length) {
+        this.props.checkOut(cartItems);
+      }
     }
   }
 
@@ -67,7 +74,7 @@ export default class BlockSellingItemList extends Component {
             </ul>
           </div>
           {!sellerMode && <div className="col-md-3 col-xs-4 row">
-            <BlockShoppingCart cartItems={this.state.cartItems} />
+            <BlockShoppingCart cartItems={this.state.cartItems} checkOut={this.handleCheckOut} />
           </div>}
         </div>
         <div className="body clearfix">

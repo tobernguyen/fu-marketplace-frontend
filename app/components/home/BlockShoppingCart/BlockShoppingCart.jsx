@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import './BlockShoppingCart.scss';
 import { FormattedMessage, FormattedPlural, FormattedNumber, injectIntl, intlShape } from 'react-intl';
 import { messages } from './BlockShoppingCart.i18n';
+import classNames from 'classnames';
 
 class BlockShoppingCart extends Component {
 
@@ -32,7 +33,7 @@ class BlockShoppingCart extends Component {
   render() {
     return (
       <div className="block-shopping-cart">
-        <a href="#">
+        <a onClick={this.props.checkOut} className={classNames({'has-pointer': this.props.cartItems.length > 0})}>
           <h4>
             <span className="total">
               {this.calculateTotal()}₫
@@ -48,7 +49,8 @@ class BlockShoppingCart extends Component {
 
 BlockShoppingCart.propTypes = {
   intl:       intlShape.isRequired,
-  cartItems:  PropTypes.array.isRequired
+  cartItems:  PropTypes.array.isRequired,
+  checkOut:   PropTypes.func.isRequired
 };
 
 export default injectIntl(BlockShoppingCart)

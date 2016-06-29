@@ -7,6 +7,7 @@ import { getUserShop } from 'app/actions/user';
 import { Link } from 'react-router';
 import _ from 'lodash';
 import BuyNowForm from './PlaceOrder/BuyNowForm';
+import CheckOutPage from './PlaceOrder/CheckOutPage';
 import classNames from 'classnames';
 
 class Shop extends Component {
@@ -15,28 +16,20 @@ class Shop extends Component {
 
     const { shopID } = this.props.params;
     if (!isNaN(shopID)) {
-      this.state = {
-        shopValid: true,
-        showModal: false
-      };
+      this.state = { shopValid: true, showModal: false };
       this.props.getUserShop(shopID);
     }
 
-    this.handleAddToCard = (item) => {
-      console.log('Add to card', item);
+    this.handleCheckOut = (items) => {
+      this.setState({ showModal: true, bsSize: null, items: items });
     };
 
     this.handleBuyNow = (item) => {
-      this.setState({
-        showModal: true,
-        bsSize: "sm",
-        item: item
-      });
-      console.log('Buy now', item)
+      this.setState({ showModal: true, bsSize: 'sm', item: item });
     };
 
     this.close = () => {
-      this.setState({ showModal: false });
+      this.setState({ showModal: false, item: null, items: null });
     }
   }
 
@@ -50,6 +43,20 @@ class Shop extends Component {
   }
 
   render() {
+    let orderForm;
+    if (this.state.item) {
+      orderForm = <BuyNowForm
+        show={this.state.showModal}
+        onHide={this.close}
+        bsSize={this.state.bsSize}
+        item={this.state.item} />
+    } else if (this.state.items) {
+      orderForm = <CheckOutPage
+        show={this.state.showModal}
+        onHide={this.close}
+        bsSize={this.state.bsSize}
+        items={this.state.items} />
+    }
     return (
       <div className={classNames('shop-detail-modal', {'dim': this.state.showModal})}>
         {this.state.shopValid && <div>
@@ -57,15 +64,11 @@ class Shop extends Component {
           <SellingItemList
             shopID={this.props.params.shopID}
             sellerMode={false}
-            addToCard={this.handleAddToCard}
+            checkOut={this.handleCheckOut}
             buyNow={this.handleBuyNow} />
           <Link to='/' className="close"><span>×</span></Link>
         </div>}
-        <BuyNowForm
-          show={this.state.showModal}
-          onHide={this.close}
-          bsSize={this.state.bsSize}
-          item={this.state.item} />
+        {orderForm}
       </div>
     );
   }

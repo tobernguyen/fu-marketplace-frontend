@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import './BlockSellingItemForUser.scss';
+import classNames from 'classnames';
 
 export default class BlockSellingItemForUser extends Component {
   constructor(props) {
@@ -15,6 +16,28 @@ export default class BlockSellingItemForUser extends Component {
     this.handleBuyNow = () => {
       buyNow(item);
     };
+  }
+
+  renderAddCartButton(itemID) {
+    const { cartItems } = this.props;
+
+    const itemIndex = _.findIndex(cartItems, (cartItem) =>
+      cartItem.id === itemID
+    );
+
+    const isAddedToCart = (itemIndex !== -1);
+
+
+    return (
+      <div className="add-to-cart">
+          <span
+            onClick={this.handleAddToCard}
+            title={ isAddedToCart ? 'Remove from cart' : 'Add to cart' }
+            className={classNames({ 'added': isAddedToCart })}>
+            <i className="fa fa-shopping-bag" />
+          </span>
+      </div>
+    );
   }
 
   render() {
@@ -49,11 +72,7 @@ export default class BlockSellingItemForUser extends Component {
                     </div>
                   </td>
                   <td>
-                    <div className="add-to-cart">
-                      <span onClick={this.handleAddToCard}>
-                        <i className="fa fa-shopping-bag" />
-                      </span>
-                    </div>
+                    {this.renderAddCartButton(item.id)}
                   </td>
                 </tr>
                 </tbody>
@@ -68,7 +87,8 @@ export default class BlockSellingItemForUser extends Component {
 
 
 BlockSellingItemForUser.propTypes = {
-  item: PropTypes.object.isRequired,
-  addToCard: PropTypes.func.isRequired,
-  buyNow: PropTypes.func.isRequired
+  item:       PropTypes.object.isRequired,
+  addToCard:  PropTypes.func.isRequired,
+  buyNow:     PropTypes.func.isRequired,
+  cartItems:  PropTypes.array.isRequired
 };

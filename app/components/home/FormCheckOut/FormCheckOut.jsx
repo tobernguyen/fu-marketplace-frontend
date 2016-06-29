@@ -26,7 +26,7 @@ class FormCheckOut extends Component {
             <textarea
               type="text"
               className="form-control"
-              placeholder="Con gai ship, ship truoc 12h"
+              placeholder="Con gai ship, ship truoc 12h, mang theo tien le"
               {...note} />
           </div>
 
@@ -80,7 +80,7 @@ class FormCheckOut extends Component {
                     <textarea
                       type="text"
                       className="form-control"
-                      placeholder="Add your special request for this item"
+                      placeholder="Special request for this item"
                       {...item.note} />
                   </td>
                   <td className="delete">

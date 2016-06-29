@@ -28,7 +28,16 @@ export default class BlockSellingItemList extends Component {
 
     this.handleAddToCard = (item) => {
       let cartItems = this.state.cartItems;
-      cartItems[cartItems.length] = item;
+      const itemIndex = _.findIndex(cartItems, (cartItem) =>
+        cartItem.id === item.id
+      );
+
+      if (itemIndex === -1) {
+        cartItems[cartItems.length] = item;
+      } else {
+        _.pullAt(cartItems, [itemIndex]);
+      }
+
       this.setState({
         cartItems: cartItems
       });
@@ -90,7 +99,8 @@ export default class BlockSellingItemList extends Component {
               item={item}
               addToCard={this.handleAddToCard}
               buyNow={this.props.buyNow}
-              shopID={this.props.shopID}/>
+              shopID={this.props.shopID}
+              cartItems={this.state.cartItems} />
           }}
           )}
         </div>

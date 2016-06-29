@@ -28,10 +28,14 @@
     .add-to-cart {
       span {
         text-align: center;
-        background-color: $primary-color;
+        background-color: $dark-color;
         color: #ffffff;
         padding: 6px 10px;
         cursor: pointer;
+      }
+      .added {
+        background-color: $primary-color;
+
       }
     }
 

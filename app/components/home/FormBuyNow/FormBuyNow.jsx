@@ -1,8 +1,16 @@
 import React, { Component } from 'react';
 import { Modal } from 'react-bootstrap';
 import './FormBuyNow.scss';
+import AsyncResultCode from 'app/shared/asyncResultCodes';
 
 export default class FormBuyNow extends Component {
+  constructor(props) {
+    super(props);
+
+    this.increaseQuantity = (e, quantity) => {
+      quantity.onChange(Number(quantity.value) + 1);
+    }
+  }
   render() {
     const {
       fields: { shipAddress, quantity, note },
@@ -57,13 +65,13 @@ export default class FormBuyNow extends Component {
               <div className="col-sm-9">
                 <div className="input-group">
                   <span className="input-group-btn">
-                      <button type="button" className="btn btn-info btn-number" onClick={() => quantity.onChange(--quantity.value)}>
+                      <button type="button" className="btn btn-info btn-number" onClick={() =>{ if (quantity.value > 0 ) { quantity.onChange(Number(quantity.value) - 1)}}}>
                         <span className="glyphicon glyphicon-minus"/>
                       </button>
                   </span>
                   <input type="text" className="form-control input-number" {...quantity}/>
                   <span className="input-group-btn">
-                      <button type="button" className="btn btn-success btn-number" onClick={() => quantity.onChange(++quantity.value)}>
+                      <button type="button" className="btn btn-success btn-number" onClick={() => quantity.onChange(Number(quantity.value) + 1)}>
                           <span className="glyphicon glyphicon-plus"/>
                       </button>
                   </span>
@@ -86,8 +94,8 @@ export default class FormBuyNow extends Component {
                   </div>
               </div>
             </div>
-            {placeOrderResult === 'SUCCESS' && <div className="alert alert-success">Order has been placed</div>}
-            {placeOrderResult === 'FAIL' && <div className="alert alert-danger">Error occured!</div>}
+            {placeOrderResult === AsyncResultCode.PLACE_ORDER_SUCCESS && <div className="alert alert-success">Order has been placed</div>}
+            {placeOrderResult === AsyncResultCode.PLACE_ORDER_FAIL && <div className="alert alert-danger">Error occured!</div>}
             <button type="submit" className="btn btn-danger btn-block" disabled={submitting || !dirty}>
               Place order
             </button>

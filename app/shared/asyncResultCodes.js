@@ -18,5 +18,7 @@ export default {
   UPDATE_SHOP_AVATAR_SUCCESS: 'UPDATE_SHOP_AVATAR_SUCCESS',
   UPDATE_SHOP_AVATAR_FAIL: 'UPDATE_SHOP_AVATAR_FAIL',
   FILE_TOO_BIG: 'error.upload.file_too_big',
-  NOT_A_PENDING_REQUEST: 'error.params.not_a_pending_request'
+  NOT_A_PENDING_REQUEST: 'error.params.not_a_pending_request',
+  PLACE_ORDER_SUCCESS: 'PLACE_ORDER_SUCCESS',
+  PLACE_ORDER_FAIL : 'PLACE_ORDER_FAIL'
 }

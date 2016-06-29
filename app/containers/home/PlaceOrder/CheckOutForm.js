@@ -19,6 +19,10 @@ const validate = values => {
     errors.shipAddress = 'shipAddress required';
   }
 
+  if (values.items && values.items.length === 0) {
+    errors.items = 'no item to check out';
+  }
+
   return errors;
 };
 

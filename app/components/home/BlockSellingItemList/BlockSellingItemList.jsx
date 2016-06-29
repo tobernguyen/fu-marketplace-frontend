@@ -15,8 +15,7 @@ export default class BlockSellingItemList extends Component {
       activePage: 1,
       totalPage: 0,
       items: [],
-      pagedItems: [],
-      cartItems: []
+      pagedItems: []
     };
 
     this.pageChanged = (eventKey) => {
@@ -26,27 +25,10 @@ export default class BlockSellingItemList extends Component {
       })
     };
 
-    this.handleAddToCard = (item) => {
-      let cartItems = this.state.cartItems;
-      const itemIndex = _.findIndex(cartItems, (cartItem) =>
-        cartItem.id === item.id
-      );
-
-      if (itemIndex === -1) {
-        cartItems[cartItems.length] = item;
-      } else {
-        _.pullAt(cartItems, [itemIndex]);
-      }
-
-      this.setState({
-        cartItems: cartItems
-      });
-    };
-
     this.handleCheckOut = () => {
-      const { cartItems } = this.state;
+      const { cartItems } = this.props;
       if (cartItems.length) {
-        this.props.checkOut(cartItems);
+        this.props.checkOut();
       }
     }
   }
@@ -83,7 +65,7 @@ export default class BlockSellingItemList extends Component {
             </ul>
           </div>
           {!sellerMode && <div className="col-md-3 col-xs-4 row">
-            <BlockShoppingCart cartItems={this.state.cartItems} checkOut={this.handleCheckOut} />
+            <BlockShoppingCart cartItems={this.props.cartItems} checkOut={this.handleCheckOut} />
           </div>}
         </div>
         <div className="body clearfix">
@@ -97,10 +79,10 @@ export default class BlockSellingItemList extends Component {
             return <BlockSellingItemForUser
               key={item.id}
               item={item}
-              addToCard={this.handleAddToCard}
+              addToCard={this.props.addToCart}
               buyNow={this.props.buyNow}
               shopID={this.props.shopID}
-              cartItems={this.state.cartItems} />
+              cartItems={this.props.cartItems} />
           }}
           )}
         </div>
@@ -118,5 +100,5 @@ export default class BlockSellingItemList extends Component {
 
 BlockSellingItemList.propTypes = {
   items: PropTypes.array.isRequired,
-  sellerMode: PropTypes.bool.isRequired
+  sellerMode: PropTypes.bool.isRequired,
 };

@@ -5,11 +5,12 @@ import { getImageURLWithTimestamp } from 'app/helpers/image';
 
 const INITIAL_STATE = {
   currentUser: {},
-  currentViewedShop: null
+  currentViewedShop: null,
+  cartItems: []
 };
 
 export const user = (state = INITIAL_STATE, action) => {
-  const { type, response, error } = action;
+  const { type, response, error, payload } = action;
   switch (type) {
     case ActionTypes.CURRENT_USER_SUCCESS:
       return _.assign({}, state, {
@@ -45,6 +46,32 @@ export const user = (state = INITIAL_STATE, action) => {
     case UserActionTypes.UPLOAD_IDENTITY_PHOTO_SUCCESS:
       return _.assign({}, state, {
         identityPhoto: getImageURLWithTimestamp(response.identityPhoto)
+      });
+    case UserActionTypes.ADD_ITEM_TO_CART:
+      const currentCartItems = state.cartItems;
+      const addedItem = payload.item;
+      const itemIndex = _.findIndex(currentCartItems, (cartItem) =>
+        cartItem.id === addedItem.id
+      );
+      if (itemIndex === -1) {
+        return _.assign({}, state, {
+          cartItems: [
+            ...state.cartItems,
+            addedItem
+          ]
+        });
+      } else {
+        return _.assign({}, state, {
+          cartItems: currentCartItems.filter(item =>
+            item.id !== addedItem.id
+          )
+        });
+      }
+    case UserActionTypes.REMOVE_ITEM_FROM_CART:
+      return _.assign({}, state, {
+        cartItems: state.cartItems.filter(item =>
+          item.id !== payload.itemID
+        )
       });
     default:
       return state;

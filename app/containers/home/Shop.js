@@ -21,7 +21,7 @@ class Shop extends Component {
     }
 
     this.handleCheckOut = (items) => {
-      this.setState({ showModal: true, bsSize: null, items: items });
+      this.setState({ showModal: true, bsSize: null });
     };
 
     this.handleBuyNow = (item) => {
@@ -29,7 +29,7 @@ class Shop extends Component {
     };
 
     this.close = () => {
-      this.setState({ showModal: false, item: null, items: null });
+      this.setState({ showModal: false, item: null });
     }
   }
 
@@ -50,12 +50,11 @@ class Shop extends Component {
         onHide={this.close}
         bsSize={this.state.bsSize}
         item={this.state.item} />
-    } else if (this.state.items) {
+    } else {
       orderForm = <CheckOutPage
         show={this.state.showModal}
         onHide={this.close}
-        bsSize={this.state.bsSize}
-        items={this.state.items} />
+        bsSize={this.state.bsSize} />
     }
     return (
       <div className={classNames('shop-detail-modal', {'dim': this.state.showModal})}>

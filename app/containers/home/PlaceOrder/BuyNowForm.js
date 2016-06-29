@@ -12,6 +12,8 @@ const validate = values => {
 
   if (!values.quantity) {
     errors.quantity = 'quantity required';
+  } else if (values.quantity && isNaN(Number(values.quantity))) {
+    errors.quantity = 'number only';
   }
 
   return errors;
@@ -20,8 +22,11 @@ const validate = values => {
 const mapStateToProps = (state) => {
   return {
     initialValues: {
-      quantity:  1
-    }
+      quantity:  1,
+      note: '',
+      shipAddress: ''
+    },
+    placeOrderResult: state.order.expressOrderResult
   }
 };
 

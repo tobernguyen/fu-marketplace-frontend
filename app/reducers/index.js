@@ -9,12 +9,14 @@ import { common } from './common';
 import { shop } from './shop';
 import { item } from './item';
 import { feed } from './feed';
+import { order } from './order';
 
 const rootReducer = combineReducers({
   auth,
   user,
   shop,
   item,
+  order,
   admin,
   feed,
   routing,

@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { updateModalMode, updateModalSize } from '../../actions/common';
 import SellingItemList from './SellingItemList';
 import { getUserShop } from 'app/actions/user';
+import { placeOrder, clearOrderResult } from 'app/actions/order';
 import { Link } from 'react-router';
 import _ from 'lodash';
 import BuyNowForm from './PlaceOrder/BuyNowForm';
@@ -30,7 +31,26 @@ class Shop extends Component {
 
     this.close = () => {
       this.setState({ showModal: false, item: null });
+      this.props.clearOrderResult();
+      this.setState({ showModal: false });
     }
+
+    this.handleExpressOrder = (formData) => {
+      const { shopID } = this.props.params;
+      const { item } = this.state;
+      const order = {
+        items: [
+          {
+            id: item.id,
+            quantity: formData.quantity,
+            note: formData.note
+          }
+        ],
+        note: '',
+        shipAddress: formData.shipAddress
+      };
+      this.props.placeOrder(shopID, order);
+    };
   }
 
   componentWillMount() {
@@ -49,7 +69,8 @@ class Shop extends Component {
         show={this.state.showModal}
         onHide={this.close}
         bsSize={this.state.bsSize}
-        item={this.state.item} />
+        item={this.state.item}
+        onSubmit={this.handleExpressOrder} />
     } else {
       orderForm = <CheckOutPage
         show={this.state.showModal}
@@ -92,5 +113,7 @@ const mapStateToProps = (state) => {
 export default connect(mapStateToProps, {
   updateModalSize,
   updateModalMode,
-  getUserShop
+  getUserShop,
+  placeOrder,
+  clearOrderResult
 })(Shop)

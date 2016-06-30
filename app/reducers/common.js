@@ -9,7 +9,7 @@ const INITIAL_STATE = {
 };
 
 export const common = (state = INITIAL_STATE, action) => {
-  const { type, payload } = action;
+  const { type, payload, response } = action;
   switch (type) {
     case CommonActionTypes.UPDATE_MODAL_SIZE:
       return _.merge({}, state, {
@@ -19,9 +19,10 @@ export const common = (state = INITIAL_STATE, action) => {
       return _.merge({}, state, {
         modalMode: payload.modalMode
       });
-    case CommonActionTypes.GET_SHIP_PLACES_SUCCESS:
+    case CommonActionTypes.GET_METADATA_SUCCESS:
       return _.merge({}, state, {
-        shipPlaces: action.response.shipPlaces
+        shipPlaces: response.shipPlaces,
+        categories: response.categories
       });
     default:
       return state;

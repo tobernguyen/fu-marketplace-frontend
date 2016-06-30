@@ -46,7 +46,8 @@
     "redux": "^3.5.2",
     "redux-form": "^5.2.5",
     "redux-logger": "^2.6.1",
-    "redux-thunk": "^2.1.0"
+    "redux-thunk": "^2.1.0",
+    "reselect": "^2.5.1"
   },
   "devDependencies": {
     "font-awesome": "^4.6.1",

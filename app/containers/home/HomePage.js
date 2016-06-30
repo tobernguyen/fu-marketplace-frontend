@@ -8,8 +8,8 @@ import CarouselPinnedItems from 'app/components/home/CarouselPinnedItems';
 import BlockBookmarks from 'app/components/home/BlockBookmarks';
 import ShopsFeed from './ShopsFeed';
 import { getCurrentUser, signOutGoogle } from '../../actions';
-import { getShipPlaces } from 'app/actions/common';
-import { getItemCategories } from 'app/actions/item';
+import { getMetadata } from 'app/actions/common';
+import { getCategories, getShipPlaces, getUser } from 'app/selectors';
 
 class HomePage extends Component {
   constructor(props) {
@@ -22,8 +22,7 @@ class HomePage extends Component {
 
   componentWillMount() {
     this.props.getCurrentUser();
-    this.props.getItemCategories();
-    this.props.getShipPlaces();
+    this.props.getMetadata();
   }
 
   componentWillReceiveProps(nextProps) {
@@ -55,7 +54,6 @@ class HomePage extends Component {
     }
 
     const { currentUser, onSignOut, categories, shipPlaces } = this.props;
-
     return (
       <div className="home-page">
         <Header onSignOut={onSignOut} currentUser={currentUser} />
@@ -89,14 +87,14 @@ HomePage.propTypes = {
 };
 
 const mapStateToProps = (state) => {
-  const { user, common, item } = state;
+  const { user, common } = state;
   return {
-    currentUser:  user.currentUser,
+    currentUser:  getUser(user),
     error:        user.error,
     modalSize:    common.modalSize,
     modalMode:    common.modalMode,
-    shipPlaces:   common.shipPlaces,
-    categories:   item.categories
+    shipPlaces:   getShipPlaces(common),
+    categories:   getCategories(common)
   }
 };
 
@@ -104,6 +102,5 @@ const mapStateToProps = (state) => {
 export default connect(mapStateToProps, {
   getCurrentUser,
   signOutGoogle,
-  getItemCategories,
-  getShipPlaces
+  getMetadata
 })(HomePage)

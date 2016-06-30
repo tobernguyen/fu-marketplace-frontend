@@ -9,7 +9,7 @@ import BlockBookmarks from 'app/components/home/BlockBookmarks';
 import ShopsFeed from './ShopsFeed';
 import { getCurrentUser, signOutGoogle } from '../../actions';
 import { getMetadata } from 'app/actions/common';
-import { getCategories, getShipPlaces, getUser } from 'app/selectors';
+import { getCategories, getShipPlaces, getUser, getAggregations } from 'app/selectors';
 
 class HomePage extends Component {
   constructor(props) {
@@ -53,15 +53,36 @@ class HomePage extends Component {
       childPage = children;
     }
 
-    const { currentUser, onSignOut, categories, shipPlaces } = this.props;
+    const {
+      currentUser,
+      onSignOut,
+      categories,
+      shipPlaces,
+      aggregations:
+        {
+          category,
+          shipPlace,
+          totalCategory,
+          totalShipPlace
+        }
+    } = this.props;
+
     return (
       <div className="home-page">
         <Header onSignOut={onSignOut} currentUser={currentUser} />
         <div className="container home-body">
           {(this.props.modalMode || !this.state.hasChildren) && <div className="row">
             <div className="col-md-3">
-              <BlockItemList categories={categories}/>
-              <BlockDormList shipPlaces={shipPlaces} />
+              <BlockItemList
+                categories={categories}
+                categoryCounter={category}
+                totalCategory={totalCategory} />
+
+              <BlockDormList
+                shipPlaces={shipPlaces}
+                shipPlaceCounter={shipPlace}
+                totalShipPlace={totalShipPlace} />
+              
               <BlockBookmarks />
             </div>
             <div className="col-md-9">
@@ -94,7 +115,8 @@ const mapStateToProps = (state) => {
     modalSize:    common.modalSize,
     modalMode:    common.modalMode,
     shipPlaces:   getShipPlaces(state),
-    categories:   getCategories(state)
+    categories:   getCategories(state),
+    aggregations: getAggregations(state)
   }
 };
 

@@ -1,10 +1,11 @@
 import { createSelector } from 'reselect';
 import _ from 'lodash';
 
-const categoriesSelector  = (state) => state.common.categories;
-const shipPlacesSelector  = (state) => state.common.shipPlaces;
-const currentUserSelector = (state) => state.user.currentUser;
-const shopsFeedSelector   = (state) => state.feed.shops;
+const categoriesSelector    = (state) => state.common.categories;
+const shipPlacesSelector    = (state) => state.common.shipPlaces;
+const currentUserSelector   = (state) => state.user.currentUser;
+const shopsFeedSelector     = (state) => state.feed.shops;
+const aggregationsSelector  = (state) => state.feed.aggregations;
 
 export const getCategories = createSelector(
   categoriesSelector,
@@ -56,5 +57,28 @@ export const getShopsFeed = createSelector(
     return _.map(newShops, (shop) => {
       return _.omit(shop, [ 'categoryIds', 'shipPlaceIds' ])
     });
+  }
+);
+
+export const getAggregations = createSelector(
+  aggregationsSelector,
+  (aggregations) => {
+    let { category, shipPlace } = aggregations;
+    category = _.mapValues(_.keyBy(category, 'key'), 'doc_count');
+    shipPlace = _.mapValues(_.keyBy(shipPlace, 'key'), 'doc_count');
+
+    const totalCategory = _.reduce(category, (sum, value) => {
+      return sum + value;
+    }, 0);
+
+    const totalShipPlace = _.reduce(shipPlace, (sum, value) => {
+      return sum + value;
+    }, 0);
+    return {
+      category,
+      shipPlace,
+      totalCategory,
+      totalShipPlace
+    }
   }
 );

@@ -1,18 +1,27 @@
 .block-item-list {
   .body {
-    ul {
-      li.item {
-        a {
-          padding: 8px 0;
-          span {
-            font-weight: 700;
-            color: #666;
-          }
+    .category-list {
+      padding-top: 10px;
+    }
+    .category-list .btn {
+      width: 50%;
+      color: #66757f;
+      text-align: left;
+      border: 0;
+      border-right: 1px dashed #c2ccd1;
 
-          &:hover {
-            background: none;
-          }
-        }
+      &:nth-child(2n) {
+        border-right: 0;
+      }
+
+      &:hover {
+        background-color: transparent;
+        text-decoration: underline;
+      }
+
+      .badge {
+        float: right;
+        background-color: #666;
       }
     }
   }

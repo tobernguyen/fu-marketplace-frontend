@@ -89,12 +89,12 @@ HomePage.propTypes = {
 const mapStateToProps = (state) => {
   const { user, common } = state;
   return {
-    currentUser:  getUser(user),
+    currentUser:  getUser(state),
     error:        user.error,
     modalSize:    common.modalSize,
     modalMode:    common.modalMode,
-    shipPlaces:   getShipPlaces(common),
-    categories:   getCategories(common)
+    shipPlaces:   getShipPlaces(state),
+    categories:   getCategories(state)
   }
 };
 

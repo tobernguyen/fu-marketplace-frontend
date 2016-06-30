@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import BlockShopFeedItem from 'app/components/home/BlockShopFeedItem';
 import { getShops } from 'app/actions/feed';
+import { getShopsFeed } from 'app/selectors';
 
 class ShopsFeed extends Component {
   constructor(props) {
@@ -14,7 +15,6 @@ class ShopsFeed extends Component {
 
   render() {
     const { shops } = this.props;
-
     return (
       <div>
         {shops.map((shop, key) => {
@@ -28,9 +28,8 @@ class ShopsFeed extends Component {
 }
 
 const mapStateToProps = (state) => {
-  const { feed: { shops } } = state;
   return {
-    shops: shops
+    shops: getShopsFeed(state)
   }
 };
 

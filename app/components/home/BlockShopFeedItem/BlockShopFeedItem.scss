@@ -24,12 +24,15 @@
         li {
           float: left;
           a {
-            padding: 2px 5px;
+            padding: 2px 8px;
             margin-right: 5px;
             color: $primary-text-color;
-            background-color: $primary-color;
-            color: #ffffff;
+            background-color: #eff1f5;
             border-radius: 3px;
+
+            &:hover {
+              background-color: #CCCCCC;
+            }
           }
         }
       }
@@ -40,12 +43,11 @@
       background: #f9f9f9;
       padding: 1em 10px;
       margin: 10px 0;
-      quotes: "\201C""\201D""\2018""\2019";
       border-radius: 3px;
     }
     .description:before {
       color: #ccc;
-      content: open-quote;
+      content: "\201C";
       font-size: 4em;
       line-height: 0.1em;
       margin-right: 0.25em;
@@ -59,11 +61,10 @@
           float: left;
 
           a {
-            color: $primary-text-color;
-            background-color: #eff1f5;
-            border-radius: 50%;
+            color: #666;
+            border: 1px dashed #CCC;
             margin-left: 5px;
-            padding: 5px 10px;
+            padding: 2px 8px;
           }
 
           a.active {

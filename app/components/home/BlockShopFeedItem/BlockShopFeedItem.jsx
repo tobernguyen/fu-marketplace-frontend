@@ -33,7 +33,7 @@ export default class BlockShopFeedItem extends Component {
   }
 
   render() {
-    const { shop: { id, name, description, categoryIds } } = this.props;
+    const { shop: { id, name, description, categories, shipPlaces } } = this.props;
 
     return (
       <div className="block row block-shop-feed-item">
@@ -57,13 +57,11 @@ export default class BlockShopFeedItem extends Component {
             </h3>
             <div className="category">
               <ul className="nav">
-                {categoryIds.map((category, key) => {
-                  return (
-                    <li key={key}>
-                      <a>{category}</a>
-                    </li>
-                  )
-                })}
+                {categories.map((category, key) =>
+                  <li key={key}>
+                    <a href="#">{category.name}</a>
+                  </li>
+                )}
               </ul>
             </div>
             <div className="description">
@@ -71,10 +69,12 @@ export default class BlockShopFeedItem extends Component {
             </div>
             <div className="ship-dorms">
               <ul className="nav">
-                <li><a href="#">A</a></li>
-                <li><a href="#" className="active">B</a></li>
-                <li><a href="#">D</a></li>
-                <li><a href="#">E</a></li>
+                {shipPlaces.map((shipPlace, key) =>
+                  <li key={key}>
+                    <a href="#">{shipPlace.name}</a>
+                  </li>
+                )}
+
               </ul>
               <i>Last updated: 23:51 05/06/2016</i>
             </div>

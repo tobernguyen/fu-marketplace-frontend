@@ -2,7 +2,7 @@ import * as ActionTypes from '../actions';
 import * as AdminActionTypes from '../actions/admin';
 import { accessTokenKey, adminAccessTokenKey, languageKey } from 'app/config';
 
-export default store => next => action => {
+export default () => next => action => {
   const { type, response, language } = action;
   switch (type) {
     case ActionTypes.GOOGLE_SIGN_IN_SUCCESS:

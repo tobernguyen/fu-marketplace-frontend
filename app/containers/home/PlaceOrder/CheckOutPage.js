@@ -21,8 +21,6 @@ class CheckOutPage extends Component {
           note: item.note
         }))
       });
-      // TODO: @dong.do: Invoke API
-      console.log(orderValues);
       this.props.placeOrder(shopID, orderValues);
     };
 
@@ -47,7 +45,7 @@ class CheckOutPage extends Component {
           <CheckOutForm
             submitOrder={this.handleCheckOutSubmit}
             removeFromCartItem={this.handleRemoveFromCartItem}
-            items={this.props.items} 
+            items={this.props.items}
             hideModal={this.props.onHide}/>
         </Modal.Body>
       </Modal>

@@ -31,6 +31,7 @@
     "bootstrap-css-only": "^3.3.6",
     "classnames": "^2.2.5",
     "halogen": "^0.2.0",
+    "intl": "^1.2.4",
     "lodash": "^4.13.1",
     "react": "^15.0.2",
     "react-bootstrap": "^0.29.4",

@@ -16,8 +16,20 @@ addLocaleData(vi);
 const store = configureStore();
 const history = syncHistoryWithStore(hashHistory, store);
 
+if (!global.Intl) {
+  require.ensure(['intl'], require => {
+    require('intl');
+    require('intl/locale-data/jsonp/en.js');
+    require('intl/locale-data/jsonp/vi.js');
+    start()
+  }, 'IntlBundle')
+} else {
+  start()
+}
 
-ReactDOM.render(
-  <Root store={store} history={history} />,
-  document.getElementById('root')
-);
+function start() {
+  ReactDOM.render(
+    <Root store={store} history={history} />,
+    document.getElementById('root')
+  )
+}

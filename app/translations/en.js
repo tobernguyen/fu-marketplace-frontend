@@ -86,6 +86,7 @@ export default {
   'orderList.tableHead.amount': 'Value',
   'orderList.tableHead.shipAddress': 'Address',
   'orderList.tableHead.status': 'Status',
+  'orderList.tableHead.action': 'Action',
   'orderList.tableBody.timeSuffix': 'ago',
   'orderList.tableBody.timeUnit.minute': 'minute',
   'orderList.tableBody.timeUnit.second' : 'second',

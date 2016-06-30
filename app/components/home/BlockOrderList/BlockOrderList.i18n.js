@@ -24,6 +24,10 @@ export const messages = {
       status: {
         id: 'orderList.tableHead.status',
         defaultMessage: 'Status'
+      },
+      action: {
+        id: 'orderList.tableHead.action',
+        defaultMessage: 'action'
       }
     },
     tableBody: {

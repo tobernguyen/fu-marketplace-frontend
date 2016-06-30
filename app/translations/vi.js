@@ -86,6 +86,7 @@ export default {
   'orderList.tableHead.amount': 'Giá trị đơn hàng',
   'orderList.tableHead.shipAddress': 'Địa điểm',
   'orderList.tableHead.status': 'Trạng thái',
+  'orderList.tableHead.action': 'Hành động',
   'orderList.tableBody.timeSuffix': 'trước',
   'orderList.tableBody.timeUnit.minute': 'phút',
   'orderList.tableBody.timeUnit.second' : 'giây',

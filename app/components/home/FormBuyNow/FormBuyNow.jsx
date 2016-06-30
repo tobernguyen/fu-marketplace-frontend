@@ -66,13 +66,13 @@ export default class FormBuyNow extends Component {
                 <div className="input-group">
                   <span className="input-group-btn">
                       <button type="button" className="btn btn-info btn-number" onClick={() =>{ if (quantity.value > 0 ) { quantity.onChange(Number(quantity.value) - 1)}}}>
-                        <span className="glyphicon glyphicon-minus"/>
+                        <span className="fa fa-minus"/>
                       </button>
                   </span>
                   <input type="text" className="form-control input-number" {...quantity}/>
                   <span className="input-group-btn">
                       <button type="button" className="btn btn-success btn-number" onClick={() => quantity.onChange(Number(quantity.value) + 1)}>
-                          <span className="glyphicon glyphicon-plus"/>
+                          <span className="fa fa-plus"/>
                       </button>
                   </span>
                 </div>

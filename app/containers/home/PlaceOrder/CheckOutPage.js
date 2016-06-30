@@ -4,12 +4,14 @@ import { Modal } from 'react-bootstrap';
 import _ from 'lodash';
 import { connect } from 'react-redux';
 import { removeItemFromCart } from 'app/actions/user';
+import { placeOrder } from 'app/actions/order';
 
 class CheckOutPage extends Component {
   constructor(props) {
     super(props);
 
     this.handleCheckOutSubmit = (formValues) => {
+      const { shopID } = this.props;
       const orderValues = _.assign({}, formValues, {
         note: formValues.note,
         shipAddress: formValues.shipAddress,
@@ -21,6 +23,7 @@ class CheckOutPage extends Component {
       });
       // TODO: @dong.do: Invoke API
       console.log(orderValues);
+      this.props.placeOrder(shopID, orderValues);
     };
 
     this.handleRemoveFromCartItem = (itemID) => {
@@ -42,9 +45,10 @@ class CheckOutPage extends Component {
         </Modal.Header>
         <Modal.Body>
           <CheckOutForm
-            onSubmit={this.handleCheckOutSubmit}
+            submitOrder={this.handleCheckOutSubmit}
             removeFromCartItem={this.handleRemoveFromCartItem}
-            items={this.props.items} />
+            items={this.props.items} 
+            hideModal={this.props.onHide}/>
         </Modal.Body>
       </Modal>
     )
@@ -63,6 +67,7 @@ CheckOutPage.propTypes = {
 }
 
 export default connect(mapStateToProps, {
-  removeItemFromCart
+  removeItemFromCart,
+  placeOrder
 })(CheckOutPage)
 

@@ -42,7 +42,8 @@ const mapStateToProps = (state, ownProps) => {
       note:  '',
       shipAddress: '',
       items: items
-    }
+    },
+    orderResult: state.order.orderResult
   }
 };
 

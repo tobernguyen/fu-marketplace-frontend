@@ -18,6 +18,23 @@ export const placeOrder = (shopID, order) => {
   }
 }
 
+export const SELLER_GET_ORDER_REQUEST = 'SELLER_GET_ORDER_REQUEST';
+export const SELLER_GET_ORDER_SUCCESS = 'SELLER_GET_ORDER_SUCCESS';
+export const SELLER_GET_ORDER_FAILURE = 'SELLER_GET_ORDER_FAILURE';
+const sellerRequestGetOrder = (shopID) => ({
+  [CALL_API]: {
+    types: [SELLER_GET_ORDER_REQUEST, SELLER_GET_ORDER_SUCCESS, SELLER_GET_ORDER_FAILURE],
+    url: `/api/v1/seller/shops/${shopID}/orders`,
+    method: HTTP_METHODS.GET
+  }
+});
+
+export const sellerGetOrder = (shopID) => {
+  return (dispatch) => {
+    return dispatch(sellerRequestGetOrder(shopID));
+  }
+}
+
 export const CLEAR_ORDER_RESULT = 'CLEAR_ORDER_RESULT';
 export const clearOrderResult = () => {
   return {

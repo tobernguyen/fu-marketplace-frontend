@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import BlockSellerDashboardSideBar from 'app/components/home/BlockSellerDashboardSideBar';
+import BlockOrderList from 'app/components/home/BlockOrderList';
 import { getSellerShop, updateShopInfo } from 'app/actions/shop';
+import { sellerGetOrder } from 'app/actions/order';
 import Sticky from 'react-stickynode';
 
 class ManageOrders extends Component {
@@ -14,6 +16,7 @@ class ManageOrders extends Component {
         shopID: shopID
       };
       this.props.getSellerShop(shopID);
+      this.props.sellerGetOrder(shopID);
     }
 
     this.handleShopInfoChanged = (shopData) => {
@@ -28,7 +31,7 @@ class ManageOrders extends Component {
           <div className="col-md-9">
             <div className="row">
 
-              Order List
+              <BlockOrderList orders={this.props.orders}/>
 
             </div>
           </div>
@@ -48,11 +51,13 @@ class ManageOrders extends Component {
 const mapStateToProps = (state) => {
   const { shop } = state;
   return {
+    orders: state.order.orders,
     sellerShop: shop.sellerShop
   }
 };
 
 export default connect(mapStateToProps, {
   getSellerShop,
-  updateShopInfo
+  updateShopInfo,
+  sellerGetOrder
 })(ManageOrders)

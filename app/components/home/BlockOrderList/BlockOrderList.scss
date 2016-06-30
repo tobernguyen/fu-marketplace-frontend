@@ -1,0 +1,35 @@
+.block-order-list {
+    background-color: #ffffff;
+    border: 1px solid #e7e7e7;
+}
+
+.order-status {
+    display: inline-block;
+    padding: 2px 5px;
+    margin-right: 5px;
+    color: #66757f;
+    color: #ffffff;
+    border-radius: 3px;
+
+    &.new {
+        background-color: #de9200;
+    }
+    &.accepted {
+        background-color: #b52a2e;
+    }
+    &.shipping {
+        background-color: #009ece;
+    }
+    &.completed {
+        background-color: #73a600;
+    }
+    &.rejected {
+        background-color: #a1a1a1;
+    }
+    &.canceled {
+        background-color: #a1a1a1;
+    }
+    &.aborted {
+        background-color: #a1a1a1;
+    }
+}

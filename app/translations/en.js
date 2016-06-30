@@ -94,6 +94,7 @@ export default {
   'orderList.tableBody.timeUnit.month': 'month',
   'orderList.tableBody.timeUnit.year': 'year',
   'orderList.tableBody.orderStatus.new': 'New',
+  'orderList.tableBody.orderStatus.all': 'All',
   'orderList.tableBody.orderStatus.accepted': 'Accepted',
   'orderList.tableBody.orderStatus.shipping': 'Shipping',
   'orderList.tableBody.orderStatus.completed': 'Completed',

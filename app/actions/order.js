@@ -21,17 +21,21 @@ export const placeOrder = (shopID, order) => {
 export const SELLER_GET_ORDER_REQUEST = 'SELLER_GET_ORDER_REQUEST';
 export const SELLER_GET_ORDER_SUCCESS = 'SELLER_GET_ORDER_SUCCESS';
 export const SELLER_GET_ORDER_FAILURE = 'SELLER_GET_ORDER_FAILURE';
-const sellerRequestGetOrder = (shopID) => ({
+const sellerRequestGetOrder = (shopID, filter) => ({
   [CALL_API]: {
     types: [SELLER_GET_ORDER_REQUEST, SELLER_GET_ORDER_SUCCESS, SELLER_GET_ORDER_FAILURE],
-    url: `/api/v1/seller/shops/${shopID}/orders`,
+    url: `/api/v1/seller/shops/${shopID}/orders${filter}`,
     method: HTTP_METHODS.GET
   }
 });
 
-export const sellerGetOrder = (shopID) => {
+export const sellerGetOrder = (shopID, status) => {
+  let filter = '';
+  if (status !== undefined || status === 'all') {
+    filter = `?status=${status.toUpperCase()}`;
+  }
   return (dispatch) => {
-    return dispatch(sellerRequestGetOrder(shopID));
+    return dispatch(sellerRequestGetOrder(shopID, filter));
   }
 }
 

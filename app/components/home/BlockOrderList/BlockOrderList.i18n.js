@@ -28,6 +28,10 @@ export const messages = {
     },
     tableBody: {
       orderStatus: {
+        all: {
+          id: 'orderList.tableBody.orderStatus.all',
+          defaultMessage: 'All'
+        },
         new: {
           id: 'orderList.tableBody.orderStatus.new',
           defaultMessage: 'New'

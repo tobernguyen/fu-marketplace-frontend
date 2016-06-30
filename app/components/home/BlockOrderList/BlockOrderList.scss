@@ -1,35 +1,65 @@
 .block-order-list {
-    background-color: #ffffff;
-    border: 1px solid #e7e7e7;
+  background-color: #ffffff;
+  border: 1px solid #e7e7e7;
+  .header {
+    background-color: #F6F7F9;
+    border-bottom: 1px solid #e7e7e7;
+    .nav-pills {
+      li a.active span {
+          font-weight: 700;
+      }
+      a {
+          padding: 20px 10px 5px;
+          font-weight: 400;
+          color: #666;
+          background-color: transparent;
+          &:hover {
+          color: #888;
+          background-color: transparent;
+          }
+          span {
+          font-weight: 400;
+          font-size: 12px;
+          padding: 1px;
+          margin-left: 4px;
+          }
+
+      }
+    }
+  }
+
+  .body {
+    padding: 5px;
+  }
 }
 
 .order-status {
-    display: inline-block;
-    padding: 2px 5px;
-    margin-right: 5px;
-    color: #66757f;
-    color: #ffffff;
-    border-radius: 3px;
+  display: inline-block;
+  padding: 2px 5px;
+  margin-right: 5px;
+  color: #66757f;
+  color: #ffffff;
+  border-radius: 3px;
 
-    &.new {
-        background-color: #de9200;
-    }
-    &.accepted {
-        background-color: #b52a2e;
-    }
-    &.shipping {
-        background-color: #009ece;
-    }
-    &.completed {
-        background-color: #73a600;
-    }
-    &.rejected {
-        background-color: #a1a1a1;
-    }
-    &.canceled {
-        background-color: #a1a1a1;
-    }
-    &.aborted {
-        background-color: #a1a1a1;
-    }
+  &.new {
+      background-color: #de9200;
+  }
+  &.accepted {
+      background-color: #b52a2e;
+  }
+  &.shipping {
+      background-color: #009ece;
+  }
+  &.completed {
+      background-color: #73a600;
+  }
+  &.rejected {
+      background-color: #a1a1a1;
+  }
+  &.canceled {
+      background-color: #a1a1a1;
+  }
+  &.aborted {
+      background-color: #a1a1a1;
+  }
 }

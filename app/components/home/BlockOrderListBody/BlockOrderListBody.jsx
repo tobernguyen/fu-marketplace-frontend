@@ -1,19 +1,18 @@
 import React, { Component } from 'react';
-import './BlockOrderList.scss';
-import BlockOrderListHeader from 'app/components/home/BlockOrderListHeader';
-import BlockOrderListBody from 'app/components/home/BlockOrderListBody';
 import { FormattedMessage, injectIntl } from 'react-intl';
-import { messages } from './BlockOrderList.i18n';
 import TimeAgo from 'react-timeago'
-import { Link } from 'react-router';
+import { messages } from 'app/components/home/BlockOrderList/BlockOrderList.i18n';
 import _ from 'lodash';
 
-class BlockOrderList extends Component {
-  constructor(props) {
+class BlockOrderListBody extends Component {
+    constructor(props) {
     super(props);
 
     this.renderTimeAgo = this.renderTimeAgo.bind(this);
     this.renderOrderStatus = this.renderOrderStatus.bind(this);
+  }
+  componentWillMount() {
+    console.log('here');
   }
   renderItemNameList(order) {
     let names = [];
@@ -38,7 +37,7 @@ class BlockOrderList extends Component {
         realUnit = formatMessage(messages.orderList.tableBody.timeUnit.second);
         break;
       case 'minute':
-        realUnit =formatMessage(messages.orderList.tableBody.timeUnit.minute);
+        realUnit = formatMessage(messages.orderList.tableBody.timeUnit.minute);
         break;
       case 'hour':
         realUnit = formatMessage(messages.orderList.tableBody.timeUnit.hour);
@@ -86,15 +85,49 @@ class BlockOrderList extends Component {
     return output;
 
   }
+
   render() {
-    const { shopID, orders } = this.props;
     return (
-      <div className="block-order-list clearfix">
-      <BlockOrderListHeader shopID={shopID}/>
-      <BlockOrderListBody orders={orders} />
+      <div className="clearfix">
+        <table className="table table-responsive table-striped">
+          <thead>
+            <tr>
+              <th><FormattedMessage {...messages.orderList.tableHead.orderID}/></th>
+              <th><FormattedMessage {...messages.orderList.tableHead.items}/></th>
+              <th><FormattedMessage {...messages.orderList.tableHead.amount}/></th>
+              <th><FormattedMessage {...messages.orderList.tableHead.shipAddress}/></th>
+              <th><FormattedMessage {...messages.orderList.tableHead.time}/></th>
+              <th><FormattedMessage {...messages.orderList.tableHead.status}/></th>
+            </tr>
+          </thead>
+          <tbody>
+          {
+            this.props.orders.map(order =>
+              <tr key={order.id}>
+                <td>{order.id}</td>
+                <td>
+                {this.renderItemNameList(order)}
+                </td>
+                <td>
+                {this.calculateTotalAmount(order)}
+                </td>
+                <td>
+                {order.shipAddress}
+                </td>
+                <td>
+                <TimeAgo date={new Date(order.createdAt)} formatter={this.renderTimeAgo} />
+                </td>
+                <td>
+                {this.renderOrderStatus(order)}
+                </td>
+              </tr>
+            )
+          }
+          </tbody>
+        </table>
       </div>
-    )
+    );
   }
 }
 
-export default injectIntl(BlockOrderList);
+export default injectIntl(BlockOrderListBody);

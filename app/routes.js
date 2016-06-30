@@ -42,7 +42,7 @@ export default (
         <Route path="items/add" component={AddShopItem} />
         <Route path="items/:itemID/update" component={UpdateShopItem} />
       </Route>
-      <Route path="shops/:shopID/dashboard/orders" component={ManageOrders} />
+      <Route path="shops/:shopID/dashboard/orders(/:status)" component={ManageOrders} />
     </Route>
 
     <Route name="admin" path="admin" component={Admin}>

@@ -10,13 +10,14 @@ class ManageOrders extends Component {
   constructor(props) {
     super(props);
 
-    const { shopID } = this.props.params;
+    const { shopID, status } = this.props.params;
     if (!isNaN(shopID)) {
       this.state = {
-        shopID: shopID
+        shopID: shopID,
+        status: status
       };
       this.props.getSellerShop(shopID);
-      this.props.sellerGetOrder(shopID);
+      this.props.sellerGetOrder(shopID, status);
     }
 
     this.handleShopInfoChanged = (shopData) => {
@@ -31,7 +32,7 @@ class ManageOrders extends Component {
           <div className="col-md-9">
             <div className="row">
 
-              <BlockOrderList orders={this.props.orders}/>
+              <BlockOrderList shopID ={this.props.params.shopID} orders={this.props.orders}/>
 
             </div>
           </div>

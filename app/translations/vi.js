@@ -94,6 +94,7 @@ export default {
   'orderList.tableBody.timeUnit.month': 'tháng',
   'orderList.tableBody.timeUnit.year': 'năm',
   'orderList.tableBody.orderStatus.new': 'Mới',
+  'orderList.tableBody.orderStatus.all': 'Tất cả',
   'orderList.tableBody.orderStatus.accepted': 'Đã chấp nhận',
   'orderList.tableBody.orderStatus.shipping': 'Đang chuyển hàng',
   'orderList.tableBody.orderStatus.completed': 'Hoàn thành',

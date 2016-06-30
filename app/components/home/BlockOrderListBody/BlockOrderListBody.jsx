@@ -11,9 +11,6 @@ class BlockOrderListBody extends Component {
     this.renderTimeAgo = this.renderTimeAgo.bind(this);
     this.renderOrderStatus = this.renderOrderStatus.bind(this);
   }
-  componentWillMount() {
-    console.log('here');
-  }
   renderItemNameList(order) {
     let names = [];
     order.orderLines.map(orderLine => {
@@ -122,7 +119,7 @@ class BlockOrderListBody extends Component {
                 {this.renderOrderStatus(order)}
                 </td>
                 <td>
-                  <button className="btn btn-warning"><i className="fa fa-eye"></i></button>
+                  <button className="btn btn-warning" onClick={() => this.props.viewOrder(order)}><i className="fa fa-eye"></i></button>
                 </td>
               </tr>
             )

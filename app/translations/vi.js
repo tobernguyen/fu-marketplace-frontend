@@ -101,5 +101,13 @@ export default {
   'orderList.tableBody.orderStatus.completed': 'Hoàn thành',
   'orderList.tableBody.orderStatus.rejected': 'Đã từ chối',
   'orderList.tableBody.orderStatus.canceled': 'Bị hủy bỏ',
-  'orderList.tableBody.orderStatus.aborted': 'Không thành công'
+  'orderList.tableBody.orderStatus.aborted': 'Không thành công',
+  'modalViewOrder.title': 'Đơn hàng',
+  'modalViewOrder.body.shipAddress': 'Địa chỉ',
+  'modalViewOrder.body.note': 'Ghi chú',
+  'modalViewOrder.body.orderLines': 'Đơn hàng',
+  'modalViewOrder.body.table.item' : 'Mặt hàng',
+  'modalViewOrder.body.table.quantity': 'Số lượng',
+  'modalViewOrder.body.table.total': 'Tổng giá trị',
+  'modalViewOrder.body.table.note': 'Ghi chú'
 };

@@ -101,5 +101,13 @@ export default {
   'orderList.tableBody.orderStatus.completed': 'Completed',
   'orderList.tableBody.orderStatus.rejected': 'Rejected',
   'orderList.tableBody.orderStatus.canceled': 'Canceled',
-  'orderList.tableBody.orderStatus.aborted': 'Aborted'
+  'orderList.tableBody.orderStatus.aborted': 'Aborted',
+  'modalViewOrder.title': 'View order',
+  'modalViewOrder.body.shipAddress': 'Ship address',
+  'modalViewOrder.body.note': 'Note',
+  'modalViewOrder.body.orderLines': 'Order lines',
+  'modalViewOrder.body.table.item' : 'Items',
+  'modalViewOrder.body.table.quantity': 'Quantity',
+  'modalViewOrder.body.table.total': 'Total',
+  'modalViewOrder.body.table.note': 'Note'
 };

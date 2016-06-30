@@ -91,7 +91,7 @@ class BlockOrderList extends Component {
     return (
       <div className="block-order-list clearfix">
       <BlockOrderListHeader shopID={shopID}/>
-      <BlockOrderListBody orders={orders} />
+      <BlockOrderListBody orders={orders} viewOrder={this.props.viewOrder}/>
       </div>
     )
   }

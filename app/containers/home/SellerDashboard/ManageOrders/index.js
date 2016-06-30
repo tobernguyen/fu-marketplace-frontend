@@ -25,6 +25,17 @@ class ManageOrders extends Component {
     }
   }
 
+  componentWillReceiveProps(nextProps) {
+    const {shopID, status} = nextProps.params;
+    if(shopID != this.state.shopID || status != this.state.status) {
+      this.props.sellerGetOrder(shopID, status);
+      this.setState ({
+        shopID,
+        status
+      });
+    }
+
+  }
   render() {
     return (
       <div>

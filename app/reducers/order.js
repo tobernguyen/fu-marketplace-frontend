@@ -23,8 +23,12 @@ export const order = (state = INITIAL_STATE, action) => {
         orderResult: AsyncResultCode.PLACE_ORDER_FAIL
       });
     case OrderActionTypes.SELLER_GET_ORDER_SUCCESS:
-      return _.merge({}, state, {
+      return _.assign({}, state, {
         orders: action.response.orders
+      });
+    case OrderActionTypes.SELLER_GET_ORDER_FAILURE:
+      return _.merge({}, state, {
+        orders: []
       });
     default:
       return state;

@@ -31,7 +31,9 @@ const sellerRequestGetOrder = (shopID, filter) => ({
 
 export const sellerGetOrder = (shopID, status) => {
   let filter = '';
-  if (status !== undefined || status === 'all') {
+  if (status === undefined || status === 'all') {
+    filter = '';
+  } else {
     filter = `?status=${status.toUpperCase()}`;
   }
   return (dispatch) => {

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { FormattedMessage, FormattedNumber, FormattedRelative, injectIntl } from 'react-intl';
-import TimeAgo from 'react-timeago'
 import { messages } from 'app/components/home/BlockOrderList/BlockOrderList.i18n';
 import _ from 'lodash';
 

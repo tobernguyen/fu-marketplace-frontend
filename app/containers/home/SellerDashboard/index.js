@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Header from 'app/components/home/Header';
 import dataURLtoBlob from 'blueimp-canvas-to-blob';
 import BlockShopHeader from 'app/components/home/BlockShopHeader';
 import BlockSellerDashboardSideBar from 'app/components/home/BlockSellerDashboardSideBar';
 import SellingItemList from '../SellingItemList';
 import { Modal } from 'react-bootstrap';
 import { uploadShopAvatar, uploadShopCover, getSellerShop, updateShopInfo } from 'app/actions/shop';
-import { getUser } from 'app/selectors';
 import Sticky from 'react-stickynode';
-import { signOutGoogle } from 'app/actions';
+import NavigationBar from '../NavigationBar';
+
 
 
 class SellerDashboard extends Component {
@@ -19,8 +18,7 @@ class SellerDashboard extends Component {
     const { shopID } = this.props.params;
     if (!isNaN(shopID)) {
       this.state = {
-        shopID: shopID,
-        hasChildren: false
+        shopID: shopID
       };
       this.props.getSellerShop(shopID);
     }
@@ -42,17 +40,10 @@ class SellerDashboard extends Component {
     }
   }
 
-  componentWillReceiveProps(nextProps) {
-    this.setState({
-      hasChildren: !(nextProps.children === null)
-    })
-  }
-
   render() {
-    const { currentUser, signOutGoogle } = this.props;
     return (
       <div className="home-page">
-        <Header onSignOut={signOutGoogle} currentUser={currentUser} />
+        <NavigationBar />
         <div className="container home-body">
           <div className="seller-dashboard">
             <div className="col-md-9">
@@ -89,8 +80,7 @@ class SellerDashboard extends Component {
 const mapStateToProps = (state) => {
   const { shop } = state;
   return {
-    sellerShop: shop.sellerShop,
-    currentUser:  getUser(state)
+    sellerShop: shop.sellerShop
   }
 };
 
@@ -98,6 +88,5 @@ export default connect(mapStateToProps, {
   getSellerShop,
   uploadShopAvatar,
   uploadShopCover,
-  updateShopInfo,
-  signOutGoogle
+  updateShopInfo
 })(SellerDashboard)

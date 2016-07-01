@@ -2,13 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import BlockSellerDashboardSideBar from 'app/components/home/BlockSellerDashboardSideBar';
 import BlockOrderList from 'app/components/home/BlockOrderList';
-import Header from 'app/components/home/Header';
 import ModalViewOrder from 'app/components/home/ModalViewOrder';
 import { getSellerShop, updateShopInfo } from 'app/actions/shop';
 import { sellerGetOrder } from 'app/actions/order';
 import Sticky from 'react-stickynode';
-import { signOutGoogle } from 'app/actions';
 import { getUser } from 'app/selectors';
+import NavigationBar from 'app/containers/home/NavigationBar';
 
 class ManageOrders extends Component {
   constructor(props) {
@@ -30,14 +29,14 @@ class ManageOrders extends Component {
 
     this.handleShopInfoChanged = (shopData) => {
       this.props.updateShopInfo(shopData, this.props.params.shopID);
-    }
+    };
 
     this.viewOrder = (selectedOrder) => {
       this.setState({
         showModal: true,
         selectedOrder
       })
-    }
+    };
 
     this.close = () => {
       this.setState({
@@ -57,10 +56,9 @@ class ManageOrders extends Component {
     }
   }
   render() {
-    const { currentUser, signOutGoogle } = this.props;
     return (
       <div className="home-page">
-        <Header onSignOut={signOutGoogle} currentUser={currentUser} />
+        <NavigationBar />
         <div className="container home-body">
           <div className="seller-dashboard">
             <div className="col-md-9">
@@ -94,14 +92,12 @@ const mapStateToProps = (state) => {
   const { shop } = state;
   return {
     orders: state.order.orders,
-    sellerShop: shop.sellerShop,
-    currentUser: getUser(state)
+    sellerShop: shop.sellerShop
   }
 };
 
 export default connect(mapStateToProps, {
   getSellerShop,
   updateShopInfo,
-  sellerGetOrder,
-  signOutGoogle
+  sellerGetOrder
 })(ManageOrders)

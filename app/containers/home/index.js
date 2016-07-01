@@ -1,27 +1,22 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Modal } from 'react-bootstrap';
-import Header from 'app/components/home/Header';
 import BlockItemList from 'app/components/home/BlockItemList';
 import BlockDormList from 'app/components/home/BlockDormList';
 import CarouselPinnedItems from 'app/components/home/CarouselPinnedItems';
 import BlockBookmarks from 'app/components/home/BlockBookmarks';
 import ShopsFeed from './ShopsFeed';
-import { signOutGoogle, getCurrentUser } from 'app/actions';
 import { getMetadata } from 'app/actions/common';
-import { getCategories, getShipPlaces, getUser, getAggregations } from 'app/selectors';
+import { getCategories, getShipPlaces, getAggregations } from 'app/selectors';
+import NavigationBar from './NavigationBar';
+import { signOutGoogle } from 'app/actions';
 
 class Home extends Component {
   constructor(props) {
     super(props);
-
-    this.handleSignOut = () => {
-      this.props.signOutGoogle();
-    };
   }
 
   componentWillMount() {
-    this.props.getCurrentUser();
     this.props.getMetadata();
   }
 
@@ -34,10 +29,8 @@ class Home extends Component {
     }
   }
 
-
   render() {
     const {
-      currentUser,
       categories,
       shipPlaces,
       aggregations:
@@ -50,9 +43,7 @@ class Home extends Component {
     } = this.props;
     return (
       <div className="home-page">
-        <Header
-          onSignOut={this.props.signOutGoogle}
-          currentUser={currentUser} />
+        <NavigationBar />
         <div className="container home-body">
           <div className="row">
             <div className="col-md-3">
@@ -85,13 +76,12 @@ class Home extends Component {
 }
 
 Home.propTypes = {
-  signOutGoogle:    PropTypes.func.isRequired
+  signOutGoogle: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => {
   const { user, common } = state;
   return {
-    currentUser:  getUser(state),
     error:        user.error,
     modalSize:    common.modalSize,
     modalMode:    common.modalMode,
@@ -102,9 +92,7 @@ const mapStateToProps = (state) => {
 };
 
 
-
 export default connect(mapStateToProps, {
-  getCurrentUser,
-  signOutGoogle,
-  getMetadata
+  getMetadata,
+  signOutGoogle
 })(Home)

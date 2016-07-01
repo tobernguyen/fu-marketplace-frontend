@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
 import { Modal } from 'react-bootstrap';
-import { FormattedMessage, injectIntl } from 'react-intl';
+import { FormattedMessage, FormattedNumber, injectIntl } from 'react-intl';
 import './ModalViewOrder.scss';
 import { messages } from 'app/components/home/ModalViewOrder/ModalViewOrder.i18n';
 
 class ModalViewOrder extends Component {
+  calculateTotal(orderLine) {
+    const total= orderLine.quantity * orderLine.item.price;
+    return <FormattedNumber value={total} />
+  }
   render() {
     const { order } = this.props;
-    console.log(order);
     return (
       <Modal show={this.props.show} onHide={this.props.onHide} bsSize="large">
         <Modal.Header>
@@ -58,13 +61,13 @@ class ModalViewOrder extends Component {
                 </td>
                 <td>
                   <strong>{orderLine.item.name}</strong>
-                  <p>{orderLine.item.price.toLocaleString('EN-us')}₫</p>
+                  <p><FormattedNumber value={orderLine.item.price}/>₫</p>
                 </td>
                 <td>
                   {orderLine.quantity}
                 </td>
                 <td>
-                  {(orderLine.quantity * orderLine.item.price).toLocaleString('EN-us')}₫
+                  {this.calculateTotal(orderLine)}₫
                 </td>
                 <td>
                   {orderLine.note}

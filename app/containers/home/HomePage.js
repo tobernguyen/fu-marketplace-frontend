@@ -82,7 +82,7 @@ class HomePage extends Component {
                 shipPlaces={shipPlaces}
                 shipPlaceCounter={shipPlace}
                 totalShipPlace={totalShipPlace} />
-              
+
               <BlockBookmarks />
             </div>
             <div className="col-md-9">

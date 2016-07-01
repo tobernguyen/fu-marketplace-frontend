@@ -15,9 +15,15 @@ export const feed = (state = INITIAL_STATE, action) => {
   const { type, response } = action;
   switch (type) {
     case FeedActionTypes.GET_SHOPS_SUCCESS:
+      const { result } = response;
+      return _.merge({}, state, {
+        shops: result.shops,
+        aggregations: result.aggregations
+      });
+    case FeedActionTypes.GET_SHOPS_OF_PAGE_SUCCESS:
       const { result: { shops, aggregations } } = response;
       return _.merge({}, state, {
-        shops: shops,
+        shops: _.concat(state.shops, shops),
         aggregations: aggregations
       });
     case ItemActionTypes.GET_ITEM_CATEGORIES_SUCCESS:

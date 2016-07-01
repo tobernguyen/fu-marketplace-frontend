@@ -2,10 +2,13 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import BlockSellerDashboardSideBar from 'app/components/home/BlockSellerDashboardSideBar';
 import BlockOrderList from 'app/components/home/BlockOrderList';
+import Header from 'app/components/home/Header';
 import ModalViewOrder from 'app/components/home/ModalViewOrder';
 import { getSellerShop, updateShopInfo } from 'app/actions/shop';
 import { sellerGetOrder } from 'app/actions/order';
 import Sticky from 'react-stickynode';
+import { signOutGoogle } from 'app/actions';
+import { getUser } from 'app/selectors';
 
 class ManageOrders extends Component {
   constructor(props) {
@@ -52,31 +55,34 @@ class ManageOrders extends Component {
         status
       });
     }
-
   }
   render() {
+    const { currentUser, signOutGoogle } = this.props;
     return (
-      <div>
-        <div className="seller-dashboard">
-          <div className="col-md-9">
-            <div className="row">
-              <BlockOrderList
-                shopID ={this.props.params.shopID}
-                orders={this.props.orders}
-                viewOrder={this.viewOrder}/>
-              <ModalViewOrder
-                order={this.state.selectedOrder}
-                show={this.state.showModal}
-                onHide={this.close}
-              />
+      <div className="home-page">
+        <Header onSignOut={signOutGoogle} currentUser={currentUser} />
+        <div className="container home-body">
+          <div className="seller-dashboard">
+            <div className="col-md-9">
+              <div className="row">
+                <BlockOrderList
+                  shopID ={this.props.params.shopID}
+                  orders={this.props.orders}
+                  viewOrder={this.viewOrder}/>
+                <ModalViewOrder
+                  order={this.state.selectedOrder}
+                  show={this.state.showModal}
+                  onHide={this.close}
+                />
+              </div>
             </div>
-          </div>
-          <div className="col-md-3">
-            <Sticky enabled={true} top={60}>
-              <BlockSellerDashboardSideBar sellerShop={this.props.sellerShop}
-                                           shopInfoChanged={this.handleShopInfoChanged}
-                                           shopID={this.state.shopID} />
-            </Sticky>
+            <div className="col-md-3">
+              <Sticky enabled={true} top={60}>
+                <BlockSellerDashboardSideBar sellerShop={this.props.sellerShop}
+                                             shopInfoChanged={this.handleShopInfoChanged}
+                                             shopID={this.state.shopID} />
+              </Sticky>
+            </div>
           </div>
         </div>
       </div>
@@ -88,12 +94,14 @@ const mapStateToProps = (state) => {
   const { shop } = state;
   return {
     orders: state.order.orders,
-    sellerShop: shop.sellerShop
+    sellerShop: shop.sellerShop,
+    currentUser: getUser(state)
   }
 };
 
 export default connect(mapStateToProps, {
   getSellerShop,
   updateShopInfo,
-  sellerGetOrder
+  sellerGetOrder,
+  signOutGoogle
 })(ManageOrders)

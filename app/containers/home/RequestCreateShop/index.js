@@ -5,7 +5,7 @@ import ModalHeader from 'app/components/home/ModalHeader';
 import BlockShopOpeningPendingRequests from 'app/components/home/BlockShopOpeningPendingRequests';
 import RequestCreateShopForm from './RequestCreateShopForm';
 import { requestCreateShop } from 'app/actions/shop';
-import { updateModalMode, updateModalSize } from 'app/actions/common';
+import { updateModalSize } from 'app/actions/common';
 import { getPendingRequests } from 'app/actions/shop';
 import { titles } from 'app/shared/titles';
 
@@ -19,7 +19,6 @@ class RequestCreateShop extends Component {
 
   componentWillMount() {
     this.props.updateModalSize(null);
-    this.props.updateModalMode(true);
     this.props.getPendingRequests();
   }
 
@@ -60,6 +59,5 @@ const mapStateToProps = (state) => {
 export default injectIntl(connect(mapStateToProps, {
   updateModalSize,
   requestCreateShop,
-  updateModalMode,
   getPendingRequests
 })(RequestCreateShop))

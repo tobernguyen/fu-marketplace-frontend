@@ -3,7 +3,7 @@ import ModalHeader from 'app/components/home/ModalHeader';
 import { connect } from 'react-redux';
 import dataURLtoBlob from 'blueimp-canvas-to-blob';
 import { updateUserInfo, uploadAvatar } from 'app/actions/user';
-import { updateModalMode, updateModalSize } from 'app/actions/common';
+import { updateModalSize } from 'app/actions/common';
 import AccountBasicForm from './AccountBasicForm';
 
 class Account extends Component {
@@ -29,11 +29,6 @@ class Account extends Component {
 
   componentWillMount() {
     this.props.updateModalSize(null);
-    this.props.updateModalMode(true);
-  }
-
-  componentWillUnmount() {
-    this.props.updateModalMode(false);
   }
 
   render() {
@@ -75,6 +70,5 @@ const mapStateToProps = (state) => {
 export default connect(mapStateToProps, {
   uploadAvatar,
   updateUserInfo,
-  updateModalSize,
-  updateModalMode
+  updateModalSize
 })(Account)

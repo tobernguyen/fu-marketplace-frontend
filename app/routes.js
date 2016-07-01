@@ -38,13 +38,15 @@ export default (
       <Route path="orders" component={MyOrders} />
       <Route path="shops/request_create" component={RequestCreateShop} />
       <Route path="shops/:shopID" component={Shop} />
-      <Route path="shops/:shopID/dashboard" component={SellerDashboard}>
-        <Route path="info" component={UpdateShop} />
-        <Route path="ship_places" component={UpdateShipPlaces} />
-        <Route path="items/add" component={AddShopItem} />
-        <Route path="items/:itemID/update" component={UpdateShopItem} />
-      </Route>
-      <Route path="shops/:shopID/dashboard/orders(/:status)" component={ManageOrders} />
+    </Route>
+
+
+    <Route path="shops/:shopID/dashboard/orders(/:status)" component={ManageOrders} />
+    <Route path="/shops/:shopID/dashboard" component={SellerDashboard}>
+      <Route path="info" component={UpdateShop} />
+      <Route path="ship_places" component={UpdateShipPlaces} />
+      <Route path="items/add" component={AddShopItem} />
+      <Route path="items/:itemID/update" component={UpdateShopItem} />
     </Route>
 
     <Route name="admin" path="admin" component={Admin}>

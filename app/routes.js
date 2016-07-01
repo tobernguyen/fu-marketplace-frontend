@@ -7,6 +7,7 @@ import {
 import App from './containers/App';
 import Home from './containers/home';
 import Account from './containers/home/Account';
+import MyOrders from './containers/home/MyOrders';
 import UpdateShop from './containers/home/SellerDashboard/UpdateShop';
 import UpdateShipPlaces from './containers/home/SellerDashboard/UpdateShipPlaces';
 import AddShopItem from './containers/home/SellerDashboard/ManageShopItem/AddShopItem';
@@ -34,6 +35,7 @@ export default (
     <IndexRoute component={Home}/>
     <Route path="/" component={Home}>
       <Route path="account" component={Account} />
+      <Route path="orders" component={MyOrders} />
       <Route path="shops/request_create" component={RequestCreateShop} />
       <Route path="shops/:shopID" component={Shop} />
       <Route path="shops/:shopID/dashboard" component={SellerDashboard}>

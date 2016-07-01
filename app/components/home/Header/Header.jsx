@@ -37,10 +37,12 @@ export default class Header extends Component {
                     <FormattedMessage {...links.account} />
                   </MenuItem>
                 </LinkContainer>
-                <MenuItem eventKey={2.2}>
-                  <i className="fa fa-list-ol"/>
-                  <FormattedMessage {...links.myOrders} />
-                </MenuItem>
+                <LinkContainer to='/orders'>
+                  <MenuItem eventKey={2.1}>
+                    <i className="fa fa-list-ol"/>
+                    <FormattedMessage {...links.myOrders} />
+                  </MenuItem>
+                </LinkContainer>
                 <MenuItem divider />
                 {normalUser &&
                 <LinkContainer to='/shops/request_create'>

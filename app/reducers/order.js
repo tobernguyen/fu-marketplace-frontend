@@ -2,6 +2,7 @@ import * as OrderActionTypes from 'app/actions/order';
 import _ from 'lodash';
 import AsyncResultCode from 'app/shared/asyncResultCodes';
 const INITIAL_STATE = {
+  orders: [],
   orderResult: ''
 };
 
@@ -20,6 +21,14 @@ export const order = (state = INITIAL_STATE, action) => {
     case OrderActionTypes.USER_PLACE_ORDER_FAILURE:
       return _.merge({}, state, {
         orderResult: AsyncResultCode.PLACE_ORDER_FAIL
+      });
+    case OrderActionTypes.SELLER_GET_ORDER_SUCCESS:
+      return _.assign({}, state, {
+        orders: action.response.orders
+      });
+    case OrderActionTypes.SELLER_GET_ORDER_FAILURE:
+      return _.merge({}, state, {
+        orders: []
       });
     default:
       return state;

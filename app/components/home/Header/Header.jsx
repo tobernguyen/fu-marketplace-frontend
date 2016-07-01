@@ -4,6 +4,7 @@ import { Navbar, NavItem, Nav, NavDropdown, MenuItem, FormGroup, FormControl, Bu
 import { LinkContainer } from 'react-router-bootstrap';
 import { FormattedMessage } from 'react-intl';
 import { links } from 'app/shared/links';
+import BlockNotificationDropdown from '../BlockNotificationDropdown';
 
 export default class Header extends Component {
   render() {
@@ -26,10 +27,7 @@ export default class Header extends Component {
               <Button type="submit"><i className="fa fa-search" aria-hidden="true"/></Button>
             </Navbar.Form>
             <Nav pullRight>
-              <NavItem eventKey={1} href="#">
-                <i className="fa fa-bell fa-lg"/>
-                <span className="badge">3</span>
-              </NavItem>
+              <BlockNotificationDropdown eventKey={1} />
               <NavDropdown eventKey={2} title={fullName || ''} id="basic-nav-dropdown">
                 <LinkContainer to='/account'>
                   <MenuItem eventKey={2.1}>

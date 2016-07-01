@@ -1,0 +1,41 @@
+.block-notification-dropdown {
+  .dropdown-menu {
+    width: 406px;
+    li {
+      a {
+        border-bottom: 1px solid #eeeeff;
+        padding: 10px 15px;
+      }
+    }
+
+    > .header {
+      padding: 7px 15px;
+      border-bottom: 1px solid #eeeeff;
+      .title {
+        font-size: 15px;
+        float: left;
+        margin: 5px 0;
+        border: none;
+      }
+
+      .actions {
+        float: right;
+        a {
+          line-height: 24px;
+          border-bottom: 0;
+        }
+      }
+    }
+
+    > .footer {
+      text-align: center;
+      font-weight: 700;
+      font-size: 14px;
+      border-bottom: 0;
+      a {
+        padding: 10px 15px;
+        border-bottom: 0;
+      }
+    }
+  }
+}

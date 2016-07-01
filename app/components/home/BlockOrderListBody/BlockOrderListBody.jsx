@@ -56,7 +56,7 @@ class BlockOrderListBody extends Component {
 
   render() {
     return (
-      <div className="clearfix">
+      <div className="body clearfix">
         <table className="table table-responsive table-striped">
           <thead>
             <tr>
@@ -66,6 +66,7 @@ class BlockOrderListBody extends Component {
               <th><FormattedMessage {...messages.orderList.tableHead.shipAddress}/></th>
               <th><FormattedMessage {...messages.orderList.tableHead.time}/></th>
               <th><FormattedMessage {...messages.orderList.tableHead.status}/></th>
+              <th><FormattedMessage {...messages.orderList.tableHead.action}/></th>
             </tr>
           </thead>
           <tbody>
@@ -87,6 +88,9 @@ class BlockOrderListBody extends Component {
                 </td>
                 <td>
                 {this.renderOrderStatus(order)}
+                </td>
+                <td>
+                  <button className="btn btn-warning" onClick={() => this.props.viewOrder(order)}><i className="fa fa-eye"></i></button>
                 </td>
               </tr>
             )

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import BlockSellerDashboardSideBar from 'app/components/home/BlockSellerDashboardSideBar';
 import BlockOrderList from 'app/components/home/BlockOrderList';
+import ModalViewOrder from 'app/components/home/ModalViewOrder';
 import { getSellerShop, updateShopInfo } from 'app/actions/shop';
 import { sellerGetOrder } from 'app/actions/order';
 import Sticky from 'react-stickynode';
@@ -14,7 +15,11 @@ class ManageOrders extends Component {
     if (!isNaN(shopID)) {
       this.state = {
         shopID: shopID,
-        status: status
+        status: status,
+        showModal: false,
+        selectedOrder: {
+          orderLines: []
+        }
       };
       this.props.getSellerShop(shopID);
       this.props.sellerGetOrder(shopID, status);
@@ -22,6 +27,19 @@ class ManageOrders extends Component {
 
     this.handleShopInfoChanged = (shopData) => {
       this.props.updateShopInfo(shopData, this.props.params.shopID);
+    }
+
+    this.viewOrder = (selectedOrder) => {
+      this.setState({
+        showModal: true,
+        selectedOrder
+      })
+    }
+
+    this.close = () => {
+      this.setState({
+        showModal: false
+      });
     }
   }
 
@@ -42,9 +60,15 @@ class ManageOrders extends Component {
         <div className="seller-dashboard">
           <div className="col-md-9">
             <div className="row">
-
-              <BlockOrderList shopID ={this.props.params.shopID} orders={this.props.orders}/>
-
+              <BlockOrderList
+                shopID ={this.props.params.shopID}
+                orders={this.props.orders}
+                viewOrder={this.viewOrder}/>
+              <ModalViewOrder
+                order={this.state.selectedOrder}
+                show={this.state.showModal}
+                onHide={this.close}
+              />
             </div>
           </div>
           <div className="col-md-3">

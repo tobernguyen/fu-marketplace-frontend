@@ -6,7 +6,6 @@ import ModalViewOrder from 'app/components/home/ModalViewOrder';
 import { getSellerShop, updateShopInfo } from 'app/actions/shop';
 import { sellerGetOrder, sellerAcceptOrder, sellerRejectOrder } from 'app/actions/order';
 import Sticky from 'react-stickynode';
-import { getUser } from 'app/selectors';
 import NavigationBar from 'app/containers/home/NavigationBar';
 
 class ManageOrders extends Component {
@@ -43,17 +42,16 @@ class ManageOrders extends Component {
       this.setState({
         showModal: false
       });
-    }
+    };
 
     this.sellerAcceptOrder = (orderID) => {
-      const { shopID, status } = this.props.params;
       this.props.sellerAcceptOrder(orderID);
       let selectedOrder = this.state.selectedOrder;
       selectedOrder['status'] = 1;
       this.setState({
         selectedOrder
       });
-    }
+    };
 
     this.sellerRejectOrder = (orderID, messages) => {
       this.props.sellerRejectOrder(orderID, messages);

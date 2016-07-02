@@ -63,7 +63,7 @@ export const messages = {
         aborted: {
           id: 'orderList.tableBody.orderStatus.aborted',
           defaultMessage: 'Aborted'
-        },
+        }
       },
       notFinish: {
         id: 'orderList.tableBody.notFinish',

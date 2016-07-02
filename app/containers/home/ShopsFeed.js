@@ -5,6 +5,7 @@ import BlockShopFeedItem from 'app/components/home/BlockShopFeedItem';
 import { getShopsOfPage } from 'app/actions/feed';
 import { getShopsFeed } from 'app/selectors';
 import { PulseLoader } from 'halogen';
+import _ from 'lodash';
 
 class ShopsFeed extends Component {
   constructor(props) {

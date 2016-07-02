@@ -13,14 +13,10 @@ const validate = values => {
   }
 
   return hasErrors &&  errors;
-}
-
-const mapStateToProps = (state) => {
-  return {};
-}
+};
 
 export default reduxForm({
   form: 'FormRejectOrder',
   fields,
   validate
-}, mapStateToProps)(FormRejectOrder);
+}, undefined)(FormRejectOrder);

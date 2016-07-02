@@ -1,15 +1,58 @@
 import React, { Component } from 'react';
-import { Modal } from 'react-bootstrap';
+import { Modal, Dropdown } from 'react-bootstrap';
 import { FormattedMessage, FormattedNumber, injectIntl } from 'react-intl';
+import RejectOrderForm from 'app/containers/home/SellerDashboard/ManageOrders/RejectOrderForm';
 import './ModalViewOrder.scss';
 import { messages } from 'app/components/home/ModalViewOrder/ModalViewOrder.i18n';
 
 class ModalViewOrder extends Component {
+  constructor(props) {
+    super(props);
+
+    this.rejectOrder = (formData) => {
+      const { order } = this.props;
+      const messages = {
+        "sellerMessage": formData.reason
+      }
+      this.props.rejectOrder(order.id, messages);
+    }
+  }
   calculateTotal(orderLine) {
     const total= orderLine.quantity * orderLine.item.price;
     return <FormattedNumber value={total} />
   }
+  renderAction(order) {
+    let output = '';
+    switch (order.status) {
+      case 0:
+        output = <div className="btn-toolbar">
+            <button type="button" className="btn btn-success" onClick={() => this.props.acceptOrder(order.id)}>
+              <FormattedMessage {...messages.modalViewOrder.button.accept} />
+            </button>
+            <Dropdown id="FormRejectOrder">
+            <button type="button" className="btn btn-danger" bsRole="toggle">
+              <FormattedMessage {...messages.modalViewOrder.button.reject} />
+            </button>
+            <RejectOrderForm
+              bsRole="menu"
+              onSubmit={this.rejectOrder}
+              />
+            </Dropdown>
+          </div>
+          break;
+      case 1:
+        output = <div className="text-center"><h4><FormattedMessage {...messages.modalViewOrder.orderStatus.accepted}/></h4></div>
+        break;
+      case 4:
+        output = <div className="text-center"><h4><FormattedMessage {...messages.modalViewOrder.orderStatus.rejected}/></h4></div>
+        break;
+      default:
+        output = 'Coming soon...';
+    }
+    return output;
+  }
   render() {
+    const { formatMessage } = this.props.intl;
     const { order } = this.props;
     return (
       <Modal show={this.props.show} onHide={this.props.onHide} bsSize="large">
@@ -19,7 +62,6 @@ class ModalViewOrder extends Component {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-        <form className="form-horizontal">
           <div className="form-group">
             <label className="col-sm-2 control-label">
             <FormattedMessage {...messages.modalViewOrder.body.shipAddress}/>
@@ -75,15 +117,7 @@ class ModalViewOrder extends Component {
             )}
             </tbody>
           </table>
-          <div className="btn-toolbar">
-            <button type="button" className="btn btn-success" onClick={() => this.props.acceptOrder(order.id)}>
-              Accept
-            </button>
-            <button type="button" className="btn btn-danger">
-              Reject
-            </button>
-          </div>
-        </form>
+          {this.renderAction(order)}
         </Modal.Body>
       </Modal>
     );

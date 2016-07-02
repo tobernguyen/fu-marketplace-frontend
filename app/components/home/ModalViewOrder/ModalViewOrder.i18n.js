@@ -1,5 +1,39 @@
 export const messages = {
   modalViewOrder: {
+    button: {
+      accept: {
+        id: 'modalViewOrder.button.accept',
+        defaultMessage: 'Accept'
+      },
+      reject: {
+        id: 'modalViewOrder.button.reject',
+        defaultMessage: 'Reject'
+      }
+    },
+    rejectForm: {
+      label: {
+        id: 'modalViewOrder.rejectForm.label',
+        defaultMessage: 'Reason'
+      },
+      placeholder: {
+        id: 'modalViewOrder.rejectForm.placeholder',
+        defaultMessage: 'Reason'
+      },
+      button: {
+        id: 'modalViewOrder.rejectForm.button',
+        defaultMessage: 'Reject'
+      }
+    },
+    orderStatus: {
+      accepted: {
+        id: 'modalViewOrder.orderStatus.accepted',
+        defaultMessage: 'Accepted'
+      },
+      rejected: {
+        id: 'modalViewOrder.orderStatus.rejected',
+        defaultMessage: 'Rejected'
+      }
+    },
     title: {
       id: 'modalViewOrder.title',
       defaultMessage: 'View Order'

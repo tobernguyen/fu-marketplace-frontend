@@ -109,5 +109,12 @@ export default {
   'modalViewOrder.body.table.item' : 'Mặt hàng',
   'modalViewOrder.body.table.quantity': 'Số lượng',
   'modalViewOrder.body.table.total': 'Tổng giá trị',
-  'modalViewOrder.body.table.note': 'Ghi chú'
+  'modalViewOrder.body.table.note': 'Ghi chú',
+  'modalViewOrder.button.accept': 'Chấp nhận',
+  'modalViewOrder.button.reject': 'Từ chối',
+  'modalViewOrder.rejectForm.label': 'Lí do',
+  'modalViewOrder.rejectForm.placeholder': 'Cung cấp lí do',
+  'modalViewOrder.rejectForm.button': 'Từ chối',
+  'modalViewOrder.orderStatus.accepted': 'Đơn hàng đã được chấp nhận',
+  'modalViewOrder.orderStatus.rejected': 'Đơn hàng đã bị từ chối'
 };

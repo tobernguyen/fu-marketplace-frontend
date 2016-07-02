@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import './BlockItemList.scss';
 import { Link } from 'react-router';
 import classNames from 'classnames';
+import _ from 'lodash';
 
 export default class BlockItemList extends Component {
   render() {
@@ -25,9 +26,9 @@ export default class BlockItemList extends Component {
                 key={category.id}
                 to={{
                     pathname: '/',
-                    query: {
+                    query: _.assign({}, query, {
                       category: category.id
-                    }
+                    })
                   }}
                 className={classNames('btn', 'btn-default', { active: categoryID && categoryID === category.id })}>
                 {category.name} <span className="badge">{categoryCounter[category.id]}</span>

@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import './BlockDormList.scss';
 import { Link } from 'react-router';
 import classNames from 'classnames';
+import _ from 'lodash';
 
 export default class BlockDormList extends Component {
   render() {
@@ -25,11 +26,11 @@ export default class BlockDormList extends Component {
                 key={shipPlace.id}
                 to={{
                   pathname: '/',
-                  query: {
+                  query: _.assign({}, query, {
                     ship_to: shipPlace.id
-                  }
+                  })
                 }}
-                className={classNames('btn', 'btn-default', { active: placeID && placeID === undefined })}>
+                className={classNames('btn', 'btn-default', { active: placeID && placeID === shipPlace.id })}>
                 {shipPlace.name} <span className="badge">{shipPlaceCounter[shipPlace.id]}</span>
               </Link>
             )}

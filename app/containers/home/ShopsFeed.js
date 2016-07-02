@@ -26,7 +26,8 @@ class ShopsFeed extends Component {
       if (query) {
         if (query.hasOwnProperty('ship_to')) {
           params.shipPlaceId = parseInt(query['ship_to'])
-        } else if (query.hasOwnProperty('category')) {
+        }
+        if (query.hasOwnProperty('category')) {
           params.categoryIds = [parseInt(query['category'])]
         }
       }

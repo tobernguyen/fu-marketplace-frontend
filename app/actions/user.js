@@ -92,3 +92,8 @@ export const removeItemFromCart = (itemID) => ({
     itemID: itemID
   }
 });
+
+export const CLEAR_CURRENT_VIEWED_SHOP = 'CLEAR_CURRENT_VIEWED_SHOP';
+export const clearCurrentViewedShop = () => ({
+  type: CLEAR_CURRENT_VIEWED_SHOP
+});

@@ -10,6 +10,7 @@ import { getMetadata } from 'app/actions/common';
 import { getCategories, getShipPlaces, getAggregations } from 'app/selectors';
 import NavigationBar from './NavigationBar';
 import { signOutGoogle } from 'app/actions';
+import _ from 'lodash';
 
 class Home extends Component {
   constructor(props) {
@@ -17,7 +18,9 @@ class Home extends Component {
   }
 
   componentWillMount() {
-    this.props.getMetadata();
+    if (_.isEmpty(this.props.categories)) {
+      this.props.getMetadata();
+    }
   }
 
   componentWillReceiveProps(nextProps) {

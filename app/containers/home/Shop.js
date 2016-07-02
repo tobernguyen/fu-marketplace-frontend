@@ -3,7 +3,7 @@ import BlockShopHeader from 'app/components/home/BlockShopHeader';
 import { connect } from 'react-redux';
 import { updateModalSize } from '../../actions/common';
 import SellingItemList from './SellingItemList';
-import { getUserShop } from 'app/actions/user';
+import { getUserShop, clearCurrentViewedShop } from 'app/actions/user';
 import { placeOrder, clearOrderResult } from 'app/actions/order';
 import { Link } from 'react-router';
 import BuyNowForm from './PlaceOrder/BuyNowForm';
@@ -57,6 +57,10 @@ class Shop extends Component {
     this.props.updateModalSize('lg');
   }
 
+  componentWillUnmount() {
+    this.props.clearCurrentViewedShop();
+  }
+
   render() {
     let orderForm;
     if (this.state.item) {
@@ -106,5 +110,6 @@ export default connect(mapStateToProps, {
   updateModalSize,
   getUserShop,
   placeOrder,
-  clearOrderResult
+  clearOrderResult,
+  clearCurrentViewedShop
 })(Shop)

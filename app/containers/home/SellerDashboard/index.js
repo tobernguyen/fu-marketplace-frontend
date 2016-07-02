@@ -9,6 +9,8 @@ import { uploadShopAvatar, uploadShopCover, getSellerShop, updateShopInfo } from
 import Sticky from 'react-stickynode';
 import NavigationBar from '../NavigationBar';
 import { getMetadata } from 'app/actions/common';
+import { getHashCategories } from 'app/selectors';
+import _ from 'lodash';
 
 
 class SellerDashboard extends Component {
@@ -41,7 +43,9 @@ class SellerDashboard extends Component {
   }
 
   componentWillMount() {
-    this.props.getMetadata();
+    if (_.isEmpty(this.props.allCategories)) {
+      this.props.getMetadata();
+    }
   }
 
   render() {
@@ -84,7 +88,8 @@ class SellerDashboard extends Component {
 const mapStateToProps = (state) => {
   const { shop } = state;
   return {
-    sellerShop: shop.sellerShop
+    sellerShop: shop.sellerShop,
+    allCategories: getHashCategories(state)
   }
 };
 

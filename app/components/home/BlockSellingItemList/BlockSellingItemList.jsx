@@ -12,9 +12,10 @@ export default class BlockSellingItemList extends Component {
 
     this.state = {
       groupItems: {},
-      currentItems: []
+      currentItems: [],
+      selectedCategory: -1
     };
-    
+
     this.handleCheckOut = () => {
       const { cartItems } = this.props;
       if (cartItems.length) {
@@ -24,17 +25,27 @@ export default class BlockSellingItemList extends Component {
 
     this.categoryChanged = (categoryID) => {
       this.setState({
-        currentItems: this.state.groupItems[categoryID]
+        currentItems:     this.state.groupItems[categoryID],
+        selectedCategory: categoryID
       })
     }
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.items && !_.isEmpty(nextProps.items)) {
+    const { items } = nextProps;
+    if (items && !_.isEmpty(items)) {
+      const { selectedCategory } = this.state;
+      const firstKey = _.keys(items)[0];
       this.setState({
-        groupItems: nextProps.items,
-        currentItems: _.find(nextProps.items)
-      })
+        groupItems: items,
+        currentItems: selectedCategory === -1 ? items[firstKey] : items[selectedCategory]
+      });
+
+      if (selectedCategory === -1) {
+        this.setState({
+          selectedCategory: firstKey
+        })
+      }
     }
   }
 
@@ -47,13 +58,16 @@ export default class BlockSellingItemList extends Component {
 
     return (
       <ul className="nav nav-pills">
-        {categories.map(category =>
-          <li key={category.id}>
-            <a onClick={() => this.categoryChanged(category.id)}>
-              {allCategories[category.id]}{' '}
-              <span>{category.itemCount}</span></a>
-          </li>
-        )}
+        {categories.map((category, index) => {
+          const isActive = category.id === this.state.selectedCategory;
+          return (
+            <li key={category.id} className={classNames({'active': isActive})}>
+              <a onClick={() => this.categoryChanged(category.id)}>
+                {allCategories[category.id]}{' '}
+                <span>{category.itemCount}</span></a>
+            </li>
+          )
+        })}
       </ul>
     )
   }

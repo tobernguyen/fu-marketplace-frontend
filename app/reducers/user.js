@@ -38,7 +38,8 @@ export const user = (state = INITIAL_STATE, action) => {
         currentViewedShop: modifiedShop
       });
     case UserActionTypes.USER_GET_SHOP_FAILURE:
-      return _.merge({}, state, {
+    case UserActionTypes.CLEAR_CURRENT_VIEWED_SHOP:
+      return _.assign({}, state, {
         currentViewedShop: {}
       });
     case ActionTypes.CURRENT_USER_FAILURE:

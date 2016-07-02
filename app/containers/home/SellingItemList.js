@@ -16,7 +16,7 @@ class SellingItemList extends Component {
 
     this.handleAddToCart = (item) => {
       this.props.addItemToCart(item);
-    }
+    };
   }
 
   render() {

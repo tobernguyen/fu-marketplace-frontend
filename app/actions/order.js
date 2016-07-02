@@ -47,3 +47,20 @@ export const clearOrderResult = () => {
     type: CLEAR_ORDER_RESULT
   };
 }
+
+export const USER_GET_ORDER_REQUEST = 'USER_GET_ORDER_REQUEST';
+export const USER_GET_ORDER_SUCCESS = 'USER_GET_ORDER_SUCCESS';
+export const USER_GET_ORDER_FAILURE = 'USER_GET_ORDER_FAILURE';
+const userRequestGetOrder = () => ({
+  [CALL_API]: {
+    types: [USER_GET_ORDER_REQUEST, USER_GET_ORDER_SUCCESS, USER_GET_ORDER_FAILURE],
+    url: `/api/v1/orders`,
+    method: HTTP_METHODS.GET
+  }
+});
+
+export const userGetOrder = () => {
+  return (dispatch) => {
+    return dispatch(userRequestGetOrder());
+  }
+}

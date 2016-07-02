@@ -30,6 +30,14 @@ export const order = (state = INITIAL_STATE, action) => {
       return _.merge({}, state, {
         orders: []
       });
+    case OrderActionTypes.USER_GET_ORDER_SUCCESS:
+      return _.assign({}, state, {
+        orders: action.response.orders
+      });
+    case OrderActionTypes.USER_GET_ORDER_FAILURE:
+      return _.assign({}, state, {
+        orders: []
+      });
     default:
       return state;
   }

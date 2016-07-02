@@ -4,6 +4,7 @@ import Infinite from 'react-infinite';
 import BlockShopFeedItem from 'app/components/home/BlockShopFeedItem';
 import { getShopsOfPage } from 'app/actions/feed';
 import { getShopsFeed } from 'app/selectors';
+import { PulseLoader } from 'halogen';
 
 class ShopsFeed extends Component {
   constructor(props) {
@@ -24,7 +25,7 @@ class ShopsFeed extends Component {
 
     this.elementInfiniteLoad = () => {
       return (
-        <div>Loading</div>
+        <PulseLoader className="feed-loader" color="#C0392B" size="12px" />
       )
     }
   }

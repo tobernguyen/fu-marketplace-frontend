@@ -29,12 +29,17 @@ export const user = (state = INITIAL_STATE, action) => {
         userUpdated: true
       });
     case UserActionTypes.USER_GET_SHOP_SUCCESS:
+      // Shop item grouped by category id
+      const groupItems = _.groupBy(response.items, 'categoryId');
+      const modifiedShop = _.assign({}, response, {
+        groupItems: groupItems
+      });
       return _.merge({}, state, {
-        currentViewedShop: response
+        currentViewedShop: modifiedShop
       });
     case UserActionTypes.USER_GET_SHOP_FAILURE:
       return _.merge({}, state, {
-        currentViewedShop: null
+        currentViewedShop: {}
       });
     case ActionTypes.CURRENT_USER_FAILURE:
     case UserActionTypes.UPLOAD_AVATAR_FAILURE:

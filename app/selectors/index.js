@@ -1,11 +1,12 @@
 import { createSelector } from 'reselect';
 import _ from 'lodash';
 
-const categoriesSelector    = (state) => state.common.categories;
-const shipPlacesSelector    = (state) => state.common.shipPlaces;
-const currentUserSelector   = (state) => state.user.currentUser;
-const shopsFeedSelector     = (state) => state.feed.shops;
-const aggregationsSelector  = (state) => state.feed.aggregations;
+const categoriesSelector        = (state) => state.common.categories;
+const shipPlacesSelector        = (state) => state.common.shipPlaces;
+const currentUserSelector       = (state) => state.user.currentUser;
+const shopsFeedSelector         = (state) => state.feed.shops;
+const aggregationsSelector      = (state) => state.feed.aggregations;
+const currentViewedShopSelector = (state) => state.user.currentViewedShop;
 
 export const getCategories = createSelector(
   categoriesSelector,
@@ -80,5 +81,29 @@ export const getAggregations = createSelector(
       totalCategory,
       totalShipPlace
     }
+  }
+);
+
+export const getCurrentViewedShop = createSelector(
+  currentViewedShopSelector,
+  (currentViewedShop) => {
+    const shopInfo = _.pickBy(currentViewedShop, (value, key) => {
+      return _.indexOf(['items', 'shipPlaces', 'seller', 'groupItems'], key) === -1
+    });
+    const seller = _.get(currentViewedShop, 'seller');
+    const sellingItems = _.get(currentViewedShop, 'groupItems');
+
+    return {
+      shopInfo: shopInfo,
+      seller: seller || {},
+      sellingItems: sellingItems || {}
+    };
+  }
+);
+
+export const getHashCategories = createSelector(
+  categoriesSelector,
+  (categories) => {
+    return _.mapValues(_.keyBy(categories, 'id'), 'name')
   }
 );

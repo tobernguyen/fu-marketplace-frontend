@@ -6,7 +6,7 @@ import { getImageURLWithTimestamp } from 'app/helpers/image';
 const INITIAL_STATE = {
   shopOpeningRequests: [],
   sellerShop: {},
-  sellingItems: [],
+  sellingItems: {},
   toBeUpdatedItem: null,
   newlyItemAdded: false,
   itemUpdated: false,
@@ -36,8 +36,10 @@ export const shop = (state = INITIAL_STATE, action) => {
         shipPlacesUpdated: false
       });
     case ShopActionTypes.SELLER_GET_SHOP_ITEM_LIST_SUCCESS:
+      // Shop item grouped by category id
+      const groupItems = _.groupBy(response.items, 'categoryId');
       return _.assign({}, state, {
-        sellingItems: response.items
+        sellingItems: groupItems
       });
     case ShopActionTypes.SHOP_CREATE_ITEM_SUCCESS:
       return _.assign({}, state, {

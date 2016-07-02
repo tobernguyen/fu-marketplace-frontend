@@ -8,7 +8,7 @@ import { Modal } from 'react-bootstrap';
 import { uploadShopAvatar, uploadShopCover, getSellerShop, updateShopInfo } from 'app/actions/shop';
 import Sticky from 'react-stickynode';
 import NavigationBar from '../NavigationBar';
-
+import { getMetadata } from 'app/actions/common';
 
 
 class SellerDashboard extends Component {
@@ -38,6 +38,10 @@ class SellerDashboard extends Component {
     this.handleShopInfoChanged = (shopData) => {
       this.props.updateShopInfo(shopData, this.props.params.shopID);
     }
+  }
+
+  componentWillMount() {
+    this.props.getMetadata();
   }
 
   render() {
@@ -88,5 +92,6 @@ export default connect(mapStateToProps, {
   getSellerShop,
   uploadShopAvatar,
   uploadShopCover,
-  updateShopInfo
+  updateShopInfo,
+  getMetadata
 })(SellerDashboard)

@@ -3,7 +3,6 @@ import BlockSellingItem from 'app/components/home/BlockSellingItem';
 import BlockSellingItemForUser from 'app/components/home/BlockSellingItemForUser';
 import BlockShoppingCart from 'app/components/home/BlockShoppingCart';
 import './BlockSellingItemList.scss';
-import { Pagination } from 'react-bootstrap';
 import _ from 'lodash';
 import classNames from 'classnames';
 
@@ -12,64 +11,68 @@ export default class BlockSellingItemList extends Component {
     super(props);
 
     this.state = {
-      activePage: 1,
-      totalPage: 0,
-      items: [],
-      pagedItems: []
+      groupItems: {},
+      currentItems: []
     };
-
-    this.pageChanged = (eventKey) => {
-      this.setState({
-        activePage: eventKey,
-        pagedItems: _.slice(this.state.items, (eventKey - 1) * 8, (eventKey * 8))
-      })
-    };
-
+    
     this.handleCheckOut = () => {
       const { cartItems } = this.props;
       if (cartItems.length) {
         this.props.checkOut();
       }
-    }
-  }
+    };
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.items && nextProps.items.length > 0) {
+    this.categoryChanged = (categoryID) => {
       this.setState({
-        totalPage: Math.ceil(nextProps.items.length / 8),
-        items: nextProps.items,
-        activeKey: 1,
-        pagedItems: _.slice(nextProps.items, 0, 8)
+        currentItems: this.state.groupItems[categoryID]
       })
     }
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.items && !_.isEmpty(nextProps.items)) {
+      this.setState({
+        groupItems: nextProps.items,
+        currentItems: _.find(nextProps.items)
+      })
+    }
+  }
+
+  renderHeader() {
+    const { allCategories, items } = this.props;
+    const categories = _.map(items, (value, key) => ({
+      id: key,
+      itemCount: value.length
+    }));
+
+    return (
+      <ul className="nav nav-pills">
+        {categories.map(category =>
+          <li key={category.id}>
+            <a onClick={() => this.categoryChanged(category.id)}>
+              {allCategories[category.id]}{' '}
+              <span>{category.itemCount}</span></a>
+          </li>
+        )}
+      </ul>
+    )
+  }
 
   render() {
     const { sellerMode } = this.props;
+
     return (
       <div className="block-selling-item-list clearfix">
         <div className="header clearfix">
           <div className={classNames({'col-md-9 col-xs-8': !sellerMode})}>
-            <ul className="nav nav-pills">
-              <li className="active">
-                <a href="#">Tất cả <span>8</span></a>
-              </li>
-              <li>
-                <a href="#">Đồ ăn <span>3</span>
-                </a>
-              </li>
-              <li>
-                <a href="#">Đồ uống <span>5</span></a>
-              </li>
-            </ul>
+            {this.renderHeader()}
           </div>
           {!sellerMode && <div className="col-md-3 col-xs-4 row">
             <BlockShoppingCart cartItems={this.props.cartItems} checkOut={this.handleCheckOut} />
           </div>}
         </div>
         <div className="body clearfix">
-          {this.state.pagedItems.map((item) =>
+          {this.state.currentItems.map((item) =>
           {if (sellerMode) {
             return <BlockSellingItem
               key={item.id}
@@ -86,19 +89,12 @@ export default class BlockSellingItemList extends Component {
           }}
           )}
         </div>
-        <div className="footer clearfix">
-          {this.state.totalPage > 1 && <Pagination
-            bsSize="small"
-            items={this.state.totalPage}
-            activePage={this.state.activePage}
-            onSelect={this.pageChanged} />}
-        </div>
       </div>
     )
   }
 }
 
 BlockSellingItemList.propTypes = {
-  items: PropTypes.array.isRequired,
-  sellerMode: PropTypes.bool.isRequired,
+  items: PropTypes.object.isRequired,
+  sellerMode: PropTypes.bool.isRequired
 };

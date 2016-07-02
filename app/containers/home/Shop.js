@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import BlockShopHeader from 'app/components/home/BlockShopHeader';
 import { connect } from 'react-redux';
-import { updateModalMode, updateModalSize } from '../../actions/common';
+import { updateModalSize } from '../../actions/common';
 import SellingItemList from './SellingItemList';
 import { getUserShop } from 'app/actions/user';
 import { placeOrder, clearOrderResult } from 'app/actions/order';
 import { Link } from 'react-router';
-import _ from 'lodash';
 import BuyNowForm from './PlaceOrder/BuyNowForm';
 import CheckOutPage from './PlaceOrder/CheckOutPage';
 import classNames from 'classnames';
+import { getCurrentViewedShop } from 'app/selectors';
 
 class Shop extends Component {
   constructor(props) {
@@ -55,11 +55,6 @@ class Shop extends Component {
 
   componentWillMount() {
     this.props.updateModalSize('lg');
-    this.props.updateModalMode(true);
-  }
-
-  componentWillUnmount() {
-    this.props.updateModalMode(false);
   }
 
   render() {
@@ -78,6 +73,7 @@ class Shop extends Component {
         onHide={this.close}
         bsSize={this.state.bsSize} />
     }
+
     return (
       <div className={classNames('shop-detail-modal', {'dim': this.state.showModal})}>
         {this.state.shopValid && <div>
@@ -85,6 +81,7 @@ class Shop extends Component {
           <SellingItemList
             shopID={parseInt(this.props.params.shopID)}
             sellerMode={false}
+            sellingItems={this.props.sellingItems}
             checkOut={this.handleCheckOut}
             buyNow={this.handleBuyNow} />
           <Link to='/' className="close"><span>×</span></Link>
@@ -95,24 +92,18 @@ class Shop extends Component {
   }
 }
 
-
 const mapStateToProps = (state) => {
-  const { user: { currentViewedShop } } = state;
-
-  const { seller } = currentViewedShop;
-  const shop = _.pickBy(currentViewedShop, (value, key) => {
-    return _.indexOf(['Items', 'shipPlaces', 'seller'], key) === -1
-  });
-
+  const currentViewedShop = getCurrentViewedShop(state);
+  const { shopInfo, seller, sellingItems } = currentViewedShop;
   return {
-    shop: shop,
-    seller: seller
+    shop: shopInfo,
+    seller: seller,
+    sellingItems: sellingItems
   }
 };
 
 export default connect(mapStateToProps, {
   updateModalSize,
-  updateModalMode,
   getUserShop,
   placeOrder,
   clearOrderResult

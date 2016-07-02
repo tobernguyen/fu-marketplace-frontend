@@ -16,7 +16,6 @@ class App extends Component {
     this.handleSignIn = (authResult) => {
       this.props.signInGoogle(authResult['code']);
     };
-
   }
 
   componentWillReceiveProps(nextProps) {

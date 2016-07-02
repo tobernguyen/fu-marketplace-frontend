@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import BlockSellingItemList from 'app/components/home/BlockSellingItemList';
 import { getSellerShopItems } from 'app/actions/shop';
 import { addItemToCart } from 'app/actions/user';
+import { getHashCategories } from 'app/selectors';
 
 class SellingItemList extends Component {
   constructor(props) {
@@ -19,33 +20,35 @@ class SellingItemList extends Component {
   }
 
   render() {
-    const { checkOut, buyNow } = this.props;
+    const { checkOut, buyNow, sellingItems, shopID, cartItems, sellerMode, allCategories } = this.props;
     return (
       <BlockSellingItemList
-        items={this.props.sellingItems}
-        shopID={this.props.shopID}
+        items={sellingItems}
+        shopID={shopID}
         checkOut={checkOut}
         buyNow={buyNow}
+        allCategories={allCategories}
         addToCart={this.handleAddToCart}
-        cartItems={this.props.cartItems}
-        sellerMode={this.props.sellerMode} />
+        cartItems={cartItems}
+        sellerMode={sellerMode} />
     )
   }
 }
 
 const mapStateToProps = (state, ownProps) => {
-  const { shop, user: { cartItems, currentViewedShop } } = state;
+  const { shop: { sellingItems }, user: { cartItems } } = state;
   if (ownProps.sellerMode) {
     return {
-      sellingItems: shop.sellingItems
+      sellingItems: sellingItems,
+      allCategories: getHashCategories(state)
     }
   } else {
     return {
       cartItems: cartItems,
-      sellingItems: currentViewedShop.items || []
+      sellingItems: ownProps.sellingItems,
+      allCategories: getHashCategories(state)
     }
   }
-
 };
 
 SellingItemList.propTypes = {

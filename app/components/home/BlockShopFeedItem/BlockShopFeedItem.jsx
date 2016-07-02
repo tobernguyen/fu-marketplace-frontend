@@ -59,7 +59,9 @@ export default class BlockShopFeedItem extends Component {
               <ul className="nav">
                 {categories.map((category, key) =>
                   <li key={key}>
-                    <a href="#">{category.name}</a>
+                    <Link to={{ pathname: '/', query: { category: category.id } }}>
+                      {category.name}
+                    </Link>
                   </li>
                 )}
               </ul>
@@ -71,10 +73,11 @@ export default class BlockShopFeedItem extends Component {
               <ul className="nav">
                 {shipPlaces.map((shipPlace, key) =>
                   <li key={key}>
-                    <a href="#">{shipPlace.name}</a>
+                    <Link to={{ pathname: '/', query: { ship_to: shipPlace.id } }}>
+                      {shipPlace.name}
+                    </Link>
                   </li>
                 )}
-
               </ul>
               <i>Last updated: 23:51 05/06/2016</i>
             </div>

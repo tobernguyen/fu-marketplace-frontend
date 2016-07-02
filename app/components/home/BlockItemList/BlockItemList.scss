@@ -8,20 +8,23 @@
       color: #66757f;
       text-align: left;
       border: 0;
-      border-right: 1px dashed #c2ccd1;
-
-      &:nth-child(2n) {
-        border-right: 0;
-      }
+      //border-right: 1px dashed #c2ccd1;
+      //&:nth-child(2n) {
+      //  border-right: 0;
+      //}
 
       &:hover {
-        background-color: transparent;
-        text-decoration: underline;
+
       }
 
       .badge {
         float: right;
         background-color: #666;
+        top: 1px;
+      }
+
+      &.active {
+        box-shadow: none;
       }
     }
   }

@@ -16,6 +16,10 @@
       &:hover {
         background-color: #EEEEEE;
       }
+
+      &.active {
+        box-shadow: none;
+      }
     }
   }
 }

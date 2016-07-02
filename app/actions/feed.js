@@ -20,19 +20,34 @@ export const getShops = () => {
 export const GET_SHOPS_OF_PAGE_REQUEST = 'GET_SHOPS_OF_PAGE_REQUEST';
 export const GET_SHOPS_OF_PAGE_SUCCESS = 'GET_SHOPS_OF_PAGE_SUCCESS';
 export const GET_SHOPS_OF_PAGE_FAILURE = 'GET_SHOPS_OF_PAGE_FAILURE';
-const requestGetShopsOfPage = (pageNumber) => ({
+const requestGetShopsOfPage = (params) => ({
   [CALL_API]: {
     types: [GET_SHOPS_OF_PAGE_REQUEST, GET_SHOPS_OF_PAGE_SUCCESS, GET_SHOPS_OF_PAGE_FAILURE],
     url: '/api/v1/feed/shops',
     method: HTTP_METHODS.POST,
-    params: {
-      page: pageNumber
-    }
+    params: params
   }
 });
 
-export const getShopsOfPage = (pageNumber) => {
+export const GET_FIRST_PAGE_SHOPS_REQUEST = 'GET_FIRST_PAGE_SHOPS_REQUEST';
+export const GET_FIRST_PAGE_SHOPS_SUCCESS = 'GET_FIRST_PAGE_SHOPS_SUCCESS';
+export const GET_FIRST_PAGE_SHOPS_FAILURE = 'GET_FIRST_PAGE_SHOPS_FAILURE';
+const requestGetFirstPageShops = (params) => ({
+  [CALL_API]: {
+    types: [GET_FIRST_PAGE_SHOPS_REQUEST, GET_FIRST_PAGE_SHOPS_SUCCESS, GET_FIRST_PAGE_SHOPS_FAILURE],
+    url: '/api/v1/feed/shops',
+    method: HTTP_METHODS.POST,
+    params: params
+  }
+});
+
+export const getShopsOfPage = (params, firstPage) => {
   return (dispatch) => {
-    return dispatch(requestGetShopsOfPage(pageNumber))
+    if (firstPage) {
+      return dispatch(requestGetFirstPageShops(params))
+    } else {
+      return dispatch(requestGetShopsOfPage(params))
+    }
+
   }
 };

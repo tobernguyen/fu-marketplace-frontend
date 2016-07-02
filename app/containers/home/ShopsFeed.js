@@ -13,11 +13,24 @@ class ShopsFeed extends Component {
     this.state = {
       isInfiniteLoading: false,
       loadedPage: 0,
-      loadedShops: 0
+      loadedShops: 0,
+      query: null
     };
 
     this.handleInfiniteLoad = () => {
-      this.props.getShopsOfPage(this.state.loadedPage + 1);
+      const { query } = this.state;
+      let params = {
+        page: this.state.loadedPage + 1
+      };
+
+      if (query) {
+        if (query.hasOwnProperty('ship_to')) {
+          params.shipPlaceId = parseInt(query['ship_to'])
+        } else if (query.hasOwnProperty('category')) {
+          params.categoryIds = [parseInt(query['category'])]
+        }
+      }
+      this.props.getShopsOfPage(params, this.state.loadedPage === 0);
       this.setState({
         isInfiniteLoading: true
       });
@@ -42,23 +55,36 @@ class ShopsFeed extends Component {
         isInfiniteLoading: false
       })
     }
+
+    if (nextProps.query) {
+      const { query } = nextProps;
+      if (!_.isEqual(this.state.query, query)) {
+        this.setState({
+          query: query,
+          loadedShops: 0,
+          loadedPage: 0
+        }, () => {
+          this.handleInfiniteLoad()
+        });
+      }
+    }
   }
 
   render() {
     const { shops } = this.props;
     return (
       <div>
-        <Infinite elementHeight={250}
-                  containerHeight={window.innerHeight}
-                  infiniteLoadBeginEdgeOffset={200}
-                  onInfiniteLoad={this.handleInfiniteLoad}
-                  loadingSpinnerDelegate={this.elementInfiniteLoad()}
-                  isInfiniteLoading={this.state.isInfiniteLoading}
-                  useWindowAsScrollContainer>
-        {shops.map((shop, key) =>
-          <BlockShopFeedItem key={key} shop={shop} />
-        )}
-        </Infinite>
+        {this.state.query && <Infinite elementHeight={250}
+                                       containerHeight={window.innerHeight}
+                                       infiniteLoadBeginEdgeOffset={200}
+                                       onInfiniteLoad={this.handleInfiniteLoad}
+                                       loadingSpinnerDelegate={this.elementInfiniteLoad()}
+                                       isInfiniteLoading={this.state.isInfiniteLoading}
+                                       useWindowAsScrollContainer>
+          {shops.map((shop, key) =>
+            <BlockShopFeedItem key={key} shop={shop} />
+          )}
+        </Infinite>}
       </div>
     );
   }

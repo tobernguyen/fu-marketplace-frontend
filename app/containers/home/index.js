@@ -15,6 +15,10 @@ import _ from 'lodash';
 class Home extends Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      query: null
+    }
   }
 
   componentWillMount() {
@@ -28,6 +32,15 @@ class Home extends Component {
       const { status } = nextProps.error;
       if (status === 401) {
         this.props.signOutGoogle();
+      }
+    }
+
+    if (nextProps.location) {
+      const { query } = nextProps.location;
+      if (!_.isEqual(this.state.query, query)) {
+        this.setState({
+          query: query
+        })
       }
     }
   }
@@ -51,10 +64,12 @@ class Home extends Component {
           <div className="row">
             <div className="col-md-3">
               <BlockItemList
+                query={this.state.query}
                 categories={categories}
                 categoryCounter={category}
                 totalCategory={totalCategory} />
               <BlockDormList
+                query={this.state.query}
                 shipPlaces={shipPlaces}
                 shipPlaceCounter={shipPlace}
                 totalShipPlace={totalShipPlace} />
@@ -64,7 +79,7 @@ class Home extends Component {
               <div className="row">
                 <CarouselPinnedItems />
                 <div className="main-column col-md-12">
-                  <ShopsFeed />
+                  <ShopsFeed query={this.state.query} />
                 </div>
               </div>
             </div>

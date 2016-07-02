@@ -20,12 +20,25 @@ export const feed = (state = INITIAL_STATE, action) => {
         shops: result.shops,
         aggregations: result.aggregations
       });
-    case FeedActionTypes.GET_SHOPS_OF_PAGE_SUCCESS:
+    case FeedActionTypes.GET_SHOPS_OF_PAGE_SUCCESS: {
       const { result: { shops, aggregations } } = response;
       return _.merge({}, state, {
         shops: _.concat(state.shops, shops),
         aggregations: aggregations
       });
+    }
+    case FeedActionTypes.GET_FIRST_PAGE_SHOPS_REQUEST:
+      return _.merge({}, state, {
+        shops: INITIAL_STATE.shop,
+        aggregations: INITIAL_STATE.aggregations
+      });
+    case FeedActionTypes.GET_FIRST_PAGE_SHOPS_SUCCESS: {
+      const { result: { shops, aggregations } } = response;
+      return _.merge({}, state, {
+        shops: shops,
+        aggregations: aggregations
+      });
+    }
     case ItemActionTypes.GET_ITEM_CATEGORIES_SUCCESS:
       return _.merge({}, state, response);
     default:

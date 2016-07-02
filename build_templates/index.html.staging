@@ -5,7 +5,18 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>FU Marketplace</title>
+  <link rel="manifest" href="/manifest.json">
   <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async></script>
+  <script>
+    var OneSignal = OneSignal || [];
+    OneSignal.push(["init", {
+      appId: "dd4c1ce8-f2df-416d-a3cd-5dd36268a0ee",
+      autoRegister: false,
+      notifyButton: {
+        enable: false /* Set to false to hide */
+      }
+    }]);
+  </script>
 </head>
 <body>
 <div id="root"></div>

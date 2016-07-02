@@ -1,0 +1,7 @@
+{
+  "name": "FU Marketplace Staging",
+  "short_name": "FUMStaging",
+  "start_url": "/",
+  "display": "standalone",
+  "gcm_sender_id": "191680141585"
+}

@@ -5,6 +5,7 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const TARGET = process.env.npm_lifecycle_event;
 const pkg = require('./package.json');
 process.env.BABEL_ENV = TARGET;
@@ -65,6 +66,9 @@ const common = {
         loader: "url?limit=10000&mimetype=image/svg+xml"
       }
     ]
+  },
+  externals: {
+    onesignal: 'OneSignal'
   }
 };
 
@@ -103,7 +107,7 @@ if(TARGET === 'start' || !TARGET) {
   });
 }
 
-if(TARGET === 'build') {
+if(TARGET === 'staging') {
   module.exports = merge(common, {
     entry: {
       app: PATHS.app,
@@ -119,6 +123,9 @@ if(TARGET === 'build') {
     plugins: [
       new CleanWebpackPlugin([PATHS.build], {
         root: process.cwd()
+      }),
+      new HtmlWebpackPlugin({
+        template: 'build_templates/index.html.staging'
       }),
       new ExtractTextPlugin('styles.[chunkhash].css'),
       new webpack.optimize.CommonsChunkPlugin({
@@ -147,11 +154,16 @@ if(TARGET === 'build') {
         asset: '[file].gz',
         minRatio: 0,
         regExp: /\.(js|html|css)$/
-      })
+      }),
+      new CopyWebpackPlugin([
+        { from: path.join(__dirname, 'build_templates', 'manifest.json.staging'), to: 'manifest.json' },
+        { from: path.join(__dirname, 'build_templates', 'OneSignalSDKUpdaterWorker.js') },
+        { from: path.join(__dirname, 'build_templates', 'OneSignalSDKWorker.js') },
+      ])
     ],
     resolve: {
       alias: {
-        config: path.join(__dirname, 'config', 'production')
+        config: path.join(__dirname, 'config', 'staging')
       }
     },
     module: {

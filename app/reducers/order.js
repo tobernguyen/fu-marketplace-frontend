@@ -3,7 +3,8 @@ import _ from 'lodash';
 import AsyncResultCode from 'app/shared/asyncResultCodes';
 const INITIAL_STATE = {
   orders: [],
-  orderResult: ''
+  orderResult: '',
+  shouldUpdateOrderList: false
 };
 
 export const order = (state = INITIAL_STATE, action) => {
@@ -24,11 +25,21 @@ export const order = (state = INITIAL_STATE, action) => {
       });
     case OrderActionTypes.SELLER_GET_ORDER_SUCCESS:
       return _.assign({}, state, {
-        orders: action.response.orders
+        orders: action.response.orders,
+        shouldUpdateOrderList: false
       });
     case OrderActionTypes.SELLER_GET_ORDER_FAILURE:
       return _.merge({}, state, {
-        orders: []
+        orders: [],
+        shouldUpdateOrderList: false
+      });
+    case OrderActionTypes.SELLER_ACCEPT_ORDER_SUCCESS:
+      return _.merge({}, state, {
+        shouldUpdateOrderList: true
+      });
+    case OrderActionTypes.SELLER_REJECT_ORDER_SUCCESS:
+      return _.merge({}, state, {
+        shouldUpdateOrderList: true
       });
     case OrderActionTypes.USER_GET_ORDER_SUCCESS:
       return _.assign({}, state, {

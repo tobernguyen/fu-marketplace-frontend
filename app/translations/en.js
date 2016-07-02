@@ -111,5 +111,12 @@ export default {
   'modalViewOrder.body.table.item' : 'Items',
   'modalViewOrder.body.table.quantity': 'Quantity',
   'modalViewOrder.body.table.total': 'Total',
-  'modalViewOrder.body.table.note': 'Note'
+  'modalViewOrder.body.table.note': 'Note',
+  'modalViewOrder.button.accept': 'Accept',
+  'modalViewOrder.button.reject': 'Reject',
+  'modalViewOrder.rejectForm.label': 'Reason',
+  'modalViewOrder.rejectForm.placeholder': 'Provide reason',
+  'modalViewOrder.rejectForm.button': 'Reject',
+  'modalViewOrder.orderStatus.accepted': 'Order is accepted',
+  'modalViewOrder.orderStatus.rejected': 'Order is rejected'
 };

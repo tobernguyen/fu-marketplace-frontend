@@ -4,7 +4,7 @@ import BlockSellerDashboardSideBar from 'app/components/home/BlockSellerDashboar
 import BlockOrderList from 'app/components/home/BlockOrderList';
 import ModalViewOrder from 'app/components/home/ModalViewOrder';
 import { getSellerShop, updateShopInfo } from 'app/actions/shop';
-import { sellerGetOrder } from 'app/actions/order';
+import { sellerGetOrder, sellerAcceptOrder, sellerRejectOrder } from 'app/actions/order';
 import Sticky from 'react-stickynode';
 import { getUser } from 'app/selectors';
 import NavigationBar from 'app/containers/home/NavigationBar';
@@ -19,6 +19,7 @@ class ManageOrders extends Component {
         shopID: shopID,
         status: status,
         showModal: false,
+        showRejectModal: false,
         selectedOrder: {
           orderLines: []
         }
@@ -43,16 +44,39 @@ class ManageOrders extends Component {
         showModal: false
       });
     }
+
+    this.sellerAcceptOrder = (orderID) => {
+      const { shopID, status } = this.props.params;
+      this.props.sellerAcceptOrder(orderID);
+      let selectedOrder = this.state.selectedOrder;
+      selectedOrder['status'] = 1;
+      this.setState({
+        selectedOrder
+      });
+    }
+
+    this.sellerRejectOrder = (orderID, messages) => {
+      this.props.sellerRejectOrder(orderID, messages);
+      let selectedOrder = this.state.selectedOrder;
+      selectedOrder['status'] = 4;
+      this.setState({
+        selectedOrder
+      });
+    }
   }
 
   componentWillReceiveProps(nextProps) {
     const {shopID, status} = nextProps.params;
+    const {shouldUpdateOrderList} = nextProps;
     if(shopID != this.state.shopID || status != this.state.status) {
       this.props.sellerGetOrder(shopID, status);
       this.setState ({
         shopID,
         status
       });
+    }
+    if(shouldUpdateOrderList === true) {
+      this.props.sellerGetOrder(shopID, status);
     }
   }
   render() {
@@ -71,6 +95,9 @@ class ManageOrders extends Component {
                   order={this.state.selectedOrder}
                   show={this.state.showModal}
                   onHide={this.close}
+                  acceptOrder={this.sellerAcceptOrder}
+                  rejectOrder={this.sellerRejectOrder}
+                  openRejectModal={this.openRejectModal}
                 />
               </div>
             </div>
@@ -92,12 +119,15 @@ const mapStateToProps = (state) => {
   const { shop } = state;
   return {
     orders: state.order.orders,
-    sellerShop: shop.sellerShop
+    sellerShop: shop.sellerShop,
+    shouldUpdateOrderList: state.order.shouldUpdateOrderList
   }
 };
 
 export default connect(mapStateToProps, {
   getSellerShop,
   updateShopInfo,
-  sellerGetOrder
+  sellerGetOrder,
+  sellerAcceptOrder,
+  sellerRejectOrder
 })(ManageOrders)

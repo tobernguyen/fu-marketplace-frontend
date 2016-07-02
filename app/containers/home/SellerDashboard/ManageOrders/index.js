@@ -48,9 +48,8 @@ class ManageOrders extends Component {
     this.sellerAcceptOrder = (orderID) => {
       const { shopID, status } = this.props.params;
       this.props.sellerAcceptOrder(orderID);
-      this.props.sellerGetOrder(shopID, status);
       let selectedOrder = this.state.selectedOrder;
-      selectedOrder['status'] = 3;
+      selectedOrder['status'] = 1;
       this.setState({
         selectedOrder
       });
@@ -68,12 +67,16 @@ class ManageOrders extends Component {
 
   componentWillReceiveProps(nextProps) {
     const {shopID, status} = nextProps.params;
+    const {shouldUpdateOrderList} = nextProps;
     if(shopID != this.state.shopID || status != this.state.status) {
       this.props.sellerGetOrder(shopID, status);
       this.setState ({
         shopID,
         status
       });
+    }
+    if(shouldUpdateOrderList === true) {
+      this.props.sellerGetOrder(shopID, status);
     }
   }
   render() {
@@ -116,7 +119,8 @@ const mapStateToProps = (state) => {
   const { shop } = state;
   return {
     orders: state.order.orders,
-    sellerShop: shop.sellerShop
+    sellerShop: shop.sellerShop,
+    shouldUpdateOrderList: state.order.shouldUpdateOrderList
   }
 };
 

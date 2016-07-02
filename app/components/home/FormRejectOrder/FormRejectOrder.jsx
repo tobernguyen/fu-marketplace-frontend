@@ -3,14 +3,6 @@ import { FormattedMessage, injectIntl } from 'react-intl';
 import { messages } from 'app/components/home/ModalViewOrder/ModalViewOrder.i18n';
 import './FormRejectOrder.scss';
 class FormRejectOrder extends Component {
-  focusNext() {
-    let input = ReactDOM.findDOMNode(this.input);
-
-    if (input) {
-      input.focus();
-    }
-  }
-
   render() {
     const { formatMessage } = this.props.intl;
     const { fields : { reason }, dirty, handleSubmit, submitting} = this.props;

@@ -12,7 +12,7 @@ class ModalViewOrder extends Component {
     this.rejectOrder = (formData) => {
       const { order } = this.props;
       const messages = {
-        "sellerMessage": formData.reason
+        sellerMessage: formData.reason
       }
       this.props.rejectOrder(order.id, messages);
     }

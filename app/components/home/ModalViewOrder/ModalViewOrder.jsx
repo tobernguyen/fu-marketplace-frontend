@@ -13,7 +13,7 @@ class ModalViewOrder extends Component {
     const { order } = this.props;
     return (
       <Modal show={this.props.show} onHide={this.props.onHide} bsSize="large">
-        <Modal.Header>
+        <Modal.Header closeButton>
           <Modal.Title>
           <FormattedMessage {...messages.modalViewOrder.title}/>
           </Modal.Title>
@@ -42,7 +42,7 @@ class ModalViewOrder extends Component {
             </label>
           </div>
 
-          <table className="table table-responsive order-items">
+          <table className="table table-responsive table-striped order-items">
             <thead>
             <tr>
               <th>#</th>
@@ -50,7 +50,6 @@ class ModalViewOrder extends Component {
               <th><FormattedMessage {...messages.modalViewOrder.body.table.quantity}/></th>
               <th><FormattedMessage {...messages.modalViewOrder.body.table.total}/></th>
               <th><FormattedMessage {...messages.modalViewOrder.body.table.note}/></th>
-              <th/>
             </tr>
             </thead>
             <tbody>
@@ -76,6 +75,14 @@ class ModalViewOrder extends Component {
             )}
             </tbody>
           </table>
+          <div className="btn-toolbar">
+            <button type="button" className="btn btn-success" onClick={() => this.props.acceptOrder(order.id)}>
+              Accept
+            </button>
+            <button type="button" className="btn btn-danger">
+              Reject
+            </button>
+          </div>
         </form>
         </Modal.Body>
       </Modal>

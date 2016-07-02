@@ -4,7 +4,7 @@ import BlockSellerDashboardSideBar from 'app/components/home/BlockSellerDashboar
 import BlockOrderList from 'app/components/home/BlockOrderList';
 import ModalViewOrder from 'app/components/home/ModalViewOrder';
 import { getSellerShop, updateShopInfo } from 'app/actions/shop';
-import { sellerGetOrder } from 'app/actions/order';
+import { sellerGetOrder, sellerAcceptOrder } from 'app/actions/order';
 import Sticky from 'react-stickynode';
 import { getUser } from 'app/selectors';
 import NavigationBar from 'app/containers/home/NavigationBar';
@@ -19,6 +19,7 @@ class ManageOrders extends Component {
         shopID: shopID,
         status: status,
         showModal: false,
+        showRejectModal: false,
         selectedOrder: {
           orderLines: []
         }
@@ -42,6 +43,12 @@ class ManageOrders extends Component {
       this.setState({
         showModal: false
       });
+    }
+
+    this.sellerAcceptOrder = (orderID) => {
+      const { shopID, status } = this.props.params;
+      this.props.sellerAcceptOrder(orderID);
+      this.props.sellerGetOrder(shopID, status);
     }
   }
 
@@ -71,6 +78,8 @@ class ManageOrders extends Component {
                   order={this.state.selectedOrder}
                   show={this.state.showModal}
                   onHide={this.close}
+                  acceptOrder={this.sellerAcceptOrder}
+                  openRejectModal={this.openRejectModal}
                 />
               </div>
             </div>
@@ -99,5 +108,6 @@ const mapStateToProps = (state) => {
 export default connect(mapStateToProps, {
   getSellerShop,
   updateShopInfo,
-  sellerGetOrder
+  sellerGetOrder,
+  sellerAcceptOrder
 })(ManageOrders)

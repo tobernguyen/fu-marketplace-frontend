@@ -41,6 +41,42 @@ export const sellerGetOrder = (shopID, status) => {
   }
 }
 
+export const SELLER_ACCEPT_ORDER_REQUEST = 'SELLER_ACCEPT_ORDER_REQUEST';
+export const SELLER_ACCEPT_ORDER_SUCCESS = 'SELLER_ACCEPT_ORDER_SUCCESS';
+export const SELLER_ACCEPT_ORDER_FAILURE = 'SELLER_ACCEPT_ORDER_FAILURE';
+const requestAcceptOrder = (orderID) => ({
+  [CALL_API]: {
+    types: [SELLER_ACCEPT_ORDER_REQUEST, SELLER_ACCEPT_ORDER_SUCCESS, SELLER_ACCEPT_ORDER_FAILURE],
+    url: `/api/v1/seller/orders/${orderID}/accept`,
+    method: HTTP_METHODS.POST
+  }
+});
+
+export const sellerAcceptOrder = (orderID) => {
+  return (dispatch) => {
+    return dispatch(requestAcceptOrder(orderID));
+  }
+}
+
+export const SELLER_REJECT_ORDER_REQUEST = 'SELLER_REJECT_ORDER_REQUEST';
+export const SELLER_REJECT_ORDER_SUCCESS = 'SELLER_REJECT_ORDER_SUCCESS';
+export const SELLER_REJECT_ORDER_FAILURE = 'SELLER_REJECT_ORDER_FAILURE';
+const requestRejectOrder = (orderID, message) => ({
+  [CALL_API]: {
+    types: [SELLER_REJECT_ORDER_REQUEST, SELLER_REJECT_ORDER_SUCCESS, SELLER_REJECT_ORDER_FAILURE],
+    url: `/api/v1/seller/orders/${orderID}/reject`,
+    method: HTTP_METHODS.POST,
+    params: message
+  }
+});
+
+export const sellerRejectOrder = (orderID, message) => {
+  return (dispatch) => {
+    return dispatch(requestRejectOrder(orderID, message));
+  }
+}
+
+
 export const CLEAR_ORDER_RESULT = 'CLEAR_ORDER_RESULT';
 export const clearOrderResult = () => {
   return {

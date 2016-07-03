@@ -12,7 +12,8 @@ class ManageOrders extends Component {
   constructor(props) {
     super(props);
 
-    const { shopID, status } = this.props.params;
+    const { shopID } = this.props.params;
+    const { status } = this.props.location.query;
     if (!isNaN(shopID)) {
       this.state = {
         shopID: shopID,
@@ -64,7 +65,8 @@ class ManageOrders extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const {shopID, status} = nextProps.params;
+    const {shopID} = nextProps.params;
+    const { status } = this.props.location.query;
     const {shouldUpdateOrderList} = nextProps;
     if(shopID != this.state.shopID || status != this.state.status) {
       this.props.sellerGetOrder(shopID, status);

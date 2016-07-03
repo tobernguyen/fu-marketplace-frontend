@@ -37,7 +37,7 @@ export default class Header extends Component {
   }
 
   render() {
-    const { onSignOut, currentUser: { roles, fullName, shops} } = this.props;
+    const { onSignOut, currentUser: { roles, fullName, shops}, displaySearch } = this.props;
     const normalUser = roles && roles.length == 0;
     return (
       <div className="home-header">
@@ -51,7 +51,7 @@ export default class Header extends Component {
             <Navbar.Toggle />
           </Navbar.Header>
           <Navbar.Collapse>
-            <Navbar.Form pullLeft className="search-form">
+            {displaySearch && <Navbar.Form pullLeft className="search-form">
               <FormGroup>
                 <FormControl
                   type="text"
@@ -63,7 +63,7 @@ export default class Header extends Component {
               <Button type="submit" onClick={this.handleSearch}>
                 <i className="fa fa-search" aria-hidden="true"/>
               </Button>
-            </Navbar.Form>
+            </Navbar.Form>}
             <Nav pullRight>
               <BlockNotificationDropdown eventKey={1} />
               <NavDropdown eventKey={2} title={fullName || ''} id="basic-nav-dropdown">

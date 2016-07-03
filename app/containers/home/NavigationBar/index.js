@@ -13,9 +13,14 @@ class NavigationBar extends Component {
   }
 
   render () {
-    const { currentUser, signOutGoogle, handleSearch } = this.props;
+    const { currentUser, signOutGoogle, handleSearch, displaySearch } = this.props;
     return (
-      <Header currentUser={currentUser} onSignOut={signOutGoogle} handleSearch={handleSearch} keyword={this.state.keyword}/>
+      <Header
+        displaySearch={displaySearch}
+        currentUser={currentUser}
+        onSignOut={signOutGoogle}
+        handleSearch={handleSearch}
+        keyword={this.state.keyword}/>
     );
   }
 

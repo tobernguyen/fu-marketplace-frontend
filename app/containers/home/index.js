@@ -72,6 +72,7 @@ class Home extends Component {
     return (
       <div className="home-page">
         <NavigationBar
+          displaySearch={true}
           handleSearch={this.handleSearch}
           query={query} />
         <div className="container home-body">

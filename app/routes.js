@@ -41,7 +41,7 @@ export default (
     </Route>
 
 
-    <Route path="shops/:shopID/dashboard/orders(/:status)" component={ManageOrders} />
+    <Route path="shops/:shopID/dashboard/orders" component={ManageOrders} />
     <Route path="/shops/:shopID/dashboard" component={SellerDashboard}>
       <Route path="info" component={UpdateShop} />
       <Route path="ship_places" component={UpdateShipPlaces} />

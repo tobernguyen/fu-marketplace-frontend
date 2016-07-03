@@ -38,31 +38,31 @@ class SideBar extends Component {
         <div className="sidebar-collapse">
           <ul className="nav">
             <li className={navHeaderClass}>
-              <Link to="admin" className={fullTitleClass}>FU Marketplace</Link>
-              <Link to="admin" className={shortTitleClass}>FU Marketplace</Link>
+              <Link to="/admin" className={fullTitleClass}>FU Marketplace</Link>
+              <Link to="/admin" className={shortTitleClass}>FU Marketplace</Link>
             </li>
             <li>
-              <Link to="admin/dashboard" activeClassName="active">
+              <Link to="/admin/dashboard" activeClassName="active">
                 <i className="fa fa-th-large" /><span>Dashboard</span>
               </Link>
             </li>
             <li>
-              <Link to="admin/users" activeClassName="active">
+              <Link to="/admin/users" activeClassName="active">
                 <i className="fa fa-users" /><span>User Management</span>
               </Link>
             </li>
             <li>
-              <Link to="admin/shops" activeClassName="active">
+              <Link to="/admin/shops" activeClassName="active">
                 <i className="fa fa-shopping-bag" /><span>Shop Management</span>
               </Link>
             </li>
             <li>
-              <Link to="admin/requests" activeClassName="active">
+              <Link to="/admin/requests" activeClassName="active">
                 <i className="fa fa-envelope" /><span>Request Management</span>
               </Link>
             </li>
             <li>
-              <Link to="admin/changepwd" activeClassName="active">
+              <Link to="/admin/changepwd" activeClassName="active">
                 <i className="fa fa-key" /><span>Change password</span>
               </Link>
             </li>
@@ -76,7 +76,6 @@ class SideBar extends Component {
         </div>
       </div>
     );
-
   }
 }
 

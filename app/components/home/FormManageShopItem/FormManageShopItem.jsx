@@ -11,6 +11,11 @@ class FormManageShopItem extends Component {
 
     this.onDrop = files => {
       this.props.fields.imageData.onChange(files[0])
+    };
+
+    this.handleDelete = (e) => {
+      e.preventDefault();
+      this.props.onDelete();
     }
   }
 
@@ -19,7 +24,6 @@ class FormManageShopItem extends Component {
       shopID,
       itemCategories,
       updateMode,
-      onDelete,
       oldItemImage,
       fields: { id, name, description, quantity, price, categoryId, imageData },
       handleSubmit,
@@ -150,7 +154,7 @@ class FormManageShopItem extends Component {
                   </button>
                   {updateMode &&
                   <button className="btn btn-danger"
-                          onClick={onDelete}>
+                          onClick={this.handleDelete}>
                     Delete
                   </button>}
                 </ButtonToolbar>

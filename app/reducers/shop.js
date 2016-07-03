@@ -41,25 +41,55 @@ export const shop = (state = INITIAL_STATE, action) => {
       return _.assign({}, state, {
         sellingItems: groupItems
       });
-    case ShopActionTypes.SHOP_CREATE_ITEM_SUCCESS:
-      return _.assign({}, state, {
-        sellingItems: [...state.sellingItems, response],
-        newlyItemAdded: true
-      });
-    case ShopActionTypes.SELLER_UPDATE_SHOP_ITEM_SUCCESS:
-      const { sellingItems } = state;
-      const updatedItemIndex = _.findIndex(sellingItems, (p => {
-        return p.id === response.id
-      }));
+    case ShopActionTypes.SHOP_CREATE_ITEM_SUCCESS: {
+      const { categoryId } = response;
+      let groupItems = _.assign([], state.sellingItems[categoryId], [
+        response, ...state.sellingItems[categoryId]
+      ]);
+      let newSellingItems = _.assign({}, state.sellingItems);
+      newSellingItems[categoryId] = groupItems;
 
       return _.assign({}, state, {
-        sellingItems: _.concat(
-          _.slice(sellingItems, 0, updatedItemIndex),
-          response,
-          _.slice(sellingItems, updatedItemIndex + 1, sellingItems.length)
-        ),
+        sellingItems: _.assign({}, state.sellingItems, newSellingItems),
+        newlyItemAdded: true
+      });
+    }
+    case ShopActionTypes.SELLER_UPDATE_SHOP_ITEM_SUCCESS: {
+      const { sellingItems } = state;
+      const { categoryId } = response;
+      const updatedCategoryItems = sellingItems[categoryId];
+      const updatedItemIndex = _.findIndex(updatedCategoryItems, (p => {
+        return p.id === response.id
+      }));
+      let newSellingItems = _.assign({}, sellingItems);
+      newSellingItems[categoryId] = _.concat(
+        _.slice(updatedCategoryItems, 0, updatedItemIndex),
+        response,
+        _.slice(updatedCategoryItems, updatedItemIndex + 1, updatedCategoryItems.length)
+      );
+
+      return _.assign({}, state, {
+        sellingItems: newSellingItems,
         itemUpdated: true
       });
+    }
+    case ShopActionTypes.REMOVE_SHOP_ITEM_FROM_LIST: {
+      const { sellingItems } = state;
+      const itemArray = _.flatMap(state.sellingItems);
+      const toBeRemovedItem = _.find(itemArray, (item) =>
+        item.id === payload.itemID
+      );
+      const { id, categoryId } = toBeRemovedItem;
+      let newSellingItems = _.assign({}, sellingItems);
+      newSellingItems[categoryId] = _.filter(sellingItems[categoryId], (item) =>
+        item.id !== id
+      );
+
+      return _.assign({}, state, {
+        sellingItems: newSellingItems,
+        itemDeleted: false
+      });
+    }
     case CommonActionTypes.GET_SHIP_PLACES_SUCCESS:
       let places = action.response.shipPlaces;
       places.map(place =>
@@ -67,14 +97,6 @@ export const shop = (state = INITIAL_STATE, action) => {
       );
       return _.merge({}, state, {
         places: places
-      });
-    case ShopActionTypes.TOGGLE_SHIP_PLACE:
-      return _.merge({}, state, {
-        places: state.places.map(place =>
-          place.id === payload.placeID ? _.assign({}, place, {
-            checked: !place.checked
-          }) : place
-        )
       });
     case ShopActionTypes.RESET_UPDATED_ITEM_STATUS:
       return _.assign({}, state, {
@@ -85,13 +107,6 @@ export const shop = (state = INITIAL_STATE, action) => {
     case ShopActionTypes.SELLER_DELETE_SHOP_ITEM_SUCCESS:
       return _.assign({}, state, {
         itemDeleted: true
-      });
-    case ShopActionTypes.REMOVE_SHOP_ITEM_FROM_LIST:
-      return _.assign({}, state, {
-        itemDeleted: false,
-        sellingItems: _.filter(state.sellingItems, (item) => {
-          return item.id !== payload.itemID
-        })
       });
     case ShopActionTypes.UPLOAD_SHOP_AVATAR_SUCCESS:
       const newAvatar = response.avatar ? getImageURLWithTimestamp(response.avatar) : '';

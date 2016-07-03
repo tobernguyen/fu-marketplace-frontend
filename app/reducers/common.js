@@ -3,7 +3,6 @@ import _ from 'lodash';
 
 const INITIAL_STATE = {
   modalSize: null,
-  modalMode: false,
   shipPlaces: [],
   categories: []
 };
@@ -14,10 +13,6 @@ export const common = (state = INITIAL_STATE, action) => {
     case CommonActionTypes.UPDATE_MODAL_SIZE:
       return _.merge({}, state, {
         modalSize: payload.modalSize
-      });
-    case CommonActionTypes.UPDATE_MODAL_MODE:
-      return _.merge({}, state, {
-        modalMode: payload.modalMode
       });
     case CommonActionTypes.GET_METADATA_SUCCESS:
       return _.merge({}, state, {

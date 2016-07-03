@@ -2,15 +2,6 @@ import React, { Component, PropTypes } from 'react';
 import './OptionItem.scss';
 
 export default class OptionItem extends Component {
-  constructor(props) {
-    super(props);
-
-    const { toggleItem, item} = this.props;
-    this.onChange = () => {
-      toggleItem(item.id);
-    }
-  }
-
   render() {
     const { item } = this.props;
     return (
@@ -20,7 +11,7 @@ export default class OptionItem extends Component {
                  className="checkbox-custom"
                  checked={item.checked}
                  type="checkbox"
-                 onChange={this.onChange} />
+                 onChange={() => this.props.toggleItem(item.id)} />
             <label htmlFor={`checkbox-${item.id}`}
                    className="checkbox-custom-label">
               {item.name}

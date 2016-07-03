@@ -125,9 +125,7 @@ export default class Header extends Component {
 
 Header.propTypes = {
   onSignOut: PropTypes.func.isRequired,
-  currentUser: PropTypes.object.isRequired,
-  handleSearch: PropTypes.func.isRequired,
-  keyword: PropTypes.string.isRequired
+  currentUser: PropTypes.object.isRequired
 };
 
 Header.defaultProps = {

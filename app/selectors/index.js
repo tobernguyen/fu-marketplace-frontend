@@ -7,6 +7,7 @@ const currentUserSelector       = (state) => state.user.currentUser;
 const shopsFeedSelector         = (state) => state.feed.shops;
 const aggregationsSelector      = (state) => state.feed.aggregations;
 const currentViewedShopSelector = (state) => state.user.currentViewedShop;
+const sellerShopSelector        = (state) => state.shop.sellerShop;
 
 export const getCategories = createSelector(
   categoriesSelector,
@@ -105,5 +106,21 @@ export const getHashCategories = createSelector(
   categoriesSelector,
   (categories) => {
     return _.mapValues(_.keyBy(categories, 'id'), 'name')
+  }
+);
+
+export const getSellerShopShipPlaces = createSelector(
+  [shipPlacesSelector, sellerShopSelector],
+  (shipPlaces, sellerShop) => {
+    const shopShipPlaces = sellerShop.shipPlaces || [];
+    let arrayShipPlaces = _.map(shipPlaces, (place) => {
+      if (shopShipPlaces.indexOf(place.id) === -1) {
+        place.checked = false;
+      } else {
+        place.checked = true;
+      }
+      return place;
+    });
+    return arrayShipPlaces;
   }
 );

@@ -1,10 +1,11 @@
 import React, { Component, PropTypes } from 'react';
 import './Header.scss';
-import { Navbar, NavItem, Nav, NavDropdown, MenuItem, FormGroup, FormControl, Button } from 'react-bootstrap';
+import { Navbar, Nav, NavDropdown, MenuItem, FormGroup, FormControl, Button } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import { FormattedMessage } from 'react-intl';
 import { links } from 'app/shared/links';
 import BlockNotificationDropdown from '../BlockNotificationDropdown';
+import { Link } from 'react-router';
 
 export default class Header extends Component {
   constructor(props) {
@@ -43,7 +44,9 @@ export default class Header extends Component {
         <Navbar inverse fixedTop>
           <Navbar.Header>
             <Navbar.Brand>
-              <a href="#">FU Marketplace</a>
+              <Link to="/">
+                FU Marketplace
+              </Link>
             </Navbar.Brand>
             <Navbar.Toggle />
           </Navbar.Header>

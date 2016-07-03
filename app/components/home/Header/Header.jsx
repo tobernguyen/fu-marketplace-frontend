@@ -7,6 +7,34 @@ import { links } from 'app/shared/links';
 import BlockNotificationDropdown from '../BlockNotificationDropdown';
 
 export default class Header extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      keyword: ''
+    };
+
+    this.handleKeywordChange = (e) => {
+      this.setState({
+        keyword: e.target.value
+      })
+    };
+
+    this.handleSearch = () => {
+      const { keyword } = this.state;
+      this.props.handleSearch(keyword);
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const { keyword } = nextProps;
+    if (keyword !== this.state.keyword) {
+      this.setState({
+        keyword: keyword
+      })
+    }
+  }
+
   render() {
     const { onSignOut, currentUser: { roles, fullName, shops} } = this.props;
     const normalUser = roles && roles.length == 0;
@@ -22,9 +50,16 @@ export default class Header extends Component {
           <Navbar.Collapse>
             <Navbar.Form pullLeft className="search-form">
               <FormGroup>
-                <FormControl type="text" placeholder="Search" />
+                <FormControl
+                  type="text"
+                  ref="keyword"
+                  placeholder="Search"
+                  value={this.state.keyword}
+                  onChange={this.handleKeywordChange} />
               </FormGroup>
-              <Button type="submit"><i className="fa fa-search" aria-hidden="true"/></Button>
+              <Button type="submit" onClick={this.handleSearch}>
+                <i className="fa fa-search" aria-hidden="true"/>
+              </Button>
             </Navbar.Form>
             <Nav pullRight>
               <BlockNotificationDropdown eventKey={1} />
@@ -87,7 +122,9 @@ export default class Header extends Component {
 
 Header.propTypes = {
   onSignOut: PropTypes.func.isRequired,
-  currentUser: PropTypes.object.isRequired
+  currentUser: PropTypes.object.isRequired,
+  handleSearch: PropTypes.func.isRequired,
+  keyword: PropTypes.string.isRequired
 };
 
 Header.defaultProps = {

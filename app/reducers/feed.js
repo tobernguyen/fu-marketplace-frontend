@@ -22,7 +22,7 @@ export const feed = (state = INITIAL_STATE, action) => {
       });
     case FeedActionTypes.GET_SHOPS_OF_PAGE_SUCCESS: {
       const { result: { shops, aggregations } } = response;
-      return _.merge({}, state, {
+      return _.assign({}, state, {
         shops: _.concat(state.shops, shops),
         aggregations: aggregations
       });
@@ -34,7 +34,7 @@ export const feed = (state = INITIAL_STATE, action) => {
       });
     case FeedActionTypes.GET_FIRST_PAGE_SHOPS_SUCCESS: {
       const { result: { shops, aggregations } } = response;
-      return _.merge({}, state, {
+      return _.assign({}, state, {
         shops: shops,
         aggregations: aggregations
       });

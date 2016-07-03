@@ -15,7 +15,7 @@ class ShopsFeed extends Component {
       isInfiniteLoading: false,
       loadedPage: 0,
       loadedShops: 0,
-      query: null
+      query: {}
     };
 
     this.handleInfiniteLoad = () => {
@@ -31,7 +31,11 @@ class ShopsFeed extends Component {
         if (query.hasOwnProperty('category')) {
           params.categoryIds = [parseInt(query['category'])]
         }
+        if (query.hasOwnProperty('keyword')) {
+          params.keyword = query['keyword']
+        }
       }
+
       this.props.getShopsOfPage(params, this.state.loadedPage === 0);
       this.setState({
         isInfiniteLoading: true
@@ -46,13 +50,19 @@ class ShopsFeed extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.shops && nextProps.shops.length > 0) {
+    if (nextProps.shops) {
       if (nextProps.shops.length > this.state.loadedShops) {
         this.setState({
           loadedShops: nextProps.shops.length,
           loadedPage: this.state.loadedPage + 1
         })
+      } else if (nextProps.shops.length === 0) {
+        this.setState({
+          loadedShops: 0,
+          loadedPage: 0
+        })
       }
+
       this.setState({
         isInfiniteLoading: false
       })

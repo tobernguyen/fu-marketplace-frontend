@@ -5,15 +5,35 @@ import { signOutGoogle, getCurrentUser } from 'app/actions';
 import { getUser } from 'app/selectors';
 
 class NavigationBar extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      keyword: ''
+    }
+  }
+
   render () {
-    const { currentUser, signOutGoogle } = this.props;
+    const { currentUser, signOutGoogle, handleSearch } = this.props;
     return (
-      <Header currentUser={currentUser} onSignOut={signOutGoogle} />
+      <Header currentUser={currentUser} onSignOut={signOutGoogle} handleSearch={handleSearch} keyword={this.state.keyword}/>
     );
   }
 
   componentWillMount() {
     this.props.getCurrentUser();
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const { query } = nextProps;
+    let keyword = '';
+    if (query && query.hasOwnProperty('keyword')) {
+      keyword = query['keyword']
+    }
+    if (this.state.keyword !== keyword) {
+      this.setState({
+        keyword: keyword
+      })
+    }
   }
 }
 

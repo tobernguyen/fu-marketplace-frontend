@@ -11,6 +11,7 @@ import { getCategories, getShipPlaces, getAggregations } from 'app/selectors';
 import NavigationBar from './NavigationBar';
 import { signOutGoogle } from 'app/actions';
 import _ from 'lodash';
+import { withRouter } from 'react-router';
 
 class Home extends Component {
   constructor(props) {
@@ -18,6 +19,15 @@ class Home extends Component {
 
     this.state = {
       query: null
+    };
+
+    this.handleSearch = (keyword) => {
+      this.props.router.push({
+        pathname: '/',
+        query: _.assign({}, this.state.query, {
+          keyword: keyword
+        })
+      })
     }
   }
 
@@ -57,19 +67,23 @@ class Home extends Component {
           totalShipPlace
         }
     } = this.props;
+
+    const { query } = this.state;
     return (
       <div className="home-page">
-        <NavigationBar />
+        <NavigationBar
+          handleSearch={this.handleSearch}
+          query={query} />
         <div className="container home-body">
           <div className="row">
             <div className="col-md-3">
               <BlockItemList
-                query={this.state.query}
+                query={query}
                 categories={categories}
                 categoryCounter={category}
                 totalCategory={totalCategory} />
               <BlockDormList
-                query={this.state.query}
+                query={query}
                 shipPlaces={shipPlaces}
                 shipPlaceCounter={shipPlace}
                 totalShipPlace={totalShipPlace} />
@@ -110,7 +124,7 @@ const mapStateToProps = (state) => {
 };
 
 
-export default connect(mapStateToProps, {
+export default withRouter(connect(mapStateToProps, {
   getMetadata,
   signOutGoogle
-})(Home)
+})(Home))

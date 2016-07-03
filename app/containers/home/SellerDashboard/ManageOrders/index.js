@@ -66,7 +66,7 @@ class ManageOrders extends Component {
 
   componentWillReceiveProps(nextProps) {
     const {shopID} = nextProps.params;
-    const { status } = this.props.location.query;
+    const { status } = nextProps.location.query;
     const {shouldUpdateOrderList} = nextProps;
     if(shopID != this.state.shopID || status != this.state.status) {
       this.props.sellerGetOrder(shopID, status);
@@ -79,6 +79,7 @@ class ManageOrders extends Component {
       this.props.sellerGetOrder(shopID, status);
     }
   }
+
   render() {
     return (
       <div className="home-page">

@@ -90,7 +90,9 @@ if(TARGET === 'start' || !TARGET) {
     },
     devServer: {
       contentBase: PATHS.build,
-      historyApiFallback: true,
+      historyApiFallback: {
+        index: '/'
+      },
       hot: true,
       inline: true,
       progress: true,

@@ -11,7 +11,7 @@ class UpdateShipPlaces extends Component {
 
     this.state = {
       shipPlacesUpdated: false,
-      shopShipPlaces: []
+      shopShipPlaces: this.props.places || []
     };
 
     this.submitShipPlaces = () => {
@@ -43,7 +43,7 @@ class UpdateShipPlaces extends Component {
       });
       this.props.resetUpdatedItemStatus();
     }
-
+    console.log(nextProps.places);
     if (nextProps.places && nextProps.places.length > 0) {
       this.setState({
         shopShipPlaces: nextProps.places

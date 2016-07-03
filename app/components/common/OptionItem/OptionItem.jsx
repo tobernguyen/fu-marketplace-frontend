@@ -20,7 +20,7 @@ export default class OptionItem extends Component {
                  className="checkbox-custom"
                  checked={item.checked}
                  type="checkbox"
-                 onChange={this.onChange} />
+                 onChange={() => this.onChange} />
             <label htmlFor={`checkbox-${item.id}`}
                    className="checkbox-custom-label">
               {item.name}

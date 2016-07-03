@@ -7,6 +7,7 @@ const currentUserSelector       = (state) => state.user.currentUser;
 const shopsFeedSelector         = (state) => state.feed.shops;
 const aggregationsSelector      = (state) => state.feed.aggregations;
 const currentViewedShopSelector = (state) => state.user.currentViewedShop;
+const sellerShopSelector        = (state) => state.shop.sellerShop;
 
 export const getCategories = createSelector(
   categoriesSelector,
@@ -105,5 +106,13 @@ export const getHashCategories = createSelector(
   categoriesSelector,
   (categories) => {
     return _.mapValues(_.keyBy(categories, 'id'), 'name')
+  }
+);
+
+export const getSellerShopShipPlaces = createSelector(
+  [shipPlacesSelector, sellerShopSelector],
+  (shipPlaces, sellerShop) => {
+    console.log(shipPlaces,sellerShop);
+    return shipPlaces;
   }
 );

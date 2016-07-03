@@ -21,11 +21,7 @@ class RequestCreateShop extends Component {
     this.props.updateModalSize(null);
     this.props.getPendingRequests();
   }
-
-  componentWillUnmount() {
-    this.props.updateModalMode(false);
-  }
-
+  
   render() {
     const { formatMessage } = this.props.intl;
     const { shopOpeningRequests } = this.props;

@@ -3,7 +3,7 @@ import ModalHeader from 'app/components/home/ModalHeader';
 import BlockMyOrder from 'app/components/home/BlockMyOrder';
 import { userGetOrder } from 'app/actions/order';
 import { connect } from 'react-redux';
-import { updateModalMode, updateModalSize } from 'app/actions/common';
+import { updateModalSize } from 'app/actions/common';
 
 class MyOrders extends Component {
   constructor(props) {
@@ -14,12 +14,8 @@ class MyOrders extends Component {
 
   componentWillMount() {
     this.props.updateModalSize('lg');
-    this.props.updateModalMode(true);
   }
 
-  componentWillUnmount() {
-    this.props.updateModalMode(false);
-  }
 
   render() {
     return (
@@ -42,7 +38,6 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps, {
-  updateModalMode,
   updateModalSize,
   userGetOrder
 })(MyOrders)

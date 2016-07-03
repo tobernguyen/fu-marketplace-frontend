@@ -41,17 +41,18 @@ class UpdateShopItem extends Component {
 
   componentWillMount() {
     const { sellingItems } = this.props;
-    if (this.state.toBeUpdatedItem === null && sellingItems && sellingItems.length > 0) {
-      // Filter by item and and get first item
-      const toBeUpdatedItem = _.head(_.filter(sellingItems, (o) => {
-        return o.id === this.state.toBeUpdatedItemID
-      }));
+    if (this.state.toBeUpdatedItem === null && sellingItems) {
+      let items = _.flatten(_.toArray(sellingItems));
+      if (items.length > 0) {
+        const toBeUpdatedItem = _.head(_.filter(items, (o) => {
+          return o.id === this.state.toBeUpdatedItemID
+        }));
 
-      this.setState({
-        toBeUpdatedItem: toBeUpdatedItem
-      });
-
-      this.props.setToBeUpdatedItem(toBeUpdatedItem);
+        this.setState({
+          toBeUpdatedItem: toBeUpdatedItem
+        });
+        this.props.setToBeUpdatedItem(toBeUpdatedItem);
+      }
     }
 
     // Get categories for item to select
@@ -69,14 +70,17 @@ class UpdateShopItem extends Component {
       this.props.resetUpdatedItemStatus();
     }
 
-    if (this.state.toBeUpdatedItem === null && nextProps.sellingItems && nextProps.sellingItems.length > 0) {
-      const toBeUpdatedItem = _.head(_.filter(nextProps.sellingItems, (o) => {
-        return o.id === this.state.toBeUpdatedItemID
-      }));
-      this.setState({
-        toBeUpdatedItem: toBeUpdatedItem
-      });
-      this.props.setToBeUpdatedItem(toBeUpdatedItem);
+    if (this.state.toBeUpdatedItem === null && nextProps.sellingItems) {
+      let items = _.flatMap(nextProps.sellingItems);
+      if (items.length > 0) {
+        const toBeUpdatedItem = _.find(items, (o) => {
+          return o.id === this.state.toBeUpdatedItemID
+        });
+        this.setState({
+          toBeUpdatedItem: toBeUpdatedItem
+        });
+        this.props.setToBeUpdatedItem(toBeUpdatedItem);
+      }
     }
   }
 

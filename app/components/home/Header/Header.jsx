@@ -22,8 +22,13 @@ export default class Header extends Component {
     };
 
     this.handleSearch = () => {
-      const { keyword } = this.state;
-      this.props.handleSearch(keyword);
+      this.props.handleSearch(this.state.keyword);
+    };
+
+    this.handleKeyPress = (e) => {
+      if (e.key === 'Enter') {
+        this.props.handleSearch(this.state.keyword);
+      }
     }
   }
 
@@ -58,6 +63,7 @@ export default class Header extends Component {
                   ref="keyword"
                   placeholder="Search"
                   value={this.state.keyword}
+                  onKeyPress={this.handleKeyPress}
                   onChange={this.handleKeywordChange} />
               </FormGroup>
               <Button type="submit" onClick={this.handleSearch}>

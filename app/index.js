@@ -1,7 +1,7 @@
 import 'babel-polyfill';
 import ReactDOM from 'react-dom';
 import React from 'react';
-import { hashHistory } from 'react-router';
+import { browserHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 import configureStore from './store/configureStore';
 import Root from './containers/Root';
@@ -14,7 +14,7 @@ addLocaleData(en);
 addLocaleData(vi);
 
 const store = configureStore();
-const history = syncHistoryWithStore(hashHistory, store);
+const history = syncHistoryWithStore(browserHistory, store);
 
 if (!global.Intl) {
   require.ensure(['intl'], require => {

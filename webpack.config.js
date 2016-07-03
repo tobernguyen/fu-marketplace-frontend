@@ -118,7 +118,8 @@ if(TARGET === 'staging') {
     output: {
       path: PATHS.build,
       filename: '[name].[chunkhash].js',
-      chunkFilename: '[chunkhash].js'
+      chunkFilename: '[chunkhash].js',
+      publicPath: '/'
     },
     plugins: [
       new CleanWebpackPlugin([PATHS.build], {

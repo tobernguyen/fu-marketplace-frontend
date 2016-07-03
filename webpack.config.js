@@ -88,11 +88,12 @@ if(TARGET === 'start' || !TARGET) {
         }
       ]
     },
+    output: {
+      publicPath: '/'
+    },
     devServer: {
       contentBase: PATHS.build,
-      historyApiFallback: {
-        index: '/'
-      },
+      historyApiFallback: true,
       hot: true,
       inline: true,
       progress: true,

@@ -43,12 +43,16 @@ export const shop = (state = INITIAL_STATE, action) => {
       });
     case ShopActionTypes.SHOP_CREATE_ITEM_SUCCESS: {
       const { categoryId } = response;
-      let groupItems = _.assign([], state.sellingItems[categoryId], [
-        response, ...state.sellingItems[categoryId]
-      ]);
-      let newSellingItems = _.assign({}, state.sellingItems);
-      newSellingItems[categoryId] = groupItems;
-
+      let newSellingItems = {};
+      if (_.isEmpty(state.sellingItems)) {
+        newSellingItems[categoryId] = [response];
+      } else {
+        let groupItems = _.assign([], state.sellingItems[categoryId], [
+          response, ...state.sellingItems[categoryId]
+        ]);
+        newSellingItems = _.assign({}, state.sellingItems);
+        newSellingItems[categoryId] = groupItems;
+      }
       return _.assign({}, state, {
         sellingItems: _.assign({}, state.sellingItems, newSellingItems),
         newlyItemAdded: true

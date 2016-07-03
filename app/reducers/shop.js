@@ -98,14 +98,6 @@ export const shop = (state = INITIAL_STATE, action) => {
       return _.merge({}, state, {
         places: places
       });
-    case ShopActionTypes.TOGGLE_SHIP_PLACE:
-      return _.merge({}, state, {
-        places: state.places.map(place =>
-          place.id === payload.placeID ? _.assign({}, place, {
-            checked: !place.checked
-          }) : place
-        )
-      });
     case ShopActionTypes.RESET_UPDATED_ITEM_STATUS:
       return _.assign({}, state, {
         newlyItemAdded: false,

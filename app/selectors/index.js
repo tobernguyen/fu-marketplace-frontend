@@ -112,7 +112,15 @@ export const getHashCategories = createSelector(
 export const getSellerShopShipPlaces = createSelector(
   [shipPlacesSelector, sellerShopSelector],
   (shipPlaces, sellerShop) => {
-    console.log(shipPlaces,sellerShop);
-    return shipPlaces;
+    const shopShipPlaces = sellerShop.shipPlaces || [];
+    let arrayShipPlaces = _.map(shipPlaces, (place) => {
+      if (shopShipPlaces.indexOf(place.id) === -1) {
+        place.checked = false;
+      } else {
+        place.checked = true;
+      }
+      return place;
+    });
+    return arrayShipPlaces;
   }
 );

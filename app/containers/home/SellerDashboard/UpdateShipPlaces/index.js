@@ -1,27 +1,38 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import FormUpdateShipPlaces from 'app/components/home/FormUpdateShipPlaces';
-import { toggleShipPlace, updateShipPlaces, resetUpdatedItemStatus } from 'app/actions/shop';
+import { updateShipPlaces, resetUpdatedItemStatus } from 'app/actions/shop';
 import { getSellerShopShipPlaces } from 'app/selectors';
-
+import _ from 'lodash';
 
 class UpdateShipPlaces extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      shipPlacesUpdated: false
+      shipPlacesUpdated: false,
+      shopShipPlaces: []
     };
 
     this.submitShipPlaces = () => {
-      console.log(this.props.places);
-      const placeIDs = this.props.places.filter((place) =>
+      const placeIDs = this.state.shopShipPlaces.filter((place) =>
         place.checked
       ).map((place) =>
         place.id
       );
-      debugger;
       this.props.updateShipPlaces(this.props.params.shopID, placeIDs);
+    };
+
+    this.toggleShipPlace = (itemID) => {
+      const { shopShipPlaces } = this.state;
+      this.setState({
+        shopShipPlaces: _.map(shopShipPlaces, (place) => {
+          if (place.id === itemID) {
+            place.checked = !place.checked;
+          }
+          return place
+        })
+      })
     }
   }
 
@@ -32,15 +43,20 @@ class UpdateShipPlaces extends Component {
       });
       this.props.resetUpdatedItemStatus();
     }
+
+    if (nextProps.places && nextProps.places.length > 0) {
+      this.setState({
+        shopShipPlaces: nextProps.places
+      })
+    }
   }
 
   render() {
-    console.log(this.props.places);
     return (
       <FormUpdateShipPlaces shopID={this.props.params.shopID}
-                            places={this.props.places}
+                            places={this.state.shopShipPlaces}
                             shipPlacesUpdated={this.state.shipPlacesUpdated}
-                            toggleShipPlace={this.props.toggleShipPlace}
+                            toggleShipPlace={this.toggleShipPlace}
                             handleSubmit={this.submitShipPlaces} />
     );
   }
@@ -54,13 +70,11 @@ const mapStateToProps = (state) => {
 };
 
 UpdateShipPlaces.propTypes = {
-  toggleShipPlace:	      PropTypes.func.isRequired,
   updateShipPlaces:	      PropTypes.func.isRequired,
   resetUpdatedItemStatus:	PropTypes.func.isRequired
 };
 
 export default connect(mapStateToProps, {
-  toggleShipPlace,
   updateShipPlaces,
   resetUpdatedItemStatus
 })(UpdateShipPlaces)

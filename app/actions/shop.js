@@ -253,14 +253,6 @@ export const resetUpdatedItemStatus = () => ({
   type: RESET_UPDATED_ITEM_STATUS
 });
 
-export const TOGGLE_SHIP_PLACE = 'TOGGLE_SHIP_PLACE';
-export const toggleShipPlace = (placeID) => ({
-  type: TOGGLE_SHIP_PLACE,
-  payload: {
-    placeID: placeID
-  }
-});
-
 
 export const SELLER_UPDATE_SHIP_PLACES_REQUEST = 'SELLER_UPDATE_SHIP_PLACES_REQUEST';
 export const SELLER_UPDATE_SHIP_PLACES_SUCCESS = 'SELLER_UPDATE_SHIP_PLACES_SUCCESS';

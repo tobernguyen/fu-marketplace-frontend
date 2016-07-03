@@ -6,10 +6,6 @@ import './FormUpdateShipPlaces.scss';
 import { Alert } from 'react-bootstrap';
 
 export default class FormUpdateShipPlaces extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     const { shopID, places, toggleShipPlace, handleSubmit } = this.props;
     return (

@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import './BlockMyOrder.scss';
 import { FormattedMessage, FormattedTime, FormattedNumber, FormattedRelative, injectIntl } from 'react-intl';
 import { messages } from 'app/components/home/BlockMyOrder/BlockMyOrder.i18n';
+import { Link } from 'react-router';
+import _ from 'lodash';
 
 class BlockMyOrder extends Component {
   renderItemNameList(order) {
@@ -54,8 +56,7 @@ class BlockMyOrder extends Component {
       return <FormattedMessage {...messages.myOrder.tableBody.notFinish}/>
     }
   }
-  render() {
-    const { orders } = this.props;
+  renderOrderList(orders) {
     return (
       <table className="table table-responsive table-striped">
         <thead>
@@ -86,6 +87,31 @@ class BlockMyOrder extends Component {
           )}
         </tbody>
       </table>
+    );
+  }
+  renderEmptyOrderList() {
+    return (
+    <div className="alert alert-warning">
+      <FormattedMessage {...messages.myOrder.emptyOrderList.message.text}/>
+      <Link to="/" ><FormattedMessage {...messages.myOrder.emptyOrderList.link}/></Link>
+    </div>
+    );
+  }
+  renderMyOrder(orders) {
+    let output = '';
+    if (!orders || orders.length == 0) {
+      output = this.renderEmptyOrderList();
+    } else {
+      output = this.renderOrderList(orders);
+    }
+    return output;
+  }
+  render() {
+    const { orders } = this.props;
+    return (
+      <div>
+        {this.renderMyOrder(orders)}
+      </div>
     );
   }
 }

@@ -118,5 +118,7 @@ export default {
   'modalViewOrder.rejectForm.placeholder': 'Cung cấp lí do',
   'modalViewOrder.rejectForm.button': 'Từ chối',
   'modalViewOrder.orderStatus.accepted': 'Đơn hàng đã được chấp nhận',
-  'modalViewOrder.orderStatus.rejected': 'Đơn hàng đã bị từ chối'
+  'modalViewOrder.orderStatus.rejected': 'Đơn hàng đã bị từ chối',
+  'myOrder.emptyOrderList.message.text': 'Bạn đang không có đơn hàng nào.',
+  'myOrder.emptyOrderList.link': 'Bắt đầu mua hàng.'
 };

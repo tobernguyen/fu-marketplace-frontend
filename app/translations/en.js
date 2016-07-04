@@ -118,5 +118,7 @@ export default {
   'modalViewOrder.rejectForm.placeholder': 'Provide reason',
   'modalViewOrder.rejectForm.button': 'Reject',
   'modalViewOrder.orderStatus.accepted': 'Order is accepted',
-  'modalViewOrder.orderStatus.rejected': 'Order is rejected'
+  'modalViewOrder.orderStatus.rejected': 'Order is rejected',
+  'myOrder.emptyOrderList.message.text': 'No active order',
+  'myOrder.emptyOrderList.link': 'Start shopping.'
 };

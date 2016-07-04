@@ -1,5 +1,17 @@
 export const messages = {
   myOrder: {
+    emptyOrderList: {
+      message: {
+        text: {
+          id: 'myOrder.emptyOrderList.message.text',
+          defaultMessage: 'No active order'
+        }
+      },
+      link: {
+        id: 'myOrder.emptyOrderList.link',
+        defaultMessage: 'Start shopping.'
+      }
+    },
     tableHead: {
       item: {
         id: 'orderList.tableHead.items',

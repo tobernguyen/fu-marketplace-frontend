@@ -120,5 +120,8 @@ export default {
   'modalViewOrder.orderStatus.accepted': 'Order is accepted',
   'modalViewOrder.orderStatus.rejected': 'Order is rejected',
   'myOrder.emptyOrderList.message.text': 'No active order',
-  'myOrder.emptyOrderList.link': 'Start shopping.'
+  'myOrder.emptyOrderList.link': 'Start shopping.',
+  'modalViewOrder.body.referenceInformation': 'Reference information',
+  'modalViewOrder.body.orderStatus': 'Order status',
+  'modalViewOrder.body.updatedAt': 'updated '
 };

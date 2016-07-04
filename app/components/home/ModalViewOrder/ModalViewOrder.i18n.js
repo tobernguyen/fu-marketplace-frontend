@@ -39,6 +39,18 @@ export const messages = {
       defaultMessage: 'View Order'
     },
     body: {
+      updatedAt: {
+        id: 'modalViewOrder.body.updatedAt',
+        defaultMessage: 'updated '
+      },
+      orderStatus: {
+        id: 'modalViewOrder.body.orderStatus',
+        defaultMessage: 'Order status'
+      },
+      referenceInformation: {
+        id: 'modalViewOrder.body.referenceInformation',
+        defaultMessage: 'Reference Information'
+      },
       shipAddress: {
         id: 'modalViewOrder.body.shipAddress',
         defaultMessage: 'Ship Address'

@@ -107,7 +107,7 @@ export default {
   'modalViewOrder.title': 'Đơn hàng',
   'modalViewOrder.body.shipAddress': 'Địa chỉ',
   'modalViewOrder.body.note': 'Ghi chú',
-  'modalViewOrder.body.orderLines': 'Đơn hàng',
+  'modalViewOrder.body.orderLines': 'Chi tiết đơn hàng',
   'modalViewOrder.body.table.item' : 'Mặt hàng',
   'modalViewOrder.body.table.quantity': 'Số lượng',
   'modalViewOrder.body.table.total': 'Tổng giá trị',
@@ -120,5 +120,8 @@ export default {
   'modalViewOrder.orderStatus.accepted': 'Đơn hàng đã được chấp nhận',
   'modalViewOrder.orderStatus.rejected': 'Đơn hàng đã bị từ chối',
   'myOrder.emptyOrderList.message.text': 'Bạn đang không có đơn hàng nào.',
-  'myOrder.emptyOrderList.link': 'Bắt đầu mua hàng.'
+  'myOrder.emptyOrderList.link': 'Bắt đầu mua hàng.',
+  'modalViewOrder.body.referenceInformation': 'Thông tin liên quan',
+  'modalViewOrder.body.orderStatus': 'Trạng thái đơn hàng',
+  'modalViewOrder.body.updatedAt': 'cập nhật '
 };

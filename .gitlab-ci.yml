@@ -1,0 +1,21 @@
+before_script:
+  - npm install
+
+cache:
+  key: $CI_BUILD_REPO
+  paths:
+  - node_modules/
+
+deploy-staging:
+  type: deploy
+  script:
+    - npm run deploy:staging
+  only:
+    - staging
+
+deploy-production:
+  type: deploy
+  script:
+    - npm run deploy:production
+  only:
+    - production

@@ -6,7 +6,9 @@
     "start": "webpack-dev-server",
     "staging": "webpack",
     "test": "jest",
-    "lint": "eslint ./app"
+    "lint": "eslint ./app",
+    "deploy:staging": "npm run staging && sh ./bin/deploy-staging.sh",
+    "deploy:production": "npm run build && sh ./bin/deploy-production.sh"
   },
   "jest": {
     "unmockedModulePathPatterns": [

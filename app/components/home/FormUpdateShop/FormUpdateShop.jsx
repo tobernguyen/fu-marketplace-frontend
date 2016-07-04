@@ -10,7 +10,7 @@ export default class UpdateShopForm extends Component {
   }
 
   render() {
-    const { shopID, fields: { description }, handleSubmit, submitting, dirty, shopUpdated } = this.props;
+    const { shopID, fields: { description, status }, handleSubmit, submitting, dirty, shopUpdated } = this.props;
     return (
       <div className="form-update-shop">
         <ModalHeader
@@ -21,15 +21,29 @@ export default class UpdateShopForm extends Component {
           {shopUpdated && <Alert bsStyle="success">
             <p>Shop information updated.</p>
           </Alert>}
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} className="form-horizontal">
             <div className={`form-group ${description.touched && description.invalid ? 'has-error' : ''}`}>
-              <label>
+              <label className="col-sm-3 control-label">
                 Shop Description
               </label>
-              <textarea
-                className="form-control" {...description} />
-              <div className="help-block">
-                {description.touched ? description.error : ''}
+              <div className="col-sm-9">
+                <textarea
+                  className="form-control" {...description} />
+                <div className="help-block">
+                  {description.touched ? description.error : ''}
+                </div>
+              </div>
+            </div>
+            <div className="form-group">
+              <label className="col-sm-3 control-label">
+                Publish status
+              </label>
+              <div className="col-sm-9 publish-status">
+                <div className="checkbox checkbox-slider--b control">
+                  <label>
+                    <input type="checkbox" {...status} /><span/>
+                  </label>
+                </div>
               </div>
             </div>
             <button type="submit"

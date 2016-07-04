@@ -5,7 +5,7 @@ import './FormRejectOrder.scss';
 class FormRejectOrder extends Component {
   render() {
     const { formatMessage } = this.props.intl;
-    const { fields : { reason }, dirty, handleSubmit, submitting} = this.props;
+    const { fields : { reason }, dirty, handleSubmit, actionName} = this.props;
     return (
       <div className="dropdown-menu form-reject-order">
         <form onSubmit={handleSubmit}>
@@ -23,8 +23,8 @@ class FormRejectOrder extends Component {
               {reason.touched ? reason.error : ''}
             </div>
           </div>
-          <button type="submit" className="btn btn-sm btn-danger">
-            <FormattedMessage {...messages.modalViewOrder.rejectForm.button}/>
+          <button type="submit" className="btn btn-sm btn-danger" disabled={!dirty}>
+            {actionName}
           </button>
         </form>
       </div>

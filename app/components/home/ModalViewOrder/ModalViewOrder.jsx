@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
-import { Modal, Dropdown } from 'react-bootstrap';
+import { Modal } from 'react-bootstrap';
 import { FormattedMessage, FormattedNumber, FormattedRelative, injectIntl } from 'react-intl';
-import RejectOrderForm from 'app/containers/home/SellerDashboard/ManageOrders/RejectOrderForm';
+import ModalViewOrderFooter from './ModalViewOrderFooter.jsx';
 import LabelOrderStatus from 'app/components/home/LabelOrderStatus';
 import './ModalViewOrder.scss';
 import { messages } from 'app/components/home/ModalViewOrder/ModalViewOrder.i18n';
 import _ from 'lodash';
-import OrderStatus from 'app/shared/orderStatus';
 
 class ModalViewOrder extends Component {
   constructor(props) {
@@ -16,8 +15,16 @@ class ModalViewOrder extends Component {
       const { order } = this.props;
       const messages = {
         sellerMessage: formData.reason
-      }
+      };
       this.props.rejectOrder(order.id, messages);
+    }
+
+    this.abortOrder = (formData) => {
+      const { order } = this.props;
+      const messages = {
+        sellerMessage: formData.reason
+      };
+      this.props.abortOrder(order.id, messages);
     }
   }
   calculateTotal(order) {
@@ -25,31 +32,6 @@ class ModalViewOrder extends Component {
       return sum + (order.item.price * order.quantity);
     }, 0);
     return <FormattedNumber value={total} />;
-  }
-  renderAction(order) {
-    let output = '';
-    switch (order.status) {
-      case OrderStatus.NEW:
-        output = <div className="btn-toolbar">
-            <button type="button" className="btn btn-success" onClick={() => this.props.acceptOrder(order.id)}>
-              <FormattedMessage {...messages.modalViewOrder.button.accept} />
-            </button>
-            <Dropdown id="FormRejectOrder">
-            <button type="button" className="btn btn-danger" bsRole="toggle">
-              <FormattedMessage {...messages.modalViewOrder.button.reject} />
-            </button>
-            <RejectOrderForm
-              bsRole="menu"
-              onSubmit={this.rejectOrder}
-              />
-            </Dropdown>
-          </div>
-        break;
-      default:
-        output = '';
-    }
-
-    return output;
   }
   render() {
     const { order } = this.props;
@@ -132,7 +114,14 @@ class ModalViewOrder extends Component {
             </div>
           </div>
           <hr />
-          {this.renderAction(order)}
+          <ModalViewOrderFooter
+            order={order}
+            acceptOrder={this.props.acceptOrder}
+            rejectOrder={this.rejectOrder}
+            startShippingOrder={this.props.startShippingOrder}
+            completeOrder={this.props.completeOrder}
+            abortOrder={this.abortOrder}
+          />
         </Modal.Body>
       </Modal>
     );

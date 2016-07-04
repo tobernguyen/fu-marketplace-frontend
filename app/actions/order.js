@@ -76,6 +76,57 @@ export const sellerRejectOrder = (orderID, message) => {
   }
 };
 
+export const SELLER_START_SHIPPING_ORDER_REQUEST = 'SELLER_START_SHIPPING_ORDER_REQUEST';
+export const SELLER_START_SHIPPING_ORDER_SUCCESS = 'SELLER_START_SHIPPING_ORDER_SUCCESS';
+export const SELLER_START_SHIPPING_ORDER_FAILURE = 'SELLER_START_SHIPPING_ORDER_FAILURE';
+const requestStartShippingOrder = (orderID) => ({
+  [CALL_API]: {
+    types: [SELLER_START_SHIPPING_ORDER_REQUEST, SELLER_START_SHIPPING_ORDER_SUCCESS, SELLER_START_SHIPPING_ORDER_FAILURE],
+    url: `/api/v1/seller/orders/${orderID}/ship`,
+    method: HTTP_METHODS.POST
+  }
+});
+
+export const sellerStartShippingOrder = (orderID) => {
+  return (dispatch) => {
+    dispatch(requestStartShippingOrder(orderID));
+  }
+}
+
+export const SELLER_COMPLETE_ORDER_REQUEST = 'SELLER_COMPLETE_ORDER_REQUEST';
+export const SELLER_COMPLETE_ORDER_SUCCESS = 'SELLER_COMPLETE_ORDER_SUCCESS';
+export const SELLER_COMPLETE_ORDER_FAILURE = 'SELLER_COMPLETE_ORDER_FAILURE';
+const requestCompleteOrder = (orderID) => ({
+  [CALL_API]: {
+    types: [SELLER_COMPLETE_ORDER_REQUEST, SELLER_COMPLETE_ORDER_SUCCESS, SELLER_COMPLETE_ORDER_FAILURE],
+    url: `/api/v1/seller/orders/${orderID}/complete`,
+    method: HTTP_METHODS.POST
+  }
+});
+
+export const sellerCompleteOrder = (orderID) => {
+  return (dispatch) => {
+    dispatch(requestCompleteOrder(orderID));
+  }
+}
+
+export const SELLER_ABORT_ORDER_REQUEST = 'SELLER_ABORT_ORDER_REQUEST';
+export const SELLER_ABORT_ORDER_SUCCESS = 'SELLER_ABORT_ORDER_SUCCESS';
+export const SELLER_ABORT_ORDER_FAILURE = 'SELLER_ABORT_ORDER_FAILURE';
+const requestAbortOrder = (orderID, message) => ({
+  [CALL_API]: {
+    types: [SELLER_ABORT_ORDER_REQUEST, SELLER_ABORT_ORDER_SUCCESS, SELLER_ABORT_ORDER_FAILURE],
+    url: `/api/v1/seller/orders/${orderID}/abort`,
+    method: HTTP_METHODS.POST,
+    params: message
+  }
+});
+
+export const sellerAbortOrder = (orderID, message) => {
+  return (dispatch) => {
+    return dispatch(requestAbortOrder(orderID, message));
+  }
+};
 
 export const CLEAR_ORDER_RESULT = 'CLEAR_ORDER_RESULT';
 export const clearOrderResult = () => {

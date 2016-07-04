@@ -123,5 +123,9 @@ export default {
   'myOrder.emptyOrderList.link': 'Start shopping.',
   'modalViewOrder.body.referenceInformation': 'Reference information',
   'modalViewOrder.body.orderStatus': 'Order status',
-  'modalViewOrder.body.updatedAt': 'updated '
+  'modalViewOrder.body.updatedAt': 'updated ',
+  'orderListFooter.next': 'Next',
+  'orderListFooter.previous': 'Previous',
+  'orderListFooter.pageSize': 'Show ',
+  'orderListFooter.pageSizeUnit': ' orders'
 };

@@ -123,5 +123,9 @@ export default {
   'myOrder.emptyOrderList.link': 'Bắt đầu mua hàng.',
   'modalViewOrder.body.referenceInformation': 'Thông tin liên quan',
   'modalViewOrder.body.orderStatus': 'Trạng thái đơn hàng',
-  'modalViewOrder.body.updatedAt': 'cập nhật '
+  'modalViewOrder.body.updatedAt': 'cập nhật ',
+  'orderListFooter.next': 'Trang sau',
+  'orderListFooter.previous': 'Trang trước',
+  'orderListFooter.pageSize': 'Hiển thị ',
+  'orderListFooter.pageSizeUnit': ' đơn hàng'
 };

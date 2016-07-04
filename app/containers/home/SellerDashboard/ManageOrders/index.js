@@ -7,17 +7,20 @@ import { getSellerShop, updateShopInfo } from 'app/actions/shop';
 import { sellerGetOrder, sellerAcceptOrder, sellerRejectOrder } from 'app/actions/order';
 import Sticky from 'react-stickynode';
 import NavigationBar from 'app/containers/home/NavigationBar';
+import { withRouter } from 'react-router'
 
 class ManageOrders extends Component {
   constructor(props) {
     super(props);
 
     const { shopID } = this.props.params;
-    const { status } = this.props.location.query;
+    const { status, page, size } = this.props.location.query;
     if (!isNaN(shopID)) {
       this.state = {
         shopID: shopID,
         status: status,
+        page: page,
+        size: size,
         showModal: false,
         showRejectModal: false,
         selectedOrder: {
@@ -25,7 +28,7 @@ class ManageOrders extends Component {
         }
       };
       this.props.getSellerShop(shopID);
-      this.props.sellerGetOrder(shopID, status);
+      this.props.sellerGetOrder(shopID, status, page, size);
     }
 
     this.handleShopInfoChanged = (shopData) => {
@@ -62,17 +65,28 @@ class ManageOrders extends Component {
         selectedOrder
       });
     }
+
+    this.changePageSize = (e) => {
+      const pageSize = e.target.value;
+      const { query } = this.props.location;
+      const { shopID } = this.props.params;
+      const page = query.page || 1;
+      const status = query.status || 'all';
+      this.props.router.push(`/shops/${shopID}/dashboard/orders?size=${pageSize}&page=${page}&status=${status}`);
+    }
   }
 
   componentWillReceiveProps(nextProps) {
     const {shopID} = nextProps.params;
-    const { status } = nextProps.location.query;
+    const { status, page, size } = nextProps.location.query;
     const {shouldUpdateOrderList} = nextProps;
-    if(shopID != this.state.shopID || status != this.state.status) {
-      this.props.sellerGetOrder(shopID, status);
+    if(shopID != this.state.shopID || status != this.state.status || page != this.state.page || size !== this.state.size) {
+      this.props.sellerGetOrder(shopID, status, page, size);
       this.setState ({
         shopID,
-        status
+        status,
+        page,
+        size
       });
     }
     if(shouldUpdateOrderList === true) {
@@ -81,6 +95,7 @@ class ManageOrders extends Component {
   }
 
   render() {
+    const { query } = this.props.location;
     return (
       <div className="home-page">
         <NavigationBar />
@@ -91,7 +106,10 @@ class ManageOrders extends Component {
                 <BlockOrderList
                   shopID ={this.props.params.shopID}
                   orders={this.props.orders}
-                  viewOrder={this.viewOrder}/>
+                  viewOrder={this.viewOrder}
+                  query={query}
+                  changePageSize={this.changePageSize}
+                  />
                 <ModalViewOrder
                   order={this.state.selectedOrder}
                   show={this.state.showModal}
@@ -131,4 +149,4 @@ export default connect(mapStateToProps, {
   sellerGetOrder,
   sellerAcceptOrder,
   sellerRejectOrder
-})(ManageOrders)
+})(withRouter(ManageOrders))

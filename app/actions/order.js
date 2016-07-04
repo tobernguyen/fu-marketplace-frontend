@@ -29,12 +29,12 @@ const sellerRequestGetOrder = (shopID, filter) => ({
   }
 });
 
-export const sellerGetOrder = (shopID, status) => {
+export const sellerGetOrder = (shopID, status , page = 1, size = 10) => {
   let filter = '';
   if (status === undefined || status === 'all') {
-    filter = '';
+    filter = `?size=${size}&page=${page}`;
   } else {
-    filter = `?status=${status.toUpperCase()}`;
+    filter = `?size=${size}&page=${page}&status=${status.toUpperCase()}`;
   }
   return (dispatch) => {
     return dispatch(sellerRequestGetOrder(shopID, filter));

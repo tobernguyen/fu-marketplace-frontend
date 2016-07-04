@@ -1,0 +1,6 @@
+{
+  "name": "BlockOrderListFooter",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./BlockOrderListFooter.jsx"
+}

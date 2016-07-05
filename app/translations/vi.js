@@ -135,6 +135,21 @@ export default {
   'orderListFooter.previous': 'Trang trước',
   'orderListFooter.pageSize': 'Hiển thị ',
   'orderListFooter.pageSizeUnit': ' đơn hàng',
-  'notification.userPlaceOrder': '{buyerName} đặt hàng tại shop {shopName}',
-  'error.authentication.wrong_email_domain': 'Hãy đăng nhập bằng email đại học FPT'
+  'error.authentication.wrong_email_domain': 'Hãy đăng nhập bằng email đại học FPT',
+  'message.seller.noItem': 'Hãy thêm sản phẩm',
+  'message.user.noItem': 'Chưa có sản phẩm',
+  'sellerDashboard.sidebar.updateShipPlaces': 'Sửa địa điểm ship',
+  'sellerDashboard.sidebar.manageOrders': 'Quản lý đơn hàng',
+  'notification.markAsRead': 'Đánh dấu đã đọc tất cả',
+  'notification.title': 'Thông báo',
+  'notification.seeAll': 'Xem tất cả',
+  'shopOpeningRequest.accepted': 'Yêu cầu mở gian hàng <strong>{name}</strong> của bạn đã được chấp nhận. Bạn có thể bắt đầu bán hàng ngay từ bây giờ!',
+  'shopOpeningRequest.rejected': 'Yêu cầu mở gian hàng <strong>{name}</strong> của bạn đã bị từ chối: {adminMessage}.',
+  'orderStatus.accepted': 'Đơn hàng <strong>#{orderId}</strong> tại <strong>{shopName}</strong> đã bắt đầu được xử lý.',
+  'orderStatus.rejected': 'Đơn hàng <strong>#{orderId}</strong> tại <strong>{shopName}</strong> đã bị từ chối với lý do: {sellerMessage}.',
+  'orderStatus.shipping': 'Đơn hàng <strong>#{orderId}</strong> tại <strong>{shopName}</strong> đã bắt đầu được vận chuyển.',
+  'orderStatus.completed': 'Đơn hàng của bạn tại <strong>{shopName}</strong> vừa mới hoàn thành. Nếu có thời gian, xin bạn hãy đánh giá chất lượng dịch vụ. Xin cám ơn.',
+  'orderStatus.aborted': 'Đơn hàng <strong>#{orderId}</strong> tại <strong>{shopName}</strong> đã bị huỷ với lý do: {sellerMessage}.',
+  'order.userPlaceOrder': 'Bạn có đơn hàng mới tại <strong>{shopName}</strong> với mã số <strong>#{orderId}</strong> được đặt bởi <strong>{buyerName}</strong>',
+  'order.userCancelOrder': 'Đơn hàng <strong>#{orderId}</strong> đã bị huỳ bởi người mua'
 };

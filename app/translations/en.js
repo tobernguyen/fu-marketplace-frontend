@@ -135,6 +135,21 @@ export default {
   'orderListFooter.previous': 'Previous',
   'orderListFooter.pageSize': 'Show ',
   'orderListFooter.pageSizeUnit': ' orders',
-  'notification.userPlaceOrder': '<strong>{buyerName}</strong> has placed an order at <strong>{shopName}</strong>',
-  'error.authentication.wrong_email_domain': 'Please sign in with FPT University email'
+  'error.authentication.wrong_email_domain': 'Please sign in with FPT University email',
+  'message.seller.noItem': 'Please add selling item',
+  'message.user.noItem': 'No selling items',
+  'sellerDashboard.sidebar.updateShipPlaces': 'Update ship places',
+  'sellerDashboard.sidebar.manageOrders': 'Manage orders',
+  'notification.markAsRead': 'Mark as all read',
+  'notification.title': 'Notification',
+  'notification.seeAll': 'See all',
+  'shopOpeningRequest.accepted': 'Your request to open <strong>{name}</strong> has been accepted. You can start to sell now.',
+  'shopOpeningRequest.rejected': 'Your request to open <strong>{name}</strong> has been rejected due to: {adminMessage}.',
+  'orderStatus.accepted': 'Order #<strong>{orderId}</strong> at <strong>{shopName}</strong> has been processed.',
+  'orderStatus.rejected': 'Order #<strong>{orderId}</strong> at <strong>{shopName}</strong> has been rejected due to: {sellerMessage}.',
+  'orderStatus.shipping': 'Order #<strong>{orderId}</strong> at <strong>{shopName}</strong> has been shipped.',
+  'orderStatus.completed': 'Your order at <strong>{shopName}</strong> has been completed. Please rate or review shop service. Thanks.',
+  'orderStatus.aborted': 'Order #<strong>{orderId} at <strong>{shopName}</strong> has been cancelled due to: {sellerMessage}.',
+  'order.userPlaceOrder': 'You have new order at <strong>{shopName}</strong> with <strong>#{orderId}</strong> by <strong>{buyerName}</strong>',
+  'order.userCancelOrder': 'Order <strong>#{orderId}</strong> was be cancelled by buyer.'
 };

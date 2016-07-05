@@ -1,15 +1,32 @@
 import React, { Component, PropTypes } from 'react';
 import { NavDropdown, MenuItem } from 'react-bootstrap';
 import './BlockNotificationDropdown.scss';
-import { FormattedRelative, FormattedHTMLMessage } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
+import BlockNotificationItem from 'app/components/home/BlockNotificationItem';
 import { messages } from './BlockNotificationDropdown.i18n';
+import _ from 'lodash';
 
 export default class BlockNotificationDropdown extends Component {
+
+  renderNotificationBadge() {
+    const notificationCount = _.size(_.filter(this.props.notifications, (item) =>
+      item.read !== true
+    ));
+
+    return (
+      <div>
+        {notificationCount > 0 && <span className="badge">
+          {notificationCount}
+        </span>}
+      </div>
+    )
+  }
+
   render() {
     const { eventKey, notifications } = this.props;
     const title = <div>
       <i className="fa fa-bell fa-lg"/>
-      <span className="badge">3</span>
+      {this.renderNotificationBadge()}
     </div>;
     return (
       <NavDropdown
@@ -18,34 +35,21 @@ export default class BlockNotificationDropdown extends Component {
         className="block-notification-dropdown"
         id="notifications-dropdown" noCaret>
         <li className="header clearfix">
-          <h4 className="title">Notifications</h4>
+          <h4 className="title">
+            <FormattedMessage {...messages.notificationTitle} />
+          </h4>
           <div className="actions">
-            <a href="#">Mark All as Read</a>
+            <a href="#">
+              <FormattedMessage {...messages.markAsRead} />
+            </a>
           </div>
         </li>
-        {notifications.map((notification, index) =>{
-          const { data: { buyerName, shopName, buyerAvatar }, createdAt, type } = notification;
-          const notificationTime = new Date(createdAt);
-          return (
-            <MenuItem className="notification-item" key={index} eventKey={eventKey}>
-              <div className="clearfix">
-                <div className="pull-left buyer-avatar">
-                  <img src={buyerAvatar} />
-                </div>
-                <div className="content">
-                  <FormattedHTMLMessage values={{ buyerName: buyerName, shopName: shopName }} {...messages.notification[type]} />
-                  <p>
-                    <FormattedRelative value={notificationTime}/>
-                  </p>
-                </div>
-              </div>
-            </MenuItem>
-          )
-        })}
-
-        <MenuItem divider />
-        <MenuItem eventKey={3.3} className="footer">See All</MenuItem>
-
+        {notifications.map((notification, index) =>
+          <BlockNotificationItem key={index} eventKey={eventKey} notification={notification}/>
+        )}
+        <MenuItem eventKey={3.3} className="footer">
+          <FormattedMessage {...messages.seeAll} />
+        </MenuItem>
       </NavDropdown>
     );
   }

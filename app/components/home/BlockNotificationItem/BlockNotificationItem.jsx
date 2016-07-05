@@ -13,20 +13,20 @@ export default class BlockNotificationItem extends Component {
       case NOTIFICATION_TYPE.OPEN_SHOP_REQUEST_CHANGE:
       {
         switch (data.status) {
-          case 1: // Accepted
-          {
-            const values = {
-              name: data.name
-            };
-            return <FormattedHTMLMessage values={values} {...messages.shopOpeningRequest.accepted} />;
-          }
-          case 2: // Rejected
+          case 1: // Rejected
           {
             const values = {
               name: data.name,
               adminMessage: data.adminMessage
             };
             return <FormattedHTMLMessage values={values} {...messages.shopOpeningRequest.rejected} />;
+          }
+          case 2: // Accepted
+          {
+            const values = {
+              name: data.name
+            };
+            return <FormattedHTMLMessage values={values} {...messages.shopOpeningRequest.accepted} />;
           }
           default:
             break;

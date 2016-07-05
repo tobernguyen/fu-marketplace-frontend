@@ -6,7 +6,9 @@
   }
   .content {
     padding-left: 60px;
-
+    span {
+      word-break: break-all;
+    }
     p {
       margin: 0;
     }

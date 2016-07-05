@@ -106,7 +106,7 @@ export default class BlockSellingItemList extends Component {
               <FormattedMessage {...messages.noItem.seller} />
             </span>}
             {!sellerMode && <span>
-              <FormattedMessage {...messages.user.seller} />
+              <FormattedMessage {...messages.noItem.user} />
             </span>}
           </p>
 

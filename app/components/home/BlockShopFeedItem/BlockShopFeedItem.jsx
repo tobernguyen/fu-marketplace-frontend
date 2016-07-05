@@ -34,7 +34,11 @@ export default class BlockShopFeedItem extends Component {
 
   render() {
     const { shop: { id, name, description, categories, shipPlaces } } = this.props;
-
+    let avatar = this.state.thumbnail;
+    if (!avatar || avatar === '') {
+      const noAvatar = require('../../../images/no_avatar.jpg');
+      avatar = noAvatar;
+    }
     return (
       <div className="block row block-shop-feed-item">
         <div className="col-md-3 col-sm-4">
@@ -43,7 +47,7 @@ export default class BlockShopFeedItem extends Component {
               <img
                 onMouseMove={this.handleMouseMove}
                 onMouseLeave={this.handleMouseLeave}
-                src={this.state.thumbnail}
+                src={avatar}
                 className="img-responsive"/>
             </Link>
           </div>

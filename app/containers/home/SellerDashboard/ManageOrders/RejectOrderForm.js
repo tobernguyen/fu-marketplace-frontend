@@ -19,4 +19,4 @@ export default reduxForm({
   form: 'FormRejectOrder',
   fields,
   validate
-}, undefined)(FormRejectOrder);
+})(FormRejectOrder);

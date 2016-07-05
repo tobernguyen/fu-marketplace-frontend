@@ -4,10 +4,18 @@ import BlockSellerDashboardSideBar from 'app/components/home/BlockSellerDashboar
 import BlockOrderList from 'app/components/home/BlockOrderList';
 import ModalViewOrder from 'app/components/home/ModalViewOrder';
 import { getSellerShop, updateShopInfo } from 'app/actions/shop';
-import { sellerGetOrder, sellerAcceptOrder, sellerRejectOrder } from 'app/actions/order';
+import {
+  sellerGetOrder,
+  sellerAcceptOrder,
+  sellerRejectOrder,
+  sellerStartShippingOrder,
+  sellerCompleteOrder,
+  sellerAbortOrder
+} from 'app/actions/order';
 import Sticky from 'react-stickynode';
 import NavigationBar from 'app/containers/home/NavigationBar';
 import { withRouter } from 'react-router'
+import OrderStatus from 'app/shared/orderStatus';
 
 class ManageOrders extends Component {
   constructor(props) {
@@ -51,7 +59,10 @@ class ManageOrders extends Component {
     this.sellerAcceptOrder = (orderID) => {
       this.props.sellerAcceptOrder(orderID);
       let selectedOrder = this.state.selectedOrder;
-      selectedOrder['status'] = 1;
+      selectedOrder['status'] = OrderStatus.ACCEPTED;
+      const currentTime = new Date();
+      currentTime.setSeconds(currentTime.getSeconds() - 3);
+      selectedOrder['updatedAt'] = currentTime;
       this.setState({
         selectedOrder
       });
@@ -60,7 +71,34 @@ class ManageOrders extends Component {
     this.sellerRejectOrder = (orderID, messages) => {
       this.props.sellerRejectOrder(orderID, messages);
       let selectedOrder = this.state.selectedOrder;
-      selectedOrder['status'] = 4;
+      selectedOrder['status'] = OrderStatus.REJECTED;
+      this.setState({
+        selectedOrder
+      });
+    }
+
+    this.sellerStartShippingOrder = (orderID) => {
+      this.props.sellerStartShippingOrder(orderID);
+      let selectedOrder = this.state.selectedOrder;
+      selectedOrder['status'] = OrderStatus.SHIPPING;
+      this.setState({
+        selectedOrder
+      });
+    }
+
+    this.sellerCompleteOrder = (orderID) => {
+      this.props.sellerCompleteOrder(orderID);
+      let selectedOrder = this.state.selectedOrder;
+      selectedOrder['status'] = OrderStatus.COMPLETED;
+      this.setState({
+        selectedOrder
+      });
+    }
+
+    this.sellerAbortOrder = (orderID, messages) => {
+      this.props.sellerAbortOrder(orderID, messages);
+      let selectedOrder = this.state.selectedOrder;
+      selectedOrder['status'] = OrderStatus.ABORTED;
       this.setState({
         selectedOrder
       });
@@ -116,6 +154,9 @@ class ManageOrders extends Component {
                   onHide={this.close}
                   acceptOrder={this.sellerAcceptOrder}
                   rejectOrder={this.sellerRejectOrder}
+                  startShippingOrder={this.sellerStartShippingOrder}
+                  completeOrder={this.sellerCompleteOrder}
+                  abortOrder={this.sellerAbortOrder}
                   openRejectModal={this.openRejectModal}
                 />
               </div>
@@ -148,5 +189,8 @@ export default connect(mapStateToProps, {
   updateShopInfo,
   sellerGetOrder,
   sellerAcceptOrder,
-  sellerRejectOrder
+  sellerRejectOrder,
+  sellerStartShippingOrder,
+  sellerCompleteOrder,
+  sellerAbortOrder
 })(withRouter(ManageOrders))

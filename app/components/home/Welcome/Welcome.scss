@@ -19,4 +19,18 @@
       padding-bottom: 26px;
     }
   }
+
+  .error-message {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background-color: rgba(192, 57, 43,0.8);
+
+    h4 {
+      text-align: center;
+      color: #FFFFFF;
+      font-size: 14px;
+    }
+  }
 }

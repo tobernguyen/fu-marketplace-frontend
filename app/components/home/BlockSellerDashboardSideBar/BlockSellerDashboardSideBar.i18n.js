@@ -10,5 +10,13 @@ export const messages = {
   addShopItem: {
     id: 'sellerDashboard.sidebar.addShopItem',
     defaultMessage: 'add shop item'
+  },
+  updateShipPlaces: {
+    id: 'sellerDashboard.sidebar.updateShipPlaces',
+    defaultMessage: 'update ship places'
+  },
+  manageOrders: {
+    id: 'sellerDashboard.sidebar.manageOrders',
+    defaultMessage: 'manage orders'
   }
 };

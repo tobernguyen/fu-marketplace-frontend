@@ -5,6 +5,8 @@ import BlockShoppingCart from 'app/components/home/BlockShoppingCart';
 import './BlockSellingItemList.scss';
 import _ from 'lodash';
 import classNames from 'classnames';
+import { messages } from './BlockSellingItemList.i18n';
+import { FormattedMessage } from 'react-intl';
 
 export default class BlockSellingItemList extends Component {
   constructor(props) {
@@ -72,6 +74,47 @@ export default class BlockSellingItemList extends Component {
     )
   }
 
+  renderSellingItems() {
+    const { currentItems } = this.state;
+    const { sellerMode, addToCart, buyNow, shopID, cartItems } = this.props;
+    if (currentItems.length > 0) {
+      return (
+        <div>
+          {this.state.currentItems.map((item) =>
+            {if (sellerMode) {
+              return <BlockSellingItem
+                key={item.id}
+                item={item}
+                shopID={shopID} />
+            } else {
+              return <BlockSellingItemForUser
+                key={item.id}
+                item={item}
+                addToCard={addToCart}
+                buyNow={buyNow}
+                shopID={shopID}
+                cartItems={cartItems} />
+            }}
+          )}
+        </div>
+      )
+    } else {
+      return (
+        <div className={classNames('no-item', { seller: sellerMode })}>
+          <p className="message">
+            {sellerMode && <span>
+              <FormattedMessage {...messages.noItem.seller} />
+            </span>}
+            {!sellerMode && <span>
+              <FormattedMessage {...messages.user.seller} />
+            </span>}
+          </p>
+
+        </div>
+      )
+    }
+  }
+
   render() {
     const { sellerMode } = this.props;
 
@@ -86,22 +129,7 @@ export default class BlockSellingItemList extends Component {
           </div>}
         </div>
         <div className="body clearfix">
-          {this.state.currentItems.map((item) =>
-          {if (sellerMode) {
-            return <BlockSellingItem
-              key={item.id}
-              item={item}
-              shopID={this.props.shopID} />
-          } else {
-            return <BlockSellingItemForUser
-              key={item.id}
-              item={item}
-              addToCard={this.props.addToCart}
-              buyNow={this.props.buyNow}
-              shopID={this.props.shopID}
-              cartItems={this.props.cartItems} />
-          }}
-          )}
+          {this.renderSellingItems()}
         </div>
       </div>
     )

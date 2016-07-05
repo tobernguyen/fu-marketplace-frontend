@@ -1,0 +1,29 @@
+.order-status {
+  display: inline-block;
+  padding: 2px 5px;
+  margin-right: 5px;
+  color: #ffffff;
+  border-radius: 3px;
+
+  &.status-0 {
+      background-color: #de9200;
+  }
+  &.status-1 {
+      background-color: #b52a2e;
+  }
+  &.status-2 {
+      background-color: #009ece;
+  }
+  &.status-3 {
+      background-color: #73a600;
+  }
+  &.status-4 {
+      background-color: #a1a1a1;
+  }
+  &.status-5 {
+      background-color: #a1a1a1;
+  }
+  &.status-6 {
+      background-color: #a1a1a1;
+  }
+}

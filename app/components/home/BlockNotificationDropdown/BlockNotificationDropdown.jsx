@@ -1,13 +1,32 @@
 import React, { Component, PropTypes } from 'react';
 import { NavDropdown, MenuItem } from 'react-bootstrap';
 import './BlockNotificationDropdown.scss';
+import { FormattedMessage } from 'react-intl';
+import BlockNotificationItem from 'app/components/home/BlockNotificationItem';
+import { messages } from './BlockNotificationDropdown.i18n';
+import _ from 'lodash';
 
 export default class BlockNotificationDropdown extends Component {
+
+  renderNotificationBadge() {
+    const notificationCount = _.size(_.filter(this.props.notifications, (item) =>
+      item.read !== true
+    ));
+
+    return (
+      <div>
+        {notificationCount > 0 && <span className="badge">
+          {notificationCount}
+        </span>}
+      </div>
+    )
+  }
+
   render() {
-    const { eventKey } = this.props;
+    const { eventKey, notifications } = this.props;
     const title = <div>
       <i className="fa fa-bell fa-lg"/>
-      <span className="badge">3</span>
+      {this.renderNotificationBadge()}
     </div>;
     return (
       <NavDropdown
@@ -16,40 +35,27 @@ export default class BlockNotificationDropdown extends Component {
         className="block-notification-dropdown"
         id="notifications-dropdown" noCaret>
         <li className="header clearfix">
-          <h4 className="title">Notifications</h4>
+          <h4 className="title">
+            <FormattedMessage {...messages.notificationTitle} />
+          </h4>
           <div className="actions">
-            <a href="#">Mark All as Read</a>
+            <a href="#">
+              <FormattedMessage {...messages.markAsRead} />
+            </a>
           </div>
         </li>
-        <MenuItem eventKey={eventKey}>
-          Your order at Mini has been accepted. Please check.
+        {notifications.map((notification, index) =>
+          <BlockNotificationItem key={index} eventKey={eventKey} notification={notification}/>
+        )}
+        <MenuItem eventKey={3.3} className="footer">
+          <FormattedMessage {...messages.seeAll} />
         </MenuItem>
-        <MenuItem eventKey={3.2}>
-          Your order has been declined due to out of stock.
-        </MenuItem>
-        <MenuItem eventKey={3.3}>
-          There are 13 opening shops near you.
-        </MenuItem>
-        <MenuItem eventKey={3.3}>
-          Your order at Tho Con has been shipped.
-        </MenuItem>
-        <MenuItem eventKey={3.3}>
-          Order completed. Please feedback Momo's service.
-        </MenuItem>
-        <MenuItem eventKey={3.3}>
-          Your favorite shop C-Bakery has just opened.
-        </MenuItem>
-        <MenuItem eventKey={3.3}>
-          Flash deal, please visit Ally to get 10% discount on each product.
-        </MenuItem>
-        <MenuItem divider />
-        <MenuItem eventKey={3.3} className="footer">See All</MenuItem>
-
       </NavDropdown>
     );
   }
 }
 
 BlockNotificationDropdown.propTypes = {
-  eventKey: PropTypes.number.isRequired
+  eventKey: PropTypes.number.isRequired,
+  notifications: PropTypes.array.isRequired
 };

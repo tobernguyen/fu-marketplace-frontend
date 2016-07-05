@@ -12,6 +12,7 @@ import NavigationBar from './NavigationBar';
 import { signOutGoogle } from 'app/actions';
 import _ from 'lodash';
 import { withRouter } from 'react-router';
+import NotificationSystem from 'react-notification-system';
 
 class Home extends Component {
   constructor(props) {
@@ -21,6 +22,8 @@ class Home extends Component {
       query: null
     };
 
+    this.notification = null;
+
     this.handleSearch = (keyword) => {
       this.props.router.push({
         pathname: '/',
@@ -28,6 +31,15 @@ class Home extends Component {
           keyword: keyword
         })
       })
+    };
+
+    this.testNotification = (e) => {
+      e.preventDefault();
+      this.notification.addNotification({
+        message: 'Notification message',
+        level: 'success',
+        position: 'bl'
+      });
     }
   }
 
@@ -35,6 +47,10 @@ class Home extends Component {
     if (_.isEmpty(this.props.categories)) {
       this.props.getMetadata();
     }
+  }
+
+  componentDidMount() {
+    this.notification = this.refs.notificationSystem;
   }
 
   componentWillReceiveProps(nextProps) {
@@ -72,6 +88,7 @@ class Home extends Component {
     return (
       <div className="home-page">
         <NavigationBar
+          displaySearch={true}
           handleSearch={this.handleSearch}
           query={query} />
         <div className="container home-body">
@@ -88,6 +105,7 @@ class Home extends Component {
                 shipPlaceCounter={shipPlace}
                 totalShipPlace={totalShipPlace} />
               <BlockBookmarks />
+              <button onClick={this.testNotification}>Test notification</button>
             </div>
             <div className="col-md-9">
               <div className="row">
@@ -102,6 +120,7 @@ class Home extends Component {
         {this.props.children && <Modal show={true} bsSize={this.props.modalSize}>
           {this.props.children}
         </Modal>}
+        <NotificationSystem ref="notificationSystem" />
       </div>
     );
   }

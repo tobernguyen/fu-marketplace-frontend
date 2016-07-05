@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
-import { Modal, Dropdown } from 'react-bootstrap';
-import { FormattedMessage, FormattedNumber, injectIntl } from 'react-intl';
-import RejectOrderForm from 'app/containers/home/SellerDashboard/ManageOrders/RejectOrderForm';
+import { Modal } from 'react-bootstrap';
+import { FormattedMessage, FormattedNumber, FormattedRelative, injectIntl } from 'react-intl';
+import ModalViewOrderFooter from './ModalViewOrderFooter.jsx';
+import LabelOrderStatus from 'app/components/home/LabelOrderStatus';
 import './ModalViewOrder.scss';
 import { messages } from 'app/components/home/ModalViewOrder/ModalViewOrder.i18n';
+import _ from 'lodash';
 
 class ModalViewOrder extends Component {
   constructor(props) {
@@ -13,46 +15,25 @@ class ModalViewOrder extends Component {
       const { order } = this.props;
       const messages = {
         sellerMessage: formData.reason
-      }
+      };
       this.props.rejectOrder(order.id, messages);
     }
-  }
-  calculateTotal(orderLine) {
-    const total= orderLine.quantity * orderLine.item.price;
-    return <FormattedNumber value={total} />
-  }
-  renderAction(order) {
-    let output = '';
-    switch (order.status) {
-      case 0:
-        output = <div className="btn-toolbar">
-            <button type="button" className="btn btn-success" onClick={() => this.props.acceptOrder(order.id)}>
-              <FormattedMessage {...messages.modalViewOrder.button.accept} />
-            </button>
-            <Dropdown id="FormRejectOrder">
-            <button type="button" className="btn btn-danger" bsRole="toggle">
-              <FormattedMessage {...messages.modalViewOrder.button.reject} />
-            </button>
-            <RejectOrderForm
-              bsRole="menu"
-              onSubmit={this.rejectOrder}
-              />
-            </Dropdown>
-          </div>
-          break;
-      case 1:
-        output = <div className="text-center"><h4><FormattedMessage {...messages.modalViewOrder.orderStatus.accepted}/></h4></div>
-        break;
-      case 4:
-        output = <div className="text-center"><h4><FormattedMessage {...messages.modalViewOrder.orderStatus.rejected}/></h4></div>
-        break;
-      default:
-        output = 'Coming soon...';
+
+    this.abortOrder = (formData) => {
+      const { order } = this.props;
+      const messages = {
+        sellerMessage: formData.reason
+      };
+      this.props.abortOrder(order.id, messages);
     }
-    return output;
+  }
+  calculateTotal(order) {
+    const total = _.reduce(order.orderLines, (sum, order) => {
+      return sum + (order.item.price * order.quantity);
+    }, 0);
+    return <FormattedNumber value={total} />;
   }
   render() {
-    const { formatMessage } = this.props.intl;
     const { order } = this.props;
     return (
       <Modal show={this.props.show} onHide={this.props.onHide} bsSize="large">
@@ -62,62 +43,85 @@ class ModalViewOrder extends Component {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <div className="form-group">
-            <label className="col-sm-2 control-label">
-            <FormattedMessage {...messages.modalViewOrder.body.shipAddress}/>
-            </label>
-            <div className="col-sm-10">
-              <p className="form-control-static">{order.shipAddress}</p>
+          <h4>
+            <FormattedMessage {...messages.modalViewOrder.body.orderLines}/>
+          </h4>
+          <div className="well">
+            <table className="table table-responsive order-items">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th><FormattedMessage {...messages.modalViewOrder.body.table.item}/></th>
+                  <th><FormattedMessage {...messages.modalViewOrder.body.table.quantity}/></th>
+                  <th><FormattedMessage {...messages.modalViewOrder.body.table.note}/></th>
+                </tr>
+              </thead>
+              <tbody>
+                {order.orderLines.map((orderLine,index) =>
+                  <tr key={index}>
+                    <td>
+                      {index + 1}
+                    </td>
+                    <td>
+                      <strong>{orderLine.item.name}</strong>
+                      <p><FormattedNumber value={orderLine.item.price}/>₫</p>
+                    </td>
+                    <td>
+                      {orderLine.quantity}
+                    </td>
+                    <td>
+                      {orderLine.note}
+                    </td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+          </div>
+          <div>
+            <strong><FormattedMessage {...messages.modalViewOrder.body.table.total}/>: </strong>
+            {this.calculateTotal(order)}₫
+          </div>
+          <hr />
+          <h4>
+            <FormattedMessage {...messages.modalViewOrder.body.referenceInformation}/>
+          </h4>
+          <div>
+            <div className="form-group">
+              <label className="col-sm-3 control-label">
+                <FormattedMessage {...messages.modalViewOrder.body.shipAddress}/>:
+              </label>
+              <div class="col-sm-9">
+                <p class="form-control-static">{order.shipAddress}</p>
+              </div>
+            </div>
+            <div className="form-group">
+              <label className="col-sm-3 control-label">
+                <FormattedMessage {...messages.modalViewOrder.body.note}/>:
+              </label>
+              <div class="col-sm-9">
+                <p class="form-control-static">{order.note}</p>
+              </div>
+            </div>
+            <div className="form-group">
+              <label className="col-sm-3 control-label">
+                <FormattedMessage {...messages.modalViewOrder.body.orderStatus}/>:
+              </label>
+              <div class="col-sm-9">
+                <LabelOrderStatus status={order.status}/>
+                <FormattedMessage {...messages.modalViewOrder.body.updatedAt} />
+                <FormattedRelative value={new Date(order.updatedAt)}/>
+              </div>
             </div>
           </div>
-          <div className="form-group">
-            <label className="col-sm-2 control-label">
-            <FormattedMessage {...messages.modalViewOrder.body.note}/>
-            </label>
-            <div className="col-sm-10">
-              <p className="form-control-static">{order.note}</p>
-            </div>
-          </div>
-          <div className="form-group">
-            <label className="col-sm-2 control-label">
-            <FormattedMessage {...messages.modalViewOrder.body.orderLines}/>:
-            </label>
-          </div>
-
-          <table className="table table-responsive table-striped order-items">
-            <thead>
-            <tr>
-              <th>#</th>
-              <th><FormattedMessage {...messages.modalViewOrder.body.table.item}/></th>
-              <th><FormattedMessage {...messages.modalViewOrder.body.table.quantity}/></th>
-              <th><FormattedMessage {...messages.modalViewOrder.body.table.total}/></th>
-              <th><FormattedMessage {...messages.modalViewOrder.body.table.note}/></th>
-            </tr>
-            </thead>
-            <tbody>
-            {order.orderLines.map((orderLine,index) =>
-              <tr key={index}>
-                <td>
-                  {index + 1}
-                </td>
-                <td>
-                  <strong>{orderLine.item.name}</strong>
-                  <p><FormattedNumber value={orderLine.item.price}/>₫</p>
-                </td>
-                <td>
-                  {orderLine.quantity}
-                </td>
-                <td>
-                  {this.calculateTotal(orderLine)}₫
-                </td>
-                <td>
-                  {orderLine.note}
-                </td>
-              </tr>
-            )}
-            </tbody>
-          </table>
-          {this.renderAction(order)}
+          <hr />
+          <ModalViewOrderFooter
+            order={order}
+            acceptOrder={this.props.acceptOrder}
+            rejectOrder={this.rejectOrder}
+            startShippingOrder={this.props.startShippingOrder}
+            completeOrder={this.props.completeOrder}
+            abortOrder={this.abortOrder}
+          />
         </Modal.Body>
       </Modal>
     );

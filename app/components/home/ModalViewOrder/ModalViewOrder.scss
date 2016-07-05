@@ -1,0 +1,28 @@
+.modal-view-order-footer {
+  button, button:hover, button:focus {
+    color: #ffffff;
+  }
+  .btn-accept {
+    background-color: #b52a2e;
+  }
+
+  .btn-reject {
+    background-color: #a1a1a1;
+  }
+
+  .btn-shipping {
+    background-color: #009ece;
+  }
+
+  .btn-complete {
+    background-color: #73a600
+  }
+
+  .btn-abort {
+    background-color: #a1a1a1;
+  }
+
+  .order-status-message {
+    color: #666666;
+  }
+}

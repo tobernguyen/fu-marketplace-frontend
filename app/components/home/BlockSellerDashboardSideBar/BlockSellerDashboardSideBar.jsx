@@ -91,7 +91,7 @@ export default class BlockSellerDashboardSideBar extends Component {
                 <i className="fa fa-paper-plane-o"/>
               </div>
               <div className="title">
-                Update ship places
+                <FormattedMessage {...messages.updateShipPlaces} />
               </div>
             </div>
           </ListGroupItem>
@@ -103,7 +103,7 @@ export default class BlockSellerDashboardSideBar extends Component {
                 <i className="fa fa-bars"/>
               </div>
               <div className="title">
-                Manage Orders
+                <FormattedMessage {...messages.manageOrders} />
               </div>
             </div>
           </ListGroupItem>

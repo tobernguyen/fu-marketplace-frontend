@@ -32,6 +32,17 @@
 
   .body {
     padding: 5px;
+
+    .no-item {
+      .message {
+        text-align: center;
+        padding: 80px 0;
+        font-size: 20px;
+        -webkit-font-smoothing: antialiased;
+        font-weight: bold;
+        color: #bbb;
+      }
+    }
   }
 
   .footer {

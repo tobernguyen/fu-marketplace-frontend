@@ -1,0 +1,22 @@
+.my-order {
+  overflow: auto;
+
+  .pager {
+    margin: 0;
+  }
+
+  .disabled {
+    pointer-events: none;
+  }
+
+  .pull-left {
+    label {
+      font-weight: normal;
+    }
+
+    select {
+      display: inline-block;
+      width: 64px;
+    }
+  }
+}

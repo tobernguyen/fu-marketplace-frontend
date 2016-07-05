@@ -2,6 +2,8 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import UpdateShopForm from './UpdateShopForm';
 import { updateShopInfo } from 'app/actions/shop';
+import _ from 'lodash';
+
 
 class UpdateShop extends Component {
   constructor(props) {
@@ -17,8 +19,11 @@ class UpdateShop extends Component {
         newShopDescription: formValues.description,
         shopUpdated:        false
       });
-
-      this.props.updateShopInfo(formValues, this.props.params.shopID);
+      const shopData = _.assign({}, formValues, {
+        status: Number(formValues.status)
+      });
+      
+      this.props.updateShopInfo(shopData, this.props.params.shopID);
     }
   }
 

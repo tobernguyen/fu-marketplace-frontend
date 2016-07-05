@@ -41,6 +41,18 @@ export const order = (state = INITIAL_STATE, action) => {
       return _.merge({}, state, {
         shouldUpdateOrderList: true
       });
+    case OrderActionTypes.SELLER_START_SHIPPING_ORDER_SUCCESS:
+      return _.merge({}, state, {
+        shouldUpdateOrderList: true
+      });
+    case OrderActionTypes.SELLER_COMPLETE_ORDER_SUCCESS:
+      return _.merge({}, state, {
+        shouldUpdateOrderList: true
+      });
+    case OrderActionTypes.SELLER_ABORT_ORDER_SUCCESS:
+      return _.merge({}, state, {
+        shouldUpdateOrderList: true
+      });
     case OrderActionTypes.USER_GET_ORDER_SUCCESS:
       return _.assign({}, state, {
         orders: action.response.orders

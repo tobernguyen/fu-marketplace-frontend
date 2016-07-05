@@ -29,12 +29,12 @@ const sellerRequestGetOrder = (shopID, filter) => ({
   }
 });
 
-export const sellerGetOrder = (shopID, status) => {
+export const sellerGetOrder = (shopID, status , page = 1, size = 10) => {
   let filter = '';
   if (status === undefined || status === 'all') {
-    filter = '';
+    filter = `?size=${size}&page=${page}`;
   } else {
-    filter = `?status=${status.toUpperCase()}`;
+    filter = `?size=${size}&page=${page}&status=${status.toUpperCase()}`;
   }
   return (dispatch) => {
     return dispatch(sellerRequestGetOrder(shopID, filter));
@@ -76,6 +76,57 @@ export const sellerRejectOrder = (orderID, message) => {
   }
 };
 
+export const SELLER_START_SHIPPING_ORDER_REQUEST = 'SELLER_START_SHIPPING_ORDER_REQUEST';
+export const SELLER_START_SHIPPING_ORDER_SUCCESS = 'SELLER_START_SHIPPING_ORDER_SUCCESS';
+export const SELLER_START_SHIPPING_ORDER_FAILURE = 'SELLER_START_SHIPPING_ORDER_FAILURE';
+const requestStartShippingOrder = (orderID) => ({
+  [CALL_API]: {
+    types: [SELLER_START_SHIPPING_ORDER_REQUEST, SELLER_START_SHIPPING_ORDER_SUCCESS, SELLER_START_SHIPPING_ORDER_FAILURE],
+    url: `/api/v1/seller/orders/${orderID}/ship`,
+    method: HTTP_METHODS.POST
+  }
+});
+
+export const sellerStartShippingOrder = (orderID) => {
+  return (dispatch) => {
+    dispatch(requestStartShippingOrder(orderID));
+  }
+}
+
+export const SELLER_COMPLETE_ORDER_REQUEST = 'SELLER_COMPLETE_ORDER_REQUEST';
+export const SELLER_COMPLETE_ORDER_SUCCESS = 'SELLER_COMPLETE_ORDER_SUCCESS';
+export const SELLER_COMPLETE_ORDER_FAILURE = 'SELLER_COMPLETE_ORDER_FAILURE';
+const requestCompleteOrder = (orderID) => ({
+  [CALL_API]: {
+    types: [SELLER_COMPLETE_ORDER_REQUEST, SELLER_COMPLETE_ORDER_SUCCESS, SELLER_COMPLETE_ORDER_FAILURE],
+    url: `/api/v1/seller/orders/${orderID}/complete`,
+    method: HTTP_METHODS.POST
+  }
+});
+
+export const sellerCompleteOrder = (orderID) => {
+  return (dispatch) => {
+    dispatch(requestCompleteOrder(orderID));
+  }
+}
+
+export const SELLER_ABORT_ORDER_REQUEST = 'SELLER_ABORT_ORDER_REQUEST';
+export const SELLER_ABORT_ORDER_SUCCESS = 'SELLER_ABORT_ORDER_SUCCESS';
+export const SELLER_ABORT_ORDER_FAILURE = 'SELLER_ABORT_ORDER_FAILURE';
+const requestAbortOrder = (orderID, message) => ({
+  [CALL_API]: {
+    types: [SELLER_ABORT_ORDER_REQUEST, SELLER_ABORT_ORDER_SUCCESS, SELLER_ABORT_ORDER_FAILURE],
+    url: `/api/v1/seller/orders/${orderID}/abort`,
+    method: HTTP_METHODS.POST,
+    params: message
+  }
+});
+
+export const sellerAbortOrder = (orderID, message) => {
+  return (dispatch) => {
+    return dispatch(requestAbortOrder(orderID, message));
+  }
+};
 
 export const CLEAR_ORDER_RESULT = 'CLEAR_ORDER_RESULT';
 export const clearOrderResult = () => {
@@ -87,16 +138,18 @@ export const clearOrderResult = () => {
 export const USER_GET_ORDER_REQUEST = 'USER_GET_ORDER_REQUEST';
 export const USER_GET_ORDER_SUCCESS = 'USER_GET_ORDER_SUCCESS';
 export const USER_GET_ORDER_FAILURE = 'USER_GET_ORDER_FAILURE';
-const userRequestGetOrder = () => ({
+const userRequestGetOrder = (filter) => ({
   [CALL_API]: {
     types: [USER_GET_ORDER_REQUEST, USER_GET_ORDER_SUCCESS, USER_GET_ORDER_FAILURE],
-    url: '/api/v1/orders',
+    url: `/api/v1/orders${filter}`,
     method: HTTP_METHODS.GET
   }
 });
 
-export const userGetOrder = () => {
+export const userGetOrder = (page = 1, size = 10, status = '') => {
+  let filter = `?size=${size}&page=${page}&status=${status}`;
+
   return (dispatch) => {
-    return dispatch(userRequestGetOrder());
+    return dispatch(userRequestGetOrder(filter));
   }
 };

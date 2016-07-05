@@ -8,7 +8,7 @@ const INITIAL_STATE = {
 };
 
 export const auth = (state = INITIAL_STATE, action) => {
-  const { type, token, adminToken } = action;
+  const { type, token, adminToken, error } = action;
   switch (type) {
     case ActionTypes.CHECK_AUTH_STATUS:
       return _.assign({}, state, {
@@ -17,7 +17,14 @@ export const auth = (state = INITIAL_STATE, action) => {
     case ActionTypes.GOOGLE_SIGN_IN_SUCCESS:
     case ActionTypes.GOOGLE_SIGN_OUT:
       return _.assign({}, state, {
-        shouldUpdateAuthStatus: true
+        shouldUpdateAuthStatus: true,
+        error: null
+      });
+    case ActionTypes.GOOGLE_SIGN_IN_FAILURE:
+      const { message_code } = error;
+      return _.assign({}, state, {
+        isAuthenticated: false,
+        error: message_code
       });
     case ActionTypes.AUTH_STATUS_IS_UPDATED:
       return _.assign({}, state, {

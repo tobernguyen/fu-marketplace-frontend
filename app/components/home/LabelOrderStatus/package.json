@@ -1,0 +1,6 @@
+{
+  "name": "LabelOrderStatus",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./LabelOrderStatus.jsx"
+}

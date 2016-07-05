@@ -1,5 +1,37 @@
 export const messages = {
   myOrder: {
+    emptyOrderList: {
+      message: {
+        text: {
+          id: 'myOrder.emptyOrderList.message.text',
+          defaultMessage: 'No active order'
+        }
+      },
+      link: {
+        id: 'myOrder.emptyOrderList.link',
+        defaultMessage: 'Start shopping.'
+      }
+    },
+    tableFooter: {
+      button: {
+        next: {
+          id: 'orderListFooter.next',
+          defaultMessage: 'Next'
+        },
+        previous: {
+          id: 'orderListFooter.previous',
+          defaultMessage: 'Previous'
+        }
+      },
+      pageSize: {
+        id: 'orderListFooter.pageSize',
+        defaultMessage: 'Show'
+      },
+      pageSizeUnit: {
+        id: 'orderListFooter.pageSizeUnit',
+        defaultMessage: 'orders'
+      }
+    },
     tableHead: {
       item: {
         id: 'orderList.tableHead.items',

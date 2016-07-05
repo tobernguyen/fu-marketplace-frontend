@@ -8,6 +8,18 @@ export const messages = {
       reject: {
         id: 'modalViewOrder.button.reject',
         defaultMessage: 'Reject'
+      },
+      startShipping: {
+        id: 'modalViewOrder.button.startShipping',
+        defaultMessage: 'Start shipping'
+      },
+      complete: {
+        id: 'modalViewOrder.button.complete',
+        defaultMessage: 'Complete'
+      },
+      abort: {
+        id: 'modalViewOrder.button.abort',
+        defaultMessage: 'Abort'
       }
     },
     rejectForm: {
@@ -27,11 +39,27 @@ export const messages = {
     orderStatus: {
       accepted: {
         id: 'modalViewOrder.orderStatus.accepted',
-        defaultMessage: 'Accepted'
+        defaultMessage: 'Order is accepted'
       },
       rejected: {
         id: 'modalViewOrder.orderStatus.rejected',
-        defaultMessage: 'Rejected'
+        defaultMessage: 'Order is rejected'
+      },
+      completed: {
+        id: 'modalViewOrder.orderStatus.completed',
+        defaultMessage: 'Order is completed'
+      },
+      aborted: {
+        id: 'modalViewOrder.orderStatus.aborted',
+        defaultMessage: 'Order is aborted'
+      },
+      canceled: {
+        id: 'modalViewOrder.orderStatus.canceled',
+        defaultMessage: 'Order is canceled'
+      },
+      noStatus: {
+        id: 'modalViewOrder.orderStatus.noStatus',
+        defaultMessage: 'No status found, please report to admin.'
       }
     },
     title: {
@@ -39,6 +67,18 @@ export const messages = {
       defaultMessage: 'View Order'
     },
     body: {
+      updatedAt: {
+        id: 'modalViewOrder.body.updatedAt',
+        defaultMessage: 'updated '
+      },
+      orderStatus: {
+        id: 'modalViewOrder.body.orderStatus',
+        defaultMessage: 'Order status'
+      },
+      referenceInformation: {
+        id: 'modalViewOrder.body.referenceInformation',
+        defaultMessage: 'Reference Information'
+      },
       shipAddress: {
         id: 'modalViewOrder.body.shipAddress',
         defaultMessage: 'Ship Address'

@@ -95,6 +95,11 @@ export default class BlockShopHeader extends Component {
 
   render() {
     const { shop: { address, avatar, cover, description, name, opening }, sellerMode } = this.props;
+    let shopAvatar = avatar;
+    if (!avatar || avatar === '') {
+      const noAvatar = require('../../../images/no_avatar.jpg');
+      shopAvatar = noAvatar;
+    }
     return (
       <div className="block-shop-header clearfix">
         <div className="shop-cover">
@@ -102,7 +107,7 @@ export default class BlockShopHeader extends Component {
           <div className="shop-info-wrapper col-md-12">
             <div className="shop-avatar-wrapper row">
               <div className="col-sm-3 shop-avatar">
-                <img src={avatar}/>
+                <img src={shopAvatar}/>
                 {sellerMode && <div className="upload-avatar">
                   <Dropzone ref="dropzoneAvatar"
                             onDrop={this.onAvatarChange}

@@ -40,7 +40,7 @@ export default class Welcome extends Component {
         <h4>
           <FormattedMessage
             id={this.props.error}
-            defaultMessage='Please sign in with FPT University email' />
+            defaultMessage='Authentication failed' />
         </h4>
       </div>}
     </div>;

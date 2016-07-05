@@ -3,6 +3,8 @@ import './Welcome.scss';
 import { Carousel } from 'react-bootstrap';
 import GoogleLoginButton from '../GoogleLoginButton';
 import { googleClientID } from 'app/config';
+import { FormattedMessage } from 'react-intl';
+
 
 export default class Welcome extends Component {
   constructor(props) {
@@ -29,11 +31,18 @@ export default class Welcome extends Component {
             cssClass="btn btn-primary btn-google-sign-in"
             clientId={googleClientID}
             callback={this.signInCallback}>
-            <i className="fa fa-google-plus" aria-hidden="true"></i>
+            <i className="fa fa-google-plus" aria-hidden="true"/>
             Sign in with Google
           </GoogleLoginButton>
         </div>
       </div>
+      {this.props.error && <div className="error-message">
+        <h4>
+          <FormattedMessage
+            id={this.props.error}
+            defaultMessage='Please sign in with FPT University email' />
+        </h4>
+      </div>}
     </div>;
   }
 }

@@ -1,7 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import Welcome from 'app/components/home/Welcome';
+import { connect } from 'react-redux';
 
-export default class WelcomePage extends Component {
+class WelcomePage extends Component {
   constructor(props) {
     super(props);
     this.handleSignIn = (authResult) => {
@@ -11,7 +12,7 @@ export default class WelcomePage extends Component {
   render() {
     return (
       <div>
-        <Welcome onSignIn={this.handleSignIn} />
+        <Welcome error={this.props.error} onSignIn={this.handleSignIn} />
       </div>
     );
   }
@@ -20,3 +21,13 @@ export default class WelcomePage extends Component {
 WelcomePage.propTypes = {
   onSignIn: PropTypes.func.isRequired
 };
+
+const mapStateToProps = (state) => {
+  const { auth } = state;
+  return {
+    error: auth.error
+  }
+};
+
+
+export default connect(mapStateToProps)(WelcomePage)

@@ -135,5 +135,6 @@ export default {
   'orderListFooter.previous': 'Previous',
   'orderListFooter.pageSize': 'Show ',
   'orderListFooter.pageSizeUnit': ' orders',
-  'notification.userPlaceOrder': '<strong>{buyerName}</strong> has placed an order at <strong>{shopName}</strong>'
+  'notification.userPlaceOrder': '<strong>{buyerName}</strong> has placed an order at <strong>{shopName}</strong>',
+  'error.authentication.wrong_email_domain': 'Please sign in with FPT University email'
 };

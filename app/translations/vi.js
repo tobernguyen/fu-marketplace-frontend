@@ -135,5 +135,6 @@ export default {
   'orderListFooter.previous': 'Trang trước',
   'orderListFooter.pageSize': 'Hiển thị ',
   'orderListFooter.pageSizeUnit': ' đơn hàng',
-  'notification.userPlaceOrder': '{buyerName} đặt hàng tại shop {shopName}'
+  'notification.userPlaceOrder': '{buyerName} đặt hàng tại shop {shopName}',
+  'error.authentication.wrong_email_domain': 'Hãy đăng nhập bằng email đại học FPT'
 };

@@ -138,16 +138,18 @@ export const clearOrderResult = () => {
 export const USER_GET_ORDER_REQUEST = 'USER_GET_ORDER_REQUEST';
 export const USER_GET_ORDER_SUCCESS = 'USER_GET_ORDER_SUCCESS';
 export const USER_GET_ORDER_FAILURE = 'USER_GET_ORDER_FAILURE';
-const userRequestGetOrder = () => ({
+const userRequestGetOrder = (filter) => ({
   [CALL_API]: {
     types: [USER_GET_ORDER_REQUEST, USER_GET_ORDER_SUCCESS, USER_GET_ORDER_FAILURE],
-    url: '/api/v1/orders',
+    url: `/api/v1/orders${filter}`,
     method: HTTP_METHODS.GET
   }
 });
 
-export const userGetOrder = () => {
+export const userGetOrder = (page = 1, size = 10, status = '') => {
+  let filter = `?size=${size}&page=${page}&status=${status}`;
+
   return (dispatch) => {
-    return dispatch(userRequestGetOrder());
+    return dispatch(userRequestGetOrder(filter));
   }
 };

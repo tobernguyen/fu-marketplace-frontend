@@ -1,10 +1,12 @@
 import React, { Component, PropTypes } from 'react';
 import { NavDropdown, MenuItem } from 'react-bootstrap';
 import './BlockNotificationDropdown.scss';
+import { FormattedRelative, FormattedHTMLMessage } from 'react-intl';
+import { messages } from './BlockNotificationDropdown.i18n';
 
 export default class BlockNotificationDropdown extends Component {
   render() {
-    const { eventKey } = this.props;
+    const { eventKey, notifications } = this.props;
     const title = <div>
       <i className="fa fa-bell fa-lg"/>
       <span className="badge">3</span>
@@ -21,27 +23,26 @@ export default class BlockNotificationDropdown extends Component {
             <a href="#">Mark All as Read</a>
           </div>
         </li>
-        <MenuItem eventKey={eventKey}>
-          Your order at Mini has been accepted. Please check.
-        </MenuItem>
-        <MenuItem eventKey={3.2}>
-          Your order has been declined due to out of stock.
-        </MenuItem>
-        <MenuItem eventKey={3.3}>
-          There are 13 opening shops near you.
-        </MenuItem>
-        <MenuItem eventKey={3.3}>
-          Your order at Tho Con has been shipped.
-        </MenuItem>
-        <MenuItem eventKey={3.3}>
-          Order completed. Please feedback Momo's service.
-        </MenuItem>
-        <MenuItem eventKey={3.3}>
-          Your favorite shop C-Bakery has just opened.
-        </MenuItem>
-        <MenuItem eventKey={3.3}>
-          Flash deal, please visit Ally to get 10% discount on each product.
-        </MenuItem>
+        {notifications.map((notification, index) =>{
+          const { data: { buyerName, shopName, buyerAvatar }, createdAt, type } = notification;
+          const notificationTime = new Date(createdAt);
+          return (
+            <MenuItem className="notification-item" key={index} eventKey={eventKey}>
+              <div className="clearfix">
+                <div className="pull-left buyer-avatar">
+                  <img src={buyerAvatar} />
+                </div>
+                <div className="content">
+                  <FormattedHTMLMessage values={{ buyerName: buyerName, shopName: shopName }} {...messages.notification[type]} />
+                  <p>
+                    <FormattedRelative value={notificationTime}/>
+                  </p>
+                </div>
+              </div>
+            </MenuItem>
+          )
+        })}
+
         <MenuItem divider />
         <MenuItem eventKey={3.3} className="footer">See All</MenuItem>
 
@@ -51,5 +52,6 @@ export default class BlockNotificationDropdown extends Component {
 }
 
 BlockNotificationDropdown.propTypes = {
-  eventKey: PropTypes.number.isRequired
+  eventKey: PropTypes.number.isRequired,
+  notifications: PropTypes.array.isRequired
 };

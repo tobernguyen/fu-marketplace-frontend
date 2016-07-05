@@ -127,5 +127,6 @@ export default {
   'orderListFooter.next': 'Trang sau',
   'orderListFooter.previous': 'Trang trước',
   'orderListFooter.pageSize': 'Hiển thị ',
-  'orderListFooter.pageSizeUnit': ' đơn hàng'
+  'orderListFooter.pageSizeUnit': ' đơn hàng',
+  'notification.userPlaceOrder': '{buyerName} đặt hàng tại shop {shopName}'
 };

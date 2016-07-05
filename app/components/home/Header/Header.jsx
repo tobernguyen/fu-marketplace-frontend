@@ -42,7 +42,7 @@ export default class Header extends Component {
   }
 
   render() {
-    const { onSignOut, currentUser: { roles, fullName, shops}, displaySearch } = this.props;
+    const { onSignOut, currentUser: { roles, fullName, shops}, displaySearch, notifications } = this.props;
     const normalUser = roles && roles.length == 0;
     return (
       <div className="home-header">
@@ -71,7 +71,7 @@ export default class Header extends Component {
               </Button>
             </Navbar.Form>}
             <Nav pullRight>
-              <BlockNotificationDropdown eventKey={1} />
+              <BlockNotificationDropdown notifications={notifications} eventKey={1} />
               <NavDropdown eventKey={2} title={fullName || ''} id="basic-nav-dropdown">
                 <LinkContainer to='/account'>
                   <MenuItem eventKey={2.1}>
@@ -131,7 +131,8 @@ export default class Header extends Component {
 
 Header.propTypes = {
   onSignOut: PropTypes.func.isRequired,
-  currentUser: PropTypes.object.isRequired
+  currentUser: PropTypes.object.isRequired,
+  notifications: PropTypes.array.isRequired
 };
 
 Header.defaultProps = {

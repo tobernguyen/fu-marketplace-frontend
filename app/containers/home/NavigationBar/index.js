@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Header from 'app/components/home/Header';
 import { signOutGoogle, getCurrentUser } from 'app/actions';
-import { getUser } from 'app/selectors';
+import { getNotifications } from 'app/actions/notification';
+import { getUser, getOwnNotifications } from 'app/selectors';
 
 class NavigationBar extends Component {
   constructor(props) {
@@ -13,9 +14,10 @@ class NavigationBar extends Component {
   }
 
   render () {
-    const { currentUser, signOutGoogle, handleSearch, displaySearch } = this.props;
+    const { currentUser, signOutGoogle, handleSearch, displaySearch, notifications } = this.props;
     return (
       <Header
+        notifications={notifications}
         displaySearch={displaySearch}
         currentUser={currentUser}
         onSignOut={signOutGoogle}
@@ -26,6 +28,7 @@ class NavigationBar extends Component {
 
   componentWillMount() {
     this.props.getCurrentUser();
+    this.props.getNotifications();
   }
 
   componentWillReceiveProps(nextProps) {
@@ -44,11 +47,13 @@ class NavigationBar extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    currentUser:  getUser(state)
+    currentUser:    getUser(state),
+    notifications:  getOwnNotifications(state)
   }
 };
 
 export default connect(mapStateToProps, {
   getCurrentUser,
-  signOutGoogle
+  signOutGoogle,
+  getNotifications
 })(NavigationBar)

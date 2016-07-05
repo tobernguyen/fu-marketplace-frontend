@@ -127,5 +127,6 @@ export default {
   'orderListFooter.next': 'Next',
   'orderListFooter.previous': 'Previous',
   'orderListFooter.pageSize': 'Show ',
-  'orderListFooter.pageSizeUnit': ' orders'
+  'orderListFooter.pageSizeUnit': ' orders',
+  'notification.userPlaceOrder': '<strong>{buyerName}</strong> has placed an order at <strong>{shopName}</strong>'
 };

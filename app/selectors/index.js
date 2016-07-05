@@ -8,6 +8,7 @@ const shopsFeedSelector         = (state) => state.feed.shops;
 const aggregationsSelector      = (state) => state.feed.aggregations;
 const currentViewedShopSelector = (state) => state.user.currentViewedShop;
 const sellerShopSelector        = (state) => state.shop.sellerShop;
+const notificationsSelector     = (state) => state.notification.notifications;
 
 export const getCategories = createSelector(
   categoriesSelector,
@@ -122,5 +123,12 @@ export const getSellerShopShipPlaces = createSelector(
       return place;
     });
     return arrayShipPlaces;
+  }
+);
+
+export const getOwnNotifications = createSelector(
+  notificationsSelector,
+  (notifications) => {
+    return notifications
   }
 );

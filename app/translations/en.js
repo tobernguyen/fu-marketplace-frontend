@@ -128,6 +128,7 @@ export default {
   'modalViewOrder.orderStatus.noStatus': 'No status found, please report to admin.',
   'myOrder.emptyOrderList.message.text': 'No active order',
   'myOrder.emptyOrderList.link': 'Start shopping.',
+  'myOrder.button.abort': 'Cancel',
   'modalViewOrder.body.referenceInformation': 'Reference information',
   'modalViewOrder.body.orderStatus': 'Order status',
   'modalViewOrder.body.updatedAt': 'updated ',

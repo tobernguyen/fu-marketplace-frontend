@@ -19,4 +19,21 @@
       width: 64px;
     }
   }
+
+  .btn-cancel {
+    color: #ffffff;
+    background-color: #a1a1a1;
+    font-size: 14px;
+  }
+}
+
+.cancel-order-modal {
+  .btn {
+    color: #ffffff;
+    background-color: #a1a1a1;
+
+    &.confirm {
+      background-color: #b52a2e;
+    }
+  }
 }

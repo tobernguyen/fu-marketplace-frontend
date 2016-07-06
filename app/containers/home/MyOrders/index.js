@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ModalHeader from 'app/components/home/ModalHeader';
 import BlockMyOrder from 'app/components/home/BlockMyOrder';
-import { userGetOrder } from 'app/actions/order';
+import { userGetOrder, userCancelOrder } from 'app/actions/order';
 import { connect } from 'react-redux';
 import { updateModalSize } from 'app/actions/common';
 import { withRouter } from 'react-router'
@@ -38,6 +38,10 @@ class MyOrders extends Component {
         size
       });
     }
+
+    if(nextProps.shouldUpdateOrderList === true) {
+      this.props.userGetOrder(page,size);
+    }
   }
 
 
@@ -52,6 +56,7 @@ class MyOrders extends Component {
             page={page}
             size={size}
             changePageSize={this.changePageSize}
+            cancelOrder={this.props.userCancelOrder}
           />
         </div>
       </div>
@@ -61,11 +66,13 @@ class MyOrders extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    orders: state.order.orders
+    orders: state.order.orders,
+    shouldUpdateOrderList: state.order.shouldUpdateOrderList
   }
 };
 
 export default connect(mapStateToProps, {
   updateModalSize,
-  userGetOrder
+  userGetOrder,
+  userCancelOrder
 })(withRouter(MyOrders))

@@ -1,5 +1,31 @@
 export const messages = {
   myOrder: {
+    cancelOrderModal: {
+      title: {
+        id: 'myOrder.cancelOrderModal.title',
+        defaultMessage: 'Cancel order'
+      },
+      message: {
+        id: 'myOrder.cancelOrderModal.message',
+        defaultMessage: 'Are you sure you want to cancel this order?'
+      },
+      button: {
+        accept: {
+          id: 'myOrder.cancelOrderModal.button.accept',
+          defaultMessage: 'OK'
+        },
+        cancel: {
+          id: 'myOrder.cancelOrderModal.button.cancel',
+          defaultMessage: 'No'
+        }
+      }
+    },
+    button: {
+      abort: {
+        id: 'myOrder.button.abort',
+        defaultMessage: 'Abort'
+      }
+    },
     emptyOrderList: {
       message: {
         text: {

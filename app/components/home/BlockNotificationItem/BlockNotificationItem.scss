@@ -1,4 +1,11 @@
 .block-notification-item {
+  background-color: #F6F7F9;
+  padding: 10px 15px;
+
+  &.read {
+    background-color: #ffffff;
+  }
+
   .buyer-avatar {
     img {
       width: 50px;
@@ -11,6 +18,9 @@
     }
     p {
       margin: 0;
+      font-weight: 500;
+      color: #8c8c8c;
+      font-style: italic;
     }
   }
 }

@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import Header from 'app/components/home/Header';
 import { signOutGoogle, getCurrentUser } from 'app/actions';
-import { getNotifications } from 'app/actions/notification';
+import { getNotifications, markNotificationAsRead, markAllNotificationsAsRead } from 'app/actions/notification';
 import { getUser, getOwnNotifications } from 'app/selectors';
 
 class NavigationBar extends Component {
@@ -10,6 +10,14 @@ class NavigationBar extends Component {
     super(props);
     this.state = {
       keyword: ''
+    };
+
+    this.onNotificationClick = (notification) => {
+      this.props.markNotificationAsRead(notification.data.id);
+    };
+
+    this.markAsAllRead = () => {
+      this.props.markAllNotificationsAsRead();
     }
   }
 
@@ -17,6 +25,8 @@ class NavigationBar extends Component {
     const { currentUser, signOutGoogle, handleSearch, displaySearch, notifications } = this.props;
     return (
       <Header
+        onNotificationClick={this.onNotificationClick}
+        markAsAllRead={this.markAsAllRead}
         notifications={notifications}
         displaySearch={displaySearch}
         currentUser={currentUser}
@@ -45,6 +55,14 @@ class NavigationBar extends Component {
   }
 }
 
+NavigationBar.propTypes = {
+  getCurrentUser: PropTypes.func.isRequired,
+  signOutGoogle: PropTypes.func.isRequired,
+  getNotifications: PropTypes.func.isRequired,
+  markNotificationAsRead: PropTypes.func.isRequired,
+  markAllNotificationsAsRead: PropTypes.func.isRequired
+};
+
 const mapStateToProps = (state) => {
   return {
     currentUser:    getUser(state),
@@ -55,5 +73,7 @@ const mapStateToProps = (state) => {
 export default connect(mapStateToProps, {
   getCurrentUser,
   signOutGoogle,
-  getNotifications
+  getNotifications,
+  markNotificationAsRead,
+  markAllNotificationsAsRead
 })(NavigationBar)

@@ -1,12 +1,15 @@
 import React, { Component, PropTypes } from 'react';
 import { FormattedRelative, FormattedHTMLMessage } from 'react-intl';
-import { MenuItem } from 'react-bootstrap';
 import { messages } from './BlockNotificationItem.i18n';
 import './BlockNotificationItem.scss';
 import { NOTIFICATION_TYPE, ORDER_STATUS } from './notificationTypes';
 import classNames from 'classnames';
 
 export default class BlockNotificationItem extends Component {
+  constructor(props) {
+    super(props);
+  }
+
   renderNotificationTitle() {
     const { notification: { type, data } } = this.props;
     switch (type) {
@@ -118,22 +121,20 @@ export default class BlockNotificationItem extends Component {
 
 
   render() {
-    const { notification: { createdAt, read } } = this.props;
+    const { notification: { data, createdAt, read } } = this.props;
     const notificationTime = new Date(createdAt);
     return (
-      <MenuItem className={classNames('block-notification-item', { read: read })}>
-        <div className="clearfix">
-          <div className="pull-left buyer-avatar">
-            {this.renderNotificationImage()}
-          </div>
-          <div className="content">
-            {this.renderNotificationTitle()}
-            <p>
-              <FormattedRelative value={notificationTime}/>
-            </p>
-          </div>
+      <div className={classNames('block-notification-item', 'clearfix', { read: read })}>
+        <div className="pull-left buyer-avatar">
+          {this.renderNotificationImage()}
         </div>
-      </MenuItem>
+        <div className="content">
+          {this.renderNotificationTitle()}
+          <p>
+            <FormattedRelative value={notificationTime}/>
+          </p>
+        </div>
+      </div>
     )
   }
 }

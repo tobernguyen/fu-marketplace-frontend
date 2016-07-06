@@ -6,8 +6,8 @@ import BlockNotificationItem from 'app/components/home/BlockNotificationItem';
 import { messages } from './BlockNotificationDropdown.i18n';
 import _ from 'lodash';
 
-export default class BlockNotificationDropdown extends Component {
 
+export default class BlockNotificationDropdown extends Component {
   renderNotificationBadge() {
     const notificationCount = _.size(_.filter(this.props.notifications, (item) =>
       item.read !== true
@@ -23,7 +23,7 @@ export default class BlockNotificationDropdown extends Component {
   }
 
   render() {
-    const { eventKey, notifications } = this.props;
+    const { eventKey, notifications, markAsAllRead, onNotificationClick } = this.props;
     const title = <div>
       <i className="fa fa-bell fa-lg"/>
       {this.renderNotificationBadge()}
@@ -39,17 +39,20 @@ export default class BlockNotificationDropdown extends Component {
             <FormattedMessage {...messages.notificationTitle} />
           </h4>
           <div className="actions">
-            <a href="#">
+            <a onClick={markAsAllRead}>
               <FormattedMessage {...messages.markAsRead} />
             </a>
           </div>
         </li>
         {notifications.map((notification, index) =>
-          <BlockNotificationItem key={index} eventKey={eventKey} notification={notification}/>
+          <MenuItem
+            key={index}
+            eventKey={eventKey + (index + 1) / 10}
+            onClick={() => onNotificationClick(notification)}>
+            <BlockNotificationItem
+              notification={notification}/>
+          </MenuItem>
         )}
-        <MenuItem eventKey={3.3} className="footer">
-          <FormattedMessage {...messages.seeAll} />
-        </MenuItem>
       </NavDropdown>
     );
   }
@@ -57,5 +60,7 @@ export default class BlockNotificationDropdown extends Component {
 
 BlockNotificationDropdown.propTypes = {
   eventKey: PropTypes.number.isRequired,
-  notifications: PropTypes.array.isRequired
+  notifications: PropTypes.array.isRequired,
+  onNotificationClick: PropTypes.func.isRequired,
+  markAsAllRead: PropTypes.func.isRequired
 };

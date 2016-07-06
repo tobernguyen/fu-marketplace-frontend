@@ -42,7 +42,17 @@ export default class Header extends Component {
   }
 
   render() {
-    const { onSignOut, currentUser: { roles, fullName, shops}, displaySearch, notifications } = this.props;
+    const {
+      onSignOut,
+      currentUser: {
+        roles,
+        fullName,
+        shops
+      },
+      displaySearch, notifications,
+      onNotificationClick,
+      markAsAllRead
+    } = this.props;
     const normalUser = roles && roles.length == 0;
     return (
       <div className="home-header">
@@ -71,7 +81,11 @@ export default class Header extends Component {
               </Button>
             </Navbar.Form>}
             <Nav pullRight>
-              <BlockNotificationDropdown notifications={notifications} eventKey={1} />
+              <BlockNotificationDropdown
+                notifications={notifications}
+                eventKey={1}
+                markAsAllRead={markAsAllRead}
+                onNotificationClick={onNotificationClick} />
               <NavDropdown eventKey={2} title={fullName || ''} id="basic-nav-dropdown">
                 <LinkContainer to='/account'>
                   <MenuItem eventKey={2.1}>
@@ -132,7 +146,9 @@ export default class Header extends Component {
 Header.propTypes = {
   onSignOut: PropTypes.func.isRequired,
   currentUser: PropTypes.object.isRequired,
-  notifications: PropTypes.array.isRequired
+  notifications: PropTypes.array.isRequired,
+  onNotificationClick: PropTypes.func.isRequired,
+  markAsAllRead: PropTypes.func.isRequired
 };
 
 Header.defaultProps = {

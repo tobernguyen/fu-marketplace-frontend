@@ -153,3 +153,20 @@ export const userGetOrder = (page = 1, size = 10, status = '') => {
     return dispatch(userRequestGetOrder(filter));
   }
 };
+
+export const USER_CANCEL_ORDER_REQUEST = 'USER_CANCEL_ORDER_REQUEST';
+export const USER_CANCEL_ORDER_SUCCESS = 'USER_CANCEL_ORDER_SUCCESS';
+export const USER_CANCEL_ORDER_FAILURE = 'USER_CANCEL_ORDER_FAILURE';
+const userRequestCancelOrder = (orderID) => ({
+  [CALL_API]: {
+    types: [USER_CANCEL_ORDER_REQUEST, USER_CANCEL_ORDER_SUCCESS, USER_CANCEL_ORDER_FAILURE],
+    url: `/api/v1/orders/${orderID}/cancel`,
+    method: HTTP_METHODS.POST
+  }
+});
+
+export const userCancelOrder = (orderID) => {
+  return (dispatch) => {
+    return dispatch(userRequestCancelOrder(orderID));
+  }
+};

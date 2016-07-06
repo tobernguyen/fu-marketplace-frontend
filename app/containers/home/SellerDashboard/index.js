@@ -9,9 +9,11 @@ import { uploadShopAvatar, uploadShopCover, getSellerShop, updateShopInfo } from
 import Sticky from 'react-stickynode';
 import NavigationBar from '../NavigationBar';
 import { getMetadata } from 'app/actions/common';
+import { registerOneSignal } from 'app/actions/notification';
 import { getHashCategories } from 'app/selectors';
 import _ from 'lodash';
-
+import OneSignal from 'onesignal';
+import BlockEnablePushSuggestion from 'app/components/home/BlockEnablePushSuggestion';
 
 class SellerDashboard extends Component {
   constructor(props) {
@@ -20,7 +22,8 @@ class SellerDashboard extends Component {
     const { shopID } = this.props.params;
     if (!isNaN(shopID)) {
       this.state = {
-        shopID: shopID
+        shopID: shopID,
+        pushNotificationEnabled: true
       };
       this.props.getSellerShop(shopID);
     }
@@ -46,6 +49,26 @@ class SellerDashboard extends Component {
     if (_.isEmpty(this.props.allCategories)) {
       this.props.getMetadata();
     }
+    OneSignal.push(() => {
+      OneSignal.on('subscriptionChange', (isSubscribed) => {
+        this.setState({
+          pushNotificationEnabled: isSubscribed
+        });
+        if (isSubscribed) {
+          OneSignal.push(['getUserId', (playerId) => {
+            this.props.registerOneSignal(playerId);
+          }]);
+        }
+      });
+    });
+  }
+
+  componentDidMount() {
+    OneSignal.push(['isPushNotificationsEnabled', (enabled) => {
+      this.setState({
+        pushNotificationEnabled: enabled
+      })
+    }]);
   }
 
   render() {
@@ -61,6 +84,10 @@ class SellerDashboard extends Component {
                   sellerMode={true}
                   uploadShopCover={this.handleUploadShopCover}
                   uploadShopAvatar={this.handleUploadShopAvatar} />
+                <BlockEnablePushSuggestion
+                  sellerMode={true}
+                  oneSignalRegistered={this.props.oneSignalRegistered}
+                  pushNotificationEnabled={this.state.pushNotificationEnabled} />
                 <SellingItemList shopID={parseInt(this.state.shopID)} sellerMode={true} />
               </div>
             </div>
@@ -86,10 +113,11 @@ class SellerDashboard extends Component {
 
 
 const mapStateToProps = (state) => {
-  const { shop } = state;
+  const { shop, notification: { oneSignalRegistered } } = state;
   return {
     sellerShop: shop.sellerShop,
-    allCategories: getHashCategories(state)
+    allCategories: getHashCategories(state),
+    oneSignalRegistered: oneSignalRegistered
   }
 };
 
@@ -98,5 +126,6 @@ export default connect(mapStateToProps, {
   uploadShopAvatar,
   uploadShopCover,
   updateShopInfo,
-  getMetadata
+  getMetadata,
+  registerOneSignal
 })(SellerDashboard)

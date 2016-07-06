@@ -3,7 +3,8 @@ import _ from 'lodash';
 
 const INITIAL_STATE = {
   notifications: [],
-  markAsReadSuccessful: false
+  markAsReadSuccessful: false,
+  oneSignalRegistered: false
 };
 
 export const notification = (state = INITIAL_STATE, action) => {
@@ -27,6 +28,15 @@ export const notification = (state = INITIAL_STATE, action) => {
           notification.read = true;
           return notification;
         })
+      });
+    case NotificationTypes.REGISTER_ONE_SIGNAL_SUCCESS:
+      return _.assign({}, state, {
+        oneSignalRegistered: true
+      });
+    case NotificationTypes.REGISTER_ONE_SIGNAL_REQUEST:
+    case NotificationTypes.REGISTER_ONE_SIGNAL_FAILURE:
+      return _.assign({}, state, {
+        oneSignalRegistered: false
       });
     default:
       return state;

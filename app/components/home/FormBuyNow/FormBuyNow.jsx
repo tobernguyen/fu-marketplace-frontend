@@ -1,7 +1,8 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { Modal } from 'react-bootstrap';
 import './FormBuyNow.scss';
 import AsyncResultCode from 'app/shared/asyncResultCodes';
+import BlockEnablePushSuggestion from 'app/components/home/BlockEnablePushSuggestion';
 
 export default class FormBuyNow extends Component {
   constructor(props) {
@@ -18,7 +19,9 @@ export default class FormBuyNow extends Component {
       handleSubmit,
       item,
       submitting,
-      placeOrderResult
+      placeOrderResult,
+      pushNotificationEnabled,
+      oneSignalRegistered
     } = this.props;
     return (
       <Modal className="form-buy-now" show={this.props.show} onHide={this.props.onHide} bsSize={this.props.bsSize}>
@@ -28,6 +31,7 @@ export default class FormBuyNow extends Component {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
+          <BlockEnablePushSuggestion pushNotificationEnabled={pushNotificationEnabled} oneSignalRegistered={oneSignalRegistered} />
           {item && <div className="item-preview clearfix">
             <div className="col-sm-3 image">
               <img src={item.image} className="img-responsive thumbnail"/>
@@ -105,3 +109,8 @@ export default class FormBuyNow extends Component {
     )
   }
 }
+
+FormBuyNow.propTypes = {
+  pushNotificationEnabled: PropTypes.bool.isRequired,
+  oneSignalRegistered: PropTypes.bool.isRequired
+};

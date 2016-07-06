@@ -8,13 +8,13 @@ class FormCheckOut extends Component {
 
     this.state = {
       orderPlaced: false
-    }
+    };
 
-    const { fields: { items }, removeFromCartItem } = this.props;  
+    const { fields: { items }, removeFromCartItem } = this.props;
     this.handleRemoveCartItem = (index, itemID) => {
       removeFromCartItem(itemID);
       items.removeField(index);
-    }
+    };
 
     this.submitOrder = (formData) => {
       this.props.submitOrder(formData);
@@ -25,7 +25,6 @@ class FormCheckOut extends Component {
   }
 
   renderNoCartItemMessage() {
-    // TODO: @dong.do: Design UI for this case
     return (
       <div className="alert alert-warning">
         Your cart is empty.
@@ -35,7 +34,7 @@ class FormCheckOut extends Component {
   }
 
   renderSuccessPlaceOrder() {
-    const { fields: { note, shipAddress, items } } = this.props;
+    const { fields: { items } } = this.props;
     return (
       <div>
       <div className="alert alert-success">
@@ -109,7 +108,7 @@ class FormCheckOut extends Component {
               {shipAddress.touched ? shipAddress.error : ''}
             </div>
           </div>
-          
+
         </div>
         <div className='form-group'>
           <label className="col-sm-2 control-label">
@@ -213,7 +212,10 @@ class FormCheckOut extends Component {
   }
 
   render() {
-    const { fields: { items } ,orderResult } = this.props;
+    const {
+      fields: { items },
+      orderResult,
+    } = this.props;
     const { orderPlaced } = this.state;
     let output;
     if(orderPlaced === true && orderResult === AsyncResultCode.PLACE_ORDER_SUCCESS) { //If order is placed, display a summary with success alert
@@ -225,7 +227,7 @@ class FormCheckOut extends Component {
         output = this.renderCheckOutForm();
       }
     }
-    
+
 
     return (
       <div className="form-check-out">

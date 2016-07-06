@@ -50,3 +50,23 @@ export const markAllNotificationsAsRead = () => {
     return dispatch(requestMarkAllNotificationsAsRead())
   }
 };
+
+export const REGISTER_ONE_SIGNAL_REQUEST = 'REGISTER_ONE_SIGNAL_REQUEST';
+export const REGISTER_ONE_SIGNAL_SUCCESS = 'REGISTER_ONE_SIGNAL_SUCCESS';
+export const REGISTER_ONE_SIGNAL_FAILURE = 'REGISTER_ONE_SIGNAL_FAILURE';
+const requestRegisterOneSignal = (playerId) => ({
+  [CALL_API]: {
+    types: [REGISTER_ONE_SIGNAL_REQUEST, REGISTER_ONE_SIGNAL_SUCCESS, REGISTER_ONE_SIGNAL_FAILURE],
+    url: `/api/v1/users/me/registerOneSignal`,
+    method: HTTP_METHODS.POST,
+    params: {
+      playerId: playerId
+    }
+  }
+});
+
+export const registerOneSignal = (playerId) => {
+  return (dispatch) => {
+    return dispatch(requestRegisterOneSignal(playerId))
+  }
+};

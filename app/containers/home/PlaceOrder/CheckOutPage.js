@@ -1,10 +1,12 @@
 import React, { Component, PropTypes } from 'react';
 import CheckOutForm from './CheckOutForm';
+import BlockEnablePushSuggestion from 'app/components/home/BlockEnablePushSuggestion';
 import { Modal } from 'react-bootstrap';
 import _ from 'lodash';
 import { connect } from 'react-redux';
 import { removeItemFromCart } from 'app/actions/user';
 import { placeOrder } from 'app/actions/order';
+
 
 class CheckOutPage extends Component {
   constructor(props) {
@@ -30,6 +32,7 @@ class CheckOutPage extends Component {
   }
 
   render() {
+    const { pushNotificationEnabled, oneSignalRegistered } = this.props;
     return (
       <Modal
         className="form-check-out"
@@ -42,6 +45,7 @@ class CheckOutPage extends Component {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
+          <BlockEnablePushSuggestion pushNotificationEnabled={pushNotificationEnabled} oneSignalRegistered={oneSignalRegistered} />
           <CheckOutForm
             submitOrder={this.handleCheckOutSubmit}
             removeFromCartItem={this.handleRemoveFromCartItem}

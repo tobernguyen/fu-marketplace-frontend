@@ -5,11 +5,13 @@ import { updateModalSize } from '../../actions/common';
 import SellingItemList from './SellingItemList';
 import { getUserShop, clearCurrentViewedShop } from 'app/actions/user';
 import { placeOrder, clearOrderResult } from 'app/actions/order';
+import { registerOneSignal } from 'app/actions/notification';
 import { Link } from 'react-router';
 import BuyNowForm from './PlaceOrder/BuyNowForm';
 import CheckOutPage from './PlaceOrder/CheckOutPage';
 import classNames from 'classnames';
 import { getCurrentViewedShop } from 'app/selectors';
+import OneSignal from 'onesignal';
 
 class Shop extends Component {
   constructor(props) {
@@ -17,7 +19,11 @@ class Shop extends Component {
 
     const { shopID } = this.props.params;
     if (!isNaN(shopID)) {
-      this.state = { shopValid: true, showModal: false };
+      this.state = {
+        shopValid: true,
+        showModal: false,
+        pushNotificationEnabled: false
+      };
       this.props.getUserShop(shopID);
     }
 
@@ -51,20 +57,46 @@ class Shop extends Component {
       };
       this.props.placeOrder(shopID, order);
     };
+
   }
 
   componentWillMount() {
     this.props.updateModalSize('lg');
+    if (!this.state.pushNotificationEnabled) {
+      OneSignal.push(() => {
+        OneSignal.on('subscriptionChange', (isSubscribed) => {
+          this.setState({
+            pushNotificationEnabled: isSubscribed
+          });
+          if (isSubscribed) {
+            OneSignal.push(['getUserId', (playerId) => {
+              this.props.registerOneSignal(playerId);
+            }]);
+          }
+        });
+      });
+    }
   }
+
 
   componentWillUnmount() {
     this.props.clearCurrentViewedShop();
+  }
+
+  componentDidMount() {
+    OneSignal.push(['isPushNotificationsEnabled', (enabled) => {
+      this.setState({
+        pushNotificationEnabled: enabled
+      })
+    }]);
   }
 
   render() {
     let orderForm;
     if (this.state.item) {
       orderForm = <BuyNowForm
+        oneSignalRegistered={this.props.oneSignalRegistered}
+        pushNotificationEnabled={this.state.pushNotificationEnabled}
         show={this.state.showModal}
         onHide={this.close}
         bsSize={this.state.bsSize}
@@ -72,6 +104,8 @@ class Shop extends Component {
         onSubmit={this.handleExpressOrder} />
     } else {
       orderForm = <CheckOutPage
+        oneSignalRegistered={this.props.oneSignalRegistered}
+        pushNotificationEnabled={this.state.pushNotificationEnabled}
         shopID={this.props.params.shopID}
         show={this.state.showModal}
         onHide={this.close}
@@ -97,12 +131,14 @@ class Shop extends Component {
 }
 
 const mapStateToProps = (state) => {
+  const { notification: { oneSignalRegistered } } = state;
   const currentViewedShop = getCurrentViewedShop(state);
   const { shopInfo, seller, sellingItems } = currentViewedShop;
   return {
     shop: shopInfo,
     seller: seller,
-    sellingItems: sellingItems
+    sellingItems: sellingItems,
+    oneSignalRegistered: oneSignalRegistered
   }
 };
 
@@ -111,5 +147,6 @@ export default connect(mapStateToProps, {
   getUserShop,
   placeOrder,
   clearOrderResult,
-  clearCurrentViewedShop
+  clearCurrentViewedShop,
+  registerOneSignal
 })(Shop)

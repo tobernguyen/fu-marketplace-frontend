@@ -21,6 +21,9 @@ export default {
   'button.previous': 'Previous',
   'button.submit': 'Submit',
   'button.register': 'Register',
+  'button.add': 'Add',
+  'button.delete': 'Delete',
+  'button.update': 'Update',
   'shop.form.identityNo.placeholder': 'Identity number',
   'shop.form.identityNo.label': 'Identity no',
   'shop.form.shopName.placeholder': 'Shop name',
@@ -153,5 +156,14 @@ export default {
   'orderStatus.aborted': 'Order #<strong>{orderId} at <strong>{shopName}</strong> has been cancelled due to: {sellerMessage}.',
   'order.userPlaceOrder': 'You have new order at <strong>{shopName}</strong> with <strong>#{orderId}</strong> by <strong>{buyerName}</strong>',
   'order.userCancelOrder': 'Order <strong>#{orderId}</strong> was be cancelled by buyer.',
-  'notification.empty': 'No notification'
+  'notification.empty': 'No notification',
+  'sellerDashboard.shopOpening': 'Opening',
+  'sellerDashboard.shopClosed': 'Closed',
+  'shop.updateInformation': 'Update shop information',
+  'shop.information.updated': 'Shop information updated',
+  'shop.information.description': 'Shop description',
+  'shop.information.publishStatus': 'Publish status',
+  'shopItem.update': 'Update shop item',
+  'shopItem.add': 'Add shop item',
+  'shop.updateShipPlaces': 'Update ship places'
 };

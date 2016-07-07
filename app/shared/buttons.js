@@ -14,5 +14,17 @@ export const buttons = {
   register: {
     id: 'button.register',
     defaultMessage: 'register'
+  },
+  add: {
+    id: 'button.add',
+    defaultMessage: 'add'
+  },
+  delete: {
+    id: 'button.delete',
+    defaultMessage: 'delete'
+  },
+  update: {
+    id: 'button.update',
+    defaultMessage: 'update'
   }
 };

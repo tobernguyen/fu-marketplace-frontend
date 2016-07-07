@@ -53,6 +53,14 @@ export const messages = {
         id: 'shopItem.name.placeholder',
         defaultMessage: 'name placeholder'
       }
+    },
+    update: {
+      id: 'shopItem.update',
+      defaultMessage: 'update shop item'
+    },
+    add: {
+      id: 'shopItem.add',
+      defaultMessage: 'add shop item'
     }
   }
 };

@@ -15,7 +15,6 @@ const validate = values => {
 
 const mapStateToProps = (state) => {
   const { shop } = state;
-  console.log(shop.sellerShop.status);
   return {
     initialValues: {
       description:  shop.sellerShop ? shop.sellerShop.description : '',

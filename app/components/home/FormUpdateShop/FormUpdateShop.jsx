@@ -2,29 +2,35 @@ import React, { Component, PropTypes } from 'react';
 import ModalHeader from '../ModalHeader';
 import { Modal, Alert } from 'react-bootstrap';
 import './FormUpdateShop.scss';
+import { messages } from './FormUpdateShop.i18n';
+import { buttons } from 'app/shared/buttons';
+import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 
 
-export default class UpdateShopForm extends Component {
+class FormUpdateShop extends Component {
   constructor(props) {
     super(props);
   }
 
   render() {
     const { shopID, fields: { description, status }, handleSubmit, submitting, dirty, shopUpdated } = this.props;
+    const { formatMessage } = this.props.intl;
     return (
       <div className="form-update-shop">
         <ModalHeader
-          title="Update shop information"
+          title={formatMessage(messages.modalTitle)}
           closeLink={`/shops/${shopID}/dashboard`}
         />
         <Modal.Body className="clearfix">
           {shopUpdated && <Alert bsStyle="success">
-            <p>Shop information updated.</p>
+            <p>
+              <FormattedMessage {...messages.shopInformation.updated}/>
+            </p>
           </Alert>}
           <form onSubmit={handleSubmit} className="form-horizontal">
             <div className={`form-group ${description.touched && description.invalid ? 'has-error' : ''}`}>
               <label className="col-sm-3 control-label">
-                Shop Description
+                <FormattedMessage {...messages.shopInformation.description}/>
               </label>
               <div className="col-sm-9">
                 <textarea
@@ -36,7 +42,7 @@ export default class UpdateShopForm extends Component {
             </div>
             <div className="form-group">
               <label className="col-sm-3 control-label">
-                Publish status
+                <FormattedMessage {...messages.shopInformation.publishStatus}/>
               </label>
               <div className="col-sm-9 publish-status">
                 <div className="checkbox checkbox-slider--b control">
@@ -49,7 +55,7 @@ export default class UpdateShopForm extends Component {
             <button type="submit"
                     className="btn btn-primary"
                     disabled={submitting || !dirty}>
-              Submit
+              <FormattedMessage {...buttons.submit}/>
             </button>
           </form>
         </Modal.Body>
@@ -58,8 +64,11 @@ export default class UpdateShopForm extends Component {
   }
 }
 
-UpdateShopForm.propTypes = {
-  fields: PropTypes.object.isRequired,
+FormUpdateShop.propTypes = {
+  intl:         intlShape.isRequired,
+  fields:       PropTypes.object.isRequired,
   handleSubmit: PropTypes.func.isRequired,
-  submitting: PropTypes.bool.isRequired
+  submitting:   PropTypes.bool.isRequired
 };
+
+export default injectIntl(FormUpdateShop)

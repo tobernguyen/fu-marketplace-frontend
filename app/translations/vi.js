@@ -21,6 +21,9 @@ export default {
   'button.previous': 'Trước',
   'button.submit': 'Submit',
   'button.register': 'Đăng ký',
+  'button.add': 'Thêm',
+  'button.delete': 'Xoá',
+  'button.update': 'Sửa',
   'shop.form.identityNo.placeholder': 'Số chứng minh thư nhân dân',
   'shop.form.identityNo.label': 'Số chứng minh thư',
   'shop.form.shopName.placeholder': 'Tên shop',
@@ -157,5 +160,14 @@ export default {
   'orderStatus.aborted': 'Đơn hàng <strong>#{orderId}</strong> tại <strong>{shopName}</strong> đã bị huỷ với lý do: {sellerMessage}.',
   'order.userPlaceOrder': 'Bạn có đơn hàng mới tại <strong>{shopName}</strong> với mã số <strong>#{orderId}</strong> được đặt bởi <strong>{buyerName}</strong>',
   'order.userCancelOrder': 'Đơn hàng <strong>#{orderId}</strong> đã bị huỳ bởi người mua',
-  'notification.empty': 'Không có thông báo'
+  'notification.empty': 'Không có thông báo',
+  'sellerDashboard.shopOpening': 'Đang mở',
+  'sellerDashboard.shopClosed': 'Đóng cửa',
+  'shop.updateInformation': 'Sửa thông tin cửa hàng',
+  'shop.information.updated': 'Thông tin cửa hàng đã được cập nhập',
+  'shop.information.description': 'Miêu tả shop',
+  'shop.information.publishStatus': 'Trạng thái kích hoạt',
+  'shopItem.update': 'Sửa thông tin sản phẩm',
+  'shopItem.add': 'Thêm sản phẩm',
+  'shop.updateShipPlaces': 'Sửa khu vực ship hàng'
 };

@@ -4,6 +4,7 @@ import { Modal, ButtonToolbar } from 'react-bootstrap';
 import Dropzone from 'react-dropzone';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import { messages } from './FormManageShopItem.i18n';
+import { buttons } from 'app/shared/buttons';
 
 class FormManageShopItem extends Component {
   constructor(props) {
@@ -43,7 +44,7 @@ class FormManageShopItem extends Component {
     return (
       <div className="form-manage-shop-item">
         <ModalHeader
-          title={updateMode ? 'Update shop item' : 'Add shop item'}
+          title={updateMode ? formatMessage(messages.shopItem.update) : formatMessage(messages.shopItem.add)}
           closeLink={`/shops/${shopID}/dashboard`}
         />
         <Modal.Body className="clearfix">
@@ -150,12 +151,12 @@ class FormManageShopItem extends Component {
                   <button type="submit"
                           className="btn btn-primary"
                           disabled={submitting || !dirty || invalid}>
-                    {updateMode ? 'Update' : 'Add'}
+                    {updateMode ? <FormattedMessage {...buttons.update} /> : <FormattedMessage {...buttons.add} />}
                   </button>
                   {updateMode &&
                   <button className="btn btn-danger"
                           onClick={this.handleDelete}>
-                    Delete
+                    <FormattedMessage {...buttons.delete} />
                   </button>}
                 </ButtonToolbar>
               </div>

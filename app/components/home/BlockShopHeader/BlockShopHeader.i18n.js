@@ -10,5 +10,13 @@ export const messages = {
   updateCoverWarning: {
     id: 'sellerDashboard.cover.warning',
     defaultMessage: ''
+  },
+  shopOpening: {
+    id: 'sellerDashboard.shopOpening',
+    defaultMessage: 'shop opening'
+  },
+  shopClosed: {
+    id: 'sellerDashboard.shopClosed',
+    defaultMessage: 'shop closed'
   }
 };

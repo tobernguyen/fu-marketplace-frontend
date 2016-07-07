@@ -142,7 +142,7 @@ export default {
   'sellerDashboard.sidebar.updateShipPlaces': 'Update ship places',
   'sellerDashboard.sidebar.manageOrders': 'Manage orders',
   'notification.markAsRead': 'Mark as all read',
-  'notification.title': 'Notification',
+  'notification.title': 'Notifications',
   'notification.seeAll': 'See all',
   'shopOpeningRequest.accepted': 'Your request to open <strong>{name}</strong> has been accepted. You can start to sell now.',
   'shopOpeningRequest.rejected': 'Your request to open <strong>{name}</strong> has been rejected due to: {adminMessage}.',
@@ -152,5 +152,6 @@ export default {
   'orderStatus.completed': 'Your order at <strong>{shopName}</strong> has been completed. Please rate or review shop service. Thanks.',
   'orderStatus.aborted': 'Order #<strong>{orderId} at <strong>{shopName}</strong> has been cancelled due to: {sellerMessage}.',
   'order.userPlaceOrder': 'You have new order at <strong>{shopName}</strong> with <strong>#{orderId}</strong> by <strong>{buyerName}</strong>',
-  'order.userCancelOrder': 'Order <strong>#{orderId}</strong> was be cancelled by buyer.'
+  'order.userCancelOrder': 'Order <strong>#{orderId}</strong> was be cancelled by buyer.',
+  'notification.empty': 'No notification'
 };

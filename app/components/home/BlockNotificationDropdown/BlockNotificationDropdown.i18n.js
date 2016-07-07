@@ -10,6 +10,10 @@ export const messages = {
   seeAll: {
     id: 'notification.seeAll',
     defaultMessage: 'see all'
+  },
+  noNotification: {
+    id: 'notification.empty',
+    defaultMessage: 'empty'
   }
 };
 

@@ -156,5 +156,6 @@ export default {
   'orderStatus.completed': 'Đơn hàng của bạn tại <strong>{shopName}</strong> vừa mới hoàn thành. Nếu có thời gian, xin bạn hãy đánh giá chất lượng dịch vụ. Xin cám ơn.',
   'orderStatus.aborted': 'Đơn hàng <strong>#{orderId}</strong> tại <strong>{shopName}</strong> đã bị huỷ với lý do: {sellerMessage}.',
   'order.userPlaceOrder': 'Bạn có đơn hàng mới tại <strong>{shopName}</strong> với mã số <strong>#{orderId}</strong> được đặt bởi <strong>{buyerName}</strong>',
-  'order.userCancelOrder': 'Đơn hàng <strong>#{orderId}</strong> đã bị huỳ bởi người mua'
+  'order.userCancelOrder': 'Đơn hàng <strong>#{orderId}</strong> đã bị huỳ bởi người mua',
+  'notification.empty': 'Không có thông báo'
 };

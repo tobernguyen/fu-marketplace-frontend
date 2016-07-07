@@ -38,11 +38,11 @@ export default class BlockNotificationDropdown extends Component {
           <h4 className="title">
             <FormattedMessage {...messages.notificationTitle} />
           </h4>
-          <div className="actions">
+          {notifications.length > 0 && <div className="actions">
             <a onClick={markAsAllRead}>
               <FormattedMessage {...messages.markAsRead} />
             </a>
-          </div>
+          </div>}
         </li>
         {notifications.map((notification, index) =>
           <MenuItem
@@ -53,6 +53,11 @@ export default class BlockNotificationDropdown extends Component {
               notification={notification}/>
           </MenuItem>
         )}
+        {notifications.length === 0 && <li>
+          <p className="no-notification">
+            <FormattedMessage {...messages.noNotification} />
+          </p>
+        </li>}
       </NavDropdown>
     );
   }

@@ -14,7 +14,8 @@ class UpdateShipPlaces extends Component {
       shopShipPlaces: this.props.places || []
     };
 
-    this.submitShipPlaces = () => {
+    this.submitShipPlaces = (e) => {
+      e.preventDefault();
       const placeIDs = this.state.shopShipPlaces.filter((place) =>
         place.checked
       ).map((place) =>

@@ -14,8 +14,23 @@
     padding-left: 10px;
     h3 {
       margin-top: 10px;
+      display: table;
+
       a {
         color: $primary-text-color;
+      }
+
+      .status {
+        font-size: 14px;
+        color: #666;
+        padding-left: 5px;
+        display: table-cell;
+        vertical-align: middle;
+      }
+      .status.opening {
+        i {
+          color: limegreen;
+        }
       }
     }
 

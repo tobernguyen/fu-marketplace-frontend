@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import './BlockShopFeedItem.scss';
 import { Link } from 'react-router';
+import classNames from 'classnames';
 
 export default class BlockShopFeedItem extends Component {
   constructor(props) {
@@ -33,7 +34,7 @@ export default class BlockShopFeedItem extends Component {
   }
 
   render() {
-    const { shop: { id, name, description, categories, shipPlaces } } = this.props;
+    const { shop: { id, name, description, categories, shipPlaces, opening } } = this.props;
     let avatar = this.state.thumbnail;
     if (!avatar || avatar === '') {
       const noAvatar = require('../../../images/no_avatar.jpg');
@@ -58,6 +59,9 @@ export default class BlockShopFeedItem extends Component {
               <Link to={`shops/${id}`}>
                 {name}
               </Link>
+              <span className={classNames('status', { 'opening' : opening})}>
+                <i className="fa fa fa-circle"/>
+              </span>
             </h3>
             <div className="category">
               <ul className="nav">

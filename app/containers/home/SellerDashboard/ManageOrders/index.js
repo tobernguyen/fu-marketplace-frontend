@@ -16,6 +16,10 @@ import Sticky from 'react-stickynode';
 import NavigationBar from 'app/containers/home/NavigationBar';
 import { withRouter } from 'react-router'
 import OrderStatus from 'app/shared/orderStatus';
+import io from 'socket.io-client';
+import config from 'config';
+
+const socket = io.connect(config.SOCKET_IO_URL);
 
 class ManageOrders extends Component {
   constructor(props) {
@@ -136,7 +140,8 @@ class ManageOrders extends Component {
     const { query } = this.props.location;
     return (
       <div className="home-page">
-        <NavigationBar />
+        <NavigationBar
+          socket={socket}/>
         <div className="container home-body">
           <div className="seller-dashboard">
             <div className="col-md-9">

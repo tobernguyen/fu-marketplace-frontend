@@ -14,6 +14,10 @@ import { getHashCategories } from 'app/selectors';
 import _ from 'lodash';
 import OneSignal from 'onesignal';
 import BlockEnablePushSuggestion from 'app/components/home/BlockEnablePushSuggestion';
+import io from 'socket.io-client';
+import config from 'config';
+
+const socket = io.connect(config.SOCKET_IO_URL);
 
 class SellerDashboard extends Component {
   constructor(props) {
@@ -74,7 +78,8 @@ class SellerDashboard extends Component {
   render() {
     return (
       <div className="home-page">
-        <NavigationBar />
+        <NavigationBar
+          socket={socket}/>
         <div className="container home-body">
           <div className="seller-dashboard">
             <div className="col-md-9">

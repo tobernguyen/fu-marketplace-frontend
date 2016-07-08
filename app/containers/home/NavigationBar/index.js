@@ -29,7 +29,6 @@ class NavigationBar extends Component {
 
   render () {
     const { currentUser, signOutGoogle, handleSearch, displaySearch, notifications } = this.props;
-    console.log(notifications);
     return (
       <Header
         onNotificationClick={this.onNotificationClick}

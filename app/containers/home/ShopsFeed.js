@@ -20,27 +20,29 @@ class ShopsFeed extends Component {
     };
 
     this.handleInfiniteLoad = () => {
-      const { query } = this.state;
-      let params = {
-        page: this.state.loadedPage + 1
-      };
+      const { query, isInfiniteLoading } = this.state;
+      if (!isInfiniteLoading) {
+        let params = {
+          page: this.state.loadedPage + 1
+        };
 
-      if (query) {
-        if (query.hasOwnProperty('ship_to')) {
-          params.shipPlaceId = parseInt(query['ship_to'])
+        if (query) {
+          if (query.hasOwnProperty('ship_to')) {
+            params.shipPlaceId = parseInt(query['ship_to'])
+          }
+          if (query.hasOwnProperty('category')) {
+            params.categoryIds = [parseInt(query['category'])]
+          }
+          if (query.hasOwnProperty('keyword')) {
+            params.keyword = query['keyword']
+          }
         }
-        if (query.hasOwnProperty('category')) {
-          params.categoryIds = [parseInt(query['category'])]
-        }
-        if (query.hasOwnProperty('keyword')) {
-          params.keyword = query['keyword']
-        }
+
+        this.props.getShopsOfPage(params, this.state.loadedPage === 0);
+        this.setState({
+          isInfiniteLoading: true
+        });
       }
-
-      this.props.getShopsOfPage(params, this.state.loadedPage === 0);
-      this.setState({
-        isInfiniteLoading: true
-      });
     };
 
     this.elementInfiniteLoad = () => {
@@ -96,7 +98,7 @@ class ShopsFeed extends Component {
       <div>
         {this.state.query && <Infinite elementHeight={250}
                                        containerHeight={window.innerHeight}
-                                       infiniteLoadBeginEdgeOffset={200}
+                                       infiniteLoadBeginEdgeOffset={10}
                                        onInfiniteLoad={this.handleInfiniteLoad}
                                        loadingSpinnerDelegate={this.elementInfiniteLoad()}
                                        isInfiniteLoading={this.state.isInfiniteLoading}

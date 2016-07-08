@@ -165,5 +165,6 @@ export default {
   'shop.information.publishStatus': 'Publish status',
   'shopItem.update': 'Update shop item',
   'shopItem.add': 'Add shop item',
-  'shop.updateShipPlaces': 'Update ship places'
+  'shop.updateShipPlaces': 'Update ship places',
+  'shop.shipPlaces.updated': 'Update ship places successful'
 };

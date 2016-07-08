@@ -169,5 +169,6 @@ export default {
   'shop.information.publishStatus': 'Trạng thái kích hoạt',
   'shopItem.update': 'Sửa thông tin sản phẩm',
   'shopItem.add': 'Thêm sản phẩm',
-  'shop.updateShipPlaces': 'Sửa khu vực ship hàng'
+  'shop.updateShipPlaces': 'Sửa khu vực ship hàng',
+  'shop.shipPlaces.updated': 'Đã cập nhật nơi ship đồ'
 };

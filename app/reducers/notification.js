@@ -8,7 +8,7 @@ const INITIAL_STATE = {
 };
 
 export const notification = (state = INITIAL_STATE, action) => {
-  const { type, response } = action;
+  const { type, response, payload } = action;
   switch (type) {
     case NotificationTypes.GET_NOTIFICATIONS_SUCCESS:
       return _.assign({}, state, {
@@ -29,6 +29,15 @@ export const notification = (state = INITIAL_STATE, action) => {
           return notification;
         })
       });
+    case NotificationTypes.WS_NEW_NOTIFICATION: {
+      const { notification } = payload;
+      return _.assign({}, state, {
+        notifications: [
+          notification,
+          ...state.notifications
+        ]
+      })
+    }
     case NotificationTypes.REGISTER_ONE_SIGNAL_SUCCESS:
       return _.assign({}, state, {
         oneSignalRegistered: true

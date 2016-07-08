@@ -102,6 +102,7 @@ class Home extends Component {
     return (
       <div className="home-page">
         <NavigationBar
+          socket={socket}
           displaySearch={true}
           handleSearch={this.handleSearch}
           query={query} />

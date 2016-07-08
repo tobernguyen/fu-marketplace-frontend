@@ -2,8 +2,14 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import Header from 'app/components/home/Header';
 import { signOutGoogle, getCurrentUser } from 'app/actions';
-import { getNotifications, markNotificationAsRead, markAllNotificationsAsRead } from 'app/actions/notification';
+import {
+  getNotifications,
+  markNotificationAsRead,
+  markAllNotificationsAsRead,
+  newNotification
+} from 'app/actions/notification';
 import { getUser, getOwnNotifications } from 'app/selectors';
+import { EVENTS } from 'app/shared/socketIOEvents';
 
 class NavigationBar extends Component {
   constructor(props) {
@@ -23,6 +29,7 @@ class NavigationBar extends Component {
 
   render () {
     const { currentUser, signOutGoogle, handleSearch, displaySearch, notifications } = this.props;
+    console.log(notifications);
     return (
       <Header
         onNotificationClick={this.onNotificationClick}
@@ -39,6 +46,13 @@ class NavigationBar extends Component {
   componentWillMount() {
     this.props.getCurrentUser();
     this.props.getNotifications();
+  }
+
+  componentDidMount() {
+    const { socket } = this.props;
+    socket.on(EVENTS.NEW_NOTIFICATION, (notification) => {
+      this.props.newNotification(notification);
+    });
   }
 
   componentWillReceiveProps(nextProps) {
@@ -75,5 +89,6 @@ export default connect(mapStateToProps, {
   signOutGoogle,
   getNotifications,
   markNotificationAsRead,
-  markAllNotificationsAsRead
+  markAllNotificationsAsRead,
+  newNotification
 })(NavigationBar)

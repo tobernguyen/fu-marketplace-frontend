@@ -70,3 +70,12 @@ export const registerOneSignal = (playerId) => {
     return dispatch(requestRegisterOneSignal(playerId))
   }
 };
+
+
+export const WS_NEW_NOTIFICATION = 'WS_NEW_NOTIFICATION';
+export const newNotification = (notification) => ({
+  type: WS_NEW_NOTIFICATION,
+  payload: {
+    notification: notification
+  }
+});

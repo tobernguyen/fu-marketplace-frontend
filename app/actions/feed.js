@@ -51,3 +51,11 @@ export const getShopsOfPage = (params, firstPage) => {
 
   }
 };
+
+export const WS_SHOP_UPDATED = 'WS_SHOP_UPDATED';
+export const updateShop = (shopData) => ({
+  type: WS_SHOP_UPDATED,
+  payload: {
+    shop: shopData
+  }
+});

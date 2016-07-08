@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Infinite from 'react-infinite';
 import BlockShopFeedItem from 'app/components/home/BlockShopFeedItem';
-import { getShopsOfPage } from 'app/actions/feed';
+import { getShopsOfPage, updateShop } from 'app/actions/feed';
 import { getShopsFeed } from 'app/selectors';
 import { PulseLoader } from 'halogen';
 import _ from 'lodash';
+import { EVENTS } from 'app/shared/socketIOEvents';
 
 class ShopsFeed extends Component {
   constructor(props) {
@@ -47,6 +48,13 @@ class ShopsFeed extends Component {
         <PulseLoader className="feed-loader" color="#C0392B" size="12px" />
       )
     }
+  }
+
+  componentDidMount() {
+    const { socket } = this.props;
+    socket.on(EVENTS.SHOP_FEED_UPDATE, (shop) => {
+      this.props.updateShop(shop);
+    });
   }
 
   componentWillReceiveProps(nextProps) {
@@ -109,5 +117,6 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps, {
-  getShopsOfPage
+  getShopsOfPage,
+  updateShop
 })(ShopsFeed)

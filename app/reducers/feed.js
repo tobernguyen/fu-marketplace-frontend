@@ -12,7 +12,7 @@ const INITIAL_STATE = {
 };
 
 export const feed = (state = INITIAL_STATE, action) => {
-  const { type, response } = action;
+  const { type, response, payload } = action;
   switch (type) {
     case FeedActionTypes.GET_SHOPS_SUCCESS:
       const { result } = response;
@@ -39,6 +39,22 @@ export const feed = (state = INITIAL_STATE, action) => {
         aggregations: aggregations
       });
     }
+    case FeedActionTypes.WS_SHOP_UPDATED:{
+      const { shop } = payload;
+      const existingShopIndex = _.findIndex(state.shops, (s) =>
+        s.id === shop.id
+      );
+      const updatedShop = _.assign({}, state.shops[existingShopIndex], shop);
+
+      return _.assign({}, state, {
+        shops: _.concat(
+          _.slice(state.shops, 0, existingShopIndex),
+          updatedShop,
+          _.slice(state.shops, existingShopIndex + 1, state.shops.length)
+        )
+      });
+    }
+
     case ItemActionTypes.GET_ITEM_CATEGORIES_SUCCESS:
       return _.merge({}, state, response);
     default:

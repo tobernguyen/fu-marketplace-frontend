@@ -13,6 +13,10 @@ import { signOutGoogle } from 'app/actions';
 import _ from 'lodash';
 import { withRouter } from 'react-router';
 import NotificationSystem from 'react-notification-system';
+import io from 'socket.io-client';
+import config from 'config';
+
+const socket = io.connect(config.SOCKET_IO_URL);
 
 class Home extends Component {
   constructor(props) {
@@ -51,46 +55,16 @@ class Home extends Component {
 
   componentDidMount() {
     this.notification = this.refs.notificationSystem;
-
-    //////////////////////////////
-    // DEMO FOR STORY 811 ONLY //
-    // REMOVE IT WHEN DONE     //
-    /////////////////////////////
-    function configSocketIODemo() {
-      var io = require('socket.io-client');
-      var config = require('config');
-
-      // Authentication part, should be run right after user logged-in
-      let socket = io.connect(config.SOCKET_IO_URL);
-      socket.on('disconnect', (reason) => {
-        // TODO: handle on disconnect, usually if it happened here, it means token is not valid
-        console.log(reason);
-      });
-      socket.on('connect', () => {
-        socket.emit('authenticate', {token: window.localStorage['token']});
-      });
-      socket.on('authenticated', () => {
-        console.log('TADA Websocket Connection is authenticated. Now you will receive real-time push via websocket');
-      });
-
-      // Some events to listen to:
-      const EVENT = {
-        NEW_NOTIFICATION: 'new-notification',
-        SHOP_FEED_UPDATE: 'shop-feed-update'
-      };
-
-      // Listen to new notification channel
-      socket.on(EVENT.NEW_NOTIFICATION, (data) => {
-        console.log('Holyshit, there are new notification: ', data);
-      });
-
-      // Listen to shop feed update
-      socket.on(EVENT.SHOP_FEED_UPDATE, (data) => {
-        console.log('Holyshit, there is shop updated: ', data);
-      });
-    }
-
-    configSocketIODemo();
+    socket.on('disconnect', (reason) => {
+      // TODO: handle on disconnect, usually if it happened here, it means token is not valid
+      console.log(reason);
+    });
+    socket.on('connect', () => {
+      socket.emit('authenticate', {token: window.localStorage['token']});
+    });
+    socket.on('authenticated', () => {
+      console.log('TADA Websocket Connection is authenticated. Now you will receive real-time push via websocket');
+    });
   }
 
   componentWillReceiveProps(nextProps) {
@@ -151,7 +125,7 @@ class Home extends Component {
               <div className="row">
                 <CarouselPinnedItems />
                 <div className="main-column col-md-12">
-                  <ShopsFeed query={this.state.query} />
+                  <ShopsFeed query={this.state.query} socket={socket} />
                 </div>
               </div>
             </div>

@@ -35,7 +35,8 @@ export const notification = (state = INITIAL_STATE, action) => {
         notifications: [
           notification,
           ...state.notifications
-        ]
+        ],
+        promptNotification: notification
       })
     }
     case NotificationTypes.REGISTER_ONE_SIGNAL_SUCCESS:

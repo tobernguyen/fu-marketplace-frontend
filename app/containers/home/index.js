@@ -15,6 +15,8 @@ import { withRouter } from 'react-router';
 import NotificationSystem from 'react-notification-system';
 import io from 'socket.io-client';
 import config from 'config';
+import { getNotificationMessage } from 'app/shared/notificationMessages';
+import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 
 const socket = io.connect(config.SOCKET_IO_URL);
 
@@ -43,6 +45,25 @@ class Home extends Component {
         message: 'Notification message',
         level: 'success',
         position: 'bl'
+      });
+    }
+  }
+
+  addNotification(notification) {
+    const { formatHTMLMessage } = this.props.intl;
+    const notificationMessage = getNotificationMessage(notification);
+    if (notificationMessage) {
+      const { values, message } = notificationMessage;
+
+      let div = document.createElement('div');
+      div.innerHTML = formatHTMLMessage(message, values);
+      const messageText = div.innerText;
+
+      this.notification.addNotification({
+        message: messageText,
+        level: 'success',
+        position: 'bl',
+        autoDismiss: 20
       });
     }
   }
@@ -82,6 +103,10 @@ class Home extends Component {
           query: query
         })
       }
+    }
+
+    if (nextProps.notification) {
+      this.addNotification(nextProps.notification)
     }
   }
 
@@ -142,23 +167,25 @@ class Home extends Component {
 }
 
 Home.propTypes = {
-  signOutGoogle: PropTypes.func.isRequired
+  signOutGoogle:  PropTypes.func.isRequired,
+  intl:           intlShape.isRequired
 };
 
 const mapStateToProps = (state) => {
-  const { user, common } = state;
+  const { user, common, notification } = state;
   return {
     error:        user.error,
     modalSize:    common.modalSize,
     modalMode:    common.modalMode,
     shipPlaces:   getShipPlaces(state),
     categories:   getCategories(state),
-    aggregations: getAggregations(state)
+    aggregations: getAggregations(state),
+    notification: notification.promptNotification
   }
 };
 
 
-export default withRouter(connect(mapStateToProps, {
+export default injectIntl(withRouter(connect(mapStateToProps, {
   getMetadata,
   signOutGoogle
-})(Home))
+})(Home)))

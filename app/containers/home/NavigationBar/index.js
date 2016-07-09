@@ -19,7 +19,7 @@ class NavigationBar extends Component {
     };
 
     this.onNotificationClick = (notification) => {
-      this.props.markNotificationAsRead(notification.data.id);
+      this.props.markNotificationAsRead(notification.id);
     };
 
     this.markAsAllRead = () => {

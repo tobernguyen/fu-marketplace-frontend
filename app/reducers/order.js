@@ -3,6 +3,7 @@ import _ from 'lodash';
 import AsyncResultCode from 'app/shared/asyncResultCodes';
 const INITIAL_STATE = {
   orders: [],
+  currentOrders: [],
   orderResult: '',
   shouldUpdateOrderList: false
 };
@@ -66,6 +67,22 @@ export const order = (state = INITIAL_STATE, action) => {
     case OrderActionTypes.USER_CANCEL_ORDER_SUCCESS:
       return _.merge({}, state, {
         shouldUpdateOrderList: true
+      });
+    case OrderActionTypes.GET_FIRST_PAGE_ORDERS_REQUEST:
+      return _.assign({},state, {
+        currentOrders: [],
+        orderResult: '',
+        shouldUpdateOrderList: false
+      });
+    case OrderActionTypes.GET_FIRST_PAGE_ORDERS_SUCCESS:
+      return _.merge({}, state, {
+        currentOrders: action.response.orders
+      });
+    case OrderActionTypes.GET_ORDERS_OF_PAGE_REQUEST:
+      return state;
+    case OrderActionTypes.GET_ORDERS_OF_PAGE_SUCCESS:
+      return _.merge({}, state, {
+        currentOrders: _.concat(state.orders, action.response.orders)
       });
     default:
       return state;

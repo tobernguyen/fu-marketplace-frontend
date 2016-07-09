@@ -67,6 +67,30 @@ export const messages = {
       defaultMessage: 'View Order'
     },
     body: {
+      orderInformation: {
+        id: 'modalViewOrder.body.orderInformation',
+        defaultMessage: 'Order Information'
+      },
+      orderDetail: {
+        id: 'modalViewOrder.body.orderDetail',
+        defaultMessage: 'Order detail'
+      },
+      noNote: {
+        id: 'modalViewOrder.body.noNote',
+        defaultMessage: 'No note attached'
+      },
+      orderId: {
+        id: 'modalViewOrder.body.orderId',
+        defaultMessage: 'Order ID'
+      },
+      createdAt: {
+        id: 'modalViewOrder.body.createdAt',
+        defaultMessage: 'Ordered at'
+      },
+      numberOfItems: {
+        id: 'modalViewOrder.body.numberOfItems',
+        defaultMessage: 'Number of items'
+      },
       updatedAt: {
         id: 'modalViewOrder.body.updatedAt',
         defaultMessage: 'updated '

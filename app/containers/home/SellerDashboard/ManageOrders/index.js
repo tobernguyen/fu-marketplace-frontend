@@ -10,7 +10,8 @@ import {
   sellerRejectOrder,
   sellerStartShippingOrder,
   sellerCompleteOrder,
-  sellerAbortOrder
+  sellerAbortOrder,
+  getShopsOfPage
 } from 'app/actions/order';
 import Sticky from 'react-stickynode';
 import NavigationBar from 'app/containers/home/NavigationBar';
@@ -132,12 +133,13 @@ class ManageOrders extends Component {
       });
     }
     if(shouldUpdateOrderList === true) {
-      this.props.sellerGetOrder(shopID, status);
+      this.props.sellerGetOrder(shopID, status, page, size);
     }
   }
 
   render() {
     const { query } = this.props.location;
+    const { getShopsOfPage } = this.props;
     return (
       <div className="home-page">
         <NavigationBar
@@ -149,9 +151,17 @@ class ManageOrders extends Component {
                 <BlockOrderList
                   shopID ={this.props.params.shopID}
                   orders={this.props.orders}
+                  currentOrders={this.props.currentOrders}
                   viewOrder={this.viewOrder}
                   query={query}
+                  getShopsOfPage={getShopsOfPage}
                   changePageSize={this.changePageSize}
+                  acceptOrder={this.sellerAcceptOrder}
+                  rejectOrder={this.sellerRejectOrder}
+                  startShippingOrder={this.sellerStartShippingOrder}
+                  completeOrder={this.sellerCompleteOrder}
+                  abortOrder={this.sellerAbortOrder}
+                  shouldUpdateOrderList={this.props.shouldUpdateOrderList}
                   />
                 <ModalViewOrder
                   order={this.state.selectedOrder}
@@ -183,6 +193,7 @@ class ManageOrders extends Component {
 const mapStateToProps = (state) => {
   const { shop } = state;
   return {
+    currentOrders: state.order.currentOrders,
     orders: state.order.orders,
     sellerShop: shop.sellerShop,
     shouldUpdateOrderList: state.order.shouldUpdateOrderList
@@ -197,5 +208,6 @@ export default connect(mapStateToProps, {
   sellerRejectOrder,
   sellerStartShippingOrder,
   sellerCompleteOrder,
-  sellerAbortOrder
+  sellerAbortOrder,
+  getShopsOfPage
 })(withRouter(ManageOrders))

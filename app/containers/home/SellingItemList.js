@@ -20,9 +20,10 @@ class SellingItemList extends Component {
   }
 
   render() {
-    const { checkOut, buyNow, sellingItems, shopID, cartItems, sellerMode, allCategories } = this.props;
+    const { checkOut, buyNow, sellingItems, shopID, cartItems, sellerMode, allCategories, shopOpening } = this.props;
     return (
       <BlockSellingItemList
+        shopOpening={shopOpening}
         items={sellingItems}
         shopID={shopID}
         checkOut={checkOut}

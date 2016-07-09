@@ -76,7 +76,7 @@ export default class BlockSellingItemList extends Component {
 
   renderSellingItems() {
     const { currentItems } = this.state;
-    const { sellerMode, addToCart, buyNow, shopID, cartItems } = this.props;
+    const { sellerMode, addToCart, buyNow, shopID, cartItems, shopOpening } = this.props;
     if (currentItems.length > 0) {
       return (
         <div>
@@ -88,6 +88,7 @@ export default class BlockSellingItemList extends Component {
                 shopID={shopID} />
             } else {
               return <BlockSellingItemForUser
+                shopOpening={shopOpening}
                 key={item.id}
                 item={item}
                 addToCard={addToCart}
@@ -116,15 +117,14 @@ export default class BlockSellingItemList extends Component {
   }
 
   render() {
-    const { sellerMode } = this.props;
-
+    const { sellerMode, shopOpening } = this.props;
     return (
       <div className="block-selling-item-list clearfix">
         <div className="header clearfix">
           <div className={classNames({'col-md-9 col-xs-8': !sellerMode})}>
             {this.renderHeader()}
           </div>
-          {!sellerMode && <div className="col-md-3 col-xs-4 row">
+          {(!sellerMode && shopOpening) && <div className="col-md-3 col-xs-4 row">
             <BlockShoppingCart cartItems={this.props.cartItems} checkOut={this.handleCheckOut} />
           </div>}
         </div>

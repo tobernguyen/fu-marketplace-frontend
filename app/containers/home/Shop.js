@@ -92,6 +92,7 @@ class Shop extends Component {
   }
 
   render() {
+    const { shop } = this.props;
     let orderForm;
     if (this.state.item) {
       orderForm = <BuyNowForm
@@ -115,8 +116,9 @@ class Shop extends Component {
     return (
       <div className={classNames('shop-detail-modal', {'dim': this.state.showModal})}>
         {this.state.shopValid && <div>
-          <BlockShopHeader shop={this.props.shop} sellerMode={false} />
+          <BlockShopHeader shop={shop} sellerMode={false} />
           <SellingItemList
+            shopOpening={shop.opening}
             shopID={parseInt(this.props.params.shopID)}
             sellerMode={false}
             sellingItems={this.props.sellingItems}
@@ -124,7 +126,7 @@ class Shop extends Component {
             buyNow={this.handleBuyNow} />
           <Link to='/' className="close"><span>×</span></Link>
         </div>}
-        {orderForm}
+        {shop.opening && orderForm}
       </div>
     );
   }

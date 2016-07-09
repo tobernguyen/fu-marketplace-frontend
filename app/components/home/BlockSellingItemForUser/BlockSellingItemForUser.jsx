@@ -41,7 +41,7 @@ export default class BlockSellingItemForUser extends Component {
   }
 
   render() {
-    const { item, shopID } = this.props;
+    const { item, shopOpening } = this.props;
     const tooltip = (
       item.description ? <Tooltip id="tooltip">{item.description}</Tooltip> : <span/>
     );
@@ -51,13 +51,13 @@ export default class BlockSellingItemForUser extends Component {
           <div className="row item">
             <a className="item-image">
               <img src={item.image} />
-              <div className="actions">
+              {shopOpening && <div className="actions">
                 <p>
                   <span onClick={this.handleBuyNow}>
                     Mua ngay
                   </span>
                 </p>
-              </div>
+              </div>}
             </a>
             <div className="info clearfix">
               <table>
@@ -71,9 +71,10 @@ export default class BlockSellingItemForUser extends Component {
                       <span className="price">{item.price} ₫</span>
                     </div>
                   </td>
-                  <td>
+                  {shopOpening && <td>
                     {this.renderAddCartButton(item.id)}
-                  </td>
+                  </td>}
+
                 </tr>
                 </tbody>
               </table>

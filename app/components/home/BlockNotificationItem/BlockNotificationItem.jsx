@@ -83,7 +83,7 @@ export default class BlockNotificationItem extends Component {
         }
         break;
       }
-      case NOTIFICATION_TYPE.USER_CANCEL_ORDER:
+      case NOTIFICATION_TYPE.USER_PLACE_ORDER:
       {
         const values = {
           shopName: data.shopName,
@@ -92,7 +92,7 @@ export default class BlockNotificationItem extends Component {
         };
         return <FormattedHTMLMessage values={values} {...messages.order.userPlaceOrder} />;
       }
-      case NOTIFICATION_TYPE.USER_PLACE_ORDER:
+      case NOTIFICATION_TYPE.USER_CANCEL_ORDER:
       {
         const values = {
           orderId: data.orderId

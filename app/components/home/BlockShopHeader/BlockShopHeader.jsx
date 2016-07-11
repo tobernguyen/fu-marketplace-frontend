@@ -6,6 +6,7 @@ import classNames from 'classnames';
 import { messages } from './BlockShopHeader.i18n';
 import { FormattedMessage } from 'react-intl';
 import BlockStars from '../BlockStars';
+import { Link } from 'react-router';
 
 export default class BlockShopHeader extends Component {
   constructor(props) {
@@ -119,7 +120,7 @@ export default class BlockShopHeader extends Component {
   }
 
   render() {
-    const { shop: { address, avatar, cover, description, name }, sellerMode } = this.props;
+    const { shop: { id, address, avatar, cover, description, name }, sellerMode } = this.props;
     let shopAvatar = avatar;
     if (!avatar || avatar === '') {
       const noAvatar = require('../../../images/no_avatar.jpg');
@@ -150,9 +151,9 @@ export default class BlockShopHeader extends Component {
               <div className="col-md-4 col-md-offset-3">
                 <div className="row shop-basic-info">
                   <h4 className="title">{name} {this.renderOpeningStatus()}</h4>
-                  <a className="rating" onClick={this.openShopReviews}>
+                  <Link to={`/shops/${id}/reviews`} className="rating">
                     {this.renderStars()} See reviews
-                  </a>
+                  </Link>
                 </div>
               </div>
               <div className="col-md-5">

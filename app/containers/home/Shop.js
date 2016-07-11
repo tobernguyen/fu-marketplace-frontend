@@ -12,6 +12,7 @@ import CheckOutPage from './PlaceOrder/CheckOutPage';
 import classNames from 'classnames';
 import { getCurrentViewedShop } from 'app/selectors';
 import OneSignal from 'onesignal';
+import { Modal } from 'react-bootstrap';
 
 class Shop extends Component {
   constructor(props) {
@@ -89,6 +90,14 @@ class Shop extends Component {
         pushNotificationEnabled: enabled
       })
     }]);
+
+
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      hasChildren: nextProps.children !== null
+    })
   }
 
   render() {
@@ -114,7 +123,7 @@ class Shop extends Component {
     }
 
     return (
-      <div className={classNames('shop-detail-modal', {'dim': this.state.showModal})}>
+      <div className={classNames('shop-detail-modal', {'dim': this.state.showModal || this.props.children})}>
         {this.state.shopValid && <div>
           <BlockShopHeader shop={shop} sellerMode={false} />
           <SellingItemList
@@ -127,6 +136,9 @@ class Shop extends Component {
           <Link to='/' className="close"><span>×</span></Link>
         </div>}
         {shop.opening && orderForm}
+        {(this.state.hasChildren) && <Modal show={this.state.hasChildren}>
+          {this.props.children}
+        </Modal>}
       </div>
     );
   }

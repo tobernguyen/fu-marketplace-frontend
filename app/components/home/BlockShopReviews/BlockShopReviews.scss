@@ -1,0 +1,79 @@
+.block-shop-reviews {
+  .first-row {
+    .avatar {
+
+    }
+    .shop-info {
+      padding-left: 0;
+      .title {
+        margin: 10px 0 5px 0;
+      }
+      .description {
+        .quote {
+          //margin: 5px 0;
+          //padding: 15px 5px;
+          //line-height: 10px;
+
+          &:before {
+            margin-right: 5px;
+          }
+        }
+      }
+
+    }
+  }
+  .second-row {
+    .group-info {
+      li {
+        float: left;
+        width: 25%;
+
+
+        span {
+          color: #8c8c8c;
+          background-color: #F6F6F6;
+          border: 1px solid #8c8c8c;
+          border-radius: 50%;
+          padding: 4px 0;
+          width: 30px;
+          display: block;
+          text-align: center;
+          float: left;
+          i {
+
+          }
+        }
+
+        cite {
+          font-style: normal;
+          padding: 0 5px;
+          line-height: 29px;
+        }
+      }
+    }
+  }
+  .third-row {
+    ul.statistics {
+      li {
+        float: left;
+        width: 25%;
+        text-align: center;
+        border-right: 1px solid #CCC;
+        padding: 5px 4px;
+        &:last-child {
+          border-right: 0;
+        }
+
+        span {
+          display: block;
+          font-weight: 700;
+          font-size: 16px;
+        }
+        cite {
+          font-style: normal;
+          color: #8c8c8c;
+        }
+      }
+    }
+  }
+}

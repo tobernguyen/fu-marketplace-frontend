@@ -14,6 +14,7 @@ import AddShopItem from './containers/home/SellerDashboard/ManageShopItem/AddSho
 import UpdateShopItem from './containers/home/SellerDashboard/ManageShopItem/UpdateShopItem';
 import ManageOrders from './containers/home/SellerDashboard/ManageOrders';
 import Shop from './containers/home/Shop';
+import ShopReviews from './containers/home/ShopReviews';
 import Admin from './containers/admin';
 import RequestCreateShop from './containers/home/RequestCreateShop';
 import SellerDashboard from './containers/home/SellerDashboard';
@@ -37,7 +38,9 @@ export default (
       <Route path="account" component={Account} />
       <Route path="orders" component={MyOrders} />
       <Route path="shops/request_create" component={RequestCreateShop} />
-      <Route path="shops/:shopID" component={Shop} />
+      <Route path="shops/:shopID" component={Shop}>
+        <Route path="reviews" component={ShopReviews} />
+      </Route>
     </Route>
 
 

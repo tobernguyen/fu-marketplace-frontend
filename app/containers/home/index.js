@@ -25,10 +25,11 @@ class Home extends Component {
     super(props);
 
     this.state = {
-      query: null
+      query: null,
+      notification: null
     };
 
-    this.notification = null;
+    this.floatNotification = null;
 
     this.handleSearch = (keyword) => {
       this.props.router.push({
@@ -38,15 +39,6 @@ class Home extends Component {
         })
       })
     };
-
-    this.testNotification = (e) => {
-      e.preventDefault();
-      this.notification.addNotification({
-        message: 'Notification message',
-        level: 'success',
-        position: 'bl'
-      });
-    }
   }
 
   addNotification(notification) {
@@ -59,11 +51,14 @@ class Home extends Component {
       div.innerHTML = formatHTMLMessage(message, values);
       const messageText = div.innerText;
 
-      this.notification.addNotification({
+      this.floatNotification.addNotification({
         message: messageText,
         level: 'success',
         position: 'bl',
-        autoDismiss: 20
+        autoDismiss: 20,
+        onRemove: () => {
+          console.log('test')
+        }
       });
     }
   }
@@ -75,7 +70,7 @@ class Home extends Component {
   }
 
   componentDidMount() {
-    this.notification = this.refs.notificationSystem;
+    this.floatNotification = this.refs.notificationSystem;
     socket.on('disconnect', (reason) => {
       // TODO: handle on disconnect, usually if it happened here, it means token is not valid
       console.log(reason);
@@ -106,7 +101,12 @@ class Home extends Component {
     }
 
     if (nextProps.notification) {
-      this.addNotification(nextProps.notification)
+      if (!_.isEqual(nextProps.notification, this.state.notification)) {
+        this.setState({
+          notification: nextProps.notification
+        });
+        this.addNotification(nextProps.notification)
+      }
     }
   }
 
@@ -145,7 +145,6 @@ class Home extends Component {
                 shipPlaceCounter={shipPlace}
                 totalShipPlace={totalShipPlace} />
               <BlockBookmarks />
-              <button onClick={this.testNotification}>Test notification</button>
             </div>
             <div className="col-md-9">
               <div className="row">

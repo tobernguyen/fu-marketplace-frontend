@@ -37,7 +37,7 @@ export const admin = (state = initialState, action) => {
   const { type, response } = action;
   switch (type) {
     case AdminActionTypes.ADMIN_GET_USERS_REQUEST:
-      return _.merge({}, state, {
+      return _.assign({}, state, {
         userManagement: {
           isFetching: true,
           selectedUser: {},
@@ -46,7 +46,7 @@ export const admin = (state = initialState, action) => {
         }
       });
     case AdminActionTypes.ADMIN_GET_USERS_SUCCESS:
-      return _.merge({}, state, {
+      return _.assign({}, state, {
         userManagement: {
           isFetching: false,
           userList: response.users

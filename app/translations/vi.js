@@ -184,5 +184,21 @@ export default {
   'formBuyNow.modalBody.button.placeOrder': 'Đặt hàng',
   'formBuyNow.modalBody.message.orderSuccess': 'Đơn hàng đã được đặt.',
   'formBuyNow.modalBody.message.continueShopping': 'Tiếp tục mua hàng',
-  'formBuyNow.modalBody.message.error': 'Đặt hàng không thành công, xin hãy thử lại.'
+  'formBuyNow.modalBody.message.error': 'Đặt hàng không thành công, xin hãy thử lại.',
+  'userList.tableHead.email': 'Thư điện tử',
+  'userList.tableHead.fullName': 'Tên đầy đủ',
+  'userList.tableHead.role': 'Vai trò',
+  'userList.tableHead.banned': 'Cấm',
+  'userList.tableHead.action': 'Hành động',
+  'userList.button.previous': 'Trang trước',
+  'userList.button.next': 'Trang kế',
+  'userList.tableFooter.pageSize': 'Hiện',
+  'userList.tableFooter.pageSizeUnit': 'bản ghi',
+  'shopList.tableHead.name': 'Tên cửa hàng',
+  'shopList.tableHead.owner': 'Chủ cửa hàng',
+  'shopList.tableHead.shipPlaces': 'Địa điểm chuyển hàng',
+  'shopList.tableHead.opening': 'Mở cửa',
+  'shopList.tableHead.status': 'Trạng thái',
+  'shopList.tableHead.banStatus': 'Cấm',
+  'shopList.tableHead.action': 'Hành động'
 };

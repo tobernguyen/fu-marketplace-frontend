@@ -3,17 +3,18 @@ import { CALL_API, HTTP_METHODS } from '../middleware/api';
 export const ADMIN_GET_USERS_REQUEST = 'ADMIN_GET_USERS_REQUEST';
 export const ADMIN_GET_USERS_SUCCESS = 'ADMIN_GET_USERS_SUCCESS';
 export const ADMIN_GET_USERS_FAILURE = 'ADMIN_GET_USERS_FAILURE';
-const adminRequestGetUsers = () => ({
+const adminRequestGetUsers = (filter) => ({
   [CALL_API]: {
     types: [ADMIN_GET_USERS_REQUEST, ADMIN_GET_USERS_SUCCESS, ADMIN_GET_USERS_FAILURE],
-    url: '/api/v1/admin/users',
+    url: `/api/v1/admin/users${filter}`,
     method: HTTP_METHODS.GET
   }
 });
 
-export const adminGetUsers = () => {
+export const adminGetUsers = (page = 1, size = 10) => {
+  const filter = `?page=${page}&size=${size}`
   return (dispatch) => {
-    return dispatch(adminRequestGetUsers());
+    return dispatch(adminRequestGetUsers(filter));
   }
 };
 
@@ -130,17 +131,18 @@ export const adminUnbanUser = (user) => {
 export const ADMIN_GET_SHOPS_REQUEST = 'ADMIN_GET_SHOPS_REQUEST';
 export const ADMIN_GET_SHOPS_SUCCESS = 'ADMIN_GET_SHOPS_SUCCESS';
 export const ADMIN_GET_SHOPS_FAILURE = 'ADMIN_GET_SHOPS_FAILURE';
-const adminRequestGetShops = () => ({
+const adminRequestGetShops = (filter) => ({
   [CALL_API]: {
     types: [ADMIN_GET_SHOPS_REQUEST, ADMIN_GET_SHOPS_SUCCESS, ADMIN_GET_SHOPS_FAILURE],
-    url: '/api/v1/admin/shops',
+    url: `/api/v1/admin/shops${filter}`,
     method: HTTP_METHODS.GET
   }
 });
 
-export const adminGetShops = () => {
+export const adminGetShops = (page = 1, size = 10) => {
+  const filter = `?page=${page}&size=${size}`
   return (dispatch) => {
-    return dispatch(adminRequestGetShops());
+    return dispatch(adminRequestGetShops(filter));
   }
 };
 

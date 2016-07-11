@@ -1,4 +1,20 @@
 .admin-page {
+  .pager {
+    .disabled {
+      pointer-events: none;
+    }
+  }
+  .pull-left {
+    label {
+      font-weight: normal;
+    }
+
+    select {
+      display: inline-block;
+      width: 64px;
+      margin: 0 10px;
+    }
+  }
   .table {
     td.actions {
       ul {

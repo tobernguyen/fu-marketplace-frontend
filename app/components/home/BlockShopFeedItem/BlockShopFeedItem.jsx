@@ -74,7 +74,7 @@ export default class BlockShopFeedItem extends Component {
                 )}
               </ul>
             </div>
-            <div className="description">
+            <div className="description quote">
               {description}
             </div>
             <div className="ship-dorms">
@@ -87,7 +87,6 @@ export default class BlockShopFeedItem extends Component {
                   </li>
                 )}
               </ul>
-              <i>Last updated: 23:51 05/06/2016</i>
             </div>
           </div>
         </div>

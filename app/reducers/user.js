@@ -1,5 +1,6 @@
 import * as ActionTypes from '../actions';
 import * as UserActionTypes from '../actions/user';
+import * as FeedActionTypes from '../actions/feed';
 import _ from 'lodash';
 import { getImageURLWithTimestamp } from 'app/helpers/image';
 
@@ -42,6 +43,19 @@ export const user = (state = INITIAL_STATE, action) => {
       return _.assign({}, state, {
         currentViewedShop: {}
       });
+    case FeedActionTypes.WS_SHOP_UPDATED:
+    {
+      const { currentViewedShop } = state;
+
+      if (_.isEmpty(currentViewedShop)) {
+        return state;
+      }
+      const { shop } = payload;
+
+      return _.merge({}, state, {
+        currentViewedShop: _.merge({}, currentViewedShop, shop)
+      });
+    }
     case ActionTypes.CURRENT_USER_FAILURE:
     case UserActionTypes.UPLOAD_AVATAR_FAILURE:
     case UserActionTypes.UPDATE_USER_INFO_FAILURE:

@@ -18,9 +18,16 @@ export default class BlockItemList extends Component {
         </h3>
         <div className="clearfix body">
           <div className="category-list">
-            <a href="#" className={classNames('btn', 'btn-default', { active: categoryID === undefined })}>
+            <Link
+              to={{
+                    pathname: '/',
+                    query: _.assign({}, query, {
+                      category: undefined
+                    })
+                  }}
+              className={classNames('btn', 'btn-default', { active: categoryID === undefined })}>
               Tất cả <span className="badge">{totalCategory}</span>
-            </a>
+            </Link>
             {categories.map(category =>
               <Link
                 key={category.id}

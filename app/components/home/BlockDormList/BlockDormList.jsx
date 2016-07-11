@@ -18,9 +18,16 @@ export default class BlockDormList extends Component {
         </h3>
         <div className="clearfix body">
           <div className="tag-list">
-            <a href="#" className={classNames('btn', 'btn-default', { active: placeID === undefined })}>
+            <Link
+              to={{
+                    pathname: '/',
+                    query: _.assign({}, query, {
+                      ship_to: undefined
+                    })
+                  }}
+              className={classNames('btn', 'btn-default', { active: placeID === undefined })}>
               Tất cả <span className="badge">{totalShipPlace}</span>
-            </a>
+            </Link>
             {shipPlaces.map(shipPlace =>
               <Link
                 key={shipPlace.id}

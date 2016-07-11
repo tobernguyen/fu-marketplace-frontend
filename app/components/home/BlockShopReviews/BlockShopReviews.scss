@@ -76,4 +76,46 @@
       }
     }
   }
+
+  .reviews-row {
+    .user-avatar {
+      padding: 0 4px;
+    }
+    .review-box {
+      //border: 1px solid #eee;
+      //border-radius: 2px;
+      .comment-box {
+        padding: 0 4px;
+        .input-review {
+          border-radius: 2px;
+          font-size: 14px;
+          resize: none;
+        }
+      }
+    }
+  }
+  .all-reviews {
+
+    .user-avatar {
+      padding: 0 4px;
+    }
+    .review-box {
+      padding: 10px 0;
+      border-bottom: 1px solid #EEE;
+      &:last-child {
+        border-bottom: 0;
+      }
+      .comment-box {
+        padding: 0 4px;
+        .review-content {
+          margin-bottom: 5px;
+        }
+        .timestamp {
+          font-size: 13px;
+          font-style: italic;
+          line-height: 22px;
+        }
+      }
+    }
+  }
 }

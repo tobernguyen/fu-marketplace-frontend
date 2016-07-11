@@ -74,11 +74,6 @@ export default class BlockShopHeader extends Component {
 
       reader.readAsDataURL(file);
     };
-
-    this.openShopReviews = (e) => {
-      e.preventDefault();
-      console.log('openShopReviews');
-    }
   }
 
   componentWillReceiveProps(nextProps) {

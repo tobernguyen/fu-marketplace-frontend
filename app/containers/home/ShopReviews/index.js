@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { Modal } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
-import { getCurrentViewedShop } from 'app/selectors';
+import { getCurrentViewedShop, getUser } from 'app/selectors';
 import BlockShopReviews from 'app/components/home/BlockShopReviews';
 
 class ShopReviews extends Component {
@@ -16,7 +16,7 @@ class ShopReviews extends Component {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <BlockShopReviews shop={this.props.shop} seller={this.props.seller} />
+          <BlockShopReviews currentUser={this.props.currentUser} shop={this.props.shop} seller={this.props.seller} />
         </Modal.Body>
       </div>
     )
@@ -27,6 +27,7 @@ const mapStateToProps = (state) => {
   const currentViewedShop = getCurrentViewedShop(state);
   const { shopInfo, seller } = currentViewedShop;
   return {
+    currentUser: getUser(state),
     shop: shopInfo,
     seller: seller
   }

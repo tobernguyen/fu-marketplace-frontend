@@ -93,6 +93,21 @@
       z-index: 0;
 
       .shop-basic-info {
+        .rating {
+          display: block;
+          float: left;
+          color: #222222;
+          line-height: 13px;
+
+          label {
+            cursor: pointer;
+            margin-bottom: 0;
+          }
+          &:hover {
+            text-decoration: none;
+            color: #2b81af;
+          }
+        }
         .title {
           margin: 5px 0 2px
         }

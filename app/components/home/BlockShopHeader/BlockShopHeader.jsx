@@ -5,6 +5,7 @@ import Dropzone from 'react-dropzone';
 import classNames from 'classnames';
 import { messages } from './BlockShopHeader.i18n';
 import { FormattedMessage } from 'react-intl';
+import BlockStars from '../BlockStars';
 
 export default class BlockShopHeader extends Component {
   constructor(props) {
@@ -71,6 +72,11 @@ export default class BlockShopHeader extends Component {
       };
 
       reader.readAsDataURL(file);
+    };
+
+    this.openShopReviews = (e) => {
+      e.preventDefault();
+      console.log('openShopReviews');
     }
   }
 
@@ -93,8 +99,27 @@ export default class BlockShopHeader extends Component {
     }
   }
 
+  renderOpeningStatus() {
+    const { shop: { opening } } = this.props;
+    return (
+      <span className={classNames('status', { 'opening' : opening})}>
+                    <i className="fa fa fa-circle"/>
+                  </span>
+    )
+  }
+
+  renderStars() {
+    return (
+      <BlockStars
+        name={'star'}
+        value={2}
+        editing={false}
+      />
+    )
+  }
+
   render() {
-    const { shop: { address, avatar, cover, description, name, opening }, sellerMode } = this.props;
+    const { shop: { address, avatar, cover, description, name }, sellerMode } = this.props;
     let shopAvatar = avatar;
     if (!avatar || avatar === '') {
       const noAvatar = require('../../../images/no_avatar.jpg');
@@ -124,10 +149,10 @@ export default class BlockShopHeader extends Component {
             <div className="row">
               <div className="col-md-4 col-md-offset-3">
                 <div className="row shop-basic-info">
-                  <h4 className="title">{name}</h4>
-                  <span className={classNames('status', { 'opening' : opening})}>
-                    <i className="fa fa fa-circle"/> { opening ?  <FormattedMessage {...messages.shopOpening} /> : <FormattedMessage {...messages.shopClosed} /> }
-                  </span>
+                  <h4 className="title">{name} {this.renderOpeningStatus()}</h4>
+                  <a className="rating" onClick={this.openShopReviews}>
+                    {this.renderStars()} See reviews
+                  </a>
                 </div>
               </div>
               <div className="col-md-5">

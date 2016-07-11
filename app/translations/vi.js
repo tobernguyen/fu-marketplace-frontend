@@ -176,5 +176,13 @@ export default {
   'shopItem.update': 'Sửa thông tin sản phẩm',
   'shopItem.add': 'Thêm sản phẩm',
   'shop.updateShipPlaces': 'Sửa khu vực ship hàng',
-  'shop.shipPlaces.updated': 'Đã cập nhật nơi ship đồ'
+  'shop.shipPlaces.updated': 'Đã cập nhật nơi ship đồ',
+  'formBuyNow.modalHeader.title': 'Đặt hàng ngay',
+  'formBuyNow.modalBody.shipTo': 'Địa chỉ',
+  'formBuyNow.modalBody.quantity': 'Số lượng',
+  'formBuyNow.modalBody.note': 'Ghi chú',
+  'formBuyNow.modalBody.button.placeOrder': 'Đặt hàng',
+  'formBuyNow.modalBody.message.orderSuccess': 'Đơn hàng đã được đặt.',
+  'formBuyNow.modalBody.message.continueShopping': 'Tiếp tục mua hàng',
+  'formBuyNow.modalBody.message.error': 'Đặt hàng không thành công, xin hãy thử lại.'
 };

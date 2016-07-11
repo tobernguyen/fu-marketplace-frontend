@@ -102,7 +102,7 @@ class Shop extends Component {
         onHide={this.close}
         bsSize={this.state.bsSize}
         item={this.state.item}
-        onSubmit={this.handleExpressOrder} />
+        handleExpressOrder={this.handleExpressOrder} />
     } else {
       orderForm = <CheckOutPage
         oneSignalRegistered={this.props.oneSignalRegistered}

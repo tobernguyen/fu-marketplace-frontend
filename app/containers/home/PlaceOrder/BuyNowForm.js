@@ -1,6 +1,5 @@
 import { reduxForm } from 'redux-form';
 import FormBuyNow from 'app/components/home/FormBuyNow';
-
 export const fields = [ 'shipAddress', 'quantity', 'note' ];
 
 const validate = values => {

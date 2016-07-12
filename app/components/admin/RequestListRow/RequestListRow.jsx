@@ -8,7 +8,6 @@ export default class RequestListRow extends Component {
         <td>{this.props.request.id}</td>
         <td>{this.props.request.name}</td>
         <td>{this.props.request.ownerId}</td>
-        <td>{this.props.request.not}</td>
         <td>
           {this.props.request.status == 0 && 'Pending'}
           {this.props.request.status == 1 && 'Rejected'}

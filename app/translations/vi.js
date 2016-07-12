@@ -200,5 +200,12 @@ export default {
   'shopList.tableHead.opening': 'Mở cửa',
   'shopList.tableHead.status': 'Trạng thái',
   'shopList.tableHead.banStatus': 'Cấm',
-  'shopList.tableHead.action': 'Hành động'
+  'shopList.tableHead.action': 'Hành động',
+  'requestList.tableHead.name': 'Tên cửa hàng',
+  'requestList.tableHead.requester': 'Người yêu cầu',
+  'requestList.tableHead.status': 'Trạng thái',
+  'requestList.tableHead.action': 'Hành động',
+  'userRole.admin': 'Quản trị viên',
+  'userRole.seller': 'Chủ cửa hàng',
+  'userRole.user': 'Người dùng'
 };

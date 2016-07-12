@@ -16,7 +16,7 @@ import NotificationSystem from 'react-notification-system';
 import io from 'socket.io-client';
 import config from 'config';
 import { getNotificationMessage } from 'app/shared/notificationMessages';
-import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
+import { injectIntl, intlShape } from 'react-intl';
 
 const socket = io.connect(config.SOCKET_IO_URL);
 
@@ -55,10 +55,7 @@ class Home extends Component {
         message: messageText,
         level: 'success',
         position: 'bl',
-        autoDismiss: 20,
-        onRemove: () => {
-          console.log('test')
-        }
+        autoDismiss: 20
       });
     }
   }

@@ -29,26 +29,15 @@ const requestGetShopsOfPage = (params) => ({
   }
 });
 
-export const GET_FIRST_PAGE_SHOPS_REQUEST = 'GET_FIRST_PAGE_SHOPS_REQUEST';
-export const GET_FIRST_PAGE_SHOPS_SUCCESS = 'GET_FIRST_PAGE_SHOPS_SUCCESS';
-export const GET_FIRST_PAGE_SHOPS_FAILURE = 'GET_FIRST_PAGE_SHOPS_FAILURE';
-const requestGetFirstPageShops = (params) => ({
-  [CALL_API]: {
-    types: [GET_FIRST_PAGE_SHOPS_REQUEST, GET_FIRST_PAGE_SHOPS_SUCCESS, GET_FIRST_PAGE_SHOPS_FAILURE],
-    url: '/api/v1/feed/shops',
-    method: HTTP_METHODS.POST,
-    params: params
-  }
+export const CLEAR_SHOPS_FEED = 'CLEAR_SHOPS_FEED';
+export const clearShopsFeed = () => ({
+  type: CLEAR_SHOPS_FEED
 });
 
-export const getShopsOfPage = (params, firstPage) => {
-  return (dispatch) => {
-    if (firstPage) {
-      return dispatch(requestGetFirstPageShops(params))
-    } else {
-      return dispatch(requestGetShopsOfPage(params))
-    }
 
+export const getShopsOfPage = (params) => {
+  return (dispatch) => {
+    return dispatch(requestGetShopsOfPage(params))
   }
 };
 

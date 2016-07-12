@@ -8,7 +8,8 @@ const INITIAL_STATE = {
   aggregations: {
     category: {},
     shipPlace: {}
-  }
+  },
+  hasMore: true
 };
 
 export const feed = (state = INITIAL_STATE, action) => {
@@ -24,19 +25,15 @@ export const feed = (state = INITIAL_STATE, action) => {
       const { result: { shops, aggregations } } = response;
       return _.assign({}, state, {
         shops: _.concat(state.shops, shops),
-        aggregations: aggregations
+        aggregations: aggregations,
+        hasMore: shops.length !== 0
       });
     }
-    case FeedActionTypes.GET_FIRST_PAGE_SHOPS_REQUEST:
-      return _.merge({}, state, {
-        shops: INITIAL_STATE.shop,
-        aggregations: INITIAL_STATE.aggregations
-      });
-    case FeedActionTypes.GET_FIRST_PAGE_SHOPS_SUCCESS: {
-      const { result: { shops, aggregations } } = response;
+    case FeedActionTypes.CLEAR_SHOPS_FEED: {
       return _.assign({}, state, {
-        shops: shops,
-        aggregations: aggregations
+        shops: INITIAL_STATE.shops,
+        aggregations: INITIAL_STATE.aggregations,
+        hasMore: INITIAL_STATE.hasMore
       });
     }
     case FeedActionTypes.WS_SHOP_UPDATED:{

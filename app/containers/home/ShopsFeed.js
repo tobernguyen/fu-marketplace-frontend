@@ -1,54 +1,33 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Infinite from 'react-infinite';
+import InfiniteScroll from 'react-infinite-scroller'
 import BlockShopFeedItem from 'app/components/home/BlockShopFeedItem';
-import { getShopsOfPage, updateShop } from 'app/actions/feed';
+import { getShopsOfPage, clearShopsFeed, updateShop } from 'app/actions/feed';
 import { getShopsFeed } from 'app/selectors';
 import { PulseLoader } from 'halogen';
-import _ from 'lodash';
 import { EVENTS } from 'app/shared/socketIOEvents';
+import { toFilterParams } from 'app/shared/normalizeParams';
 
 class ShopsFeed extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      isInfiniteLoading: false,
-      loadedPage: 0,
-      loadedShops: 0,
-      query: {}
+      query: null,
+      elements: []
     };
 
-    this.handleInfiniteLoad = () => {
-      const { query, isInfiniteLoading } = this.state;
-      if (!isInfiniteLoading) {
-        let params = {
-          page: this.state.loadedPage + 1
-        };
-
-        if (query) {
-          if (query.hasOwnProperty('ship_to')) {
-            params.shipPlaceId = parseInt(query['ship_to'])
-          }
-          if (query.hasOwnProperty('category')) {
-            params.categoryIds = [parseInt(query['category'])]
-          }
-          if (query.hasOwnProperty('keyword')) {
-            params.keyword = query['keyword']
-          }
-        }
-
-        this.props.getShopsOfPage(params, this.state.loadedPage === 0);
-        this.setState({
-          isInfiniteLoading: true
-        });
-      }
+    this.loadMore = (page) => {
+      let params = toFilterParams(this.state.query);
+      params['page'] = page;
+      this.props.getShopsOfPage(params)
     };
 
-    this.elementInfiniteLoad = () => {
-      return (
-        <PulseLoader className="feed-loader" color="#C0392B" size="12px" />
-      )
+    this.handleFetchFeed = () => {
+      this.props.clearShopsFeed();
+      let params = toFilterParams(this.state.query);
+      params['page'] = 1;
+      this.props.getShopsOfPage(params);
     }
   }
 
@@ -60,65 +39,52 @@ class ShopsFeed extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.shops) {
-      if (nextProps.shops.length > this.state.loadedShops) {
+    const { query, shops } = nextProps;
+    if (query) {
+      if (!_.isEqual(query, this.state.query)) {
         this.setState({
-          loadedShops: nextProps.shops.length,
-          loadedPage: this.state.loadedPage + 1
-        })
-      } else if (nextProps.shops.length === 0) {
-        this.setState({
-          loadedShops: 0,
-          loadedPage: 0
+          query: query
+        }, () => {
+          this.handleFetchFeed()
         })
       }
 
-      this.setState({
-        isInfiniteLoading: false
-      })
-    }
-
-    if (nextProps.query) {
-      const { query } = nextProps;
-      if (!_.isEqual(this.state.query, query)) {
+      if (shops) {
         this.setState({
-          query: query,
-          loadedShops: 0,
-          loadedPage: 0
-        }, () => {
-          this.handleInfiniteLoad()
+          elements: shops.map((shop) =>
+            <BlockShopFeedItem key={shop.id} shop={shop} />
+          )
         });
       }
     }
   }
 
   render() {
-    const { shops } = this.props;
     return (
       <div>
-        {this.state.query && <Infinite elementHeight={250}
-                                       containerHeight={window.innerHeight}
-                                       infiniteLoadBeginEdgeOffset={10}
-                                       onInfiniteLoad={this.handleInfiniteLoad}
-                                       loadingSpinnerDelegate={this.elementInfiniteLoad()}
-                                       isInfiniteLoading={this.state.isInfiniteLoading}
-                                       useWindowAsScrollContainer>
-          {shops.map((shop, key) =>
-            <BlockShopFeedItem key={key} shop={shop} />
-          )}
-        </Infinite>}
+        {this.state.elements.length > 0 &&
+          <InfiniteScroll
+            pageStart={1}
+            loadMore={this.loadMore}
+            hasMore={this.props.hasMore}
+            loader={<PulseLoader className="feed-loader" color="#C0392B" size="12px" />}>
+            {this.state.elements}
+          </InfiniteScroll>}
       </div>
     );
   }
 }
 
 const mapStateToProps = (state) => {
+  const { feed } = state;
   return {
-    shops: getShopsFeed(state)
+    shops: getShopsFeed(state),
+    hasMore: feed.hasMore
   }
 };
 
 export default connect(mapStateToProps, {
   getShopsOfPage,
+  clearShopsFeed,
   updateShop
 })(ShopsFeed)

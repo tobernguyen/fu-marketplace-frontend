@@ -108,6 +108,7 @@ export default class BlockShopReviews extends Component {
                   Đồ ăn ngon, ship nhanh.
                 </p>
                 <BlockStars
+                  name={'review1'}
                   value={2} editing={false}/>
                 <span className="pull-right timestamp">Son Hoang - Jul 7, 2014</span>
               </div>
@@ -121,6 +122,7 @@ export default class BlockShopReviews extends Component {
                   Đồ ăn ngon, ship nhanh.
                 </p>
                 <BlockStars
+                  name={'review2'}
                   value={2} editing={false}/>
                 <span className="pull-right timestamp">Son Hoang - Jul 7, 2014</span>
               </div>
@@ -134,6 +136,7 @@ export default class BlockShopReviews extends Component {
                   Đồ ăn ngon, ship nhanh.
                 </p>
                 <BlockStars
+                  name={'review3'}
                   value={2} editing={false}/>
                 <span className="pull-right timestamp">Son Hoang - Jul 7, 2014</span>
               </div>

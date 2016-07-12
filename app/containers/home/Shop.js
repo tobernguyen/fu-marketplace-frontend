@@ -39,7 +39,6 @@ class Shop extends Component {
     this.close = () => {
       this.setState({ showModal: false, item: null });
       this.props.clearOrderResult();
-      this.setState({ showModal: false });
     };
 
     this.handleExpressOrder = (formData) => {

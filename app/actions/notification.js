@@ -40,7 +40,7 @@ export const MARK_ALL_NOTIFICATIONS_AS_READ_FAILURE = 'MARK_ALL_NOTIFICATIONS_AS
 const requestMarkAllNotificationsAsRead = () => ({
   [CALL_API]: {
     types: [MARK_ALL_NOTIFICATIONS_AS_READ_REQUEST, MARK_ALL_NOTIFICATIONS_AS_READ_SUCCESS, MARK_ALL_NOTIFICATIONS_AS_READ_FAILURE],
-    url: `/api/v1/users/me/notifications/read`,
+    url: '/api/v1/users/me/notifications/read',
     method: HTTP_METHODS.POST
   }
 });
@@ -57,7 +57,7 @@ export const REGISTER_ONE_SIGNAL_FAILURE = 'REGISTER_ONE_SIGNAL_FAILURE';
 const requestRegisterOneSignal = (playerId) => ({
   [CALL_API]: {
     types: [REGISTER_ONE_SIGNAL_REQUEST, REGISTER_ONE_SIGNAL_SUCCESS, REGISTER_ONE_SIGNAL_FAILURE],
-    url: `/api/v1/users/me/registerOneSignal`,
+    url: '/api/v1/users/me/registerOneSignal',
     method: HTTP_METHODS.POST,
     params: {
       playerId: playerId

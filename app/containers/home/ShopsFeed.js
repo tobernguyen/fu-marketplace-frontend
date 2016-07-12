@@ -7,6 +7,7 @@ import { getShopsFeed } from 'app/selectors';
 import { PulseLoader } from 'halogen';
 import { EVENTS } from 'app/shared/socketIOEvents';
 import { toFilterParams } from 'app/shared/normalizeParams';
+import _ from 'lodash';
 
 class ShopsFeed extends Component {
   constructor(props) {

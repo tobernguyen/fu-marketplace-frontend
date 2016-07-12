@@ -41,7 +41,8 @@ export const user = (state = INITIAL_STATE, action) => {
     case UserActionTypes.USER_GET_SHOP_FAILURE:
     case UserActionTypes.CLEAR_CURRENT_VIEWED_SHOP:
       return _.assign({}, state, {
-        currentViewedShop: {}
+        currentViewedShop: {},
+        cartItems: []
       });
     case FeedActionTypes.WS_SHOP_UPDATED:
     {

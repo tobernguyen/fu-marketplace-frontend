@@ -23,7 +23,7 @@ const UserListRow = ({ user }) => {
           <LabelBanned banned={user.banned}/>
         </td>
         <td className="actions">
-          <Link className="btn btn-warning" to={`admin/users/${user.id}/edit`} bsStyle="warning">
+          <Link className="btn btn-warning" to={`/admin/users/${user.id}/edit`} bsStyle="warning">
             <i className="fa fa-pencil-square-o"></i>
           </Link>
         </td>

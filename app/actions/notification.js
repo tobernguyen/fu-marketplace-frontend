@@ -3,17 +3,21 @@ import { CALL_API, HTTP_METHODS } from '../middleware/api';
 export const GET_NOTIFICATIONS_REQUEST = 'GET_NOTIFICATIONS_REQUEST';
 export const GET_NOTIFICATIONS_SUCCESS = 'GET_NOTIFICATIONS_SUCCESS';
 export const GET_NOTIFICATIONS_FAILURE = 'GET_NOTIFICATIONS_FAILURE';
-const requestGetNotifications = () => ({
+const requestGetNotifications = (page) => ({
   [CALL_API]: {
     types: [GET_NOTIFICATIONS_REQUEST, GET_NOTIFICATIONS_SUCCESS, GET_NOTIFICATIONS_FAILURE],
     url: '/api/v1/users/me/notifications',
-    method: HTTP_METHODS.GET
+    method: HTTP_METHODS.GET,
+    params: {
+      size: 5,
+      page: page
+    }
   }
 });
 
-export const getNotifications = () => {
+export const getNotifications = (page) => {
   return (dispatch) => {
-    return dispatch(requestGetNotifications())
+    return dispatch(requestGetNotifications(page))
   }
 };
 

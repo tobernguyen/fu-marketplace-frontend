@@ -24,16 +24,22 @@ class NavigationBar extends Component {
 
     this.markAsAllRead = () => {
       this.props.markAllNotificationsAsRead();
+    };
+
+    this.loadMoreNotifications = (page) => {
+      this.props.getNotifications(page);
     }
   }
 
   render () {
-    const { currentUser, signOutGoogle, handleSearch, displaySearch, notifications } = this.props;
+    const { currentUser, signOutGoogle, handleSearch, displaySearch, notifications, hasMore } = this.props;
     return (
       <Header
+        loadMoreNotifications={this.loadMoreNotifications}
         onNotificationClick={this.onNotificationClick}
         markAsAllRead={this.markAsAllRead}
         notifications={notifications}
+        hasMoreNotifications={hasMore}
         displaySearch={displaySearch}
         currentUser={currentUser}
         onSignOut={signOutGoogle}
@@ -44,7 +50,7 @@ class NavigationBar extends Component {
 
   componentWillMount() {
     this.props.getCurrentUser();
-    this.props.getNotifications();
+    this.props.getNotifications(1);
   }
 
   componentDidMount() {
@@ -79,7 +85,8 @@ NavigationBar.propTypes = {
 const mapStateToProps = (state) => {
   return {
     currentUser:    getUser(state),
-    notifications:  getOwnNotifications(state)
+    notifications:  getOwnNotifications(state),
+    hasMore:        state.notification.hasMore
   }
 };
 

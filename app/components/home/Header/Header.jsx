@@ -49,9 +49,12 @@ export default class Header extends Component {
         fullName,
         shops
       },
-      displaySearch, notifications,
+      displaySearch,
+      notifications,
       onNotificationClick,
-      markAsAllRead
+      markAsAllRead,
+      hasMoreNotifications,
+      loadMoreNotifications
     } = this.props;
     const normalUser = roles && roles.length == 0;
     return (
@@ -83,6 +86,8 @@ export default class Header extends Component {
             <Nav pullRight>
               <BlockNotificationDropdown
                 notifications={notifications}
+                hasMoreNotifications={hasMoreNotifications}
+                loadMoreNotifications={loadMoreNotifications}
                 eventKey={1}
                 markAsAllRead={markAsAllRead}
                 onNotificationClick={onNotificationClick} />
@@ -148,7 +153,8 @@ Header.propTypes = {
   currentUser: PropTypes.object.isRequired,
   notifications: PropTypes.array.isRequired,
   onNotificationClick: PropTypes.func.isRequired,
-  markAsAllRead: PropTypes.func.isRequired
+  markAsAllRead: PropTypes.func.isRequired,
+  loadMoreNotifications: PropTypes.func.isRequired
 };
 
 Header.defaultProps = {

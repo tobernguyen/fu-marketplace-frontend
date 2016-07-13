@@ -28,10 +28,9 @@ class FormManageShopItem extends Component {
       oldItemImage,
       fields: { id, name, description, quantity, price, categoryId, imageData },
       handleSubmit,
-      submitting,
+      formSubmitting,
       dirty,
       invalid } = this.props;
-
 
     let itemImage = null;
     if (imageData.value instanceof File) {
@@ -150,7 +149,7 @@ class FormManageShopItem extends Component {
                 <ButtonToolbar>
                   <button type="submit"
                           className="btn btn-primary"
-                          disabled={submitting || !dirty || invalid}>
+                          disabled={formSubmitting || !dirty || invalid}>
                     {updateMode ? <FormattedMessage {...buttons.update} /> : <FormattedMessage {...buttons.add} />}
                   </button>
                   {updateMode &&

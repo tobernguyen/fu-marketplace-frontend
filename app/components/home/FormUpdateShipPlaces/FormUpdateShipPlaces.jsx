@@ -10,7 +10,7 @@ import { messages } from './FormUpdateShipPlaces.i18n';
 
 class FormUpdateShipPlaces extends Component {
   render() {
-    const { shopID, places, toggleShipPlace, handleSubmit } = this.props;
+    const { shopID, places, toggleShipPlace, handleSubmit, formSubmitting } = this.props;
     const { formatMessage } = this.props.intl;
     return (
       <div className="form-update-ship-places">
@@ -33,7 +33,7 @@ class FormUpdateShipPlaces extends Component {
               </ul>
             </div>
             <button type="submit"
-                    className="btn btn-primary">
+                    className="btn btn-primary" disabled={formSubmitting}>
               <FormattedMessage {...buttons.submit}/>
             </button>
           </form>
@@ -46,7 +46,8 @@ class FormUpdateShipPlaces extends Component {
 FormUpdateShipPlaces.propTypes = {
   intl: intlShape,
   places: PropTypes.array.isRequired,
-  shipPlacesUpdated: PropTypes.bool.isRequired
+  shipPlacesUpdated: PropTypes.bool.isRequired,
+  formSubmitting: PropTypes.bool.isRequired
 };
 
 export default injectIntl(FormUpdateShipPlaces);

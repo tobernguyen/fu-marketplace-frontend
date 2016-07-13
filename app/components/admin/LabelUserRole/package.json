@@ -1,0 +1,6 @@
+{
+  "name": "LabelUserRole",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./LabelUserRole.jsx"
+}

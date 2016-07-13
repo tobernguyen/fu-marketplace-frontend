@@ -290,21 +290,22 @@ export const adminUnbanShop = (shopId) => {
 export const ADMIN_GET_REQUESTS_REQUEST = 'ADMIN_GET_REQUESTS_REQUEST';
 export const ADMIN_GET_REQUESTS_SUCCESS = 'ADMIN_GET_REQUESTS_SUCCESS';
 export const ADMIN_GET_REQUESTS_FAILURE = 'ADMIN_GET_REQUESTS_FAILURE';
-const adminRequestGetRequests = (filterMode) => ({
+const adminRequestGetRequests = (filter) => ({
   [CALL_API]: {
     types: [
       ADMIN_GET_REQUESTS_REQUEST,
       ADMIN_GET_REQUESTS_SUCCESS,
       ADMIN_GET_REQUESTS_FAILURE
     ],
-    url: `/api/v1/admin/shopOpeningRequests${filterMode || ''}`,
+    url: `/api/v1/admin/shopOpeningRequests${filter}`,
     method: HTTP_METHODS.GET
   }
 });
 
-export const adminGetRequests = (filterMode) => {
+export const adminGetRequests = (page = 1, size = 10, showAll = true) => {
+  const filter = `?size=${size}&page=${page}&showAll=${showAll}`;
   return (dispatch) => {
-    return dispatch(adminRequestGetRequests(filterMode));
+    return dispatch(adminRequestGetRequests(filter));
   }
 };
 

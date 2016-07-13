@@ -1,6 +1,21 @@
 .block-notification-dropdown {
+  a {
+    display: block;
+    &:hover {
+      text-decoration: none;
+
+      .block-notification-item {
+        background-color: #e9eef7;
+      }
+    }
+  }
   .dropdown-menu {
     width: 406px;
+
+    .infinite-scroll {
+      height: 361px;
+      overflow: auto;
+    }
     li {
       a {
         border-bottom: 1px solid #eeeeff;

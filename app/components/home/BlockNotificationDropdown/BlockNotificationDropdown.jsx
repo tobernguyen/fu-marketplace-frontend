@@ -5,9 +5,25 @@ import { FormattedMessage } from 'react-intl';
 import BlockNotificationItem from 'app/components/home/BlockNotificationItem';
 import { messages } from './BlockNotificationDropdown.i18n';
 import _ from 'lodash';
+import InfiniteScroll from 'app/components/common/InfiniteScroll';
+import { PulseLoader } from 'halogen';
 
 
 export default class BlockNotificationDropdown extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      elements: []
+    };
+
+    this.loadMore = this.loadMore.bind(this);
+  }
+
+  loadMore(page) {
+    this.props.loadMoreNotifications(page);
+  }
+
   renderNotificationBadge() {
     const notificationCount = _.size(_.filter(this.props.notifications, (item) =>
       item.read !== true
@@ -22,8 +38,26 @@ export default class BlockNotificationDropdown extends Component {
     )
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.notifications) {
+      if (nextProps.notifications.length > this.state.elements.length) {
+        this.setState({
+          elements: nextProps.notifications.map((notification, index) =>
+            <MenuItem
+              key={notification.id}
+              eventKey={this.props.eventKey + (index + 1) / 10}
+              onClick={() => this.props.onNotificationClick(notification)}>
+              <BlockNotificationItem
+                notification={notification}/>
+            </MenuItem>
+          )
+        })
+      }
+    }
+  }
+
   render() {
-    const { eventKey, notifications, markAsAllRead, onNotificationClick } = this.props;
+    const { eventKey, markAsAllRead, hasMoreNotifications } = this.props;
     const title = <div>
       <i className="fa fa-bell fa-lg"/>
       {this.renderNotificationBadge()}
@@ -38,22 +72,25 @@ export default class BlockNotificationDropdown extends Component {
           <h4 className="title">
             <FormattedMessage {...messages.notificationTitle} />
           </h4>
-          {notifications.length > 0 && <div className="actions">
+          {this.state.elements.length > 0 && <div className="actions">
             <a onClick={markAsAllRead}>
               <FormattedMessage {...messages.markAsRead} />
             </a>
           </div>}
         </li>
-        {notifications.map((notification, index) =>
-          <MenuItem
-            key={index}
-            eventKey={eventKey + (index + 1) / 10}
-            onClick={() => onNotificationClick(notification)}>
-            <BlockNotificationItem
-              notification={notification}/>
-          </MenuItem>
-        )}
-        {notifications.length === 0 && <li>
+        {this.state.elements.length > 0 && <div className="infinite-scroll">
+          <InfiniteScroll
+            pageStart={1}
+            loadMore={this.loadMore}
+            hasMore={hasMoreNotifications}
+            loader={<PulseLoader className="feed-loader" color="#C0392B" size="12px" />}
+            threshold={1}
+            useWindow={false}>
+            {this.state.elements}
+          </InfiniteScroll>
+        </div>}
+
+        {this.state.elements.length === 0 && <li>
           <p className="no-notification">
             <FormattedMessage {...messages.noNotification} />
           </p>
@@ -67,5 +104,6 @@ BlockNotificationDropdown.propTypes = {
   eventKey: PropTypes.number.isRequired,
   notifications: PropTypes.array.isRequired,
   onNotificationClick: PropTypes.func.isRequired,
-  markAsAllRead: PropTypes.func.isRequired
+  markAsAllRead: PropTypes.func.isRequired,
+  loadMoreNotifications: PropTypes.func.isRequired
 };

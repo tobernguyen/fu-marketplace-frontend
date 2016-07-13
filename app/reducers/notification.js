@@ -4,16 +4,20 @@ import _ from 'lodash';
 const INITIAL_STATE = {
   notifications: [],
   markAsReadSuccessful: false,
-  oneSignalRegistered: false
+  oneSignalRegistered: false,
+  hasMore: true
 };
 
 export const notification = (state = INITIAL_STATE, action) => {
   const { type, response, payload } = action;
   switch (type) {
-    case NotificationTypes.GET_NOTIFICATIONS_SUCCESS:
+    case NotificationTypes.GET_NOTIFICATIONS_SUCCESS: {
+      const { notifications } = response;
       return _.assign({}, state, {
-        notifications: response.notifications
+        notifications: _.concat(state.notifications, notifications),
+        hasMore: notifications.length !== 0
       });
+    }
     case NotificationTypes.MARK_NOTIFICATION_AS_READ_REQUEST:
       return _.assign({}, state, {
         markAsReadSuccessful: false

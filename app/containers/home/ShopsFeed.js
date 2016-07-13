@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import InfiniteScroll from 'react-infinite-scroller'
+import InfiniteScroll from 'app/components/common/InfiniteScroll';
 import BlockShopFeedItem from 'app/components/home/BlockShopFeedItem';
 import { getShopsOfPage, clearShopsFeed, updateShop } from 'app/actions/feed';
 import { getShopsFeed } from 'app/selectors';
@@ -37,6 +37,11 @@ class ShopsFeed extends Component {
     socket.on(EVENTS.SHOP_FEED_UPDATE, (shop) => {
       this.props.updateShop(shop);
     });
+  }
+
+  componentWillUnmount() {
+    const { socket } = this.props;
+    socket.off(EVENTS.SHOP_FEED_UPDATE);
   }
 
   componentWillReceiveProps(nextProps) {

@@ -57,7 +57,8 @@ class UpdateShipPlaces extends Component {
                             places={this.state.shopShipPlaces}
                             shipPlacesUpdated={this.state.shipPlacesUpdated}
                             toggleShipPlace={this.toggleShipPlace}
-                            handleSubmit={this.submitShipPlaces} />
+                            handleSubmit={this.submitShipPlaces}
+                            formSubmitting={this.props.formSubmitting} />
     );
   }
 }
@@ -65,7 +66,8 @@ const mapStateToProps = (state) => {
   const { shop } = state;
   return {
     places: getSellerShopShipPlaces(state),
-    shipPlacesUpdated: shop.shipPlacesUpdated
+    shipPlacesUpdated: shop.shipPlacesUpdated,
+    formSubmitting: shop.formSubmitting
   }
 };
 

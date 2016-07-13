@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import {
   ControlLabel,
   Button,
@@ -8,6 +8,8 @@ import {
   Col
 } from 'react-bootstrap';
 import AsyncResultCode from 'app/shared/asyncResultCodes';
+import { FormattedMessage, FormattedHTMLMessage, injectIntl } from 'react-intl';
+import { messages } from 'app/components/admin/FormEditUserBanStatus/FormEditUserBanStatus.i18n';
 
 class FormEditUserBanStatus extends Component {
   constructor(props) {
@@ -49,41 +51,73 @@ class FormEditUserBanStatus extends Component {
   }
 
   render() {
-    const title = (
-      <h3>Ban user</h3>
-    );
-    const { user, isSubmitting, submitResult } = this.props;
+    const { user, isSubmitting, submitResult, intl: { formatMessage } } = this.props;
     return(
       <div className="row">
         <Col lg={3}>
-          <h4 className="ban-title"><strong>Ban</strong></h4>
-          <p>Ban user from accessing FU Marketplace</p>
+          <h4 className="ban-title">
+            <strong>
+              <FormattedMessage {...messages.formEditUserBanStatus.sectionName} />
+            </strong>
+          </h4>
+          <p>
+            <FormattedMessage {...messages.formEditUserBanStatus.sectionDescription} />
+          </p>
         </Col>
         <Col lg={9}>
           <FormGroup>
-            <ControlLabel>Email</ControlLabel>
+            <ControlLabel>
+              <FormattedMessage {...messages.formEditUserBanStatus.fields.email}/>
+            </ControlLabel>
             <FormControl
               type="text"
               name="email"
+              placeholder={formatMessage(messages.formEditUserBanStatus.fields.email)}
               onChange={this.handleOnChange}
             />
           </FormGroup>
           <ul>
-            <li>User will be banned from accessing FU Marketplace</li>
-            <li>Banned user can be released in the future</li>
-            <li>Type <code>{user.email}</code> to confirm banning this user</li>
+            <li>
+              <FormattedMessage {...messages.formEditUserBanStatus.message.line1}/>
+            </li>
+            <li>
+              <FormattedMessage {...messages.formEditUserBanStatus.message.line2}/>
+            </li>
+            <li>
+              <FormattedHTMLMessage {...messages.formEditUserBanStatus.message.line3} values={{ email: user.email }}/>
+            </li>
           </ul>
           <div className="form-actions">
-            {submitResult === AsyncResultCode.BAN_USER_SUCCESS && <Alert bsStyle="danger">User has been banned</Alert>}
-            {submitResult === AsyncResultCode.BAN_USER_FAIL && <Alert bsStyle="danger">Error occurred!</Alert>}
-            {submitResult === AsyncResultCode.UNBAN_USER_SUCCESS && <Alert bsStyle="danger">User has been released</Alert>}
-            {submitResult === AsyncResultCode.UNBAN_USER_FAIL && <Alert bsStyle="danger">Error occurred!</Alert>}
+            {
+              submitResult === AsyncResultCode.BAN_USER_SUCCESS &&
+              <Alert bsStyle="danger">
+                <FormattedMessage {...messages.formEditUserBanStatus.submitResult.banSuccess}/>
+              </Alert>
+            }
+            {
+              submitResult === AsyncResultCode.BAN_USER_FAIL &&
+              <Alert bsStyle="danger">
+                <FormattedMessage {...messages.formEditUserBanStatus.submitResult.fail}/>
+              </Alert>
+            }
+            {
+              submitResult === AsyncResultCode.UNBAN_USER_SUCCESS &&
+              <Alert bsStyle="danger">
+                <FormattedMessage {...messages.formEditUserBanStatus.submitResult.releaseSuccess}/>
+              </Alert>
+            }
+            {
+              submitResult === AsyncResultCode.UNBAN_USER_FAIL &&
+              <Alert bsStyle="danger">
+                <FormattedMessage {...messages.formEditUserBanStatus.submitResult.fail}/>
+              </Alert>
+            }
 
             <Button
               bsStyle="danger"
               onClick={this.handleOnClick}
               disabled={isSubmitting || !this.state.isValid}>
-              {user.banned ? 'Release' : 'Ban'}
+              {user.banned ? formatMessage(messages.formEditUserBanStatus.button.release) : formatMessage(messages.formEditUserBanStatus.button.ban)}
             </Button>
           </div>
         </Col>
@@ -98,4 +132,4 @@ FormEditUserBanStatus.defaultProps={
   }
 };
 
-export default FormEditUserBanStatus;
+export default injectIntl(FormEditUserBanStatus);

@@ -53,10 +53,11 @@ const validate = (values, props) => {
 
 const mapStateToProps = (state, ownProps) => {
 
-  const { item } = state;
+  const { item, shop } = state;
 
   let newState = {
-    itemCategories: item.categories
+    itemCategories: item.categories,
+    formSubmitting: shop.formSubmitting
   };
 
   if (ownProps.updateMode) {

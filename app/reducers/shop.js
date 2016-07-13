@@ -11,7 +11,8 @@ const INITIAL_STATE = {
   newlyItemAdded: false,
   itemUpdated: false,
   shipPlacesUpdated: false,
-  places: []
+  places: [],
+  formSubmitting: false
 };
 
 export const shop = (state = INITIAL_STATE, action) => {
@@ -41,6 +42,12 @@ export const shop = (state = INITIAL_STATE, action) => {
       return _.assign({}, state, {
         sellingItems: groupItems
       });
+    case ShopActionTypes.SHOP_CREATE_ITEM_REQUEST:
+    case ShopActionTypes.SELLER_UPDATE_SHOP_ITEM_REQUEST:
+    case ShopActionTypes.SELLER_DELETE_SHOP_ITEM_REQUEST:
+      return _.assign({}, state, {
+        formSubmitting: true
+      });
     case ShopActionTypes.SHOP_CREATE_ITEM_SUCCESS: {
       const { categoryId } = response;
       let newSellingItems = {};
@@ -59,7 +66,8 @@ export const shop = (state = INITIAL_STATE, action) => {
       }
       return _.assign({}, state, {
         sellingItems: _.assign({}, state.sellingItems, newSellingItems),
-        newlyItemAdded: true
+        newlyItemAdded: true,
+        formSubmitting: false
       });
     }
     case ShopActionTypes.SELLER_UPDATE_SHOP_ITEM_SUCCESS: {
@@ -78,7 +86,8 @@ export const shop = (state = INITIAL_STATE, action) => {
 
       return _.assign({}, state, {
         sellingItems: newSellingItems,
-        itemUpdated: true
+        itemUpdated: true,
+        formSubmitting: false
       });
     }
     case ShopActionTypes.REMOVE_SHOP_ITEM_FROM_LIST: {
@@ -114,7 +123,8 @@ export const shop = (state = INITIAL_STATE, action) => {
       });
     case ShopActionTypes.SELLER_DELETE_SHOP_ITEM_SUCCESS:
       return _.assign({}, state, {
-        itemDeleted: true
+        itemDeleted: true,
+        formSubmitting: false
       });
     case ShopActionTypes.UPLOAD_SHOP_AVATAR_SUCCESS:
       const newAvatar = response.avatar ? getImageURLWithTimestamp(response.avatar) : '';

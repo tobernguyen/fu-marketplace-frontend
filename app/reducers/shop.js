@@ -30,11 +30,13 @@ export const shop = (state = INITIAL_STATE, action) => {
     case ShopActionTypes.SELLER_UPDATE_SHIP_PLACES_SUCCESS:
       return _.assign({}, state, {
         sellerShop: response,
-        shipPlacesUpdated: true
+        shipPlacesUpdated: true,
+        formSubmitting: false
       });
     case ShopActionTypes.SELLER_DELETE_SHOP_ITEM_REQUEST:
       return _.merge({}, state, {
-        shipPlacesUpdated: false
+        shipPlacesUpdated: false,
+        formSubmitting: true
       });
     case ShopActionTypes.SELLER_GET_SHOP_ITEM_LIST_SUCCESS:
       // Shop item grouped by category id
@@ -44,7 +46,7 @@ export const shop = (state = INITIAL_STATE, action) => {
       });
     case ShopActionTypes.SHOP_CREATE_ITEM_REQUEST:
     case ShopActionTypes.SELLER_UPDATE_SHOP_ITEM_REQUEST:
-    case ShopActionTypes.SELLER_DELETE_SHOP_ITEM_REQUEST:
+    case ShopActionTypes.SELLER_UPDATE_SHIP_PLACES_REQUEST:
       return _.assign({}, state, {
         formSubmitting: true
       });

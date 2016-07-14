@@ -19,7 +19,7 @@ class FormUpdateShop extends Component {
       <div className="form-update-shop">
         <ModalHeader
           title={formatMessage(messages.modalTitle)}
-          closeLink={`/shops/${shopID}/dashboard`}
+          closeLink={`/dashboard/shops/${shopID}`}
         />
         <Modal.Body className="clearfix">
           {shopUpdated && <Alert bsStyle="success">

@@ -7,17 +7,12 @@ import SellingItemList from '../SellingItemList';
 import { Modal } from 'react-bootstrap';
 import { uploadShopAvatar, uploadShopCover, getSellerShop, updateShopInfo } from 'app/actions/shop';
 import Sticky from 'react-stickynode';
-import NavigationBar from '../NavigationBar';
 import { getMetadata } from 'app/actions/common';
 import { registerOneSignal } from 'app/actions/notification';
 import { getHashCategories } from 'app/selectors';
 import _ from 'lodash';
 import OneSignal from 'onesignal';
 import BlockEnablePushSuggestion from 'app/components/home/BlockEnablePushSuggestion';
-import io from 'socket.io-client';
-import config from 'config';
-
-const socket = io.connect(config.SOCKET_IO_URL);
 
 class SellerDashboard extends Component {
   constructor(props) {
@@ -77,40 +72,36 @@ class SellerDashboard extends Component {
 
   render() {
     return (
-      <div className="home-page">
-        <NavigationBar
-          socket={socket}/>
-        <div className="container home-body">
-          <div className="seller-dashboard">
-            <div className="col-md-9">
-              <div className="row">
-                <BlockShopHeader
-                  shop={this.props.sellerShop}
-                  sellerMode={true}
-                  uploadShopCover={this.handleUploadShopCover}
-                  uploadShopAvatar={this.handleUploadShopAvatar} />
-                <BlockEnablePushSuggestion
-                  sellerMode={true}
-                  oneSignalRegistered={this.props.oneSignalRegistered}
-                  pushNotificationEnabled={this.state.pushNotificationEnabled} />
-                <SellingItemList shopID={parseInt(this.state.shopID)} sellerMode={true} />
-              </div>
-            </div>
-            <div className="col-md-3">
-              <Sticky enabled={true} top={60}>
-                <BlockSellerDashboardSideBar sellerShop={this.props.sellerShop}
-                                             shopInfoChanged={this.handleShopInfoChanged}
-                                             shopID={this.state.shopID} />
-              </Sticky>
+      <div className="container home-body">
+        <div className="seller-dashboard">
+          <div className="col-md-9">
+            <div className="row">
+              <BlockShopHeader
+                shop={this.props.sellerShop}
+                sellerMode={true}
+                uploadShopCover={this.handleUploadShopCover}
+                uploadShopAvatar={this.handleUploadShopAvatar} />
+              <BlockEnablePushSuggestion
+                sellerMode={true}
+                oneSignalRegistered={this.props.oneSignalRegistered}
+                pushNotificationEnabled={this.state.pushNotificationEnabled} />
+              <SellingItemList shopID={parseInt(this.state.shopID)} sellerMode={true} />
             </div>
           </div>
-
-          {this.props.children && <div>
-            <Modal show={true}>
-              {this.props.children}
-            </Modal>
-          </div>}
+          <div className="col-md-3">
+            <Sticky enabled={true} top={60}>
+              <BlockSellerDashboardSideBar sellerShop={this.props.sellerShop}
+                                           shopInfoChanged={this.handleShopInfoChanged}
+                                           shopID={this.state.shopID} />
+            </Sticky>
+          </div>
         </div>
+
+        {this.props.children && <div>
+          <Modal show={true}>
+            {this.props.children}
+          </Modal>
+        </div>}
       </div>
     );
   }

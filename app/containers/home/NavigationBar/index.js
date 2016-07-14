@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import Header from 'app/components/home/Header';
 import { signOutGoogle, getCurrentUser } from 'app/actions';
+import { withRouter } from 'react-router'
 import {
   getNotifications,
   markNotificationAsRead,
@@ -19,7 +20,23 @@ class NavigationBar extends Component {
     };
 
     this.onNotificationClick = (notification) => {
-      this.props.markNotificationAsRead(notification.id);
+      const { id, type, read, data } = notification;
+
+      switch (type) {
+        case 2:
+        {
+          this.props.router.push(`/dashboard/shops/${data.id}`);
+          break;
+        }
+        default:
+        {
+          this.props.router.push('/orders');
+        }
+      }
+
+      if (!read) {
+        this.props.markNotificationAsRead(id);
+      }
     };
 
     this.markAsAllRead = () => {
@@ -53,15 +70,8 @@ class NavigationBar extends Component {
     this.props.getNotifications(1);
   }
 
-  componentDidMount() {
-    const { socket } = this.props;
-    socket.on(EVENTS.NEW_NOTIFICATION, (notification) => {
-      this.props.newNotification(notification);
-    });
-  }
-
   componentWillReceiveProps(nextProps) {
-    const { query } = nextProps;
+    const { query, socket } = nextProps;
     let keyword = '';
     if (query && query.hasOwnProperty('keyword')) {
       keyword = query['keyword']
@@ -70,6 +80,12 @@ class NavigationBar extends Component {
       this.setState({
         keyword: keyword
       })
+    }
+
+    if (socket) {
+      socket.on(EVENTS.NEW_NOTIFICATION, (notification) => {
+        this.props.newNotification(notification);
+      });
     }
   }
 }
@@ -84,17 +100,18 @@ NavigationBar.propTypes = {
 
 const mapStateToProps = (state) => {
   return {
-    currentUser:    getUser(state),
-    notifications:  getOwnNotifications(state),
-    hasMore:        state.notification.hasMore
+    currentUser:            getUser(state),
+    notifications:          getOwnNotifications(state),
+    hasMore:                state.notification.hasMore,
+    socket:                 state.common.socket
   }
 };
 
-export default connect(mapStateToProps, {
+export default withRouter(connect(mapStateToProps, {
   getCurrentUser,
   signOutGoogle,
   getNotifications,
   markNotificationAsRead,
   markAllNotificationsAsRead,
   newNotification
-})(NavigationBar)
+})(NavigationBar))

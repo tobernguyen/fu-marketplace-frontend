@@ -60,7 +60,7 @@ export default class BlockSellerDashboardSideBar extends Component {
           </div>
 
         </ListGroupItem>
-        <LinkContainer to={`/shops/${shopID}/dashboard/info`}>
+        <LinkContainer to={`/dashboard/shops/${shopID}/info`}>
           <ListGroupItem>
             <div className="clearfix action">
               <div className="icon icon-gray">
@@ -72,7 +72,7 @@ export default class BlockSellerDashboardSideBar extends Component {
             </div>
           </ListGroupItem>
         </LinkContainer>
-        <LinkContainer to={`/shops/${shopID}/dashboard/items/add`}>
+        <LinkContainer to={`/dashboard/shops/${shopID}/items/add`}>
           <ListGroupItem>
             <div className="clearfix action">
               <div className="icon icon-green">
@@ -84,7 +84,7 @@ export default class BlockSellerDashboardSideBar extends Component {
             </div>
           </ListGroupItem>
         </LinkContainer>
-        <LinkContainer to={`/shops/${shopID}/dashboard/ship_places`}>
+        <LinkContainer to={`/dashboard/shops/${shopID}/ship_places`}>
           <ListGroupItem>
             <div className="clearfix action">
               <div className="icon icon-blue">
@@ -96,7 +96,7 @@ export default class BlockSellerDashboardSideBar extends Component {
             </div>
           </ListGroupItem>
         </LinkContainer>
-        <LinkContainer to={`/shops/${shopID}/dashboard/orders`}>
+        <LinkContainer to={`/dashboard/shops/${shopID}/orders`}>
           <ListGroupItem>
             <div className="clearfix action">
               <div className="icon icon-red">

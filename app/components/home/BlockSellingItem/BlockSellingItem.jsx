@@ -13,7 +13,7 @@ export default class BlockSellingItem extends Component {
     const tooltip = (
       item.description ? <Tooltip id="tooltip">{item.description}</Tooltip> : <span/>
     );
-    const updateURL = `/shops/${shopID}/dashboard/items/${item.id}/update`;
+    const updateURL = `/dashboard/shops/${shopID}/items/${item.id}/update`;
     return (
       <div className="block-selling-item col-md-3 col-xs-4">
         <OverlayTrigger placement="top" overlay={tooltip}>

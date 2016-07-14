@@ -42,3 +42,19 @@ export const getShipPlaces = () => {
     return dispatch(getShipPlacesRequest());
   }
 };
+
+export const UPDATE_QUERY = 'UPDATE_QUERY';
+export const updateQuery = (query) => ({
+  type: UPDATE_QUERY,
+  payload: {
+    query: query
+  }
+});
+
+export const CREATE_WEB_SOCKET = 'CREATE_WEB_SOCKET';
+export const createWebSocket = (socket) => ({
+  type: CREATE_WEB_SOCKET,
+  payload: {
+    socket: socket
+  }
+});

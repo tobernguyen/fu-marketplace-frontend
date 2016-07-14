@@ -4,7 +4,9 @@ import _ from 'lodash';
 const INITIAL_STATE = {
   modalSize: null,
   shipPlaces: [],
-  categories: []
+  categories: [],
+  query: null,
+  socket: null
 };
 
 export const common = (state = INITIAL_STATE, action) => {
@@ -18,6 +20,14 @@ export const common = (state = INITIAL_STATE, action) => {
       return _.merge({}, state, {
         shipPlaces: response.shipPlaces,
         categories: response.categories
+      });
+    case CommonActionTypes.UPDATE_QUERY:
+      return _.assign({}, state, {
+        query: payload.query
+      });
+    case CommonActionTypes.CREATE_WEB_SOCKET:
+      return _.assign({}, state, {
+        socket: payload.socket
       });
     default:
       return state;

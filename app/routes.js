@@ -4,8 +4,11 @@ import {
   IndexRoute,
   IndexRedirect
 } from 'react-router';
+import { displayAsModal } from './containers/home/ModalComponent';
 import App from './containers/App';
 import Home from './containers/home';
+import Wrapper from './containers/home/Wrapper';
+import WrapperDashboard from './containers/home/WrapperDashboard';
 import Account from './containers/home/Account';
 import MyOrders from './containers/home/MyOrders';
 import UpdateShop from './containers/home/SellerDashboard/UpdateShop';
@@ -32,24 +35,29 @@ import ChangePassword from './containers/admin/ChangePassword';
 
 
 export default (
-  <Route path="/" component={App}>
+  <Route component={App}>
     <IndexRoute component={Home}/>
     <Route path="/" component={Home}>
-      <Route path="account" component={Account} />
-      <Route path="orders" component={MyOrders} />
-      <Route path="shops/request_create" component={RequestCreateShop} />
-      <Route path="shops/:shopID" component={Shop}>
-        <Route path="reviews" component={ShopReviews} />
+      <IndexRoute component={Wrapper}/>
+      <Route component={Wrapper}>
+        <Route path="account" component={displayAsModal(Account)} />
+        <Route path="orders" component={displayAsModal(MyOrders)} />
+        <Route path="shops/request_create" component={displayAsModal(RequestCreateShop)} />
+        <Route path="shops/:shopID" component={displayAsModal(Shop)}>
+          <Route path="reviews" component={ShopReviews} />
+        </Route>
       </Route>
-    </Route>
 
+      <Route path="/dashboard" component={WrapperDashboard}>
+        <Route path="shops/:shopID" component={SellerDashboard}>
+          <Route path="info" component={UpdateShop} />
+          <Route path="ship_places" component={UpdateShipPlaces} />
+          <Route path="items/add" component={AddShopItem} />
+          <Route path="items/:itemID/update" component={UpdateShopItem} />
+        </Route>
+      </Route>
 
-    <Route path="shops/:shopID/dashboard/orders" component={ManageOrders} />
-    <Route path="/shops/:shopID/dashboard" component={SellerDashboard}>
-      <Route path="info" component={UpdateShop} />
-      <Route path="ship_places" component={UpdateShipPlaces} />
-      <Route path="items/add" component={AddShopItem} />
-      <Route path="items/:itemID/update" component={UpdateShopItem} />
+      <Route path="/dashboard/shops/:shopID/orders" component={ManageOrders} />
     </Route>
 
     <Route name="admin" path="admin" component={Admin}>

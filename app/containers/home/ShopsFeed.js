@@ -32,11 +32,14 @@ class ShopsFeed extends Component {
     }
   }
 
-  componentDidMount() {
-    const { socket } = this.props;
-    socket.on(EVENTS.SHOP_FEED_UPDATE, (shop) => {
-      this.props.updateShop(shop);
-    });
+  componentWillMount() {
+    if (this.props.query) {
+      this.setState({
+        query: this.props.query
+      }, () => {
+        this.handleFetchFeed()
+      })
+    }
   }
 
   componentWillUnmount() {
@@ -45,7 +48,7 @@ class ShopsFeed extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const { query, shops } = nextProps;
+    const { query, shops, socket } = nextProps;
     if (query) {
       if (!_.isEqual(query, this.state.query)) {
         this.setState({
@@ -62,6 +65,12 @@ class ShopsFeed extends Component {
           )
         });
       }
+    }
+
+    if (socket) {
+      socket.on(EVENTS.SHOP_FEED_UPDATE, (shop) => {
+        this.props.updateShop(shop);
+      });
     }
   }
 
@@ -85,7 +94,9 @@ const mapStateToProps = (state) => {
   const { feed } = state;
   return {
     shops: getShopsFeed(state),
-    hasMore: feed.hasMore
+    hasMore: feed.hasMore,
+    socket: state.common.socket,
+    query: state.common.query
   }
 };
 

@@ -62,11 +62,11 @@ class UpdateShopItem extends Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps.itemDeleted) {
       this.props.removeShopItemFromList(this.state.toBeUpdatedItemID);
-      this.props.router.push(`/shops/${this.props.params.shopID}/dashboard`);
+      this.props.router.push(`/dashboard/shops/${this.props.params.shopID}`);
     }
 
     if (nextProps.itemUpdated) {
-      this.props.router.push(`/shops/${this.props.params.shopID}/dashboard`);
+      this.props.router.push(`/dashboard/shops/${this.props.params.shopID}`);
       this.props.resetUpdatedItemStatus();
     }
 

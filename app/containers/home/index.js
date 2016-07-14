@@ -1,13 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { Modal } from 'react-bootstrap';
-import BlockItemList from 'app/components/home/BlockItemList';
-import BlockDormList from 'app/components/home/BlockDormList';
-import CarouselPinnedItems from 'app/components/home/CarouselPinnedItems';
-import BlockBookmarks from 'app/components/home/BlockBookmarks';
-import ShopsFeed from './ShopsFeed';
-import { getMetadata } from 'app/actions/common';
-import { getCategories, getShipPlaces, getAggregations } from 'app/selectors';
+import { getMetadata, updateQuery, createWebSocket } from 'app/actions/common';
 import NavigationBar from './NavigationBar';
 import { signOutGoogle } from 'app/actions';
 import _ from 'lodash';
@@ -17,6 +10,7 @@ import io from 'socket.io-client';
 import config from 'config';
 import { getNotificationMessage } from 'app/shared/notificationMessages';
 import { injectIntl, intlShape } from 'react-intl';
+import { getCategories } from 'app/selectors';
 
 const socket = io.connect(config.SOCKET_IO_URL);
 
@@ -68,15 +62,12 @@ class Home extends Component {
 
   componentDidMount() {
     this.floatNotification = this.refs.notificationSystem;
-    socket.on('disconnect', (reason) => {
-      // TODO: handle on disconnect, usually if it happened here, it means token is not valid
-      console.log(reason);
-    });
+
     socket.on('connect', () => {
       socket.emit('authenticate', {token: window.localStorage['token']});
     });
     socket.on('authenticated', () => {
-      console.log('TADA Websocket Connection is authenticated. Now you will receive real-time push via websocket');
+      this.props.createWebSocket(socket);
     });
   }
 
@@ -90,10 +81,8 @@ class Home extends Component {
 
     if (nextProps.location) {
       const { query } = nextProps.location;
-      if (!_.isEqual(this.state.query, query)) {
-        this.setState({
-          query: query
-        })
+      if (!_.isEqual(this.props.query, query)) {
+        this.props.updateQuery(query);
       }
     }
 
@@ -108,54 +97,15 @@ class Home extends Component {
   }
 
   render() {
-    const {
-      categories,
-      shipPlaces,
-      aggregations:
-        {
-          category,
-          shipPlace,
-          totalCategory,
-          totalShipPlace
-        }
-    } = this.props;
-
-    const { query } = this.state;
     return (
       <div className="home-page">
         <NavigationBar
-          socket={socket}
           displaySearch={true}
           handleSearch={this.handleSearch}
-          query={query} />
-        <div className="container home-body">
-          <div className="row">
-            <div className="col-md-3">
-              <BlockItemList
-                query={query}
-                categories={categories}
-                categoryCounter={category}
-                totalCategory={totalCategory} />
-              <BlockDormList
-                query={query}
-                shipPlaces={shipPlaces}
-                shipPlaceCounter={shipPlace}
-                totalShipPlace={totalShipPlace} />
-              <BlockBookmarks />
-            </div>
-            <div className="col-md-9">
-              <div className="row">
-                <CarouselPinnedItems />
-                <div className="main-column col-md-12">
-                  <ShopsFeed query={this.state.query} socket={socket} />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        {this.props.children && <Modal show={true} bsSize={this.props.modalSize}>
-          {this.props.children}
-        </Modal>}
+          query={this.state.query} />
+
+        {this.props.children}
+
         <NotificationSystem ref="notificationSystem" />
       </div>
     );
@@ -168,20 +118,19 @@ Home.propTypes = {
 };
 
 const mapStateToProps = (state) => {
-  const { user, common, notification } = state;
+  const { user, notification } = state;
   return {
     error:        user.error,
-    modalSize:    common.modalSize,
-    modalMode:    common.modalMode,
-    shipPlaces:   getShipPlaces(state),
+    notification: notification.promptNotification,
     categories:   getCategories(state),
-    aggregations: getAggregations(state),
-    notification: notification.promptNotification
+    query: state.common.query
   }
 };
 
 
 export default injectIntl(withRouter(connect(mapStateToProps, {
   getMetadata,
-  signOutGoogle
+  signOutGoogle,
+  updateQuery,
+  createWebSocket
 })(Home)))

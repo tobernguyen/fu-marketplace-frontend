@@ -44,7 +44,7 @@ class FormManageShopItem extends Component {
       <div className="form-manage-shop-item">
         <ModalHeader
           title={updateMode ? formatMessage(messages.shopItem.update) : formatMessage(messages.shopItem.add)}
-          closeLink={`/shops/${shopID}/dashboard`}
+          closeLink={`/dashboard/shops/${shopID}`}
         />
         <Modal.Body className="clearfix">
           <form onSubmit={handleSubmit} className="form-horizontal">

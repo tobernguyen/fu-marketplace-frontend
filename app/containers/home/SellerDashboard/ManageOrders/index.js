@@ -14,13 +14,8 @@ import {
   getShopsOfPage
 } from 'app/actions/order';
 import Sticky from 'react-stickynode';
-import NavigationBar from 'app/containers/home/NavigationBar';
 import { withRouter } from 'react-router'
 import OrderStatus from 'app/shared/orderStatus';
-import io from 'socket.io-client';
-import config from 'config';
-
-const socket = io.connect(config.SOCKET_IO_URL);
 
 class ManageOrders extends Component {
   constructor(props) {
@@ -141,48 +136,44 @@ class ManageOrders extends Component {
     const { query } = this.props.location;
     const { getShopsOfPage } = this.props;
     return (
-      <div className="home-page">
-        <NavigationBar
-          socket={socket}/>
-        <div className="container home-body">
-          <div className="seller-dashboard">
-            <div className="col-md-9">
-              <div className="row">
-                <BlockOrderList
-                  shopID ={this.props.params.shopID}
-                  orders={this.props.orders}
-                  currentOrders={this.props.currentOrders}
-                  viewOrder={this.viewOrder}
-                  query={query}
-                  getShopsOfPage={getShopsOfPage}
-                  changePageSize={this.changePageSize}
-                  acceptOrder={this.sellerAcceptOrder}
-                  rejectOrder={this.sellerRejectOrder}
-                  startShippingOrder={this.sellerStartShippingOrder}
-                  completeOrder={this.sellerCompleteOrder}
-                  abortOrder={this.sellerAbortOrder}
-                  shouldUpdateOrderList={this.props.shouldUpdateOrderList}
-                  />
-                <ModalViewOrder
-                  order={this.state.selectedOrder}
-                  show={this.state.showModal}
-                  onHide={this.close}
-                  acceptOrder={this.sellerAcceptOrder}
-                  rejectOrder={this.sellerRejectOrder}
-                  startShippingOrder={this.sellerStartShippingOrder}
-                  completeOrder={this.sellerCompleteOrder}
-                  abortOrder={this.sellerAbortOrder}
-                  openRejectModal={this.openRejectModal}
-                />
-              </div>
+      <div className="container home-body">
+        <div className="seller-dashboard">
+          <div className="col-md-9">
+            <div className="row">
+              <BlockOrderList
+                shopID ={this.props.params.shopID}
+                orders={this.props.orders}
+                currentOrders={this.props.currentOrders}
+                viewOrder={this.viewOrder}
+                query={query}
+                getShopsOfPage={getShopsOfPage}
+                changePageSize={this.changePageSize}
+                acceptOrder={this.sellerAcceptOrder}
+                rejectOrder={this.sellerRejectOrder}
+                startShippingOrder={this.sellerStartShippingOrder}
+                completeOrder={this.sellerCompleteOrder}
+                abortOrder={this.sellerAbortOrder}
+                shouldUpdateOrderList={this.props.shouldUpdateOrderList}
+              />
+              <ModalViewOrder
+                order={this.state.selectedOrder}
+                show={this.state.showModal}
+                onHide={this.close}
+                acceptOrder={this.sellerAcceptOrder}
+                rejectOrder={this.sellerRejectOrder}
+                startShippingOrder={this.sellerStartShippingOrder}
+                completeOrder={this.sellerCompleteOrder}
+                abortOrder={this.sellerAbortOrder}
+                openRejectModal={this.openRejectModal}
+              />
             </div>
-            <div className="col-md-3">
-              <Sticky enabled={true} top={60}>
-                <BlockSellerDashboardSideBar sellerShop={this.props.sellerShop}
-                                             shopInfoChanged={this.handleShopInfoChanged}
-                                             shopID={this.state.shopID} />
-              </Sticky>
-            </div>
+          </div>
+          <div className="col-md-3">
+            <Sticky enabled={true} top={60}>
+              <BlockSellerDashboardSideBar sellerShop={this.props.sellerShop}
+                                           shopInfoChanged={this.handleShopInfoChanged}
+                                           shopID={this.state.shopID} />
+            </Sticky>
           </div>
         </div>
       </div>

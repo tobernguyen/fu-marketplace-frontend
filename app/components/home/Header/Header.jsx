@@ -114,7 +114,7 @@ export default class Header extends Component {
                 </LinkContainer>}
                 {shops instanceof Array && shops.map((shop) => {
                   return (
-                    <LinkContainer key={shop.id} to={`/shops/${shop.id}/dashboard`}>
+                    <LinkContainer key={shop.id} to={`/dashboard/shops/${shop.id}`}>
                       <MenuItem eventKey={2.3}>
                         <i className="fa fa-opencart"/> {shop.name}
                       </MenuItem>

@@ -11,7 +11,8 @@ import {
   adminUnbanShop,
   adminUpdateShopAvatar,
   adminUpdateShopCover,
-  adminUpdateShopShipPlaces
+  adminUpdateShopShipPlaces,
+  adminUpdateShopOpeningStatus
 } from 'app/actions/admin';
 import { getShipPlaces } from 'app/actions/common';
 import LoadingSpinner from 'app/components/admin/LoadingSpinner';
@@ -19,52 +20,58 @@ import LoadingSpinner from 'app/components/admin/LoadingSpinner';
 class ContainerEditShop extends Component {
   constructor(props) {
     super(props);
-    
+
     this.handleSubmitShopInformation = this.handleSubmitShopInformation.bind(this);
     this.uploadAvatar = this.uploadAvatar.bind(this);
     this.uploadCover = this.uploadCover.bind(this);
     this.banShop = this.banShop.bind(this);
     this.unbanShop = this.unbanShop.bind(this);
     this.handleSubmitShipPlaces = this.handleSubmitShipPlaces.bind(this);
+    this.handleSubmitShopOpeningStatus = this.handleSubmitShopOpeningStatus.bind(this);
   }
-  
+
   handleSubmitShopInformation(shop) {
     const shopId = this.props.shopManagement.selectedShop.id;
     this.props.adminUpdateShopInformation(shopId, shop);
   }
-  
+
+  handleSubmitShopOpeningStatus(opening) {
+    const shopID = this.props.shopManagement.selectedShop.id;
+    this.props.adminUpdateShopOpeningStatus(shopID, opening)
+  }
+
   handleSubmitShipPlaces(shipPlaces) {
     const shopId = this.props.shopManagement.selectedShop.id;
     this.props.adminUpdateShopShipPlaces(shopId, shipPlaces)
   }
-  
+
   uploadAvatar(formData) {
     const shopId = this.props.shopManagement.selectedShop.id;
     this.props.adminUpdateShopAvatar(shopId, formData);
   }
-  
+
   uploadCover(formData) {
     const shopId = this.props.shopManagement.selectedShop.id;
     this.props.adminUpdateShopCover(shopId, formData);
   }
-  
+
   banShop() {
     const shopId = this.props.shopManagement.selectedShop.id;
     this.props.adminBanShop(shopId);
   }
-  
+
   unbanShop() {
     const shopId = this.props.shopManagement.selectedShop.id;
     this.props.adminUnbanShop(shopId);
   }
-  
+
   componentWillMount() {
     this.props.getShipPlaces();
     this.props.adminGetShop(this.props.params.shopId);
   }
   render() {
     const { shopManagement } = this.props;
-    if(shopManagement.isFetching) {
+    if(shopManagement.isFetching || shopManagement.isSubmitting) {
       return <div className="text-center container-fluid">
           <LoadingSpinner />
         </div>;
@@ -80,7 +87,7 @@ class ContainerEditShop extends Component {
         <hr />
         <FormEditShopShipPlaces
           shop={shopManagement.selectedShop}
-          submitOpeningStatus={this.handleSubmitShopInformation}
+          submitOpeningStatus={this.handleSubmitShopOpeningStatus}
           submitShipPlaces={this.handleSubmitShipPlaces}
           submitResult={shopManagement.submitResult}
           isSubmitting={shopManagement.isSubmitting}
@@ -124,7 +131,7 @@ export default connect(mapStateToProps, {
   adminUnbanShop,
   adminUpdateShopAvatar,
   adminUpdateShopCover,
+  adminUpdateShopOpeningStatus,
   adminUpdateShopShipPlaces,
   getShipPlaces
 })(ContainerEditShop);
-

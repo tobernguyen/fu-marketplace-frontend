@@ -10,25 +10,29 @@ import {
 } from 'react-bootstrap';
 import _ from 'lodash';
 import AsyncResultCode from 'app/shared/asyncResultCodes';
+import { FormattedMessage, injectIntl } from 'react-intl';
+import { messages } from 'app/components/admin/FormEditShopShipPlaces/FormEditShopShipPlaces.i18n';
+
 
 class FormEditShopShipPlaces extends React.Component {
   constructor(props) {
     super(props);
-    
+
     const { shop } = this.props;
-    
+
     this.state = {
+      isValid: false,
       informationToBeUpdated: {
         openStatus: shop.opening,
         shipPlaces: shop.shipPlaces
       }
     };
-    
+
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleOnChange = this.handleOnChange.bind(this);
     this.handleShipPlacesChange = this.handleShipPlacesChange.bind(this);
   }
-  
+
   handleSubmit() {
     const { shop } = this.props;
     const { informationToBeUpdated } = this.state;
@@ -38,16 +42,21 @@ class FormEditShopShipPlaces extends React.Component {
     if(informationToBeUpdated.shipPlaces !== shop.shipPlaces) {
       this.props.submitShipPlaces({shipPlaces: informationToBeUpdated.shipPlaces});
     }
+
+    this.setState({
+      isValid: false
+    });
   }
-    
+
   handleOnChange(e) {
     let informationToBeUpdated = this.state.informationToBeUpdated;
     informationToBeUpdated[e.target.name] = e.target.value;
     this.setState({
+      isValid: true,
       informationToBeUpdated
     });
   }
-  
+
   handleShipPlacesChange(e) {
     let informationToBeUpdated = this.state.informationToBeUpdated;
     const trueValue = _.toInteger(e.target.value);
@@ -64,32 +73,50 @@ class FormEditShopShipPlaces extends React.Component {
         informationToBeUpdated
       });
     }
+    this.setState({
+      isValid: true
+    });
   }
-  
+
   render() {
-    const { informationToBeUpdated } = this.state;
-    const { submitResult, isSubmitting } = this.props;
+    const { informationToBeUpdated, isValid } = this.state;
+    const { submitResult, isSubmitting, intl: { formatMessage } } = this.props;
     return (
       <div className="row">
         <Col lg={3}>
-          <h4><strong>Operational Information</strong></h4>
-          <p>Information that relate to operation of shop</p>
+          <h4>
+            <strong>
+              <FormattedMessage {...messages.formEditShopShipPlaces.sectionName} />
+            </strong>
+          </h4>
+          <p>
+            <FormattedMessage {...messages.formEditShopShipPlaces.sectionDescription}/>
+          </p>
         </Col>
         <Col lg={9}>
           <FormGroup>
-            <ControlLabel>Open status</ControlLabel>
+            <ControlLabel>
+              <FormattedMessage {...messages.formEditShopShipPlaces.fields.open}/>
+            </ControlLabel>
             <FormControl
               componentClass="select"
               name="openStatus"
               defaultValue={informationToBeUpdated.openStatus || false}
               onChange={this.handleOnChange}
               >
-              <option value={true}>Open</option>
-              <option value={false}>Close</option>
+              <option value={true}>
+                {formatMessage(messages.formEditShopShipPlaces.openingStatus.open)}
+              </option>
+              <option value={false}>
+                {formatMessage(messages.formEditShopShipPlaces.openingStatus.close)}
+              </option>
             </FormControl>
           </FormGroup>
           <FormGroup>
-            <ControlLabel>Ship places</ControlLabel>
+            <ControlLabel>
+              <FormattedMessage {...messages.formEditShopShipPlaces.fields.shipPlaces}/>
+            </ControlLabel>
+            <div className="ship-place-checkbox-wrapper">
             {this.props.availableShipPlaces.map(shipPlace =>
             <Checkbox
               key={shipPlace.id}
@@ -100,11 +127,25 @@ class FormEditShopShipPlaces extends React.Component {
               {shipPlace.name}
             </Checkbox>
             )}
+            </div>
+
           </FormGroup>
           <div className="form-actions">
-            {submitResult === AsyncResultCode.UPDATE_SHOP_SHIP_PLACES_SUCCESS && <Alert bsStyle="success">Operational Information has been saved</Alert>}
-            {submitResult === AsyncResultCode.UPDATE_SHOP_SHIP_PLACES_FAIL && <Alert bsStyle="danger">Operational Information has been saved</Alert>}
-            <Button bsStyle="success" onClick={this.handleSubmit} disabled={isSubmitting}>Save Changes</Button>
+            {
+              submitResult === AsyncResultCode.UPDATE_SHOP_SHIP_PLACES_SUCCESS &&
+              <Alert bsStyle="success">
+                <FormattedMessage {...messages.formEditShopShipPlaces.submitResult.success}/>
+              </Alert>
+            }
+            {
+              submitResult === AsyncResultCode.UPDATE_SHOP_SHIP_PLACES_FAIL &&
+              <Alert bsStyle="danger">
+                <FormattedMessage {...messages.formEditShopShipPlaces.submitResult.fail}/>
+              </Alert>
+            }
+            <Button bsStyle="success" onClick={this.handleSubmit} disabled={isSubmitting || !isValid}>
+              {formatMessage(messages.formEditShopShipPlaces.button.saveChanges)}
+            </Button>
           </div>
         </Col>
       </div>
@@ -112,4 +153,4 @@ class FormEditShopShipPlaces extends React.Component {
   }
 }
 
-export default FormEditShopShipPlaces;
+export default injectIntl(FormEditShopShipPlaces);

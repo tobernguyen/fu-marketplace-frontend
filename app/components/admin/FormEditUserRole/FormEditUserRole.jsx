@@ -18,6 +18,7 @@ class FormEditUserRole extends Component {
     this.handleCheckboxChange = this.handleCheckboxChange.bind(this);
     this.updateRole = this.updateRole.bind(this);
     this.state = {
+      isValid: false,
       rolesToBeUpdated: []
     };
   }
@@ -41,17 +42,24 @@ class FormEditUserRole extends Component {
         rolesToBeUpdated: _.concat(rolesToBeUpdated, e.target.value)
       });
     }
+
+    this.setState({
+      isValid: true
+    });
   }
 
   updateRole() {
     const { id } = this.props.user;
     const { rolesToBeUpdated } = this.state;
     this.props.adminUpdateUserRole(id, { roles: rolesToBeUpdated});
+    this.setState({
+      isValid: false
+    });
   }
 
   render() {
     const { submitResult, isSubmitting, intl: { formatMessage } } = this.props;
-    const { rolesToBeUpdated } = this.state;
+    const { rolesToBeUpdated, isValid } = this.state;
     return (
       <div className="row">
         <Col lg={3}>
@@ -65,7 +73,7 @@ class FormEditUserRole extends Component {
           <FormattedMessage {...messages.formEditUserRole.sectionDescription}/>
         </Col>
         <Col lg={9}>
-          <FormGroup defaultChecked="admin" className="role-checkboxes">
+          <FormGroup className="role-checkboxes ship-place-checkbox-wrapper">
             <Checkbox
               value="admin"
               checked={_.includes(rolesToBeUpdated, 'admin')}
@@ -105,7 +113,7 @@ class FormEditUserRole extends Component {
                 <FormattedMessage {...messages.formEditUserRole.submitResult.fail}/>
               </Alert>
             }
-            <Button bsStyle="warning" onClick={this.updateRole} disabled={isSubmitting}>
+            <Button bsStyle="warning" onClick={this.updateRole} disabled={isSubmitting || !isValid }>
               {formatMessage(messages.formEditUserRole.button.updateRole)}
             </Button>
           </div>

@@ -1,24 +1,26 @@
-import React, {Component, PropTypes} from 'react';
-import { Button } from 'react-bootstrap';
+import React from 'react';
 import { Link } from 'react-router';
-export default class RequestListRow extends Component {
-  render() {
-    return (
-      <tr>
-        <td>{this.props.request.id}</td>
-        <td>{this.props.request.name}</td>
-        <td>{this.props.request.ownerId}</td>
-        <td>
-          {this.props.request.status == 0 && 'Pending'}
-          {this.props.request.status == 1 && 'Rejected'}
-          {this.props.request.status == 2 && 'Accepted'}
-        </td>
-        <td className="actions">
-          <Link to={`/admin/requests/${this.props.request.id}/view`} className="btn btn-warning">
-            <i className="fa fa-eye"></i>
-          </Link>
-        </td>
-      </tr>
-    );
-  }
+import LabelRequestStatus from 'app/components/admin/LabelRequestStatus';
+const RequestListRow = ({ request }) => {
+  return (
+    <tr>
+      <td>{request.id}</td>
+      <td>{request.name}</td>
+      <td>
+        <Link to={`/admin/users/${request.seller.id}/edit`}>
+          {request.seller.fullName}
+        </Link>
+      </td>
+      <td>
+        <LabelRequestStatus status={request.status}/>
+      </td>
+      <td className="actions">
+        <Link to={`/admin/requests/${request.id}/view`} className="btn btn-warning">
+          <i className="fa fa-eye"></i>
+        </Link>
+      </td>
+    </tr>
+  );
 }
+
+export default RequestListRow;

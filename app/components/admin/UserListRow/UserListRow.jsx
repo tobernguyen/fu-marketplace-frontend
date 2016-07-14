@@ -2,11 +2,13 @@ import React from 'react';
 import { Link } from 'react-router';
 import './UserListRow.scss';
 import LabelUserRole from 'app/components/admin/LabelUserRole';
-import LabelBanned from 'app/components/admin/LabelBanned';
-
+import classNames from 'classnames'
 const UserListRow = ({ user }) => {
+  const rowClassName = classNames({
+    'banned': user.banned
+  })
   return (
-    <tr>
+    <tr className={rowClassName}>
         <td>
           {user.id || 'N/A'}
         </td>
@@ -18,9 +20,6 @@ const UserListRow = ({ user }) => {
         </td>
         <td>
           <LabelUserRole role={user.roles[0]}/>
-        </td>
-        <td>
-          <LabelBanned banned={user.banned}/>
         </td>
         <td className="actions">
           <Link className="btn btn-warning" to={`/admin/users/${user.id}/edit`} bsStyle="warning">

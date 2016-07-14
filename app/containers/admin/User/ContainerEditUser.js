@@ -24,7 +24,7 @@ class ContainerEditUser extends React.Component {
       adminUnbanUser,
       adminBanUser
     } = this.props;
-    if(userManagement.isFetching) {
+    if(userManagement.isFetching || userManagement.isSubmitting) {
       return <div className="text-center container-fluid">
           <LoadingSpinner />
         </div>;

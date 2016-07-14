@@ -1,0 +1,6 @@
+{
+  "name": "LabelRequestStatus",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./LabelRequestStatus.jsx"
+}

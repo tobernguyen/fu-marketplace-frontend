@@ -30,7 +30,6 @@ class UserList extends Component {
               <th className="col-lg-2"><FormattedMessage {...messages.userList.tableHead.email} /></th>
               <th className="col-lg-3"><FormattedMessage {...messages.userList.tableHead.fullName} /></th>
               <th className="col-lg-2"><FormattedMessage {...messages.userList.tableHead.role} /></th>
-              <th className="col-lg-1"><FormattedMessage {...messages.userList.tableHead.banned} /></th>
               <th><FormattedMessage {...messages.userList.tableHead.action} /></th>
             </tr>
           </thead>

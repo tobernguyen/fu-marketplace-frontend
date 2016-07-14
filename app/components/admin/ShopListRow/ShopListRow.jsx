@@ -1,33 +1,36 @@
-import React, { Component, PropTypes } from 'react';
+import React from 'react';
 import { Link } from 'react-router';
 import './ShopListRow.scss';
+import LabelShopOpening from 'app/components/admin/LabelShopOpening';
+import LabelShopStatus from 'app/components/admin/LabelShopStatus';
+import classNames from 'classnames';
 
-class ShopListRow extends Component {
-  constructor(props, context) {
-    super(props,context);
-  }
-
-  render() {
-    const ShipPlacesArray = ['', 'Dom A', 'Dom B', 'Dom C', 'Dom D', 'Dom E', 'Dom F'];
-    return (
-      <tr>
-        <td>{this.props.shop.id}</td>
-        <td>{this.props.shop.name}</td>
-        <td><Link to={`admin/users/${this.props.shop.seller.id}/edit`}>{this.props.shop.seller.fullName}</Link></td>
-        <td>{this.props.shop.shipPlaces.map(shipPlace =>
-          <div key={shipPlace} className="ship-place-span text-center">{ShipPlacesArray[shipPlace]}</div>
-        )}</td>
-        <td>{this.props.shop.opening ? 'Open' : 'Close'}</td>
-        <td>{this.props.shop.status}</td>
-        <td>{this.props.shop.banned ? 'Banned' : 'Not Banned'}</td>
-        <td className="actions">
-          <Link className="btn btn-warning" to={`admin/shops/${this.props.shop.id}/edit`} bsStyle="warning">
-            <i className="fa fa-pencil-square-o"></i>
-          </Link>
-        </td>
-      </tr>
-    );
-  }
+const ShopListRow = ({ shop }) => {
+  const rowClassName = classNames({
+    'banned': shop.banned
+  });
+  const ShipPlacesArray = ['', 'Dom A', 'Dom B', 'Dom C', 'Dom D', 'Dom E', 'Dom F'];
+  return (
+    <tr className={rowClassName}>
+      <td>{shop.id}</td>
+      <td>{shop.name}</td>
+      <td><Link to={`/admin/users/${shop.seller.id}/edit`}>{shop.seller.fullName}</Link></td>
+      <td>{shop.shipPlaces.map(shipPlace =>
+        <div key={shipPlace} className="ship-place-span text-center">{ShipPlacesArray[shipPlace]}</div>
+      )}</td>
+      <td>
+        <LabelShopOpening status={shop.opening} />
+      </td>
+      <td>
+        <LabelShopStatus status={shop.status} />
+      </td>
+      <td className="actions">
+        <Link className="btn btn-warning" to={`/admin/shops/${shop.id}/edit`} bsStyle="warning">
+          <i className="fa fa-pencil-square-o"></i>
+        </Link>
+      </td>
+    </tr>
+  );
 }
 
 ShopListRow.defaultProps = {

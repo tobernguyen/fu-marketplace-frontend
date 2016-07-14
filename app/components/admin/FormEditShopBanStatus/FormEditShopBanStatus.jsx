@@ -1,27 +1,30 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import {
-  Panel,
   Button,
+  ControlLabel,
   FormGroup,
   FormControl,
   Alert,
   Col
 } from 'react-bootstrap';
 import AsyncResultCode from 'app/shared/asyncResultCodes';
+import { FormattedMessage, FormattedHTMLMessage, injectIntl } from 'react-intl';
+import { messages } from 'app/components/admin/FormEditShopBanStatus/FormEditShopBanStatus.i18n';
+
 
 class FormEditShopBanStatus extends Component {
   constructor(props) {
     super(props);
-    
+
     this.state = {
       name: '',
       isValid: false
     };
-    
+
     this.handleOnChange = this.handleOnChange.bind(this);
     this.handleOnClick = this.handleOnClick.bind(this);
   }
-  
+
   handleOnChange(e) {
     this.setState({
       name: e.target.value
@@ -36,7 +39,7 @@ class FormEditShopBanStatus extends Component {
       });
     }
   }
-  
+
   handleOnClick() {
     const { shop } = this.props;
     if(this.state.name === shop.name) {
@@ -47,41 +50,75 @@ class FormEditShopBanStatus extends Component {
       }
     }
   }
-  
+
   render() {
-    const title = (
-      <h3>Ban shop</h3>
-    );
-    const { shop, isSubmitting, submitResult } = this.props;
+    const { shop, isSubmitting, submitResult, intl: { formatMessage } } = this.props;
     return(
       <div className="row">
         <Col lg={3}>
-          <h4 className="ban-title"><strong>Ban</strong></h4>
+          <h4 className="ban-title">
+            <strong>
+              <FormattedMessage {...messages.formEditShopBanStatus.sectionName}/>
+            </strong>
+          </h4>
+          <p>
+            <FormattedMessage {...messages.formEditShopBanStatus.sectionDescription}/>
+          </p>
         </Col>
         <Col lg={9}>
           <FormGroup>
+            <ControlLabel>
+              <FormattedMessage {...messages.formEditShopBanStatus.fields.shopName}/>
+            </ControlLabel>
             <FormControl
               type="text"
               name="name"
+              placeholder={formatMessage(messages.formEditShopBanStatus.fields.shopName)}
               onChange={this.handleOnChange}
               />
           </FormGroup>
           <ul>
-            <li>Shop will be banned from FU Marketplace</li>
-            <li>Banned shop won't be list in feeds or access by buyer</li>
-            <li>Type <code>{shop.name}</code> to confirm banning this user</li>
+            <li>
+              <FormattedMessage {...messages.formEditShopBanStatus.message.line1}/>
+            </li>
+            <li>
+              <FormattedMessage {...messages.formEditShopBanStatus.message.line2}/>
+            </li>
+            <li>
+              <FormattedHTMLMessage {...messages.formEditShopBanStatus.message.line3} values={{ name: shop.name }} />
+            </li>
           </ul>
           <div className="form-actions">
-              {submitResult === AsyncResultCode.BAN_SHOP_SUCCESS && <Alert bsStyle="danger">Shop has been banned</Alert>}
-              {submitResult === AsyncResultCode.BAN_SHOP_FAIL && <Alert bsStyle="danger">Error occurred!</Alert>}
-              {submitResult === AsyncResultCode.UNBAN_SHOP_SUCCESS && <Alert bsStyle="danger">Shop has been released</Alert>}
-              {submitResult === AsyncResultCode.UNBAN_SHOP_FAIL && <Alert bsStyle="danger">Error occurred!</Alert>}
-              
+              {
+                submitResult === AsyncResultCode.BAN_SHOP_SUCCESS &&
+                <Alert bsStyle="success">
+                  <FormattedMessage {...messages.formEditShopBanStatus.submitResult.banSuccess}/>
+                </Alert>
+              }
+              {
+                submitResult === AsyncResultCode.BAN_SHOP_FAIL &&
+                <Alert bsStyle="danger">
+                  <FormattedMessage {...messages.formEditShopBanStatus.submitResult.fail}/>
+                </Alert>
+              }
+              {
+                submitResult === AsyncResultCode.UNBAN_SHOP_SUCCESS &&
+                <Alert bsStyle="success">
+                  <FormattedMessage {...messages.formEditShopBanStatus.submitResult.releaseSuccess}/>
+                </Alert>
+              }
+              {
+                submitResult === AsyncResultCode.UNBAN_SHOP_FAIL &&
+                <Alert bsStyle="danger">
+                  <FormattedMessage {...messages.formEditShopBanStatus.submitResult.fail}/>
+                </Alert>
+              }
+
               <Button
                 bsStyle="danger"
                 onClick={this.handleOnClick}
                 disabled={isSubmitting || !this.state.isValid}>
-                {shop.banned ? 'Release' : 'Ban'}
+                {shop.banned ? formatMessage(messages.formEditShopBanStatus.button.release) : formatMessage(messages.formEditShopBanStatus.button.ban)}
               </Button>
             </div>
         </Col>
@@ -94,4 +131,4 @@ FormEditShopBanStatus.defaultProps = {
   shop: {}
 };
 
-export default FormEditShopBanStatus;
+export default injectIntl(FormEditShopBanStatus);

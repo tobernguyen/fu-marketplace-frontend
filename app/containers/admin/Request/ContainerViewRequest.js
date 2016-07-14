@@ -12,14 +12,14 @@ class ContainerViewRequest extends Component {
   constructor(props) {
     super(props);
   }
-  
+
   componentWillMount() {
     this.props.adminGetRequests('?showAll=true');
   }
-    
+
   render() {
     const { params, requestManagement, adminAcceptRequest, adminRejectRequest} = this.props;
-    if(requestManagement.isFetching) {
+    if(requestManagement.isFetching || requestManagement.isSubmitting) {
       return <div className="text-center container-fluid">
           <LoadingSpinner />
         </div>;

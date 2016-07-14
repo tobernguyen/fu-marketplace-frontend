@@ -69,17 +69,25 @@ export const admin = (state = initialState, action) => {
       });
     case AdminActionTypes.ADMIN_GET_USERS_FAILURE:
       return _.merge({}, state, { users: [] });
+    case AdminActionTypes.ADMIN_UPDATE_USER_INFORMATION_REQUEST:
+      return _.merge({}, state, {
+        userManagement: {
+          isSubmitting: true
+        }
+      });
     case AdminActionTypes.ADMIN_UPDATE_USER_INFORMATION_SUCCESS:
       return _.merge({}, state, {
         userManagement: {
           selectedUser: response,
-          submitResult: AsyncResultCode.UPDATE_USER_INFORMATION_SUCCESS
+          submitResult: AsyncResultCode.UPDATE_USER_INFORMATION_SUCCESS,
+          isSubmitting: false
         }
       });
     case AdminActionTypes.ADMIN_UPDATE_USER_INFORMATION_FAILURE:
       return _.merge({}, state, {
         userManagement: {
-          submitResult: AsyncResultCode.UPDATE_USER_INFORMATION_FAIL
+          submitResult: AsyncResultCode.UPDATE_USER_INFORMATION_FAIL,
+          isSubmitting: false
         }
       });
     case AdminActionTypes.ADMIN_UPDATE_USER_ROLE_REQUEST:
@@ -199,6 +207,27 @@ export const admin = (state = initialState, action) => {
           submitResult: AsyncResultCode.UPDATE_SHOP_INFORMATION_FAIL
         }
       });
+    case AdminActionTypes.ADMIN_UPDATE_SHOP_OPENING_REQUEST:
+      return _.merge({}, state, {
+        shopManagement: {
+          isSubmitting: true
+        }
+      });
+    case AdminActionTypes.ADMIN_UPDATE_SHOP_OPENING_SUCCESS:
+      return _.merge({}, state, {
+        shopManagement: {
+          isSubmitting: false,
+          selectedShop: response,
+          submitResult: AsyncResultCode.UPDATE_SHOP_SHIP_PLACES_SUCCESS
+        }
+      });
+    case AdminActionTypes.ADMIN_UPDATE_SHOP_OPENING_FAILURE:
+      return _.merge({}, state, {
+        shopManagement: {
+          isSubmitting: false,
+          submitResult: AsyncResultCode.UPDATE_SHOP_SHIP_PLACES_FAIL
+        }
+      });
     case AdminActionTypes.ADMIN_UPDATE_SHOP_SHIP_PLACES_REQUEST:
       return _.merge({}, state, {
         shopManagement: {
@@ -291,13 +320,15 @@ export const admin = (state = initialState, action) => {
       return _.merge({}, state, {
         shopManagement: {
           selectedShop: response,
-          submitResult: AsyncResultCode.UNBAN_SHOP_SUCCESS
+          submitResult: AsyncResultCode.UNBAN_SHOP_SUCCESS,
+          isSubmitting: false
         }
       });
     case AdminActionTypes.ADMIN_UNBAN_SHOP_FAILURE:
       return _.merge({}, state, {
         shopManagement: {
-          submitResult: AsyncResultCode.UNBAN_SHOP_FAIL
+          submitResult: AsyncResultCode.UNBAN_SHOP_FAIL,
+          isSubmitting: false
         }
       });
     case AdminActionTypes.ADMIN_GET_REQUESTS_REQUEST:

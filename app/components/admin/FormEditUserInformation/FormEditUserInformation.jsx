@@ -17,6 +17,7 @@ import AsyncResultCode from 'app/shared/asyncResultCodes';
 const validate = (values) => {
   let errors = {};
   let hasErrors = false;
+  const validIdentityNumberLength = [0, 9 , 12];
   if(!values.email || values.email.trim() === '') {
     errors.email = 'common.form.validation.email.blank';
     hasErrors = true;
@@ -28,6 +29,11 @@ const validate = (values) => {
 
   if(values.identityNumber && isNaN(Number(values.identityNumber))) {
     errors.identityNumber = 'common.form.validation.identityNumber.invalid';
+    hasErrors = true;
+  }
+
+  if(values.identityNumber && validIdentityNumberLength.indexOf(values.identityNumber.length)) {
+    errors.identityNumber = 'common.form.validation.identityNumber.len';
     hasErrors = true;
   }
 
@@ -57,6 +63,7 @@ class FormEditUserInformation extends Component {
       },
       handleSubmit,
       submitting,
+      dirty,
       submitResult,
       intl: { formatMessage}
     } = this.props;
@@ -158,7 +165,7 @@ class FormEditUserInformation extends Component {
                   <FormattedMessage {...messages.formEditUserInformation.submitResult.fail}/>
                 </Alert>
               }
-              <Button type="submit" bsStyle="success" disabled={submitting}>
+              <Button type="submit" bsStyle="success" disabled={submitting || !dirty }>
                 {formatMessage(messages.formEditUserInformation.button.saveChanges)}
               </Button>
             </div>

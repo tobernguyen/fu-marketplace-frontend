@@ -185,6 +185,29 @@ export const adminUpdateShopInformation = (shopId, shop) => {
   }
 };
 
+export const ADMIN_UPDATE_SHOP_OPENING_REQUEST = 'ADMIN_UPDATE_SHOP_OPENING_REQUEST';
+export const ADMIN_UPDATE_SHOP_OPENING_SUCCESS = 'ADMIN_UPDATE_SHOP_OPENING_SUCCESS';
+export const ADMIN_UPDATE_SHOP_OPENING_FAILURE = 'ADMIN_UPDATE_SHOP_OPENING_FAILURE';
+const adminRequestUpdateShopOpeningStatus = (shopId, opening) => ({
+  [CALL_API]: {
+    types: [
+      ADMIN_UPDATE_SHOP_OPENING_REQUEST,
+      ADMIN_UPDATE_SHOP_OPENING_SUCCESS,
+      ADMIN_UPDATE_SHOP_OPENING_FAILURE
+      ],
+    url: `/api/v1/admin/shops/${shopId}`,
+    params: opening,
+    method: HTTP_METHODS.PUT
+  }
+});
+
+export const adminUpdateShopOpeningStatus = (shopId, opening) => {
+  return (dispatch) => {
+    return dispatch(adminRequestUpdateShopOpeningStatus(shopId, opening));
+  }
+};
+
+
 export const ADMIN_UPDATE_SHOP_SHIP_PLACES_REQUEST = 'ADMIN_UPDATE_SHOP_SHIP_PLACES_REQUEST';
 export const ADMIN_UPDATE_SHOP_SHIP_PLACES_SUCCESS = 'ADMIN_UPDATE_SHOP_SHIP_PLACES_SUCCESS';
 export const ADMIN_UPDATE_SHOP_SHIP_PLACES_FAILURE = 'ADMIN_UPDATE_SHOP_SHIP_PLACES_FAILURE';

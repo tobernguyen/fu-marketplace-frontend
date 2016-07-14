@@ -1,7 +1,10 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import { Link } from 'react-router';
 import './SideBar.scss';
 import classNames from 'classnames';
+import { FormattedMessage, FormattedHTMLMessage, injectIntl } from 'react-intl';
+import { messages } from 'app/components/admin/SideBar/SideBar.i18n';
+
 
 class SideBar extends Component {
   constructor(props) {
@@ -39,31 +42,46 @@ class SideBar extends Component {
           <ul className="nav">
             <li className={navHeaderClass}>
               <Link to="/admin" className={fullTitleClass}>FU Marketplace</Link>
-              <Link to="/admin" className={shortTitleClass}>FU Marketplace</Link>
+              <Link to="/admin" className={shortTitleClass}>FUM</Link>
             </li>
             <li>
               <Link to="/admin/dashboard" activeClassName="active">
-                <i className="fa fa-th-large" /><span>Dashboard</span>
+                <i className="fa fa-th-large" />
+                <span>
+                  <FormattedMessage {...messages.sideBar.dashboard}/>
+                </span>
               </Link>
             </li>
             <li>
               <Link to="/admin/users" activeClassName="active">
-                <i className="fa fa-users" /><span>User Management</span>
+                <i className="fa fa-users" />
+                <span>
+                  <FormattedMessage {...messages.sideBar.userManagement} />
+                </span>
               </Link>
             </li>
             <li>
               <Link to="/admin/shops" activeClassName="active">
-                <i className="fa fa-shopping-bag" /><span>Shop Management</span>
+                <i className="fa fa-shopping-bag" />
+                <span>
+                  <FormattedMessage {...messages.sideBar.shopManagement} />
+                </span>
               </Link>
             </li>
             <li>
               <Link to="/admin/requests" activeClassName="active">
-                <i className="fa fa-envelope" /><span>Request Management</span>
+                <i className="fa fa-envelope" />
+                <span>
+                  <FormattedMessage {...messages.sideBar.requestManagement} />
+                </span>
               </Link>
             </li>
             <li>
               <Link to="/admin/changepwd" activeClassName="active">
-                <i className="fa fa-key" /><span>Change password</span>
+                <i className="fa fa-key" />
+                <span>
+                  <FormattedMessage {...messages.sideBar.changePassword} />
+                </span>
               </Link>
             </li>
           </ul>

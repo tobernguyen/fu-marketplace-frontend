@@ -32,7 +32,6 @@ class ShopList extends Component {
               <th className="col-lg-4"><FormattedMessage {...messages.shopList.tableHead.shipPlaces}/></th>
               <th className="col-lg-1"><FormattedMessage {...messages.shopList.tableHead.opening}/></th>
               <th className="col-lg-1"><FormattedMessage {...messages.shopList.tableHead.status}/></th>
-              <th className="col-lg-1"><FormattedMessage {...messages.shopList.tableHead.banStatus}/></th>
               <th className="col-lg-1"><FormattedMessage {...messages.shopList.tableHead.action}/></th>
             </tr>
           </thead>

@@ -9,6 +9,7 @@ const INITIAL_STATE = {
     category: {},
     shipPlace: {}
   },
+  total: 0,
   hasMore: true
 };
 
@@ -19,20 +20,19 @@ export const feed = (state = INITIAL_STATE, action) => {
       const { result } = response;
       return _.merge({}, state, {
         shops: result.shops,
-        aggregations: result.aggregations
+        aggregations: result.aggregations,
+        total: result.total
       });
     case FeedActionTypes.GET_SHOPS_OF_PAGE_SUCCESS: {
-      const { result: { shops, aggregations } } = response;
+      const { result: { shops } } = response;
       return _.assign({}, state, {
         shops: _.concat(state.shops, shops),
-        aggregations: aggregations,
         hasMore: shops.length !== 0
       });
     }
     case FeedActionTypes.CLEAR_SHOPS_FEED: {
       return _.assign({}, state, {
         shops: INITIAL_STATE.shops,
-        aggregations: INITIAL_STATE.aggregations,
         hasMore: INITIAL_STATE.hasMore
       });
     }

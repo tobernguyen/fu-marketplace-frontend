@@ -5,6 +5,7 @@ import BlockDormList from 'app/components/home/BlockDormList';
 import CarouselPinnedItems from 'app/components/home/CarouselPinnedItems';
 import BlockBookmarks from 'app/components/home/BlockBookmarks';
 import ShopsFeed from './ShopsFeed';
+import { getShops } from 'app/actions/feed';
 import { getCategories, getShipPlaces, getAggregations } from 'app/selectors';
 
 
@@ -15,6 +16,11 @@ class Wrapper extends Component {
       query: null
     };
   }
+
+  componentWillMount() {
+    this.props.getShops();
+  }
+
   render() {
     const {
       categories,
@@ -23,8 +29,7 @@ class Wrapper extends Component {
         {
           category,
           shipPlace,
-          totalCategory,
-          totalShipPlace
+          total
         },
       query
     } = this.props;
@@ -36,12 +41,12 @@ class Wrapper extends Component {
               query={query}
               categories={categories}
               categoryCounter={category}
-              totalCategory={totalCategory} />
+              totalCategory={total} />
             <BlockDormList
               query={query}
               shipPlaces={shipPlaces}
               shipPlaceCounter={shipPlace}
-              totalShipPlace={totalShipPlace} />
+              totalShipPlace={total} />
             <BlockBookmarks />
           </div>
           <div className="col-md-9">
@@ -70,5 +75,5 @@ const mapStateToProps = (state) => {
 
 
 export default connect(mapStateToProps, {
-
+  getShops
 })(Wrapper)

@@ -8,29 +8,29 @@ const LabelOrderStatus = ({ status, intl: { formatMessage } }) => {
   let output = '';
   switch(status) {
     case OrderStatus.NEW:
-      output = <div className={`order-status status-${status}`}>{formatMessage(messages.orderList.tableBody.orderStatus.new)}</div>
+      output = <span className={`order-status status-${status}`}>{formatMessage(messages.orderList.tableBody.orderStatus.new)}</span>
       break;
     case OrderStatus.ACCEPTED:
-      output = <div className={`order-status status-${status}`}>{formatMessage(messages.orderList.tableBody.orderStatus.accepted)}</div>
+      output = <span className={`order-status status-${status}`}>{formatMessage(messages.orderList.tableBody.orderStatus.accepted)}</span>
       break;
     case OrderStatus.SHIPPING:
-      output = <div className={`order-status status-${status}`}>{formatMessage(messages.orderList.tableBody.orderStatus.shipping)}</div>
+      output = <span className={`order-status status-${status}`}>{formatMessage(messages.orderList.tableBody.orderStatus.shipping)}</span>
       break;
     case OrderStatus.COMPLETED:
-      output = <div className={`order-status status-${status}`}>{formatMessage(messages.orderList.tableBody.orderStatus.completed)}</div>
+      output = <span className={`order-status status-${status}`}>{formatMessage(messages.orderList.tableBody.orderStatus.completed)}</span>
       break;
     case OrderStatus.REJECTED:
-      output = <div className={`order-status status-${status}`}>{formatMessage(messages.orderList.tableBody.orderStatus.rejected)}</div>
+      output = <span className={`order-status status-${status}`}>{formatMessage(messages.orderList.tableBody.orderStatus.rejected)}</span>
       break;
     case OrderStatus.CANCELED:
-      output = <div className={`order-status status-${status}`}>{formatMessage(messages.orderList.tableBody.orderStatus.canceled)}</div>
+      output = <span className={`order-status status-${status}`}>{formatMessage(messages.orderList.tableBody.orderStatus.canceled)}</span>
       break;
     case OrderStatus.ABORTED:
-      output = <div className={`order-status status-${status}`}>{formatMessage(messages.orderList.tableBody.orderStatus.aborted)}</div>
+      output = <span className={`order-status status-${status}`}>{formatMessage(messages.orderList.tableBody.orderStatus.aborted)}</span>
       break;
 
   }
   return output;
-}
+};
 
 export default injectIntl(LabelOrderStatus);

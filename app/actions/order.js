@@ -174,31 +174,24 @@ export const userCancelOrder = (orderID) => {
 export const GET_ORDERS_OF_PAGE_REQUEST = 'GET_ORDERS_OF_PAGE_REQUEST';
 export const GET_ORDERS_OF_PAGE_SUCCESS = 'GET_ORDERS_OF_PAGE_SUCCESS';
 export const GET_ORDERS_OF_PAGE_FAILURE = 'GET_ORDERS_OF_PAGE_FAILURE';
-const requestGetOrdersOfPage = (params) => ({
+const requestGetOrdersOfPage = (shopID, params) => ({
   [CALL_API]: {
     types: [GET_ORDERS_OF_PAGE_REQUEST, GET_ORDERS_OF_PAGE_SUCCESS, GET_ORDERS_OF_PAGE_FAILURE],
-    url: `/api/v1/seller/shops/${params.shopID}/orders?page=${params.page}&size=${params.size}`,
-    method: HTTP_METHODS.GET
+    url: `/api/v1/seller/shops/${shopID}/orders`,
+    method: HTTP_METHODS.GET,
+    params: params
   }
 });
 
-export const GET_FIRST_PAGE_ORDERS_REQUEST = 'GET_FIRST_PAGE_ORDERS_REQUEST';
-export const GET_FIRST_PAGE_ORDERS_SUCCESS = 'GET_FIRST_PAGE_ORDERS_SUCCESS';
-export const GET_FIRST_PAGE_ORDERS_FAILURE = 'GET_FIRST_PAGE_ORDERS_FAILURE';
-const requestGetFirstPageOrders = (params) => ({
-  [CALL_API]: {
-    types: [GET_FIRST_PAGE_ORDERS_REQUEST, GET_FIRST_PAGE_ORDERS_SUCCESS, GET_FIRST_PAGE_ORDERS_FAILURE],
-    url: `/api/v1/seller/shops/${params.shopID}/orders?page=1&size=${params.size}`,
-    method: HTTP_METHODS.GET
-  }
-});
 
-export const getShopsOfPage = (params, firstPage) => {
+export const getOrdersOfPage = (shopID, params) => {
   return (dispatch) => {
-    if (firstPage) {
-      return dispatch(requestGetFirstPageOrders(params))
-    } else {
-      return dispatch(requestGetOrdersOfPage(params))
-    }
+    return dispatch(requestGetOrdersOfPage(shopID, params))
   }
-}
+};
+
+
+export const CLEAR_CURRENT_ORDERS = 'CLEAR_CURRENT_ORDERS';
+export const clearCurrentOrders = () => ({
+  type: CLEAR_CURRENT_ORDERS
+});

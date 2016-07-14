@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import './BlockOrderList.scss';
 import BlockOrderListHeader from 'app/components/home/BlockOrderListHeader';
 import BlockManageOrderHeader from 'app/components/home/BlockManageOrderHeader';
@@ -17,6 +17,10 @@ class BlockOrderList extends Component {
     };
 
     this.changeOrderListDisplay = (isCurrent) => {
+      if (!isCurrent) {
+        // If switch to ALL tab, reset content in CURRENT page
+        this.props.clearCurrentOrders()
+      }
       this.setState({
         isCurrent
       });
@@ -24,7 +28,7 @@ class BlockOrderList extends Component {
   }
 
   render() {
-    const { shopID, orders,query, changePageSize } = this.props;
+    const { shopID, currentOrders, orders, query, changePageSize, getOrdersOfPage } = this.props;
     const size = query.size || 10;
     const hasNextPage = orders.length < size;
     const { isCurrent } = this.state;
@@ -36,15 +40,15 @@ class BlockOrderList extends Component {
             changeOrderListDisplay={this.changeOrderListDisplay}/>
           <BlockCurrentOrderList
             shopID={this.props.shopID}
-            orders={this.props.currentOrders}
-            getShopsOfPage={this.props.getShopsOfPage}
+            currentOrders={currentOrders}
+            getOrdersOfPage={getOrdersOfPage}
             acceptOrder={this.props.acceptOrder}
             rejectOrder={this.props.rejectOrder}
             startShippingOrder={this.props.startShippingOrder}
             completeOrder={this.props.completeOrder}
             abortOrder={this.props.abortOrder}
             shouldUpdateOrderList={this.props.shouldUpdateOrderList}
-            />
+            hasMore={this.props.hasMore} />
         </div>)
 
     }
@@ -64,9 +68,12 @@ class BlockOrderList extends Component {
           />
         </div>
       </div>
-
     )
   }
 }
+
+BlockOrderList.propTypes = {
+  clearCurrentOrders: PropTypes.func.isRequired
+};
 
 export default injectIntl(BlockOrderList);

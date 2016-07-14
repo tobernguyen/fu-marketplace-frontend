@@ -25,6 +25,7 @@
 
     &.is-expand {
       height: 100%;
+      background: #f7f4f4;
 
       .preview {
         .title {
@@ -35,6 +36,7 @@
       .detail {
         display: table;
         width: 100%;
+
       }
     }
   }

@@ -13,7 +13,7 @@ class FormUpdateShop extends Component {
   }
 
   render() {
-    const { shopID, fields: { description, status }, handleSubmit, submitting, dirty, shopUpdated } = this.props;
+    const { shopID, fields: { description, status }, handleSubmit, formSubmitting, dirty, shopUpdated } = this.props;
     const { formatMessage } = this.props.intl;
     return (
       <div className="form-update-shop">
@@ -54,8 +54,9 @@ class FormUpdateShop extends Component {
             </div>
             <button type="submit"
                     className="btn btn-primary"
-                    disabled={submitting || !dirty}>
-              <FormattedMessage {...buttons.submit}/>
+                    disabled={formSubmitting || !dirty}>
+              <FormattedMessage {...buttons.submit}/>{' '}
+              {formSubmitting && <i className="fa fa-spinner fa-spin"/>}
             </button>
           </form>
         </Modal.Body>
@@ -65,10 +66,10 @@ class FormUpdateShop extends Component {
 }
 
 FormUpdateShop.propTypes = {
-  intl:         intlShape.isRequired,
-  fields:       PropTypes.object.isRequired,
-  handleSubmit: PropTypes.func.isRequired,
-  submitting:   PropTypes.bool.isRequired
+  intl:           intlShape.isRequired,
+  fields:         PropTypes.object.isRequired,
+  handleSubmit:   PropTypes.func.isRequired,
+  formSubmitting: PropTypes.bool.isRequired
 };
 
 export default injectIntl(FormUpdateShop)

@@ -23,9 +23,13 @@ export const shop = (state = INITIAL_STATE, action) => {
           request: response
       });
     case ShopActionTypes.SELLER_GET_SHOP_SUCCESS:
-    case ShopActionTypes.UPDATE_SHOP_INFO_SUCCESS:
       return _.assign({}, state, {
         sellerShop: response
+      });
+    case ShopActionTypes.UPDATE_SHOP_INFO_SUCCESS:
+      return _.assign({}, state, {
+        sellerShop: response,
+        formSubmitting: false
       });
     case ShopActionTypes.SELLER_UPDATE_SHIP_PLACES_SUCCESS:
       return _.assign({}, state, {
@@ -47,6 +51,7 @@ export const shop = (state = INITIAL_STATE, action) => {
     case ShopActionTypes.SHOP_CREATE_ITEM_REQUEST:
     case ShopActionTypes.SELLER_UPDATE_SHOP_ITEM_REQUEST:
     case ShopActionTypes.SELLER_UPDATE_SHIP_PLACES_REQUEST:
+    case ShopActionTypes.UPDATE_SHOP_INFO_REQUEST:
       return _.assign({}, state, {
         formSubmitting: true
       });

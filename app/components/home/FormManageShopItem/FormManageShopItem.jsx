@@ -150,12 +150,14 @@ class FormManageShopItem extends Component {
                   <button type="submit"
                           className="btn btn-primary"
                           disabled={formSubmitting || !dirty || invalid}>
-                    {updateMode ? <FormattedMessage {...buttons.update} /> : <FormattedMessage {...buttons.add} />}
+                    {updateMode ? <FormattedMessage {...buttons.update} /> : <FormattedMessage {...buttons.add} />}{' '}
+                    {formSubmitting && <i className="fa fa-spinner fa-spin"/>}
                   </button>
                   {updateMode &&
                   <button className="btn btn-danger"
                           onClick={this.handleDelete}>
-                    <FormattedMessage {...buttons.delete} />
+                    <FormattedMessage {...buttons.delete} />{' '}
+                    {formSubmitting && <i className="fa fa-spinner fa-spin"/>}
                   </button>}
                 </ButtonToolbar>
               </div>

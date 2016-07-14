@@ -22,7 +22,7 @@ class UpdateShop extends Component {
       const shopData = _.assign({}, formValues, {
         status: Number(formValues.status)
       });
-      
+
       this.props.updateShopInfo(shopData, this.props.params.shopID);
     }
   }
@@ -39,7 +39,11 @@ class UpdateShop extends Component {
 
   render() {
     return (
-      <UpdateShopForm onSubmit={this.handleUpdateShop} shopID={this.props.params.shopID} shopUpdated={this.state.shopUpdated} />
+      <UpdateShopForm
+        onSubmit={this.handleUpdateShop}
+        shopID={this.props.params.shopID}
+        shopUpdated={this.state.shopUpdated}
+        formSubmitting={this.props.formSubmitting} />
     );
   }
 }
@@ -47,13 +51,14 @@ class UpdateShop extends Component {
 const mapStateToProps = (state) => {
   const { shop } = state;
   return {
-    sellerShop: shop.sellerShop
+    sellerShop: shop.sellerShop,
+    formSubmitting: shop.formSubmitting
   }
 };
 
 UpdateShop.propTypes = {
   updateShopInfo: PropTypes.func.isRequired
-}
+};
 
 export default connect(mapStateToProps, {
   updateShopInfo

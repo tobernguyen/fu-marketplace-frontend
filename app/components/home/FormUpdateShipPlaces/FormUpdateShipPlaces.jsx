@@ -34,7 +34,8 @@ class FormUpdateShipPlaces extends Component {
             </div>
             <button type="submit"
                     className="btn btn-primary" disabled={formSubmitting}>
-              <FormattedMessage {...buttons.submit}/>
+              <FormattedMessage {...buttons.submit}/>{' '}
+              {formSubmitting && <i className="fa fa-spinner fa-spin"/>}
             </button>
           </form>
         </Modal.Body>

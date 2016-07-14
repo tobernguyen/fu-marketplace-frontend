@@ -7,7 +7,8 @@ import {
   getNotifications,
   markNotificationAsRead,
   markAllNotificationsAsRead,
-  newNotification
+  newNotification,
+  clearNotifications
 } from 'app/actions/notification';
 import { getUser, getOwnNotifications } from 'app/selectors';
 import { EVENTS } from 'app/shared/socketIOEvents';
@@ -49,9 +50,10 @@ class NavigationBar extends Component {
   }
 
   render () {
-    const { currentUser, signOutGoogle, handleSearch, displaySearch, notifications, hasMore } = this.props;
+    const { currentUser, signOutGoogle, handleSearch, displaySearch, notifications, hasMore, clearNotifications } = this.props;
     return (
       <Header
+        clearNotifications={clearNotifications}
         loadMoreNotifications={this.loadMoreNotifications}
         onNotificationClick={this.onNotificationClick}
         markAsAllRead={this.markAsAllRead}
@@ -67,7 +69,6 @@ class NavigationBar extends Component {
 
   componentWillMount() {
     this.props.getCurrentUser();
-    this.props.getNotifications(1);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -95,7 +96,8 @@ NavigationBar.propTypes = {
   signOutGoogle: PropTypes.func.isRequired,
   getNotifications: PropTypes.func.isRequired,
   markNotificationAsRead: PropTypes.func.isRequired,
-  markAllNotificationsAsRead: PropTypes.func.isRequired
+  markAllNotificationsAsRead: PropTypes.func.isRequired,
+  clearNotifications: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => {
@@ -113,5 +115,6 @@ export default withRouter(connect(mapStateToProps, {
   getNotifications,
   markNotificationAsRead,
   markAllNotificationsAsRead,
-  newNotification
+  newNotification,
+  clearNotifications
 })(NavigationBar))

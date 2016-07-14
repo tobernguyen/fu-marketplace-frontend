@@ -18,6 +18,17 @@ export default class BlockNotificationDropdown extends Component {
     };
 
     this.loadMore = this.loadMore.bind(this);
+
+    this.onToggleHandle = (isOpen) => {
+      if (!isOpen) {
+        this.props.clearNotifications();
+        this.setState({
+          elements: []
+        })
+      } else {
+        this.props.loadMoreNotifications(1);
+      }
+    }
   }
 
   loadMore(page) {
@@ -56,6 +67,7 @@ export default class BlockNotificationDropdown extends Component {
     }
   }
 
+
   render() {
     const { eventKey, markAsAllRead, hasMoreNotifications } = this.props;
     const title = <div>
@@ -67,6 +79,7 @@ export default class BlockNotificationDropdown extends Component {
         eventKey={eventKey}
         title={title}
         className="block-notification-dropdown"
+        onToggle={this.onToggleHandle}
         id="notifications-dropdown" noCaret>
         <li className="header clearfix">
           <h4 className="title">
@@ -105,5 +118,6 @@ BlockNotificationDropdown.propTypes = {
   notifications: PropTypes.array.isRequired,
   onNotificationClick: PropTypes.func.isRequired,
   markAsAllRead: PropTypes.func.isRequired,
-  loadMoreNotifications: PropTypes.func.isRequired
+  loadMoreNotifications: PropTypes.func.isRequired,
+  clearNotifications: PropTypes.func.isRequired
 };

@@ -19,7 +19,6 @@ export const feed = (state = INITIAL_STATE, action) => {
     case FeedActionTypes.GET_SHOPS_SUCCESS:
       const { result } = response;
       return _.merge({}, state, {
-        shops: result.shops,
         aggregations: result.aggregations,
         total: result.total
       });

@@ -54,7 +54,9 @@ export default class Header extends Component {
       onNotificationClick,
       markAsAllRead,
       hasMoreNotifications,
-      loadMoreNotifications
+      loadMoreNotifications,
+      clearNotifications,
+      loadFirstNotificationPage
     } = this.props;
     const normalUser = roles && roles.length == 0;
     return (
@@ -85,6 +87,7 @@ export default class Header extends Component {
             </Navbar.Form>}
             <Nav pullRight>
               <BlockNotificationDropdown
+                clearNotifications={clearNotifications}
                 notifications={notifications}
                 hasMoreNotifications={hasMoreNotifications}
                 loadMoreNotifications={loadMoreNotifications}

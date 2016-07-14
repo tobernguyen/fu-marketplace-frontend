@@ -84,3 +84,9 @@ export const newNotification = (notification) => ({
     notification: notification
   }
 });
+
+export const CLEAR_NOTIFICATIONS = 'CLEAR_NOTIFICATIONS';
+export const clearNotifications = () => ({
+  type: CLEAR_NOTIFICATIONS
+
+});

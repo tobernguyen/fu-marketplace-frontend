@@ -110,7 +110,7 @@ class ManageOrders extends Component {
       const { shopID } = this.props.params;
       const page = query.page || 1;
       const status = query.status || 'all';
-      this.props.router.push(`/shops/${shopID}/dashboard/orders?size=${pageSize}&page=${page}&status=${status}`);
+      this.props.router.push(`/dashboard/shops/${shopID}/orders?size=${pageSize}&page=${page}&status=${status}`);
     }
   }
 

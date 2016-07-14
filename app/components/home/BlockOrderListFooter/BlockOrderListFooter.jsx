@@ -21,12 +21,12 @@ const BlockOrderListFooter = ({ shopID, query, hasNextPage, changePageSize }) =>
       <div className="pull-left">
         <ul>
           <li>
-          <Link className={previousButtonClass} to={`/shops/${shopID}/dashboard/orders`} query={{ status, size, page: Number(page) - 1 }}>
+          <Link className={previousButtonClass} to={`/dashboard/shops/${shopID}/orders`} query={{ status, size, page: Number(page) - 1 }}>
             <span aria-hidden="true">&larr;</span><FormattedMessage {...messages.orderListFooter.previous}/>
           </Link>
           </li>
           <li>
-            <Link className={nextButtonClass} to={`/shops/${shopID}/dashboard/orders`} query={{ status, size, page: Number(page) + 1 }}>
+            <Link className={nextButtonClass} to={`/dashboard/shops/${shopID}/orders`} query={{ status, size, page: Number(page) + 1 }}>
               <FormattedMessage {...messages.orderListFooter.next}/><span aria-hidden="true">&rarr;</span>
             </Link>
           </li>

@@ -1,5 +1,21 @@
 .manage-order-header {
-  h4 {
-    display: inline;
+  .title {
+    float: left;
+  }
+  .switch-mode {
+    border: 2px solid #c0392b;
+    border-radius: 4px;
+    button {
+      box-shadow: none;
+      background-color: transparent;
+      min-width: 80px;
+      font-size: 14px;
+      &.active {
+        background-color: #c0392b;
+        border-radius: 0;
+        color: #FFFFFF;
+
+      }
+    }
   }
 }

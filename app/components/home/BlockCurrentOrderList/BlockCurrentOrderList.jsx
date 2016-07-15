@@ -1,99 +1,34 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import BlockCurrentOrderListRow from './BlockCurrentOrderListRow.jsx';
 import './BlockCurrentOrderList.scss';
 import { PulseLoader } from 'halogen';
-import Infinite from 'react-infinite';
+import InfiniteScroll from 'app/components/common/InfiniteScroll';
 
 class BlockCurrentOrderList extends Component {
   constructor(props) {
     super(props);
 
     this.state= {
-      isInfiniteLoading: false,
-      loadedPage: 0,
-      loadedOrders: 0,
-      query: {}
+      elements: []
     };
 
-    this.handleInfiniteLoad = () => {
-      const { query, isInfiniteLoading } = this.state;
-      const { shopID } = this.props;
-      if(!isInfiniteLoading) {
-        let params = {
-          shopID: shopID,
-          page: this.state.loadedPage + 1,
-          size: 10
-        };
+    this.loadMore = (page) => {
+      this.props.getOrdersOfPage({
+        page: page
+      });
+    };
+  }
 
-        if (query) {
-
-        }
-
-        this.props.getShopsOfPage(params, this.state.loadedPage === 0);
-        this.setState({
-          isInfiniteLoading: true
-        });
-      }
-    }
-
-    this.elementInfiniteLoad = () => {
-      return (
-        <PulseLoader className="feed-loader" color="#C0392B" size="12px" />
-      )
-    }
+  componentWillMount() {
+    this.props.getOrdersOfPage({
+      page: 1
+    });
   }
 
   componentWillReceiveProps(nextProps) {
-    const { query, isInfiniteLoading } = this.state;
-    const { shopID } = nextProps;
-    if(nextProps.orders) {
-      if(nextProps.orders.length > this.state.loadedOrders) {
-        this.setState({
-          loadedOrders: nextProps.orders.length,
-          loadedPage: this.state.loadedPage + 1
-        })
-      } else if (nextProps.orders.length === 0) {
-        this.setState({
-          loadedPage: 0,
-          loadedOrders: 0
-        })
-      }
-
+    if(nextProps.currentOrders) {
       this.setState({
-        isInfiniteLoading: false
-      })
-    }
-    if(nextProps.shouldUpdateOrderList && !isInfiniteLoading) {
-      let params = {
-        shopID: shopID,
-        page: this.state.loadedPage,
-        size: 10
-      };
-
-      if (query) {
-
-      }
-
-      this.props.getShopsOfPage(params, this.state.loadedPage === 0);
-      this.setState({
-        isInfiniteLoading: true
-      });
-    }
-  }
-
-  render() {
-    const { orders } = this.props;
-    return (
-      <div className="current-order-list">
-      <Infinite elementHeight={250}
-                                     containerHeight={window.innerHeight}
-                                     elementHeight={150}
-                                     infiniteLoadBeginEdgeOffset={0}
-                                     onInfiniteLoad={this.handleInfiniteLoad}
-                                     loadingSpinnerDelegate={this.elementInfiniteLoad()}
-                                     isInfiniteLoading={this.state.isInfiniteLoading}
-                                     timeScrollStateLastsForAfterUserScrolls>
-        {orders.map(order =>
+        elements: nextProps.currentOrders.map((order) =>
           <BlockCurrentOrderListRow
             key={order.id}
             order={order}
@@ -102,12 +37,37 @@ class BlockCurrentOrderList extends Component {
             startShippingOrder={this.props.startShippingOrder}
             completeOrder={this.props.completeOrder}
             abortOrder={this.props.abortOrder}
-            />
-        )}
-        </Infinite>
+          />
+        )
+      });
+    }
+  }
+
+  render() {
+    return (
+      <div className="current-order-list">
+        {this.state.elements.length > 0 &&
+        <InfiniteScroll
+          pageStart={1}
+          loadMore={this.loadMore}
+          hasMore={this.props.hasMore}
+          loader={<PulseLoader className="feed-loader" color="#C0392B" size="12px" />}>
+          {this.state.elements}
+        </InfiniteScroll>}
       </div>
     );
   }
 }
+
+BlockCurrentOrderList.propTypes = {
+  hasMore: PropTypes.bool.isRequired,
+  acceptOrder: PropTypes.func.isRequired,
+  rejectOrder: PropTypes.func.isRequired,
+  abortOrder: PropTypes.func.isRequired,
+  startShippingOrder: PropTypes.func.isRequired,
+  completeOrder: PropTypes.func.isRequired,
+  getOrdersOfPage: PropTypes.func.isRequired,
+  currentOrders: PropTypes.array.isRequired
+};
 
 export default BlockCurrentOrderList;

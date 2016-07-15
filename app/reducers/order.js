@@ -1,15 +1,16 @@
-import * as OrderActionTypes from 'app/actions/order';
+import * as OrderActionTypes from '../actions/order';
 import _ from 'lodash';
 import AsyncResultCode from 'app/shared/asyncResultCodes';
 const INITIAL_STATE = {
   orders: [],
   currentOrders: [],
   orderResult: '',
-  shouldUpdateOrderList: false
+  shouldUpdateOrderList: false,
+  hasMore: true
 };
 
 export const order = (state = INITIAL_STATE, action) => {
-  const { type } = action;
+  const { type, response } = action;
   switch(type) {
     case OrderActionTypes.USER_PLACE_ORDER_REQUEST:
     case OrderActionTypes.CLEAR_ORDER_RESULT:
@@ -68,23 +69,22 @@ export const order = (state = INITIAL_STATE, action) => {
       return _.merge({}, state, {
         shouldUpdateOrderList: true
       });
-    case OrderActionTypes.GET_FIRST_PAGE_ORDERS_REQUEST:
-      return _.assign({},state, {
-        currentOrders: [],
-        orderResult: '',
-        shouldUpdateOrderList: false
-      });
-    case OrderActionTypes.GET_FIRST_PAGE_ORDERS_SUCCESS:
-      return _.merge({}, state, {
-        currentOrders: action.response.orders
-      });
-    case OrderActionTypes.GET_ORDERS_OF_PAGE_REQUEST:
-      return state;
     case OrderActionTypes.GET_ORDERS_OF_PAGE_SUCCESS:
-      return _.merge({}, state, {
-        currentOrders: _.concat(state.orders, action.response.orders)
+    {
+      const { orders } = response;
+      return _.assign({}, state, {
+        currentOrders: _.concat(state.currentOrders, orders),
+        hasMore: orders.length !== 0
       });
+    }
+    case OrderActionTypes.CLEAR_CURRENT_ORDERS:
+    {
+      return _.assign({}, state, {
+        currentOrders: INITIAL_STATE.currentOrders,
+        hasMore: INITIAL_STATE.hasMore
+      });
+    }
     default:
       return state;
   }
-}
+};

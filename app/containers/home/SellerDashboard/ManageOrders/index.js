@@ -11,7 +11,8 @@ import {
   sellerStartShippingOrder,
   sellerCompleteOrder,
   sellerAbortOrder,
-  getShopsOfPage
+  getOrdersOfPage,
+  clearCurrentOrders
 } from 'app/actions/order';
 import Sticky from 'react-stickynode';
 import { withRouter } from 'react-router'
@@ -75,7 +76,7 @@ class ManageOrders extends Component {
       this.setState({
         selectedOrder
       });
-    }
+    };
 
     this.sellerStartShippingOrder = (orderID) => {
       this.props.sellerStartShippingOrder(orderID);
@@ -84,7 +85,7 @@ class ManageOrders extends Component {
       this.setState({
         selectedOrder
       });
-    }
+    };
 
     this.sellerCompleteOrder = (orderID) => {
       this.props.sellerCompleteOrder(orderID);
@@ -93,7 +94,7 @@ class ManageOrders extends Component {
       this.setState({
         selectedOrder
       });
-    }
+    };
 
     this.sellerAbortOrder = (orderID, messages) => {
       this.props.sellerAbortOrder(orderID, messages);
@@ -102,7 +103,7 @@ class ManageOrders extends Component {
       this.setState({
         selectedOrder
       });
-    }
+    };
 
     this.changePageSize = (e) => {
       const pageSize = e.target.value;
@@ -111,6 +112,10 @@ class ManageOrders extends Component {
       const page = query.page || 1;
       const status = query.status || 'all';
       this.props.router.push(`/dashboard/shops/${shopID}/orders?size=${pageSize}&page=${page}&status=${status}`);
+    };
+
+    this.handleGetOrdersOfPage = (params) => {
+      this.props.getOrdersOfPage(shopID, params);
     }
   }
 
@@ -134,19 +139,22 @@ class ManageOrders extends Component {
 
   render() {
     const { query } = this.props.location;
-    const { getShopsOfPage } = this.props;
+    const { currentOrders, orders, hasMore, clearCurrentOrders } = this.props;
+
     return (
       <div className="container home-body">
         <div className="seller-dashboard">
           <div className="col-md-9">
             <div className="row">
               <BlockOrderList
+                clearCurrentOrders={clearCurrentOrders}
+                hasMore={hasMore}
                 shopID ={this.props.params.shopID}
-                orders={this.props.orders}
-                currentOrders={this.props.currentOrders}
+                orders={orders}
+                currentOrders={currentOrders}
                 viewOrder={this.viewOrder}
                 query={query}
-                getShopsOfPage={getShopsOfPage}
+                getOrdersOfPage={this.handleGetOrdersOfPage}
                 changePageSize={this.changePageSize}
                 acceptOrder={this.sellerAcceptOrder}
                 rejectOrder={this.sellerRejectOrder}
@@ -185,13 +193,15 @@ const mapStateToProps = (state) => {
   const { shop } = state;
   return {
     currentOrders: state.order.currentOrders,
+    hasMore: state.order.hasMore,
     orders: state.order.orders,
     sellerShop: shop.sellerShop,
     shouldUpdateOrderList: state.order.shouldUpdateOrderList
+
   }
 };
 
-export default connect(mapStateToProps, {
+export default withRouter(connect(mapStateToProps, {
   getSellerShop,
   updateShopInfo,
   sellerGetOrder,
@@ -200,5 +210,6 @@ export default connect(mapStateToProps, {
   sellerStartShippingOrder,
   sellerCompleteOrder,
   sellerAbortOrder,
-  getShopsOfPage
-})(withRouter(ManageOrders))
+  getOrdersOfPage,
+  clearCurrentOrders
+})(ManageOrders))

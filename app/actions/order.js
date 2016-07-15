@@ -171,6 +171,27 @@ export const userCancelOrder = (orderID) => {
   }
 };
 
+export const USER_RATE_ORDER_REQUEST = 'USER_RATE_ORDER_REQUEST';
+export const USER_RATE_ORDER_SUCCESS = 'USER_RATE_ORDER_SUCCESS';
+export const USER_RATE_ORDER_FAILURE = 'USER_RATE_ORDER_FAILURE';
+const userRequestRateOrder = (orderID, rate, comment) => ({
+  [CALL_API]: {
+    types: [USER_RATE_ORDER_REQUEST, USER_RATE_ORDER_SUCCESS, USER_RATE_ORDER_FAILURE],
+    url: `/api/v1/orders/${orderID}/rate`,
+    method: HTTP_METHODS.POST,
+    params: {
+      'rate': rate,
+      'comment': comment
+    }
+  }
+});
+
+export const userRateOrder = (orderID, rate, comment = '') => {
+  return (dispatch) => {
+    return dispatch(userRequestRateOrder(orderID, rate, comment));
+  }
+}
+
 export const GET_ORDERS_OF_PAGE_REQUEST = 'GET_ORDERS_OF_PAGE_REQUEST';
 export const GET_ORDERS_OF_PAGE_SUCCESS = 'GET_ORDERS_OF_PAGE_SUCCESS';
 export const GET_ORDERS_OF_PAGE_FAILURE = 'GET_ORDERS_OF_PAGE_FAILURE';

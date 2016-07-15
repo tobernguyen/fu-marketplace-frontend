@@ -1,0 +1,6 @@
+{
+  "name": "BlockRateOrder",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./BlockRateOrder.jsx"
+}

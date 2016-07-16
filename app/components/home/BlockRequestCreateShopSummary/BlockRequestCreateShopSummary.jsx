@@ -12,45 +12,38 @@ export default class BlockRequestCreateShopSummary extends Component {
     } = this.props.requestSummary;
     return (
       <div className="block-request-create-shop-summary">
-        <h4 className="page-header">
-          <FormattedMessage {...messages.requestShopSuccessfullyTitle} />:
+        <h4>
+          <FormattedMessage {...messages.requestShopSuccessfullyTitle} />
         </h4>
-        <div className="panel panel-info">
-          <div className="panel-heading">
-            <h3 className="panel-title">
-              <FormattedMessage {...messages.shopOwnerInfo} />:
-            </h3>
-          </div>
-          <div className="panel-body">
-            <ul>
+        <div className="callout seller">
+          <h3 className="title">
+            <FormattedMessage {...messages.shopOwnerInfo} />
+          </h3>
+          <div className="body">
+            <ul className="nav">
               <li>
-                <FormattedMessage {...fields.phone} />: {phone}
+                <FormattedMessage {...fields.phone} />: <code>{phone}</code>
               </li>
               <li>
-                <FormattedMessage {...fields.identityNumber} />: {identityNumber}
+                <FormattedMessage {...fields.identityNumber} />: <code>{identityNumber}</code>
               </li>
             </ul>
           </div>
         </div>
-        <div className="panel panel-info">
-          <div className="panel-heading">
-            <h3 className="panel-title">
-              <FormattedMessage {...messages.shopInfo} />:
-            </h3>
-          </div>
-          <div className="panel-body">
-            <ul>
+        <div className="callout shop">
+          <h3 className="title">
+            <FormattedMessage {...messages.shopInfo} />
+          </h3>
+          <div className="body">
+            <ul className="nav">
               <li>
-                <FormattedMessage {...fields.shopName} />: {name}
+                <FormattedMessage {...fields.shopName} />: <code>{name}</code>
               </li>
               <li>
-                <FormattedMessage {...fields.shopDescription} />: {description}
+                <FormattedMessage {...fields.shopDescription} />: <code>{description}</code>
               </li>
               <li>
-                <FormattedMessage {...fields.shopAddress} />: {address}
-              </li>
-              <li>
-                <FormattedMessage {...fields.note} />: {note}
+                <FormattedMessage {...fields.shopAddress} />: <code>{address}</code>
               </li>
             </ul>
           </div>

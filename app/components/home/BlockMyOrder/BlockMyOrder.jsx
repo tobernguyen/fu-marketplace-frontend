@@ -62,6 +62,7 @@ class BlockMyOrder extends Component {
               order={order}
               openModal={this.openModal}
               rateOrder={this.props.rateOrder}
+              key={order.id}
               />
           )}
         </tbody>

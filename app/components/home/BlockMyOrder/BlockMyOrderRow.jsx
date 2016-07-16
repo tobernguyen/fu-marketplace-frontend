@@ -10,18 +10,10 @@ class BlockMyOrderRow extends Component {
   constructor(props) {
     super(props);
 
-    const { order } = this.props;
-    this.state = {
-      order
-    }
 
     this.rateOrder = (rate) => {
-      const { order } = this.state;
+      const { order } = this.props;
       this.props.rateOrder(order.id, rate);
-      order['rate'] = rate;
-      this.setState({
-        order
-      });
     }
   }
   renderItemNameList(order) {
@@ -59,9 +51,10 @@ class BlockMyOrderRow extends Component {
       case OrderStatus.ABORTED:
         output = (
           <BlockStars
-            name={'rate'}
+            name={`rate-order-${order.id}`}
             value={order.rate || 0}
             onStarClick={this.rateOrder}
+            key={order.id}
           />
         )
         break;
@@ -72,9 +65,9 @@ class BlockMyOrderRow extends Component {
   }
 
   render() {
-    const { order } = this.state;
+    const { order } = this.props;
     return (
-      <tr key={order.id}>
+      <tr>
         <td>{order.id}</td>
         <td>{this.renderItemNameList(order)}</td>
         <td>{this.calculateTotalAmount(order)}</td>

@@ -4,6 +4,7 @@ import './FormRequestCreateShopIntro.scss';
 
 class FormRequestCreateShopIntro extends Component {
   render() {
+    const { loaded } = this.props;
     return (
       <div className="form-request-create-shop-intro">
         <div className="action-points">
@@ -27,12 +28,16 @@ class FormRequestCreateShopIntro extends Component {
             <p>Bắt đầu bán hàng luôn!</p>
           </div>
         </div>
-        <button type="submit" className="btn btn-primary" onClick={this.props.nextPage}>
-          Đăng ký ngay hôm nay !
+        <button type="submit" disabled={!loaded} className="btn btn-primary" onClick={this.props.nextPage}>
+          Đăng ký ngay hôm nay ! {!loaded && <i className="fa fa-spinner fa-spin" />}
         </button>
       </div>
     );
   }
 }
+
+FormRequestCreateShopIntro.propTypes = {
+  loaded: PropTypes.bool.isRequired
+};
 
 export default FormRequestCreateShopIntro;

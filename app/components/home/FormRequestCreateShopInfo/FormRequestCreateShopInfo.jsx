@@ -9,9 +9,9 @@ class FormRequestCreateShopInfo extends Component {
       fields: { shopName, description, address },
       handleSubmit,
       previousPage,
-      submitting
+      submitting,
+      hasShop
     } = this.props;
-
     const { formatMessage } = this.props.intl;
 
     return (
@@ -58,9 +58,9 @@ class FormRequestCreateShopInfo extends Component {
         </div>
 
         <div className="form-group clearfix">
-          <button type="button" disabled={submitting} onClick={previousPage} className="btn btn-primary pull-left">
+          {!hasShop && <button type="button" disabled={submitting} onClick={previousPage} className="btn btn-primary pull-left">
             <i className="fa fa-chevron-left"/> <FormattedMessage {...buttons.previous} />
-          </button>
+          </button>}
           <button type="submit" disabled={submitting} className="btn btn-success pull-right">
             {submitting ? <i className="fa fa-spinner" /> : <i className="fa fa-paper-plane"/>} <FormattedMessage {...buttons.register} />
           </button>

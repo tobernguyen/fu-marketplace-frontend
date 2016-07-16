@@ -8,6 +8,8 @@ import { requestCreateShop } from 'app/actions/shop';
 import { updateModalSize } from 'app/actions/common';
 import { getPendingRequests } from 'app/actions/shop';
 import { titles } from 'app/shared/titles';
+import { getUser } from 'app/selectors';
+
 
 class RequestCreateShop extends Component {
   constructor(props) {
@@ -21,14 +23,14 @@ class RequestCreateShop extends Component {
     this.props.updateModalSize(null);
     this.props.getPendingRequests();
   }
-  
+
   render() {
     const { formatMessage } = this.props.intl;
-    const { shopOpeningRequests } = this.props;
+    const { shopOpeningRequests, currentUser } = this.props;
 
     let content;
     if (shopOpeningRequests.length == 0) {
-      content = <RequestCreateShopForm onSubmit={this.props.requestCreateShop} />
+      content = <RequestCreateShopForm ownShops={currentUser.shops} onSubmit={this.props.requestCreateShop} />
     } else {
       content = <BlockShopOpeningPendingRequests shopOpeningRequests={this.props.shopOpeningRequests} />
     }
@@ -46,9 +48,9 @@ class RequestCreateShop extends Component {
 
 
 const mapStateToProps = (state) => {
-  const { shop } = state;
   return {
-    shopOpeningRequests: shop.shopOpeningRequests
+    shopOpeningRequests: state.shop.shopOpeningRequests,
+    currentUser: getUser(state)
   }
 };
 

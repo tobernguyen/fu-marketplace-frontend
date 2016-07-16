@@ -55,10 +55,9 @@ export default class Header extends Component {
       markAsAllRead,
       hasMoreNotifications,
       loadMoreNotifications,
-      clearNotifications,
-      loadFirstNotificationPage
+      clearNotifications
     } = this.props;
-    const normalUser = roles && roles.length == 0;
+    // const normalUser = roles && roles.length == 0;
     return (
       <div className="home-header">
         <Navbar inverse fixedTop>
@@ -108,22 +107,19 @@ export default class Header extends Component {
                   </MenuItem>
                 </LinkContainer>
                 <MenuItem divider />
-                {normalUser &&
+                {shops instanceof Array && shops.map((shop) =>
+                  <LinkContainer key={shop.id} to={`/dashboard/shops/${shop.id}`}>
+                    <MenuItem eventKey={2.3}>
+                      <i className="fa fa-opencart"/> {shop.name}
+                    </MenuItem>
+                  </LinkContainer>
+                )}
                 <LinkContainer to='/shops/request_create'>
                   <MenuItem eventKey={2.3}>
-                    <i className="fa fa-opencart"/>
+                    <i className="fa fa-flag-o"/>
                     <FormattedMessage {...links.openShop} />
                   </MenuItem>
-                </LinkContainer>}
-                {shops instanceof Array && shops.map((shop) => {
-                  return (
-                    <LinkContainer key={shop.id} to={`/dashboard/shops/${shop.id}`}>
-                      <MenuItem eventKey={2.3}>
-                        <i className="fa fa-opencart"/> {shop.name}
-                      </MenuItem>
-                    </LinkContainer>
-                  )
-                })}
+                </LinkContainer>
                 <MenuItem divider />
                 <MenuItem eventKey={2.4}>
                   <i className="fa fa-cog"/>

@@ -20,9 +20,6 @@ export default class BlockShopOpeningPendingRequests extends Component {
                 <FormattedMessage {...fields.shopDescription} />
               </th>
               <th>
-                <FormattedMessage {...fields.note} />
-              </th>
-              <th>
                 <FormattedMessage {...fields.adminMessage} />
               </th>
             </tr>
@@ -34,7 +31,6 @@ export default class BlockShopOpeningPendingRequests extends Component {
                   <th scope="row">{item.id}</th>
                   <td>{item.name}</td>
                   <td>{item.description}</td>
-                  <td>{item.note}</td>
                   <td>{item.adminMessage || ''}</td>
                 </tr>
               )

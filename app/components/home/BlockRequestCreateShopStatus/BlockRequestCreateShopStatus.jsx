@@ -33,7 +33,6 @@ export default class BlockRequestCreateShopStatus extends Component {
   }
 
   render() {
-    const { request, error } = this.props;
     return (
       <div className="block-request-create-shop-status">
         {this.state.loading && <DotLoader className="loader" color="#C0392B" size="120px" margin="4px"/>}

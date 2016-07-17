@@ -42,14 +42,17 @@ export default class RequestCreateShopForm extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.ownShops) {
-      if (nextProps.ownShops instanceof Array) {
-        // Current user was loaded
-        this.setState({
-          loaded: true,
-          hasShop: nextProps.ownShops.length > 0
-        })
+
+    const { currentUser } = nextProps;
+
+    if (currentUser) {
+      let newState = {
+        loaded: true
+      };
+      if (currentUser.shops instanceof Array) {
+        newState.hasShop = (nextProps.ownShops.length > 0);
       }
+      this.setState(newState)
     }
   }
 

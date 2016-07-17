@@ -30,7 +30,7 @@ class RequestCreateShop extends Component {
 
     let content;
     if (shopOpeningRequests.length == 0) {
-      content = <RequestCreateShopForm ownShops={currentUser.shops} onSubmit={this.props.requestCreateShop} />
+      content = <RequestCreateShopForm currentUser={currentUser} onSubmit={this.props.requestCreateShop} />
     } else {
       content = <BlockShopOpeningPendingRequests shopOpeningRequests={this.props.shopOpeningRequests} />
     }

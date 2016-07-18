@@ -9,7 +9,7 @@ import { uploadShopAvatar, uploadShopCover, getSellerShop, updateShopInfo } from
 import Sticky from 'react-stickynode';
 import { getMetadata } from 'app/actions/common';
 import { registerOneSignal } from 'app/actions/notification';
-import { getHashCategories } from 'app/selectors';
+import { getHashCategories, getUser } from 'app/selectors';
 import _ from 'lodash';
 import OneSignal from 'onesignal';
 import BlockEnablePushSuggestion from 'app/components/home/BlockEnablePushSuggestion';
@@ -77,6 +77,7 @@ class SellerDashboard extends Component {
           <div className="col-md-9">
             <div className="row">
               <BlockShopHeader
+                shopOwner={this.props.currentUser}
                 shop={this.props.sellerShop}
                 sellerMode={true}
                 uploadShopCover={this.handleUploadShopCover}
@@ -112,6 +113,7 @@ const mapStateToProps = (state) => {
   const { shop, notification: { oneSignalRegistered } } = state;
   return {
     sellerShop: shop.sellerShop,
+    currentUser: getUser(state),
     allCategories: getHashCategories(state),
     oneSignalRegistered: oneSignalRegistered
   }

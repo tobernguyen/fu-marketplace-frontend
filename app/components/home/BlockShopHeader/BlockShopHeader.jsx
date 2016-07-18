@@ -115,16 +115,22 @@ export default class BlockShopHeader extends Component {
   }
 
   render() {
-    const { shop: { id, address, avatar, cover, description, name }, sellerMode } = this.props;
+    const { shop: { id, address, avatar, cover, description, name }, sellerMode, shopOwner } = this.props;
     let shopAvatar = avatar;
+    let shopCover = cover;
     if (!avatar || avatar === '') {
       const noAvatar = require('../../../images/no_avatar.jpg');
       shopAvatar = noAvatar;
     }
+
+    if (!shopCover || shopCover === '') {
+      const noCover = require('../../../images/no_cover.jpg');
+      shopCover = noCover;
+    }
     return (
       <div className="block-shop-header clearfix">
         <div className="shop-cover">
-          <img src={cover} />
+          <img src={shopCover} />
           <div className="shop-info-wrapper col-md-12">
             <div className="shop-avatar-wrapper row">
               <div className="col-sm-3 shop-avatar">
@@ -143,7 +149,7 @@ export default class BlockShopHeader extends Component {
           </div>
           <div className="col-md-12 shop-nav-wrapper">
             <div className="row">
-              <div className="col-md-4 col-md-offset-3">
+              <div className="col-md-6 col-md-offset-3">
                 <div className="row shop-basic-info">
                   <h4 className="title">{name} {this.renderOpeningStatus()}</h4>
                   <Link to={`/shops/${id}/reviews`} className="rating">
@@ -151,19 +157,11 @@ export default class BlockShopHeader extends Component {
                   </Link>
                 </div>
               </div>
-              <div className="col-md-5">
-                <div className="col-md-6">
-                  <ul className="nav shop-info">
-                    <li><i className="fa fa-map-marker" /> {address}</li>
-                    <li><i className="fa fa-mobile" /> *01262338766</li>
-                  </ul>
-                </div>
-                <div className="col-md-6">
-                  <ul className="nav shop-info">
-                    <li><i className="fa fa-envelope-o" /> *hieutdse02289</li>
-                    <li><i className="fa fa-facebook-official" /> *hyhy</li>
-                  </ul>
-                </div>
+              <div className="col-md-3">
+                <ul className="nav shop-info">
+                  <li><i className="fa fa-user" /> {shopOwner.fullName}</li>
+                  <li><i className="fa fa-map-marker" /> {address}</li>
+                </ul>
               </div>
 
             </div>
@@ -207,5 +205,6 @@ export default class BlockShopHeader extends Component {
 
 BlockShopHeader.propTypes = {
   shop: PropTypes.object.isRequired,
-  sellerMode: PropTypes.bool.isRequired
+  sellerMode: PropTypes.bool.isRequired,
+  shopOwner: PropTypes.object.isRequired
 };

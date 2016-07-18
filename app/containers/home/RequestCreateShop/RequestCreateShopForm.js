@@ -3,6 +3,7 @@ import RequestCreateShopInfoForm from './RequestCreateShopInfoForm';
 import RequestCreateShopOwnerForm from './RequestCreateShopOwnerForm';
 import FormRequestCreateShopIntro from 'app/components/home/FormRequestCreateShopIntro';
 import RequestCreateShopStatus from './RequestCreateShopStatus';
+import _ from 'lodash';
 
 export default class RequestCreateShopForm extends Component {
   constructor(props) {
@@ -41,21 +42,25 @@ export default class RequestCreateShopForm extends Component {
     this.setState({ page: this.state.page + 1 })
   }
 
+  componentDidMount() {
+    this.updateShopRequestMode(this.props.currentUser);
+  }
+
   componentWillReceiveProps(nextProps) {
+    this.updateShopRequestMode(nextProps.currentUser);
+  }
 
-    const { currentUser } = nextProps;
-
-    if (currentUser) {
+  updateShopRequestMode(currentUser) {
+    if (!_.isEmpty(currentUser)) {
       let newState = {
         loaded: true
       };
       if (currentUser.shops instanceof Array) {
-        newState.hasShop = (nextProps.ownShops.length > 0);
+        newState.hasShop = (currentUser.shops.length > 0);
       }
       this.setState(newState)
     }
   }
-
 
   render() {
     const { page, loaded, hasShop } = this.state;

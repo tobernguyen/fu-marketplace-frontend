@@ -4,6 +4,7 @@ import FormEditShopInformation from 'app/components/admin/FormEditShopInformatio
 import FormEditShopShipPlaces from 'app/components/admin/FormEditShopShipPlaces';
 import FormEditShopBanStatus from 'app/components/admin/FormEditShopBanStatus';
 import FormEditShopAvatarAndCover from 'app/components/admin/FormEditShopAvatarAndCover';
+import FormShopPromotionCampaign from 'app/components/admin/FormShopPromotionCampaign';
 import {
   adminGetShop,
   adminUpdateShopInformation,
@@ -12,7 +13,8 @@ import {
   adminUpdateShopAvatar,
   adminUpdateShopCover,
   adminUpdateShopShipPlaces,
-  adminUpdateShopOpeningStatus
+  adminUpdateShopOpeningStatus,
+  adminCreateShopPromotionCampaign
 } from 'app/actions/admin';
 import { getShipPlaces } from 'app/actions/common';
 import LoadingSpinner from 'app/components/admin/LoadingSpinner';
@@ -28,6 +30,7 @@ class ContainerEditShop extends Component {
     this.unbanShop = this.unbanShop.bind(this);
     this.handleSubmitShipPlaces = this.handleSubmitShipPlaces.bind(this);
     this.handleSubmitShopOpeningStatus = this.handleSubmitShopOpeningStatus.bind(this);
+    this.handleSubmitShopPromotionCampaign = this.handleSubmitShopPromotionCampaign.bind(this);
   }
 
   handleSubmitShopInformation(shop) {
@@ -63,6 +66,11 @@ class ContainerEditShop extends Component {
   unbanShop() {
     const shopId = this.props.shopManagement.selectedShop.id;
     this.props.adminUnbanShop(shopId);
+  }
+
+  handleSubmitShopPromotionCampaign(startDate, endDate, type) {
+    const shopId = this.props.shopManagement.selectedShop.id;
+    this.props.adminCreateShopPromotionCampaign(shopId, startDate, endDate, type);
   }
 
   componentWillMount() {
@@ -102,6 +110,10 @@ class ContainerEditShop extends Component {
           isSubmitting={shopManagement.isSubmitting}
         />
         <hr />
+        <FormShopPromotionCampaign
+          createShopPromotionCampaign = {this.handleSubmitShopPromotionCampaign}
+        />
+        <hr />
         <FormEditShopBanStatus
           shop={shopManagement.selectedShop}
           adminBanShop={this.banShop}
@@ -133,5 +145,6 @@ export default connect(mapStateToProps, {
   adminUpdateShopCover,
   adminUpdateShopOpeningStatus,
   adminUpdateShopShipPlaces,
-  getShipPlaces
+  getShipPlaces,
+  adminCreateShopPromotionCampaign
 })(ContainerEditShop);

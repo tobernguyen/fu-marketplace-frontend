@@ -311,5 +311,12 @@ export default {
   'sideBar.requestManagement': 'Quản lý yêu cầu',
   'sideBar.changePassword': 'Thay đổi mật khẩu',
   'shop.review.success': 'Xin cảm ơn! Nhận xét của bạn đã được gửi.',
-  'error.review.you_must_order_at_this_shop_at_least_one_time': 'Để viết nhận xét, bạn cần phải đã từng đặt hàng tại cửa hàng này.'
+  'error.review.you_must_order_at_this_shop_at_least_one_time': 'Để viết nhận xét, bạn cần phải đã từng đặt hàng tại cửa hàng này.',
+  'formShopPromotionCampaign.sectionName': 'Chiến dịch quảng bá',
+  'formShopPromotionCampaign.sectionDescription': 'Quảng bá cửa hàng theo yêu cầu của người bán',
+  'formShopPromotionCampaign.fields.startDate': 'Ngày bắt đầu',
+  'formShopPromotionCampaign.fields.endDate': 'Ngày kết thúc',
+  'formShopPromotionCampaign.fields.type': 'Kiểu',
+  'formShopPromotionCampaign.button.today': 'Ngày hôm nay',
+  'formShopPromotionCampaign.button.createShopPromotionCampaign': 'Tạo chiến dịch quảng bá cửa hàng'
 };

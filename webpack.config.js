@@ -83,6 +83,10 @@ if(TARGET === 'start' || !TARGET) {
     module: {
       loaders: [
         {
+          test: /\.css$/,
+          loaders: ['style', 'css']
+        },
+        {
           test: /\.scss$/,
           loaders: ['style', 'css', 'sass']
         }
@@ -172,6 +176,11 @@ if(TARGET === 'staging') {
     },
     module: {
       loaders: [
+        {
+          test: /\.css$/,
+          loader: ExtractTextPlugin.extract('style', 'css'),
+          include: PATHS.app
+        },
         {
           test: /\.scss$/,
           loader: ExtractTextPlugin.extract('style', 'css!sass'),

@@ -398,3 +398,28 @@ export const adminChangePassword = (passwordToBeChanged) => {
     return dispatch(adminRequestChangePassword(passwordToBeChanged))
   }
 };
+
+export const ADMIN_CREATE_SHOP_PROMOTION_CAMPAIGN_REQUEST = 'ADMIN_CREATE_SHOP_PROMOTION_CAMPAIGN_REQUEST';
+export const ADMIN_CREATE_SHOP_PROMOTION_CAMPAIGN_SUCCESS = 'ADMIN_CREATE_SHOP_PROMOTION_CAMPAIGN_SUCCESS';
+export const ADMIN_CREATE_SHOP_PROMOTION_CAMPAIGN_FAILURE = 'ADMIN_CREATE_SHOP_PROMOTION_CAMPAIGN_FAILURE';
+
+const adminRequestCreateShopPromotionCampaign = (params) => ({
+  [CALL_API]: {
+    types: [ADMIN_CREATE_SHOP_PROMOTION_CAMPAIGN_REQUEST, ADMIN_CREATE_SHOP_PROMOTION_CAMPAIGN_SUCCESS, ADMIN_CREATE_SHOP_PROMOTION_CAMPAIGN_FAILURE],
+    url: '/api/v1/admin/shopPromotionCampaigns',
+    method: HTTP_METHODS.POST,
+    params: params
+  }
+});
+
+export const adminCreateShopPromotionCampaign = (shopId, startDate, endDate, type) => {
+  const params = {
+    shopId,
+    startDate,
+    endDate,
+    type
+  };
+  return (dispatch) => {
+    dispatch(adminRequestCreateShopPromotionCampaign(params));
+  }
+}

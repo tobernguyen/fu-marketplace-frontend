@@ -11,6 +11,10 @@ class ShopReviews extends Component {
   constructor(props) {
     super(props);
 
+    this.state = {
+      reviewsRequested: false
+    };
+
     this.handleSubmitReview = (stars, comment) => {
       const rateValue = {
         rate: stars,
@@ -21,10 +25,19 @@ class ShopReviews extends Component {
     }
   }
 
-  componentWillMount() {
-    this.props.getShopReviews(this.props.shop.id, {
 
-    })
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.shop) {
+      if (!this.state.reviewsRequested && nextProps.shop.hasOwnProperty('id')) {
+        this.setState({
+          reviewsRequested: true
+        });
+        this.props.getShopReviews(nextProps.shop.id, {
+          page: 1
+        })
+      }
+    }
   }
 
   render() {

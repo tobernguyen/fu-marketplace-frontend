@@ -129,7 +129,9 @@ export default class BlockShopReviews extends Component {
         <hr/>
         <div className="row all-reviews">
           <div className="col-sm-offset-2 col-sm-8">
-            <BlockShopUserReview  currentUser={currentUser} />
+            {reviews.map((review) =>
+              <BlockShopUserReview key={review.id}  review={review} />
+            )}
           </div>
         </div>
       </div>

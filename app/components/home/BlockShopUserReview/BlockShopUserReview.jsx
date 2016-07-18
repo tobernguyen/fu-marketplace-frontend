@@ -1,22 +1,32 @@
 import React, { Component, PropTypes } from 'react';
 import BlockStars from '../BlockStars';
+import { FormattedDate } from 'react-intl';
 
 export default class BlockShopUserReview extends Component {
   render() {
-    const { currentUser } = this.props;
+    const { review } = this.props;
+
     return (
       <div className="review-box clearfix">
         <label className="col-sm-2 user-avatar">
-          <img src={currentUser.avatar} className="img-circle img-responsive"/>
+          <img src={review.user.avatar} className="img-circle img-responsive"/>
         </label>
         <div className="col-sm-10 comment-box">
           <p className="review-content">
-            Đồ ăn ngon, ship nhanh.
+            {review.comment}
           </p>
           <BlockStars
             name={'review1'}
-            value={2} editing={false}/>
-          <span className="pull-right timestamp">{currentUser.fullName} - Jul 7, 2014</span>
+            value={review.rate} editing={false}/>
+          <span className="pull-right timestamp">
+            {review.user.fullName}
+            {' - '}
+            <FormattedDate
+            value={new Date(review.updatedAt)}
+            year='numeric'
+            month='long'
+            day='2-digit'
+          /></span>
         </div>
       </div>
     )
@@ -24,5 +34,5 @@ export default class BlockShopUserReview extends Component {
 }
 
 BlockShopUserReview.propTypes = {
-  currentUser: PropTypes.object.isRequired
+  review: PropTypes.object.isRequired
 };

@@ -104,6 +104,43 @@ export const user = (state = INITIAL_STATE, action) => {
         currentViewedShop: currentViewedShop
       });
     }
+    case ShopActionTypes.USER_RATES_SHOP_SUCCESS:
+    {
+      const { currentViewedShop: { reviews } } = state;
+
+      if (!reviews) {
+        return state;
+      }
+
+      let updatedReviews = [];
+
+      const index = _.findIndex(reviews, (r) =>
+        r.id === response.id
+      );
+
+      const newReview = _.merge({}, reviews[index], {
+        comment: response.comment,
+        rate: response.rate
+      });
+
+      if (index > -1) {
+        updatedReviews = _.concat(
+          _.slice(reviews, 0, index),
+          newReview,
+          _.slice(reviews, index + 1, reviews.length)
+        );
+      } else {
+        updatedReviews = _.concat(response, reviews);
+      }
+
+      const currentViewedShop = _.assign({}, state.currentViewedShop, {
+        reviews: updatedReviews
+      });
+      
+      return _.assign({}, state, {
+        currentViewedShop: currentViewedShop
+      });
+    }
     default:
       return state;
   }

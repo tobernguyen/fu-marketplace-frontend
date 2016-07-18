@@ -99,19 +99,23 @@ export default class BlockShopHeader extends Component {
     const { shop: { opening } } = this.props;
     return (
       <span className={classNames('status', { 'opening' : opening})}>
-                    <i className="fa fa fa-circle"/>
-                  </span>
+        <i className="fa fa fa-circle"/>
+      </span>
     )
   }
 
   renderStars() {
-    return (
-      <BlockStars
-        name={'star'}
-        value={2}
-        editing={false}
-      />
-    )
+    const { shop } = this.props;
+    if (shop.averageRating) {
+      return (
+        <BlockStars
+          name={'averageRating'}
+          value={shop.averageRating || 0}
+          editing={false}
+        />
+      )
+    }
+
   }
 
   render() {

@@ -25,7 +25,16 @@ class ShopReviews extends Component {
     }
   }
 
-
+  componentWillMount() {
+    if (!this.state.reviewsRequested && this.props.shop.hasOwnProperty('id')) {
+      this.setState({
+        reviewsRequested: true
+      });
+      this.props.getShopReviews(this.props.shop.id, {
+        page: 1
+      })
+    }
+  }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.shop) {

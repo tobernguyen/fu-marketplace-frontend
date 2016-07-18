@@ -40,6 +40,7 @@
     "react-datepicker": "^0.28.1",
     "react-dom": "~15.1.0",
     "react-dropzone": "^3.5.0",
+    "react-emoji": "^0.4.4",
     "react-intl": "^2.1.2",
     "react-notification-system": "^0.2.7",
     "react-redux": "^4.4.5",

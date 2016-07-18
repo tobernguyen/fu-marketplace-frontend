@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import BlockStars from '../BlockStars';
 import { FormattedDate } from 'react-intl';
+import ReactEmoji from 'react-emoji';
 
 export default class BlockShopUserReview extends Component {
   render() {
@@ -13,7 +14,7 @@ export default class BlockShopUserReview extends Component {
         </label>
         <div className="col-sm-10 comment-box">
           <p className="review-content">
-            {review.comment}
+            {ReactEmoji.emojify(review.comment)}
           </p>
           <BlockStars
             name={'review1'}

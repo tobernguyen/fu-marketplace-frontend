@@ -42,7 +42,16 @@ export default class FormShopReview extends Component {
     this.handleSubmit = (e) => {
       e.preventDefault();
       if (this.state.stars > INITIAL_STAR_NUMBER) {
-        // Submit here
+        const { stars, comment } = this.state;
+        this.props.handleSubmitReview(stars, comment);
+      }
+    };
+
+    this.handleOnStarClick = (nextValue, prevValue) => {
+      if (nextValue !== prevValue) {
+        this.setState({
+          stars: nextValue
+        })
       }
     }
   }
@@ -63,6 +72,7 @@ export default class FormShopReview extends Component {
               placeholder="Review (optional)"/>
             <BlockStars
               name={'user_review'}
+              onStarClick={this.handleOnStarClick}
               value={this.props.stars} />
             <span className="pull-right">
             {this.state.maxLength} characters left
@@ -83,5 +93,6 @@ export default class FormShopReview extends Component {
 }
 
 FormShopReview.propTypes = {
-  reviewer: PropTypes.object.isRequired
+  reviewer: PropTypes.object.isRequired,
+  handleSubmitReview: PropTypes.func.isRequired
 };

@@ -277,3 +277,22 @@ export const updateShipPlaces = (shopID, shipPlaces) => {
     return dispatch(requestUpdateShipPlaces(shopID, shipPlaces))
   }
 };
+
+
+export const USER_RATES_SHOP_REQUEST = 'USER_RATES_SHOP_REQUEST';
+export const USER_RATES_SHOP_SUCCESS = 'USER_RATES_SHOP_SUCCESS';
+export const USER_RATES_SHOP_FAILURE = 'USER_RATES_SHOP_FAILURE';
+const requestRateShop = (shopID, rateValue) => ({
+  [CALL_API]: {
+    types: [USER_RATES_SHOP_REQUEST, USER_RATES_SHOP_SUCCESS, USER_RATES_SHOP_FAILURE],
+    url: `/api/v1/shops/${shopID}/review`,
+    method: HTTP_METHODS.POST,
+    params: rateValue
+  }
+});
+
+export const rateShop = (shopID, rateValue) => {
+  return (dispatch) => {
+    return dispatch(requestRateShop(shopID, rateValue))
+  }
+};

@@ -166,5 +166,7 @@ export default {
   'shopItem.update': 'Update shop item',
   'shopItem.add': 'Add shop item',
   'shop.updateShipPlaces': 'Update ship places',
-  'shop.shipPlaces.updated': 'Update ship places successful'
+  'shop.shipPlaces.updated': 'Update ship places successful',
+  'shop.review.success': 'Your review has been submitted.',
+  'error.review.you_must_order_at_this_shop_at_least_one_time': 'To write review for this shop, you have to have at least one order.'
 };

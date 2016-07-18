@@ -1,9 +1,30 @@
 import React, { Component, PropTypes } from 'react';
 import './BlockShopReviews.scss';
 import BlockStars from '../BlockStars';
+import { FormattedMessage } from 'react-intl';
 import FormShopReview from '../FormShopReview';
 
 export default class BlockShopReviews extends Component {
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      reviewStatus: null
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.reviewStatus) {
+      this.setState({
+        reviewStatus: {
+          id: nextProps.reviewStatus,
+          defaultMessage: 'review status'
+        }
+      })
+    }
+  }
+
   render() {
     const { shop, seller, currentUser } = this.props;
     return (
@@ -82,7 +103,14 @@ export default class BlockShopReviews extends Component {
         <hr/>
         <div className="row reviews-row">
           <div className="col-sm-offset-1 col-sm-10">
-            <FormShopReview reviewer={currentUser} />
+            {!this.state.reviewStatus &&
+            <FormShopReview handleSubmitReview={this.props.handleSubmitReview} reviewer={currentUser} />}
+
+            <div className="clearfix col-sm-8 col-sm-offset-2">
+              {this.state.reviewStatus && <h5 className="review-status">
+                <FormattedMessage {...this.state.reviewStatus}/>
+              </h5>}
+            </div>
           </div>
         </div>
         <hr/>
@@ -140,5 +168,6 @@ export default class BlockShopReviews extends Component {
 BlockShopReviews.propTypes = {
   shop: PropTypes.object.isRequired,
   seller: PropTypes.object.isRequired,
-  currentUser: PropTypes.object.isRequired
+  currentUser: PropTypes.object.isRequired,
+  handleSubmitReview: PropTypes.func.isRequired
 };

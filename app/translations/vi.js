@@ -309,5 +309,7 @@ export default {
   'sideBar.userManagement': 'Quản lý người dùng',
   'sideBar.shopManagement': 'Quản lý cửa hàng',
   'sideBar.requestManagement': 'Quản lý yêu cầu',
-  'sideBar.changePassword': 'Thay đổi mật khẩu'
+  'sideBar.changePassword': 'Thay đổi mật khẩu',
+  'shop.review.success': 'Nhận xét của bạn đã được gửi.',
+  'error.review.you_must_order_at_this_shop_at_least_one_time': 'Để viết nhận xét, bạn cần phải đã từng đặt hàng tại cửa hàng này.'
 };

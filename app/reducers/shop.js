@@ -160,6 +160,14 @@ export const shop = (state = INITIAL_STATE, action) => {
       return _.merge({}, state, {
         toBeUpdatedItem: payload.toBeUpdatedItem
       });
+    case ShopActionTypes.USER_RATES_SHOP_SUCCESS:
+      return _.assign({}, state, {
+        reviewStatus: 'shop.review.success'
+      });
+    case ShopActionTypes.USER_RATES_SHOP_FAILURE:
+      return _.assign({}, state, {
+        reviewStatus: error.message_code
+      });
     default:
       return state;
   }

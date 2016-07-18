@@ -136,7 +136,7 @@ export const user = (state = INITIAL_STATE, action) => {
       const currentViewedShop = _.assign({}, state.currentViewedShop, {
         reviews: updatedReviews
       });
-      
+
       return _.assign({}, state, {
         currentViewedShop: currentViewedShop
       });

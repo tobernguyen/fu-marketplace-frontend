@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import './BlockShopFeedItem.scss';
 import { Link } from 'react-router';
 import classNames from 'classnames';
+import BlockStars from '../BlockStars';
 
 export default class BlockShopFeedItem extends Component {
   constructor(props) {
@@ -34,7 +35,7 @@ export default class BlockShopFeedItem extends Component {
   }
 
   render() {
-    const { shop: { id, name, description, categories, shipPlaces, opening } } = this.props;
+    const { shop: { id, name, description, categories, shipPlaces, opening, averageRating } } = this.props;
     let avatar = this.state.thumbnail;
     if (!avatar || avatar === '') {
       const noAvatar = require('../../../images/no_avatar.jpg');
@@ -63,6 +64,11 @@ export default class BlockShopFeedItem extends Component {
                 <i className="fa fa fa-circle"/>
               </span>
             </h3>
+            <BlockStars
+              name={'averageRating'}
+              value={averageRating}
+              editing={false}
+            />
             <div className="category">
               <ul className="nav">
                 {categories.map((category, key) =>

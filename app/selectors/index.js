@@ -90,7 +90,8 @@ export const getCurrentViewedShop = createSelector(
     return {
       shopInfo: shopInfo,
       seller: seller || {},
-      sellingItems: sellingItems || {}
+      sellingItems: sellingItems || {},
+      reviews: currentViewedShop.reviews || []
     };
   }
 );

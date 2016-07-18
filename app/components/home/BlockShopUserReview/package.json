@@ -1,0 +1,6 @@
+{
+  "name": "BlockShopUserReview",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./BlockShopUserReview.jsx"
+}

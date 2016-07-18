@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import './BlockShopReviews.scss';
-import BlockStars from '../BlockStars';
 import { FormattedMessage } from 'react-intl';
 import FormShopReview from '../FormShopReview';
+import BlockShopUserReview from '../BlockShopUserReview';
 
 export default class BlockShopReviews extends Component {
 
@@ -26,7 +26,7 @@ export default class BlockShopReviews extends Component {
   }
 
   render() {
-    const { shop, seller, currentUser } = this.props;
+    const { shop, seller, currentUser, reviews } = this.props;
     return (
       <div className="block-shop-reviews">
         <div className="row first-row">
@@ -82,20 +82,33 @@ export default class BlockShopReviews extends Component {
           <div className="col-sm-12">
             <ul className="group-info nav">
               <li>
-                <span><i className="fa fa-user"/></span>
-                <cite>{seller.fullName}</cite>
-              </li>
-              <li>
-                <span><i className="fa fa-flag"/></span>
-                <cite>{shop.address}</cite>
+                <span className="img-avatar">
+                  <img src={seller.avatar} className="img-circle img-responsive"/>
+                </span>
+                <cite>
+                  <div>
+                    Chủ shop
+                  </div>
+                  <strong>{seller.fullName}</strong>
+                </cite>
               </li>
               <li>
                 <span><i className="fa fa-phone"/></span>
-                <cite>01262338766</cite>
+                <cite>
+                  <div>
+                    Điện thoại
+                  </div>
+                  <strong>{seller.phone}</strong>
+                </cite>
               </li>
               <li>
-                <span><i className="fa fa-facebook"/></span>
-                <cite>Hieu Tran</cite>
+                <span><i className="fa fa-flag"/></span>
+                <cite>
+                  <div>
+                    Địa chỉ
+                  </div>
+                  <strong>{shop.address}</strong>
+                </cite>
               </li>
             </ul>
           </div>
@@ -116,48 +129,7 @@ export default class BlockShopReviews extends Component {
         <hr/>
         <div className="row all-reviews">
           <div className="col-sm-offset-2 col-sm-8">
-            <div className="review-box clearfix">
-              <label className="col-sm-2 user-avatar">
-                <img src={currentUser.avatar} className="img-circle img-responsive"/>
-              </label>
-              <div className="col-sm-10 comment-box">
-                <p className="review-content">
-                  Đồ ăn ngon, ship nhanh.
-                </p>
-                <BlockStars
-                  name={'review1'}
-                  value={2} editing={false}/>
-                <span className="pull-right timestamp">Son Hoang - Jul 7, 2014</span>
-              </div>
-            </div>
-            <div className="review-box clearfix">
-              <label className="col-sm-2 user-avatar">
-                <img src={currentUser.avatar} className="img-circle img-responsive"/>
-              </label>
-              <div className="col-sm-10 comment-box">
-                <p className="review-content">
-                  Đồ ăn ngon, ship nhanh.
-                </p>
-                <BlockStars
-                  name={'review2'}
-                  value={2} editing={false}/>
-                <span className="pull-right timestamp">Son Hoang - Jul 7, 2014</span>
-              </div>
-            </div>
-            <div className="review-box clearfix">
-              <label className="col-sm-2 user-avatar">
-                <img src={currentUser.avatar} className="img-circle img-responsive"/>
-              </label>
-              <div className="col-sm-10 comment-box">
-                <p className="review-content">
-                  Đồ ăn ngon, ship nhanh.
-                </p>
-                <BlockStars
-                  name={'review3'}
-                  value={2} editing={false}/>
-                <span className="pull-right timestamp">Son Hoang - Jul 7, 2014</span>
-              </div>
-            </div>
+            <BlockShopUserReview  currentUser={currentUser} />
           </div>
         </div>
       </div>

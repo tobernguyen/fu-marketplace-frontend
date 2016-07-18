@@ -1,6 +1,7 @@
 import * as ActionTypes from '../actions';
 import * as UserActionTypes from '../actions/user';
 import * as FeedActionTypes from '../actions/feed';
+import * as ShopActionTypes from '../actions/shop';
 import _ from 'lodash';
 import { getImageURLWithTimestamp } from 'app/helpers/image';
 
@@ -94,6 +95,15 @@ export const user = (state = INITIAL_STATE, action) => {
           item.id !== payload.itemID
         )
       });
+    case ShopActionTypes.USER_GETS_SHOP_REVIEWS_SUCCESS:
+    {
+      const currentViewedShop = _.assign({}, state.currentViewedShop, {
+        reviews: response.reviews
+      });
+      return _.assign({}, state, {
+        currentViewedShop: currentViewedShop
+      });
+    }
     default:
       return state;
   }

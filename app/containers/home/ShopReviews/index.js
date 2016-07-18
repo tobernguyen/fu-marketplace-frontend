@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { getCurrentViewedShop, getUser } from 'app/selectors';
 import BlockShopReviews from 'app/components/home/BlockShopReviews';
-import { rateShop } from 'app/actions/shop';
+import { rateShop, getShopReviews } from 'app/actions/shop';
 
 class ShopReviews extends Component {
 
@@ -21,6 +21,12 @@ class ShopReviews extends Component {
     }
   }
 
+  componentWillMount() {
+    this.props.getShopReviews(this.props.shop.id, {
+
+    })
+  }
+
   render() {
     return (
       <div>
@@ -32,6 +38,7 @@ class ShopReviews extends Component {
         </Modal.Header>
         <Modal.Body>
           <BlockShopReviews
+            reviews={this.props.reviews}
             reviewStatus={this.props.reviewStatus}
             handleSubmitReview={this.handleSubmitReview}
             currentUser={this.props.currentUser}
@@ -50,11 +57,13 @@ const mapStateToProps = (state) => {
     currentUser: getUser(state),
     shop: shopInfo,
     seller: seller,
-    reviewStatus: state.shop.reviewStatus
+    reviewStatus: state.shop.reviewStatus,
+    reviews: currentViewedShop.reviews
   }
 };
 
 export default connect(mapStateToProps, {
-  rateShop
+  rateShop,
+  getShopReviews
 })(ShopReviews)
 

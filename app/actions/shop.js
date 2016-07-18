@@ -296,3 +296,22 @@ export const rateShop = (shopID, rateValue) => {
     return dispatch(requestRateShop(shopID, rateValue))
   }
 };
+
+
+export const USER_GETS_SHOP_REVIEWS_REQUEST = 'USER_GETS_SHOP_REVIEWS_REQUEST';
+export const USER_GETS_SHOP_REVIEWS_SUCCESS = 'USER_GETS_SHOP_REVIEWS_SUCCESS';
+export const USER_GETS_SHOP_REVIEWS_FAILURE = 'USER_GETS_SHOP_REVIEWS_FAILURE';
+const requestShopReviews = (shopID, params) => ({
+  [CALL_API]: {
+    types: [USER_GETS_SHOP_REVIEWS_REQUEST, USER_GETS_SHOP_REVIEWS_SUCCESS, USER_GETS_SHOP_REVIEWS_FAILURE],
+    url: `/api/v1/shops/${shopID}/reviews`,
+    method: HTTP_METHODS.GET,
+    params: params
+  }
+});
+
+export const getShopReviews = (shopID, params) => {
+  return (dispatch) => {
+    return dispatch(requestShopReviews(shopID, params))
+  }
+};

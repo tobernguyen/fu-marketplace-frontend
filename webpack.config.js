@@ -83,10 +83,6 @@ if(TARGET === 'start' || !TARGET) {
     module: {
       loaders: [
         {
-          test: /\.css$/,
-          loaders: ['style', 'css']
-        },
-        {
           test: /\.scss$/,
           loaders: ['style', 'css', 'sass']
         }

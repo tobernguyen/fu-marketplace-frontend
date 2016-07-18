@@ -5,7 +5,6 @@ import DatePicker from 'react-datepicker';
 import moment from 'moment';
 import shopPromotionCampaignType from 'app/shared/promotionCampaignType';
 
-import 'react-datepicker/dist/react-datepicker.css';
 
 class FormShopPromotionCampaign extends Component {
   constructor(props) {

@@ -1,11 +1,11 @@
 import React, { Component, PropTypes } from 'react';
 import './BlockShopReviews.scss';
 import BlockStars from '../BlockStars';
+import FormShopReview from '../FormShopReview';
 
 export default class BlockShopReviews extends Component {
   render() {
     const { shop, seller, currentUser } = this.props;
-    console.log(currentUser);
     return (
       <div className="block-shop-reviews">
         <div className="row first-row">
@@ -81,19 +81,8 @@ export default class BlockShopReviews extends Component {
         </div>
         <hr/>
         <div className="row reviews-row">
-          <div className="col-sm-offset-2 col-sm-8">
-            <div className="review-box clearfix">
-              <label className="col-sm-2 user-avatar" htmlFor="input-review">
-                <img src={currentUser.avatar} className="img-circle img-responsive"/>
-              </label>
-              <div className="col-sm-10 comment-box">
-                <textarea id="input-review" className="form-control input-review" placeholder="Review (optional)"/>
-                <BlockStars
-                  name={'review'}
-                  value={2} />
-                <span className="pull-right">156 characters left</span>
-              </div>
-            </div>
+          <div className="col-sm-offset-1 col-sm-10">
+            <FormShopReview reviewer={currentUser} />
           </div>
         </div>
         <hr/>

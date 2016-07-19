@@ -37,7 +37,6 @@
     "moment": "^2.14.1",
     "react": "~15.1.0",
     "react-bootstrap": "^0.29.5",
-    "react-datepicker": "^0.28.1",
     "react-dom": "~15.1.0",
     "react-dropzone": "^3.5.0",
     "react-emoji": "^0.4.4",

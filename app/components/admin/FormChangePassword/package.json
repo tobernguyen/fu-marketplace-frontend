@@ -1,6 +1,0 @@
-{
-  "name": "FormChangePassword",
-  "version": "0.0.0",
-  "private": true,
-  "main": "./FormChangePassword.jsx"
-}

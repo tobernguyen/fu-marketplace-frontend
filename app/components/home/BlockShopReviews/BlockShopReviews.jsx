@@ -47,37 +47,6 @@ export default class BlockShopReviews extends Component {
           </div>
         </div>
         <hr/>
-        <div className="row third-row">
-          <div className="col-sm-12">
-            <ul className="nav statistics">
-              <li>
-                <span>245</span>
-                <cite>
-                  Success orders
-                </cite>
-              </li>
-              <li>
-                <span>3.5</span>
-                <cite>
-                  Avg. serving time
-                </cite>
-              </li>
-              <li>
-                <span>24</span>
-                <cite>
-                  Selling items
-                </cite>
-              </li>
-              <li>
-                <span>24</span>
-                <cite>
-                  Bookmarked
-                </cite>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <hr/>
         <div className="row second-row">
           <div className="col-sm-12">
             <ul className="group-info nav">

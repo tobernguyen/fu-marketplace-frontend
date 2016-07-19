@@ -108,8 +108,10 @@ export const user = (state = INITIAL_STATE, action) => {
     {
       const { currentViewedShop: { reviews } } = state;
 
-      if (!reviews) {
-        return state;
+      if (!reviews) return state;
+
+      if (reviews instanceof Array) {
+        if (reviews.length === 0) return state;
       }
 
       let updatedReviews = [];

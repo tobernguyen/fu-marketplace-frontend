@@ -63,10 +63,9 @@ export const shop = (state = INITIAL_STATE, action) => {
       } else {
         newSellingItems = _.assign({}, state.sellingItems);
         if (state.sellingItems.hasOwnProperty(categoryId)) {
-          let groupItems = _.assign([], state.sellingItems[categoryId], [
+          newSellingItems[categoryId] = _.assign([], state.sellingItems[categoryId], [
             response, ...state.sellingItems[categoryId]
           ]);
-          newSellingItems[categoryId] = groupItems;
         } else {
           newSellingItems[categoryId] = [response];
         }

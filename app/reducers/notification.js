@@ -51,10 +51,6 @@ export const notification = (state = INITIAL_STATE, action) => {
     {
       const { notification } = payload;
       return _.assign({}, state, {
-        notifications: [
-          notification,
-          ...state.notifications
-        ],
         promptNotification: notification
       })
     }

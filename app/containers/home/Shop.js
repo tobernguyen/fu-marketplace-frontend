@@ -10,9 +10,10 @@ import { Link } from 'react-router';
 import BuyNowForm from './PlaceOrder/BuyNowForm';
 import CheckOutPage from './PlaceOrder/CheckOutPage';
 import classNames from 'classnames';
-import { getCurrentViewedShop } from 'app/selectors';
+import { getCurrentViewedShop, getUser } from 'app/selectors';
 import OneSignal from 'onesignal';
 import { Modal } from 'react-bootstrap';
+import _ from 'lodash';
 
 class Shop extends Component {
   constructor(props) {
@@ -100,7 +101,7 @@ class Shop extends Component {
   }
 
   render() {
-    const { shop, seller } = this.props;
+    const { shop, seller, currentUser } = this.props;
     let orderForm;
     if (this.state.item) {
       orderForm = <BuyNowForm
@@ -121,11 +122,17 @@ class Shop extends Component {
         bsSize={this.state.bsSize} />
     }
 
+    let ownerView = false;
+    if (!_.isEmpty(currentUser) && !_.isEmpty(seller)) {
+      ownerView = (currentUser.id === seller.id)
+    }
+
     return (
       <div className={classNames('shop-detail-modal', {'dim': this.state.showModal || this.props.children})}>
         {this.state.shopValid && <div>
           <BlockShopHeader shopOwner={seller} shop={shop} sellerMode={false} />
           <SellingItemList
+            ownerView={ownerView}
             shopOpening={shop.opening}
             shopID={parseInt(this.props.params.shopID)}
             sellerMode={false}
@@ -151,7 +158,8 @@ const mapStateToProps = (state) => {
     shop: shopInfo,
     seller: seller,
     sellingItems: sellingItems,
-    oneSignalRegistered: oneSignalRegistered
+    oneSignalRegistered: oneSignalRegistered,
+    currentUser: getUser(state)
   }
 };
 

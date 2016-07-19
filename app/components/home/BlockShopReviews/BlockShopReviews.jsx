@@ -3,6 +3,7 @@ import './BlockShopReviews.scss';
 import { FormattedMessage } from 'react-intl';
 import FormShopReview from '../FormShopReview';
 import BlockShopUserReview from '../BlockShopUserReview';
+import _ from 'lodash';
 
 export default class BlockShopReviews extends Component {
 
@@ -27,6 +28,10 @@ export default class BlockShopReviews extends Component {
 
   render() {
     const { shop, seller, currentUser, reviews } = this.props;
+    let ownerView = false;
+    if (!_.isEmpty(currentUser) && !_.isEmpty(seller)) {
+      ownerView = (currentUser.id === seller.id)
+    }
     return (
       <div className="block-shop-reviews">
         <div className="row first-row">
@@ -83,19 +88,21 @@ export default class BlockShopReviews extends Component {
           </div>
         </div>
         <hr/>
-        <div className="row reviews-row">
-          <div className="col-sm-offset-1 col-sm-10">
-            {!this.state.reviewStatus &&
-            <FormShopReview handleSubmitReview={this.props.handleSubmitReview} reviewer={currentUser} />}
+        {!ownerView && <div>
+          <div className="row reviews-row">
+            <div className="col-sm-offset-1 col-sm-10">
+              {!this.state.reviewStatus &&
+              <FormShopReview handleSubmitReview={this.props.handleSubmitReview} reviewer={currentUser} />}
 
-            <div className="clearfix col-sm-8 col-sm-offset-2">
-              {this.state.reviewStatus && <h5 className="review-status">
-                <FormattedMessage {...this.state.reviewStatus}/>
-              </h5>}
+              <div className="clearfix col-sm-8 col-sm-offset-2">
+                {this.state.reviewStatus && <h5 className="review-status">
+                  <FormattedMessage {...this.state.reviewStatus}/>
+                </h5>}
+              </div>
             </div>
           </div>
-        </div>
-        <hr/>
+          <hr/>
+        </div>}
         <div className="row all-reviews">
           <div className="col-sm-offset-2 col-sm-8">
             {reviews.map((review) =>

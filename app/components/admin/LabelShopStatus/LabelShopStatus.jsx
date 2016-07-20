@@ -8,10 +8,10 @@ const LabelShopStatus = ({ status }) => {
 
   switch (status) {
     case shopStatus.UNPUBLISHED:
-      output = <FormattedMessage {...messages.shopStatus.published} />;
+      output = <FormattedMessage {...messages.shopStatus.unpublished} />;
       break;
     case shopStatus.PUBLISHED:
-      output = <FormattedMessage {...messages.shopStatus.unpublished} />;
+      output = <FormattedMessage {...messages.shopStatus.published} />;
     default:
 
   }

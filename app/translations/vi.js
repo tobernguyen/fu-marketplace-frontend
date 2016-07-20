@@ -77,6 +77,7 @@ export default {
   'sellerDashboard.sidebar.openingStatus': 'Trạng thái mở',
   'sellerDashboard.sidebar.updateShop': 'Thông tin shop',
   'sellerDashboard.sidebar.addShopItem': 'Thêm sản phẩm',
+  'sellerDashboard.sidebar.statistics': 'Thống kê',
   'sellerDashboard.cover.update': 'Đổi ảnh bìa',
   'sellerDashboard.avatar.update': 'Đổi avatar',
   'sellerDashboard.cover.warning': 'Hãy chọn ảnh bìa có chiều cao lớn hơn 850px và chiều rộng lớn hơn 250px',

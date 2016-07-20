@@ -77,6 +77,7 @@ export default {
   'sellerDashboard.sidebar.openingStatus': 'Opening status',
   'sellerDashboard.sidebar.updateShop': 'Update shop',
   'sellerDashboard.sidebar.addShopItem': 'Add selling item',
+  'sellerDashboard.sidebar.statistics': 'Statistics',
   'sellerDashboard.cover.update': 'Update cover',
   'sellerDashboard.avatar.update': 'Update avatar',
   'sellerDashboard.cover.warning': 'Please choose an image that\'s at least 850 pixels wide and at least 250 pixels tall.',

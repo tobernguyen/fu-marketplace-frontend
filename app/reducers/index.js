@@ -11,6 +11,7 @@ import { item } from './item';
 import { feed } from './feed';
 import { order } from './order';
 import { notification } from './notification';
+import { statistic } from './statistic';
 
 const rootReducer = combineReducers({
   auth,
@@ -21,6 +22,7 @@ const rootReducer = combineReducers({
   admin,
   feed,
   notification,
+  statistic,
   routing,
   language,
   common,

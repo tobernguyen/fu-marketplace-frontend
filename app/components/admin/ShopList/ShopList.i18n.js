@@ -36,8 +36,8 @@ export const messages = {
         defaultMessage: 'Show'
       },
       pageSizeUnit: {
-        id: 'userList.tableFooter.pageSizeUnit',
-        defaultMessage: 'users'
+        id: 'shopList.tableFooter.pageSizeUnit',
+        defaultMessage: 'shops per page'
       }
     },
     button: {

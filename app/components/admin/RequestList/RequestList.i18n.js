@@ -6,8 +6,8 @@ export const messages = {
         defaultMessage: 'Show'
       },
       pageSizeUnit: {
-        id: 'userList.tableFooter.pageSizeUnit',
-        defaultMessage: 'users'
+        id: 'requestList.tableFooter.pageSizeUnit',
+        defaultMessage: 'requests per page'
       }
     },
     button: {

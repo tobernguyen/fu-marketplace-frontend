@@ -4,30 +4,66 @@ import classNames from 'classnames';
 import _ from 'lodash';
 import { FormattedMessage, FormattedNumber, FormattedRelative, injectIntl } from 'react-intl';
 import { messages } from 'app/components/home/ModalViewOrder/ModalViewOrder.i18n';
-import ModalViewOrderFooter from 'app/components/home/ModalViewOrder/ModalViewOrderFooter.jsx';
+import BlockCurrentOrderListAction from './BlockCurrentOrderListAction.jsx';
+import OrderStatus from 'app/shared/orderStatus';
 
 class BlockCurrentOrderListRow extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
+      order: props.order,
       isExpand: false
     };
+    this.acceptOrder = () => {
+      const { order } = this.state;
+      this.props.acceptOrder(order.id);
+      order['status'] = OrderStatus.ACCEPTED;
+      this.setState({
+        order
+      });
+    }
+
+    this.startShippingOrder = () => {
+      const { order } = this.state;
+      this.props.startShippingOrder(order.id);
+      order['status'] = OrderStatus.SHIPPING;
+      this.setState({
+        order
+      });
+    }
+
+    this.completeOrder = () => {
+      const { order } = this.state;
+      this.props.completeOrder(order.id);
+      order['status'] = OrderStatus.COMPLETED;
+      this.setState({
+        order
+      });
+    }
 
     this.rejectOrder = (formData) => {
-      const { order } = this.props;
+      const { order } = this.state;
       const messages = {
         sellerMessage: formData.reason
       };
       this.props.rejectOrder(order.id, messages);
+      order['status'] = OrderStatus.REJECTED;
+      this.setState({
+        order
+      });
     }
 
     this.abortOrder = (formData) => {
-      const { order } = this.props;
+      const { order } = this.state;
       const messages = {
         sellerMessage: formData.reason
       };
       this.props.abortOrder(order.id, messages);
+      order['status'] = OrderStatus.ABORTED;
+      this.setState({
+        order
+      });
     }
   }
 
@@ -41,7 +77,7 @@ class BlockCurrentOrderListRow extends Component {
     const total = _.reduce(order.orderLines, (sum, order) => {
       return sum + (order.item.price * order.quantity);
     }, 0);
-    return <FormattedNumber value={total} style="currency" currency="VND"/>;
+    return <FormattedNumber value={total}/>;
   }
   renderNumberOfItems(order) {
     const total = _.reduce(order.orderLines, (sum, order) => {
@@ -56,9 +92,9 @@ class BlockCurrentOrderListRow extends Component {
       'is-expand': this.state.isExpand
     });
 
-    const { order } = this.props;
+    const { order } = this.state;
     return (
-      <li className={orderCardClass} onMouseEnter={() => this.setState({ isExpand : true})} onMouseLeave={() => this.setState({ isExpand: false })}>
+      <li className={orderCardClass}>
         <div className="preview">
           <div className="col-sm-8">
             <p><strong><FormattedMessage {...messages.modalViewOrder.body.orderId}/>: </strong> {order.id}</p>
@@ -73,7 +109,7 @@ class BlockCurrentOrderListRow extends Component {
               </span>
               <span className="col-sm-6">
                 <strong><FormattedMessage {...messages.modalViewOrder.body.table.total}/>: </strong>
-                {this.calculateTotalAmount(order)}
+                {this.calculateTotalAmount(order)}₫
               </span>
             </p>
             <p>
@@ -121,12 +157,12 @@ class BlockCurrentOrderListRow extends Component {
             </tbody>
           </table>
           <hr />
-          <ModalViewOrderFooter
+          <BlockCurrentOrderListAction
             order={order}
-            acceptOrder={this.props.acceptOrder}
+            acceptOrder={this.acceptOrder}
             rejectOrder={this.rejectOrder}
-            startShippingOrder={this.props.startShippingOrder}
-            completeOrder={this.props.completeOrder}
+            startShippingOrder={this.startShippingOrder}
+            completeOrder={this.completeOrder}
             abortOrder={this.abortOrder}
           />
         </div>

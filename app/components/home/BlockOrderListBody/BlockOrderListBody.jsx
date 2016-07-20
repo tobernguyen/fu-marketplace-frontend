@@ -16,7 +16,7 @@ class BlockOrderListBody extends Component {
     const total = _.reduce(order.orderLines, (sum, order) => {
       return sum + (order.item.price * order.quantity);
     }, 0);
-    return <FormattedNumber value={total} style="currency" currency="VND"/>;
+    return <FormattedNumber value={total}/>;
   }
   render() {
     return (
@@ -42,7 +42,7 @@ class BlockOrderListBody extends Component {
                 {this.renderItemNameList(order)}
                 </td>
                 <td>
-                {this.calculateTotalAmount(order)}
+                {this.calculateTotalAmount(order)}₫
                 </td>
                 <td>
                 {order.shipAddress}

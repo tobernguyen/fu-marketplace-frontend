@@ -85,11 +85,11 @@ export const messages = {
       },
       createdAt: {
         id: 'modalViewOrder.body.createdAt',
-        defaultMessage: 'Ordered at'
+        defaultMessage: 'Ordered at: '
       },
       numberOfItems: {
         id: 'modalViewOrder.body.numberOfItems',
-        defaultMessage: 'Number of items'
+        defaultMessage: 'Number of items: '
       },
       updatedAt: {
         id: 'modalViewOrder.body.updatedAt',

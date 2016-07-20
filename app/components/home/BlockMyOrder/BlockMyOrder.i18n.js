@@ -1,5 +1,25 @@
 export const messages = {
   myOrder: {
+    sellerMessageModal: {
+      title: {
+        rejected: {
+          id: 'myOrder.sellerMessageModal.title.rejected',
+          defaultMessage: 'Your order has been rejected'
+        }
+      },
+      body: {
+        rejected: {
+          id: 'myOrder.sellerMessageModal.body.rejected',
+          defaultMessage: 'You order has been rejected by seller with message: '
+        }
+      },
+      button: {
+        close: {
+          id: 'myOrder.sellerMessageModal.button.close',
+          defaultMessage: 'Close'
+        }
+      }
+    },
     cancelOrderModal: {
       title: {
         id: 'myOrder.cancelOrderModal.title',

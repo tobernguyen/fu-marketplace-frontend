@@ -61,6 +61,13 @@ class BlockMyOrderRow extends Component {
           />
         );
         break;
+      case OrderStatus.REJECTED:
+        output = (
+          <button type="button" className={`btn order-status status-${OrderStatus.REJECTED} seller-message`} onClick={() => this.props.openSellerMessageModal(order)}>
+            <i className="fa fa-info"></i>
+          </button>
+        );
+        break;
       default:
     }
     return output;

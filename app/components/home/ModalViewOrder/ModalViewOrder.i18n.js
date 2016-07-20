@@ -1,5 +1,11 @@
 export const messages = {
   modalViewOrder: {
+    orderStatusMessage: {
+      message: {
+        id: 'modalViewOrder.orderStatusMessage.message',
+        defaultMessage: 'Message: '
+      }
+    },
     button: {
       accept: {
         id: 'modalViewOrder.button.accept',

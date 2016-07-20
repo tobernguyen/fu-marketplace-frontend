@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './BlockMyOrder.scss';
 import BlockMyOrderFooter from './BlockMyOrderFooter.jsx'
 import ModalCancelOrder from './ModalCancelOrder.jsx';
+import ModalSellerMessage from './ModalSellerMessage.jsx';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import { messages } from 'app/components/home/BlockMyOrder/BlockMyOrder.i18n';
 import { Link } from 'react-router';
@@ -13,7 +14,9 @@ class BlockMyOrder extends Component {
 
     this.state = {
       showModal: false,
-      selectedOrderID: null
+      showSellerMessageModal: false,
+      selectedOrderID: null,
+      selectedOrder: {}
     };
 
     this.openModal = (orderID) => {
@@ -29,6 +32,20 @@ class BlockMyOrder extends Component {
         selectedOrderID: null
       });
     };
+
+    this.openSellerMessageModal = (order) => {
+      this.setState({
+        selectedOrder: order,
+        showSellerMessageModal: true
+      });
+    }
+
+    this.closeSellerMessageModal = () => {
+      this.setState({
+        selectedOrder: {},
+        showSellerMessageModal: false
+      });
+    }
 
     this.userCancelOrder = () => {
       const { selectedOrderID } = this.state;
@@ -61,6 +78,7 @@ class BlockMyOrder extends Component {
             <BlockMyOrderRow
               order={order}
               openModal={this.openModal}
+              openSellerMessageModal={this.openSellerMessageModal}
               rateOrder={this.props.rateOrder}
               key={order.id} />
           )}
@@ -97,6 +115,11 @@ class BlockMyOrder extends Component {
           showModal={this.state.showModal}
           closeModal={this.closeModal}
           cancelOrder={this.userCancelOrder}
+        />
+        <ModalSellerMessage
+          showModal={this.state.showSellerMessageModal}
+          closeModal={this.closeSellerMessageModal}
+          order={this.state.selectedOrder}
         />
         <BlockMyOrderFooter
           page={page}

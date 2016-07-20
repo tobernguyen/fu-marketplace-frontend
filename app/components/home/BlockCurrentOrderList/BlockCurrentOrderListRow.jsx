@@ -5,6 +5,7 @@ import _ from 'lodash';
 import { FormattedMessage, FormattedNumber, FormattedRelative, injectIntl } from 'react-intl';
 import { messages } from 'app/components/home/ModalViewOrder/ModalViewOrder.i18n';
 import BlockCurrentOrderListAction from './BlockCurrentOrderListAction.jsx';
+import LabelCustomerInformation from 'app/components/home/LabelCustomerInformation';
 import OrderStatus from 'app/shared/orderStatus';
 
 class BlockCurrentOrderListRow extends Component {
@@ -98,6 +99,10 @@ class BlockCurrentOrderListRow extends Component {
         <div className="preview">
           <div className="col-sm-8">
             <p><strong><FormattedMessage {...messages.modalViewOrder.body.orderId}/>: </strong> {order.id}</p>
+            <p>
+              <strong><FormattedMessage {...messages.modalViewOrder.body.buyer}/></strong>:{' '}
+              <LabelCustomerInformation buyer={order.user}/>
+            </p>
             <p>
               <strong><FormattedMessage {...messages.modalViewOrder.body.createdAt}/></strong>
               <FormattedRelative value={new Date(order.createdAt)}/>

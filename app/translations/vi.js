@@ -109,6 +109,7 @@ export default {
   'orderList.tableBody.orderStatus.aborted': 'Không thành công',
   'orderList.tableBody.notFinish': 'Chưa hoàn thành',
   'modalViewOrder.orderStatusMessage.message': 'Lí do: ',
+  'modalViewOrder.body.buyer': 'Khách hàng',
   'modalViewOrder.title': 'Đơn hàng',
   'modalViewOrder.body.shipAddress': 'Địa chỉ',
   'modalViewOrder.body.note': 'Ghi chú',

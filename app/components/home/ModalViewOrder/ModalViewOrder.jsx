@@ -3,6 +3,7 @@ import { Modal } from 'react-bootstrap';
 import { FormattedMessage, FormattedNumber, FormattedRelative, injectIntl } from 'react-intl';
 import ModalViewOrderFooter from './ModalViewOrderFooter.jsx';
 import LabelOrderStatus from 'app/components/home/LabelOrderStatus';
+import LabelCustomerInformation from 'app/components/home/LabelCustomerInformation';
 import './ModalViewOrder.scss';
 import { messages } from 'app/components/home/ModalViewOrder/ModalViewOrder.i18n';
 import _ from 'lodash';
@@ -86,6 +87,14 @@ class ModalViewOrder extends Component {
             <FormattedMessage {...messages.modalViewOrder.body.referenceInformation}/>
           </h4>
           <div>
+            <div className="form-group">
+              <label className="col-sm-3 control-label">
+                <FormattedMessage {...messages.modalViewOrder.body.buyer}/>:
+              </label>
+              <div class="col-sm-9">
+                <LabelCustomerInformation buyer={order.user}/>
+              </div>
+            </div>
             <div className="form-group">
               <label className="col-sm-3 control-label">
                 <FormattedMessage {...messages.modalViewOrder.body.shipAddress}/>:

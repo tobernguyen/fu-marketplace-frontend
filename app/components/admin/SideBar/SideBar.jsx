@@ -69,6 +69,14 @@ class SideBar extends Component {
               </Link>
             </li>
             <li>
+              <Link to="/admin/promotions" activeClassName="active">
+                <i className="fa fa-arrow-up" />
+                <span>
+                  <FormattedMessage {...messages.sideBar.promotionManagement} />
+                </span>
+              </Link>
+            </li>
+            <li>
               <Link to="/admin/requests" activeClassName="active">
                 <i className="fa fa-envelope" />
                 <span>

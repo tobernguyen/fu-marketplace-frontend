@@ -423,3 +423,21 @@ export const adminCreateShopPromotionCampaign = (shopId, startDate, endDate, typ
     dispatch(adminRequestCreateShopPromotionCampaign(params));
   }
 }
+
+export const ADMIN_GET_SHOP_PROMOTION_CAMPAIGN_REQUEST = 'ADMIN_GET_SHOP_PROMOTION_CAMPAIGN_REQUEST';
+export const ADMIN_GET_SHOP_PROMOTION_CAMPAIGN_SUCCESS = 'ADMIN_GET_SHOP_PROMOTION_CAMPAIGN_SUCCESS';
+export const ADMIN_GET_SHOP_PROMOTION_CAMPAIGN_FAILURE = 'ADMIN_GET_SHOP_PROMOTION_CAMPAIGN_FAILURE';
+
+const adminRequestGetShopPromotionCampaign = () => ({
+  [CALL_API]: {
+    types: [ADMIN_GET_SHOP_PROMOTION_CAMPAIGN_REQUEST, ADMIN_GET_SHOP_PROMOTION_CAMPAIGN_SUCCESS, ADMIN_GET_SHOP_PROMOTION_CAMPAIGN_FAILURE],
+    url: '/api/v1/admin/shopPromotionCampaigns',
+    method: HTTP_METHODS.GET
+  }
+});
+
+export const adminGetShopPromotionCampaign = () => {
+  return (dispatch) => {
+    dispatch(adminRequestGetShopPromotionCampaign());
+  }
+}

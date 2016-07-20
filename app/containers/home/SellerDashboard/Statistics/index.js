@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import BlockSellerDashboardSideBar from 'app/components/home/BlockSellerDashboardSideBar';
 import BlockOrdersStatistic from 'app/components/home/BlockOrdersStatistic';
+import BlockSalesStatistic from 'app/components/home/BlockSalesStatistic';
 import BlockStatisticsHeader from 'app/components/home/BlockStatisticsHeader';
 import Sticky from 'react-stickynode';
-import { calculateOrdersStatisticData } from 'app/selectors';
+import { calculateOrdersStatisticData, calculateSalesStatisticSelector } from 'app/selectors';
 import { getShopStatistics, STATISTIC_TYPE } from '../../../../actions/statistic';
 import _ from 'lodash';
 
@@ -25,6 +26,8 @@ class Statistics extends Component {
       this.setState({
         activeMode: mode
       });
+
+      this.props.getShopStatistics(this.props.params.shopID, STATISTIC_MODE[mode]);
     }
   }
 
@@ -47,6 +50,7 @@ class Statistics extends Component {
             </div>
             <div className="row">
               {activeMode === 0 && <BlockOrdersStatistic ordersStatistic={ordersStatistic} />}
+              {activeMode === 1 && <BlockSalesStatistic salesStatistic={salesStatistic} />}
             </div>
           </div>
           <div className="col-md-3">
@@ -66,7 +70,7 @@ const mapStateToProps = (state) => {
   return {
     sellerShop: shop.sellerShop,
     ordersStatistic: calculateOrdersStatisticData(state),
-    salesStatistic: statistic.salesStatistic,
+    salesStatistic: calculateSalesStatisticSelector(state),
     itemSoldStatistic: statistic.itemSoldStatistic
   }
 };

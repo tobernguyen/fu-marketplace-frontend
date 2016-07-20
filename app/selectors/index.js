@@ -14,6 +14,7 @@ const currentViewedShopSelector = (state) => state.user.currentViewedShop;
 const sellerShopSelector        = (state) => state.shop.sellerShop;
 const notificationsSelector     = (state) => state.notification.notifications;
 const ordersStatisticSelector   = (state) => state.statistic.ordersStatistic;
+const salesStatisticSelector    = (state) => state.statistic.salesStatistic;
 
 export const getCategories = createSelector(
   categoriesSelector,
@@ -80,7 +81,7 @@ export const calculateOrdersStatisticData = createSelector(
     });
 
     const today = moment();
-    const last7Days   = moment().subtract(7, 'days');
+    const last7Days   = moment().subtract(6, 'days');
     const range    = moment.range(last7Days, today);
     const momentArray = range.toArray('days');
     const dayArray = momentArray.map((moment) => {
@@ -120,6 +121,62 @@ export const calculateOrdersStatisticData = createSelector(
     calculatedData['datasets'] = [completedOrdersDataSet, inCompletedOrdersDataSet];
 
     return calculatedData
+  }
+);
+
+export const calculateSalesStatisticSelector = createSelector(
+  salesStatisticSelector,
+  (salesStatistic) => {
+    let calculatedData = {};
+
+    var realData =_.keyBy(salesStatistic.data, (o) => {
+      return moment(`${o.day}/${o.month}/${o.year}`, 'DD/MM/YYYY').format('DD/MM/YYYY')
+    });
+
+    const today = moment();
+    const last7Days   = moment().subtract(6, 'days');
+    const range    = moment.range(last7Days, today);
+    const momentArray = range.toArray('days');
+    const dayArray = momentArray.map((moment) => {
+      return moment.format('DD/MM/YYYY')
+    });
+
+    const fullWeekData = dayArray.map((day) => {
+      let dayData;
+      if (realData.hasOwnProperty(day)) {
+        dayData = realData[day]['totalSales']
+      } else {
+        dayData = 0;
+      }
+      return dayData;
+    });
+
+    calculatedData['labels'] = dayArray;
+    calculatedData['datasets'] = [
+      {
+        label: 'Total sales',
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(255, 159, 64, 0.2)'
+        ],
+        borderColor: [
+          'rgba(255,99,132,1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 159, 64, 1)'
+        ],
+        borderWidth: 1,
+        data: fullWeekData,
+      }
+    ];
+
+    return calculatedData;
   }
 );
 

@@ -88,7 +88,7 @@ class BlockCurrentOrderListRow extends Component {
 
     return <FormattedNumber value={total} />
   }
-  
+
   render() {
     const orderCardClass = classNames({
       'order-card': true,

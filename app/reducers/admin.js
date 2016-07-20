@@ -465,6 +465,10 @@ export const admin = (state = initialState, action) => {
           promotionList: []
         }
       });
+    case AdminActionTypes.ADMIN_SELECT_SHOP_PROMOTION_CAMPAIGN:
+      return _.merge({}, state,{
+        selectedPromotion: action.payload
+      });
     case CommonActionTypes.GET_SHIP_PLACES_SUCCESS:
       return _.merge({}, state, {
         shopManagement: {

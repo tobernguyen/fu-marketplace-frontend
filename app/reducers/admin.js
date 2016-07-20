@@ -29,7 +29,10 @@ const initialState = {
   },
   promotionManagement: {
     isFetching: false,
-    promotionList: []
+    promotionList: [],
+    submitResult: '',
+    isSubmitting: false,
+    selectedPromotion: {}
   },
   changePasswordFormStatus: {
     isSubmitting: false,
@@ -125,13 +128,15 @@ export const admin = (state = initialState, action) => {
       return _.merge({}, state, {
         userManagement: {
           selectedUser: response,
-          submitResult: AsyncResultCode.BAN_USER_SUCCESS
+          submitResult: AsyncResultCode.BAN_USER_SUCCESS,
+          isSubmitting: false
         }
       });
     case AdminActionTypes.ADMIN_BAN_USER_FAILURE:
       return _.merge({}, state, {
         userManagement: {
-          submitResult: AsyncResultCode.BAN_USER_FAIL
+          submitResult: AsyncResultCode.BAN_USER_FAIL,
+          isSubmitting: false
         }
       });
     case AdminActionTypes.ADMIN_UNBAN_USER_REQUEST:
@@ -144,13 +149,15 @@ export const admin = (state = initialState, action) => {
       return _.merge({}, state, {
         userManagement: {
           selectedUser: response,
-          submitResult: AsyncResultCode.UNBAN_USER_SUCCESS
+          submitResult: AsyncResultCode.UNBAN_USER_SUCCESS,
+          isSubmitting: false
         }
       });
     case AdminActionTypes.ADMIN_UNBAN_USER_FAILURE:
       return _.merge({}, state, {
         userManagement: {
-          submitResult: AsyncResultCode.UNBAN_USER_FAIL
+          submitResult: AsyncResultCode.UNBAN_USER_FAIL,
+          isSubmitting: false
         }
       });
     case AdminActionTypes.ADMIN_GET_SHOPS_REQUEST:
@@ -305,12 +312,14 @@ export const admin = (state = initialState, action) => {
       return _.merge({}, state, {
         shopManagement: {
           selectedShop: response,
-          submitResult: AsyncResultCode.BAN_SHOP_SUCCESS
+          submitResult: AsyncResultCode.BAN_SHOP_SUCCESS,
+          isSubmitting: false
         }
       });
     case AdminActionTypes.ADMIN_BAN_SHOP_FAILURE:
       return _.merge({}, state, {
         shopManagement: {
+          isSubmitting: false,
           submitResult: AsyncResultCode.BAN_SHOP_FAIL
         }
       });
@@ -413,6 +422,26 @@ export const admin = (state = initialState, action) => {
         changePasswordFormStatus: {
           isSubmitting: false,
           response: action.error || ''
+        }
+      });
+    case AdminActionTypes.ADMIN_CREATE_SHOP_PROMOTION_CAMPAIGN_REQUEST:
+      return _.merge({}, state, {
+        shopManagement: {
+          isSubmitting: true
+        }
+      });
+    case AdminActionTypes.ADMIN_CREATE_SHOP_PROMOTION_CAMPAIGN_SUCCESS:
+      return _.merge({}, state,{
+        shopManagement: {
+          submitResult: AsyncResultCode.CREATE_PROMOTION_SUCCESS,
+          isSubmitting: false
+        }
+      });
+    case AdminActionTypes.ADMIN_CREATE_SHOP_PROMOTION_CAMPAIGN_FAILURE:
+      return _.merge({}, state,{
+        shopManagement: {
+          submitResult: AsyncResultCode.CREATE_PROMOTION_FAILURE,
+          isSubmitting: false
         }
       });
     case AdminActionTypes.ADMIN_GET_SHOP_PROMOTION_CAMPAIGN_REQUEST:

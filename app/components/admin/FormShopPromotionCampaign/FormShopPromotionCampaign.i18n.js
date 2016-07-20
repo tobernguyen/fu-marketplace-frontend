@@ -31,6 +31,16 @@ export const messages = {
         id: 'formShopPromotionCampaign.button.createShopPromotionCampaign',
         defaultMessage: 'Create shop promotion campaign'
       }
+    },
+    submitResult: {
+      success: {
+        id: 'formShopPromotionCampaign.submitResult.success',
+        defaultMessage: 'Shop promotion created successfully.'
+      },
+      fail: {
+        id: 'formShopPromotionCampaign.submitResult.fail',
+        defaultMessage: 'Error occurred. Please try again.'
+      }
     }
   }
 }

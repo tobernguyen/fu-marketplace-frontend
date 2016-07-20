@@ -322,8 +322,13 @@ export default {
   'formShopPromotionCampaign.fields.type': 'Kiểu',
   'formShopPromotionCampaign.button.today': 'Ngày hôm nay',
   'formShopPromotionCampaign.button.createShopPromotionCampaign': 'Tạo chiến dịch quảng bá cửa hàng',
+  'formShopPromotionCampaign.submitResult.success': 'Tạo chiến dịch quảng bá cửa hàng thành công.',
+  'formShopPromotionCampaign.submitResult.fail': 'Có lỗi xảy ra. Vui lòng thử lại sau.',
   'blockManageOrderHeader.name': 'Quản lý đơn hàng',
   'blockManageOrderHeader.button.all': 'Tất cả',
   'blockManageOrderHeader.button.current': 'Hiện tại',
-  'labelPromotionType.topFeedSlideShow': 'Slide đầu danh sách'
+  'labelPromotionType.topFeedSlideShow': 'Slide đầu danh sách',
+  'admin.form.validation.endDateMustAfterStartDate': 'Ngày kết thúc phải sau ngày bắt đầu.',
+  'admin.form.validation.startDateMustBeforeEndDate': 'Ngày bắt đầu phải trước ngày kết thúc.',
+  'admin.form.validation.aTypeMustBeChosen': 'Loại chiến dịch quảng bá không thể bỏ trống'
 };

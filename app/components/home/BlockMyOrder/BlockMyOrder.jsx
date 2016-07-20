@@ -21,14 +21,14 @@ class BlockMyOrder extends Component {
         showModal: true,
         selectedOrderID: orderID
       });
-    }
+    };
 
     this.closeModal= () => {
       this.setState({
         showModal: false,
         selectedOrderID: null
       });
-    }
+    };
 
     this.userCancelOrder = () => {
       const { selectedOrderID } = this.state;
@@ -36,7 +36,7 @@ class BlockMyOrder extends Component {
       this.setState({
         showModal: false
       });
-    }
+    };
 
     this.renderOrderList = this.renderOrderList.bind(this);
   }
@@ -47,7 +47,7 @@ class BlockMyOrder extends Component {
         <thead>
           <tr>
             <th>#</th>
-            <th><FormattedMessage {... messages.myOrder.tableHead.item}/></th>
+            <th><FormattedMessage {...messages.myOrder.tableHead.item}/></th>
             <th><FormattedMessage {...messages.myOrder.tableHead.total} /></th>
             <th><FormattedMessage {...messages.myOrder.tableHead.shipAddress}/></th>
             <th><FormattedMessage {...messages.myOrder.tableHead.time} /></th>
@@ -62,13 +62,13 @@ class BlockMyOrder extends Component {
               order={order}
               openModal={this.openModal}
               rateOrder={this.props.rateOrder}
-              key={order.id}
-              />
+              key={order.id} />
           )}
         </tbody>
       </table>
     );
   }
+
   renderEmptyOrderList() {
     return (
     <div className="alert alert-warning">
@@ -77,8 +77,9 @@ class BlockMyOrder extends Component {
     </div>
     );
   }
+
   renderMyOrder(orders) {
-    let output = '';
+    let output;
     if (!orders || orders.length == 0) {
       output = this.renderEmptyOrderList();
     } else {
@@ -86,8 +87,9 @@ class BlockMyOrder extends Component {
     }
     return output;
   }
+
   render() {
-    const { orders, page, changePageSize, size } = this.props;
+    const { orders, page, changePageSize, size, prevPage, nextPage } = this.props;
     return (
       <div>
         {this.renderMyOrder(orders)}
@@ -100,8 +102,9 @@ class BlockMyOrder extends Component {
           page={page}
           orders={orders}
           size={size}
-          changePageSize={changePageSize}
-        />
+          prevPage={prevPage}
+          nextPage={nextPage}
+          changePageSize={changePageSize} />
       </div>
     );
   }

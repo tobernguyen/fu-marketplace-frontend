@@ -6,55 +6,68 @@ import { connect } from 'react-redux';
 import { updateModalSize } from 'app/actions/common';
 import { withRouter } from 'react-router'
 
+const FIRST_PAGE = 1;
+const DEFAULT_SIZE = 5;
+
 class MyOrders extends Component {
   constructor(props) {
     super(props);
-    const { page, size } = this.props.location.query;
+
     this.state = {
-      page: page,
-      size: size
+      page: 1,
+      size: 5
     };
 
-    this.props.userGetOrder(page, size);
     this.changePageSize = (e) => {
       const size = e.target.value;
-      const { query } = this.props.location;
-      const page = query.page || 1;
-      this.props.router.push(`/orders?size=${size}&page=${page}`);
+      if (!isNaN(size)) {
+        this.setState({
+          size: size,
+          page: FIRST_PAGE
+        });
+        this.props.userGetOrder(FIRST_PAGE, size);
+      }
+    };
 
+    this.prevPage = (e) => {
+      e.preventDefault();
+      if (this.state.page > FIRST_PAGE) {
+        this.setState({
+          page: this.state.page - 1
+        }, () => {
+          this.props.userGetOrder(this.state.page, this.state.size);
+        })
+      }
+    };
+
+    this.nextPage = (e) => {
+      e.preventDefault();
+      this.setState({
+        page: this.state.page + 1
+      }, () => {
+        this.props.userGetOrder(this.state.page, this.state.size);
+      })
     }
   }
+
 
   componentWillMount() {
     this.props.updateModalSize('lg');
+    this.props.userGetOrder(FIRST_PAGE, DEFAULT_SIZE);
   }
-
-  componentWillReceiveProps(nextProps) {
-    const { page, size } = nextProps.location.query;
-    if( page != this.state.page || size != this.state.size) {
-      this.props.userGetOrder(page, size);
-      this.setState({
-        page,
-        size
-      });
-    }
-
-    if(nextProps.shouldUpdateOrderList === true) {
-      this.props.userGetOrder(page,size);
-    }
-  }
-
 
   render() {
-    const { page, size } = this.props.location.query;
+    const { page, size } = this.state;
     return (
       <div>
-        <ModalHeader title="Orders" subHeader="Danh sách tất cả orders"/>
+        <ModalHeader title="Đơn hàng" subHeader="Danh sách tất cả đơn hàng"/>
         <div className="modal-body my-order">
           <BlockMyOrder
             orders={this.props.orders}
             page={page}
             size={size}
+            prevPage={this.prevPage}
+            nextPage={this.nextPage}
             changePageSize={this.changePageSize}
             cancelOrder={this.props.userCancelOrder}
             rateOrder={this.props.userRateOrder}

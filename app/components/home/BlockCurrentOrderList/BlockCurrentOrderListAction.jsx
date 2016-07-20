@@ -36,7 +36,7 @@ const BlockCurrentOrderListAction = ({ order, acceptOrder, rejectOrder, startShi
       );
       break;
     case OrderStatus.REJECTED:
-      output = <OrderStatusMessage message={formatMessage(messages.modalViewOrder.orderStatus.rejected)}/>
+      output = <OrderStatusMessage message={formatMessage(messages.modalViewOrder.orderStatus.rejected)} sellerMessage={order.sellerMessage}/>
       break;
     case OrderStatus.SHIPPING:
       output = (
@@ -64,7 +64,7 @@ const BlockCurrentOrderListAction = ({ order, acceptOrder, rejectOrder, startShi
       output = <OrderStatusMessage message={formatMessage(messages.modalViewOrder.orderStatus.canceled)}/>
     break;
     case OrderStatus.ABORTED:
-      output = <OrderStatusMessage message={formatMessage(messages.modalViewOrder.orderStatus.aborted)}/>
+      output = <OrderStatusMessage message={formatMessage(messages.modalViewOrder.orderStatus.aborted)} sellerMessage={order.sellerMessage}/>
       break;
     default:
       output = <OrderStatusMessage message={formatMessage(messages.modalViewOrder.orderStatus.noStatus)}/>

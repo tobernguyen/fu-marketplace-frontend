@@ -27,6 +27,10 @@ class BlockOrderList extends Component {
     }
   }
 
+  componentWillUnmount() {
+    this.props.clearCurrentOrders();
+  }
+
   render() {
     const { shopID, currentOrders, orders, query, changePageSize, getOrdersOfPage } = this.props;
     const size = query.size || 10;

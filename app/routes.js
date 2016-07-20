@@ -16,6 +16,7 @@ import UpdateShipPlaces from './containers/home/SellerDashboard/UpdateShipPlaces
 import AddShopItem from './containers/home/SellerDashboard/ManageShopItem/AddShopItem';
 import UpdateShopItem from './containers/home/SellerDashboard/ManageShopItem/UpdateShopItem';
 import ManageOrders from './containers/home/SellerDashboard/ManageOrders';
+import Statistics from './containers/home/SellerDashboard/Statistics';
 import Shop from './containers/home/Shop';
 import ShopReviews from './containers/home/ShopReviews';
 import Admin from './containers/admin';
@@ -57,9 +58,9 @@ export default (
           <Route path="items/add" component={AddShopItem} />
           <Route path="items/:itemID/update" component={UpdateShopItem} />
         </Route>
+        <Route path="shops/:shopID/statistics" component={Statistics} />
+        <Route path="shops/:shopID/orders" component={ManageOrders} />
       </Route>
-
-      <Route path="/dashboard/shops/:shopID/orders" component={ManageOrders} />
     </Route>
 
     <Route name="admin" path="admin" component={Admin}>

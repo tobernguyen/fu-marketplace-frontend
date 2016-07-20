@@ -4,7 +4,7 @@ import { FormattedTime, FormattedDate } from 'react-intl';
 import LabelPromotionType from 'app/components/admin/LabelPromotionType';
 import classNames from 'classnames';
 
-const PromotionListRow = ({ promotion }) => {
+const PromotionListRow = ({ promotion, adminSelectShopPromotionCampaign }) => {
   const rowClassName = classNames({
     'banned': !promotion.active
   });
@@ -28,7 +28,7 @@ const PromotionListRow = ({ promotion }) => {
         <LabelPromotionType type={promotion.type} />
       </td>
       <td className="actions">
-        <Link className="btn btn-warning" to={`/admin/promotions/${promotion.id}/edit`} bsStyle="warning">
+        <Link className="btn btn-warning" to={`/admin/promotions/${promotion.id}/edit`} bsStyle="warning" onClick={() => adminSelectShopPromotionCampaign(promotion)}>
           <i className="fa fa-pencil-square-o"></i>
         </Link>
       </td>

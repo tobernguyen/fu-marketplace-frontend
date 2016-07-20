@@ -441,3 +441,18 @@ export const adminGetShopPromotionCampaign = () => {
     dispatch(adminRequestGetShopPromotionCampaign());
   }
 }
+
+
+export const ADMIN_SELECT_SHOP_PROMOTION_CAMPAIGN = 'ADMIN_SELECT_SHOP_PROMOTION_CAMPAIGN';
+const adminRequestSelectShopPromotionCampaign = (promotion) => ({
+  type: ADMIN_SELECT_SHOP_PROMOTION_CAMPAIGN,
+  payload: {
+    promotion: promotion
+  }
+});
+
+export const adminSelectShopPromotionCampaign = (promotion) => {
+  return (dispatch) => {
+    dispatch(adminRequestSelectShopPromotionCampaign(promotion));
+  }
+}

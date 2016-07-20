@@ -3,7 +3,7 @@ import PromotionListRow from './PromotionListRow.jsx';
 
 class PromotionList extends Component {
   render() {
-    const { promotions } = this.props;
+    const { promotions, adminSelectShopPromotionCampaign } = this.props;
     return(
       <div>
         <table className="table table-striped">
@@ -19,7 +19,7 @@ class PromotionList extends Component {
           </thead>
           <tbody>
             {promotions.length !== 0 && promotions.map(promotion =>
-              <PromotionListRow key={promotion.id} promotion={promotion} />
+              <PromotionListRow key={promotion.id} promotion={promotion} adminSelectShopPromotionCampaign={adminSelectShopPromotionCampaign}/>
             )}
           </tbody>
         </table>

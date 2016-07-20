@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import BlockSellerDashboardSideBar from 'app/components/home/BlockSellerDashboardSideBar';
 import BlockOrderList from 'app/components/home/BlockOrderList';
 import ModalViewOrder from 'app/components/home/ModalViewOrder';
-import { getSellerShop, updateShopInfo } from 'app/actions/shop';
+import { updateShopInfo } from 'app/actions/shop';
 import {
   sellerGetOrder,
   sellerAcceptOrder,
@@ -26,7 +26,7 @@ class ManageOrders extends Component {
     const { status, page, size } = this.props.location.query;
     if (!isNaN(shopID)) {
       this.state = {
-        shopID: shopID,
+        shopID: parseInt(shopID),
         status: status,
         page: page,
         size: size,
@@ -36,7 +36,6 @@ class ManageOrders extends Component {
           orderLines: []
         }
       };
-      this.props.getSellerShop(shopID);
       this.props.sellerGetOrder(shopID, status, page, size);
     }
 
@@ -126,7 +125,7 @@ class ManageOrders extends Component {
     if(shopID != this.state.shopID || status != this.state.status || page != this.state.page || size !== this.state.size) {
       this.props.sellerGetOrder(shopID, status, page, size);
       this.setState ({
-        shopID,
+        shopID: parseInt(shopID),
         status,
         page,
         size
@@ -178,9 +177,8 @@ class ManageOrders extends Component {
           </div>
           <div className="col-md-3">
             <Sticky enabled={true} top={60}>
-              <BlockSellerDashboardSideBar sellerShop={this.props.sellerShop}
-                                           shopInfoChanged={this.handleShopInfoChanged}
-                                           shopID={this.state.shopID} />
+              <BlockSellerDashboardSideBar
+                sellerShop={this.props.sellerShop} />
             </Sticky>
           </div>
         </div>
@@ -197,12 +195,10 @@ const mapStateToProps = (state) => {
     orders: state.order.orders,
     sellerShop: shop.sellerShop,
     shouldUpdateOrderList: state.order.shouldUpdateOrderList
-
   }
 };
 
 export default withRouter(connect(mapStateToProps, {
-  getSellerShop,
   updateShopInfo,
   sellerGetOrder,
   sellerAcceptOrder,

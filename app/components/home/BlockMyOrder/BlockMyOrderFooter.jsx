@@ -3,7 +3,7 @@ import { messages } from 'app/components/home/BlockMyOrder/BlockMyOrder.i18n';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import classNames from 'classnames';
 
-const BlockMyOrderFooter = ({ page = 1, orders = [], size = 10 , changePageSize, nextPage, prevPage}) => {
+const BlockMyOrderFooter = ({ page = 1, orders = [], size = 5 , changePageSize, nextPage, prevPage}) => {
   const previousButtonClass = classNames({
     'disabled': Number(page) === 1
   });
@@ -16,6 +16,7 @@ const BlockMyOrderFooter = ({ page = 1, orders = [], size = 10 , changePageSize,
         <label>
           <FormattedMessage {...messages.myOrder.tableFooter.pageSize} />
           <select className="form-control" onChange={changePageSize} value={size}>
+            <option value="5">5</option>
             <option value="10">10</option>
             <option value="20">20</option>
             <option value="50">50</option>

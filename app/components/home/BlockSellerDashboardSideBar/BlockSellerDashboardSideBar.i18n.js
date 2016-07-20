@@ -18,5 +18,9 @@ export const messages = {
   manageOrders: {
     id: 'sellerDashboard.sidebar.manageOrders',
     defaultMessage: 'manage orders'
+  },
+  statistics: {
+    id: 'sellerDashboard.sidebar.statistics',
+    defaultMessage: 'statistics'
   }
 };

@@ -125,7 +125,7 @@ export default class BlockSellerDashboardSideBar extends Component {
                 <i className="fa fa-line-chart"/>
               </div>
               <div className="title">
-                Statistics
+                <FormattedMessage {...messages.statistics} />
               </div>
             </div>
           </ListGroupItem>

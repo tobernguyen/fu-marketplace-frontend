@@ -50,6 +50,13 @@ class MyOrders extends Component {
     }
   }
 
+  componentWillReceiveProps(nextProps) {
+    const { shouldUpdateOrderList } = nextProps;
+    const { page, size } = this.state;
+    if ( shouldUpdateOrderList ) {
+      this.props.userGetOrder(page,size);
+    }
+  }
 
   componentWillMount() {
     this.props.updateModalSize('lg');

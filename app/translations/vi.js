@@ -331,5 +331,8 @@ export default {
   'labelPromotionType.topFeedSlideShow': 'Slide đầu danh sách',
   'admin.form.validation.endDateMustAfterStartDate': 'Ngày kết thúc phải sau ngày bắt đầu.',
   'admin.form.validation.startDateMustBeforeEndDate': 'Ngày bắt đầu phải trước ngày kết thúc.',
-  'admin.form.validation.aTypeMustBeChosen': 'Loại chiến dịch quảng bá không thể bỏ trống'
+  'admin.form.validation.aTypeMustBeChosen': 'Loại chiến dịch quảng bá không thể bỏ trống',
+  'ordersStatistic': 'Đơn hàng',
+  'salesStatistic': 'Bán hàng',
+  'itemSoldStatistic': 'Hàng đã bán'
 };

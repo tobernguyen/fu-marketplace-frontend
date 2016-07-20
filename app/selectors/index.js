@@ -1,5 +1,7 @@
 import { createSelector } from 'reselect';
 import _ from 'lodash';
+import moment from 'moment';
+require('moment-range');
 
 const categoriesSelector        = (state) => state.common.categories;
 const shipPlacesSelector        = (state) => state.common.shipPlaces;
@@ -11,6 +13,7 @@ const pinnedShopsSelector       = (state) => state.feed.pinnedShops;
 const currentViewedShopSelector = (state) => state.user.currentViewedShop;
 const sellerShopSelector        = (state) => state.shop.sellerShop;
 const notificationsSelector     = (state) => state.notification.notifications;
+const ordersStatisticSelector   = (state) => state.statistic.ordersStatistic;
 
 export const getCategories = createSelector(
   categoriesSelector,
@@ -37,6 +40,86 @@ export const getUser = createSelector(
   currentUserSelector,
   (currentUser) => {
     return currentUser
+  }
+);
+
+
+const HOLDER = {
+  completedOrders: 0,
+  incompleteOrders: 0
+};
+
+const CHART_DATA_HOLDER = {
+  fill: false,
+  lineTension: 0.1,
+  backgroundColor: 'rgba(236, 240, 241,1.0)',
+  borderColor: "rgba(75,192,192,1)",
+  borderCapStyle: 'butt',
+  borderDash: [],
+  borderDashOffset: 0.0,
+  borderJoinStyle: 'miter',
+  pointBorderColor: 'rgba(127, 140, 141,1.0)',
+  pointBackgroundColor: "#fff",
+  pointBorderWidth: 1,
+  pointHoverRadius: 5,
+  pointHoverBackgroundColor: "rgba(75,192,192,1)",
+  pointHoverBorderColor: 'rgba(41, 128, 185,1.0)',
+  pointHoverBorderWidth: 2,
+  pointRadius: 3,
+  pointHitRadius: 10,
+  spanGaps: false,
+};
+
+export const calculateOrdersStatisticData = createSelector(
+  ordersStatisticSelector,
+  (ordersStatistic) => {
+    let calculatedData = {};
+
+    var realData =_.keyBy(ordersStatistic.data, (o) => {
+      return moment(`${o.day}/${o.month}/${o.year}`, 'DD/MM/YYYY').format('DD/MM/YYYY')
+    });
+
+    const today = moment();
+    const last7Days   = moment().subtract(7, 'days');
+    const range    = moment.range(last7Days, today);
+    const momentArray = range.toArray('days');
+    const dayArray = momentArray.map((moment) => {
+      return moment.format('DD/MM/YYYY')
+    });
+
+    const fullWeekData = dayArray.map((day) => {
+      let dayData;
+      if (realData.hasOwnProperty(day)) {
+        dayData = _.pick(realData[day], ['completedOrders', 'incompleteOrders'])
+      } else {
+        dayData = HOLDER;
+      }
+      return dayData;
+    });
+
+    const completedOrdersData = _.map(fullWeekData, (data) => {
+      return data.completedOrders
+    });
+    const inCompletedOrdersData = _.map(fullWeekData, (data) => {
+      return data.incompleteOrders
+    });
+
+    const completedOrdersDataSet = _.assign({}, CHART_DATA_HOLDER, {
+      data: completedOrdersData,
+      label: 'Completed orders',
+      borderColor: 'rgba(39, 174, 96,1.0)'
+    });
+
+    const inCompletedOrdersDataSet = _.assign({}, CHART_DATA_HOLDER, {
+      data: inCompletedOrdersData,
+      label: 'In-completed orders',
+      borderColor: 'rgba(192, 57, 43,1.0)'
+    });
+
+    calculatedData['labels'] = dayArray;
+    calculatedData['datasets'] = [completedOrdersDataSet, inCompletedOrdersDataSet];
+
+    return calculatedData
   }
 );
 

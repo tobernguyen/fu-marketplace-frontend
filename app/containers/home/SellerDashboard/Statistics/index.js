@@ -4,6 +4,7 @@ import BlockSellerDashboardSideBar from 'app/components/home/BlockSellerDashboar
 import BlockOrdersStatistic from 'app/components/home/BlockOrdersStatistic';
 import BlockStatisticsHeader from 'app/components/home/BlockStatisticsHeader';
 import Sticky from 'react-stickynode';
+import { calculateOrdersStatisticData } from 'app/selectors';
 import { getShopStatistics, STATISTIC_TYPE } from '../../../../actions/statistic';
 import _ from 'lodash';
 
@@ -64,7 +65,7 @@ const mapStateToProps = (state) => {
   const { shop, statistic } = state;
   return {
     sellerShop: shop.sellerShop,
-    ordersStatistic: statistic.ordersStatistic,
+    ordersStatistic: calculateOrdersStatisticData(state),
     salesStatistic: statistic.salesStatistic,
     itemSoldStatistic: statistic.itemSoldStatistic
   }

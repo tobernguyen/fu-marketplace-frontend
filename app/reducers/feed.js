@@ -10,7 +10,8 @@ const INITIAL_STATE = {
     shipPlace: {}
   },
   total: 0,
-  hasMore: true
+  hasMore: true,
+  pinnedShops: [],
 };
 
 export const feed = (state = INITIAL_STATE, action) => {
@@ -71,7 +72,12 @@ export const feed = (state = INITIAL_STATE, action) => {
           });
       }
     }
-
+    case FeedActionTypes.GET_TOP_FEED_SLIDE_SHOW_SUCCESS:
+    {
+      return _.assign({}, state, {
+        pinnedShops: response.shops
+      })
+    }
     case ItemActionTypes.GET_ITEM_CATEGORIES_SUCCESS:
       return _.merge({}, state, response);
     default:

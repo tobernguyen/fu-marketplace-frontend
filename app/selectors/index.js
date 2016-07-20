@@ -7,6 +7,7 @@ const currentUserSelector       = (state) => state.user.currentUser;
 const shopsFeedSelector         = (state) => state.feed.shops;
 const aggregationsSelector      = (state) => state.feed.aggregations;
 const totalShopSelector         = (state) => state.feed.total;
+const pinnedShopsSelector       = (state) => state.feed.pinnedShops;
 const currentViewedShopSelector = (state) => state.user.currentViewedShop;
 const sellerShopSelector        = (state) => state.shop.sellerShop;
 const notificationsSelector     = (state) => state.notification.notifications;
@@ -22,6 +23,13 @@ export const getShipPlaces = createSelector(
   shipPlacesSelector,
   (shipPlaces) => {
     return shipPlaces
+  }
+);
+
+export const getPinnedShops = createSelector(
+  pinnedShopsSelector,
+  (shops) => {
+    return shops
   }
 );
 

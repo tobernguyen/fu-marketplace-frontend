@@ -5,8 +5,8 @@ import BlockDormList from 'app/components/home/BlockDormList';
 import CarouselPinnedItems from 'app/components/home/CarouselPinnedItems';
 import BlockBookmarks from 'app/components/home/BlockBookmarks';
 import ShopsFeed from './ShopsFeed';
-import { getShops } from 'app/actions/feed';
-import { getCategories, getShipPlaces, getAggregations } from 'app/selectors';
+import { getShops, getTopFeedSlideShow } from 'app/actions/feed';
+import { getCategories, getShipPlaces, getAggregations, getPinnedShops } from 'app/selectors';
 
 
 class Wrapper extends Component {
@@ -19,12 +19,14 @@ class Wrapper extends Component {
 
   componentWillMount() {
     this.props.getShops();
+    this.props.getTopFeedSlideShow();
   }
 
   render() {
     const {
       categories,
       shipPlaces,
+      pinnedShops,
       aggregations:
         {
           category,
@@ -51,7 +53,7 @@ class Wrapper extends Component {
           </div>
           <div className="col-md-9">
             <div className="row">
-              <CarouselPinnedItems />
+              <CarouselPinnedItems pinnedShops={pinnedShops} />
               <div className="main-column col-md-12">
                 <ShopsFeed/>
               </div>
@@ -69,11 +71,13 @@ const mapStateToProps = (state) => {
     shipPlaces:   getShipPlaces(state),
     categories:   getCategories(state),
     aggregations: getAggregations(state),
-    query: state.common.query
+    query:        state.common.query,
+    pinnedShops:  getPinnedShops(state)
   }
 };
 
 
 export default connect(mapStateToProps, {
-  getShops
+  getShops,
+  getTopFeedSlideShow
 })(Wrapper)

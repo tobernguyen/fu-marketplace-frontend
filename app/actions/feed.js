@@ -29,17 +29,16 @@ const requestGetShopsOfPage = (params) => ({
   }
 });
 
-export const CLEAR_SHOPS_FEED = 'CLEAR_SHOPS_FEED';
-export const clearShopsFeed = () => ({
-  type: CLEAR_SHOPS_FEED
-});
-
-
 export const getShopsOfPage = (params) => {
   return (dispatch) => {
     return dispatch(requestGetShopsOfPage(params))
   }
 };
+
+export const CLEAR_SHOPS_FEED = 'CLEAR_SHOPS_FEED';
+export const clearShopsFeed = () => ({
+  type: CLEAR_SHOPS_FEED
+});
 
 export const WS_SHOP_UPDATED = 'WS_SHOP_UPDATED';
 export const updateShop = (shopData) => ({
@@ -48,3 +47,21 @@ export const updateShop = (shopData) => ({
     shop: shopData
   }
 });
+
+
+export const GET_TOP_FEED_SLIDE_SHOW_REQUEST = 'GET_TOP_FEED_SLIDE_SHOW_REQUEST';
+export const GET_TOP_FEED_SLIDE_SHOW_SUCCESS = 'GET_TOP_FEED_SLIDE_SHOW_SUCCESS';
+export const GET_TOP_FEED_SLIDE_SHOW_FAILURE = 'GET_TOP_FEED_SLIDE_SHOW_FAILURE';
+const requestGetTopFeedSlideShow = () => ({
+  [CALL_API]: {
+    types: [GET_TOP_FEED_SLIDE_SHOW_REQUEST, GET_TOP_FEED_SLIDE_SHOW_SUCCESS, GET_TOP_FEED_SLIDE_SHOW_FAILURE],
+    url: '/api/v1/shopPromotions/topFeedSlideShow',
+    method: HTTP_METHODS.GET
+  }
+});
+
+export const getTopFeedSlideShow = () => {
+  return (dispatch) => {
+    return dispatch(requestGetTopFeedSlideShow())
+  }
+};

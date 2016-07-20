@@ -37,6 +37,8 @@ class FormShopPromotionCampaign extends Component {
       if(startDate.value.isBefore(endDate.value)) {
         startDate['hasErrors'] = false;
         startDate['error'] = null;
+        endDate['hasErrors'] = false;
+        endDate['error'] = null;
       } else {
         startDate['hasErrors'] = true;
         startDate['error'] = {
@@ -46,7 +48,8 @@ class FormShopPromotionCampaign extends Component {
       }
 
       this.setState({
-        startDate
+        startDate,
+        endDate
       });
     }
 
@@ -56,6 +59,8 @@ class FormShopPromotionCampaign extends Component {
       if(endDate.value.isAfter(startDate.value)) {
         endDate['hasErrors'] = false;
         endDate['error'] = null;
+        startDate['hasErrors'] = false;
+        startDate['error'] = null;
       } else {
         endDate['hasErrors'] = true;
         endDate['error'] = {
@@ -65,7 +70,8 @@ class FormShopPromotionCampaign extends Component {
       }
 
       this.setState({
-        endDate
+        endDate,
+        startDate
       });
     }
 

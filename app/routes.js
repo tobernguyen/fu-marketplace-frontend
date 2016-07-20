@@ -31,6 +31,8 @@ import ContainerEditUser from './containers/admin/User/ContainerEditUser';
 import ShopManagement from './containers/admin/ShopManagement';
 import ContainerListShop from './containers/admin/Shop/ContainerListShop';
 import ContainerEditShop from './containers/admin/Shop/ContainerEditShop';
+import PromotionCampaignManagement from './containers/admin/PromotionCampaignManagement';
+import ContainerListPromotion from './containers/admin/Promotion/ContainerListPromotion';
 import ChangePassword from './containers/admin/ChangePassword';
 
 
@@ -74,6 +76,9 @@ export default (
       <Route path="shops" component={ShopManagement} >
         <IndexRoute component={ContainerListShop} />
         <Route path=":shopId/edit" component={ContainerEditShop} />
+      </Route>
+      <Route path="promotions" component={PromotionCampaignManagement} >
+        <IndexRoute component={ContainerListPromotion} />
       </Route>
       <Route path="changepwd" component={ChangePassword} />
     </Route>

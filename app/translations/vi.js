@@ -312,6 +312,7 @@ export default {
   'sideBar.shopManagement': 'Quản lý cửa hàng',
   'sideBar.requestManagement': 'Quản lý yêu cầu',
   'sideBar.changePassword': 'Thay đổi mật khẩu',
+  'sideBar.promotionManagement': 'Quản lý quảng bá',
   'shop.review.success': 'Xin cảm ơn! Nhận xét của bạn đã được gửi.',
   'error.review.you_must_order_at_this_shop_at_least_one_time': 'Để viết nhận xét, bạn cần phải đã từng đặt hàng tại cửa hàng này.',
   'formShopPromotionCampaign.sectionName': 'Chiến dịch quảng bá',
@@ -323,5 +324,6 @@ export default {
   'formShopPromotionCampaign.button.createShopPromotionCampaign': 'Tạo chiến dịch quảng bá cửa hàng',
   'blockManageOrderHeader.name': 'Quản lý đơn hàng',
   'blockManageOrderHeader.button.all': 'Tất cả',
-  'blockManageOrderHeader.button.current': 'Hiện tại'
+  'blockManageOrderHeader.button.current': 'Hiện tại',
+  'labelPromotionType.topFeedSlideShow': 'Slide đầu danh sách'
 };

@@ -12,6 +12,10 @@ export const messages = {
       id: 'sideBar.shopManagement',
       defaultMessage: 'Shop management'
     },
+    promotionManagement: {
+      id: 'sideBar.promotionManagement',
+      defaultMessage: 'Promotion management'
+    },
     requestManagement: {
       id: 'sideBar.requestManagement',
       defaultMessage: 'Request management'

@@ -27,6 +27,10 @@ const initialState = {
     isSubmitting: false,
     submitResult: ''
   },
+  promotionManagement: {
+    isFetching: false,
+    promotionList: []
+  },
   changePasswordFormStatus: {
     isSubmitting: false,
     response: {}
@@ -409,6 +413,27 @@ export const admin = (state = initialState, action) => {
         changePasswordFormStatus: {
           isSubmitting: false,
           response: action.error || ''
+        }
+      });
+    case AdminActionTypes.ADMIN_GET_SHOP_PROMOTION_CAMPAIGN_REQUEST:
+      return _.merge({}, state, {
+        promotionManagement: {
+          isFetching: true,
+          promotionList: []
+        }
+      });
+    case AdminActionTypes.ADMIN_GET_SHOP_PROMOTION_CAMPAIGN_SUCCESS:
+      return _.merge({}, state, {
+        promotionManagement: {
+          isFetching: false,
+          promotionList: response.shopPromotionCampaigns
+        }
+      });
+    case AdminActionTypes.ADMIN_GET_SHOP_PROMOTION_CAMPAIGN_FAILURE:
+      return _.merge({}, state, {
+        promotionManagement: {
+          isFetching: false,
+          promotionList: []
         }
       });
     case CommonActionTypes.GET_SHIP_PLACES_SUCCESS:

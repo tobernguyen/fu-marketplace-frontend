@@ -318,5 +318,8 @@ export default {
   'formShopPromotionCampaign.fields.endDate': 'Ngày kết thúc',
   'formShopPromotionCampaign.fields.type': 'Kiểu',
   'formShopPromotionCampaign.button.today': 'Ngày hôm nay',
-  'formShopPromotionCampaign.button.createShopPromotionCampaign': 'Tạo chiến dịch quảng bá cửa hàng'
+  'formShopPromotionCampaign.button.createShopPromotionCampaign': 'Tạo chiến dịch quảng bá cửa hàng',
+  'blockManageOrderHeader.name': 'Quản lý đơn hàng',
+  'blockManageOrderHeader.button.all': 'Tất cả',
+  'blockManageOrderHeader.button.current': 'Hiện tại'
 };

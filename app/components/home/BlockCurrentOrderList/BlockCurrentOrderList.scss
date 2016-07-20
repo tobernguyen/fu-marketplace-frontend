@@ -9,6 +9,7 @@
     background-color: #ffffff;
     border: 1px solid #e7e7e7;
     padding: 10px;
+    transition: all 0.7s ease;
     .preview {
       .title {
         display: none;
@@ -18,15 +19,15 @@
     .detail {
       padding: 15px;
       display: none;
-      transition-property: all;
-    	transition-duration: 4s;
-    	transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
     }
-
-    &.is-expand {
-      height: 100%;
-      background: #f7f4f4;
-
+    &:hover {
+      height: auto;
+      box-shadow:
+                1px 1px #a1a1a1,
+                2px 2px #a1a1a1,
+                3px 3px #a1a1a1;
+      -webkit-transform: translateX(-3px);
+      transform: translateX(-3px);
       .preview {
         .title {
           display: block;

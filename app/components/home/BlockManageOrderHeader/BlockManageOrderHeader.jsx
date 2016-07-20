@@ -1,17 +1,21 @@
 import React from 'react';
 import './BlockManageOrderHeader.scss';
 import classNames  from 'classnames';
+import { FormattedMessage } from 'react-intl';
+import { messages } from 'app/components/home/BlockManageOrderHeader/BlockManageOrderHeader.i18n';
 
 const BlockManageOrderHeader = ({ isCurrent = true, changeOrderListDisplay}) => {
   return (
     <div className="manage-order-header clearfix">
-      <h4 className="title">Order Management</h4>
+      <h4 className="title">
+        <FormattedMessage {...messages.blockManageOrderHeader.name} />
+      </h4>
       <div className="btn-group switch-mode pull-right">
         <button className={classNames('btn', { 'active': isCurrent })} onClick={() => changeOrderListDisplay(true)}>
-          Current
+          <FormattedMessage {...messages.blockManageOrderHeader.button.current} />
         </button>
         <button className={classNames('btn', { 'active': !isCurrent })} onClick={() => changeOrderListDisplay(false)}>
-          All
+          <FormattedMessage {...messages.blockManageOrderHeader.button.all}/>
         </button>
       </div>
     </div>

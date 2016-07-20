@@ -8,6 +8,8 @@
 
   .btn-reject {
     background-color: #a1a1a1;
+    border-top-right-radius: 3px !important;
+    border-bottom-right-radius: 3px !important;
   }
 
   .btn-shipping {
@@ -20,9 +22,12 @@
 
   .btn-abort {
     background-color: #a1a1a1;
+    border-top-right-radius: 3px !important;
+    border-bottom-right-radius: 3px !important;
   }
 
   .order-status-message {
     color: #666666;
   }
+
 }

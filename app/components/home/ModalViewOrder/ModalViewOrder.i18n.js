@@ -73,6 +73,10 @@ export const messages = {
       defaultMessage: 'View Order'
     },
     body: {
+      buyer: {
+        id: 'modalViewOrder.body.buyer',
+        defaultMessage: 'Customer'
+      },
       orderInformation: {
         id: 'modalViewOrder.body.orderInformation',
         defaultMessage: 'Order Information'

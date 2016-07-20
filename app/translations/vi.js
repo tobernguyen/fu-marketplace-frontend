@@ -109,6 +109,7 @@ export default {
   'orderList.tableBody.orderStatus.aborted': 'Không thành công',
   'orderList.tableBody.notFinish': 'Chưa hoàn thành',
   'modalViewOrder.orderStatusMessage.message': 'Lí do: ',
+  'modalViewOrder.body.buyer': 'Khách hàng',
   'modalViewOrder.title': 'Đơn hàng',
   'modalViewOrder.body.shipAddress': 'Địa chỉ',
   'modalViewOrder.body.note': 'Ghi chú',
@@ -338,5 +339,7 @@ export default {
   'admin.form.validation.aTypeMustBeChosen': 'Loại chiến dịch quảng bá không thể bỏ trống',
   'ordersStatistic': 'Đơn hàng',
   'salesStatistic': 'Bán hàng',
-  'itemSoldStatistic': 'Hàng đã bán'
+  'itemSoldStatistic': 'Hàng đã bán',
+  'noActiveOrder.message': 'Không có đơn hàng',
+  'noActiveOrder.button.startShopping': 'Bắt đầu mua hàng'
 };

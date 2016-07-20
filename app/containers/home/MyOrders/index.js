@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ModalHeader from 'app/components/home/ModalHeader';
 import BlockMyOrder from 'app/components/home/BlockMyOrder';
+import NoActiveOrder from 'app/components/home/NoActiveOrder';
 import { userGetOrder, userCancelOrder, userRateOrder } from 'app/actions/order';
 import { connect } from 'react-redux';
 import { updateModalSize } from 'app/actions/common';
@@ -48,6 +49,25 @@ class MyOrders extends Component {
         this.props.userGetOrder(this.state.page, this.state.size);
       })
     }
+
+    this.renderBody = () => {
+      const { page, size } = this.state;
+      const { orders } = this.props;
+      if( orders.length === 0 )  {
+        return <NoActiveOrder />
+      }
+      return <BlockMyOrder
+          orders={orders}
+          page={page}
+          size={size}
+          prevPage={this.prevPage}
+          nextPage={this.nextPage}
+          changePageSize={this.changePageSize}
+          cancelOrder={this.props.userCancelOrder}
+          rateOrder={this.props.userRateOrder}
+        />;
+    }
+
   }
 
   componentWillReceiveProps(nextProps) {
@@ -64,21 +84,11 @@ class MyOrders extends Component {
   }
 
   render() {
-    const { page, size } = this.state;
     return (
       <div>
         <ModalHeader title="Đơn hàng" subHeader="Danh sách tất cả đơn hàng"/>
         <div className="modal-body my-order">
-          <BlockMyOrder
-            orders={this.props.orders}
-            page={page}
-            size={size}
-            prevPage={this.prevPage}
-            nextPage={this.nextPage}
-            changePageSize={this.changePageSize}
-            cancelOrder={this.props.userCancelOrder}
-            rateOrder={this.props.userRateOrder}
-          />
+        {this.renderBody()}
         </div>
       </div>
     );

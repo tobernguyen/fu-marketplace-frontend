@@ -112,6 +112,7 @@ class ContainerEditShop extends Component {
         <hr />
         <FormShopPromotionCampaign
           createShopPromotionCampaign = {this.handleSubmitShopPromotionCampaign}
+          submitResult={shopManagement.submitResult}
         />
         <hr />
         <FormEditShopBanStatus

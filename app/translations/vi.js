@@ -339,5 +339,7 @@ export default {
   'admin.form.validation.aTypeMustBeChosen': 'Loại chiến dịch quảng bá không thể bỏ trống',
   'ordersStatistic': 'Đơn hàng',
   'salesStatistic': 'Bán hàng',
-  'itemSoldStatistic': 'Hàng đã bán'
+  'itemSoldStatistic': 'Hàng đã bán',
+  'noActiveOrder.message': 'Không có đơn hàng',
+  'noActiveOrder.button.startShopping': 'Bắt đầu mua hàng'
 };

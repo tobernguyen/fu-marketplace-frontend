@@ -16,19 +16,22 @@ class BlockMyOrderRow extends Component {
       this.props.rateOrder(order.id, rate);
     }
   }
+
   renderItemNameList(order) {
     let names = [];
     order.orderLines.map(orderLine => {
       names = _.concat(names, orderLine.item.name);
     });
-    return _.toString(names);
+    return _.join(names, ', ');
   }
+
   calculateTotalAmount(order) {
     const total = _.reduce(order.orderLines, (sum, order) => {
       return sum + (order.item.price * order.quantity);
     }, 0);
-    return <FormattedNumber value={total} style="currency" currency="VND"/>;
+    return <FormattedNumber value={total} />;
   }
+
   renderFinishTime(order) {
     if (order.status === 3) { //Order is completed
       return <FormattedTime value={new Date(order.createdAt)}/>
@@ -38,14 +41,14 @@ class BlockMyOrderRow extends Component {
   }
 
   renderAction(order) {
-    let output = '';
+    let output;
     switch (order.status) {
       case OrderStatus.NEW:
         output = (
           <button type="button" className="btn order-status btn-cancel" onClick={() => this.props.openModal(order.id)}>
             <FormattedMessage {...messages.myOrder.button.abort} />
           </button>
-        )
+        );
         break;
       case OrderStatus.COMPLETED:
       case OrderStatus.ABORTED:
@@ -56,10 +59,9 @@ class BlockMyOrderRow extends Component {
             onStarClick={this.rateOrder}
             key={order.id}
           />
-        )
+        );
         break;
       default:
-
     }
     return output;
   }
@@ -70,7 +72,7 @@ class BlockMyOrderRow extends Component {
       <tr>
         <td>{order.id}</td>
         <td>{this.renderItemNameList(order)}</td>
-        <td>{this.calculateTotalAmount(order)}</td>
+        <td>{this.calculateTotalAmount(order)}₫</td>
         <td>{order.shipAddress}</td>
         <td><FormattedRelative value={new Date(order.createdAt)}/></td>
         <td>{this.renderFinishTime(order)}</td>

@@ -44,7 +44,9 @@ class ShopsFeed extends Component {
 
   componentWillUnmount() {
     const { socket } = this.props;
-    socket.off(EVENTS.SHOP_FEED_UPDATE);
+    if (socket) {
+      socket.off(EVENTS.SHOP_FEED_UPDATE);
+    }
   }
 
   componentWillReceiveProps(nextProps) {

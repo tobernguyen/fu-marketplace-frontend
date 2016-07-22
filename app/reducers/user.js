@@ -2,6 +2,7 @@ import * as ActionTypes from '../actions';
 import * as UserActionTypes from '../actions/user';
 import * as FeedActionTypes from '../actions/feed';
 import * as ShopActionTypes from '../actions/shop';
+import * as OrderActionTypes from '../actions/order';
 import _ from 'lodash';
 import { getImageURLWithTimestamp } from 'app/helpers/image';
 
@@ -43,6 +44,10 @@ export const user = (state = INITIAL_STATE, action) => {
     case UserActionTypes.CLEAR_CURRENT_VIEWED_SHOP:
       return _.assign({}, state, {
         currentViewedShop: {},
+        cartItems: []
+      });
+    case OrderActionTypes.USER_PLACE_ORDER_SUCCESS:
+      return _.assign({}, state, {
         cartItems: []
       });
     case FeedActionTypes.WS_SHOP_UPDATED:

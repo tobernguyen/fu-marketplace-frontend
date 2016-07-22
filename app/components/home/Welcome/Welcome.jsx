@@ -15,6 +15,7 @@ export default class Welcome extends Component {
   }
 
   render() {
+    const { authenticating } = this.props;
     return <div className="slideshow">
       <Carousel controls={false}>
         <Carousel.Item>
@@ -30,9 +31,10 @@ export default class Welcome extends Component {
           <GoogleLoginButton
             cssClass="btn btn-primary btn-google-sign-in"
             clientId={googleClientID}
+            authenticating={authenticating}
             callback={this.signInCallback}>
-            <i className="fa fa-google-plus" aria-hidden="true"/>
-            Sign in with Google
+            <i className="fa fa-google-plus"/>
+            Sign in with Google {authenticating && <i className="fa fa-spin fa-spinner"/>}
           </GoogleLoginButton>
         </div>
       </div>
@@ -48,5 +50,6 @@ export default class Welcome extends Component {
 }
 
 Welcome.propTypes = {
-  onSignIn: PropTypes.func.isRequired
+  onSignIn: PropTypes.func.isRequired,
+  authenticating: PropTypes.bool.isRequired
 };

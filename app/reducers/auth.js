@@ -4,7 +4,8 @@ import _ from 'lodash';
 
 const INITIAL_STATE = {
   isAuthenticated: false,
-  isAdminAuthenticated: false
+  isAdminAuthenticated: false,
+  authenticating: false
 };
 
 export const auth = (state = INITIAL_STATE, action) => {
@@ -14,17 +15,23 @@ export const auth = (state = INITIAL_STATE, action) => {
       return _.assign({}, state, {
         isAuthenticated: (token != null)
       });
+    case ActionTypes.GOOGLE_SIGN_IN_REQUEST:
+      return _.assign({}, state, {
+        authenticating: true
+      });
     case ActionTypes.GOOGLE_SIGN_IN_SUCCESS:
     case ActionTypes.GOOGLE_SIGN_OUT:
       return _.assign({}, state, {
         shouldUpdateAuthStatus: true,
-        error: null
+        error: null,
+        authenticating: false
       });
     case ActionTypes.GOOGLE_SIGN_IN_FAILURE:
       const { message_code } = error;
       return _.assign({}, state, {
         isAuthenticated: false,
-        error: message_code
+        error: message_code,
+        authenticating: false
       });
     case ActionTypes.AUTH_STATUS_IS_UPDATED:
       return _.assign({}, state, {

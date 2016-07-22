@@ -160,6 +160,7 @@ export default {
   'orderListFooter.pageSize': 'Hiển thị ',
   'orderListFooter.pageSizeUnit': ' đơn hàng',
   'error.authentication.wrong_email_domain': 'Hãy đăng nhập bằng email đại học FPT',
+  'error.authentication.invalid_one_time_code': 'Lỗi đăng nhập. Hãy tải lại trang và đăng nhập lại.',
   'message.seller.noItem': 'Hãy thêm sản phẩm',
   'message.user.noItem': 'Chưa có sản phẩm',
   'sellerDashboard.sidebar.updateShipPlaces': 'Sửa địa điểm ship',

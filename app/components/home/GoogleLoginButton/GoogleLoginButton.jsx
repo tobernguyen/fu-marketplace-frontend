@@ -38,10 +38,11 @@ export default class GoogleLoginButton extends Component {
   }
 
   render() {
-    const { cssClass, children } = this.props;
+    const { cssClass, children, authenticating } = this.props;
     return (
       <button
         className={cssClass}
+        disabled={authenticating}
         onClick={this.onButtonLoginClick.bind(this)}>
         {children}
       </button>

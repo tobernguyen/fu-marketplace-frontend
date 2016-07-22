@@ -145,6 +145,7 @@ export default {
   'orderListFooter.pageSize': 'Show ',
   'orderListFooter.pageSizeUnit': ' orders',
   'error.authentication.wrong_email_domain': 'Please sign in with FPT University email',
+  'error.authentication.invalid_one_time_code': 'Authentication failed. Please refresh and login again',
   'message.seller.noItem': 'Please add selling item',
   'message.user.noItem': 'No selling items',
   'sellerDashboard.sidebar.updateShipPlaces': 'Update ship places',

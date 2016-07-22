@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import messages from '../translations';
 import {
   checkAuthStatus,
-  signInGoogle,
   authStatusIsUpdated } from '../actions';
 import { bindActionCreators } from 'redux';
 import WelcomePage from './home/WelcomePage';
@@ -36,7 +35,7 @@ class App extends Component {
     if (isAuthenticated) {
       page = children;
     } else {
-      page = <WelcomePage onSignIn={this.handleSignIn} />
+      page = <WelcomePage />
     }
     return (
       <IntlProvider locale={language} messages={messages[language]}>
@@ -52,7 +51,6 @@ App.propTypes = {
   // Injected by React Router
   children: PropTypes.node,
   checkAuthStatus:  PropTypes.func.isRequired,
-  signInGoogle:     PropTypes.func.isRequired,
   isAuthenticated:  PropTypes.bool.isRequired
 };
 
@@ -68,7 +66,6 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
   checkAuthStatus,
-  signInGoogle,
   authStatusIsUpdated
 }, dispatch);
 

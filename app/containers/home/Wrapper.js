@@ -49,7 +49,6 @@ class Wrapper extends Component {
               shipPlaces={shipPlaces}
               shipPlaceCounter={shipPlace}
               totalShipPlace={total} />
-            <BlockBookmarks />
           </div>
           <div className="col-md-9">
             <div className="row">

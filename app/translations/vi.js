@@ -341,5 +341,18 @@ export default {
   'salesStatistic': 'Bán hàng',
   'itemSoldStatistic': 'Hàng đã bán',
   'noActiveOrder.message': 'Không có đơn hàng',
-  'noActiveOrder.button.startShopping': 'Bắt đầu mua hàng'
+  'noActiveOrder.button.startShopping': 'Bắt đầu mua hàng',
+  'myOrder.button.report': 'Báo cáo',
+  'myOrder.openTicketModal.title': 'Báo cáo',
+  'myOrder.openTicketModal.subHeader': 'Báo cáo đơn hàng sai phạm',
+  'myOrder.openTicketModal.orderInformation.title': 'Thông tin đơn hàng: ',
+  'myOrder.openTicketModal.orderInformation.fields.orderId': 'Mã đơn hàng: ',
+  'myOrder.openTicketModal.orderInformation.fields.shop': 'Cửa hàng: ',
+  'myOrder.openTicketModal.orderInformation.fields.orderLines': 'Mặt hàng: ',
+  'myOrder.openTicketModal.orderInformation.fields.shipAddress': 'Địa chỉ: ',
+  'myOrder.openTicketModal.orderInformation.fields.createdAt': 'Thời điểm đặt hàng: ',
+  'myOrder.openTicketModal.orderInformation.fields.orderStatus': 'Trạng thái đơn hàng: ',
+  'myOrder.openTicketModal.userMessage.title': 'Thông tin thêm: ',
+  'myOrder.openTicketModal.userMessage.placeholder': 'Cung cấp thêm thông tin...',
+  'myOrder.openTicketModal.button.sendReport': 'Gửi báo cáo'
 };

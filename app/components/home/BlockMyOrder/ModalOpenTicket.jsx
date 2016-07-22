@@ -4,8 +4,47 @@ import { FormattedMessage, FormattedRelative, injectIntl } from 'react-intl';
 import { messages } from 'app/components/home/BlockMyOrder/BlockMyOrder.i18n';
 import LabelOrderStatus from 'app/components/home/LabelOrderStatus';
 import { Link } from 'react-router';
+import AsyncResultCode from 'app/shared/asyncResultCodes';
 
 class ModalOpenTicket extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      dirty: false,
+      message: {
+        value: '',
+        hasErrors: false,
+        error: ''
+      }
+    }
+
+    this.submitTicket = () => {
+      const { order } = this.props;
+      const { message } = this.state;
+      if(!message.hasErrors) {
+        this.props.openTicket(order.id, message.value);
+      }
+    }
+
+    this.handleChange = (e) => {
+      let dirty = true;
+      const { message } = this.state;
+      message['value'] = e.target.value;
+      if (e.target.value.trim().length == 0) {
+        message['hasErrors'] = true;
+        message['error'] = messages.myOrder.openTicketModal.validation.message.blank
+        dirty = false;
+      } else {
+        message['hasErrors'] = false;
+        message['error'] = ''
+      }
+      this.setState({
+        dirty,
+        message
+      });
+    }
+  }
   renderOrderLine(orderLine) {
     return (
       <span className="ordered-item">{orderLine.item.name}({orderLine.quantity})</span>
@@ -24,7 +63,8 @@ class ModalOpenTicket extends React.Component {
 
   }
   render() {
-    const { order, showModal, closeModal , intl: { formatMessage } } = this.props;
+    const { order, showModal, closeModal , intl: { formatMessage }, ticket } = this.props;
+    const { message, dirty } = this.state;
     let title = <FormattedMessage {...messages.myOrder.openTicketModal.title}/>;
     if(order.orderLines) {
       return (
@@ -66,20 +106,40 @@ class ModalOpenTicket extends React.Component {
               </div>
 
             </div>
-            <h5>
-              <strong>
+            <div className={`form-group ${message.hasErrors ? 'has-error' : ''}`}>
+              <label className="control-label">
                 <FormattedMessage {...messages.myOrder.openTicketModal.userMessage.title}/>
-              </strong>
-            </h5>
-            <div className="user-message">
-              <textarea className="form-control" placeholder={formatMessage(messages.myOrder.openTicketModal.userMessage.placeholder)} />
+              </label>
+              <textarea
+                className="form-control"
+                placeholder={formatMessage(messages.myOrder.openTicketModal.userMessage.placeholder)}
+                onChange={this.handleChange}
+                disabled={ticket.isSubmitting || ticket.submitResult === AsyncResultCode.OPEN_TICKET_SUCCESS}
+                />
+                <div className="help-block">
+                {message.hasErrors && <FormattedMessage {...message.error}/>}
+                </div>
             </div>
+            {
+              ticket.submitResult === AsyncResultCode.OPEN_TICKET_SUCCESS &&
+              <div className="alert alert-success">
+                <FormattedMessage {...messages.myOrder.openTicketModal.asyncMessage.success} />
+              </div>
+            }
+            {
+              ticket.submitResult === AsyncResultCode.OPEN_TICKET_FAILURE &&
+              <div className="alert alert-danger">
+                <FormattedMessage {...messages.myOrder.openTicketModal.asyncMessage.fail} />
+              </div>
+            }
           </Modal.Body>
           <Modal.Footer>
-            <button className="btn btn-danger" onClick={() => console.log('Hello')}>
-              <FormattedMessage {...messages.myOrder.openTicketModal.button.sendReport}/>
-            </button>
-            <button className="btn" onClick={closeModal}>
+            {ticket.submitResult !== AsyncResultCode.OPEN_TICKET_SUCCESS &&
+              <button className="btn btn-danger" onClick={this.submitTicket} disabled={ticket.isSubmitting || !dirty}>
+                <FormattedMessage {...messages.myOrder.openTicketModal.button.sendReport}/>{ticket.isSubmitting && <i className="fa fa-spinner fa-spin"></i>}
+              </button>
+            }
+            <button className="btn btn-close" onClick={closeModal}>
               <FormattedMessage {...messages.myOrder.sellerMessageModal.button.close}/>
             </button>
           </Modal.Footer>

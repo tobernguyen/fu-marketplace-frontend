@@ -3,6 +3,7 @@ import ModalHeader from 'app/components/home/ModalHeader';
 import BlockMyOrder from 'app/components/home/BlockMyOrder';
 import NoActiveOrder from 'app/components/home/NoActiveOrder';
 import { userGetOrder, userCancelOrder, userRateOrder } from 'app/actions/order';
+import { userOpenTicket } from 'app/actions/ticket';
 import { connect } from 'react-redux';
 import { updateModalSize } from 'app/actions/common';
 import { withRouter } from 'react-router'
@@ -65,6 +66,8 @@ class MyOrders extends Component {
           changePageSize={this.changePageSize}
           cancelOrder={this.props.userCancelOrder}
           rateOrder={this.props.userRateOrder}
+          openTicket={this.props.userOpenTicket}
+          ticket={this.props.ticket}
         />;
     }
 
@@ -98,6 +101,7 @@ class MyOrders extends Component {
 const mapStateToProps = (state) => {
   return {
     orders: state.order.orders,
+    ticket: state.ticket,
     shouldUpdateOrderList: state.order.shouldUpdateOrderList
   }
 };
@@ -106,5 +110,6 @@ export default connect(mapStateToProps, {
   updateModalSize,
   userGetOrder,
   userCancelOrder,
-  userRateOrder
+  userRateOrder,
+  userOpenTicket
 })(withRouter(MyOrders))

@@ -6,7 +6,11 @@ const INITIAL_STATE = {
   currentOrders: [],
   orderResult: '',
   shouldUpdateOrderList: false,
-  hasMore: true
+  hasMore: true,
+  ticket: {
+    isSubmitting: false,
+    submitResult: ''
+  }
 };
 
 export const order = (state = INITIAL_STATE, action) => {

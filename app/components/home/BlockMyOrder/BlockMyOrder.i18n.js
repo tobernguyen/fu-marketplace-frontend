@@ -1,6 +1,24 @@
 export const messages = {
   myOrder: {
     openTicketModal: {
+      validation: {
+        message: {
+          blank: {
+            id: 'myOrder.openTicketModal.validation.message.blank',
+            defaultMessage: 'Please provide more information'
+          }
+        }
+      },
+      asyncMessage: {
+        success: {
+          id: 'myOrder.openTicketModal.asyncMessage.success',
+          defaultMessage: 'Report ticket has been created. Admin will start investigate soon.'
+        },
+        fail: {
+          id: 'myOrder.openTicketModal.asyncMessage.fail',
+          defaultMessage: 'Error occured. Report has not been created. Please try again later.'
+        }
+      },
       title: {
         id: 'myOrder.openTicketModal.title',
         defaultMessage: 'Report'

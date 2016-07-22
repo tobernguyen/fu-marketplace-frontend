@@ -354,5 +354,8 @@ export default {
   'myOrder.openTicketModal.orderInformation.fields.orderStatus': 'Trạng thái đơn hàng: ',
   'myOrder.openTicketModal.userMessage.title': 'Thông tin thêm: ',
   'myOrder.openTicketModal.userMessage.placeholder': 'Cung cấp thêm thông tin...',
-  'myOrder.openTicketModal.button.sendReport': 'Gửi báo cáo'
+  'myOrder.openTicketModal.button.sendReport': 'Gửi báo cáo',
+  'myOrder.openTicketModal.asyncMessage.success': 'Báo cáo sai phạm đã được gửi tới quản trị viên.',
+  'myOrder.openTicketModal.asyncMessage.fail': 'Có lỗi xảy ra. Báo cáo sai phạm chưa được tạo. Xin hãy thử lại sau.',
+  'myOrder.openTicketModal.validation.message.blank': 'Xin hãy cung cấp thêm thông tin'
 };

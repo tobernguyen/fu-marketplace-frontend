@@ -142,6 +142,8 @@ class BlockMyOrder extends Component {
           showModal={this.state.showOpenTicketModal}
           closeModal={this.closeOpenTicketModal}
           order={this.state.selectedOrder}
+          openTicket={this.props.openTicket}
+          ticket={this.props.ticket}
         />
         <BlockMyOrderFooter
           page={page}

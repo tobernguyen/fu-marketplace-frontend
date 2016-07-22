@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
 import './FormCheckOut.scss';
 import AsyncResultCode from 'app/shared/asyncResultCodes';
 
@@ -54,7 +54,7 @@ class FormCheckOut extends Component {
           </thead>
           <tbody>
           {items.map((item, index) => {
-            const { name, price, image, id } = item;
+            const { name, price, image } = item;
             return (
               <tr key={index}>
                 <td>
@@ -168,7 +168,7 @@ class FormCheckOut extends Component {
                             <span className="fa fa-minus"/>
                           </button>
                       </span>
-                    <input type="text" className="form-control input-number" {...item.quantity} />
+                    <input type="text" className="form-control input-number quantity-input" {...item.quantity} readOnly/>
                       <span className="input-group-btn">
                           <button
                             type="button"
@@ -214,7 +214,7 @@ class FormCheckOut extends Component {
   render() {
     const {
       fields: { items },
-      orderResult,
+      orderResult
     } = this.props;
     const { orderPlaced } = this.state;
     let output;

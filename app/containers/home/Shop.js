@@ -124,7 +124,7 @@ class Shop extends Component {
 
     let ownerView = false;
     if (!_.isEmpty(currentUser) && !_.isEmpty(seller)) {
-      ownerView = (currentUser.id === seller.id)
+      ownerView = (currentUser.id === shop.ownerId)
     }
 
     return (

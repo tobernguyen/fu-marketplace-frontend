@@ -7,7 +7,7 @@ class WelcomePage extends Component {
   constructor(props) {
     super(props);
     this.handleSignIn = (authResult) => {
-      this.props.signInGoogle(authResult);
+      this.props.signInGoogle(authResult.code);
     }
   }
   render() {

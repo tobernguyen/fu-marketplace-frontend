@@ -1,6 +1,9 @@
 .form-check-out {
   table.order-items {
     tbody {
+      .quantity-input {
+        background-color: #ffffff;
+      }
       tr {
         td.item {
           width: 200px;

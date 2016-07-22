@@ -6,7 +6,7 @@ import { buttons } from 'app/shared/buttons';
 class FormRequestCreateShopInfo extends Component {
   render() {
     const {
-      fields: { shopName, description, address },
+      fields: { shopName, description, address, shopPhone },
       handleSubmit,
       previousPage,
       submitting,
@@ -27,6 +27,19 @@ class FormRequestCreateShopInfo extends Component {
             {...shopName} />
           <div className="help-block">
             {shopName.touched && shopName.error ? <FormattedMessage {...shopName.error} /> : ''}
+          </div>
+        </div>
+
+        <div className={`form-group ${shopPhone.touched && shopPhone.invalid ? 'has-error' : ''}`}>
+          <label className="control-label">
+            <FormattedMessage {...messages.shopPhone.label} />
+          </label>
+          <input type="text"
+                 className="form-control"
+                 placeholder={formatMessage(messages.shopPhone.placeholder)}
+                 {...shopPhone} />
+          <div className="help-block">
+            {shopPhone.touched && shopPhone.error ? <FormattedMessage {...shopPhone.error} /> : ''}
           </div>
         </div>
 

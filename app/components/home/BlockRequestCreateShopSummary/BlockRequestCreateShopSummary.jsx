@@ -7,8 +7,8 @@ import './BlockRequestCreateShopSummary.scss';
 export default class BlockRequestCreateShopSummary extends Component {
   render() {
     const {
-      sellerInfo: { identityNumber, phone  },
-      shopInfo: { address, description, name, note }
+      sellerInfo,
+      shopInfo: { address, description, name, phone }
     } = this.props.requestSummary;
     return (
       <div className="block-request-create-shop-summary">
@@ -22,10 +22,10 @@ export default class BlockRequestCreateShopSummary extends Component {
           <div className="body">
             <ul className="nav">
               <li>
-                <FormattedMessage {...fields.phone} />: <code>{phone}</code>
+                <FormattedMessage {...fields.phone} />: <code>{sellerInfo.phone}</code>
               </li>
               <li>
-                <FormattedMessage {...fields.identityNumber} />: <code>{identityNumber}</code>
+                <FormattedMessage {...fields.identityNumber} />: <code>{sellerInfo.identityNumber}</code>
               </li>
             </ul>
           </div>
@@ -44,6 +44,9 @@ export default class BlockRequestCreateShopSummary extends Component {
               </li>
               <li>
                 <FormattedMessage {...fields.shopAddress} />: <code>{address}</code>
+              </li>
+              <li>
+                <FormattedMessage {...fields.phone} />: <code>{phone}</code>
               </li>
             </ul>
           </div>

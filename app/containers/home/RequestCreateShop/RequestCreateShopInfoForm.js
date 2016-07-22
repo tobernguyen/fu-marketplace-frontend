@@ -1,7 +1,7 @@
 import { reduxForm } from 'redux-form';
 import FormRequestCreateShopInfo from 'app/components/home/FormRequestCreateShopInfo';
 
-export const fields = [ 'phone', 'identityNumber', 'shopName', 'description', 'address' ];
+export const fields = [ 'phone', 'identityNumber', 'shopName', 'description', 'address', 'shopPhone' ];
 
 const validate = values => {
   const errors = {};
@@ -23,6 +23,18 @@ const validate = values => {
     errors.address = {
       id: 'shop.form.validation.address.required',
       defaultMessage: 'shop address is required'
+    };
+  }
+
+  if (!values.shopPhone) {
+    errors.shopPhone = {
+      id: 'shop.form.validation.shopPhone.required',
+      defaultMessage: 'shopPhone number is required'
+    };
+  } else if (isNaN(Number(values.shopPhone))) {
+    errors.shopPhone = {
+      id: 'common.form.validation.shopPhone.number',
+      defaultMessage: 'shopPhone number is not valid'
     };
   }
 

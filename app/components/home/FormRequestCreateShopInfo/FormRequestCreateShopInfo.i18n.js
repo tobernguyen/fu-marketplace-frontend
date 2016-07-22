@@ -28,5 +28,15 @@ export const messages = {
       id: 'shop.form.description.label',
       defaultMessage: 'description'
     }
+  },
+  shopPhone: {
+    placeholder: {
+      id: 'shop.form.shopPhone.placeholder',
+      defaultMessage: 'shop phone'
+    },
+    label: {
+      id: 'shop.form.shopPhone.label',
+      defaultMessage: 'shop phone'
+    }
   }
 };

@@ -14,7 +14,7 @@ const requestRequestCreateShop = (formValues, hasShop) => ({
 });
 
 export const requestCreateShop = (formValues, hasShop) => {
-  const { phone, identityNumber, shopName, description, address } = formValues;
+  const { phone, identityNumber, shopName, description, address, shopPhone } = formValues;
   let requestForm = {
     sellerInfo: {
       phone: phone,
@@ -23,7 +23,8 @@ export const requestCreateShop = (formValues, hasShop) => {
     shopInfo: {
       name: shopName,
       description: description,
-      address: address
+      address: address,
+      phone: shopPhone
     }
   };
 

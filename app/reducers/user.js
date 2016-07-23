@@ -4,7 +4,6 @@ import * as FeedActionTypes from '../actions/feed';
 import * as ShopActionTypes from '../actions/shop';
 import * as OrderActionTypes from '../actions/order';
 import _ from 'lodash';
-import { getImageURLWithTimestamp } from 'app/helpers/image';
 
 const INITIAL_STATE = {
   currentUser: {},
@@ -20,7 +19,7 @@ export const user = (state = INITIAL_STATE, action) => {
         currentUser: response
       });
     case UserActionTypes.UPLOAD_AVATAR_SUCCESS:
-      const newAvatar = response.avatar ? getImageURLWithTimestamp(response.avatar) : '';
+      const newAvatar = response.avatar;
       let modifiedResponse = response;
       modifiedResponse.avatar = newAvatar;
       return _.assign({}, state, {
@@ -72,7 +71,7 @@ export const user = (state = INITIAL_STATE, action) => {
       });
     case UserActionTypes.UPLOAD_IDENTITY_PHOTO_SUCCESS:
       return _.assign({}, state, {
-        identityPhoto: getImageURLWithTimestamp(response.identityPhoto)
+        identityPhoto: response.identityPhoto
       });
     case UserActionTypes.ADD_ITEM_TO_CART:
       const currentCartItems = state.cartItems;

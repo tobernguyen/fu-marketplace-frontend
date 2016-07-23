@@ -1,7 +1,6 @@
 import * as ShopActionTypes from '../actions/shop';
 import * as CommonActionTypes from '../actions/common';
 import _ from 'lodash';
-import { getImageURLWithTimestamp } from 'app/helpers/image';
 
 const INITIAL_STATE = {
   shopOpeningRequests: [],
@@ -133,14 +132,14 @@ export const shop = (state = INITIAL_STATE, action) => {
         formSubmitting: false
       });
     case ShopActionTypes.UPLOAD_SHOP_AVATAR_SUCCESS:
-      const newAvatar = response.avatar ? getImageURLWithTimestamp(response.avatar) : '';
+      const newAvatar = response.avatar;
       const modifiedResponse = response;
       modifiedResponse.avatar = newAvatar;
       return _.assign({}, state, {
         sellerShop: modifiedResponse
       });
     case ShopActionTypes.UPLOAD_SHOP_COVER_SUCCESS:
-      const newCover = response.cover ? getImageURLWithTimestamp(response.cover) : '';
+      const newCover = response.cover;
       const modifiedCoverResponse = response;
       modifiedCoverResponse.cover = newCover;
       return _.assign({}, state, {

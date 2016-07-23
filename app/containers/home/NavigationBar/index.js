@@ -11,6 +11,7 @@ import {
   clearNotifications
 } from 'app/actions/notification';
 import { getUser, getOwnNotifications } from 'app/selectors';
+import { ORDER_STATUS, NOTIFICATION_TYPE } from 'app/shared/notificationMessages';
 import { EVENTS } from 'app/shared/socketIOEvents';
 
 class NavigationBar extends Component {
@@ -22,11 +23,24 @@ class NavigationBar extends Component {
 
     this.onNotificationClick = (notification) => {
       const { id, type, read, data } = notification;
-
       switch (type) {
-        case 2:
+        case NOTIFICATION_TYPE.SELLER_CHANGE_ORDER_STATUS:
+        {
+          if (data.newStatus === ORDER_STATUS.COMPLETED) {
+            this.props.router.push(`/shops/${data.shopId}/reviews`);
+          } else {
+            this.props.router.push('/orders');
+          }
+          break;
+        }
+        case NOTIFICATION_TYPE.OPEN_SHOP_REQUEST_CHANGE:
         {
           this.props.router.push(`/dashboard/shops/${data.id}`);
+          break;
+        }
+        case NOTIFICATION_TYPE.USER_PLACE_ORDER:
+        {
+          this.props.router.push(`/dashboard/shops/${data.shopId}/orders`);
           break;
         }
         default:

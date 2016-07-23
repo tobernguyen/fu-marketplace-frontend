@@ -31,7 +31,8 @@ class BlockStars extends Component {
     const { name, starCount, starColor, renderStarIcon } = this.props;
     const { value } = this.state;
     const starStyles = {
-      float: 'right'
+      float: 'right',
+      color: '#E7E7E7'
     };
     const radioStyles = {
       display: 'none',
@@ -67,7 +68,7 @@ class BlockStars extends Component {
           {typeof renderStarIcon === 'function' ? (
             renderStarIcon(i, value, name)
           ) : (
-            <i style={{fontStyle: 'normal'}}>&#9733;</i>
+            <i className={`fa fa-star`}/>
           )}
         </label>
       );

@@ -10,10 +10,19 @@
       width: 100%;
     }
   }
+  .dv-star-rating {
+    .dv-star-rating-star {
+      i {
+        font-size: 18px;
+      }
+    }
+  }
+
   .content {
     padding-left: 10px;
     h3 {
       margin-top: 10px;
+      margin-bottom: 3px;
       display: table;
 
       a {

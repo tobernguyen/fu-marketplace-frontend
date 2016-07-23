@@ -10,10 +10,6 @@
       }
       .description {
         .quote {
-          //margin: 5px 0;
-          //padding: 15px 5px;
-          //line-height: 10px;
-
           &:before {
             margin-right: 5px;
           }
@@ -96,10 +92,17 @@
       text-align: center;
     }
     .review-box {
-      //border: 1px solid #eee;
-      //border-radius: 2px;
       .comment-box {
         padding: 0 4px;
+
+        .dv-star-rating {
+          .dv-star-rating-star {
+            i {
+              font-size: 16px;
+            }
+          }
+        }
+
         .input-review {
           border-radius: 2px;
           font-size: 14px;

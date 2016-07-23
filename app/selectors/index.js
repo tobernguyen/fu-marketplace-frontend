@@ -1,5 +1,6 @@
 import { createSelector } from 'reselect';
 import _ from 'lodash';
+import randomcolor from 'randomcolor';
 import moment from 'moment';
 require('moment-range');
 
@@ -15,6 +16,7 @@ const sellerShopSelector        = (state) => state.shop.sellerShop;
 const notificationsSelector     = (state) => state.notification.notifications;
 const ordersStatisticSelector   = (state) => state.statistic.ordersStatistic;
 const salesStatisticSelector    = (state) => state.statistic.salesStatistic;
+const itemSoldStatisticSelector    = (state) => state.statistic.itemSoldStatistic;
 
 export const getCategories = createSelector(
   categoriesSelector,
@@ -54,7 +56,7 @@ const CHART_DATA_HOLDER = {
   fill: false,
   lineTension: 0.1,
   backgroundColor: 'rgba(236, 240, 241,1.0)',
-  borderColor: "rgba(75,192,192,1)",
+  borderColor: "transparent",
   borderCapStyle: 'butt',
   borderDash: [],
   borderDashOffset: 0.0,
@@ -124,7 +126,7 @@ export const calculateOrdersStatisticData = createSelector(
   }
 );
 
-export const calculateSalesStatisticSelector = createSelector(
+export const calculateSalesStatistic = createSelector(
   salesStatisticSelector,
   (salesStatistic) => {
     let calculatedData = {};
@@ -175,6 +177,66 @@ export const calculateSalesStatisticSelector = createSelector(
         data: fullWeekData,
       }
     ];
+
+    return calculatedData;
+  }
+);
+
+export const calculateItemSoldStatistic = createSelector(
+  [itemSoldStatisticSelector, categoriesSelector],
+  (itemSoldStatistic, categories) => {
+    let calculatedData = {};
+
+    var realData =_.keyBy(itemSoldStatistic.data, (o) => {
+      return moment(`${o.day}/${o.month}/${o.year}`, 'DD/MM/YYYY').format('DD/MM/YYYY')
+    });
+
+    const today = moment();
+    const last7Days   = moment().subtract(6, 'days');
+    const range    = moment.range(last7Days, today);
+    const momentArray = range.toArray('days');
+    const dayArray = momentArray.map((moment) => {
+      return moment.format('DD/MM/YYYY')
+    });
+
+    const allCategoryIDs = _.uniq(_.flatten(_.map(itemSoldStatistic.data, (data) => {
+      return _.keys(data.itemSold)
+    })));
+
+    const categoriesHash = _.keyBy(categories, 'id');
+    const categoryLabels = allCategoryIDs.map((categoryID) => {
+      return categoriesHash[categoryID]
+    });
+
+    const itemSoldDataHolder = _.fill(Array(7), 0);
+    let itemSoldData = {};
+
+    _.forEach(realData, (value, key) => {
+      const indexToFill = _.indexOf(dayArray, key);
+      if (indexToFill > -1) {
+        const { itemSold } = value;
+        _.forEach(itemSold, (value, key) => {
+          itemSoldData[key] = _.concat(
+            _.slice(itemSoldDataHolder, 0, indexToFill),
+            value,
+            _.slice(itemSoldDataHolder, indexToFill + 1, itemSoldDataHolder.length)
+          );
+        })
+      }
+    });
+
+    const dataSets = _.fill(Array(allCategoryIDs.length), CHART_DATA_HOLDER).map((data, index) => {
+      return _.merge({}, data, {
+        label: categoryLabels[index]['name'],
+        data: itemSoldData[categoryLabels[index]['id']] || itemSoldDataHolder,
+        backgroundColor: randomcolor({
+          seed: `${categoryLabels[index]['id'] * 26}_${categoryLabels[index]['name']}`
+        })
+      })
+    });
+
+    calculatedData['datasets'] = dataSets;
+    calculatedData['labels'] = dayArray;
 
     return calculatedData;
   }

@@ -12,7 +12,6 @@ import { getNotificationMessage } from 'app/shared/notificationMessages';
 import { injectIntl, intlShape } from 'react-intl';
 import { getCategories } from 'app/selectors';
 
-const socket = io.connect(config.SOCKET_IO_URL);
 
 class Home extends Component {
   constructor(props) {
@@ -63,12 +62,15 @@ class Home extends Component {
   componentDidMount() {
     this.floatNotification = this.refs.notificationSystem;
 
-    socket.on('connect', () => {
-      socket.emit('authenticate', {token: window.localStorage['token']});
-    });
-    socket.on('authenticated', () => {
-      this.props.createWebSocket(socket);
-    });
+    if (this.props.isAuthenticated) {
+      const socket = io.connect(config.SOCKET_IO_URL);
+      socket.on('connect', () => {
+        socket.emit('authenticate', {token: window.localStorage['token']});
+      });
+      socket.on('authenticated', () => {
+        this.props.createWebSocket(socket);
+      });
+    }
   }
 
   componentWillReceiveProps(nextProps) {
@@ -118,12 +120,13 @@ Home.propTypes = {
 };
 
 const mapStateToProps = (state) => {
-  const { user, notification } = state;
+  const { user, notification, auth } = state;
   return {
-    error:        user.error,
-    notification: notification.promptNotification,
-    categories:   getCategories(state),
-    query: state.common.query
+    error:            user.error,
+    notification:     notification.promptNotification,
+    categories:       getCategories(state),
+    query:            state.common.query,
+    isAuthenticated:  auth.isAuthenticated
   }
 };
 

@@ -29,6 +29,10 @@ export const common = (state = INITIAL_STATE, action) => {
       return _.assign({}, state, {
         socket: payload.socket
       });
+    case CommonActionTypes.DESTROY_WEB_SOCKET:
+      return _.assign({}, state, {
+        socket: INITIAL_STATE.socket
+      });
     default:
       return state;
   }

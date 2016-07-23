@@ -58,3 +58,8 @@ export const createWebSocket = (socket) => ({
     socket: socket
   }
 });
+
+export const DESTROY_WEB_SOCKET = 'DESTROY_WEB_SOCKET';
+export const destroyWebSocket = () => ({
+  type: DESTROY_WEB_SOCKET
+});

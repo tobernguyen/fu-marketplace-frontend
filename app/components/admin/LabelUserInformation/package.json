@@ -1,0 +1,6 @@
+{
+  "name": "LabelUserInformation",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./LabelUserInformation.jsx"
+}

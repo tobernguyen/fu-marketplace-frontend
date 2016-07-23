@@ -37,6 +37,7 @@ import ContainerListPromotion from './containers/admin/Promotion/ContainerListPr
 import ContainerEditPromotion from './containers/admin/Promotion/ContainerEditPromotion';
 import TicketManagement from './containers/admin/TicketManagement';
 import ContainerListTicket from './containers/admin/Ticket/ContainerListTicket';
+import ContainerViewTicket from './containers/admin/Ticket/ContainerViewTicket';
 import ChangePassword from './containers/admin/ChangePassword';
 
 
@@ -87,6 +88,7 @@ export default (
       </Route>
       <Route path="tickets" component={TicketManagement}>
         <IndexRoute component={ContainerListTicket} />
+        <Route path=":ticketId/view" component={ContainerViewTicket} />
       </Route>
       <Route path="changepwd" component={ChangePassword} />
     </Route>

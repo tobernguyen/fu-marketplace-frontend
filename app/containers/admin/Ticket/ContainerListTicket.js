@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {
-  adminGetTicket
+  adminGetTickets
 } from 'app/actions/ticket';
 import TicketList from 'app/components/admin/TicketList';
 
 class ComponentListTicket extends Component {
   componentWillMount() {
-    this.props.adminGetTicket();
+    this.props.adminGetTickets();
   }
 
   render() {
@@ -32,5 +32,5 @@ const mapStateToProps = (state) => {
 }
 
 export default connect(mapStateToProps, {
-  adminGetTicket
+  adminGetTickets
 })(ComponentListTicket);

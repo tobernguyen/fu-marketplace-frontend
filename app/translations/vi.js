@@ -317,6 +317,7 @@ export default {
   'sideBar.userManagement': 'Quản lý người dùng',
   'sideBar.shopManagement': 'Quản lý cửa hàng',
   'sideBar.requestManagement': 'Quản lý yêu cầu',
+  'sideBar.ticketManagement': 'Báo cáo sai phạm',
   'sideBar.changePassword': 'Thay đổi mật khẩu',
   'sideBar.promotionManagement': 'Quản lý quảng bá',
   'shop.review.success': 'Xin cảm ơn! Nhận xét của bạn đã được gửi.',
@@ -357,5 +358,13 @@ export default {
   'myOrder.openTicketModal.button.sendReport': 'Gửi báo cáo',
   'myOrder.openTicketModal.asyncMessage.success': 'Báo cáo sai phạm đã được gửi tới quản trị viên.',
   'myOrder.openTicketModal.asyncMessage.fail': 'Có lỗi xảy ra. Báo cáo sai phạm chưa được tạo. Xin hãy thử lại sau.',
-  'myOrder.openTicketModal.validation.message.blank': 'Xin hãy cung cấp thêm thông tin'
+  'myOrder.openTicketModal.validation.message.blank': 'Xin hãy cung cấp thêm thông tin',
+  'admin.ticketList.table.header.user': 'Người báo cáo',
+  'admin.ticketList.table.header.shop': 'Cửa hàng',
+  'admin.ticketList.table.header.status': 'Trạng thái',
+  'admin.ticketList.table.header.createdAt': 'Thời điểm báo cáo',
+  'admin.ticketList.table.header.action': 'Hành động',
+  'labelTicketStatus.opening': 'Mở',
+  'labelTicketStatus.investigating': 'Đang xử lý',
+  'labelTicketStatus.closed': 'Đóng'
 };

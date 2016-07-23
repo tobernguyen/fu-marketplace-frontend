@@ -20,3 +20,21 @@ export const userOpenTicket = (orderId, message) => {
     dispatch(userRequestOpenTicket(orderId, message));
   }
 }
+
+export const ADMIN_GET_TICKET_REQUEST = 'ADMIN_GET_TICKET_REQUEST';
+export const ADMIN_GET_TICKET_SUCCESS = 'ADMIN_GET_TICKET_SUCCESS';
+export const ADMIN_GET_TICKET_FAILURE = 'ADMIN_GET_TICKET_FAILURE';
+
+const adminRequestGetTicket = (status, page, size)  => ({
+  [CALL_API]: {
+    types: [ADMIN_GET_TICKET_REQUEST, ADMIN_GET_TICKET_SUCCESS, ADMIN_GET_TICKET_FAILURE],
+    url: `/api/v1/admin/tickets?status=${status}&page=${page}&size=${size}`,
+    method: HTTP_METHODS.GET
+  }
+});
+
+export const adminGetTicket = (status = 'OPENING', page = 1, size = 10) => {
+  return (dispatch) => {
+    dispatch(adminRequestGetTicket(status, page, size));
+  }
+}

@@ -96,3 +96,21 @@ export const adminCloseTicket = (ticketId, adminMessage) => {
     dispatch(adminRequestCloseTicket(ticketId, adminMessage));
   }
 }
+
+export const USER_GET_TICKETS_REQUEST = 'USER_GET_TICKETS_REQUEST';
+export const USER_GET_TICKETS_SUCCESS = 'USER_GET_TICKETS_SUCCESS';
+export const USER_GET_TICKETS_FAILURE = 'USER_GET_TICKETS_FAILURE';
+
+const userRequestGetTickets = (status, page, size) => ({
+  [CALL_API]: {
+    types: [USER_GET_TICKETS_REQUEST, USER_GET_TICKETS_SUCCESS, USER_GET_TICKETS_FAILURE],
+    url: `/api/v1/tickets/?status=${status}&size=${size}&page=${page}`,
+    method: HTTP_METHODS.GET
+  }
+});
+
+export const userGetTickets = (status = '', page = 1, size = 5) => {
+  return (dispatch) => {
+    dispatch(userRequestGetTickets(status, page, size));
+  }
+}

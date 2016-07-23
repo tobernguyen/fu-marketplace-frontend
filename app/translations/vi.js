@@ -401,5 +401,16 @@ export default {
   'formChangeTicketStatus.responseSection.fields.currentStatus': 'Trạng thái hiện tại của báo cáo',
   'formChangeTicketStatus.responseSection.placeholder.adminMessage': 'Kết luận sau khi điều tra và lí do đóng báo cáo sai phạm này...',
   'formChangeTicketStatus.responseSection.button.saveChanges': 'Lưu thay đổi',
-  'formChangeTicketStatus.responseSection.error.blank': 'Thông điệp của quản trị viên không được bỏ trống'
+  'formChangeTicketStatus.responseSection.error.blank': 'Thông điệp của quản trị viên không được bỏ trống',
+  'blockMyTicket.table.header.orderId': 'Mã đơn hàng',
+  'blockMyTicket.table.header.shop': 'Cửa hàng',
+  'blockMyTicket.table.header.status': 'Trạng thái',
+  'blockMyTicket.table.header.createdAt': 'Thời điểm báo cáo',
+  'blockMyTicket.table.header.updatedAt': 'Thời điểm cập nhật trạng thái',
+  'blockMyTicket.table.header.action': 'Hành động',
+  'blockMyTicket.table.footer.button.next': 'Trang sau',
+  'blockMyTicket.table.footer.button.previous': 'Trang trước',
+  'blockMyTicket.table.footer.pageSize': 'Hiện',
+  'blockMyTicket.table.footer.pageSizeUnit': 'báo cáo',
+  'blockMyTicket.table.row.button': 'Xem'
 };

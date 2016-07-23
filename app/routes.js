@@ -11,6 +11,7 @@ import Wrapper from './containers/home/Wrapper';
 import WrapperDashboard from './containers/home/WrapperDashboard';
 import Account from './containers/home/Account';
 import MyOrders from './containers/home/MyOrders';
+import MyTickets from './containers/home/MyTickets';
 import UpdateShop from './containers/home/SellerDashboard/UpdateShop';
 import UpdateShipPlaces from './containers/home/SellerDashboard/UpdateShipPlaces';
 import AddShopItem from './containers/home/SellerDashboard/ManageShopItem/AddShopItem';
@@ -49,6 +50,7 @@ export default (
       <Route component={Wrapper}>
         <Route path="account" component={displayAsModal(Account)} />
         <Route path="orders" component={displayAsModal(MyOrders)} />
+        <Route path="tickets" component={displayAsModal(MyTickets)} />
         <Route path="shops/request_create" component={displayAsModal(RequestCreateShop)} />
         <Route path="shops/:shopID" component={displayAsModal(Shop)}>
           <Route path="reviews" component={ShopReviews} />

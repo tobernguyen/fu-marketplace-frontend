@@ -123,6 +123,21 @@ export const ticket = (state = INITIAL_STATE, action) => {
         isSubmitting: false,
         submitResult: AsyncResultCode.CLOSE_TICKET_FAIL
       });
+    case TicketActionTypes.USER_GET_TICKETS_REQUEST:
+      return _.merge({}, state, {
+        isFetching: true,
+        tickets: []
+      });
+    case TicketActionTypes.USER_GET_TICKETS_SUCCESS:
+      return _.merge({}, state, {
+        isFetching: false,
+        tickets: action.response.tickets
+      });
+    case TicketActionTypes.USER_GET_TICKETS_FAILURE:
+     return _.merge({}, state, {
+       isFetching: false,
+       tickets: []
+     });
     default:
       return state;
   }

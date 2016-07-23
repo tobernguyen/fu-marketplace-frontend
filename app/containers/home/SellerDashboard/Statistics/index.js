@@ -16,8 +16,6 @@ class Statistics extends Component {
   constructor(props) {
     super(props);
 
-    const { shopID } = this.props.params;
-
     this.state = {
       statisticModes: _.values(STATISTIC_TYPE),
       activeMode: 0
@@ -28,7 +26,9 @@ class Statistics extends Component {
         activeMode: mode
       });
 
-      this.props.getShopStatistics(this.props.params.shopID, STATISTIC_MODE[mode]);
+      if (this.props[STATISTIC_MODE[mode]]['updatedAt'] === null) {
+        this.props.getShopStatistics(this.props.params.shopID, STATISTIC_MODE[mode]);
+      }
     }
   }
 
@@ -50,8 +50,8 @@ class Statistics extends Component {
                 switchMode={this.handleSwitchMode} />
             </div>
             <div className="row">
-              {activeMode === 0 && <BlockOrdersStatistic ordersStatistic={ordersStatistic} />}
-              {activeMode === 1 && <BlockSalesStatistic salesStatistic={salesStatistic} />}
+              {activeMode === 0 && <BlockSalesStatistic salesStatistic={salesStatistic} />}
+              {activeMode === 1 && <BlockOrdersStatistic ordersStatistic={ordersStatistic} />}
               {activeMode === 2 && <BlockItemSoldStatistic itemSoldStatistic={itemSoldStatistic} />}
             </div>
           </div>

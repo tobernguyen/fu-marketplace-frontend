@@ -3,6 +3,7 @@ import _ from 'lodash';
 import randomcolor from 'randomcolor';
 import moment from 'moment';
 require('moment-range');
+require('frozen-moment');
 
 const categoriesSelector        = (state) => state.common.categories;
 const shipPlacesSelector        = (state) => state.common.shipPlaces;
@@ -16,7 +17,7 @@ const sellerShopSelector        = (state) => state.shop.sellerShop;
 const notificationsSelector     = (state) => state.notification.notifications;
 const ordersStatisticSelector   = (state) => state.statistic.ordersStatistic;
 const salesStatisticSelector    = (state) => state.statistic.salesStatistic;
-const itemSoldStatisticSelector    = (state) => state.statistic.itemSoldStatistic;
+const itemSoldStatisticSelector = (state) => state.statistic.itemSoldStatistic;
 
 export const getCategories = createSelector(
   categoriesSelector,
@@ -83,9 +84,11 @@ export const calculateOrdersStatisticData = createSelector(
     });
 
     const today = moment();
-    const last7Days   = moment().subtract(6, 'days');
+    const last7Days   = today.clone().subtract(6, 'days');
+
     const range    = moment.range(last7Days, today);
     const momentArray = range.toArray('days');
+
     const dayArray = momentArray.map((moment) => {
       return moment.format('DD/MM/YYYY')
     });
@@ -122,6 +125,8 @@ export const calculateOrdersStatisticData = createSelector(
     calculatedData['labels'] = dayArray;
     calculatedData['datasets'] = [completedOrdersDataSet, inCompletedOrdersDataSet];
 
+    calculatedData['updatedAt'] = ordersStatistic['updatedAt'];
+
     return calculatedData
   }
 );
@@ -136,7 +141,8 @@ export const calculateSalesStatistic = createSelector(
     });
 
     const today = moment();
-    const last7Days   = moment().subtract(6, 'days');
+    const last7Days   = today.clone().subtract(6, 'days');
+
     const range    = moment.range(last7Days, today);
     const momentArray = range.toArray('days');
     const dayArray = momentArray.map((moment) => {
@@ -157,26 +163,13 @@ export const calculateSalesStatistic = createSelector(
     calculatedData['datasets'] = [
       {
         label: 'Total sales',
-        backgroundColor: [
-          'rgba(255, 99, 132, 0.2)',
-          'rgba(54, 162, 235, 0.2)',
-          'rgba(255, 206, 86, 0.2)',
-          'rgba(75, 192, 192, 0.2)',
-          'rgba(153, 102, 255, 0.2)',
-          'rgba(255, 159, 64, 0.2)'
-        ],
-        borderColor: [
-          'rgba(255,99,132,1)',
-          'rgba(54, 162, 235, 1)',
-          'rgba(255, 206, 86, 1)',
-          'rgba(75, 192, 192, 1)',
-          'rgba(153, 102, 255, 1)',
-          'rgba(255, 159, 64, 1)'
-        ],
+        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+        borderColor: 'rgba(255,99,132,1)',
         borderWidth: 1,
         data: fullWeekData,
       }
     ];
+    calculatedData['updatedAt'] = salesStatistic['updatedAt'];
 
     return calculatedData;
   }
@@ -192,7 +185,8 @@ export const calculateItemSoldStatistic = createSelector(
     });
 
     const today = moment();
-    const last7Days   = moment().subtract(6, 'days');
+    const last7Days   = today.clone().subtract(6, 'days');
+
     const range    = moment.range(last7Days, today);
     const momentArray = range.toArray('days');
     const dayArray = momentArray.map((moment) => {
@@ -237,6 +231,7 @@ export const calculateItemSoldStatistic = createSelector(
 
     calculatedData['datasets'] = dataSets;
     calculatedData['labels'] = dayArray;
+    calculatedData['updatedAt'] = itemSoldStatistic['updatedAt'];
 
     return calculatedData;
   }

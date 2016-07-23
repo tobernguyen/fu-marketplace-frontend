@@ -32,6 +32,7 @@
     "blueimp-canvas-to-blob": "^3.3.0",
     "chart.js": "^2.2.0-rc.2",
     "classnames": "^2.2.5",
+    "frozen-moment": "^0.3.0",
     "halogen": "^0.2.0",
     "intl": "^1.2.4",
     "lodash": "^4.13.1",

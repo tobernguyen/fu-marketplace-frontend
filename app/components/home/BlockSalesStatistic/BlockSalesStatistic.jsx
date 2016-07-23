@@ -2,6 +2,10 @@ import React, { Component, PropTypes } from 'react';
 import Chart from 'react-chartjs';
 
 export default class BlockSalesStatistic extends Component {
+  shouldComponentUpdate(nextProps) {
+    return this.props.salesStatistic.updatedAt !== nextProps.salesStatistic.updatedAt;
+  }
+
   render() {
     const { salesStatistic } = this.props;
 
@@ -15,7 +19,7 @@ export default class BlockSalesStatistic extends Component {
     };
     return (
       <div className="block-sales-statistic">
-        <Chart.Bar data={chartData} options={chartOptions} width="600" height="250"/>
+        <Chart.Line data={chartData} options={chartOptions} width="600" height="250"/>
       </div>
     )
   }

@@ -3,6 +3,10 @@ import Chart from 'react-chartjs';
 import './BlockOrdersStatistic.scss';
 
 export default class BlockOrdersStatistic extends Component {
+  shouldComponentUpdate(nextProps) {
+    return this.props.ordersStatistic.updatedAt !== nextProps.ordersStatistic.updatedAt;
+  }
+
   render() {
     const { ordersStatistic } = this.props;
 
@@ -14,6 +18,7 @@ export default class BlockOrdersStatistic extends Component {
     const chartOptions = {
       responsive: true
     };
+
     return (
       <div className="block-orders-statistic">
         <Chart.Line data={chartData} options={chartOptions} width="600" height="250"/>

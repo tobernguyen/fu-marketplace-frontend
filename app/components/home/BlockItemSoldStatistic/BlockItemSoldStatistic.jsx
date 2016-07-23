@@ -2,8 +2,13 @@ import React, { Component, PropTypes } from 'react';
 import Chart from 'react-chartjs';
 
 export default class BlockItemSoldStatistic extends Component {
+  shouldComponentUpdate(nextProps) {
+    return this.props.itemSoldStatistic.updatedAt !== nextProps.itemSoldStatistic.updatedAt;
+  }
+
   render() {
     const { itemSoldStatistic } = this.props;
+
     const chartData = {
       labels: itemSoldStatistic.labels,
       datasets: itemSoldStatistic.datasets

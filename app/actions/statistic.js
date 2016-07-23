@@ -1,8 +1,8 @@
 import { CALL_API, HTTP_METHODS } from '../middleware/api';
 
 export const STATISTIC_TYPE = {
-  ORDERS: 'ordersStatistic',
   SALES: 'salesStatistic',
+  ORDERS: 'ordersStatistic',
   ITEM_SOLD: 'itemSoldStatistic'
 };
 

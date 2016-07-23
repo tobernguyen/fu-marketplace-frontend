@@ -1,5 +1,57 @@
 export const messages = {
   formChangeTicketStatus: {
+    responseSection: {
+      sectionName: {
+        id: 'formChangeTicketStatus.responseSection.sectionName',
+        defaultMessage: 'Response'
+      },
+      sectionDescription: {
+        id: 'formChangeTicketStatus.responseSection.sectionDescription',
+        defaultMessage: 'Change status of ticket and response to user'
+      },
+      placeholder: {
+        adminMessage: {
+          id: 'formChangeTicketStatus.responseSection.placeholder.adminMessage',
+          defaultMessage: 'Conclusion of investigation and reason to close ticket...'
+        }
+      },
+      button: {
+        saveChanges: {
+          id: 'formChangeTicketStatus.responseSection.button.saveChanges',
+          defaultMessage: 'Save changes'
+        }
+      },
+      error: {
+        blank: {
+          id: 'formChangeTicketStatus.responseSection.error.blank',
+          defaultMessage: 'Admin message cannot be blank'
+        }
+      },
+      fields: {
+        currentStatus: {
+          id: 'formChangeTicketStatus.responseSection.fields.currentStatus',
+          defaultMessage: 'Current status'
+        },
+        adminMessage: {
+          id: 'formChangeTicketStatus.responseSection.fields.adminMessage',
+          defaultMessage: 'Admin message'
+        },
+        changeTicketStatus: {
+          id: 'formChangeTicketStatus.responseSection.fields.changeTicketStatus',
+          defaultMessage: 'Change ticket status'
+        },
+        orderStatus: {
+          investigate: {
+            id: 'formChangeTicketStatus.responseSection.fields.orderStatus.investigate',
+            defaultMessage: 'Investigating'
+          },
+          close: {
+            id: 'formChangeTicketStatus.responseSection.fields.orderStatus.close',
+            defaultMessage: 'Close ticket'
+          }
+        }
+      }
+    },
     relatedSection: {
       sectionName: {
         id: 'formChangeTicketStatus.relatedSection.sectionName',

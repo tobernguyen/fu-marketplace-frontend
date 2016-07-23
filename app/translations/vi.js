@@ -391,5 +391,15 @@ export default {
   'formChangeTicketStatus.orderSection.fields.itemTable.note': 'Ghi chú',
   'formChangeTicketStatus.relatedSection.sectionName': 'Thông tin thêm',
   'formChangeTicketStatus.relatedSection.sectionDescription': 'Thông tin được cung cấp thêm bởi người dùng',
-  'formChangeTicketStatus.relatedSection.fields.userNote': 'Lời nhắn của người dùng'
+  'formChangeTicketStatus.relatedSection.fields.userNote': 'Lời nhắn của người dùng',
+  'formChangeTicketStatus.responseSection.sectionName': 'Trả lời',
+  'formChangeTicketStatus.responseSection.sectionDescription': 'Thay đổi trạng thái của báo cáo, và trả lời báo cáo của người dùng',
+  'formChangeTicketStatus.responseSection.fields.changeTicketStatus': 'Thay đổi trạng thái báo cáo',
+  'formChangeTicketStatus.responseSection.fields.orderStatus.investigate': 'Đang điều tra',
+  'formChangeTicketStatus.responseSection.fields.orderStatus.close': 'Đóng báo cáo',
+  'formChangeTicketStatus.responseSection.fields.adminMessage': 'Thông điệp của quản trị viên',
+  'formChangeTicketStatus.responseSection.fields.currentStatus': 'Trạng thái hiện tại của báo cáo',
+  'formChangeTicketStatus.responseSection.placeholder.adminMessage': 'Kết luận sau khi điều tra và lí do đóng báo cáo sai phạm này...',
+  'formChangeTicketStatus.responseSection.button.saveChanges': 'Lưu thay đổi',
+  'formChangeTicketStatus.responseSection.error.blank': 'Thông điệp của quản trị viên không được bỏ trống'
 };

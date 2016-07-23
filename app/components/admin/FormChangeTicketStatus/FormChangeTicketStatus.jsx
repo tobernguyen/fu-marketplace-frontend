@@ -3,10 +3,11 @@ import UserInformationSection from './UserInformationSection.jsx';
 import ShopInformationSection from './ShopInformationSection.jsx';
 import OrderInformationSection from './OrderInformationSection.jsx';
 import RelatedInformationSection from './RelatedInformationSection.jsx';
+import ResponseSection from './ResponseSection.jsx';
 
 class FormChangeTicketStatus extends Component {
   render() {
-    const { adminGetUser, adminGetShop, ticket} = this.props
+    const { adminGetUser, adminGetShop, adminInvestigateTicket, adminCloseTicket, ticket} = this.props
     return (
       <div>
         <UserInformationSection
@@ -32,6 +33,11 @@ class FormChangeTicketStatus extends Component {
           ticket={ticket.selectedTicket}
         />
         <hr />
+        <ResponseSection
+          ticket={ticket}
+          adminInvestigateTicket={adminInvestigateTicket}
+          adminCloseTicket={adminCloseTicket}
+        />
       </div>
     );
   }

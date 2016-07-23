@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import FormChangeTicketStatus from 'app/components/admin/FormChangeTicketStatus';
 import { connect } from 'react-redux';
 import {
-  adminGetTicket
+  adminGetTicket,
+  adminInvestigateTicket,
+  adminCloseTicket
 } from 'app/actions/ticket';
 import {
   adminGetUser,
@@ -17,8 +19,8 @@ class ContainerViewTicket extends Component {
     this.props.adminGetTicket(ticketId);
   }
   render() {
-    const { ticket, adminGetUser, adminGetShop } = this.props;
-    if(ticket.isFetching) {
+    const { ticket, adminGetUser, adminGetShop, adminInvestigateTicket, adminCloseTicket } = this.props;
+    if(ticket.isFetching || ticket.isSubmitting) {
       return <div className="text-center container-fluid">
           <LoadingSpinner />
         </div>;
@@ -29,6 +31,8 @@ class ContainerViewTicket extends Component {
           ticket={ticket}
           adminGetUser={adminGetUser}
           adminGetShop={adminGetShop}
+          adminInvestigateTicket={adminInvestigateTicket}
+          adminCloseTicket={adminCloseTicket}
         />
       </div>
     )
@@ -44,5 +48,7 @@ const mapStateToProps = (state) => {
 export default connect(mapStateToProps, {
   adminGetTicket,
   adminGetUser,
-  adminGetShop
+  adminGetShop,
+  adminInvestigateTicket,
+  adminCloseTicket
 })(ContainerViewTicket);

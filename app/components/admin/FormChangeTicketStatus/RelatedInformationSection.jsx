@@ -21,8 +21,7 @@ const RelatedInformationSection = ({ ticket }) => {
           <label className="control-label">
             <FormattedMessage {...messages.formChangeTicketStatus.relatedSection.fields.userNote} />
           </label>
-          <textarea className="form-control" disabled="true">
-            {ticket.userNote}
+          <textarea className="form-control" disabled="true" defaultValue={ticket.userNote}>
           </textarea>
         </div>
       </div>

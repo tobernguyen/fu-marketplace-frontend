@@ -93,6 +93,36 @@ export const ticket = (state = INITIAL_STATE, action) => {
         isFetchingUser: false,
         selectedUser: {}
       });
+    case TicketActionTypes.ADMIN_INVESTIGATE_TICKET_REQUEST:
+      return _.merge({}, state,{
+        isSubmitting: true
+      });
+    case TicketActionTypes.ADMIN_INVESTIGATE_TICKET_SUCCESS:
+      return _.merge({}, state, {
+        isSubmitting: false,
+        selectedTicket: action.response,
+        submitResult: AsyncResultCode.INVESTIGATING_TICKET_SUCCESS
+      });
+    case TicketActionTypes.ADMIN_INVESTIGATE_TICKET_FAILURE:
+      return _.merge({}, state, {
+        isSubmitting: false,
+        submitResult: AsyncResultCode.INVESTIGATING_TICKET_FAIL
+      });
+    case TicketActionTypes.ADMIN_CLOSE_TICKET_REQUEST:
+      return _.merge({}, state, {
+        isSubmitting: true
+      });
+    case TicketActionTypes.ADMIN_CLOSE_TICKET_SUCCESS:
+      return _.merge({}, state, {
+        isSubmitting: false,
+        selectedTicket: action.response,
+        submitResult: AsyncResultCode.CLOSE_TICKET_SUCCESS
+      });
+    case TicketActionTypes.ADMIN_CLOSE_TICKET_FAILURE:
+      return _.merge({}, state, {
+        isSubmitting: false,
+        submitResult: AsyncResultCode.CLOSE_TICKET_FAIL
+      });
     default:
       return state;
   }

@@ -7,6 +7,7 @@ import { messages } from 'app/components/home/ModalViewOrder/ModalViewOrder.i18n
 import BlockCurrentOrderListAction from './BlockCurrentOrderListAction.jsx';
 import LabelCustomerInformation from 'app/components/home/LabelCustomerInformation';
 import OrderStatus from 'app/shared/orderStatus';
+import LabelItem from './LabelItem.jsx';
 
 class BlockCurrentOrderListRow extends Component {
   constructor(props) {
@@ -81,14 +82,6 @@ class BlockCurrentOrderListRow extends Component {
     return <FormattedNumber value={total}/>;
   }
 
-  renderNumberOfItems(order) {
-    const total = _.reduce(order.orderLines, (sum, order) => {
-      return sum + order.quantity
-    }, 0);
-
-    return <FormattedNumber value={total} />
-  }
-
   render() {
     const orderCardClass = classNames({
       'order-card': true,
@@ -98,34 +91,38 @@ class BlockCurrentOrderListRow extends Component {
     const { order } = this.state;
     return (
       <li className={orderCardClass}>
-        <div className="preview">
+        <div className="preview clearfix">
           <div className="col-sm-8">
             <div><strong><FormattedMessage {...messages.modalViewOrder.body.orderId}/>: </strong> {order.id}</div>
             <div>
-              <strong><FormattedMessage {...messages.modalViewOrder.body.buyer}/></strong>:{' '}
-              <LabelCustomerInformation buyer={order.user}/>
-            </div>
-            <div>
-              <strong><FormattedMessage {...messages.modalViewOrder.body.createdAt}/></strong>
-              <FormattedRelative value={new Date(order.createdAt)}/>
-            </div>
-            <div>
               <div className="row">
-              <span className="col-sm-6">
-                <strong><FormattedMessage {...messages.modalViewOrder.body.numberOfItems}/></strong>
-                {this.renderNumberOfItems(order)}
-              </span>
                 <span className="col-sm-6">
-                <strong><FormattedMessage {...messages.modalViewOrder.body.table.total}/>: </strong>
-                  {this.calculateTotalAmount(order)}₫
-              </span>
+                  <strong><FormattedMessage {...messages.modalViewOrder.body.buyer}/></strong>:{' '}
+                  <LabelCustomerInformation buyer={order.user}/>
+                </span>
+                <span className="col-sm-6">
+                <strong><FormattedMessage {...messages.modalViewOrder.body.createdAt}/></strong>
+                <FormattedRelative value={new Date(order.createdAt)}/>
+                </span>
               </div>
+            </div>
+            <div className="order-item">
+              <strong><FormattedMessage {...messages.modalViewOrder.body.table.item}/>: </strong>
+              {
+                order.orderLines.map(orderLine =>
+                  <LabelItem orderLine={orderLine} key={orderLine.item.id}/>
+                )
+              }
+            </div>
+            <div>
+              <strong><FormattedMessage {...messages.modalViewOrder.body.table.total}/>: </strong>
+              {this.calculateTotalAmount(order)}₫
             </div>
             <div>
               <strong><FormattedMessage {...messages.modalViewOrder.body.note}/>: </strong>
               {order.note == '' ? <FormattedMessage {...messages.modalViewOrder.body.noNote}/> : order.note}
             </div>
-          </div>
+            </div>
           <div className="col-sm-4">
             <p>
               <strong><FormattedMessage {...messages.modalViewOrder.body.orderStatus}/>: </strong>
@@ -133,47 +130,16 @@ class BlockCurrentOrderListRow extends Component {
             </p>
           </div>
         </div>
-        <div className="detail">
-          <hr />
-          <h4><FormattedMessage {...messages.modalViewOrder.body.orderDetail}/></h4>
-          <table className="table table-responsive table-bordered">
-            <thead>
-            <tr>
-              <th>#</th>
-              <th><FormattedMessage {...messages.modalViewOrder.body.table.item}/></th>
-              <th><FormattedMessage {...messages.modalViewOrder.body.table.quantity}/></th>
-              <th><FormattedMessage {...messages.modalViewOrder.body.table.note}/></th>
-            </tr>
-            </thead>
-            <tbody>
-              {order.orderLines.map((orderLine,index) =>
-                <tr key={index}>
-                  <td>
-                    {index + 1}
-                  </td>
-                  <td>
-                    <strong>{orderLine.item.name}</strong>
-                    <p><FormattedNumber value={orderLine.item.price}/>₫</p>
-                  </td>
-                  <td>
-                    {orderLine.quantity}
-                  </td>
-                  <td>
-                    {orderLine.note}
-                  </td>
-                </tr>
-              )}
-            </tbody>
-          </table>
-          <hr />
-          <BlockCurrentOrderListAction
-            order={order}
-            acceptOrder={this.acceptOrder}
-            rejectOrder={this.rejectOrder}
-            startShippingOrder={this.startShippingOrder}
-            completeOrder={this.completeOrder}
-            abortOrder={this.abortOrder}
-          />
+        <hr />
+        <div className="current-order-action">
+        <BlockCurrentOrderListAction
+          order={order}
+          acceptOrder={this.acceptOrder}
+          rejectOrder={this.rejectOrder}
+          startShippingOrder={this.startShippingOrder}
+          completeOrder={this.completeOrder}
+          abortOrder={this.abortOrder}
+        />
         </div>
       </li>
     );

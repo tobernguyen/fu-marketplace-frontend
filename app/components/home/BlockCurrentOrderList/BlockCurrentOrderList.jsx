@@ -14,14 +14,16 @@ class BlockCurrentOrderList extends Component {
 
     this.loadMore = (page) => {
       this.props.getOrdersOfPage({
-        page: page
+        page: page,
+        type: 'ACTIVE'
       });
     };
   }
 
   componentWillMount() {
     this.props.getOrdersOfPage({
-      page: 1
+      page: 1,
+      type: 'ACTIVE'
     });
   }
 

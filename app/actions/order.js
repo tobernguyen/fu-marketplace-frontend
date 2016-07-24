@@ -29,10 +29,10 @@ const sellerRequestGetOrder = (shopID, filter) => ({
   }
 });
 
-export const sellerGetOrder = (shopID, status , page = 1, size = 10) => {
+export const sellerGetOrder = (shopID, status , page = 1, size = 10, type = '') => {
   let filter = '';
   if (status === undefined || status === 'all') {
-    filter = `?size=${size}&page=${page}`;
+    filter = `?size=${size}&page=${page}&type${type.toUpperCase()}`;
   } else {
     filter = `?size=${size}&page=${page}&status=${status.toUpperCase()}`;
   }

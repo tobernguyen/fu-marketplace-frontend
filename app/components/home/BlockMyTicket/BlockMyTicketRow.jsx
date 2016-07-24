@@ -4,7 +4,7 @@ import { FormattedRelative, FormattedMessage } from 'react-intl';
 import { Link } from 'react-router';
 import { messages } from 'app/components/home/BlockMyTicket/BlockMyTicket.i18n.js';
 
-const BlockMyTicketRow = ({ ticket }) => {
+const BlockMyTicketRow = ({ ticket, openViewTicketModal }) => {
   return (
     <tr>
       <td>{ticket.id}</td>
@@ -14,7 +14,7 @@ const BlockMyTicketRow = ({ ticket }) => {
       <td><FormattedRelative value={new Date(ticket.createdAt)}/></td>
       <td><FormattedRelative value={new Date(ticket.updatedAt)}/></td>
       <td>
-        <button className="btn order-status btn-warning" type="button" onClick={() => console.log('Display modal!')}>
+        <button className="btn order-status btn-warning" type="button" onClick={() => openViewTicketModal(ticket)}>
           <FormattedMessage {...messages.blockMyTicket.table.row.button}/>
         </button>
       </td>

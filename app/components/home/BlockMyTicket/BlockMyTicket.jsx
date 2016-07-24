@@ -3,6 +3,9 @@ import { FormattedMessage } from 'react-intl';
 import { messages } from 'app/components/home/BlockMyTicket/BlockMyTicket.i18n.js';
 import BlockMyTicketRow from './BlockMyTicketRow.jsx';
 import BlockMyTicketFooter from './BlockMyTicketFooter.jsx';
+import ModalViewTicket from './ModalViewTicket.jsx';
+import TicketStatus from 'app/shared/ticketStatus';
+import AsyncResultCode from 'app/shared/asyncResultCodes';
 
 import './BlockMyTicket.scss';
 
@@ -14,7 +17,38 @@ class BlockMyTicket extends Component {
       showModal: false,
       selectedTicket: {}
     }
+
+    this.openViewTicketModal = (selectedTicket) => {
+      this.setState({
+        showModal: true,
+        selectedTicket
+      });
+    }
+
+    this.closeViewTicketModal = () => {
+      this.setState({
+        showModal: false
+      });
+      this.props.userCloseTicketModal();
+    }
+
+    this.reopen = () => {
+      const { selectedTicket } = this.state;
+      this.props.userReopenTicket(selectedTicket.id);
+    }
   }
+
+  componentWillReceiveProps(nextProps) {
+    const { submitResult } = nextProps;
+    if(submitResult == AsyncResultCode.REOPEN_TICKET_SUCCESS ) {
+      const { selectedTicket } = this.state;
+      selectedTicket['status'] = TicketStatus.OPENING
+      this.setState({
+        selectedTicket
+      });
+    }
+  }
+
   renderTicketList(tickets) {
     return(
       <table className="table table-responsive table-striped">
@@ -34,6 +68,7 @@ class BlockMyTicket extends Component {
             <BlockMyTicketRow
               key={ticket.id}
               ticket={ticket}
+              openViewTicketModal={this.openViewTicketModal}
             />
           )}
         </tbody>
@@ -41,7 +76,7 @@ class BlockMyTicket extends Component {
     );
   }
   render() {
-      const {tickets, page, changePageSize, size, prevPage, nextPage } = this.props;
+      const {tickets, page, changePageSize, size, prevPage, nextPage, isSubmitting, submitResult } = this.props;
     return (
       <div>
         {this.renderTicketList(tickets)}
@@ -52,6 +87,14 @@ class BlockMyTicket extends Component {
           prevPage={prevPage}
           nextPage={nextPage}
           changePageSize={changePageSize}
+        />
+        <ModalViewTicket
+          showModal={this.state.showModal}
+          closeModal={this.closeViewTicketModal}
+          ticket={this.state.selectedTicket}
+          reopen={this.reopen}
+          isSubmitting={isSubmitting}
+          submitResult={submitResult}
         />
       </div>
     );

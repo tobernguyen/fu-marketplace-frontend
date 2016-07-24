@@ -1,5 +1,61 @@
 export const messages = {
   blockMyTicket: {
+    modalViewTicket: {
+      error: {
+        id: 'blockMyTicket.modalViewTicket.error',
+        defaultMessage: 'Error occured! Please try again later!'
+      },
+      title: {
+        id: 'blockMyTicket.modalViewTicket.title',
+        defaultMessage: 'View ticket'
+      },
+      subHeader: {
+        id: 'blockMyTicket.modalViewTicket.subHeader',
+        defaultMessage: 'View detailed information of ticket and reopen if neccessary'
+      },
+      button: {
+        close: {
+          id: 'blockMyTicket.modalViewTicket.button.close',
+          defaultMessage: 'Close'
+        },
+        reopen: {
+          id: 'blockMyTicket.modalViewTicket.button.reopen',
+          defaultMessage: 'Reopen'
+        }
+      },
+      ticketInformation: {
+        title: {
+          id: 'blockMyTicket.modalViewTicket.ticketInformation.title',
+          defaultMessage: 'Ticket information'
+        },
+        fields: {
+          ticketId: {
+            id: 'blockMyTicket.modalViewTicket.ticketInformation.fields.ticketId',
+            defaultMessage: 'Ticket ID: '
+          },
+          shop: {
+            id: 'blockMyTicket.modalViewTicket.ticketInformation.fields.shop',
+            defaultMessage: 'Shop: '
+          },
+          userComment: {
+            id: 'blockMyTicket.modalViewTicket.ticketInformation.fields.userComment',
+            defaultMessage: 'User comment: '
+          },
+          status: {
+            id: 'blockMyTicket.modalViewTicket.ticketInformation.fields.status',
+            defaultMessage: 'Status: '
+          },
+          adminComment: {
+            id: 'blockMyTicket.modalViewTicket.ticketInformation.fields.adminComment',
+            defaultMessage: 'Administrator comment: '
+          },
+          createdAt: {
+            id: 'blockMyTicket.modalViewTicket.ticketInformation.fields.createdAt',
+            defaultMessage: 'Reported at: '
+          }
+        }
+      }
+    },
     table: {
       row: {
         button: {

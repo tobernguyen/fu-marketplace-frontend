@@ -19,4 +19,28 @@
       width: 64px;
     }
   }
+
+}
+
+.btn-close {
+  color: #ffffff;
+
+  &:hover {
+    color: #ffffff;
+  }
+}
+
+
+.view-ticket-modal {
+  .ticket-information {
+    padding: 0 10px;
+
+    div {
+      margin: 0 0 7px;
+    }
+  }
+
+  .alert {
+    margin-top: 10px;
+  }
 }

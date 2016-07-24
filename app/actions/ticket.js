@@ -114,3 +114,27 @@ export const userGetTickets = (status = '', page = 1, size = 5) => {
     dispatch(userRequestGetTickets(status, page, size));
   }
 }
+
+export const USER_REOPEN_TICKET_REQUEST = 'USER_REOPEN_TICKET_REQUEST';
+export const USER_REOPEN_TICKET_SUCCESS = 'USER_REOPEN_TICKET_SUCCESS';
+export const USER_REOPEN_TICKET_FAILURE = 'USER_REOPEN_TICKET_FAILURE';
+
+const userRequestReopenTicket = (ticketId) => ({
+  [CALL_API]: {
+    types: [USER_REOPEN_TICKET_REQUEST, USER_REOPEN_TICKET_SUCCESS, USER_REOPEN_TICKET_FAILURE],
+    url: `/api/v1/tickets/${ticketId}/reopen`,
+    method: HTTP_METHODS.POST
+  }
+});
+
+export const userReopenTicket = (ticketId) => {
+  return (dispatch) => {
+    dispatch(userRequestReopenTicket(ticketId));
+  }
+}
+
+export const USER_CLOSE_TICKET_MODAL = 'USER_CLOSE_TICKET_MODAL';
+
+export const userCloseTicketModal = () => ({
+  type: USER_CLOSE_TICKET_MODAL
+});

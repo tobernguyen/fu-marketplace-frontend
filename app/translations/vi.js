@@ -412,5 +412,17 @@ export default {
   'blockMyTicket.table.footer.button.previous': 'Trang trước',
   'blockMyTicket.table.footer.pageSize': 'Hiện',
   'blockMyTicket.table.footer.pageSizeUnit': 'báo cáo',
-  'blockMyTicket.table.row.button': 'Xem'
+  'blockMyTicket.table.row.button': 'Xem',
+  'blockMyTicket.modalViewTicket.title': 'Chi tiết báo cáo',
+  'blockMyTicket.modalViewTicket.subHeader': 'Chi tiết báo cáo và mở lại báo cáo',
+  'blockMyTicket.modalViewTicket.button.close': 'Đóng',
+  'blockMyTicket.modalViewTicket.ticketInformation.title': 'Thông tin báo cáo',
+  'blockMyTicket.modalViewTicket.ticketInformation.fields.ticketId': 'Mã báo cáo: ',
+  'blockMyTicket.modalViewTicket.ticketInformation.fields.shop': 'Cửa hàng: ',
+  'blockMyTicket.modalViewTicket.ticketInformation.fields.userComment': 'Thông tin cung cấp thêm: ',
+  'blockMyTicket.modalViewTicket.ticketInformation.fields.status': 'Trạng thái: ',
+  'blockMyTicket.modalViewTicket.ticketInformation.fields.adminComment': 'Kết luận của quản trị viên: ',
+  'blockMyTicket.modalViewTicket.button.reopen': 'Mở lại',
+  'blockMyTicket.modalViewTicket.ticketInformation.fields.createdAt': 'Thời điểm báo cáo: ',
+  'blockMyTicket.modalViewTicket.error': 'Có lỗi xảy ra, vui lòng thử lại sau'
 };

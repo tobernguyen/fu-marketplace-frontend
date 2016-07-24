@@ -3,7 +3,9 @@ import ModalHeader from 'app/components/home/ModalHeader';
 import { connect } from 'react-redux';
 import { updateModalSize } from 'app/actions/common';
 import {
-  userGetTickets
+  userGetTickets,
+  userReopenTicket,
+  userCloseTicketModal
 } from 'app/actions/ticket';
 import BlockMyTicket from 'app/components/home/BlockMyTicket';
 
@@ -52,7 +54,7 @@ class MyTickets extends Component {
 
     this.renderBody = () => {
       const { page, size } = this.state;
-      const { ticket: { tickets, isFetching } } = this.props;
+      const { userCloseTicketModal, ticket: { tickets, isFetching, isSubmitting, submitResult }, userReopenTicket } = this.props;
       if(isFetching) {
         return null;
       }
@@ -63,6 +65,10 @@ class MyTickets extends Component {
         nextPage={this.nextPage}
         changePageSize={this.changePageSize}
         tickets={tickets}
+        isSubmitting={isSubmitting}
+        submitResult={submitResult}
+        userReopenTicket={userReopenTicket}
+        userCloseTicketModal={userCloseTicketModal}
       />
     }
   }
@@ -70,6 +76,14 @@ class MyTickets extends Component {
   componentWillMount() {
     this.props.updateModalSize('lg');
     this.props.userGetTickets('', FIRST_PAGE, DEFAULT_SIZE);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const { ticket: { shouldUpdateTicketList } } = nextProps;
+    const { page, size } = this.state;
+    if ( shouldUpdateTicketList ) {
+      this.props.userGetTickets('', page,size);
+    }
   }
 
   render() {
@@ -92,5 +106,7 @@ const mapStateToProps = (state) => {
 
 export default connect(mapStateToProps, {
   updateModalSize,
-  userGetTickets
+  userGetTickets,
+  userReopenTicket,
+  userCloseTicketModal
 })(MyTickets);

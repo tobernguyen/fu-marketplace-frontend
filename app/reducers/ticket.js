@@ -12,7 +12,8 @@ const INITIAL_STATE = {
   selectedShop: {},
   isFetchingShop: false,
   selectedUser: {},
-  isFetchingUser: false
+  isFetchingUser: false,
+  shouldUpdateTicketList: false
 }
 
 
@@ -123,21 +124,37 @@ export const ticket = (state = INITIAL_STATE, action) => {
         isSubmitting: false,
         submitResult: AsyncResultCode.CLOSE_TICKET_FAIL
       });
-    case TicketActionTypes.USER_GET_TICKETS_REQUEST:
-      return _.merge({}, state, {
-        isFetching: true,
-        tickets: []
-      });
     case TicketActionTypes.USER_GET_TICKETS_SUCCESS:
       return _.merge({}, state, {
-        isFetching: false,
-        tickets: action.response.tickets
+        tickets: action.response.tickets,
+        shouldUpdateTicketList: false
       });
     case TicketActionTypes.USER_GET_TICKETS_FAILURE:
      return _.merge({}, state, {
-       isFetching: false,
-       tickets: []
+       tickets: [],
+       shouldUpdateTicketList: false
      });
+    case TicketActionTypes.USER_REOPEN_TICKET_REQUEST:
+      return _.merge({}, state, {
+        isSubmitting: true
+      });
+    case TicketActionTypes.USER_REOPEN_TICKET_SUCCESS:
+      return _.merge({}, state, {
+        isSubmitting: false,
+        submitResult: AsyncResultCode.REOPEN_TICKET_SUCCESS
+      });
+    case TicketActionTypes.USER_REOPEN_TICKET_FAILURE:
+      return _.merge({}, state, {
+        isSubmitting: false,
+        submitResult: AsyncResultCode.REOPEN_TICKET_FAIL
+      });
+    case TicketActionTypes.USER_CLOSE_TICKET_MODAL:
+      return _.merge({}, state, {
+        submitResult: '',
+        isSubmitting: false,
+        isFetching: false,
+        shouldUpdateTicketList: true
+      });
     default:
       return state;
   }

@@ -424,5 +424,6 @@ export default {
   'blockMyTicket.modalViewTicket.ticketInformation.fields.adminComment': 'Kết luận của quản trị viên: ',
   'blockMyTicket.modalViewTicket.button.reopen': 'Mở lại',
   'blockMyTicket.modalViewTicket.ticketInformation.fields.createdAt': 'Thời điểm báo cáo: ',
-  'blockMyTicket.modalViewTicket.error': 'Có lỗi xảy ra, vui lòng thử lại sau'
+  'blockMyTicket.modalViewTicket.error': 'Có lỗi xảy ra, vui lòng thử lại sau',
+  'blockMyTicket.modalViewTicket.button.close': 'Đóng báo cáo'
 };

@@ -36,6 +36,11 @@ class BlockMyTicket extends Component {
       const { selectedTicket } = this.state;
       this.props.userReopenTicket(selectedTicket.id);
     }
+
+    this.close = () => {
+      const { selectedTicket } = this.state;
+      this.props.userCloseTicket(selectedTicket.id);
+    }
   }
 
   componentWillReceiveProps(nextProps) {
@@ -47,6 +52,14 @@ class BlockMyTicket extends Component {
         selectedTicket
       });
     }
+    if(submitResult == AsyncResultCode.CLOSE_TICKET_SUCCESS ) {
+      const { selectedTicket } = this.state;
+      selectedTicket['status'] = TicketStatus.CLOSED
+      this.setState({
+        selectedTicket
+      });
+    }
+
   }
 
   renderTicketList(tickets) {
@@ -93,6 +106,7 @@ class BlockMyTicket extends Component {
           closeModal={this.closeViewTicketModal}
           ticket={this.state.selectedTicket}
           reopen={this.reopen}
+          close={this.close}
           isSubmitting={isSubmitting}
           submitResult={submitResult}
         />

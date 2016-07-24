@@ -5,7 +5,8 @@ import { updateModalSize } from 'app/actions/common';
 import {
   userGetTickets,
   userReopenTicket,
-  userCloseTicketModal
+  userCloseTicketModal,
+  userCloseTicket
 } from 'app/actions/ticket';
 import BlockMyTicket from 'app/components/home/BlockMyTicket';
 
@@ -54,7 +55,7 @@ class MyTickets extends Component {
 
     this.renderBody = () => {
       const { page, size } = this.state;
-      const { userCloseTicketModal, ticket: { tickets, isFetching, isSubmitting, submitResult }, userReopenTicket } = this.props;
+      const { userCloseTicket, userCloseTicketModal, ticket: { tickets, isFetching, isSubmitting, submitResult }, userReopenTicket } = this.props;
       if(isFetching) {
         return null;
       }
@@ -69,6 +70,7 @@ class MyTickets extends Component {
         submitResult={submitResult}
         userReopenTicket={userReopenTicket}
         userCloseTicketModal={userCloseTicketModal}
+        userCloseTicket={userCloseTicket}
       />
     }
   }
@@ -108,5 +110,6 @@ export default connect(mapStateToProps, {
   updateModalSize,
   userGetTickets,
   userReopenTicket,
-  userCloseTicketModal
+  userCloseTicketModal,
+  userCloseTicket
 })(MyTickets);

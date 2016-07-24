@@ -148,6 +148,20 @@ export const ticket = (state = INITIAL_STATE, action) => {
         isSubmitting: false,
         submitResult: AsyncResultCode.REOPEN_TICKET_FAIL
       });
+    case TicketActionTypes.USER_CLOSE_TICKET_REQUEST:
+      return _.merge({}, state, {
+        isSubmitting: true
+      });
+    case TicketActionTypes.USER_CLOSE_TICKET_SUCCESS:
+      return _.merge({}, state, {
+        isSubmitting: false,
+        submitResult: AsyncResultCode.CLOSE_TICKET_SUCCESS
+      });
+    case TicketActionTypes.USER_CLOSE_TICKET_FAILURE:
+      return _.merge({}, state, {
+        isSubmitting: false,
+        submitResult: AsyncResultCode.REOPEN_TICKET_FAIL
+      });
     case TicketActionTypes.USER_CLOSE_TICKET_MODAL:
       return _.merge({}, state, {
         submitResult: '',

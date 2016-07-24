@@ -133,6 +133,25 @@ export const userReopenTicket = (ticketId) => {
   }
 }
 
+export const USER_CLOSE_TICKET_REQUEST = 'USER_CLOSE_TICKET_REQUEST';
+export const USER_CLOSE_TICKET_SUCCESS = 'USER_CLOSE_TICKET_SUCCESS';
+export const USER_CLOSE_TICKET_FAILURE = 'USER_CLOSE_TICKET_FAILURE';
+
+const userRequestCloseTicket = (ticketId) => ({
+  [CALL_API]: {
+    types: [USER_CLOSE_TICKET_REQUEST, USER_CLOSE_TICKET_SUCCESS, USER_CLOSE_TICKET_FAILURE],
+    url: `/api/v1/tickets/${ticketId}/close`,
+    method: HTTP_METHODS.POST
+  }
+});
+
+export const userCloseTicket = (ticketId) => {
+  return (dispatch) => {
+    dispatch(userRequestCloseTicket(ticketId));
+  }
+}
+
+
 export const USER_CLOSE_TICKET_MODAL = 'USER_CLOSE_TICKET_MODAL';
 
 export const userCloseTicketModal = () => ({

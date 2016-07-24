@@ -11,7 +11,7 @@ import './BlockMyTicket.scss';
 
 class ModalViewTicket extends Component {
   render() {
-    const { showModal, closeModal, reopen, ticket, isSubmitting, submitResult } = this.props;
+    const { showModal, closeModal, reopen, close, ticket, isSubmitting, submitResult } = this.props;
     let shopId = 0;
     let shopName = '';
     if(ticket.shop) {
@@ -104,6 +104,12 @@ class ModalViewTicket extends Component {
             ticket.status == TicketStatus.CLOSED &&
             <button className="btn btn-danger" onClick={reopen} disabled={isSubmitting}>
               <FormattedMessage {...messages.blockMyTicket.modalViewTicket.button.reopen}/>{isSubmitting && <i className="fa fa-spinner fa-spin"></i>}
+            </button>
+          }
+          {
+            ticket.status != TicketStatus.CLOSED &&
+            <button className="btn btn-danger" onClick={close} disabled={isSubmitting}>
+              <FormattedMessage {...messages.blockMyTicket.modalViewTicket.button.close}/>{isSubmitting && <i className="fa fa-spinner fa-spin"></i>}
             </button>
           }
           <button className="btn btn-close" onClick={closeModal}>

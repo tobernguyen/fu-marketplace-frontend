@@ -21,6 +21,10 @@ export const messages = {
         reopen: {
           id: 'blockMyTicket.modalViewTicket.button.reopen',
           defaultMessage: 'Reopen'
+        },
+        close: {
+          id: 'blockMyTicket.modalViewTicket.button.close',
+          defaultMessage: 'Close'
         }
       },
       ticketInformation: {

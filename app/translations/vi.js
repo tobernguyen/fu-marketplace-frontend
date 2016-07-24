@@ -421,7 +421,6 @@ export default {
   'blockMyTicket.table.row.button': 'Xem',
   'blockMyTicket.modalViewTicket.title': 'Chi tiết báo cáo',
   'blockMyTicket.modalViewTicket.subHeader': 'Chi tiết báo cáo và mở lại báo cáo',
-  'blockMyTicket.modalViewTicket.button.close': 'Đóng',
   'blockMyTicket.modalViewTicket.ticketInformation.title': 'Thông tin báo cáo',
   'blockMyTicket.modalViewTicket.ticketInformation.fields.ticketId': 'Mã báo cáo: ',
   'blockMyTicket.modalViewTicket.ticketInformation.fields.shop': 'Cửa hàng: ',
@@ -431,5 +430,8 @@ export default {
   'blockMyTicket.modalViewTicket.button.reopen': 'Mở lại',
   'blockMyTicket.modalViewTicket.ticketInformation.fields.createdAt': 'Thời điểm báo cáo: ',
   'blockMyTicket.modalViewTicket.error': 'Có lỗi xảy ra, vui lòng thử lại sau',
-  'blockMyTicket.modalViewTicket.button.close': 'Đóng báo cáo'
+  'blockMyTicket.modalViewTicket.button.close': 'Đóng báo cáo',
+  'ticketStatus.opening': 'Báo cáo của bạn về đơn hàng <strong>#{orderId}</strong> tại <strong>{shopName}</strong> đã được mở.',
+  'ticketStatus.investigating': 'Báo cáo của bạn về đơn hàng <strong>#{orderId}</strong> tại <strong>{shopName}</strong> đã bắt đầu được điều tra.',
+  'ticketStatus.closed': 'Báo cáo của bạn về đơn hàng <strong>#{orderId}</strong> tại <strong>{shopName}</strong> đã đóng lại. Bấm vào thông báo này để xem kết quả.'
 };

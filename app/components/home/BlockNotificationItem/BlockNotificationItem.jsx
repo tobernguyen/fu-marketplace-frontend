@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { FormattedRelative, FormattedHTMLMessage } from 'react-intl';
 import { messages } from './BlockNotificationItem.i18n';
 import './BlockNotificationItem.scss';
-import { NOTIFICATION_TYPE, ORDER_STATUS } from './notificationTypes';
+import { NOTIFICATION_TYPE, ORDER_STATUS, TICKET_STATUS } from './notificationTypes';
 import classNames from 'classnames';
 
 export default class BlockNotificationItem extends Component {
@@ -99,6 +99,27 @@ export default class BlockNotificationItem extends Component {
         };
         return <FormattedHTMLMessage values={values} {...messages.order.userCancelOrder} />;
       }
+      case NOTIFICATION_TYPE.USER_TICKET_STATUS_CHANGE:
+      {
+        const values = {
+          orderId: data.orderId,
+          shopName: data.shopName
+        };
+        switch (data.newStatus) {
+          case TICKET_STATUS.OPENING:
+          {
+            return <FormattedHTMLMessage values={values} {...messages.ticketStatus.opening} />;
+          }
+          case TICKET_STATUS.INVESTIGATING:
+          {
+            return <FormattedHTMLMessage values={values} {...messages.ticketStatus.investigating} />;
+          }
+          case TICKET_STATUS.CLOSED:
+          {
+            return <FormattedHTMLMessage values={values} {...messages.ticketStatus.closed} />;
+          }
+        }
+      }
     }
     return <span />
   }
@@ -121,7 +142,7 @@ export default class BlockNotificationItem extends Component {
 
 
   render() {
-    const { notification: { data, createdAt, read } } = this.props;
+    const { notification: { createdAt, read } } = this.props;
     const notificationTime = new Date(createdAt);
     return (
       <div className={classNames('block-notification-item', 'clearfix', { read: read })}>

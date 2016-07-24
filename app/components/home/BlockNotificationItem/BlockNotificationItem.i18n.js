@@ -63,6 +63,20 @@ export const messages = {
       id: 'order.userCancelOrder',
       defaultMessage: 'order #{orderId} was be cancelled by buyer'
     }
+  },
+  ticketStatus: {
+    opening: {
+      id: 'ticketStatus.opening',
+      defaultMessage: 'your report about #{orderId} at {shopName} was opened'
+    },
+    investigating: {
+      id: 'ticketStatus.investigating',
+      defaultMessage: 'your report about #{orderId} at {shopName} was started investigating'
+    },
+    closed: {
+      id: 'ticketStatus.closed',
+      defaultMessage: 'your report about #{orderId} at {shopName} was closed. Click to see results.'
+    },
   }
 };
 

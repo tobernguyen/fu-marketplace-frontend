@@ -4,7 +4,6 @@ import './BlockNotificationDropdown.scss';
 import { FormattedMessage } from 'react-intl';
 import BlockNotificationItem from 'app/components/home/BlockNotificationItem';
 import { messages } from './BlockNotificationDropdown.i18n';
-import _ from 'lodash';
 import InfiniteScroll from 'app/components/common/InfiniteScroll';
 import { PulseLoader } from 'halogen';
 

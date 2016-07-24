@@ -177,5 +177,8 @@ export default {
   'error.review.you_must_order_at_this_shop_at_least_one_time': 'To write review for this shop, you have to have at least one order.',
   'ordersStatistic': 'Orders',
   'salesStatistic': 'Sales',
-  'itemSoldStatistic': 'Item sold'
+  'itemSoldStatistic': 'Item sold',
+  'ticketStatus.opening': 'Your report about <strong>#{orderId}</strong> at <strong>{shopName}</strong> was be opened.',
+  'ticketStatus.investigating': 'Your report about <strong>#{orderId}</strong> at <strong>{shopName}</strong> was be investigated.',
+  'ticketStatus.closed': 'Your report about <strong>#{orderId}</strong> at <strong>{shopName}</strong> was be closed.'
 };

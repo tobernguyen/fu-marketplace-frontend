@@ -14,3 +14,9 @@ export const ORDER_STATUS = {
   CANCELED: 5,  // by buyer
   ABORTED: 6 // by seller
 };
+
+export const TICKET_STATUS = {
+  OPENING: 0,
+  INVESTIGATING: 1,
+  CLOSED: 2
+};

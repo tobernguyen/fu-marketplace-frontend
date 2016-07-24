@@ -2,7 +2,8 @@ export const NOTIFICATION_TYPE = {
   SELLER_CHANGE_ORDER_STATUS: 1,
   OPEN_SHOP_REQUEST_CHANGE: 2,
   USER_PLACE_ORDER: 3,
-  USER_CANCEL_ORDER: 4
+  USER_CANCEL_ORDER: 4,
+  USER_TICKET_STATUS_CHANGE: 5
 };
 
 export const ORDER_STATUS = {
@@ -13,6 +14,12 @@ export const ORDER_STATUS = {
   REJECTED: 4, // by seller
   CANCELED: 5,  // by buyer
   ABORTED: 6 // by seller
+};
+
+export const TICKET_STATUS = {
+  OPENING: 0,
+  INVESTIGATING: 1,
+  CLOSED: 2
 };
 
 
@@ -58,6 +65,20 @@ export const messages = {
       id: 'order.userCancelOrder',
       defaultMessage: 'order #{orderId} was be cancelled by buyer'
     }
+  },
+  ticketStatus: {
+    opening: {
+      id: 'ticketStatus.opening',
+      defaultMessage: 'your report about #{orderId} at {shopName} was opened'
+    },
+    investigating: {
+      id: 'ticketStatus.investigating',
+      defaultMessage: 'your report about #{orderId} at {shopName} was started investigating'
+    },
+    closed: {
+      id: 'ticketStatus.closed',
+      defaultMessage: 'your report about #{orderId} at {shopName} was closed. Click to see results.'
+    },
   }
 };
 
@@ -175,6 +196,36 @@ export function getNotificationMessage(notification) {
       return {
         values: values,
         message: messages.order.userCancelOrder
+      }
+    }
+    case NOTIFICATION_TYPE.USER_TICKET_STATUS_CHANGE:
+    {
+      const values = {
+        orderId: data.orderId,
+        shopName: data.shopName
+      };
+      switch (data.newStatus) {
+        case TICKET_STATUS.OPENING:
+        {
+          return {
+            values: values,
+            message: messages.ticketStatus.opening
+          }
+        }
+        case TICKET_STATUS.INVESTIGATING:
+        {
+          return {
+            values: values,
+            message: messages.ticketStatus.investigating
+          }
+        }
+        case TICKET_STATUS.CLOSED:
+        {
+          return {
+            values: values,
+            message: messages.ticketStatus.closed
+          }
+        }
       }
     }
   }

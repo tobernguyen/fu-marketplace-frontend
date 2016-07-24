@@ -45,6 +45,11 @@ class NavigationBar extends Component {
           this.props.router.push(`/dashboard/shops/${data.shopId}/orders`);
           break;
         }
+        case NOTIFICATION_TYPE.USER_TICKET_STATUS_CHANGE:
+        {
+          this.props.router.push('/tickets');
+          break;
+        }
         default:
         {
           this.props.router.push('/orders');

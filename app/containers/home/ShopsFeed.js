@@ -63,7 +63,7 @@ class ShopsFeed extends Component {
       if (shops) {
         this.setState({
           elements: shops.map((shop) =>
-            <BlockShopFeedItem key={shop.id} shop={shop} />
+            <BlockShopFeedItem query={this.state.query} key={shop.id} shop={shop} />
           )
         });
       }

@@ -90,8 +90,6 @@ class Shop extends Component {
         pushNotificationEnabled: enabled
       })
     }]);
-
-
   }
 
   componentWillReceiveProps(nextProps) {
@@ -139,7 +137,9 @@ class Shop extends Component {
             sellingItems={this.props.sellingItems}
             checkOut={this.handleCheckOut}
             buyNow={this.handleBuyNow} />
-          <Link to='/' className="close"><span>×</span></Link>
+          <Link to={{ pathname: '/', query: this.props.query }} className="close">
+            <span>×</span>
+          </Link>
         </div>}
         {shop.opening && orderForm}
         {(this.state.hasChildren) && <Modal show={this.state.hasChildren}>
@@ -159,7 +159,8 @@ const mapStateToProps = (state) => {
     seller: seller,
     sellingItems: sellingItems,
     oneSignalRegistered: oneSignalRegistered,
-    currentUser: getUser(state)
+    currentUser: getUser(state),
+    query: state.common.query
   }
 };
 

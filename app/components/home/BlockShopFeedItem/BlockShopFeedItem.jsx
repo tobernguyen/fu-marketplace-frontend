@@ -35,17 +35,18 @@ export default class BlockShopFeedItem extends Component {
   }
 
   render() {
-    const { shop: { id, name, description, categories, shipPlaces, opening, averageRating } } = this.props;
+    const { query, shop: { id, name, description, categories, shipPlaces, opening, averageRating } } = this.props;
     let avatar = this.state.thumbnail;
     if (!avatar || avatar === '') {
       const noAvatar = require('../../../images/no_avatar.jpg');
       avatar = noAvatar;
     }
+
     return (
       <div className="block row block-shop-feed-item">
         <div className="col-md-3 col-sm-4">
           <div className="row thumbnail">
-            <Link to={`shops/${id}`}>
+            <Link to={{ pathname: `shops/${id}`, query: query }}>
               <img
                 onMouseMove={this.handleMouseMove}
                 onMouseLeave={this.handleMouseLeave}
@@ -57,7 +58,7 @@ export default class BlockShopFeedItem extends Component {
         <div className="col-md-9 col-sm-8">
           <div className="row content">
             <h3>
-              <Link to={`shops/${id}`}>
+              <Link to={{ pathname: `shops/${id}`, query: query }}>
                 {name}
               </Link>
               <span className={classNames('status', { 'opening' : opening})}>

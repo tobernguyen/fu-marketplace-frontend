@@ -86,6 +86,9 @@ class BlockMyOrderRow extends Component {
         <td><LabelOrderStatus status={order.status}/></td>
         <td className="text-center">
           {this.renderAction(order)}
+          <button type="button" className="btn order-status btn-danger" onClick={() => this.props.openOpenTicketModal(order)}>
+            <FormattedMessage {...messages.myOrder.button.report} />
+          </button>
         </td>
       </tr>
     );

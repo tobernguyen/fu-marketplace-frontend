@@ -1,0 +1,6 @@
+{
+  "name": "BlockMyTicket",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./BlockMyTicket.jsx"
+}

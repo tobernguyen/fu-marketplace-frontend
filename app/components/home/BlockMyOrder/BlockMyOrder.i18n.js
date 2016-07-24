@@ -1,5 +1,81 @@
 export const messages = {
   myOrder: {
+    openTicketModal: {
+      validation: {
+        message: {
+          blank: {
+            id: 'myOrder.openTicketModal.validation.message.blank',
+            defaultMessage: 'Please provide more information'
+          }
+        }
+      },
+      asyncMessage: {
+        success: {
+          id: 'myOrder.openTicketModal.asyncMessage.success',
+          defaultMessage: 'Report ticket has been created. Admin will start investigate soon.'
+        },
+        fail: {
+          id: 'myOrder.openTicketModal.asyncMessage.fail',
+          defaultMessage: 'Error occured. Report has not been created. Please try again later.'
+        }
+      },
+      title: {
+        id: 'myOrder.openTicketModal.title',
+        defaultMessage: 'Report'
+      },
+      subHeader: {
+        id: 'myOrder.openTicketModal.subHeader',
+        defaultMessage: 'Report order to admin'
+      },
+      userMessage: {
+        title: {
+          id: 'myOrder.openTicketModal.userMessage.title',
+          defaultMessage: 'Message: '
+        },
+        placeholder: {
+          id: 'myOrder.openTicketModal.userMessage.placeholder',
+          defaultMessage: 'Provide more detailed information...'
+        }
+      },
+      button: {
+        sendReport: {
+          id: 'myOrder.openTicketModal.button.sendReport',
+          defaultMessage: 'Report'
+        }
+      },
+      orderInformation: {
+        title: {
+          id: 'myOrder.openTicketModal.orderInformation.title',
+          defaultMessage: 'Order information: '
+        },
+        fields: {
+          orderId: {
+            id: 'myOrder.openTicketModal.orderInformation.fields.orderId',
+            defaultMessage: 'Order ID: '
+          },
+          shop: {
+            id: 'myOrder.openTicketModal.orderInformation.fields.shop',
+            defaultMessage: 'Shop: '
+          },
+          orderLines: {
+            id: 'myOrder.openTicketModal.orderInformation.fields.orderLines',
+            defaultMessage: 'Items: '
+          },
+          shipAddress: {
+            id: 'myOrder.openTicketModal.orderInformation.fields.shipAddress',
+            defaultMessage: 'Address: '
+          },
+          createdAt: {
+            id: 'myOrder.openTicketModal.orderInformation.fields.createdAt',
+            defaultMessage: 'Ordered at: '
+          },
+          orderStatus: {
+            id: 'myOrder.openTicketModal.orderInformation.fields.orderStatus',
+            defaultMessage: 'Status: '
+          }
+        }
+      }
+    },
     sellerMessageModal: {
       title: {
         rejected: {
@@ -44,6 +120,10 @@ export const messages = {
       abort: {
         id: 'myOrder.button.abort',
         defaultMessage: 'Abort'
+      },
+      report: {
+        id: 'myOrder.button.report',
+        defaultMessage: 'Report'
       }
     },
     emptyOrderList: {

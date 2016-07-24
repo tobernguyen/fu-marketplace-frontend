@@ -1,0 +1,6 @@
+{
+  "name": "TicketList",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./TicketList.jsx"
+}

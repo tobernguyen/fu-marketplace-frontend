@@ -40,4 +40,23 @@
       background-color: #b52a2e;
     }
   }
+
+}
+
+
+.open-ticket-modal {
+  .order-information {
+    padding-left: 10px;
+    div {
+      margin: 0 0 5px;
+    }
+  }
+  .btn-close {
+    color: #ffffff;
+    background-color: #a1a1a1;
+  }
+
+  textarea {
+    margin-bottom: 10px;
+  }
 }

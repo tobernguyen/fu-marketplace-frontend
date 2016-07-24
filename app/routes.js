@@ -11,6 +11,7 @@ import Wrapper from './containers/home/Wrapper';
 import WrapperDashboard from './containers/home/WrapperDashboard';
 import Account from './containers/home/Account';
 import MyOrders from './containers/home/MyOrders';
+import MyTickets from './containers/home/MyTickets';
 import UpdateShop from './containers/home/SellerDashboard/UpdateShop';
 import UpdateShipPlaces from './containers/home/SellerDashboard/UpdateShipPlaces';
 import AddShopItem from './containers/home/SellerDashboard/ManageShopItem/AddShopItem';
@@ -35,6 +36,9 @@ import ContainerEditShop from './containers/admin/Shop/ContainerEditShop';
 import PromotionCampaignManagement from './containers/admin/PromotionCampaignManagement';
 import ContainerListPromotion from './containers/admin/Promotion/ContainerListPromotion';
 import ContainerEditPromotion from './containers/admin/Promotion/ContainerEditPromotion';
+import TicketManagement from './containers/admin/TicketManagement';
+import ContainerListTicket from './containers/admin/Ticket/ContainerListTicket';
+import ContainerViewTicket from './containers/admin/Ticket/ContainerViewTicket';
 import ChangePassword from './containers/admin/ChangePassword';
 
 
@@ -46,6 +50,7 @@ export default (
       <Route component={Wrapper}>
         <Route path="account" component={displayAsModal(Account)} />
         <Route path="orders" component={displayAsModal(MyOrders)} />
+        <Route path="tickets" component={displayAsModal(MyTickets)} />
         <Route path="shops/request_create" component={displayAsModal(RequestCreateShop)} />
         <Route path="shops/:shopID" component={displayAsModal(Shop)}>
           <Route path="reviews" component={ShopReviews} />
@@ -82,6 +87,10 @@ export default (
       <Route path="promotions" component={PromotionCampaignManagement} >
         <IndexRoute component={ContainerListPromotion} />
         <Route path=":promotionId/edit" component={ContainerEditPromotion} />
+      </Route>
+      <Route path="tickets" component={TicketManagement}>
+        <IndexRoute component={ContainerListTicket} />
+        <Route path=":ticketId/view" component={ContainerViewTicket} />
       </Route>
       <Route path="changepwd" component={ChangePassword} />
     </Route>

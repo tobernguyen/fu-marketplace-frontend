@@ -20,6 +20,10 @@ export const messages = {
       id: 'sideBar.requestManagement',
       defaultMessage: 'Request management'
     },
+    ticketManagement: {
+      id: 'sideBar.ticketManagement',
+      defaultMessage: 'Ticket Management'
+    },
     changePassword: {
       id: 'sideBar.changePassword',
       defaultMessage: 'Change password'

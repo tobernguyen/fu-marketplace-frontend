@@ -12,6 +12,7 @@ import { feed } from './feed';
 import { order } from './order';
 import { notification } from './notification';
 import { statistic } from './statistic';
+import { ticket } from './ticket';
 
 const rootReducer = combineReducers({
   auth,
@@ -26,6 +27,7 @@ const rootReducer = combineReducers({
   routing,
   language,
   common,
+  ticket,
   form: formReducer
 });
 

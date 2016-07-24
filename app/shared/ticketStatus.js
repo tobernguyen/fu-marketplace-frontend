@@ -1,0 +1,7 @@
+const TICKET_STATUS = {
+  OPENING: 0,
+  INVESTIGATING: 1,
+  CLOSED: 2
+};
+
+export default TICKET_STATUS;

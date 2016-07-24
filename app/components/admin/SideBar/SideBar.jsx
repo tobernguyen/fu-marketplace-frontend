@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router';
 import './SideBar.scss';
 import classNames from 'classnames';
-import { FormattedMessage, FormattedHTMLMessage, injectIntl } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { messages } from 'app/components/admin/SideBar/SideBar.i18n';
 
 
@@ -81,6 +81,14 @@ class SideBar extends Component {
                 <i className="fa fa-envelope" />
                 <span>
                   <FormattedMessage {...messages.sideBar.requestManagement} />
+                </span>
+              </Link>
+            </li>
+            <li>
+              <Link to="/admin/tickets" activeClassName="active">
+                <i className="fa fa-ticket" />
+                <span>
+                  <FormattedMessage {...messages.sideBar.ticketManagement} />
                 </span>
               </Link>
             </li>

@@ -25,7 +25,7 @@ class FormShopPromotionCampaign extends Component {
         error: null
       },
       type: {
-        value: moment(),
+        value: '',
         hasErrors: false,
         error: null
       }

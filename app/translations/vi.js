@@ -433,5 +433,16 @@ export default {
   'blockMyTicket.modalViewTicket.button.close': 'Đóng báo cáo',
   'ticketStatus.opening': 'Báo cáo của bạn về đơn hàng <strong>#{orderId}</strong> tại <strong>{shopName}</strong> đã được mở.',
   'ticketStatus.investigating': 'Báo cáo của bạn về đơn hàng <strong>#{orderId}</strong> tại <strong>{shopName}</strong> đã bắt đầu được điều tra.',
-  'ticketStatus.closed': 'Báo cáo của bạn về đơn hàng <strong>#{orderId}</strong> tại <strong>{shopName}</strong> đã đóng lại. Bấm vào thông báo này để xem kết quả.'
+  'ticketStatus.closed': 'Báo cáo của bạn về đơn hàng <strong>#{orderId}</strong> tại <strong>{shopName}</strong> đã đóng lại. Bấm vào thông báo này để xem kết quả.',
+  'formEditShopPromotionCampaign.sectionName': 'Sửa đổi thông tin chiến dịch quảng bá',
+  'formEditShopPromotionCampaign.sectionDescription': 'Thay đổi ngày bắt đầu, ngày kết thúc, trạng thái hoạt động của chiến dịch quảng bá',
+  'formEditShopPromotionCampaign.button.saveChanges': 'Lưu thay đổi',
+  'formEditShopPromotionCampaign.message.success': 'Thông tin chiến dịch quảng bá đã được cập nhật thành công',
+  'formEditShopPromotionCampaign.message.fail': 'Có lỗi xảy ra, vui lòng thử lại sau',
+  'formShopPromotionCampaign.fields.active': 'Đang hoạt động',
+  'promotionList.tableHead.shop': 'Cửa hàng',
+  'promotionList.tableHead.startDate': 'Ngày bắt đầu',
+  'promotionList.tableHead.endDate': 'Ngày kết thúc',
+  'promotionList.tableHead.type': 'Kiểu',
+  'promotionList.tableHead.action': 'Hành động'
 };

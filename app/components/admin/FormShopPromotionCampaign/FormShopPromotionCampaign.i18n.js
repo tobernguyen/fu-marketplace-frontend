@@ -1,4 +1,30 @@
 export const messages = {
+  formEditShopPromotionCampaign: {
+    sectionName: {
+      id: 'formEditShopPromotionCampaign.sectionName',
+      defaultMessage: 'Edit promotion campaign'
+    },
+    sectionDescription: {
+      id: 'formEditShopPromotionCampaign.sectionDescription',
+      defaultMessage: 'Edit start date, end date, active status of promotion'
+    },
+    button: {
+      saveChanges: {
+        id: 'formEditShopPromotionCampaign.button.saveChanges',
+        defaultMessage: 'Save changes'
+      }
+    },
+    message: {
+      success: {
+        id: 'formEditShopPromotionCampaign.message.success',
+        defaultMessage: 'Promotion information updated successfully'
+      },
+      fail: {
+        id: 'formEditShopPromotionCampaign.message.fail',
+        defaultMessage: 'Error occurred! Please try again later'
+      }
+    }
+  },
   formShopPromotionCampaign: {
     sectionName: {
       id: 'formShopPromotionCampaign.sectionName',
@@ -9,6 +35,10 @@ export const messages = {
       defaultMessage: 'Campaign to promote shop'
     },
     fields: {
+      active: {
+        id: 'formShopPromotionCampaign.fields.active',
+        defaultMessage: 'Active'
+      },
       startDate: {
         id: 'formShopPromotionCampaign.fields.startDate',
         defaultMessage: 'Start date'

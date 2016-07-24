@@ -465,10 +465,31 @@ export const admin = (state = initialState, action) => {
           promotionList: []
         }
       });
-    case AdminActionTypes.ADMIN_SELECT_SHOP_PROMOTION_CAMPAIGN:
-      return _.merge({}, state,{
-        selectedPromotion: action.payload
+    case AdminActionTypes.ADMIN_UPDATE_SHOP_PROMOTION_CAMPAIGN_REQUEST:
+      return _.merge({}, state, {
+        promotionManagement: {
+          isSubmitting: true
+        }
       });
+    case AdminActionTypes.ADMIN_UPDATE_SHOP_PROMOTION_CAMPAIGN_SUCCESS:
+      let promotionList = state.promotionManagement.promotionList;
+      const index = _.indexOf(promotionList, _.find(promotionList, { id: response.id}));
+      promotionList.splice(index, 1, response);
+      return _.merge({}, state, {
+        promotionManagement: {
+          promotionList,
+          isSubmitting: false,
+          submitResult: AsyncResultCode.EDIT_PROMOTION_SUCCESS
+        }
+      });
+    case AdminActionTypes.ADMIN_UPDATE_SHOP_PROMOTION_CAMPAIGN_FAILURE:
+      return _.merge({}, state, {
+        promotionManagement: {
+          isSubmitting: false,
+          submitResult: AsyncResultCode.EDIT_PROMOTION_FAIL
+        }
+      });
+
     case CommonActionTypes.GET_SHIP_PLACES_SUCCESS:
       return _.merge({}, state, {
         shopManagement: {

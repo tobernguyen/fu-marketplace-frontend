@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import PromotionListRow from './PromotionListRow.jsx';
+import { messages } from './PromotionList.i18n';
+import { FormattedMessage } from 'react-intl';
 
 class PromotionList extends Component {
   render() {
@@ -10,11 +12,11 @@ class PromotionList extends Component {
           <thead>
             <tr>
               <th>#</th>
-              <th>Shop</th>
-              <th>Start date</th>
-              <th>End date</th>
-              <th>Type</th>
-              <th>Actions</th>
+              <th><FormattedMessage {...messages.promotionList.tableHead.shop}/></th>
+              <th><FormattedMessage {...messages.promotionList.tableHead.startDate}/></th>
+              <th><FormattedMessage {...messages.promotionList.tableHead.endDate}/></th>
+              <th><FormattedMessage {...messages.promotionList.tableHead.type}/></th>
+              <th><FormattedMessage {...messages.promotionList.tableHead.action}/></th>
             </tr>
           </thead>
           <tbody>

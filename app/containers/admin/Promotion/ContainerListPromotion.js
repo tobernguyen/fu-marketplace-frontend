@@ -1,8 +1,7 @@
 import React, { Component} from 'react';
 import PromotionList from 'app/components/admin/PromotionList';
 import {
-  adminGetShopPromotionCampaign,
-  adminSelectShopPromotionCampaign
+  adminGetShopPromotionCampaign
 } from 'app/actions/admin';
 import { connect } from 'react-redux';
 import LoadingSpinner from 'app/components/admin/LoadingSpinner';
@@ -21,7 +20,7 @@ class ContainerListPromotion extends Component {
     } else {
       output = (
         <div>
-          <PromotionList promotions={promotionList} adminSelectShopPromotionCampaign={adminSelectShopPromotionCampaign}/>
+          <PromotionList promotions={promotionList} />
         </div>
       );
     }
@@ -40,6 +39,5 @@ const mapStateToProps = (state) => ({
 
 
 export default connect(mapStateToProps, {
-  adminGetShopPromotionCampaign,
-  adminSelectShopPromotionCampaign
+  adminGetShopPromotionCampaign
 })(ContainerListPromotion);

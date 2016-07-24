@@ -443,16 +443,26 @@ export const adminGetShopPromotionCampaign = () => {
 }
 
 
-export const ADMIN_SELECT_SHOP_PROMOTION_CAMPAIGN = 'ADMIN_SELECT_SHOP_PROMOTION_CAMPAIGN';
-const adminRequestSelectShopPromotionCampaign = (promotion) => ({
-  type: ADMIN_SELECT_SHOP_PROMOTION_CAMPAIGN,
-  payload: {
-    promotion: promotion
+export const ADMIN_UPDATE_SHOP_PROMOTION_CAMPAIGN_REQUEST = 'ADMIN_UPDATE_SHOP_PROMOTION_CAMPAIGN_REQUEST';
+export const ADMIN_UPDATE_SHOP_PROMOTION_CAMPAIGN_SUCCESS = 'ADMIN_UPDATE_SHOP_PROMOTION_CAMPAIGN_SUCCESS';
+export const ADMIN_UPDATE_SHOP_PROMOTION_CAMPAIGN_FAILURE = 'ADMIN_UPDATE_SHOP_PROMOTION_CAMPAIGN_FAILURE';
+
+const adminRequestUpdateShopPromotionCampaign = (promotion) => ({
+  [CALL_API]: {
+    types: [ADMIN_UPDATE_SHOP_PROMOTION_CAMPAIGN_REQUEST, ADMIN_UPDATE_SHOP_PROMOTION_CAMPAIGN_SUCCESS, ADMIN_UPDATE_SHOP_PROMOTION_CAMPAIGN_FAILURE],
+    url: `/api/v1/admin/shopPromotionCampaigns/${promotion.id}`,
+    method: HTTP_METHODS.PUT,
+    params: {
+      startDate: promotion.startDate.value,
+      endDate: promotion.endDate.value,
+      type: promotion.type.value,
+      active: promotion.active
+    }
   }
 });
 
-export const adminSelectShopPromotionCampaign = (promotion) => {
+export const adminUpdateShopPromotionCampaign = (promotion) => {
   return (dispatch) => {
-    dispatch(adminRequestSelectShopPromotionCampaign(promotion));
+    dispatch(adminRequestUpdateShopPromotionCampaign(promotion));
   }
 }

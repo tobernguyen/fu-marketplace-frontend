@@ -3,27 +3,43 @@ import OrderStatus from 'app/shared/orderStatus';
 import { messages } from 'app/components/home/ModalViewOrder/ModalViewOrder.i18n';
 import { FormattedMessage , injectIntl } from 'react-intl';
 import OrderStatusMessage from './OrderStatusMessage.jsx';
-import { Dropdown } from 'react-bootstrap';
+import { OverlayTrigger, Popover } from 'react-bootstrap';
 import RejectOrderForm from 'app/containers/home/SellerDashboard/ManageOrders/RejectOrderForm';
 
 const ModalViewOrderFooter = ({ order, acceptOrder, rejectOrder, startShippingOrder, completeOrder, abortOrder, intl: { formatMessage }}) => {
   let output = '';
+
+  const rejectForm = (
+    <Popover id="rejectForm">
+      <RejectOrderForm
+        bsRole="menu"
+        actionName={formatMessage(messages.modalViewOrder.button.reject)}
+        onSubmit={rejectOrder}
+        />
+    </Popover>
+  );
+
+  const abortForm = (
+    <Popover id="abortForm">
+      <RejectOrderForm
+        bsRole="menu"
+        actionName={formatMessage(messages.modalViewOrder.button.abort)}
+        onSubmit={abortOrder}
+        />
+    </Popover>
+  );
+
   switch (order.status) {
     case OrderStatus.NEW:
       output = <div className="btn-toolbar">
           <button type="button" className="btn btn-accept" onClick={() => acceptOrder(order.id)}>
             <FormattedMessage {...messages.modalViewOrder.button.accept} />
           </button>
-          <Dropdown id="FormRejectOrder">
+          <OverlayTrigger trigger="click" placement="right" overlay={rejectForm} rootClose>
           <button type="button" className="btn btn-reject" bsRole="toggle">
             <FormattedMessage {...messages.modalViewOrder.button.reject} />
           </button>
-          <RejectOrderForm
-            bsRole="menu"
-            actionName={formatMessage(messages.modalViewOrder.button.reject)}
-            onSubmit={rejectOrder}
-            />
-          </Dropdown>
+          </OverlayTrigger>
         </div>
       break;
     case OrderStatus.ACCEPTED:
@@ -47,16 +63,11 @@ const ModalViewOrderFooter = ({ order, acceptOrder, rejectOrder, startShippingOr
           <button type="button" className="btn btn-complete" onClick={() => completeOrder(order.id)}>
             <FormattedMessage {...messages.modalViewOrder.button.complete}/>
           </button>
-          <Dropdown id="FormAbortOrder">
+          <OverlayTrigger trigger="click" placement="right" overlay={abortForm} rootClose>
           <button type="button" className="btn btn-reject" bsRole="toggle">
             <FormattedMessage {...messages.modalViewOrder.button.abort} />
           </button>
-          <RejectOrderForm
-            bsRole="menu"
-            actionName={formatMessage(messages.modalViewOrder.button.abort)}
-            onSubmit={abortOrder}
-            />
-          </Dropdown>
+          </OverlayTrigger>
         </div>
       );
       break;

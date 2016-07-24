@@ -7,7 +7,7 @@ class FormRejectOrder extends Component {
     const { formatMessage } = this.props.intl;
     const { fields : { reason }, dirty, handleSubmit, actionName} = this.props;
     return (
-      <div className="dropdown-menu form-reject-order">
+      <div className="form-reject-order">
         <form onSubmit={handleSubmit}>
           <div className={`form-group has-feedback ${reason.touched && reason.invalid ? 'has-error' : ''}`}>
             <label className="control-label">

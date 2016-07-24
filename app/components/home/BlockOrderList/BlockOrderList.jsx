@@ -6,6 +6,7 @@ import BlockCurrentOrderList from 'app/components/home/BlockCurrentOrderList';
 import BlockOrderListBody from 'app/components/home/BlockOrderListBody';
 import BlockOrderListFooter from 'app/components/home/BlockOrderListFooter';
 import { injectIntl } from 'react-intl';
+import NoOrderSeller from 'app/components/home/NoOrderSeller';
 
 
 class BlockOrderList extends Component {
@@ -24,12 +25,14 @@ class BlockOrderList extends Component {
       this.setState({
         isCurrent
       });
+
     }
   }
 
   componentWillUnmount() {
     this.props.clearCurrentOrders();
   }
+
 
   render() {
     const { shopID, currentOrders, orders, query, changePageSize, getOrdersOfPage } = this.props;
@@ -42,35 +45,39 @@ class BlockOrderList extends Component {
           <BlockManageOrderHeader
             isCurrent={this.state.isCurrent}
             changeOrderListDisplay={this.changeOrderListDisplay}/>
-          <BlockCurrentOrderList
-            shopID={this.props.shopID}
-            currentOrders={currentOrders}
-            getOrdersOfPage={getOrdersOfPage}
-            acceptOrder={this.props.acceptOrder}
-            rejectOrder={this.props.rejectOrder}
-            startShippingOrder={this.props.startShippingOrder}
-            completeOrder={this.props.completeOrder}
-            abortOrder={this.props.abortOrder}
-            shouldUpdateOrderList={this.props.shouldUpdateOrderList}
-            hasMore={this.props.hasMore} />
+            <BlockCurrentOrderList
+              shopID={this.props.shopID}
+              currentOrders={currentOrders}
+              getOrdersOfPage={getOrdersOfPage}
+              acceptOrder={this.props.acceptOrder}
+              rejectOrder={this.props.rejectOrder}
+              startShippingOrder={this.props.startShippingOrder}
+              completeOrder={this.props.completeOrder}
+              abortOrder={this.props.abortOrder}
+              shouldUpdateOrderList={this.props.shouldUpdateOrderList}
+              hasMore={this.props.hasMore} />
         </div>)
 
     }
     return (
       <div>
         <BlockManageOrderHeader isCurrent={this.state.isCurrent} changeOrderListDisplay={this.changeOrderListDisplay}/>
-        <div className="block-order-list clearfix">
-        <BlockOrderListHeader shopID={shopID}/>
-        <BlockOrderListBody
-          orders={orders}
-          viewOrder={this.props.viewOrder}/>
-        <BlockOrderListFooter
-          shopID={shopID}
-          query={query}
-          hasNextPage={hasNextPage}
-          changePageSize={changePageSize}
-          />
-        </div>
+        {
+          orders.length === 0 ? <NoOrderSeller /> : (
+            <div className="block-order-list clearfix">
+            <BlockOrderListHeader shopID={shopID}/>
+            <BlockOrderListBody
+              orders={orders}
+              viewOrder={this.props.viewOrder}/>
+            <BlockOrderListFooter
+              shopID={shopID}
+              query={query}
+              hasNextPage={hasNextPage}
+              changePageSize={changePageSize}
+              />
+            </div>
+          )
+        }
       </div>
     )
   }

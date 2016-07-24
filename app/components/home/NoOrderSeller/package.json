@@ -1,0 +1,6 @@
+{
+  "name": "NoOrderSeller",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./NoOrderSeller.jsx"
+}

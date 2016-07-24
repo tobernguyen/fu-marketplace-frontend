@@ -139,7 +139,6 @@ class ManageOrders extends Component {
   render() {
     const { query } = this.props.location;
     const { currentOrders, orders, hasMore, clearCurrentOrders } = this.props;
-
     return (
       <div className="container home-body">
         <div className="seller-dashboard">

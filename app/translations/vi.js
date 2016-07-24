@@ -346,5 +346,6 @@ export default {
   'salesStatistic': 'Bán hàng',
   'itemSoldStatistic': 'Hàng đã bán',
   'noActiveOrder.message': 'Không có đơn hàng',
-  'noActiveOrder.button.startShopping': 'Bắt đầu mua hàng'
+  'noActiveOrder.button.startShopping': 'Bắt đầu mua hàng',
+  'noOrderSeller.message': 'Bạn không có đơn hàng nào cả'
 };

@@ -3,6 +3,7 @@ import BlockCurrentOrderListRow from './BlockCurrentOrderListRow.jsx';
 import './BlockCurrentOrderList.scss';
 import { PulseLoader } from 'halogen';
 import InfiniteScroll from 'app/components/common/InfiniteScroll';
+import NoOrderSeller from 'app/components/home/NoOrderSeller';
 
 class BlockCurrentOrderList extends Component {
   constructor(props) {
@@ -46,6 +47,10 @@ class BlockCurrentOrderList extends Component {
   }
 
   render() {
+    const { currentOrders } = this.props;
+    if (currentOrders.length == 0) {
+      return <NoOrderSeller />
+    }
     return (
       <div className="current-order-list">
         {this.state.elements.length > 0 &&

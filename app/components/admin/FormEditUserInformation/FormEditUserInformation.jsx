@@ -31,8 +31,7 @@ const validate = (values) => {
     errors.identityNumber = 'common.form.validation.identityNumber.invalid';
     hasErrors = true;
   }
-
-  if(values.identityNumber && validIdentityNumberLength.indexOf(values.identityNumber.length)) {
+  if(values.identityNumber && validIdentityNumberLength.indexOf(values.identityNumber.length) < 0) {
     errors.identityNumber = 'common.form.validation.identityNumber.len';
     hasErrors = true;
   }
@@ -177,7 +176,15 @@ class FormEditUserInformation extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  initialValues: state.admin.userManagement.selectedUser,
+  initialValues: {
+    id: state.admin.userManagement.selectedUser.id,
+    email: state.admin.userManagement.selectedUser.email,
+    fullName: state.admin.userManagement.selectedUser.fullName,
+    gender: state.admin.userManagement.selectedUser.gender === null ? 'male' : state.admin.userManagement.selectedUser.gender,
+    identityNumber: state.admin.userManagement.selectedUser.identityNumber === null ? undefined : state.admin.userManagement.selectedUser.identityNumber,
+    phone: state.admin.userManagement.selectedUser.phone === null ? undefined : state.admin.userManagement.selectedUser.phone,
+    room: state.admin.userManagement.selectedUser.room === null ? undefined : state.admin.userManagement.selectedUser.room
+  },
   submitResult: state.admin.userManagement.submitResult
 });
 

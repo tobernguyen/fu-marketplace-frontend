@@ -33,7 +33,9 @@ class Statistics extends Component {
   }
 
   componentWillMount() {
-    this.props.getShopStatistics(this.props.params.shopID, STATISTIC_MODE[this.state.activeMode]);
+    if (this.props[STATISTIC_MODE[this.state.activeMode]]['updatedAt'] === null) {
+      this.props.getShopStatistics(this.props.params.shopID, STATISTIC_MODE[this.state.activeMode]);
+    }
   }
 
   render() {

@@ -21,6 +21,23 @@ export const getNotifications = (page) => {
   }
 };
 
+export const GET_UNREAD_COUNT_REQUEST = 'GET_UNREAD_COUNT_REQUEST';
+export const GET_UNREAD_COUNT_SUCCESS = 'GET_UNREAD_COUNT_SUCCESS';
+export const GET_UNREAD_COUNT_FAILURE = 'GET_UNREAD_COUNT_FAILURE';
+const requestGetUnreadCount = () => ({
+  [CALL_API]: {
+    types: [GET_UNREAD_COUNT_REQUEST, GET_UNREAD_COUNT_SUCCESS, GET_UNREAD_COUNT_FAILURE],
+    url: '/api/v1/users/me/notifications',
+    method: HTTP_METHODS.GET
+  }
+});
+
+export const getUnreadCount = () => {
+  return (dispatch) => {
+    return dispatch(requestGetUnreadCount())
+  }
+};
+
 
 export const MARK_NOTIFICATION_AS_READ_REQUEST = 'MARK_NOTIFICATION_AS_READ_REQUEST';
 export const MARK_NOTIFICATION_AS_READ_SUCCESS = 'MARK_NOTIFICATION_AS_READ_SUCCESS';

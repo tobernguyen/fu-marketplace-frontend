@@ -36,14 +36,11 @@ export default class BlockNotificationDropdown extends Component {
   }
 
   renderNotificationBadge() {
-    const notificationCount = _.size(_.filter(this.props.notifications, (item) =>
-      item.read !== true
-    ));
-
+    const { unreadCount } = this.props;
     return (
       <div>
-        {notificationCount > 0 && <span className="badge">
-          {notificationCount}
+        {unreadCount > 0 && <span className="badge">
+          {unreadCount}
         </span>}
       </div>
     )

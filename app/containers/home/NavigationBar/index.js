@@ -6,6 +6,7 @@ import { destroyWebSocket } from 'app/actions/common';
 import { withRouter } from 'react-router'
 import {
   getNotifications,
+  getUnreadCount,
   markNotificationAsRead,
   markAllNotificationsAsRead,
   newNotification,
@@ -74,9 +75,10 @@ class NavigationBar extends Component {
   }
 
   render () {
-    const { currentUser, handleSearch, displaySearch, notifications, hasMore, clearNotifications } = this.props;
+    const { currentUser, handleSearch, displaySearch, notifications, hasMore, clearNotifications, unreadCount } = this.props;
     return (
       <Header
+        unreadCount={unreadCount}
         clearNotifications={clearNotifications}
         loadMoreNotifications={this.loadMoreNotifications}
         onNotificationClick={this.onNotificationClick}
@@ -93,6 +95,7 @@ class NavigationBar extends Component {
 
   componentWillMount() {
     this.props.getCurrentUser();
+    this.props.getUnreadCount();
   }
 
   componentWillReceiveProps(nextProps) {
@@ -119,6 +122,7 @@ NavigationBar.propTypes = {
   getCurrentUser: PropTypes.func.isRequired,
   signOutGoogle: PropTypes.func.isRequired,
   getNotifications: PropTypes.func.isRequired,
+  getUnreadCount: PropTypes.func.isRequired,
   markNotificationAsRead: PropTypes.func.isRequired,
   markAllNotificationsAsRead: PropTypes.func.isRequired,
   clearNotifications: PropTypes.func.isRequired
@@ -129,7 +133,8 @@ const mapStateToProps = (state) => {
     currentUser:            getUser(state),
     notifications:          getOwnNotifications(state),
     hasMore:                state.notification.hasMore,
-    socket:                 state.common.socket
+    socket:                 state.common.socket,
+    unreadCount:            state.notification.unreadCount
   }
 };
 
@@ -137,6 +142,7 @@ export default withRouter(connect(mapStateToProps, {
   getCurrentUser,
   signOutGoogle,
   getNotifications,
+  getUnreadCount,
   markNotificationAsRead,
   markAllNotificationsAsRead,
   newNotification,

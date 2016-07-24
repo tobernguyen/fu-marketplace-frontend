@@ -3,6 +3,7 @@ import _ from 'lodash';
 
 const INITIAL_STATE = {
   notifications: [],
+  unreadCount: 0,
   markAsReadSuccessful: false,
   oneSignalRegistered: false,
   hasMore: true
@@ -13,10 +14,18 @@ export const notification = (state = INITIAL_STATE, action) => {
   switch (type) {
     case NotificationTypes.GET_NOTIFICATIONS_SUCCESS:
     {
-      const { notifications } = response;
+      const { notifications, unreadCount } = response;
       return _.assign({}, state, {
         notifications: _.concat(state.notifications, notifications),
-        hasMore: notifications.length !== 0
+        hasMore: notifications.length !== 0,
+        unreadCount: unreadCount
+      });
+    }
+    case NotificationTypes.GET_UNREAD_COUNT_SUCCESS:
+    {
+      const { unreadCount } = response;
+      return _.assign({}, state, {
+        unreadCount: unreadCount
       });
     }
     case NotificationTypes.CLEAR_NOTIFICATIONS:
@@ -44,14 +53,16 @@ export const notification = (state = INITIAL_STATE, action) => {
         notifications: state.notifications.map((notification) => {
           notification.read = true;
           return notification;
-        })
+        }),
+        unreadCount: 0
       });
     }
     case NotificationTypes.WS_NEW_NOTIFICATION:
     {
       const { notification } = payload;
       return _.assign({}, state, {
-        promptNotification: notification
+        promptNotification: notification,
+        unreadCount: state.unreadCount + 1
       })
     }
     case NotificationTypes.REGISTER_ONE_SIGNAL_SUCCESS:

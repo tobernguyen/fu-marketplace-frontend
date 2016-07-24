@@ -55,9 +55,10 @@ export default class Header extends Component {
       markAsAllRead,
       hasMoreNotifications,
       loadMoreNotifications,
-      clearNotifications
+      clearNotifications,
+      unreadCount
     } = this.props;
-    // const normalUser = roles && roles.length == 0;
+
     return (
       <div className="home-header">
         <Navbar inverse fixedTop>
@@ -88,6 +89,7 @@ export default class Header extends Component {
               <BlockNotificationDropdown
                 clearNotifications={clearNotifications}
                 notifications={notifications}
+                unreadCount={unreadCount}
                 hasMoreNotifications={hasMoreNotifications}
                 loadMoreNotifications={loadMoreNotifications}
                 eventKey={1}

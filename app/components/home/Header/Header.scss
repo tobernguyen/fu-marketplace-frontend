@@ -1,14 +1,54 @@
 @import 'app/styles/variables.scss';
 
 .home-header {
+  .nav > li > a {
+    padding: 12px
+  }
   > .navbar {
     background-color: $primary-color;
     border: 0;
     border-radius: 0;
+    min-height: 42px;
+
+    .navbar-brand {
+      height: 42px;
+      padding: 11px 15px;
+    }
+
+    .navbar-user {
+      > a {
+        padding-top: 0;
+        padding-bottom: 0;
+      }
+
+      .user-avatar {
+        display: block;
+        float: left;
+        padding: 10px 5px 0 0;
+        img {
+          height: 24px;
+          border-radius: 4px;
+        }
+      }
+      .user-title {
+        padding: 12px 0;
+        float: left;
+      }
+    }
+
+    .navbar-orders {
+      > a > i {
+        margin-right: 6px;
+      }
+    }
+    > li > a {
+      padding: 10px 9px;
+    }
     ul {
       li.open {
         > a {
           background-color: $dark-color;
+          float: left;
         }
       }
       a {
@@ -66,7 +106,7 @@
     background-color: #ffffff;
     padding: 0;
     border-radius: 3px;
-    margin-top: 10px;
+    margin-top: 6px;
     > .form-group {
       > .form-control {
         border: none;
@@ -85,5 +125,12 @@
         background-color: #CCCCCC;
       }
     }
+  }
+}
+
+@media (min-width: 768px) {
+  .navbar-nav > li > a {
+    padding-top: 12px;
+    padding-bottom: 12px;
   }
 }

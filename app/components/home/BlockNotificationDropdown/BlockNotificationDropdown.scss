@@ -1,4 +1,55 @@
+/*
+ul.navbar-nav > li {
+  position: relative;
+}
+ul.navbar-nav > li .badge {
+  background: #ff2d55;
+  border-radius: 9px;
+  font-size: 10px !important;
+  font-weight: 400;
+  text-align: center;
+  padding: 3px 5px;
+  z-index: 100;
+  min-width: 18px;
+  height: 18px;
+}
+
+ul.navbar-nav > li .badge {
+  position: absolute;
+  right: 5px;
+  top: 10px;
+}
+*/
+
 .block-notification-dropdown {
+  &.open {
+    .icon-notification {
+      .badge {
+        border: 2px solid #344150;
+      }
+    }
+  }
+  .icon-notification {
+    float: left;
+    position: relative;
+    margin-right: 8px;
+
+    .badge {
+      background: #ff2d55;
+      border-radius: 4px;
+      font-size: 10px !important;
+      font-weight: 400;
+      text-align: center;
+      padding: 2px;
+      z-index: 100;
+      min-width: 18px;
+      height: 18px;
+      position: absolute;
+      right: -7px;
+      top: -7px;
+      border: 2px solid #c0392b;
+    }
+  }
   a {
     display: block;
     &:hover {

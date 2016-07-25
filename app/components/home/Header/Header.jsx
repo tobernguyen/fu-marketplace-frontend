@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import './Header.scss';
-import { Navbar, Nav, NavDropdown, MenuItem, FormGroup, FormControl, Button } from 'react-bootstrap';
+import { Navbar, Nav, NavDropdown, MenuItem, FormGroup, FormControl, Button, NavItem } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import { FormattedMessage } from 'react-intl';
 import { links } from 'app/shared/links';
@@ -41,13 +41,71 @@ export default class Header extends Component {
     }
   }
 
-  render() {
+  renderUserNavDropdown() {
     const {
       onSignOut,
       currentUser: {
         fullName,
-        shops
-      },
+        shops,
+        avatar
+      }
+    } = this.props;
+
+    const titleNode = <div>
+      <span className="user-avatar">
+        <img src={avatar}  />
+      </span>
+      <span className="user-title">
+        {fullName || ''}
+      </span>
+    </div>;
+
+    return (
+      <NavDropdown eventKey={3} title={titleNode} id="basic-nav-dropdown" className="navbar-user" noCaret>
+        <LinkContainer to='/account'>
+          <MenuItem eventKey={3.1}>
+            <i className="fa fa-user"/>
+            <FormattedMessage {...links.account} />
+          </MenuItem>
+        </LinkContainer>
+        <MenuItem divider />
+        {shops instanceof Array && shops.map((shop) =>
+          <LinkContainer key={shop.id} to={`/dashboard/shops/${shop.id}`}>
+            <MenuItem eventKey={3.2}>
+              <i className="shop-init">{shop.name[0]}</i> {shop.name}
+            </MenuItem>
+          </LinkContainer>
+        )}
+        <LinkContainer to='/shops/request_create'>
+          <MenuItem eventKey={3.3}>
+            <i className="fa fa-flag-o"/>
+            <FormattedMessage {...links.openShop} />
+          </MenuItem>
+        </LinkContainer>
+        <MenuItem divider />
+        <MenuItem eventKey={3.4}>
+          <i className="fa fa-cog"/>
+          <FormattedMessage {...links.settings} />
+        </MenuItem>
+        <MenuItem eventKey={3.5} onSelect={onSignOut}>
+          <i className="fa fa-sign-in"/>
+          <FormattedMessage {...links.logOut} />
+        </MenuItem>
+        <MenuItem divider />
+        <MenuItem eventKey={3.6}>
+          <i className="fa fa-life-ring"/>
+          <FormattedMessage {...links.support} />
+        </MenuItem>
+        <MenuItem eventKey={3.7}>
+          <i className="fa fa-bug"/>
+          <FormattedMessage {...links.reportIssue} />
+        </MenuItem>
+      </NavDropdown>
+    )
+  }
+
+  render() {
+    const {
       displaySearch,
       notifications,
       onNotificationClick,
@@ -85,61 +143,21 @@ export default class Header extends Component {
               </Button>
             </Navbar.Form>}
             <Nav pullRight>
+              <LinkContainer to='/orders'>
+                <NavItem className="navbar-orders" eventKey={1} href="#">
+                  <i className="fa fa-list-ol"/> <FormattedMessage {...links.myOrders} />
+                </NavItem>
+              </LinkContainer>
               <BlockNotificationDropdown
                 clearNotifications={clearNotifications}
                 notifications={notifications}
                 unreadCount={unreadCount}
                 hasMoreNotifications={hasMoreNotifications}
                 loadMoreNotifications={loadMoreNotifications}
-                eventKey={1}
+                eventKey={2}
                 markAsAllRead={markAsAllRead}
                 onNotificationClick={onNotificationClick} />
-              <NavDropdown eventKey={2} title={fullName || ''} id="basic-nav-dropdown">
-                <LinkContainer to='/account'>
-                  <MenuItem eventKey={2.1}>
-                    <i className="fa fa-user"/>
-                    <FormattedMessage {...links.account} />
-                  </MenuItem>
-                </LinkContainer>
-                <LinkContainer to='/orders'>
-                  <MenuItem eventKey={2.1}>
-                    <i className="fa fa-list-ol"/>
-                    <FormattedMessage {...links.myOrders} />
-                  </MenuItem>
-                </LinkContainer>
-                <MenuItem divider />
-                {shops instanceof Array && shops.map((shop) =>
-                  <LinkContainer key={shop.id} to={`/dashboard/shops/${shop.id}`}>
-                    <MenuItem eventKey={2.3}>
-                      <i className="shop-init">{shop.name[0]}</i> {shop.name}
-                    </MenuItem>
-                  </LinkContainer>
-                )}
-                <LinkContainer to='/shops/request_create'>
-                  <MenuItem eventKey={2.3}>
-                    <i className="fa fa-flag-o"/>
-                    <FormattedMessage {...links.openShop} />
-                  </MenuItem>
-                </LinkContainer>
-                <MenuItem divider />
-                <MenuItem eventKey={2.4}>
-                  <i className="fa fa-cog"/>
-                  <FormattedMessage {...links.settings} />
-                </MenuItem>
-                <MenuItem eventKey={2.5} onSelect={onSignOut}>
-                  <i className="fa fa-sign-in"/>
-                  <FormattedMessage {...links.logOut} />
-                </MenuItem>
-                <MenuItem divider />
-                <MenuItem eventKey={2.6}>
-                  <i className="fa fa-life-ring"/>
-                  <FormattedMessage {...links.support} />
-                </MenuItem>
-                <MenuItem eventKey={2.7}>
-                  <i className="fa fa-bug"/>
-                  <FormattedMessage {...links.reportIssue} />
-                </MenuItem>
-              </NavDropdown>
+              {this.renderUserNavDropdown()}
             </Nav>
           </Navbar.Collapse>
         </Navbar>

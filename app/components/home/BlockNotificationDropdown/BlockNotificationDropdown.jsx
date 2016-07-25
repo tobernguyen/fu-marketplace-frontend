@@ -36,13 +36,13 @@ export default class BlockNotificationDropdown extends Component {
 
   renderNotificationBadge() {
     const { unreadCount } = this.props;
-    return (
-      <div>
-        {unreadCount > 0 && <span className="badge">
+    if (unreadCount > 0) {
+      return (
+        <span className="badge">
           {unreadCount}
-        </span>}
-      </div>
-    )
+        </span>
+      )
+    }
   }
 
   componentWillReceiveProps(nextProps) {
@@ -63,12 +63,13 @@ export default class BlockNotificationDropdown extends Component {
     }
   }
 
-
   render() {
     const { eventKey, markAsAllRead, hasMoreNotifications } = this.props;
     const title = <div>
-      <i className="fa fa-bell fa-lg"/>
-      {this.renderNotificationBadge()}
+      <div className="icon-notification">
+        <i className="fa fa-bell fa-lg"/>{this.renderNotificationBadge()}
+      </div>
+      Notifications
     </div>;
     return (
       <NavDropdown

@@ -1,21 +1,25 @@
 import React, { Component } from 'react';
 import { FormattedMessage, FormattedTime, FormattedNumber, FormattedRelative, injectIntl } from 'react-intl';
 import { messages } from 'app/components/home/BlockMyOrder/BlockMyOrder.i18n';
+import { Link } from 'react-router';
 import _ from 'lodash';
 import OrderStatus from 'app/shared/orderStatus';
 import LabelOrderStatus from 'app/components/home/LabelOrderStatus';
+import { Tooltip, OverlayTrigger} from 'react-bootstrap';
 
 class BlockMyOrderRow extends Component {
-  constructor(props) {
-    super(props);
-
-
-  }
-
   renderItemNameList(order) {
     let names = [];
     order.orderLines.map(orderLine => {
       names = _.concat(names, orderLine.item.name);
+    });
+    return _.join(names, ', ');
+  }
+
+  renderItemNameListWithQuantity(order) {
+    let names = [];
+    order.orderLines.map(orderLine => {
+      names = _.concat(names, `${orderLine.item.name}(${orderLine.quantity})`);
     });
     return _.join(names, ', ');
   }
@@ -40,14 +44,14 @@ class BlockMyOrderRow extends Component {
     switch (order.status) {
       case OrderStatus.NEW:
         output = (
-          <button type="button" className="btn order-status btn-cancel" onClick={() => this.props.openModal(order.id)}>
+          <button type="button" className="btn btn-warning order-status" onClick={() => this.props.openModal(order.id)}>
             <FormattedMessage {...messages.myOrder.button.abort} />
           </button>
         );
         break;
       case OrderStatus.REJECTED:
         output = (
-          <button type="button" className={`btn order-status status-${OrderStatus.REJECTED} seller-message`} onClick={() => this.props.openSellerMessageModal(order)}>
+          <button type="button" className="btn order-status btn-info seller-message" onClick={() => this.props.openSellerMessageModal(order)}>
             <i className="fa fa-info"></i>
           </button>
         );
@@ -59,20 +63,32 @@ class BlockMyOrderRow extends Component {
 
   render() {
     const { order } = this.props;
+    const tooltip = (
+      <Tooltip id="tooltip">
+        <div>
+          {this.renderItemNameListWithQuantity(order)}
+        </div>
+      </Tooltip>
+    );
     return (
       <tr>
         <td>{order.id}</td>
-        <td>{this.renderItemNameList(order)}</td>
+        <td>
+          <OverlayTrigger placement="top" overlay={tooltip}>
+          <div className="order-item-list">
+          {this.renderItemNameList(order)}
+          </div>
+          </OverlayTrigger>
+        </td>
+        <td><Link to={`/shops/${order.shopId}`}>{order.shopName}</Link></td>
         <td>{this.calculateTotalAmount(order)}₫</td>
-        <td>{order.shipAddress}</td>
         <td><FormattedRelative value={new Date(order.createdAt)}/></td>
-        <td>{this.renderFinishTime(order)}</td>
         <td><LabelOrderStatus status={order.status}/></td>
-        <td className="text-center">
-          {this.renderAction(order)}
+        <td>
           <button type="button" className="btn order-status btn-danger" onClick={() => this.props.openOpenTicketModal(order)}>
             <FormattedMessage {...messages.myOrder.button.report} />
           </button>
+          {this.renderAction(order)}
         </td>
       </tr>
     );

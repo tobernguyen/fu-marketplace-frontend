@@ -80,13 +80,12 @@ class BlockMyOrder extends Component {
         <thead>
           <tr>
             <th>#</th>
-            <th><FormattedMessage {...messages.myOrder.tableHead.item}/></th>
-            <th><FormattedMessage {...messages.myOrder.tableHead.total} /></th>
-            <th><FormattedMessage {...messages.myOrder.tableHead.shipAddress}/></th>
-            <th><FormattedMessage {...messages.myOrder.tableHead.time} /></th>
-            <th><FormattedMessage {...messages.myOrder.tableHead.finishedTime}/></th>
-            <th><FormattedMessage {...messages.myOrder.tableHead.status}/></th>
-            <th><FormattedMessage {...messages.myOrder.tableHead.action}/></th>
+            <th className="col-lg-2"><FormattedMessage {...messages.myOrder.tableHead.item}/></th>
+            <th className="col-lg-2"><FormattedMessage {...messages.myOrder.tableHead.shop}/></th>
+            <th className="col-lg-1"><FormattedMessage {...messages.myOrder.tableHead.total} /></th>
+            <th className="col-lg-2"><FormattedMessage {...messages.myOrder.tableHead.time} /></th>
+            <th className="col-lg-2"><FormattedMessage {...messages.myOrder.tableHead.status}/></th>
+            <th className="col-lg-2"><FormattedMessage {...messages.myOrder.tableHead.action}/></th>
           </tr>
         </thead>
         <tbody>

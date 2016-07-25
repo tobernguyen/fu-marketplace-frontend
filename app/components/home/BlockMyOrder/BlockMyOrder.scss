@@ -29,6 +29,13 @@
   .btn.seller-message {
     width: 30px;
   }
+
+  .order-item-list {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 200px;
+  }
 }
 
 .cancel-order-modal {
@@ -40,6 +47,7 @@
       background-color: #b52a2e;
     }
   }
+
 
 }
 

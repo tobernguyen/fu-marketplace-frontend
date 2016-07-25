@@ -163,6 +163,10 @@ export const messages = {
         id: 'orderList.tableHead.items',
         defaultMessage: 'Items'
       },
+      shop: {
+        id: 'orderList.tableHead.shop',
+        defaultMessage: 'Shop'
+      },
       total: {
         id: 'orderList.tableHead.amount',
         defaultMessage: 'Total Amount'

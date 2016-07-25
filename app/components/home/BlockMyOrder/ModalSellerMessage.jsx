@@ -21,7 +21,7 @@ const ModalSellerMessage = ({ showModal, closeModal, order }) => {
 
   }
   return (
-    <Modal className="cancel-order-modal" show={showModal} onHide={closeModal}>
+    <Modal show={showModal} onHide={closeModal}>
       <Modal.Header>
         <Modal.Title>{title}</Modal.Title>
       </Modal.Header>
@@ -29,7 +29,7 @@ const ModalSellerMessage = ({ showModal, closeModal, order }) => {
         {body}
       </Modal.Body>
       <Modal.Footer>
-        <button className="btn" onClick={closeModal}>
+        <button className="btn btn-info" onClick={closeModal}>
           <FormattedMessage {...messages.myOrder.sellerMessageModal.button.close}/>
         </button>
       </Modal.Footer>

@@ -90,7 +90,7 @@ export default {
   'cart.item.singular': 'item',
   'cart.item.plural': 'items',
   'orderList.tableHead.orderID': '#',
-  'orderList.tableHead.time': 'Created At',
+  'orderList.tableHead.time': 'Ordered at',
   'orderList.tableHead.finishedTime': 'Finish At',
   'orderList.tableHead.items': 'Items',
   'orderList.tableHead.amount': 'Value',

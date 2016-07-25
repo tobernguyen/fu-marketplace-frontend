@@ -459,5 +459,6 @@ export default {
   'requestList.noRequest': 'Không có yêu cầu',
   'promotionList.noPromotion': 'Không có chiến dịch quảng bá',
   'ticketList.tableFooter.pageSizeUnit': 'báo cáo',
-  'ticketList.noTicket': 'Không có báo cáo sai phạm'
+  'ticketList.noTicket': 'Không có báo cáo sai phạm',
+  'admin.async.error.oldPasswordNotCorrect': 'Mật khẩu cũ không chính xác'
 };

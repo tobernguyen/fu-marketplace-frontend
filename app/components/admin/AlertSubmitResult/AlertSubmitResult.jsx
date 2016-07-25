@@ -19,6 +19,7 @@ const AlertSubmitResult = ({ result }) => {
       alertType = AlertType.SUCCESS;
       break;
     case 400:
+    case 401:
     case 404:
     case 500:
       alertType = AlertType.FAILURE;
@@ -36,6 +37,9 @@ const AlertSubmitResult = ({ result }) => {
       break;
     case AsyncResultCode.REJECT_REQUEST_SUCCESS:
       alertMessage = <FormattedMessage {...messages.REJECT_REQUEST_SUCCESS}/>
+      break;
+    case AsyncResultCode.OLD_PASSWORD_NOT_CORRECT:
+      alertMessage = <FormattedMessage {...messages.OLD_PASSWORD_NOT_CORRECT}/>
       break;
     default:
       alertMessage = <FormattedMessage {...messages.UNKNOWN_ERROR}/>

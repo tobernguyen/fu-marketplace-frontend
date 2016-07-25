@@ -14,5 +14,9 @@ export const messages = {
   NOT_A_PENDING_REQUEST: {
     id: 'admin.async.error.notAPendingRequest',
     defaultMessage: 'This request is already responsed'
+  },
+  OLD_PASSWORD_NOT_CORRECT: {
+    id: 'admin.async.error.oldPasswordNotCorrect',
+    defaultMessage: 'Current password is not correct'
   }
 }

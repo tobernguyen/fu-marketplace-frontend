@@ -69,7 +69,7 @@ export default class BlockNotificationDropdown extends Component {
       <div className="icon-notification">
         <i className="fa fa-bell fa-lg"/>{this.renderNotificationBadge()}
       </div>
-      Notifications
+      <FormattedMessage {...messages.notificationTitle} />
     </div>;
     return (
       <NavDropdown

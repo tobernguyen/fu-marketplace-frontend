@@ -38,7 +38,10 @@ class NavigationBar extends Component {
         }
         case NOTIFICATION_TYPE.OPEN_SHOP_REQUEST_CHANGE:
         {
-          this.props.router.push(`/dashboard/shops/${data.id}`);
+          const SHOP_OPENING_REQUEST_IS_ACCEPTED = 2;
+          if (data.status === SHOP_OPENING_REQUEST_IS_ACCEPTED) {
+            this.props.router.push(`/dashboard/shops/${data.id}`);
+          }
           break;
         }
         case NOTIFICATION_TYPE.USER_PLACE_ORDER:
@@ -57,7 +60,7 @@ class NavigationBar extends Component {
         }
       }
 
-      if (!read) {
+      if (read === false) {
         this.props.markNotificationAsRead(id);
       }
     };

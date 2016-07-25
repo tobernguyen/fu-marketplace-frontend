@@ -81,6 +81,10 @@
               font-style: normal;
             }
           }
+
+          &:focus, &:hover {
+            text-decoration: none;
+          }
         }
       }
 

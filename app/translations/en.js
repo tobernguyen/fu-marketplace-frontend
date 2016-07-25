@@ -189,5 +189,6 @@ export default {
   'admin.async.error.unknown': 'An error has occurred, please try again later',
   'admin.async.success.acceptRequest': 'Accept request successfully',
   'admin.async.success.rejectRequest': 'Reject request successfully',
-  'requestList.noRequest': 'There is not any request'
+  'requestList.noRequest': 'There is not any request',
+  'search.form.placeholder': 'Search'
 };

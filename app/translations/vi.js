@@ -439,6 +439,7 @@ export default {
   'item.buyNow': 'Mua ngay',
   'item.addToCart': 'Thêm vào giỏ hàng',
   'item.removeFromCart': 'Xoá khỏi giỏ hàng',
+  'search.form.placeholder': 'Tìm kiếm',
   'formEditShopPromotionCampaign.sectionName': 'Sửa đổi thông tin chiến dịch quảng bá',
   'formEditShopPromotionCampaign.sectionDescription': 'Thay đổi ngày bắt đầu, ngày kết thúc, trạng thái hoạt động của chiến dịch quảng bá',
   'formEditShopPromotionCampaign.button.saveChanges': 'Lưu thay đổi',

@@ -35,18 +35,26 @@ export default class BlockSellingItemList extends Component {
 
   componentWillReceiveProps(nextProps) {
     const { items } = nextProps;
-    if (items && !_.isEmpty(items)) {
-      const { selectedCategory } = this.state;
-      const firstKey = _.keys(items)[0];
-      this.setState({
-        groupItems: items,
-        currentItems: selectedCategory === -1 ? items[firstKey] : items[selectedCategory]
-      });
-
-      if (selectedCategory === -1) {
+    if (items) {
+      if (_.isEmpty(items)) {
         this.setState({
-          selectedCategory: firstKey
-        })
+          groupItems: {},
+          currentItems: [],
+          selectedCategory: -1
+        });
+      } else {
+        const { selectedCategory } = this.state;
+        const firstKey = _.keys(items)[0];
+        this.setState({
+          groupItems: items,
+          currentItems: selectedCategory === -1 ? items[firstKey] : items[selectedCategory]
+        });
+
+        if (selectedCategory === -1) {
+          this.setState({
+            selectedCategory: firstKey
+          })
+        }
       }
     }
   }

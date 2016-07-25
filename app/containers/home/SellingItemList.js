@@ -1,18 +1,12 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import BlockSellingItemList from 'app/components/home/BlockSellingItemList';
-import { getSellerShopItems } from 'app/actions/shop';
 import { addItemToCart } from 'app/actions/user';
 import { getHashCategories } from 'app/selectors';
 
 class SellingItemList extends Component {
   constructor(props) {
     super(props);
-
-    const { shopID, sellerMode } = this.props;
-    if (sellerMode) {
-      this.props.getSellerShopItems(shopID);
-    }
 
     this.handleAddToCart = (item) => {
       this.props.addItemToCart(item);
@@ -54,11 +48,9 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 SellingItemList.propTypes = {
-  sellerMode: PropTypes.bool.isRequired,
-  shopID: PropTypes.number.isRequired
+  sellerMode: PropTypes.bool.isRequired
 };
 
 export default connect(mapStateToProps, {
-  getSellerShopItems,
   addItemToCart
 })(SellingItemList)

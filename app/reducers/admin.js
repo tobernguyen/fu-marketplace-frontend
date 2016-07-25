@@ -36,11 +36,12 @@ const initialState = {
   },
   changePasswordFormStatus: {
     isSubmitting: false,
-    response: {}
+    submitResult: {}
   }
 };
 
 export const admin = (state = initialState, action) => {
+  console.log(action);
   const { type, response } = action;
   switch (type) {
     case AdminActionTypes.ADMIN_GET_USERS_REQUEST:
@@ -429,7 +430,7 @@ export const admin = (state = initialState, action) => {
       return _.merge({}, state, {
         changePasswordFormStatus: {
           isSubmitting: false,
-          response: action.error || ''
+          submitResult: action.error
         }
       });
     case AdminActionTypes.ADMIN_CREATE_SHOP_PROMOTION_CAMPAIGN_REQUEST:

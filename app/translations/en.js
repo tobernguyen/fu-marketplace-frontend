@@ -193,5 +193,6 @@ export default {
   'search.form.placeholder': 'Search',
   'promotionList.noPromotion': 'There is no promotion campaign',
   'ticketList.tableFooter.pageSizeUnit': 'tickets',
-  'ticketList.noTicket': 'There is no report ticket'
+  'ticketList.noTicket': 'There is no report ticket',
+  'admin.async.error.oldPasswordNotCorrect': 'Current password is incorrect'
 };

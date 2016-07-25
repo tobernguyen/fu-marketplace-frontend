@@ -34,5 +34,6 @@ export default {
   EDIT_PROMOTION_SUCCESS: 'EDIT_PROMOTION_SUCCESS',
   EDIT_PROMOTION_FAIL: 'EDIT_PROMOTION_FAIL',
   ACCEPT_REQUEST_SUCCESS: 'success.admin_accept_request',
-  REJECT_REQUEST_SUCCESS: 'success.admin_reject_request'
+  REJECT_REQUEST_SUCCESS: 'success.admin_reject_request',
+  OLD_PASSWORD_NOT_CORRECT: 'error.authentication.old_password_is_not_correct'
 }

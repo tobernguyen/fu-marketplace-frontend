@@ -5,13 +5,12 @@ import {
   ControlLabel,
   FormControl,
   Col,
-  Alert,
   HelpBlock
 } from 'react-bootstrap';
 import { reduxForm } from 'redux-form';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import { messages } from 'app/components/admin/FormChangePassword/FormChangePassword.i18n';
-
+import AlertSubmitResult from 'app/components/admin/AlertSubmitResult';
 
 const validate = (values) => {
   let errors = {};
@@ -23,8 +22,11 @@ const validate = (values) => {
   if(!values.newPassword || values.newPassword.trim() === '') {
     errors.newPassword = 'New password cannot be blank';
     hasErrors = true;
-  } else {
+  }
 
+  if(values.newPassword && values.newPassword.length < 8) {
+    errors.newPassword = 'Password must be longer than 8 character';
+    hasErrors = true;
   }
 
   if(!values.repeatPassword || values.repeatPassword.trim() === '') {
@@ -42,7 +44,7 @@ const validate = (values) => {
 
 class FormChangePassword extends Component {
   render() {
-    const { fields: { oldPassword, newPassword, repeatPassword }, handleSubmit, submitting, formStatus, intl: { formatMessage }} = this.props;
+    const { fields: { oldPassword, newPassword, repeatPassword }, handleSubmit, formStatus, intl: { formatMessage }} = this.props;
     return (
       <div className="row">
         <Col lg={3}>
@@ -89,6 +91,10 @@ class FormChangePassword extends Component {
               {...repeatPassword} />
               <HelpBlock>{repeatPassword.touched ? repeatPassword.error: '' }</HelpBlock>
             </FormGroup>
+            {
+              formStatus.ubmitResult !== '' &&
+              <AlertSubmitResult result={formStatus.submitResult}/>
+            }
             <div className ="form-actions">
               <Button type="submit" bsStyle="warning" disabled={formStatus.isSubmitting}>
                 <FormattedMessage {...messages.formChangePassword.button.saveChanges}/>

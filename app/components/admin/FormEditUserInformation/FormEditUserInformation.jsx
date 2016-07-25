@@ -5,44 +5,70 @@ import {
   ControlLabel,
   HelpBlock,
   Button,
-  Alert,
   Col
 } from 'react-bootstrap';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import { messages } from 'app/components/admin/FormEditUserInformation/FormEditUserInformation.i18n';
 import { reduxForm } from 'redux-form';
-import AsyncResultCode from 'app/shared/asyncResultCodes';
-
+import AlertSubmitResult from 'app/components/admin/AlertSubmitResult';
+import LoadingSpinner from 'app/components/admin/LoadingSpinner';
+import _ from 'lodash';
 
 const validate = (values) => {
   let errors = {};
   let hasErrors = false;
-  const validIdentityNumberLength = [0, 9 , 12];
+  const validIdentityNumberLength = [9 , 12];
   if(!values.email || values.email.trim() === '') {
-    errors.email = 'common.form.validation.email.blank';
+    errors.email = {
+      id: 'admin.form.userInformation.email.blank',
+      defaultMessage: 'Email cannot be blank'
+    };
     hasErrors = true;
   }
   if(!values.fullName || values.fullName.trim() === '') {
-    errors.fullName = 'common.form.validation.name.blank';
+    errors.fullName = {
+      id: 'admin.form.userInformation.fullName.blank',
+      defaultMessage: 'Full name cannot be blank'
+    };
+    hasErrors = true;
+  }
+
+  if(!values.identityNumber || values.identityNumber.trim() === '') {
+    errors.identityNumber = {
+      id: 'admin.form.userInformation.identityNumber.blank',
+      defaultMessage: 'Identity number cannot be blank'
+    };
     hasErrors = true;
   }
 
   if(values.identityNumber && isNaN(Number(values.identityNumber))) {
-    errors.identityNumber = 'common.form.validation.identityNumber.invalid';
+    errors.identityNumber = {
+      id: 'admin.form.userInformation.identityNumber.isNaN',
+      defaultMessage: 'Identity number must contain only number'
+    };
     hasErrors = true;
   }
-  if(values.identityNumber && validIdentityNumberLength.indexOf(values.identityNumber.length) < 0) {
-    errors.identityNumber = 'common.form.validation.identityNumber.len';
+  if(values.identityNumber && !_.includes(validIdentityNumberLength, values.identityNumber.length)) {
+    errors.identityNumber = {
+      id: 'admin.form.userInformation.identityNumber.length',
+      defaultMessage: 'Identity number must contains 9 or 12 digits'
+    };
+    hasErrors = true;
+  }
+
+  if(!values.phone || values.phone.trim() === '') {
+    errors.phone = {
+      id: 'admin.form.userInformation.phone.blank',
+      defaultMessage: 'Phone number cannot be blank'
+    };
     hasErrors = true;
   }
 
   if(values.phone && isNaN(Number(values.phone))) {
-    errors.phone = 'common.form.validation.phone.number';
-    hasErrors = true;
-  }
-
-  if(values.room && !values.room.match(/([A-F]{1})([0-9]{3})/gi)) {
-    errors.room = 'common.form.validation.room';
+    errors.phone = {
+      id: 'admin.form.userInformation.phone.isNaN',
+      defaultMessage: 'Phone number must contains only number'
+    };
     hasErrors = true;
   }
 
@@ -63,9 +89,13 @@ class FormEditUserInformation extends Component {
       handleSubmit,
       submitting,
       dirty,
-      submitResult,
+      isSubmitting,
+      submitResults,
       intl: { formatMessage}
     } = this.props;
+    if(isSubmitting) {
+      return <LoadingSpinner />;
+    }
     return (
       <div className="row">
         <Col lg={3}>
@@ -89,7 +119,9 @@ class FormEditUserInformation extends Component {
                 type="email"
                 placeholder={formatMessage(messages.formEditUserInformation.fields.email)}
                 {...email} />
-              <HelpBlock>{email.touched ? email.error: '' }</HelpBlock>
+              <HelpBlock>
+                {email.touched && email.error ? <FormattedMessage {...email.error}/>: '' }
+              </HelpBlock>
             </FormGroup>
             <FormGroup
               className={`${fullName.touched && fullName.invalid ? 'has-error' : ''}`}>
@@ -100,7 +132,9 @@ class FormEditUserInformation extends Component {
                 type="text"
                 placeholder={formatMessage(messages.formEditUserInformation.fields.fullName)}
                 {...fullName} />
-              <HelpBlock>{fullName.touched ? fullName.error: '' }</HelpBlock>
+                <HelpBlock>
+                  {fullName.touched && fullName.error ? <FormattedMessage {...fullName.error}/>: '' }
+                </HelpBlock>
             </FormGroup>
             <FormGroup
               className={`${gender.touched && gender.invalid ? 'has-error' : ''}`}>
@@ -127,7 +161,9 @@ class FormEditUserInformation extends Component {
                 type="text"
                 placeholder={formatMessage(messages.formEditUserInformation.fields.identityNumber)}
                 {...identityNumber} />
-              <HelpBlock>{identityNumber.touched ? identityNumber.error: '' }</HelpBlock>
+                <HelpBlock>
+                  {identityNumber.touched && identityNumber.error ? <FormattedMessage {...identityNumber.error}/>: '' }
+                </HelpBlock>
             </FormGroup>
             <FormGroup
               className={`${phone.touched && phone.invalid ? 'has-error' : ''}`}>
@@ -138,7 +174,9 @@ class FormEditUserInformation extends Component {
                 type="text"
                 placeholder={formatMessage(messages.formEditUserInformation.fields.phone)}
                 {...phone} />
-              <HelpBlock>{phone.touched ? phone.error: '' }</HelpBlock>
+                <HelpBlock>
+                  {phone.touched && phone.error ? <FormattedMessage {...phone.error}/>: '' }
+                </HelpBlock>
             </FormGroup>
             <FormGroup
               className={`${room.touched && room.invalid ? 'has-error' : ''}`}>
@@ -149,20 +187,14 @@ class FormEditUserInformation extends Component {
                 type="text"
                 placeholder={formatMessage(messages.formEditUserInformation.fields.room)}
                 {...room} />
-              <HelpBlock>{room.touched ? room.error: '' }</HelpBlock>
+                <HelpBlock>
+                  {room.touched && room.error ? <FormattedMessage {...room.error}/>: '' }
+                </HelpBlock>
             </FormGroup>
             <div className="form-actions">
               {
-                submitResult === AsyncResultCode.UPDATE_USER_INFORMATION_SUCCESS &&
-                <Alert bsStyle="success">
-                  <FormattedMessage {...messages.formEditUserInformation.submitResult.success}/>
-                </Alert>
-              }
-              {
-                submitResult === AsyncResultCode.UPDATE_USER_INFORMATION_FAIL &&
-                <Alert bsStyle="danger">
-                  <FormattedMessage {...messages.formEditUserInformation.submitResult.fail}/>
-                </Alert>
+                submitResults !== '' &&
+                <AlertSubmitResult result={submitResults}/>
               }
               <Button type="submit" bsStyle="success" disabled={submitting || !dirty }>
                 {formatMessage(messages.formEditUserInformation.button.saveChanges)}

@@ -5,34 +5,49 @@ import {
   ControlLabel,
   HelpBlock,
   Button,
-  Alert,
   Col
 } from 'react-bootstrap';
 import { reduxForm } from 'redux-form';
 import { Link } from 'react-router';
-import AsyncResultCode from 'app/shared/asyncResultCodes';
+import AlertSubmitResult from 'app/components/admin/AlertSubmitResult';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import { messages } from 'app/components/admin/FormEditShopInformation/FormEditShopInformation.i18n';
+import LoadingSpinner from 'app/components/admin/LoadingSpinner';
 
 const validate = (values) => {
   let errors = {};
   let hasErrors = false;
 
   if(!values.name || values.name.trim() === '') {
-    errors.name = 'Name cannot be blank';
+    errors.name = {
+      id: 'admin.form.editShopInformation.validation.name.blank',
+      defaultMessage: 'Shop name cannot be blank'
+    };
     hasErrors = true;
   }
+
+  if(!values.address || values.address.trim() === '') {
+    errors.address = {
+      id: 'admin.form.editShopInformation.validation.address.blank',
+      defaultMessage: 'Shop address cannot be blank'
+    };
+    hasErrors = true;
+  }
+
   return hasErrors && errors;
 }
 
 class FormEditShopInformation extends Component {
   render() {
-    const { fields: { name, description, address }, handleSubmit, submitting, dirty, submitResult , seller, intl: { formatMessage }} = this.props;
+    const { fields: { name, description, address }, handleSubmit, isSubmitting, dirty, submitResult , seller, intl: { formatMessage }} = this.props;
     let sellerName = '';
     let sellerID = 0;
     if(seller) {
       sellerID = seller.id;
       sellerName = seller.fullName;
+    }
+    if(isSubmitting) {
+      return <LoadingSpinner />;
     }
     return (
       <div className="row">
@@ -67,7 +82,7 @@ class FormEditShopInformation extends Component {
                 type="text"
                 placeholder={formatMessage(messages.formEditShopInformation.contactInformation.fields.name)}
                 {...name} />
-              <HelpBlock>{name.touched ? name.error: '' }</HelpBlock>
+              <HelpBlock>{name.touched && name.error? <FormattedMessage {...name.error}/> : '' }</HelpBlock>
             </FormGroup>
             <FormGroup
               className={`${description.touched && description.invalid ? 'has-error' : ''}`}>
@@ -89,22 +104,14 @@ class FormEditShopInformation extends Component {
                 type="text"
                 placeholder={formatMessage(messages.formEditShopInformation.contactInformation.fields.address)}
                 {...address} />
-              <HelpBlock>{address.touched ? address.error: '' }</HelpBlock>
+              <HelpBlock>{address.touched && address.error ? <FormattedMessage {...address.error}/>: '' }</HelpBlock>
             </FormGroup>
             <div className ="form-actions">
               {
-                submitResult === AsyncResultCode.UPDATE_SHOP_INFORMATION_SUCCESS &&
-                <Alert bsStyle="success">
-                {formatMessage(messages.formEditShopInformation.contactInformation.submitResult.success)}
-                </Alert>
+                submitResult !== '' &&
+                <AlertSubmitResult result={submitResult}/>
               }
-              {
-                submitResult === AsyncResultCode.UPDATE_SHOP_INFORMATION_FAIL &&
-                <Alert bsStyle="danger">
-                {formatMessage(messages.formEditShopInformation.contactInformation.submitResult.fail)}
-                </Alert>
-              }
-              <Button type="submit" bsStyle="success" disabled={submitting || !dirty}>
+              <Button type="submit" bsStyle="success" disabled={isSubmitting || !dirty}>
                 <FormattedMessage {...messages.formEditShopInformation.contactInformation.button.saveChanges} />
               </Button>
             </div>

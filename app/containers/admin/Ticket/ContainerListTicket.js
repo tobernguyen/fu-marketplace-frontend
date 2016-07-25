@@ -64,8 +64,14 @@ class ComponentListTicket extends Component {
 }
 
 ComponentListTicket.path = '/ticket';
-ComponentListTicket.title = 'Ticket Management';
-ComponentListTicket.description = 'Ticket Management';
+ComponentListTicket.title = {
+  id: 'breadCrumb.ticketManagement.title',
+  defaultMessage: 'Ticket management'
+};
+ComponentListTicket.description = {
+  id: 'breadCrumb.ticketManagement.description',
+  defaultMessage: 'List of ticket'
+};
 ComponentListTicket.faIcon = 'fa-ticket';
 
 const mapStateToProps = (state) => {

@@ -69,8 +69,14 @@ const mapStateToProps = (state) => ({
 });
 
 UserListContainer.path = '/users';
-UserListContainer.title = 'User management';
-UserListContainer.description = 'User management';
+UserListContainer.title = {
+  id: 'breadCrumb.userManagement.title',
+  defaultMessage: 'User management'
+};
+UserListContainer.description = {
+  id: 'breadCrumb.userManagement.description',
+  defaultMessage: ' '
+};
 UserListContainer.faIcon = 'fa-users';
 
 export default connect(mapStateToProps, {

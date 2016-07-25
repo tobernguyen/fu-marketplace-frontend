@@ -17,8 +17,14 @@ class Dashboard extends Component {
 
 
 Dashboard.path = '/dashboard';
-Dashboard.title = 'Dashboard';
-Dashboard.description = 'Dashboard';
+Dashboard.title = {
+  id: 'breadCrumb.dashBoard.title',
+  defaultMessage: 'Dashboard'
+};
+Dashboard.description = {
+  id: 'breadCrumb.dashBoard.description',
+  defaultMessage: 'Place where all information is gathered'
+};
 Dashboard.faIcon = 'fa-th-large';
 
 

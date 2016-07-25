@@ -79,7 +79,7 @@ class ContainerEditShop extends Component {
   }
   render() {
     const { shopManagement } = this.props;
-    if(shopManagement.isFetching || shopManagement.isSubmitting) {
+    if(shopManagement.isFetching) {
       return <div className="text-center container-fluid">
           <LoadingSpinner />
         </div>;
@@ -88,8 +88,8 @@ class ContainerEditShop extends Component {
        <div className="container-fluid">
         <FormEditShopInformation
           onSubmit={this.handleSubmitShopInformation}
-          submitResult={shopManagement.submitResult}
-          submitting={shopManagement.isSubmitting}
+          submitResult={shopManagement.submitResultShopInformation}
+          isSubmitting={shopManagement.isSubmittingShopInformation}
           seller={shopManagement.selectedShop.seller}
         />
         <hr />
@@ -97,8 +97,8 @@ class ContainerEditShop extends Component {
           shop={shopManagement.selectedShop}
           submitOpeningStatus={this.handleSubmitShopOpeningStatus}
           submitShipPlaces={this.handleSubmitShipPlaces}
-          submitResult={shopManagement.submitResult}
-          isSubmitting={shopManagement.isSubmitting}
+          submitResult={shopManagement.submitResultShopShipPlace}
+          isSubmitting={shopManagement.isSubmittingShopShipPlace}
           availableShipPlaces = {shopManagement.availableShipPlaces}
         />
         <hr />
@@ -106,21 +106,22 @@ class ContainerEditShop extends Component {
           shop={shopManagement.selectedShop}
           uploadAvatar={this.uploadAvatar}
           uploadCover={this.uploadCover}
-          submitResult={shopManagement.submitResult}
-          isSubmitting={shopManagement.isSubmitting}
+          submitResult={shopManagement.submitResultAvatarAndCover}
+          isSubmitting={shopManagement.isSubmittingAvatarAndCover}
         />
         <hr />
         <FormShopPromotionCampaign
           createShopPromotionCampaign = {this.handleSubmitShopPromotionCampaign}
-          submitResult={shopManagement.submitResult}
+          submitResult={shopManagement.submitResultShopPromotion}
+          isSubmitting={shopManagement.isSubmittingShopPromotion}
         />
         <hr />
         <FormEditShopBanStatus
           shop={shopManagement.selectedShop}
           adminBanShop={this.banShop}
           adminUnbanShop={this.unbanShop}
-          submitResult={shopManagement.submitResult}
-          isSubmitting={shopManagement.isSubmitting}
+          submitResult={shopManagement.submitResultShopBanStatus}
+          isSubmitting={shopManagement.isSubmittingShopBanStatus}
         />
        </div>
       );
@@ -129,8 +130,14 @@ class ContainerEditShop extends Component {
 }
 
 ContainerEditShop.path = ':shopId/edit';
-ContainerEditShop.title = 'Shop edit';
-ContainerEditShop.description = 'Edit shop information/Ban shop';
+ContainerEditShop.title = {
+  id: 'breadCrumb.editShop.title',
+  defaultMessage: 'Edit shop'
+};
+ContainerEditShop.description = {
+  id: 'breadCrumb.editShop.description',
+  defaultMessage: 'Edit shop information, operational information, promotion campaign, ban status'
+};
 ContainerEditShop.faIcon = 'fa-shopping-bag';
 
 const mapStateToProps = (state) => ({

@@ -1,6 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import FormChangePassword from 'app/components/admin/FormChangePassword';
+import FormChangeLanguage from 'app/components/admin/FormChangeLanguage';
 import { adminChangePassword } from 'app/actions/admin';
+import { changeLanguage } from 'app/actions';
 import { connect } from 'react-redux';
 
 class ChangePassword extends Component {
@@ -8,6 +10,12 @@ class ChangePassword extends Component {
     super(props);
 
     this.handleChangePassword = this.handleChangePassword.bind(this);
+
+    this.changeLanguage = (language) => {
+      this.props.changeLanguage(language);
+
+      window.location.reload();
+    }
   }
 
   handleChangePassword(formData) {
@@ -26,26 +34,32 @@ class ChangePassword extends Component {
           onSubmit={this.handleChangePassword}
           formStatus={this.props.admin.changePasswordFormStatus}
           />
+        <hr />
+        <FormChangeLanguage
+          adminChangeLanguage={this.changeLanguage}
+          />
       </div>
     );
   }
 }
 
 
-ChangePassword.path = '/changepwd';
-ChangePassword.title = 'Change Password';
-ChangePassword.description = 'Change password';
-ChangePassword.faIcon = 'fa-key';
-
-ChangePassword.propTypes = {
-  adminChangePassword: PropTypes.func.isRequired,
-  formStatus: PropTypes.object
+ChangePassword.path = '/settings';
+ChangePassword.title = {
+  id: 'breadCrumb.changePassword.title',
+  defaultMessage: 'Setting'
 };
+ChangePassword.description = {
+  id: 'breadCrumb.changePassword.description',
+  defaultMessage: 'Change settings of admin site'
+};
+ChangePassword.faIcon = 'fa-cogs';
 
 const mapStateToProps = (state) => ({
   admin: state.admin
 });
 
 export default connect(mapStateToProps, {
-  adminChangePassword
+  adminChangePassword,
+  changeLanguage
 })(ChangePassword);

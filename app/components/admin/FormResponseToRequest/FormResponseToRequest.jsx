@@ -138,7 +138,7 @@ class FormResponseToRequest extends React.Component {
 
           <div className="form-actions">
             {submitResult !== '' &&
-              <AlertSubmitResult result={submitResult}/>
+              <AlertSubmitResult result={submitResult} />
             }
             <Button
               bsStyle="warning"

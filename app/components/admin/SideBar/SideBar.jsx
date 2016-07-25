@@ -93,8 +93,8 @@ class SideBar extends Component {
               </Link>
             </li>
             <li>
-              <Link to="/admin/changepwd" activeClassName="active">
-                <i className="fa fa-key" />
+              <Link to="/admin/setting" activeClassName="active">
+                <i className="fa fa-cogs" />
                 <span>
                   <FormattedMessage {...messages.sideBar.changePassword} />
                 </span>

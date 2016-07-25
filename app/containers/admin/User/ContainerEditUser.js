@@ -31,20 +31,24 @@ class ContainerEditUser extends React.Component {
     } else {
       return (
         <div className="container-fluid">
-          <FormEditUserInformation adminUpdateUserInformation={(user) => adminUpdateUserInformation(user)}/>
+          <FormEditUserInformation
+            adminUpdateUserInformation={(user) => adminUpdateUserInformation(user)}
+            isSubmitting={userManagement.isSubmittingUserInformation}
+            submitResults={userManagement.submitResultUserInformation}
+            />
           <hr />
           <FormEditUserRole
             user={userManagement.selectedUser}
             adminUpdateUserRole={adminUpdateUserRole}
-            submitResult={userManagement.submitResult}
-            isSubmitting={userManagement.isSubmitting}/>
+            submitResult={userManagement.submitResultUserRole}
+            isSubmitting={userManagement.isSubmittingUserRole}/>
           <hr />
           <FormEditUserBanStatus
             user={userManagement.selectedUser}
             adminUnbanUser={adminUnbanUser}
             adminBanUser={adminBanUser}
-            submitResult={userManagement.submitResult}
-            isSubmitting={userManagement.isSubmitting}/>
+            submitResult={userManagement.submitResultBanStatus}
+            isSubmitting={userManagement.isSubmittingBanStatus}/>
         </div>
       );
     }
@@ -52,8 +56,14 @@ class ContainerEditUser extends React.Component {
 }
 
 ContainerEditUser.path = ':userId/edit';
-ContainerEditUser.title = 'Edit user';
-ContainerEditUser.description = 'Edit user information/Assign role/Ban and release user';
+ContainerEditUser.title = {
+  id: 'breadCrumb.editUser.title',
+  defaultMessage: 'Edit user'
+};
+ContainerEditUser.description = {
+  id: 'breadCrumb.editUser.description',
+  defaultMessage: 'Edit user information, role, and ban/release user'
+};
 ContainerEditUser.faIcon = 'fa-user';
 
 const mapStateToProps = (state) => ({

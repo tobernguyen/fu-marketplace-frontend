@@ -26,7 +26,7 @@ export const messages = {
     },
     changePassword: {
       id: 'sideBar.changePassword',
-      defaultMessage: 'Change password'
+      defaultMessage: 'Setting'
     }
   }
 };

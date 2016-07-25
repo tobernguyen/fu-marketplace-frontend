@@ -17,6 +17,7 @@ export default {
   UNBAN_SHOP_FAIL: 'UNBAN_SHOP_FAIL',
   UPDATE_SHOP_AVATAR_SUCCESS: 'UPDATE_SHOP_AVATAR_SUCCESS',
   UPDATE_SHOP_AVATAR_FAIL: 'UPDATE_SHOP_AVATAR_FAIL',
+  UPDATE_SHOP_COVER_SUCCESS: 'UPDATE_SHOP_COVER_SUCCESS',
   FILE_TOO_BIG: 'error.upload.file_too_big',
   NOT_A_PENDING_REQUEST: 'error.params.not_a_pending_request',
   PLACE_ORDER_SUCCESS: 'PLACE_ORDER_SUCCESS',
@@ -35,5 +36,6 @@ export default {
   EDIT_PROMOTION_FAIL: 'EDIT_PROMOTION_FAIL',
   ACCEPT_REQUEST_SUCCESS: 'success.admin_accept_request',
   REJECT_REQUEST_SUCCESS: 'success.admin_reject_request',
-  OLD_PASSWORD_NOT_CORRECT: 'error.authentication.old_password_is_not_correct'
+  OLD_PASSWORD_NOT_CORRECT: 'error.authentication.old_password_is_not_correct',
+  UNKNOWN_ERROR: 'UNKNOWN_ERROR'
 }

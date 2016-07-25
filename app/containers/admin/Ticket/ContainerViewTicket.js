@@ -20,7 +20,7 @@ class ContainerViewTicket extends Component {
   }
   render() {
     const { ticket, adminGetUser, adminGetShop, adminInvestigateTicket, adminCloseTicket } = this.props;
-    if(ticket.isFetching || ticket.isSubmitting) {
+    if(ticket.isFetching) {
       return <div className="text-center container-fluid">
           <LoadingSpinner />
         </div>;
@@ -33,11 +33,23 @@ class ContainerViewTicket extends Component {
           adminGetShop={adminGetShop}
           adminInvestigateTicket={adminInvestigateTicket}
           adminCloseTicket={adminCloseTicket}
+          isSubmitting={ticket.isSubmitting}
         />
       </div>
     )
   }
 }
+
+ContainerViewTicket.path = '/ticket';
+ContainerViewTicket.title = {
+  id: 'breadCrumb.viewTicket.title',
+  defaultMessage: 'Response to ticket'
+};
+ContainerViewTicket.description = {
+  id: 'breadCrumb.viewTicket.description',
+  defaultMessage: 'Change status of ticket, with message which will be sent to user'
+};
+ContainerViewTicket.faIcon = 'fa-ticket';
 
 const mapStateToProps = (state) => {
   return {

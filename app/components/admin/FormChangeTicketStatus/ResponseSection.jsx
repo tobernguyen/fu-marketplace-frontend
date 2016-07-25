@@ -3,6 +3,8 @@ import { FormattedMessage, injectIntl } from 'react-intl';
 import { messages } from 'app/components/admin/FormChangeTicketStatus/FormChangeTicketStatus.i18n';
 import TicketStatus from 'app/shared/ticketStatus';
 import LabelTicketStatus from 'app/components/admin/LabelTicketStatus'
+import LoadingSpinner from 'app/components/admin/LoadingSpinner';
+
 class ResponseSection extends Component {
   constructor(props) {
     super(props);
@@ -119,8 +121,11 @@ class ResponseSection extends Component {
     return output;
   }
   render() {
-    const { ticket: { selectedTicket }, intl: { formatMessage } } = this.props;
+    const { ticket: { selectedTicket }, intl: { formatMessage }, isSubmitting } = this.props;
     const { newTicketStatus, adminMessage, dirty } = this.state;
+    if(isSubmitting) {
+      return <LoadingSpinner />;
+    }
     return (
       <div className="row">
         <div className="col-lg-3">

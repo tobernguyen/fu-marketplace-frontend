@@ -58,8 +58,14 @@ const mapStateToProps = (state) => ({
 });
 
 ContainerListShop.path = '/shops';
-ContainerListShop.title = 'Shop management';
-ContainerListShop.description = 'Shop management';
+ContainerListShop.title = {
+  id: 'breadCrumb.shopManagement.title',
+  defaultMessage: 'Shop management'
+};
+ContainerListShop.description = {
+  id: 'breadCrumb.shopManagement.description',
+  defaultMessage: 'List of shops'
+};
 ContainerListShop.faIcon = 'fa-shopping-bag';
 
 

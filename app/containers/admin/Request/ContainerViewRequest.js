@@ -19,7 +19,7 @@ class ContainerViewRequest extends Component {
 
   render() {
     const { params, requestManagement, adminAcceptRequest, adminRejectRequest} = this.props;
-    if(requestManagement.isFetching || requestManagement.isSubmitting) {
+    if(requestManagement.isFetching) {
       return <div className="text-center container-fluid">
           <LoadingSpinner />
         </div>;
@@ -41,8 +41,14 @@ class ContainerViewRequest extends Component {
 }
 
 ContainerViewRequest.path = ':requestId/view';
-ContainerViewRequest.title = 'View request';
-ContainerViewRequest.description = 'View and response to request';
+ContainerViewRequest.title = {
+  id: 'breadCrumb.viewRequest.title',
+  defaultMessage: 'Response to request'
+};
+ContainerViewRequest.description = {
+  id: 'breadCrumb.viewRequest.description',
+  defaultMessage: 'Reponse to user request'
+};
 ContainerViewRequest.faIcon = 'fa-mail-reply';
 
 const mapStateToProps = (state) => ({

@@ -3,21 +3,37 @@ import * as CommonActionTypes from '../actions/common';
 import AsyncResultCode from 'app/shared/asyncResultCodes';
 import _ from 'lodash';
 
+const LOST_CONNECTION = {
+  status: 404,
+  message_code: AsyncResultCode.UNKNOWN_ERROR
+};
 
 const initialState = {
   userManagement: {
     isFetching: false,
     userList: [],
     selectedUser: {},
-    isSubmitting: false,
-    submitResult: ''
+    isSubmittingBanStatus: false,
+    isSubmittingUserInformation: false,
+    isSubmittingUserRole: false,
+    submitResultBanStatus: '',
+    submitResultUserInformation: '',
+    submitResultUserRole: ''
   },
   shopManagement: {
     isFetching: false,
     shopList: [],
     selectedShop: {},
-    isSubmitting: false,
-    submitResult: '',
+    isSubmittingAvatarAndCover: false,
+    isSubmittingShopBanStatus: false,
+    isSubmittingShopInformation: false,
+    isSubmittingShopShipPlace: false,
+    isSubmittingShopPromotion: false,
+    submitResultAvatarAndCover: '',
+    submitResultShopBanStatus: '',
+    submitResultShopInformation: '',
+    submitResultShopShipPlace: '',
+    submitResultShopPromotion: '',
     availableShipPlaces: []
   },
   requestManagement: {
@@ -36,12 +52,11 @@ const initialState = {
   },
   changePasswordFormStatus: {
     isSubmitting: false,
-    submitResult: {}
+    submitResult: ''
   }
 };
 
 export const admin = (state = initialState, action) => {
-  console.log(action);
   const { type, response } = action;
   switch (type) {
     case AdminActionTypes.ADMIN_GET_USERS_REQUEST:
@@ -49,7 +64,12 @@ export const admin = (state = initialState, action) => {
         userManagement: {
           isFetching: true,
           selectedUser: {},
+          isSubmitting: false,
+          isSubmittingBanStatus: false,
+          isSubmittingUserInformation: false,
           submitResult: '',
+          submitResultBanStatus: '',
+          submitResultUserInformation: '',
           shopList: []
         }
       });
@@ -57,7 +77,13 @@ export const admin = (state = initialState, action) => {
       return _.assign({}, state, {
         userManagement: {
           isFetching: false,
-          userList: response.users
+          userList: response.users,
+          isSubmitting: false,
+          isSubmittingBanStatus: false,
+          isSubmittingUserInformation: false,
+          submitResult: '',
+          submitResultBanStatus: '',
+          submitResultUserInformation: ''
         }
       });
     case AdminActionTypes.ADMIN_GET_USER_REQUEST:
@@ -80,84 +106,96 @@ export const admin = (state = initialState, action) => {
     case AdminActionTypes.ADMIN_UPDATE_USER_INFORMATION_REQUEST:
       return _.merge({}, state, {
         userManagement: {
-          isSubmitting: true
+          isSubmittingUserInformation: true
         }
       });
     case AdminActionTypes.ADMIN_UPDATE_USER_INFORMATION_SUCCESS:
       return _.merge({}, state, {
         userManagement: {
           selectedUser: response,
-          submitResult: AsyncResultCode.UPDATE_USER_INFORMATION_SUCCESS,
-          isSubmitting: false
+          submitResultUserInformation: {
+            status: 200,
+            message_code: AsyncResultCode.UPDATE_USER_INFORMATION_SUCCESS
+          },
+          isSubmittingUserInformation: false
         }
       });
     case AdminActionTypes.ADMIN_UPDATE_USER_INFORMATION_FAILURE:
       return _.merge({}, state, {
         userManagement: {
-          submitResult: AsyncResultCode.UPDATE_USER_INFORMATION_FAIL,
-          isSubmitting: false
+          submitResultUserInformation: action.error || action.errors || LOST_CONNECTION,
+          isSubmittingUserInformation: false
         }
       });
     case AdminActionTypes.ADMIN_UPDATE_USER_ROLE_REQUEST:
       return _.merge({}, state, {
         userManagement: {
-          isSubmitting: true
+          isSubmittingUserRole: true
         }
       });
     case AdminActionTypes.ADMIN_UPDATE_USER_ROLE_SUCCESS:
       return _.merge({}, state, {
         userManagement: {
           selectedUser: response,
-          isSubmitting: false,
-          submitResult: AsyncResultCode.UPDATE_USER_ROLE_SUCCESS
+          isSubmittingUserRole: false,
+          submitResultUserRole: {
+            status: 200,
+            message_code: AsyncResultCode.UPDATE_USER_ROLE_SUCCESS
+          }
         }
       });
     case AdminActionTypes.ADMIN_UPDATE_USER_ROLE_FAILURE:
       return _.merge({}, state, {
         userManagement: {
-          isSubmitting: false,
-          submitResult: AsyncResultCode.UPDATE_USER_ROLE_FAIL
+          isSubmittingUserRole: false,
+          submitResultUserRole: action.error || action.errors || LOST_CONNECTION
         }
       });
     case AdminActionTypes.ADMIN_BAN_USER_REQUEST:
       return _.merge({}, state, {
         userManagement: {
-          isSubmitting: true
+          isSubmittingBanStatus: true
         }
       });
     case AdminActionTypes.ADMIN_BAN_USER_SUCCESS:
       return _.merge({}, state, {
         userManagement: {
           selectedUser: response,
-          submitResult: AsyncResultCode.BAN_USER_SUCCESS,
-          isSubmitting: false
+          submitResultBanStatus: {
+            status: 200,
+            message_code: AsyncResultCode.BAN_USER_SUCCESS
+          },
+          isSubmittingBanStatus: false
         }
       });
     case AdminActionTypes.ADMIN_BAN_USER_FAILURE:
       return _.merge({}, state, {
         userManagement: {
-          submitResult: AsyncResultCode.BAN_USER_FAIL,
-          isSubmitting: false
+          submitResultBanStatus: action.error || LOST_CONNECTION,
+          isSubmittingBanStatus: false
         }
       });
     case AdminActionTypes.ADMIN_UNBAN_USER_REQUEST:
       return _.merge({}, state, {
         userManagement: {
-          isSubmitting: true
+          isSubmittingBanStatus: true
         }
       });
     case AdminActionTypes.ADMIN_UNBAN_USER_SUCCESS:
       return _.merge({}, state, {
         userManagement: {
           selectedUser: response,
-          submitResult: AsyncResultCode.UNBAN_USER_SUCCESS,
-          isSubmitting: false
+          submitResultBanStatus: {
+            status: 200,
+            message_code: AsyncResultCode.UNBAN_USER_SUCCESS
+          },
+          isSubmittingBanStatus: false
         }
       });
     case AdminActionTypes.ADMIN_UNBAN_USER_FAILURE:
       return _.merge({}, state, {
         userManagement: {
-          submitResult: AsyncResultCode.UNBAN_USER_FAIL,
+          submitResult: action.error || LOST_CONNECTION,
           isSubmitting: false
         }
       });
@@ -165,7 +203,14 @@ export const admin = (state = initialState, action) => {
       return _.merge({}, state, {
         shopManagement: {
           isFetching: true,
-          submitResult: '',
+          isSubmittingAvatarAndCover: false,
+          isSubmittingShopBanStatus: false,
+          isSubmittingShopInformation: false,
+          isSubmittingShopShipPlace: false,
+          submitResultAvatarAndCover: '',
+          submitResultShopBanStatus: '',
+          submitResultShopInformation: '',
+          submitResultShopShipPlace: '',
           shopList: []
         }
       });
@@ -201,148 +246,169 @@ export const admin = (state = initialState, action) => {
     case AdminActionTypes.ADMIN_UPDATE_SHOP_INFORMATION_REQUEST:
       return _.merge({}, state, {
         shopManagement: {
-          isSubmitting: true
+          isSubmittingShopInformation: true
         }
       });
     case AdminActionTypes.ADMIN_UPDATE_SHOP_INFORMATION_SUCCESS:
       return _.merge({}, state, {
         shopManagement: {
-          isSubmitting: false,
+          isSubmittingShopInformation: false,
           selectedShop: response,
-          submitResult: AsyncResultCode.UPDATE_SHOP_INFORMATION_SUCCESS
+          submitResultShopInformation: {
+            status: 200,
+            message_code: AsyncResultCode.UPDATE_SHOP_INFORMATION_SUCCESS
+          }
         }
       });
     case AdminActionTypes.ADMIN_UPDATE_SHOP_INFORMATION_FAILURE:
       return _.merge({}, state, {
         shopManagement: {
-          isSubmitting: false,
-          submitResult: AsyncResultCode.UPDATE_SHOP_INFORMATION_FAIL
+          isSubmittingShopInformation: false,
+          submitResultShopInformation: action.error || LOST_CONNECTION
         }
       });
     case AdminActionTypes.ADMIN_UPDATE_SHOP_OPENING_REQUEST:
       return _.merge({}, state, {
         shopManagement: {
-          isSubmitting: true
+          submitResultShopShipPlace: true
         }
       });
     case AdminActionTypes.ADMIN_UPDATE_SHOP_OPENING_SUCCESS:
       return _.merge({}, state, {
         shopManagement: {
-          isSubmitting: false,
+          isSubmittingShopShipPlace: false,
           selectedShop: response,
-          submitResult: AsyncResultCode.UPDATE_SHOP_SHIP_PLACES_SUCCESS
+          submitResultShopShipPlace: {
+            status: 200,
+            message_code: AsyncResultCode.UPDATE_SHOP_SHIP_PLACES_SUCCESS
+          }
         }
       });
     case AdminActionTypes.ADMIN_UPDATE_SHOP_OPENING_FAILURE:
       return _.merge({}, state, {
         shopManagement: {
-          isSubmitting: false,
-          submitResult: AsyncResultCode.UPDATE_SHOP_SHIP_PLACES_FAIL
+          isSubmittingShopShipPlace: false,
+          submitResultShopShipPlace: action.error
         }
       });
     case AdminActionTypes.ADMIN_UPDATE_SHOP_SHIP_PLACES_REQUEST:
       return _.merge({}, state, {
         shopManagement: {
-          isSubmitting: true
+          isSubmittingShopShipPlace: true
         }
       });
     case AdminActionTypes.ADMIN_UPDATE_SHOP_SHIP_PLACES_SUCCESS:
       return _.merge({}, state, {
         shopManagement: {
-          isSubmitting: false,
+          isSubmittingShopShipPlace: false,
           selectedShop: response,
-          submitResult: AsyncResultCode.UPDATE_SHOP_SHIP_PLACES_SUCCESS
+          submitResultShopShipPlace: {
+            status: 200,
+            message_code: AsyncResultCode.UPDATE_SHOP_SHIP_PLACES_SUCCESS
+          }
         }
       });
     case AdminActionTypes.ADMIN_UPDATE_SHOP_SHIP_PLACES_FAILURE:
       return _.merge({}, state, {
         shopManagement: {
-          isSubmitting: false,
-          submitResult: AsyncResultCode.UPDATE_SHOP_SHIP_PLACES_FAIL
+          isSubmittingShopShipPlace: false,
+          submitResultShopShipPlace: action.error
         }
       });
     case AdminActionTypes.ADMIN_UPDATE_SHOP_AVATAR_REQUEST:
       return _.merge({}, state, {
         shopManagement: {
-          isSubmitting: true
+          isSubmittingAvatarAndCover: true
         }
       });
     case AdminActionTypes.ADMIN_UPDATE_SHOP_AVATAR_SUCCESS:
       return _.merge({}, state, {
         shopManagement: {
-          isSubmitting: false,
+          isSubmittingAvatarAndCover: false,
           selectedShop: response,
-          submitResult: AsyncResultCode.UPDATE_SHOP_AVATAR_SUCCESS
+          submitResultAvatarAndCover: {
+            status: 200,
+            message_code: AsyncResultCode.UPDATE_SHOP_AVATAR_SUCCESS
+          }
         }
       });
     case AdminActionTypes.ADMIN_UPDATE_SHOP_AVATAR_FAILURE:
       return _.merge({}, state, {
         shopManagement: {
-          isSubmitting: false,
-          submitResult: AsyncResultCode.UPDATE_SHOP_AVATAR_FAIL
+          isSubmittingAvatarAndCover: false,
+          submitResultAvatarAndCover: action.error || LOST_CONNECTION
         }
       });
     case AdminActionTypes.ADMIN_UPDATE_SHOP_COVER_REQUEST:
       return _.merge({}, state, {
         shopManagement: {
-          isSubmitting: true
+          isSubmittingAvatarAndCover: true
         }
       });
     case AdminActionTypes.ADMIN_UPDATE_SHOP_COVER_SUCCESS:
       return _.merge({}, state, {
         shopManagement: {
-          isSubmitting: false,
+          isSubmittingAvatarAndCover: false,
           selectedShop: response,
-          submitResult: AsyncResultCode.UPDATE_SHOP_AVATAR_SUCCESS
+          submitResultAvatarAndCover: {
+            status: 200,
+            message_code: AsyncResultCode.UPDATE_SHOP_COVER_SUCCESS
+          }
         }
       });
     case AdminActionTypes.ADMIN_UPDATE_SHOP_COVER_FAILURE:
       return _.merge({}, state, {
         shopManagement: {
-          isSubmitting: false,
-          submitResult: AsyncResultCode.UPDATE_SHOP_AVATAR_FAIL
+          isSubmittingAvatarAndCover: false,
+          submitResultAvatarAndCover: action.error || LOST_CONNECTION
         }
       });
     case AdminActionTypes.ADMIN_BAN_SHOP_REQUEST:
       return _.merge({}, state, {
         shopManagement: {
-          isSubmitting: true
+          isSubmittingShopBanStatus: true
         }
       });
     case AdminActionTypes.ADMIN_BAN_SHOP_SUCCESS:
       return _.merge({}, state, {
         shopManagement: {
           selectedShop: response,
-          submitResult: AsyncResultCode.BAN_SHOP_SUCCESS,
-          isSubmitting: false
+          submitResultShopBanStatus: {
+            status: 200,
+            message_code: AsyncResultCode.BAN_SHOP_SUCCESS
+          },
+          isSubmittingShopBanStatus: false
         }
       });
     case AdminActionTypes.ADMIN_BAN_SHOP_FAILURE:
       return _.merge({}, state, {
         shopManagement: {
-          isSubmitting: false,
-          submitResult: AsyncResultCode.BAN_SHOP_FAIL
+          isSubmittingShopBanStatus: false,
+          submitResultShopBanStatus: action.error
         }
       });
     case AdminActionTypes.ADMIN_UNBAN_SHOP_REQUEST:
       return _.merge({}, state, {
         shopManagement: {
-          isSubmitting: true
+          isSubmittingShopBanStatus: true
         }
       });
     case AdminActionTypes.ADMIN_UNBAN_SHOP_SUCCESS:
       return _.merge({}, state, {
         shopManagement: {
           selectedShop: response,
-          submitResult: AsyncResultCode.UNBAN_SHOP_SUCCESS,
-          isSubmitting: false
+          submitResultShopBanStatus: {
+            status: 200,
+            message_code: AsyncResultCode.UNBAN_SHOP_SUCCESS
+          },
+          isSubmittingShopBanStatus: false
         }
       });
     case AdminActionTypes.ADMIN_UNBAN_SHOP_FAILURE:
       return _.merge({}, state, {
         shopManagement: {
-          submitResult: AsyncResultCode.UNBAN_SHOP_FAIL,
-          isSubmitting: false
+          submitResultShopBanStatus: action.error || LOST_CONNECTION,
+          isSubmittingShopBanStatus: false
         }
       });
     case AdminActionTypes.ADMIN_GET_REQUESTS_REQUEST:
@@ -436,21 +502,24 @@ export const admin = (state = initialState, action) => {
     case AdminActionTypes.ADMIN_CREATE_SHOP_PROMOTION_CAMPAIGN_REQUEST:
       return _.merge({}, state, {
         shopManagement: {
-          isSubmitting: true
+          isSubmittingShopPromotion: true
         }
       });
     case AdminActionTypes.ADMIN_CREATE_SHOP_PROMOTION_CAMPAIGN_SUCCESS:
       return _.merge({}, state,{
         shopManagement: {
-          submitResult: AsyncResultCode.CREATE_PROMOTION_SUCCESS,
-          isSubmitting: false
+          submitResultShopPromotion: {
+            status: 200,
+            message_code: AsyncResultCode.CREATE_PROMOTION_SUCCESS
+          },
+          isSubmittingShopPromotion: false
         }
       });
     case AdminActionTypes.ADMIN_CREATE_SHOP_PROMOTION_CAMPAIGN_FAILURE:
       return _.merge({}, state,{
         shopManagement: {
-          submitResult: AsyncResultCode.CREATE_PROMOTION_FAILURE,
-          isSubmitting: false
+          submitResultShopPromotion: action.error || LOST_CONNECTION,
+          isSubmittingShopPromotion: false
         }
       });
     case AdminActionTypes.ADMIN_GET_SHOP_PROMOTION_CAMPAIGN_REQUEST:
@@ -488,14 +557,17 @@ export const admin = (state = initialState, action) => {
         promotionManagement: {
           promotionList,
           isSubmitting: false,
-          submitResult: AsyncResultCode.EDIT_PROMOTION_SUCCESS
+          submitResult: {
+            status: 200,
+            message_code: AsyncResultCode.EDIT_PROMOTION_SUCCESS
+          }
         }
       });
     case AdminActionTypes.ADMIN_UPDATE_SHOP_PROMOTION_CAMPAIGN_FAILURE:
       return _.merge({}, state, {
         promotionManagement: {
           isSubmitting: false,
-          submitResult: AsyncResultCode.EDIT_PROMOTION_FAIL
+          submitResult: action.error || action.errors || LOST_CONNECTION
         }
       });
 

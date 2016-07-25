@@ -71,8 +71,14 @@ const mapStateToProps = (state) => ({
 });
 
 ContainerListRequest.path = '/requests';
-ContainerListRequest.title = 'Request management';
-ContainerListRequest.description = 'Request management';
+ContainerListRequest.title = {
+  id: 'breadCrumb.requestManagement.title',
+  defaultMessage: 'Request management'
+};
+ContainerListRequest.description = {
+  id: 'breadCrumb.requestManagement.description',
+  defaultMessage: 'List of user request'
+};
 ContainerListRequest.faIcon = 'fa-envelope';
 
 export default connect(mapStateToProps, {

@@ -16,26 +16,41 @@ const validate = (values) => {
   let errors = {};
   let hasErrors = false;
   if(!values.oldPassword || values.oldPassword.trim() === '') {
-    errors.oldPassword = 'Old password cannot be blank';
+    errors.oldPassword = {
+      id: 'admin.form.changePassword.oldPassword.blank',
+      defaultMessage: 'Old password cannot be blank'
+    }
     hasErrors = true;
   }
   if(!values.newPassword || values.newPassword.trim() === '') {
-    errors.newPassword = 'New password cannot be blank';
+    errors.newPassword = {
+      id: 'admin.form.changePassword.newPassword.blank',
+      defaultMessage: 'New password cannot be blank'
+    };
     hasErrors = true;
   }
 
   if(values.newPassword && values.newPassword.length < 8) {
-    errors.newPassword = 'Password must be longer than 8 character';
+    errors.newPassword = {
+      id: 'admin.form.changePassword.newPassword.short',
+      defaultMessage: 'New password cannot be shorter than 8 character'
+    };
     hasErrors = true;
   }
 
   if(!values.repeatPassword || values.repeatPassword.trim() === '') {
-    errors.repeatPassword = 'Repeat password cannot be blank';
+    errors.repeatPassword = {
+      id: 'admin.form.changePassword.repeatPassword.blank',
+      defaultMessage: 'Repeat password cannot be blank'
+    };
     hasErrors = true;
   }
 
   if(values.newPassword && values.repeatPassword && values.newPassword != values.repeatPassword) {
-    errors.repeatPassword = 'Password does not match';
+    errors.repeatPassword = {
+      id: 'admin.form.changePassword.repeatPassword.doesNotMatch',
+      defaultMessage: 'Confirm password does not match'
+    };
     hasErrors = true;
   }
 
@@ -68,7 +83,9 @@ class FormChangePassword extends Component {
                 placeholder={formatMessage(messages.formChangePassword.fields.oldPassword)}
                 {...oldPassword}
                 />
-              <HelpBlock>{oldPassword.touched ? oldPassword.error: '' }</HelpBlock>
+              <HelpBlock>
+                {oldPassword.touched && oldPassword.error ? <FormattedMessage {...oldPassword.error}/> : '' }
+              </HelpBlock>
             </FormGroup>
             <FormGroup className={`${newPassword.touched && newPassword.invalid ? 'has-error' : ''}`}>
               <ControlLabel>
@@ -79,7 +96,9 @@ class FormChangePassword extends Component {
                 placeholder={formatMessage(messages.formChangePassword.fields.newPassword)}
                 {...newPassword}
                 />
-              <HelpBlock>{newPassword.touched ? newPassword.error: '' }</HelpBlock>
+                <HelpBlock>
+                  {newPassword.touched && newPassword.error ? <FormattedMessage {...newPassword.error}/> : '' }
+                </HelpBlock>
             </FormGroup>
             <FormGroup className={`${repeatPassword.touched && repeatPassword.invalid ? 'has-error' : ''}`}>
               <ControlLabel>
@@ -89,11 +108,13 @@ class FormChangePassword extends Component {
               type="password"
               placeholder={formatMessage(messages.formChangePassword.fields.confirmPassword)}
               {...repeatPassword} />
-              <HelpBlock>{repeatPassword.touched ? repeatPassword.error: '' }</HelpBlock>
+              <HelpBlock>
+                {repeatPassword.touched && repeatPassword.error ? <FormattedMessage {...repeatPassword.error}/> : '' }
+              </HelpBlock>
             </FormGroup>
             {
-              formStatus.ubmitResult !== '' &&
-              <AlertSubmitResult result={formStatus.submitResult}/>
+              formStatus.submitResult !== '' &&
+              <AlertSubmitResult result={formStatus.submitResult} formName="formChangePassword"/>
             }
             <div className ="form-actions">
               <Button type="submit" bsStyle="warning" disabled={formStatus.isSubmitting}>

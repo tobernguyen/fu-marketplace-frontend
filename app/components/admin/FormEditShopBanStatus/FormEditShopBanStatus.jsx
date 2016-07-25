@@ -4,13 +4,12 @@ import {
   ControlLabel,
   FormGroup,
   FormControl,
-  Alert,
   Col
 } from 'react-bootstrap';
-import AsyncResultCode from 'app/shared/asyncResultCodes';
 import { FormattedMessage, FormattedHTMLMessage, injectIntl } from 'react-intl';
 import { messages } from 'app/components/admin/FormEditShopBanStatus/FormEditShopBanStatus.i18n';
-
+import AlertSubmitResult from 'app/components/admin/AlertSubmitResult';
+import LoadingSpinner from 'app/components/admin/LoadingSpinner';
 
 class FormEditShopBanStatus extends Component {
   constructor(props) {
@@ -53,6 +52,9 @@ class FormEditShopBanStatus extends Component {
 
   render() {
     const { shop, isSubmitting, submitResult, intl: { formatMessage } } = this.props;
+    if(isSubmitting) {
+      return <LoadingSpinner />
+    }
     return(
       <div className="row">
         <Col lg={3}>
@@ -90,28 +92,8 @@ class FormEditShopBanStatus extends Component {
           </ul>
           <div className="form-actions">
               {
-                submitResult === AsyncResultCode.BAN_SHOP_SUCCESS &&
-                <Alert bsStyle="success">
-                  <FormattedMessage {...messages.formEditShopBanStatus.submitResult.banSuccess}/>
-                </Alert>
-              }
-              {
-                submitResult === AsyncResultCode.BAN_SHOP_FAIL &&
-                <Alert bsStyle="danger">
-                  <FormattedMessage {...messages.formEditShopBanStatus.submitResult.fail}/>
-                </Alert>
-              }
-              {
-                submitResult === AsyncResultCode.UNBAN_SHOP_SUCCESS &&
-                <Alert bsStyle="success">
-                  <FormattedMessage {...messages.formEditShopBanStatus.submitResult.releaseSuccess}/>
-                </Alert>
-              }
-              {
-                submitResult === AsyncResultCode.UNBAN_SHOP_FAIL &&
-                <Alert bsStyle="danger">
-                  <FormattedMessage {...messages.formEditShopBanStatus.submitResult.fail}/>
-                </Alert>
+                submitResult !== '' &&
+                <AlertSubmitResult result={submitResult} />
               }
 
               <Button

@@ -14,7 +14,7 @@ class ContainerEditPromotion extends Component {
   render() {
     const { adminUpdateShopPromotionCampaign, promotionManagement: { isFetching, promotionList, submitResult, isSubmitting }, params: { promotionId }} = this.props;
     let output = '';
-    if(isFetching || isSubmitting) {
+    if(isFetching) {
       output = <div className="text-center container-fluid">
         <LoadingSpinner />
       </div>;
@@ -23,6 +23,7 @@ class ContainerEditPromotion extends Component {
         <FormEditShopPromotionCampaign
           promotionList={promotionList}
           promotionId={promotionId}
+          isSubmitting={isSubmitting}
           submitResult={submitResult}
           adminUpdateShopPromotionCampaign={adminUpdateShopPromotionCampaign}
         />
@@ -40,8 +41,14 @@ const mapStateToProps = (state) => {
 }
 
 ContainerEditPromotion.path = ':promotionId/edit';
-ContainerEditPromotion.title = 'Promotion edit';
-ContainerEditPromotion.description = 'Edit shop promotion';
+ContainerEditPromotion.title = {
+  id: 'breadCrumb.editPromotion.title',
+  defaultMessage: 'Edit promotion'
+};
+ContainerEditPromotion.description = {
+  id: 'breadCrumb.editPromotion.description',
+  defaultMessage: 'Change shop promotion campaign information'
+};
 ContainerEditPromotion.faIcon = 'fa-arrow-up';
 
 export default connect(mapStateToProps, {

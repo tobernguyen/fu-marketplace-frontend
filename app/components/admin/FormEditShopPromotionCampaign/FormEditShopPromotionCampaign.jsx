@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { messages } from 'app/components/admin/FormShopPromotionCampaign/FormShopPromotionCampaign.i18n';
 import { FormattedMessage , injectIntl } from 'react-intl';
-import { Alert } from 'react-bootstrap';
 import DateTime from 'react-datetime';
 import moment from 'moment';
-
+import AlertSubmitResult from 'app/components/admin/AlertSubmitResult';
+import LoadingSpinner from 'app/components/admin/LoadingSpinner';
 import shopPromotionCampaignType from 'app/shared/promotionCampaignType';
-import AsyncResultCode from 'app/shared/asyncResultCodes';
+
 class FormEditShopPromotionCampaign extends Component {
   constructor(props) {
     super(props);
@@ -163,7 +163,10 @@ class FormEditShopPromotionCampaign extends Component {
 
   render() {
     const { selectedPromotion: {startDate, endDate, type, active }, isValid } = this.state;
-    const { intl: { formatMessage }, submitResult } = this.props;
+    const { intl: { formatMessage }, submitResult, isSubmitting } = this.props;
+    if(isSubmitting) {
+      return <LoadingSpinner />;
+    }
     return (
       <div className="row">
         <div className="col-lg-3">
@@ -229,16 +232,8 @@ class FormEditShopPromotionCampaign extends Component {
           </div>
           <div className="form-actions">
             {
-              submitResult === AsyncResultCode.EDIT_PROMOTION_SUCCESS &&
-              <Alert bsStyle="success">
-                <FormattedMessage {...messages.formEditShopPromotionCampaign.message.success}/>
-              </Alert>
-            }
-            {
-              submitResult === AsyncResultCode.EDIT_PROMOTION_FAIL &&
-              <Alert bsStyle="danger">
-                <FormattedMessage {...messages.formEditShopPromotionCampaign.message.fail}/>
-              </Alert>
+              submitResult !== '' &&
+              <AlertSubmitResult result={submitResult}/>
             }
             <button type="button" className="btn btn-success" onClick={this.handleSubmit} disabled={!isValid}>
               <FormattedMessage {...messages.formEditShopPromotionCampaign.button.saveChanges} />

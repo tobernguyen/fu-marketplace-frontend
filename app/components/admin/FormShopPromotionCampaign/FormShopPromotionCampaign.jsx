@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import { messages } from 'app/components/admin/FormShopPromotionCampaign/FormShopPromotionCampaign.i18n';
-import { Alert } from 'react-bootstrap';
 import DateTime from 'react-datetime';
 import moment from 'moment';
 import shopPromotionCampaignType from 'app/shared/promotionCampaignType';
-import AsyncResultCode from 'app/shared/asyncResultCodes';
-
+import AlertSubmitResult from 'app/components/admin/AlertSubmitResult';
+import LoadingSpinner from 'app/components/admin/LoadingSpinner';
 
 class FormShopPromotionCampaign extends Component {
   constructor(props) {
@@ -114,8 +113,11 @@ class FormShopPromotionCampaign extends Component {
     }
   }
   render() {
-    const { intl: { formatMessage }, submitResult } = this.props;
+    const { intl: { formatMessage }, submitResult, isSubmitting } = this.props;
     const { endDate, startDate, type, isValid } = this.state;
+    if(isSubmitting) {
+      return <LoadingSpinner />;
+    }
     return (
       <div className="row">
         <div className="col-lg-3">
@@ -171,16 +173,8 @@ class FormShopPromotionCampaign extends Component {
           </div>
           <div className="form-actions">
             {
-              submitResult === AsyncResultCode.CREATE_PROMOTION_SUCCESS &&
-              <Alert bsStyle="success">
-                <FormattedMessage {...messages.formShopPromotionCampaign.submitResult.success}/>
-              </Alert>
-            }
-            {
-              submitResult === AsyncResultCode.CREATE_PROMOTION_FAILURE &&
-              <Alert bsStyle="danger">
-                <FormattedMessage {...messages.formShopPromotionCampaign.submitResult.fail}/>
-              </Alert>
+              submitResult !== '' &&
+              <AlertSubmitResult result={submitResult} />
             }
             <button type="button" className="btn btn-success" onClick={this.handleSubmit} disabled={!isValid}>
               <FormattedMessage {...messages.formShopPromotionCampaign.button.createShopPromotionCampaign} />

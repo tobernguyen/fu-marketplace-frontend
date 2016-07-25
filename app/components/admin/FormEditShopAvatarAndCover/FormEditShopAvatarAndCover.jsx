@@ -2,14 +2,12 @@ import React, { Component } from 'react';
 import {
   Col,
   FormGroup,
-  Alert,
   Button
 } from 'react-bootstrap';
-import AsyncResultCode from 'app/shared/asyncResultCodes';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import { messages } from 'app/components/admin/FormEditShopAvatarAndCover/FormEditShopAvatarAndCover.i18n';
-
-
+import AlertSubmitResult from 'app/components/admin/AlertSubmitResult';
+import LoadingSpinner from 'app/components/admin/LoadingSpinner';
 import './FormEditShopAvatarAndCover.scss';
 
 class FormEditShopAvatarAndCover extends Component {
@@ -80,8 +78,11 @@ class FormEditShopAvatarAndCover extends Component {
   }
 
   render() {
-    const { shop, submitResult } = this.props;
+    const { shop, submitResult, isSubmitting } = this.props;
     const { isValid } = this.state;
+    if(isSubmitting) {
+      return <LoadingSpinner />
+    }
     return (
       <div className="row">
         <Col lg={3}>
@@ -127,16 +128,8 @@ class FormEditShopAvatarAndCover extends Component {
           </FormGroup>
           <div className ="form-actions">
             {
-              submitResult === AsyncResultCode.UPDATE_SHOP_AVATAR_SUCCESS &&
-              <Alert bsStyle="success">
-                <FormattedMessage {...messages.formEditShopAvatarAndCover.submitResult.success}/>
-              </Alert>
-            }
-            {
-              submitResult === AsyncResultCode.UPDATE_SHOP_AVATAR_FAIL &&
-              <Alert bsStyle="danger">
-                <FormattedMessage {...messages.formEditShopAvatarAndCover.submitResult.fail}/>
-              </Alert>
+              submitResult !== '' &&
+              <AlertSubmitResult result={submitResult} />
             }
             <Button type="submit" bsStyle="success" onClick={this.uploadAvatarAndCover} disabled={!isValid}>
               <FormattedMessage {...messages.formEditShopAvatarAndCover.button.saveChanges}/>

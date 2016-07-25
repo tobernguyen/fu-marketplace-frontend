@@ -68,8 +68,14 @@ class ContainerListPromotion extends Component {
 }
 
 ContainerListPromotion.path = '/promotions';
-ContainerListPromotion.title = 'Promotion management';
-ContainerListPromotion.description = 'Promotion management';
+ContainerListPromotion.title = {
+  id: 'breadCrumb.promotionManagement.title',
+  defaultMessage: 'Promotion management'
+};
+ContainerListPromotion.description = {
+  id: 'breadCrumb.promotionManagement.description',
+  defaultMessage: 'List of shop promotion campaign'
+};
 ContainerListPromotion.faIcon = 'fa-arrow-up';
 
 const mapStateToProps = (state) => ({

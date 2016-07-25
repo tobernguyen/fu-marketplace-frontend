@@ -3,13 +3,13 @@ import {
   Button,
   FormGroup,
   Checkbox,
-  Alert,
   Col
 } from 'react-bootstrap';
 import _ from 'lodash';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import { messages } from 'app/components/admin/FormEditUserRole/FormEditUserRole.i18n';
-import AsyncResultCode from 'app/shared/asyncResultCodes';
+import AlertSubmitResult from 'app/components/admin/AlertSubmitResult';
+import LoadingSpinner from 'app/components/admin/LoadingSpinner';
 
 class FormEditUserRole extends Component {
   constructor(props) {
@@ -60,6 +60,9 @@ class FormEditUserRole extends Component {
   render() {
     const { submitResult, isSubmitting, intl: { formatMessage } } = this.props;
     const { rolesToBeUpdated, isValid } = this.state;
+    if(isSubmitting) {
+      return <LoadingSpinner />;
+    }
     return (
       <div className="row">
         <Col lg={3}>
@@ -102,16 +105,8 @@ class FormEditUserRole extends Component {
           </FormGroup>
           <div className="form-actions">
             {
-              submitResult === AsyncResultCode.UPDATE_USER_ROLE_SUCCESS &&
-              <Alert bsStyle="success">
-                <FormattedMessage {...messages.formEditUserRole.submitResult.success}/>
-              </Alert>
-            }
-            {
-              submitResult === AsyncResultCode.UPDATE_USER_ROLE_FAIL &&
-              <Alert bsStyle="danger">
-                <FormattedMessage {...messages.formEditUserRole.submitResult.fail}/>
-              </Alert>
+              submitResult !== '' &&
+              <AlertSubmitResult result={submitResult}/>
             }
             <Button bsStyle="warning" onClick={this.updateRole} disabled={isSubmitting || !isValid }>
               {formatMessage(messages.formEditUserRole.button.updateRole)}

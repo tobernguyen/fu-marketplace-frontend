@@ -95,7 +95,7 @@ export default (
         <IndexRoute component={ContainerListTicket} />
         <Route path=":ticketId/view" component={ContainerViewTicket} />
       </Route>
-      <Route path="changepwd" component={ChangePassword} />
+      <Route path="setting" component={ChangePassword} />
     </Route>
   </Route>
 )

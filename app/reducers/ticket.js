@@ -3,6 +3,12 @@ import * as AdminActionTypes from '../actions/admin';
 import AsyncResultCode from 'app/shared/asyncResultCodes';
 import _ from 'lodash';
 
+const LOST_CONNECTION = {
+  status: 404,
+  message_code: AsyncResultCode.UNKNOWN_ERROR
+};
+
+
 const INITIAL_STATE = {
   isFetching: false,
   tickets: [],
@@ -40,7 +46,7 @@ export const ticket = (state = INITIAL_STATE, action) => {
         tickets: []
       });
     case TicketActionTypes.ADMIN_GET_TICKETS_SUCCESS:
-      return _.merge({}, state, {
+      return _.assign({}, state, {
         isFetching: false,
         tickets: action.response.tickets
       });
@@ -103,12 +109,15 @@ export const ticket = (state = INITIAL_STATE, action) => {
       return _.merge({}, state, {
         isSubmitting: false,
         selectedTicket: action.response,
-        submitResult: AsyncResultCode.INVESTIGATING_TICKET_SUCCESS
+        submitResult: {
+          status: 200,
+          message_code: AsyncResultCode.INVESTIGATING_TICKET_SUCCESS
+        }
       });
     case TicketActionTypes.ADMIN_INVESTIGATE_TICKET_FAILURE:
       return _.merge({}, state, {
         isSubmitting: false,
-        submitResult: AsyncResultCode.INVESTIGATING_TICKET_FAIL
+        submitResult: action.error || action.errors || LOST_CONNECTION
       });
     case TicketActionTypes.ADMIN_CLOSE_TICKET_REQUEST:
       return _.merge({}, state, {
@@ -118,12 +127,15 @@ export const ticket = (state = INITIAL_STATE, action) => {
       return _.merge({}, state, {
         isSubmitting: false,
         selectedTicket: action.response,
-        submitResult: AsyncResultCode.CLOSE_TICKET_SUCCESS
+        submitResult: {
+          status: 200,
+          submitResult: AsyncResultCode.CLOSE_TICKET_SUCCESS
+        }
       });
     case TicketActionTypes.ADMIN_CLOSE_TICKET_FAILURE:
       return _.merge({}, state, {
         isSubmitting: false,
-        submitResult: AsyncResultCode.CLOSE_TICKET_FAIL
+        submitResult: action.error || LOST_CONNECTION
       });
     case TicketActionTypes.USER_GET_TICKETS_SUCCESS:
       return _.merge({}, state, {

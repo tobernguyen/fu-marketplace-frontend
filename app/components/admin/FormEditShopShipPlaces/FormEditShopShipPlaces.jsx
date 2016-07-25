@@ -5,14 +5,13 @@ import {
   ControlLabel,
   Col,
   Checkbox,
-  Button,
-  Alert
+  Button
 } from 'react-bootstrap';
 import _ from 'lodash';
-import AsyncResultCode from 'app/shared/asyncResultCodes';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import { messages } from 'app/components/admin/FormEditShopShipPlaces/FormEditShopShipPlaces.i18n';
-
+import AlertSubmitResult from 'app/components/admin/AlertSubmitResult';
+import LoadingSpinner from 'app/components/admin/LoadingSpinner';
 
 class FormEditShopShipPlaces extends React.Component {
   constructor(props) {
@@ -81,6 +80,9 @@ class FormEditShopShipPlaces extends React.Component {
   render() {
     const { informationToBeUpdated, isValid } = this.state;
     const { submitResult, isSubmitting, intl: { formatMessage } } = this.props;
+    if (isSubmitting) {
+      return <LoadingSpinner />;
+    }
     return (
       <div className="row">
         <Col lg={3}>
@@ -132,16 +134,8 @@ class FormEditShopShipPlaces extends React.Component {
           </FormGroup>
           <div className="form-actions">
             {
-              submitResult === AsyncResultCode.UPDATE_SHOP_SHIP_PLACES_SUCCESS &&
-              <Alert bsStyle="success">
-                <FormattedMessage {...messages.formEditShopShipPlaces.submitResult.success}/>
-              </Alert>
-            }
-            {
-              submitResult === AsyncResultCode.UPDATE_SHOP_SHIP_PLACES_FAIL &&
-              <Alert bsStyle="danger">
-                <FormattedMessage {...messages.formEditShopShipPlaces.submitResult.fail}/>
-              </Alert>
+              submitResult !== '' &&
+              <AlertSubmitResult result={submitResult} />
             }
             <Button bsStyle="success" onClick={this.handleSubmit} disabled={isSubmitting || !isValid}>
               {formatMessage(messages.formEditShopShipPlaces.button.saveChanges)}

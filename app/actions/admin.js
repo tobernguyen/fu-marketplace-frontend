@@ -249,7 +249,7 @@ export const ADMIN_UPDATE_SHOP_COVER_SUCCESS = 'ADMIN_UPDATE_SHOP_COVER_SUCCESS'
 export const ADMIN_UPDATE_SHOP_COVER_FAILURE = 'ADMIN_UPDATE_SHOP_COVER_FAILURE';
 const adminRequestUpdateShopCover = (shopId, formData) => ({
   [CALL_API]: {
-    types: [ADMIN_UPDATE_SHOP_AVATAR_REQUEST, ADMIN_UPDATE_SHOP_AVATAR_SUCCESS, ADMIN_UPDATE_SHOP_AVATAR_FAILURE],
+    types: [ADMIN_UPDATE_SHOP_COVER_REQUEST, ADMIN_UPDATE_SHOP_COVER_SUCCESS, ADMIN_UPDATE_SHOP_COVER_FAILURE],
     url: `/api/v1/admin/shops/${shopId}/uploadCover`,
     params: formData,
     method: HTTP_METHODS.POST
@@ -466,3 +466,10 @@ export const adminUpdateShopPromotionCampaign = (promotion) => {
     dispatch(adminRequestUpdateShopPromotionCampaign(promotion));
   }
 }
+
+export const ADMIN_CHANGE_LANGUAGE = 'ADMIN_CHANGE_LANGUAGE';
+
+export const adminChangeLanguage = (language) => ({
+  type: ADMIN_CHANGE_LANGUAGE,
+  payload: language
+})

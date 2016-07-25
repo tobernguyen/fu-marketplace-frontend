@@ -20,7 +20,8 @@ class NavigationBar extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      keyword: ''
+      keyword: '',
+      wsLoaded: false
     };
 
     this.onNotificationClick = (notification) => {
@@ -103,6 +104,8 @@ class NavigationBar extends Component {
     this.props.getUnreadCount();
   }
 
+
+
   componentWillReceiveProps(nextProps) {
     const { query, socket } = nextProps;
     let keyword = '';
@@ -115,7 +118,10 @@ class NavigationBar extends Component {
       })
     }
 
-    if (socket) {
+    if (socket && !this.state.wsLoaded) {
+      this.setState({
+        wsLoaded: true
+      });
       socket.on(EVENTS.NEW_NOTIFICATION, (notification) => {
         this.props.newNotification(notification);
       });

@@ -99,6 +99,7 @@ export default {
   'orderList.tableHead.shipAddress': 'Địa điểm',
   'orderList.tableHead.status': 'Trạng thái',
   'orderList.tableHead.action': 'Hành động',
+  'orderList.tableHead.user': 'Người mua',
   'orderList.tableBody.timeSuffix': 'trước',
   'orderList.tableBody.timeUnit.minute': 'phút',
   'orderList.tableBody.timeUnit.second' : 'giây',

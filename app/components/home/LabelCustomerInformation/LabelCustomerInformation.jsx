@@ -6,11 +6,11 @@ const LabelCustomerInformation = ({ buyer }) => {
   };
   const avatarStyle= {
     height: '24px',
-    width: '24px'
+    width: '24px',
   };
   return (
     <div style={divStyle}>
-      <img src={buyer.avatar} style={avatarStyle}/>{' '}
+      <img src={buyer.avatar} className="img-circle" style={avatarStyle}/>{' '}
       <span>{buyer.fullName}</span>
     </div>
   )

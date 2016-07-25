@@ -9,6 +9,10 @@ export const messages = {
         id: 'orderList.tableHead.time',
         defaultMessage: 'Order time'
       },
+      user: {
+        id: 'orderList.tableHead.user',
+        defaultMessage: 'User'
+      },
       items: {
         id: 'orderList.tableHead.items',
         defaultMessage: 'Items'

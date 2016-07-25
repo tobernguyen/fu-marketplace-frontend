@@ -3,6 +3,7 @@ import { FormattedRelative, FormattedNumber } from 'react-intl';
 import LabelOrderStatus from 'app/components/home/LabelOrderStatus';
 import _ from 'lodash';
 import { Tooltip, OverlayTrigger} from 'react-bootstrap';
+import LabelCustomerInformation from 'app/components/home/LabelCustomerInformation';
 
 class BlockOrderListBodyRow extends Component {
   renderItemNameListWithQuantity(order) {
@@ -45,6 +46,9 @@ class BlockOrderListBodyRow extends Component {
           {this.renderItemNameList(order)}
           </div>
           </OverlayTrigger>
+        </td>
+        <td>
+          <LabelCustomerInformation buyer={order.user}/>
         </td>
         <td>
         {this.calculateTotalAmount(order)}₫

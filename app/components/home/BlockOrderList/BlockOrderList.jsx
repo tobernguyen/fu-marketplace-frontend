@@ -6,7 +6,6 @@ import BlockCurrentOrderList from 'app/components/home/BlockCurrentOrderList';
 import BlockOrderListBody from 'app/components/home/BlockOrderListBody';
 import BlockOrderListFooter from 'app/components/home/BlockOrderListFooter';
 import { injectIntl } from 'react-intl';
-import NoOrderSeller from 'app/components/home/NoOrderSeller';
 
 
 class BlockOrderList extends Component {
@@ -62,22 +61,18 @@ class BlockOrderList extends Component {
     return (
       <div>
         <BlockManageOrderHeader isCurrent={this.state.isCurrent} changeOrderListDisplay={this.changeOrderListDisplay}/>
-        {
-          orders.length === 0 ? <NoOrderSeller /> : (
-            <div className="block-order-list clearfix">
-            <BlockOrderListHeader shopID={shopID}/>
-            <BlockOrderListBody
-              orders={orders}
-              viewOrder={this.props.viewOrder}/>
-            <BlockOrderListFooter
-              shopID={shopID}
-              query={query}
-              hasNextPage={hasNextPage}
-              changePageSize={changePageSize}
-              />
-            </div>
-          )
-        }
+        <div className="block-order-list clearfix">
+          <BlockOrderListHeader shopID={shopID}/>
+          <BlockOrderListBody
+            orders={orders}
+            viewOrder={this.props.viewOrder}/>
+          <BlockOrderListFooter
+            shopID={shopID}
+            query={query}
+            hasNextPage={hasNextPage}
+            changePageSize={changePageSize}
+            />
+        </div>
       </div>
     )
   }

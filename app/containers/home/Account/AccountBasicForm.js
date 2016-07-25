@@ -20,7 +20,8 @@ const mapStateToProps = (state) => {
     initialValues: {
       room:   user.currentUser ? user.currentUser.room : '',
       phone:  user.currentUser ? user.currentUser.phone: ''
-    }
+    },
+    avatarUploading: user.avatarUploading
   }
 };
 

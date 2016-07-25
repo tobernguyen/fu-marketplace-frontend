@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { Link } from 'react-router';
 import './BlockSellingItem.scss';
+import { FormattedNumber } from 'react-intl';
 
 export default class BlockSellingItem extends Component {
   constructor(props) {
@@ -26,7 +27,7 @@ export default class BlockSellingItem extends Component {
                 <Link to={updateURL} className="name">
                   {item.name}
                 </Link>
-                <span className="price">{item.price} ₫</span>
+                <span className="price"><FormattedNumber value={item.price}/> ₫</span>
               </div>
             </div>
           </div>

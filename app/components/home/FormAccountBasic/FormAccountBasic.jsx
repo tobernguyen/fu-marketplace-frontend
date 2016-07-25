@@ -54,7 +54,7 @@ class FormAccountBasic extends Component {
   }
 
   render() {
-    const { fields: { room, phone }, handleSubmit, submitting, currentUser, dirty } = this.props;
+    const { fields: { room, phone }, handleSubmit, submitting, currentUser, dirty, avatarUploading } = this.props;
     const fullName = currentUser.fullName || '';
     const email = currentUser.email || '';
     const { formatMessage } = this.props.intl;
@@ -68,6 +68,9 @@ class FormAccountBasic extends Component {
             <span className="camera-icon">
               <i className="fa fa-camera fa-2x" />
             </span>
+            {avatarUploading && <span className="uploading-avatar">
+              <i className="fa fa-spinner fa-spin fa-2x fa-fw"/>
+            </span>}
           </div>
           <div className="col-md-7 user-info">
             <div className="header">

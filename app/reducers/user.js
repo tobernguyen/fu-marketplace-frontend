@@ -8,7 +8,8 @@ import _ from 'lodash';
 const INITIAL_STATE = {
   currentUser: {},
   currentViewedShop: {},
-  cartItems: []
+  cartItems: [],
+  avatarUploading: false
 };
 
 export const user = (state = INITIAL_STATE, action) => {
@@ -20,10 +21,15 @@ export const user = (state = INITIAL_STATE, action) => {
       });
     case UserActionTypes.UPLOAD_AVATAR_SUCCESS:
       const newAvatar = response.avatar;
-      let modifiedResponse = response;
-      modifiedResponse.avatar = newAvatar;
       return _.assign({}, state, {
-        currentUser: modifiedResponse
+        currentUser: _.assign({}, state.currentUser, {
+          avatar: newAvatar
+        }),
+        avatarUploading: false
+      });
+    case UserActionTypes.UPLOAD_AVATAR_REQUEST:
+      return _.assign({}, state, {
+        avatarUploading: true
       });
     case UserActionTypes.UPDATE_USER_INFO_SUCCESS:
       return _.assign({}, state, {
@@ -67,7 +73,8 @@ export const user = (state = INITIAL_STATE, action) => {
     case UserActionTypes.UPDATE_USER_INFO_FAILURE:
     case UserActionTypes.UPLOAD_IDENTITY_PHOTO_FAILURE:
       return _.assign({}, state, {
-        error: error
+        error: error,
+        avatarUploading: false
       });
     case UserActionTypes.UPLOAD_IDENTITY_PHOTO_SUCCESS:
       return _.assign({}, state, {

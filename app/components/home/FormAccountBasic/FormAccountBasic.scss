@@ -31,6 +31,17 @@
         opacity: .4;
       }
     }
+
+    .uploading-avatar {
+      position: absolute;
+      bottom: 5px;
+      left: 15px;
+
+      i {
+        color: #FFF;
+      }
+    }
+
     &:hover {
       .camera-icon {
         i {

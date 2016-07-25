@@ -2,8 +2,10 @@ import React, { Component, PropTypes } from 'react';
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import './BlockSellingItemForUser.scss';
 import classNames from 'classnames';
+import { messages } from './BlockSellingItemForUser.i18n';
+import { FormattedMessage, FormattedNumber, injectIntl } from 'react-intl';
 
-export default class BlockSellingItemForUser extends Component {
+class BlockSellingItemForUser extends Component {
   constructor(props) {
     super(props);
 
@@ -26,13 +28,13 @@ export default class BlockSellingItemForUser extends Component {
     );
 
     const isAddedToCart = (itemIndex !== -1);
-
+    const { formatMessage } = this.props.intl;
 
     return (
       <div className="add-to-cart">
           <span
             onClick={this.handleAddToCard}
-            title={ isAddedToCart ? 'Remove from cart' : 'Add to cart' }
+            title={ isAddedToCart ? formatMessage(messages.removeFromCart) : formatMessage(messages.addToCart) }
             className={classNames({ 'added': isAddedToCart })}>
             <i className="fa fa-shopping-bag" />
           </span>
@@ -53,9 +55,9 @@ export default class BlockSellingItemForUser extends Component {
               <img src={item.image} />
               {shopOpening && <div className="actions">
                 <p>
-                  <span onClick={this.handleBuyNow}>
-                    Mua ngay
-                  </span>
+                  <strong className="buyNow" onClick={this.handleBuyNow}>
+                    <FormattedMessage {...messages.buyNow} />
+                  </strong>
                 </p>
               </div>}
             </a>
@@ -68,13 +70,12 @@ export default class BlockSellingItemForUser extends Component {
                         <span className="name">
                           {item.name}
                         </span>
-                      <span className="price">{item.price} ₫</span>
+                      <span className="price"><FormattedNumber value={item.price}/> ₫</span>
                     </div>
                   </td>
                   {shopOpening && <td>
                     {this.renderAddCartButton(item.id)}
                   </td>}
-
                 </tr>
                 </tbody>
               </table>
@@ -86,10 +87,11 @@ export default class BlockSellingItemForUser extends Component {
   }
 }
 
-
 BlockSellingItemForUser.propTypes = {
   item:       PropTypes.object.isRequired,
   addToCard:  PropTypes.func.isRequired,
   buyNow:     PropTypes.func.isRequired,
   cartItems:  PropTypes.array.isRequired
 };
+
+export default injectIntl(BlockSellingItemForUser);

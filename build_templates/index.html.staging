@@ -12,6 +12,7 @@
     OneSignal.push(["init", {
       appId: "dd4c1ce8-f2df-416d-a3cd-5dd36268a0ee",
       autoRegister: false,
+      persistNotification: false,
       notifyButton: {
         enable: false /* Set to false to hide */
       }

@@ -3,7 +3,6 @@ import { FormattedMessage, FormattedTime, FormattedNumber, FormattedRelative, in
 import { messages } from 'app/components/home/BlockMyOrder/BlockMyOrder.i18n';
 import _ from 'lodash';
 import OrderStatus from 'app/shared/orderStatus';
-import BlockStars from 'app/components/home/BlockStars';
 import LabelOrderStatus from 'app/components/home/LabelOrderStatus';
 
 class BlockMyOrderRow extends Component {
@@ -11,10 +10,6 @@ class BlockMyOrderRow extends Component {
     super(props);
 
 
-    this.rateOrder = (rate) => {
-      const { order } = this.props;
-      this.props.rateOrder(order.id, rate);
-    }
   }
 
   renderItemNameList(order) {
@@ -48,17 +43,6 @@ class BlockMyOrderRow extends Component {
           <button type="button" className="btn order-status btn-cancel" onClick={() => this.props.openModal(order.id)}>
             <FormattedMessage {...messages.myOrder.button.abort} />
           </button>
-        );
-        break;
-      case OrderStatus.COMPLETED:
-      case OrderStatus.ABORTED:
-        output = (
-          <BlockStars
-            name={`rate-order-${order.id}`}
-            value={order.rate || 0}
-            onStarClick={this.rateOrder}
-            key={order.id}
-          />
         );
         break;
       case OrderStatus.REJECTED:

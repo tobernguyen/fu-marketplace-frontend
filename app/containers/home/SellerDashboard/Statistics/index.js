@@ -29,6 +29,10 @@ class Statistics extends Component {
       if (this.props[STATISTIC_MODE[mode]]['updatedAt'] === null) {
         this.props.getShopStatistics(this.props.params.shopID, STATISTIC_MODE[mode]);
       }
+    };
+
+    this.reloadData = () => {
+      this.props.getShopStatistics(this.props.params.shopID, STATISTIC_MODE[this.state.activeMode]);
     }
   }
 
@@ -40,7 +44,7 @@ class Statistics extends Component {
 
   render() {
     const { activeMode } = this.state;
-    const { ordersStatistic, salesStatistic, itemSoldStatistic } = this.props;
+    const { ordersStatistic, salesStatistic, itemSoldStatistic, fetchingData } = this.props;
     return (
       <div className="container home-body">
         <div className="seller-dashboard">
@@ -51,10 +55,10 @@ class Statistics extends Component {
                 statisticModes={this.state.statisticModes}
                 switchMode={this.handleSwitchMode} />
             </div>
-            <div className="row">
-              {activeMode === 0 && <BlockSalesStatistic salesStatistic={salesStatistic} />}
-              {activeMode === 1 && <BlockOrdersStatistic ordersStatistic={ordersStatistic} />}
-              {activeMode === 2 && <BlockItemSoldStatistic itemSoldStatistic={itemSoldStatistic} />}
+            <div className="row statistic-container">
+              {activeMode === 0 && <BlockSalesStatistic fetchingData={fetchingData} reloadData={this.reloadData} salesStatistic={salesStatistic} />}
+              {activeMode === 1 && <BlockOrdersStatistic fetchingData={fetchingData} reloadData={this.reloadData} ordersStatistic={ordersStatistic} />}
+              {activeMode === 2 && <BlockItemSoldStatistic fetchingData={fetchingData} reloadData={this.reloadData} itemSoldStatistic={itemSoldStatistic} />}
             </div>
           </div>
           <div className="col-md-3">
@@ -75,7 +79,8 @@ const mapStateToProps = (state) => {
     sellerShop: shop.sellerShop,
     ordersStatistic: calculateOrdersStatisticData(state),
     salesStatistic: calculateSalesStatistic(state),
-    itemSoldStatistic: calculateItemSoldStatistic(state)
+    itemSoldStatistic: calculateItemSoldStatistic(state),
+    fetchingData: statistic.fetchingData
   }
 };
 

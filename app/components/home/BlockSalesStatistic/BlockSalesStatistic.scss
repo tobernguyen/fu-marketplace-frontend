@@ -1,0 +1,22 @@
+.statistic {
+  .last-updated-at {
+    text-align: center;
+    margin: 15px 0 5px 0;
+    color: #292929;
+    span {
+      color: #303030;
+      font-weight: 700;
+    }
+  }
+  .refresh-btn {
+    margin-left: 10px;
+    padding: 3px 8px 2px;
+    i {
+      font-size: 18px;
+    }
+  }
+}
+
+.block-item-sold-statistic {
+  padding: 0 4px 0 4px;
+}

@@ -34,7 +34,6 @@ class ContainerListPromotion extends Component {
 
   componentWillReceiveProps(nextProps) {
     const { page, size } = nextProps.location.query;
-
     if(page != this.state.page || size != this.state.size) {
       this.props.adminGetShopPromotionCampaign(page, size);
       this.setState({

@@ -41,7 +41,6 @@ const initialState = {
 };
 
 export const admin = (state = initialState, action) => {
-  console.log(action);
   const { type, response } = action;
   switch (type) {
     case AdminActionTypes.ADMIN_GET_USERS_REQUEST:
@@ -354,7 +353,8 @@ export const admin = (state = initialState, action) => {
         }
       });
     case  AdminActionTypes.ADMIN_GET_REQUESTS_SUCCESS:
-      return _.merge({}, state, {
+      console.log(action);
+      return _.assign({}, state, {
         requestManagement: {
           isFetching: false,
           requestList: response.shopOpeningRequests

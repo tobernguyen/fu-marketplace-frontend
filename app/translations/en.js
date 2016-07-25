@@ -191,5 +191,7 @@ export default {
   'admin.async.success.rejectRequest': 'Reject request successfully',
   'requestList.noRequest': 'There is not any request',
   'search.form.placeholder': 'Search',
-  'promotionList.noPromotion': 'There is no promotion campaign'
+  'promotionList.noPromotion': 'There is no promotion campaign',
+  'ticketList.tableFooter.pageSizeUnit': 'tickets',
+  'ticketList.noTicket': 'There is no report ticket'
 };

@@ -52,7 +52,8 @@ export const ticket = (state = INITIAL_STATE, action) => {
     case TicketActionTypes.ADMIN_GET_TICKET_REQUEST:
       return _.merge({}, state, {
         isFetching: true,
-        selectedTicket: {}
+        isFetchingShop: true,
+        isFetchingUser: true
       });
     case TicketActionTypes.ADMIN_GET_TICKET_SUCCESS:
       return _.merge({}, state, {
@@ -168,6 +169,10 @@ export const ticket = (state = INITIAL_STATE, action) => {
         isSubmitting: false,
         isFetching: false,
         shouldUpdateTicketList: true
+      });
+    case TicketActionTypes.ADMIN_SELECT_TICKET:
+      return _.merge({}, state,{
+        selectedTicket: action.payload
       });
     default:
       return state;

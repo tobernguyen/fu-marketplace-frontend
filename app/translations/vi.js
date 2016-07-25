@@ -456,6 +456,8 @@ export default {
   'admin.async.success.acceptRequest': 'Chấp nhận yêu cầu thành công',
   'admin.async.success.rejectRequest': 'Từ chối yêu cầu thành công',
   'requestList.noRequest': 'Không có yêu cầu',
-  'shopList.tableFooter.pageSizeUnit': 'yêu cầu',
-  'promotionList.noPromotion': 'Không có chiến dịch quảng bá'
+  'requestList.tableFooter.pageSizeUnit': 'yêu cầu',
+  'promotionList.noPromotion': 'Không có chiến dịch quảng bá',
+  'ticketList.tableFooter.pageSizeUnit': 'báo cáo',
+  'ticketList.noTicket': 'Không có báo cáo sai phạm'
 };

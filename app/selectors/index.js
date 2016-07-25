@@ -287,7 +287,7 @@ export const getCurrentViewedShop = createSelector(
   currentViewedShopSelector,
   (currentViewedShop) => {
     const shopInfo = _.pickBy(currentViewedShop, (value, key) => {
-      return _.indexOf(['items', 'shipPlaces', 'seller', 'groupItems', 'ownerId'], key) === -1
+      return _.indexOf(['items', 'shipPlaces', 'seller', 'groupItems'], key) === -1
     });
     const seller = _.get(currentViewedShop, 'seller');
     const sellingItems = _.get(currentViewedShop, 'groupItems');

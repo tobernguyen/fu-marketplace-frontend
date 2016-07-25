@@ -184,5 +184,6 @@ export default {
   'ticketStatus.closed': 'Your report about <strong>#{orderId}</strong> at <strong>{shopName}</strong> was be closed.',
   'item.buyNow': 'Buy now',
   'item.addToCart': 'Add to cart',
-  'item.removeFromCart': 'Remove from cart'
+  'item.removeFromCart': 'Remove from cart',
+  'search.form.placeholder': 'Search'
 };

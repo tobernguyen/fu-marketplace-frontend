@@ -1,13 +1,13 @@
 import React, { Component, PropTypes } from 'react';
 import './Header.scss';
-import { Navbar, Nav, NavDropdown, MenuItem, FormGroup, FormControl, Button, NavItem } from 'react-bootstrap';
+import { Navbar, Nav, NavDropdown, MenuItem, FormGroup, FormControl, Button } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import { links } from 'app/shared/links';
 import BlockNotificationDropdown from '../BlockNotificationDropdown';
 import { Link } from 'react-router';
 
-export default class Header extends Component {
+class Header extends Component {
   constructor(props) {
     super(props);
 
@@ -72,10 +72,12 @@ export default class Header extends Component {
         {shops instanceof Array && shops.map((shop) =>
           <LinkContainer key={shop.id} to={`/dashboard/shops/${shop.id}`}>
             <MenuItem eventKey={3.2}>
-              <i className="shop-init">{shop.name[0]}</i> {shop.name}
+              <i className="shop-init">{shop.name[0]}</i>
+              {shop.name}
             </MenuItem>
           </LinkContainer>
         )}
+        <MenuItem divider />
         <LinkContainer to='/shops/request_create'>
           <MenuItem eventKey={3.3}>
             <i className="fa fa-flag-o"/>
@@ -90,15 +92,6 @@ export default class Header extends Component {
         <MenuItem eventKey={3.5} onSelect={onSignOut}>
           <i className="fa fa-sign-in"/>
           <FormattedMessage {...links.logOut} />
-        </MenuItem>
-        <MenuItem divider />
-        <MenuItem eventKey={3.6}>
-          <i className="fa fa-life-ring"/>
-          <FormattedMessage {...links.support} />
-        </MenuItem>
-        <MenuItem eventKey={3.7}>
-          <i className="fa fa-bug"/>
-          <FormattedMessage {...links.reportIssue} />
         </MenuItem>
       </NavDropdown>
     )
@@ -115,6 +108,8 @@ export default class Header extends Component {
       clearNotifications,
       unreadCount
     } = this.props;
+
+    const { formatMessage } = this.props.intl;
 
     return (
       <div className="home-header">
@@ -133,7 +128,7 @@ export default class Header extends Component {
                 <FormControl
                   type="text"
                   ref="keyword"
-                  placeholder="Search"
+                  placeholder={formatMessage({id: 'search.form.placeholder', defaultMessage: 'search'})}
                   value={this.state.keyword}
                   onKeyPress={this.handleKeyPress}
                   onChange={this.handleKeywordChange} />
@@ -143,11 +138,11 @@ export default class Header extends Component {
               </Button>
             </Navbar.Form>}
             <Nav pullRight>
-              <LinkContainer to='/orders'>
-                <NavItem className="navbar-orders" eventKey={1} href="#">
+              <li className="navbar-orders">
+                <Link to='/orders'>
                   <i className="fa fa-list-ol"/> <FormattedMessage {...links.myOrders} />
-                </NavItem>
-              </LinkContainer>
+                </Link>
+              </li>
               <BlockNotificationDropdown
                 clearNotifications={clearNotifications}
                 notifications={notifications}
@@ -172,9 +167,12 @@ Header.propTypes = {
   notifications: PropTypes.array.isRequired,
   onNotificationClick: PropTypes.func.isRequired,
   markAsAllRead: PropTypes.func.isRequired,
-  loadMoreNotifications: PropTypes.func.isRequired
+  loadMoreNotifications: PropTypes.func.isRequired,
+  intl: intlShape
 };
 
 Header.defaultProps = {
   currentUser: {}
 };
+
+export default injectIntl(Header);

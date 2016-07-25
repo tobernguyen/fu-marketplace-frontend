@@ -32,6 +32,11 @@ const validate = (values, props) => {
       id: 'shopItem.price.validation.number',
       defaultMessage: 'price must be number'
     };
+  } else if (values.price < 0) {
+    errors.price = {
+      id: 'shopItem.price.validation.notNegative',
+      defaultMessage: 'price must be greater than 0'
+    };
   }
 
   if (!props.updateMode && !values.imageData) {

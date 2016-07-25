@@ -29,7 +29,7 @@ export default class BlockSellerDashboardSideBar extends Component {
 
   componentDidMount() {
     const { opening } = this.props.sellerShop;
-    if (opening && (this.state.opening !== opening)) {
+    if (opening !== undefined && (this.state.opening !== opening)) {
       this.setState({
         opening: opening
       })
@@ -39,7 +39,7 @@ export default class BlockSellerDashboardSideBar extends Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps.sellerShop) {
       const { opening } = nextProps.sellerShop;
-      if (opening && (this.state.opening !== opening)) {
+      if (opening !== undefined && this.state.opening !== opening) {
         this.setState({
           opening: opening
         })
@@ -49,7 +49,6 @@ export default class BlockSellerDashboardSideBar extends Component {
 
   render() {
     const shopID = this.props.sellerShop.id;
-
     return (
       <ListGroup className="block-seller-dashboard-sidebar">
         <ListGroupItem href="#">
@@ -137,5 +136,6 @@ export default class BlockSellerDashboardSideBar extends Component {
 
 
 BlockSellerDashboardSideBar.propTypes = {
-  sellerShop: PropTypes.object.isRequired
+  sellerShop: PropTypes.object.isRequired,
+  shopInfoChanged: PropTypes.func.isRequired
 };

@@ -1,23 +1,10 @@
 import React, { Component } from 'react';
-import LabelOrderStatus from 'app/components/home/LabelOrderStatus';
-import { FormattedMessage, FormattedNumber, FormattedRelative, injectIntl } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { messages } from 'app/components/home/BlockOrderList/BlockOrderList.i18n';
-import _ from 'lodash';
+
+import BlockOrderListBodyRow from './BlockOrderListBodyRow.jsx';
 
 class BlockOrderListBody extends Component {
-  renderItemNameList(order) {
-    let names = [];
-    order.orderLines.map(orderLine => {
-      names = _.concat(names, orderLine.item.name);
-    });
-    return _.toString(names);
-  }
-  calculateTotalAmount(order) {
-    const total = _.reduce(order.orderLines, (sum, order) => {
-      return sum + (order.item.price * order.quantity);
-    }, 0);
-    return <FormattedNumber value={total}/>;
-  }
   render() {
     return (
       <div className="body clearfix">
@@ -36,27 +23,7 @@ class BlockOrderListBody extends Component {
           <tbody>
           {
             this.props.orders.map(order =>
-              <tr key={order.id}>
-                <td>{order.id}</td>
-                <td className="order-item-list">
-                {this.renderItemNameList(order)}
-                </td>
-                <td>
-                {this.calculateTotalAmount(order)}₫
-                </td>
-                <td>
-                {order.shipAddress}
-                </td>
-                <td>
-                <FormattedRelative value={new Date(order.createdAt)} />
-                </td>
-                <td>
-                  <LabelOrderStatus status={order.status}/>
-                </td>
-                <td>
-                  <button className="btn btn-warning" onClick={() => this.props.viewOrder(order)}><i className="fa fa-eye"></i></button>
-                </td>
-              </tr>
+              <BlockOrderListBodyRow key={order.id} order={order} viewOrder={this.props.viewOrder}/>
             )
           }
           </tbody>
@@ -66,4 +33,4 @@ class BlockOrderListBody extends Component {
   }
 }
 
-export default injectIntl(BlockOrderListBody);
+export default BlockOrderListBody;

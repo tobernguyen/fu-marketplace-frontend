@@ -18,7 +18,6 @@ class Home extends Component {
     super(props);
 
     this.state = {
-      query: null,
       notification: null
     };
 
@@ -27,7 +26,7 @@ class Home extends Component {
     this.handleSearch = (keyword) => {
       this.props.router.push({
         pathname: '/',
-        query: _.assign({}, this.state.query, {
+        query: _.assign({}, this.props.query, {
           keyword: keyword
         })
       })
@@ -74,6 +73,7 @@ class Home extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
+
     if (nextProps.error) {
       const { status } = nextProps.error;
       if (status === 401) {
@@ -104,7 +104,7 @@ class Home extends Component {
         <NavigationBar
           displaySearch={true}
           handleSearch={this.handleSearch}
-          query={this.state.query} />
+          query={this.props.query} />
 
         {this.props.children}
 

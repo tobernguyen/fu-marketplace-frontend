@@ -45,7 +45,6 @@ export default class Header extends Component {
     const {
       onSignOut,
       currentUser: {
-        roles,
         fullName,
         shops
       },

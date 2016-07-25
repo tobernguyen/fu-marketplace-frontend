@@ -105,7 +105,6 @@ class NavigationBar extends Component {
   }
 
 
-
   componentWillReceiveProps(nextProps) {
     const { query, socket } = nextProps;
     let keyword = '';

@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { getCurrentViewedShop, getUser } from 'app/selectors';
 import BlockShopReviews from 'app/components/home/BlockShopReviews';
-import { rateShop, getShopReviews } from 'app/actions/shop';
+import { rateShop, getShopReviews, clearReviewStatus } from 'app/actions/shop';
 
 class ShopReviews extends Component {
 
@@ -60,6 +60,7 @@ class ShopReviews extends Component {
         </Modal.Header>
         <Modal.Body>
           <BlockShopReviews
+            clearReviewStatus={this.props.clearReviewStatus}
             reviews={this.props.reviews}
             reviewStatus={this.props.reviewStatus}
             handleSubmitReview={this.handleSubmitReview}
@@ -86,6 +87,7 @@ const mapStateToProps = (state) => {
 
 export default connect(mapStateToProps, {
   rateShop,
-  getShopReviews
+  getShopReviews,
+  clearReviewStatus
 })(ShopReviews)
 

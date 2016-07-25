@@ -26,6 +26,10 @@ export default class BlockShopReviews extends Component {
     }
   }
 
+  componentWillUnmount() {
+    this.props.clearReviewStatus();
+  }
+
   render() {
     const { shop, seller, currentUser, reviews } = this.props;
     let ownerView = false;

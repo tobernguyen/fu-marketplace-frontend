@@ -298,6 +298,11 @@ export const rateShop = (shopID, rateValue) => {
   }
 };
 
+export const CLEAR_REVIEW_STATUS = 'CLEAR_REVIEW_STATUS';
+export const clearReviewStatus = () => ({
+  type: CLEAR_REVIEW_STATUS
+});
+
 
 export const USER_GETS_SHOP_REVIEWS_REQUEST = 'USER_GETS_SHOP_REVIEWS_REQUEST';
 export const USER_GETS_SHOP_REVIEWS_SUCCESS = 'USER_GETS_SHOP_REVIEWS_SUCCESS';

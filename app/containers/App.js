@@ -9,6 +9,8 @@ import {
 import { bindActionCreators } from 'redux';
 import WelcomePage from './home/WelcomePage';
 
+const ADMIN_PATH = '/admin';
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -20,7 +22,6 @@ class App extends Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps.shouldUpdateAuthStatus) {
       this.props.checkAuthStatus();
-      // Set shouldUpdateAuthStatus state to false
       this.props.authStatusIsUpdated();
     }
   }
@@ -30,9 +31,13 @@ class App extends Component {
   }
 
   render() {
-    const { language, children, isAuthenticated } = this.props;
+    const { language, children, isAuthenticated, location: { pathname } } = this.props;
+    let inAdminPath = false;
+    if (pathname && pathname.substring(0, ADMIN_PATH.length) === ADMIN_PATH) {
+      inAdminPath = true;
+    }
     let page;
-    if (isAuthenticated) {
+    if (isAuthenticated || inAdminPath) {
       page = children;
     } else {
       page = <WelcomePage />

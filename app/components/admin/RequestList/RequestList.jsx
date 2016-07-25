@@ -16,7 +16,7 @@ class RequestList extends Component {
   }
 
   render() {
-    const {page = 1, size = 10, changePageSize } = this.props;
+    const {page = 1, size = 20, changePageSize } = this.props;
     const previousButtonClass = classNames({
       'disabled': Number(page) === 1
     });
@@ -48,9 +48,9 @@ class RequestList extends Component {
             <label>
               <FormattedMessage {...messages.requestList.tableFooter.pageSize} />
               <select className="form-control" onChange={changePageSize} value={size}>
-                <option value="10">10</option>
-                <option value="15">15</option>
                 <option value="20">20</option>
+                <option value="50">50</option>
+                <option value="100">100</option>
               </select>
               <FormattedMessage {...messages.requestList.tableFooter.pageSizeUnit}/>
             </label>

@@ -41,6 +41,7 @@ const initialState = {
 };
 
 export const admin = (state = initialState, action) => {
+  console.log(action);
   const { type, response } = action;
   switch (type) {
     case AdminActionTypes.ADMIN_GET_USERS_REQUEST:
@@ -375,14 +376,17 @@ export const admin = (state = initialState, action) => {
       return _.merge({}, state, {
         requestManagement: {
           isSubmitting: false,
-          submitResult: 'OK'
+          submitResult: {
+            status: 200,
+            message_code: AsyncResultCode.ACCEPT_REQUEST_SUCCESS
+          }
         }
       });
     case AdminActionTypes.ADMIN_ACCEPT_REQUEST_FAILURE:
       return _.merge({}, state, {
         requestManagement: {
           isSubmitting: false,
-          submitResult: response.message_code
+          submitResult: action.error
         }
       });
     case AdminActionTypes.ADMIN_REJECT_REQUEST_REQUEST:
@@ -395,14 +399,17 @@ export const admin = (state = initialState, action) => {
       return _.merge({}, state, {
         requestManagement: {
           isSubmitting: false,
-          submitResult: 'OK'
+          submitResult: {
+            status: 200,
+            message_code: AsyncResultCode.REJECT_REQUEST_SUCCESS
+          }
         }
       });
     case AdminActionTypes.ADMIN_REJECT_REQUEST_FAILURE:
       return _.merge({}, state, {
         requestManagement: {
           isSubmitting: false,
-          submitResult: response.message_code
+          submitResult: action.error
         }
       });
     case AdminActionTypes.ADMIN_CHANGE_PASSWORD_REQUEST:

@@ -1,0 +1,6 @@
+{
+  "name": "AlertSubmitResult",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./AlertSubmitResult.jsx"
+}

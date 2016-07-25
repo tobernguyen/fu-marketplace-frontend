@@ -1,5 +1,8 @@
 export const messages = {
   requestList: {
+    noRequest: {
+      id: 'requestList.noRequest'
+    },
     tableFooter: {
       pageSize: {
         id: 'userList.tableFooter.pageSize',

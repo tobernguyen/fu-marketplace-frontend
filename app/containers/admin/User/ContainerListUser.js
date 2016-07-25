@@ -13,7 +13,7 @@ class UserListContainer extends React.Component {
 
     this.state = {
       page: page || 1,
-      size: size || 10
+      size: size || 20
     };
 
     this.changePageSize = (e) => {

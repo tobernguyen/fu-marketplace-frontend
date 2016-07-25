@@ -4,15 +4,14 @@ import {
   FormGroup,
   FormControl,
   ControlLabel,
-  Button,
-  Alert
+  Button
 } from 'react-bootstrap';
-import AsyncResultCode from 'app/shared/asyncResultCodes';
 import LoadingSpinner from 'app/components/admin/LoadingSpinner';
 import { messages } from 'app/components/admin/FormResponseToRequest/FormResponseToRequest.i18n';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import requestStatus from 'app/shared/requestStatus';
 import LabelRequestStatus from 'app/components/admin/LabelRequestStatus';
+import AlertSubmitResult from 'app/components/admin/AlertSubmitResult';
 
 class FormResponseToRequest extends React.Component {
   constructor(props) {
@@ -22,7 +21,11 @@ class FormResponseToRequest extends React.Component {
       isValid: false,
       responseToBeSent: {
         responseType: 'accept',
-        responseMessage: ''
+        responseMessage: {
+          value: '',
+          error: '',
+          hasErrors: false
+        }
       },
       request: {}
     }
@@ -32,11 +35,15 @@ class FormResponseToRequest extends React.Component {
     this.renderResponseForm = this.renderResponseForm.bind(this);
 
     this.changeResponse = (e) => {
+      const { responseToBeSent } = this.state;
+      let isValid = true;
+      responseToBeSent['responseType'] = e.target.value;
+      if(e.target.value === 'reject') {
+        isValid = false;
+      }
       this.setState({
-        isValid: true,
-        responseToBeSent: {
-          responseType: e.target.value
-        }
+        isValid,
+        responseToBeSent
       });
     }
   }
@@ -51,10 +58,23 @@ class FormResponseToRequest extends React.Component {
   }
 
   handleOnChange(e) {
-    const responseToBeSent = this.state.responseToBeSent;
-    responseToBeSent[e.target.name] = e.target.value;
+    const { responseToBeSent } = this.state;
+    const { responseMessage } = responseToBeSent;
+    let isValid = true;
+    responseMessage['value'] = e.target.value;
+    responseMessage['error'] = '';
+    responseMessage['hasErrors'] = false;
+    if(e.target.value.trim().length == 0) {
+      responseMessage['error'] = 'Cannot be blank';
+      responseMessage['hasErrors'] = true;
+      isValid = false;
+    }
+
+    responseToBeSent.responseMessage = responseMessage;
+
     this.setState({
-      responseToBeSent
+      responseToBeSent,
+      isValid
     });
   }
 
@@ -62,22 +82,14 @@ class FormResponseToRequest extends React.Component {
     const { responseType, responseMessage } = this.state.responseToBeSent;
     let { request } = this.state;
     if(responseType === 'accept' ) {
-      this.props.acceptRequest(request.id, responseMessage);
-      request.status = 2;
-      this.setState({
-        request
-      });
+      this.props.acceptRequest(request.id, responseMessage.value);
     } else if (responseType === 'reject') {
-      this.props.rejectRequest(request.id, responseMessage);
-      request.status = 1;
-      this.setState({
-        request
-      });
+      this.props.rejectRequest(request.id, responseMessage.value);
     }
   }
   renderResponseForm() {
     const { isSubmitting, submitResult, intl: { formatMessage } } = this.props;
-    const { request, responseToBeSent: { responseType }, isValid } = this.state;
+    const { request, responseToBeSent: { responseType, responseMessage }, isValid } = this.state;
     if(request.status === requestStatus.PENDING) {
       return (
         <Col lg={9}>
@@ -108,23 +120,26 @@ class FormResponseToRequest extends React.Component {
           </FormGroup>
           {
             responseType == 'reject' && (
-              <FormGroup>
+              <FormGroup className={`${responseMessage.hasErrors ? 'has-error' : ''}`}>
                 <ControlLabel>
                   <FormattedMessage {...messages.formResponseToRequest.responseForm.fields.reason}/>
                 </ControlLabel>
                 <FormControl
                   name="responseMessage"
                   componentClass="textarea"
+                  value={responseMessage.value}
                   placeholder={formatMessage(messages.formResponseToRequest.responseForm.fields.reason)}
                   onChange={this.handleOnChange}
                   />
+                <div className="help-block">{responseMessage.error}</div>
               </FormGroup>
             )
           }
 
           <div className="form-actions">
-            {submitResult === 'OK' && <Alert bsStyle="success">Response submitted</Alert>}
-            {submitResult === AsyncResultCode.NOT_A_PENDING_REQUEST && <Alert bsStyle="danger">Error! Request is not a pending request</Alert>}
+            {submitResult !== '' &&
+              <AlertSubmitResult result={submitResult}/>
+            }
             <Button
               bsStyle="warning"
               onClick={this.handleSubmit}

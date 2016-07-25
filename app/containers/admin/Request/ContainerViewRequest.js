@@ -14,7 +14,7 @@ class ContainerViewRequest extends Component {
   }
 
   componentWillMount() {
-    this.props.adminGetRequests('?showAll=true');
+    this.props.adminGetRequests();
   }
 
   render() {

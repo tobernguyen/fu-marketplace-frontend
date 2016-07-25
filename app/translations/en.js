@@ -184,5 +184,10 @@ export default {
   'ticketStatus.closed': 'Your report about <strong>#{orderId}</strong> at <strong>{shopName}</strong> was be closed.',
   'item.buyNow': 'Buy now',
   'item.addToCart': 'Add to cart',
-  'item.removeFromCart': 'Remove from cart'
+  'item.removeFromCart': 'Remove from cart',
+  'admin.async.error.notAPendingRequest': 'This request is already responsed',
+  'admin.async.error.unknown': 'An error has occurred, please try again later',
+  'admin.async.success.acceptRequest': 'Accept request successfully',
+  'admin.async.success.rejectRequest': 'Reject request successfully',
+  'requestList.noRequest': 'There is not any request'
 };

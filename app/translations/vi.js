@@ -449,5 +449,10 @@ export default {
   'promotionList.tableHead.startDate': 'Ngày bắt đầu',
   'promotionList.tableHead.endDate': 'Ngày kết thúc',
   'promotionList.tableHead.type': 'Kiểu',
-  'promotionList.tableHead.action': 'Hành động'
+  'promotionList.tableHead.action': 'Hành động',
+  'admin.async.error.notAPendingRequest': 'Yêu cầu này đã được trả lời',
+  'admin.async.error.unknown': 'Có lỗi xảy ra, vui lòng thử lại sau',
+  'admin.async.success.acceptRequest': 'Chấp nhận yêu cầu thành công',
+  'admin.async.success.rejectRequest': 'Từ chối yêu cầu thành công',
+  'requestList.noRequest': 'Không có yêu cầu'
 };

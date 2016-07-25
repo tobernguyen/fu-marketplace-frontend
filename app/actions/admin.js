@@ -11,7 +11,7 @@ const adminRequestGetUsers = (filter) => ({
   }
 });
 
-export const adminGetUsers = (page = 1, size = 10) => {
+export const adminGetUsers = (page = 1, size = 20) => {
   const filter = `?page=${page}&size=${size}`
   return (dispatch) => {
     return dispatch(adminRequestGetUsers(filter));
@@ -139,7 +139,7 @@ const adminRequestGetShops = (filter) => ({
   }
 });
 
-export const adminGetShops = (page = 1, size = 10) => {
+export const adminGetShops = (page = 1, size = 20) => {
   const filter = `?page=${page}&size=${size}`
   return (dispatch) => {
     return dispatch(adminRequestGetShops(filter));
@@ -325,8 +325,8 @@ const adminRequestGetRequests = (filter) => ({
   }
 });
 
-export const adminGetRequests = (page = 1, size = 10, showAll = true) => {
-  const filter = `?size=${size}&page=${page}&showAll=${showAll}`;
+export const adminGetRequests = (page = 1, size = 20) => {
+  const filter = `?size=${size}&page=${page}`;
   return (dispatch) => {
     return dispatch(adminRequestGetRequests(filter));
   }

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import RequestList  from 'app/components/admin/RequestList';
+import NoRequest  from 'app/components/admin/RequestList/NoRequest.jsx';
 import { adminGetRequests } from 'app/actions/admin';
 import LoadingSpinner from 'app/components/admin/LoadingSpinner';
 import { withRouter } from 'react-router'
@@ -12,7 +13,7 @@ class ContainerListRequest extends Component {
 
     this.state = {
       page: page || 1,
-      size: size || 10
+      size: size || 20
     };
 
     this.changePageSize = (e) => {
@@ -28,7 +29,6 @@ class ContainerListRequest extends Component {
 
   componentWillReceiveProps(nextProps) {
     const { page, size } = nextProps.location.query;
-
     if(page != this.state.page || size != this.state.size) {
       this.props.adminGetRequests(page, size);
       this.setState({
@@ -41,13 +41,16 @@ class ContainerListRequest extends Component {
   render() {
     const { isFetching, requestList} = this.props.requestManagement;
     const { page, size} = this.state;
+    let output = '';
     if(isFetching) {
-      return <div className="text-center container-fluid">
+      output = <div className="text-center container-fluid">
         <LoadingSpinner />
       </div>;
     } else {
-      return (
-        <div>
+      if(requestList.length === 0) {
+        output = <NoRequest />
+      } else {
+        output = <div>
           <RequestList
             requests={requestList}
             page={page}
@@ -55,8 +58,11 @@ class ContainerListRequest extends Component {
             changePageSize={this.changePageSize}
             />;
         </div>
-      );
+      }
+
     }
+
+    return output;
   }
 }
 

@@ -9,6 +9,7 @@ export default {
   'navigation.logOut': 'Đăng xuất',
   'navigation.support': 'Hỗ trợ',
   'navigation.reportIssue': 'Báo cáo vấn đề',
+  'navigation.admin': 'Trang quản trị',
   'account.form.phone.placeholder': 'Số điện thoại',
   'account.form.phone.label': 'Điện thoại',
   'account.form.roomNo.placeholder': 'Số phòng KTX',
@@ -456,7 +457,6 @@ export default {
   'admin.async.success.acceptRequest': 'Chấp nhận yêu cầu thành công',
   'admin.async.success.rejectRequest': 'Từ chối yêu cầu thành công',
   'requestList.noRequest': 'Không có yêu cầu',
-  'requestList.tableFooter.pageSizeUnit': 'yêu cầu',
   'promotionList.noPromotion': 'Không có chiến dịch quảng bá',
   'ticketList.tableFooter.pageSizeUnit': 'báo cáo',
   'ticketList.noTicket': 'Không có báo cáo sai phạm'

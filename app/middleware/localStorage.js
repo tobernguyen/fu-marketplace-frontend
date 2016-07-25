@@ -18,6 +18,20 @@ export default () => next => action => {
         window.localStorage.setItem(adminAccessTokenKey, response.token);
       }
       break;
+    case ActionTypes.CURRENT_USER_SUCCESS:
+      const isAdmin = response.roles.indexOf('admin') > -1;
+      const currentAdminToken = window.localStorage.getItem(adminAccessTokenKey);
+      const currentUserToken = window.localStorage.getItem(accessTokenKey);
+      if (isAdmin) {
+        if (currentUserToken !== null && currentAdminToken === null) {
+          window.localStorage.setItem(adminAccessTokenKey, currentUserToken);
+        }
+      } else {
+        if (currentAdminToken !== null) {
+          window.localStorage.removeItem(adminAccessTokenKey);
+        }
+      }
+      break;
     case ActionTypes.ADMIN_SIGN_OUT:
       window.localStorage.removeItem(adminAccessTokenKey);
       break;

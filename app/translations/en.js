@@ -9,6 +9,7 @@ export default {
   'navigation.logOut': 'Log out',
   'navigation.support': 'Support',
   'navigation.reportIssue': 'Report an issue',
+  'navigation.admin': 'Admin area',
   'account.form.phone.placeholder': 'Phone number',
   'account.form.phone.label': 'Phone',
   'account.form.roomNo.placeholder': 'Room number',

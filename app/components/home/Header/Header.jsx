@@ -47,10 +47,16 @@ class Header extends Component {
       currentUser: {
         fullName,
         shops,
-        avatar
+        avatar,
+        roles
       },
       query
     } = this.props;
+
+    let isAdmin = false;
+    if (roles) {
+      isAdmin = roles.indexOf('admin') > -1;
+    }
 
     const titleNode = <div>
       <span className="user-avatar">
@@ -86,12 +92,18 @@ class Header extends Component {
           </MenuItem>
         </LinkContainer>
         <MenuItem divider />
-        <MenuItem eventKey={3.4}>
+        {isAdmin && <LinkContainer to='/admin'>
+          <MenuItem eventKey={3.4}>
+            <i className="fa fa-user-secret"/>
+            <FormattedMessage {...links.admin} />
+          </MenuItem>
+        </LinkContainer>}
+        <MenuItem eventKey={3.5}>
           <i className="fa fa-cog"/>
           <FormattedMessage {...links.settings} />
         </MenuItem>
         <LinkContainer to='/goodbye' onSelect={onSignOut}>
-          <MenuItem eventKey={3.5}>
+          <MenuItem eventKey={3.6}>
             <i className="fa fa-sign-in"/>
             <FormattedMessage {...links.logOut} />
           </MenuItem>

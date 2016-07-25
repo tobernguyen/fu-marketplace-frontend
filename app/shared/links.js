@@ -40,5 +40,11 @@ export const links = {
     id: 'navigation.reportIssue',
     description: 'Report Issue',
     defaultMessage: 'Report Issue'
+  },
+  admin: {
+    to: '/admin',
+    id: 'navigation.admin',
+    description: 'Admin CP',
+    defaultMessage: 'Admin CP'
   }
 };

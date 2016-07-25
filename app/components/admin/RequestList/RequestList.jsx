@@ -58,12 +58,12 @@ class RequestList extends Component {
           <div className="pull-right">
             <ul className="pager">
               <li className={previousButtonClass}>
-                <Link to='/admin/shops' query={{ page: Number(page) - 1, size}}>
+                <Link to='/admin/requests' query={{ page: Number(page) - 1, size}}>
                   <FormattedMessage {...messages.requestList.button.previous} />
                 </Link>
               </li>
               <li className={nextButtonClass}>
-              <Link to='/admin/shops' query={{ page: Number(page) + 1, size}}>
+              <Link to='/admin/requests' query={{ page: Number(page) + 1, size}}>
                 <FormattedMessage {...messages.requestList.button.next} />
               </Link>
               </li>

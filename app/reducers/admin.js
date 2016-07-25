@@ -353,11 +353,12 @@ export const admin = (state = initialState, action) => {
         }
       });
     case  AdminActionTypes.ADMIN_GET_REQUESTS_SUCCESS:
-      console.log(action);
       return _.assign({}, state, {
         requestManagement: {
           isFetching: false,
-          requestList: response.shopOpeningRequests
+          requestList: response.shopOpeningRequests,
+          submitResult: '',
+          isSubmitting: false
         }
       });
     case AdminActionTypes.ADMIN_GET_REQUESTS_FAILURE:

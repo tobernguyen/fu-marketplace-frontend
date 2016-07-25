@@ -162,6 +162,10 @@ export const shop = (state = INITIAL_STATE, action) => {
       return _.assign({}, state, {
         reviewStatus: 'shop.review.success'
       });
+    case ShopActionTypes.CLEAR_REVIEW_STATUS:
+      return _.assign({}, state, {
+        reviewStatus: null
+      });
     case ShopActionTypes.USER_RATES_SHOP_FAILURE:
       return _.assign({}, state, {
         reviewStatus: error.message_code

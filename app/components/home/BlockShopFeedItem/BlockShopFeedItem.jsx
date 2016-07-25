@@ -34,6 +34,14 @@ export default class BlockShopFeedItem extends Component {
     }
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.shop && nextProps.shop.avatar) {
+      this.setState({
+        thumbnail: nextProps.shop.avatar
+      })
+    }
+  }
+
   render() {
     const { query, shop: { id, name, description, categories, shipPlaces, opening, averageRating } } = this.props;
     let avatar = this.state.thumbnail;

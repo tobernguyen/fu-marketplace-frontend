@@ -15,7 +15,8 @@ class ShopsFeed extends Component {
 
     this.state = {
       query: null,
-      elements: []
+      elements: [],
+      wsLoaded: false
     };
 
     this.loadMore = (page) => {
@@ -69,7 +70,10 @@ class ShopsFeed extends Component {
       }
     }
 
-    if (socket) {
+    if (socket && !this.state.wsLoaded) {
+      this.setState({
+        wsLoaded: true
+      });
       socket.on(EVENTS.SHOP_FEED_UPDATE, (shop) => {
         this.props.updateShop(shop);
       });

@@ -33,4 +33,11 @@
       padding: 1px 6px;
     }
   }
+
+  .order-item-list {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 200px;
+  }
 }

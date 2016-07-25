@@ -38,7 +38,7 @@ class BlockOrderListBody extends Component {
             this.props.orders.map(order =>
               <tr key={order.id}>
                 <td>{order.id}</td>
-                <td>
+                <td className="order-item-list">
                 {this.renderItemNameList(order)}
                 </td>
                 <td>

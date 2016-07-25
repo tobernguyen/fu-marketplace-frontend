@@ -46,7 +46,7 @@ class Account extends Component {
     }
     return (
       <div>
-        <ModalHeader title="Tài khoản" subHeader="Thay đổi thông tin cơ bản."/>
+        <ModalHeader query={this.props.query} title="Tài khoản" subHeader="Thay đổi thông tin cơ bản."/>
         <div className="modal-body">
           <AccountBasicForm
             currentUser={this.props.currentUser}
@@ -60,10 +60,11 @@ class Account extends Component {
 }
 
 const mapStateToProps = (state) => {
-  const { user } = state;
+  const { user, common } = state;
   return {
     currentUser:  user.currentUser,
-    userUpdated:  user.userUpdated
+    userUpdated:  user.userUpdated,
+    query:        common.query
   }
 };
 

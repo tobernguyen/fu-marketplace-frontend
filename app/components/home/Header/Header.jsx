@@ -48,12 +48,13 @@ class Header extends Component {
         fullName,
         shops,
         avatar
-      }
+      },
+      query
     } = this.props;
 
     const titleNode = <div>
       <span className="user-avatar">
-        <img src={avatar}  />
+        <img src={avatar} />
       </span>
       <span className="user-title">
         {fullName || ''}
@@ -62,7 +63,7 @@ class Header extends Component {
 
     return (
       <NavDropdown eventKey={3} title={titleNode} id="basic-nav-dropdown" className="navbar-user" noCaret>
-        <LinkContainer to='/account'>
+        <LinkContainer to={{ pathname: '/account', query: query }}>
           <MenuItem eventKey={3.1}>
             <i className="fa fa-user"/>
             <FormattedMessage {...links.account} />
@@ -78,7 +79,7 @@ class Header extends Component {
           </LinkContainer>
         )}
         <MenuItem divider />
-        <LinkContainer to='/shops/request_create'>
+        <LinkContainer to={{ pathname: '/shops/request_create', query: query }}>
           <MenuItem eventKey={3.3}>
             <i className="fa fa-flag-o"/>
             <FormattedMessage {...links.openShop} />
@@ -89,10 +90,12 @@ class Header extends Component {
           <i className="fa fa-cog"/>
           <FormattedMessage {...links.settings} />
         </MenuItem>
-        <MenuItem eventKey={3.5} onSelect={onSignOut}>
-          <i className="fa fa-sign-in"/>
-          <FormattedMessage {...links.logOut} />
-        </MenuItem>
+        <LinkContainer to='/goodbye' onSelect={onSignOut}>
+          <MenuItem eventKey={3.5}>
+            <i className="fa fa-sign-in"/>
+            <FormattedMessage {...links.logOut} />
+          </MenuItem>
+        </LinkContainer>
       </NavDropdown>
     )
   }
@@ -106,7 +109,8 @@ class Header extends Component {
       hasMoreNotifications,
       loadMoreNotifications,
       clearNotifications,
-      unreadCount
+      unreadCount,
+      query
     } = this.props;
 
     const { formatMessage } = this.props.intl;
@@ -139,7 +143,7 @@ class Header extends Component {
             </Navbar.Form>}
             <Nav pullRight>
               <li className="navbar-orders">
-                <Link to='/orders'>
+                <Link to={{ pathname: '/orders', query: query }}>
                   <i className="fa fa-list-ol"/> <FormattedMessage {...links.myOrders} />
                 </Link>
               </li>

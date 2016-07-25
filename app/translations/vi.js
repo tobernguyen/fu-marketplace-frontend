@@ -64,6 +64,7 @@ export default {
   'shopItem.quantity.validation.number': 'Số lượng phải là số',
   'shopItem.price.validation.required': 'Hãy điền giá sản phẩm',
   'shopItem.price.validation.number': 'Giá phải là số',
+  'shopItem.price.validation.notNegative': 'Giá tiền phải lớn hơn 0',
   'shopItem.categoryId.validation.required': 'Hãy chọn thể loại cho sản phẩm',
   'shop.sellerInformation': 'Thông tin chủ shop',
   'shop.form.validation.phone.required': 'Hãy nhập số điện thoại',

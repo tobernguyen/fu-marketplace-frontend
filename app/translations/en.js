@@ -64,6 +64,7 @@ export default {
   'shopItem.quantity.validation.number': 'Quantity must be a number',
   'shopItem.price.validation.required': 'Please enter item price',
   'shopItem.price.validation.number': 'Price must be a number',
+  'shopItem.price.validation.notNegative': 'Price must be non-negative number',
   'shopItem.categoryId.validation.required': 'Please select category for item',
   'shop.sellerInformation': 'Shop owner information',
   'shop.form.validation.phone.required': 'Phone number required',

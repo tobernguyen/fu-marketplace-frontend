@@ -455,5 +455,7 @@ export default {
   'admin.async.error.unknown': 'Có lỗi xảy ra, vui lòng thử lại sau',
   'admin.async.success.acceptRequest': 'Chấp nhận yêu cầu thành công',
   'admin.async.success.rejectRequest': 'Từ chối yêu cầu thành công',
-  'requestList.noRequest': 'Không có yêu cầu'
+  'requestList.noRequest': 'Không có yêu cầu',
+  'shopList.tableFooter.pageSizeUnit': 'yêu cầu',
+  'promotionList.noPromotion': 'Không có chiến dịch quảng bá'
 };

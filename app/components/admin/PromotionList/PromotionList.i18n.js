@@ -1,5 +1,9 @@
 export const messages = {
   promotionList: {
+    noPromotion: {
+      id: 'promotionList.noPromotion',
+      defaultMessage: 'There is no promotion campaign'
+    },
     tableHead: {
       shop: {
         id: 'promotionList.tableHead.shop',
@@ -20,6 +24,26 @@ export const messages = {
       action: {
         id: 'promotionList.tableHead.action',
         defaultMessage: 'Action'
+      }
+    },
+    tableFooter: {
+      pageSize: {
+        id: 'userList.tableFooter.pageSize',
+        defaultMessage: 'Show'
+      },
+      pageSizeUnit: {
+        id: 'shopList.tableFooter.pageSizeUnit',
+        defaultMessage: 'promotions per page'
+      }
+    },
+    button: {
+      previous: {
+        id: 'userList.button.previous',
+        defaultMessage: 'Previous'
+      },
+      next: {
+        id: 'userList.button.next',
+        defaultMessage: 'Next'
       }
     }
   }

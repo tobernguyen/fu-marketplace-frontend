@@ -9,10 +9,6 @@ import { messages } from 'app/components/admin/ShopList/ShopList.i18n';
 
 
 class ShopList extends Component {
-  constructor(props, context) {
-    super(props, context);
-  }
-
   render() {
     const {page = 1, size = 20, changePageSize } = this.props;
     const previousButtonClass = classNames({

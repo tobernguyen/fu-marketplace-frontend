@@ -428,17 +428,17 @@ export const ADMIN_GET_SHOP_PROMOTION_CAMPAIGN_REQUEST = 'ADMIN_GET_SHOP_PROMOTI
 export const ADMIN_GET_SHOP_PROMOTION_CAMPAIGN_SUCCESS = 'ADMIN_GET_SHOP_PROMOTION_CAMPAIGN_SUCCESS';
 export const ADMIN_GET_SHOP_PROMOTION_CAMPAIGN_FAILURE = 'ADMIN_GET_SHOP_PROMOTION_CAMPAIGN_FAILURE';
 
-const adminRequestGetShopPromotionCampaign = () => ({
+const adminRequestGetShopPromotionCampaign = (page, size) => ({
   [CALL_API]: {
     types: [ADMIN_GET_SHOP_PROMOTION_CAMPAIGN_REQUEST, ADMIN_GET_SHOP_PROMOTION_CAMPAIGN_SUCCESS, ADMIN_GET_SHOP_PROMOTION_CAMPAIGN_FAILURE],
-    url: '/api/v1/admin/shopPromotionCampaigns',
+    url: `/api/v1/admin/shopPromotionCampaigns?page=${page}&size=${size}`,
     method: HTTP_METHODS.GET
   }
 });
 
-export const adminGetShopPromotionCampaign = () => {
+export const adminGetShopPromotionCampaign = (page = 1 ,size = 20) => {
   return (dispatch) => {
-    dispatch(adminRequestGetShopPromotionCampaign());
+    dispatch(adminRequestGetShopPromotionCampaign(page, size));
   }
 }
 

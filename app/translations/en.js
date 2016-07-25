@@ -190,5 +190,6 @@ export default {
   'admin.async.success.acceptRequest': 'Accept request successfully',
   'admin.async.success.rejectRequest': 'Reject request successfully',
   'requestList.noRequest': 'There is not any request',
-  'search.form.placeholder': 'Search'
+  'search.form.placeholder': 'Search',
+  'promotionList.noPromotion': 'There is no promotion campaign'
 };

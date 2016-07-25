@@ -37,7 +37,7 @@ class RequestCreateShop extends Component {
 
     return (
       <div className="request-create-shop">
-        <ModalHeader title={formatMessage(titles.openShop.title)}/>
+        <ModalHeader query={this.props.query} title={formatMessage(titles.openShop.title)}/>
         <div className="modal-body">
           {content}
         </div>
@@ -50,7 +50,8 @@ class RequestCreateShop extends Component {
 const mapStateToProps = (state) => {
   return {
     shopOpeningRequests: state.shop.shopOpeningRequests,
-    currentUser: getUser(state)
+    currentUser: getUser(state),
+    query: state.common.query
   }
 };
 

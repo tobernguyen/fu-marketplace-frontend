@@ -29,7 +29,7 @@ export default class BlockShopFeedItem extends Component {
 
     this.handleMouseLeave = () => {
       this.setState({
-        thumbnail: avatar
+        thumbnail: this.state.avatar
       })
     }
   }
@@ -37,6 +37,7 @@ export default class BlockShopFeedItem extends Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps.shop && nextProps.shop.avatar) {
       this.setState({
+        avatar: nextProps.shop.avatar,
         thumbnail: nextProps.shop.avatar
       })
     }

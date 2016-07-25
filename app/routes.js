@@ -2,7 +2,8 @@ import React from 'react';
 import {
   Route,
   IndexRoute,
-  IndexRedirect
+  IndexRedirect,
+  Redirect
 } from 'react-router';
 import { displayAsModal } from './containers/home/ModalComponent';
 import App from './containers/App';
@@ -68,6 +69,8 @@ export default (
         <Route path="shops/:shopID/orders" component={ManageOrders} />
       </Route>
     </Route>
+
+    <Redirect from="goodbye" to="/" />
 
     <Route name="admin" path="admin" component={Admin}>
       <IndexRedirect to="dashboard" />

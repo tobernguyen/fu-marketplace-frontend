@@ -84,10 +84,11 @@ class NavigationBar extends Component {
   }
 
   render () {
-    const { currentUser, handleSearch, displaySearch, notifications, hasMore, clearNotifications, unreadCount } = this.props;
+    const { currentUser, handleSearch, displaySearch, notifications, hasMore, clearNotifications, unreadCount, query } = this.props;
     return (
       <Header
         unreadCount={unreadCount}
+        query={query}
         clearNotifications={clearNotifications}
         loadMoreNotifications={this.loadMoreNotifications}
         onNotificationClick={this.onNotificationClick}
@@ -143,11 +144,12 @@ NavigationBar.propTypes = {
 
 const mapStateToProps = (state) => {
   return {
-    currentUser:            getUser(state),
-    notifications:          getOwnNotifications(state),
-    hasMore:                state.notification.hasMore,
-    socket:                 state.common.socket,
-    unreadCount:            state.notification.unreadCount
+    currentUser:    getUser(state),
+    notifications:  getOwnNotifications(state),
+    hasMore:        state.notification.hasMore,
+    socket:         state.common.socket,
+    unreadCount:    state.notification.unreadCount,
+    query:          state.common.query
   }
 };
 

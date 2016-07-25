@@ -49,7 +49,7 @@ class MyOrders extends Component {
       }, () => {
         this.props.userGetOrder(this.state.page, this.state.size);
       })
-    }
+    };
 
     this.renderBody = () => {
       const { page, size } = this.state;
@@ -89,7 +89,7 @@ class MyOrders extends Component {
   render() {
     return (
       <div>
-        <ModalHeader title="Đơn hàng" subHeader="Danh sách tất cả đơn hàng"/>
+        <ModalHeader query={this.props.query} title="Đơn hàng" subHeader="Danh sách tất cả đơn hàng"/>
         <div className="modal-body my-order">
         {this.renderBody()}
         </div>
@@ -102,7 +102,8 @@ const mapStateToProps = (state) => {
   return {
     orders: state.order.orders,
     ticket: state.ticket,
-    shouldUpdateOrderList: state.order.shouldUpdateOrderList
+    shouldUpdateOrderList: state.order.shouldUpdateOrderList,
+    query: state.common.query
   }
 };
 

@@ -45,14 +45,6 @@ class SideBar extends Component {
               <Link to="/admin" className={shortTitleClass}>FUM</Link>
             </li>
             <li>
-              <Link to="/admin/dashboard" activeClassName="active">
-                <i className="fa fa-th-large" />
-                <span>
-                  <FormattedMessage {...messages.sideBar.dashboard}/>
-                </span>
-              </Link>
-            </li>
-            <li>
               <Link to="/admin/users" activeClassName="active">
                 <i className="fa fa-users" />
                 <span>

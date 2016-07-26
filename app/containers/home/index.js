@@ -11,6 +11,7 @@ import config from 'config';
 import { getNotificationMessage } from 'app/shared/notificationMessages';
 import { injectIntl, intlShape } from 'react-intl';
 import { getCategories } from 'app/selectors';
+import { accessTokenKey } from 'app/config';
 
 
 class Home extends Component {
@@ -64,7 +65,7 @@ class Home extends Component {
     if (this.props.isAuthenticated) {
       const socket = io.connect(config.SOCKET_IO_URL);
       socket.on('connect', () => {
-        socket.emit('authenticate', {token: window.localStorage['token']});
+        socket.emit('authenticate', {token: window.localStorage[accessTokenKey]});
       });
       socket.on('authenticated', () => {
         this.props.createWebSocket(socket);

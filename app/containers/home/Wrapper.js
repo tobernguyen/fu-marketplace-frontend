@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import BlockItemList from 'app/components/home/BlockItemList';
 import BlockDormList from 'app/components/home/BlockDormList';
 import CarouselPinnedItems from 'app/components/home/CarouselPinnedItems';
-import BlockBookmarks from 'app/components/home/BlockBookmarks';
 import ShopsFeed from './ShopsFeed';
 import { getShops, getTopFeedSlideShow } from 'app/actions/feed';
 import { getCategories, getShipPlaces, getAggregations, getPinnedShops } from 'app/selectors';

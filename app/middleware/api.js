@@ -72,6 +72,15 @@ export default () => next => action => {
   function actionWith(data) {
     const finalAction = Object.assign({}, action, data);
     delete finalAction[CALL_API];
+
+    // TODO: Need some improvements
+    if (String(finalAction.type).endsWith('_FAILURE') && String(finalAction.type).startsWith('ADMIN_')) {
+      const adminGotErrorAction = Object.assign({}, finalAction, {
+        type: 'ADMIN_GOT_ERROR'
+      });
+      next(adminGotErrorAction);
+    }
+
     return finalAction;
   }
   const [ requestType, successType, failureType ] = types;
@@ -79,7 +88,7 @@ export default () => next => action => {
 
   var authHeader = {};
   var token;
-  if (requestType.indexOf('ADMIN_') == 0) {
+  if (requestType.indexOf('ADMIN_') === 0) {
     token = window.localStorage.getItem(adminAccessTokenKey);
   } else {
     token = window.localStorage.getItem(accessTokenKey);

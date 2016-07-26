@@ -8,6 +8,9 @@ import AdminPage from './AdminPage';
 class Admin extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      unauthorized: false
+    }
   }
 
   componentWillMount() {
@@ -15,9 +18,18 @@ class Admin extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    if (nextProps.error) {
+      const { status } = nextProps.error;
+      if (status === 401 && !this.state.unauthorized) {
+        this.props.signOutAdmin();
+        this.setState({
+          unauthorized: true
+        });
+      }
+    }
+
     if (nextProps.shouldUpdateAdminAuthStatus) {
       this.props.checkAdminAuthStatus();
-      // Set shouldUpdateAuthStatus state to false
       this.props.adminAuthStatusIsUpdated();
     }
   }
@@ -46,10 +58,11 @@ class Admin extends Component {
 }
 
 const mapStateToProps = (state) => {
-  const { auth } = state;
+  const { auth, admin } = state;
   return {
     isAdminAuthenticated:         auth.isAdminAuthenticated,
-    shouldUpdateAdminAuthStatus:  auth.shouldUpdateAdminAuthStatus
+    shouldUpdateAdminAuthStatus:  auth.shouldUpdateAdminAuthStatus,
+    error:                        admin.error
   }
 };
 

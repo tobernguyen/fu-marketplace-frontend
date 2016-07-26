@@ -57,7 +57,7 @@ const initialState = {
 };
 
 export const admin = (state = initialState, action) => {
-  const { type, response } = action;
+  const { type, response, error } = action;
   switch (type) {
     case AdminActionTypes.ADMIN_GET_USERS_REQUEST:
       return _.assign({}, state, {
@@ -576,6 +576,10 @@ export const admin = (state = initialState, action) => {
         shopManagement: {
           availableShipPlaces: response.shipPlaces
         }
+      });
+    case 'ADMIN_GOT_ERROR':
+      return _.assign({}, state, {
+        error: error
       });
     default:
       return state;

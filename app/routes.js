@@ -75,8 +75,7 @@ export default (
     <Redirect from="goodbye" to="/" />
 
     <Route name="admin" path="admin" component={Admin}>
-      <IndexRedirect to="dashboard" />
-      <Route path="dashboard" component={Dashboard} />
+      <IndexRedirect to="users" />
       <Route path="requests" component={RequestManagement}>
         <IndexRoute component={ContainerListRequest} />
         <Route path=":requestId/view" component={ContainerViewRequest} />

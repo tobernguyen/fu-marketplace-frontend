@@ -54,7 +54,9 @@ class BlockOrderList extends Component {
               completeOrder={this.props.completeOrder}
               abortOrder={this.props.abortOrder}
               shouldUpdateOrderList={this.props.shouldUpdateOrderList}
-              hasMore={this.props.hasMore} />
+              hasMore={this.props.hasMore}
+              isFetching={this.props.isFetching}
+              />
         </div>)
 
     }
@@ -65,7 +67,9 @@ class BlockOrderList extends Component {
           <BlockOrderListHeader shopID={shopID}/>
           <BlockOrderListBody
             orders={orders}
-            viewOrder={this.props.viewOrder}/>
+            viewOrder={this.props.viewOrder}
+            isFetching={this.props.isFetching}
+            />
           <BlockOrderListFooter
             shopID={shopID}
             query={query}

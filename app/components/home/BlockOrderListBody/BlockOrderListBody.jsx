@@ -2,11 +2,23 @@ import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { messages } from 'app/components/home/BlockOrderList/BlockOrderList.i18n';
 import NoOrderSeller from 'app/components/home/NoOrderSeller';
-
 import BlockOrderListBodyRow from './BlockOrderListBodyRow.jsx';
+import { PulseLoader } from 'halogen';
 
 class BlockOrderListBody extends Component {
   render() {
+    if(this.props.isFetching) {
+      const style ={
+        'height': '50px',
+        'width': '100%',
+        'padding': '20px'
+      };
+      return (
+        <div className="text-center" style={style}>
+          <PulseLoader className="feed-loader" color="#C0392B" size="12px" />
+        </div>
+      );
+    }
     if(this.props.orders.length === 0) {
       return <NoOrderSeller />;
     }

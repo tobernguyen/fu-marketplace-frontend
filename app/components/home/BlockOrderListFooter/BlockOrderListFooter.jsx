@@ -6,7 +6,7 @@ import './BlockOrderListFooter.scss';
 import classNames from 'classnames';
 const BlockOrderListFooter = ({ shopID, query, hasNextPage, changePageSize }) => {
   const status = query.status || 'all';
-  const size = query.size || 10;
+  const size = query.size || 20;
   const page = query.page || 1;
 
   const previousButtonClass=classNames({
@@ -35,10 +35,10 @@ const BlockOrderListFooter = ({ shopID, query, hasNextPage, changePageSize }) =>
       <div className="pull-right">
         <label>
           <FormattedMessage {...messages.orderListFooter.pageSize} />
-          <select className="form-control" onChange={changePageSize}>
-            <option value="10">10</option>
-            <option value="15">15</option>
+          <select className="form-control" onChange={changePageSize} value={size}>
             <option value="20">20</option>
+            <option value="40">40</option>
+            <option value="80">80</option>
           </select>
           <FormattedMessage {...messages.orderListFooter.pageSizeUnit}/>
         </label>

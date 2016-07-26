@@ -33,7 +33,7 @@ export default class Welcome extends Component {
             clientId={googleClientID}
             authenticating={authenticating}
             callback={this.signInCallback}>
-            <i className="fa fa-google-plus"/>
+            <i className="fa google fa-google-plus"/>
             Sign in with Google {authenticating && <i className="fa fa-spin fa-spinner"/>}
           </GoogleLoginButton>
         </div>

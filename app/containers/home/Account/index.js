@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ModalHeader from 'app/components/home/ModalHeader';
 import { connect } from 'react-redux';
 import dataURLtoBlob from 'blueimp-canvas-to-blob';
-import { updateUserInfo, uploadAvatar } from 'app/actions/user';
+import { updateUserInfo, uploadAvatar, resetUpdateStatus } from 'app/actions/user';
 import { updateModalSize } from 'app/actions/common';
 import AccountBasicForm from './AccountBasicForm';
 
@@ -29,6 +29,7 @@ class Account extends Component {
 
   componentWillMount() {
     this.props.updateModalSize(null);
+    this.props.resetUpdateStatus();
   }
 
   render() {
@@ -49,6 +50,7 @@ class Account extends Component {
         <ModalHeader query={this.props.query} title="Tài khoản" subHeader="Thay đổi thông tin cơ bản."/>
         <div className="modal-body">
           <AccountBasicForm
+            userUpdateStatus={this.props.userUpdateStatus}
             currentUser={this.props.currentUser}
             uploadAvatar={this.handleUploadAvatar}
             roomList={roomList}
@@ -62,14 +64,15 @@ class Account extends Component {
 const mapStateToProps = (state) => {
   const { user, common } = state;
   return {
-    currentUser:  user.currentUser,
-    userUpdated:  user.userUpdated,
-    query:        common.query
+    currentUser:      user.currentUser,
+    userUpdateStatus: user.userUpdateStatus,
+    query:            common.query
   }
 };
 
 export default connect(mapStateToProps, {
   uploadAvatar,
   updateUserInfo,
-  updateModalSize
+  updateModalSize,
+  resetUpdateStatus
 })(Account)

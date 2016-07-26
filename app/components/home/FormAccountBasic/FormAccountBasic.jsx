@@ -5,6 +5,8 @@ import { messages } from './FormAccountBasic.i18n';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import './FormAccountBasic.scss';
 import Select from 'react-select';
+import { UPDATE_STATUS } from 'app/shared/statusCode';
+import classNames from 'classnames';
 
 class FormAccountBasic extends Component {
   constructor(props) {
@@ -53,8 +55,27 @@ class FormAccountBasic extends Component {
     }
   }
 
+  renderUpdateStatus() {
+    switch (this.props.userUpdateStatus) {
+      case UPDATE_STATUS.UPDATED:
+        return (
+          <p className="update-status success">
+            <FormattedMessage {...messages.updateStatus.success} />
+          </p>
+        );
+      case UPDATE_STATUS.FAILED:
+        return (
+          <p className="update-status failed">
+            <FormattedMessage {...messages.updateStatus.failed} />
+          </p>
+        )
+    }
+  }
+
   render() {
-    const { fields: { room, phone }, handleSubmit, submitting, currentUser, dirty, avatarUploading } = this.props;
+    const { fields: { room, phone }, handleSubmit, currentUser, dirty, avatarUploading, userUpdateStatus } = this.props;
+    const updating = (userUpdateStatus === UPDATE_STATUS.UPDATING);
+
     const fullName = currentUser.fullName || '';
     const email = currentUser.email || '';
     const { formatMessage } = this.props.intl;
@@ -105,14 +126,14 @@ class FormAccountBasic extends Component {
                       options={this.props.roomList}
                       onChange={this.roomSelected}
                       placeholder={formatMessage(messages.roomNo.placeholder)} />
-
                   </div>
                 </div>
                 <div className="form-group">
                   <div className="col-sm-offset-4 col-sm-8">
-                    <button type="submit" className="btn btn-primary" disabled={submitting || !dirty}>
-                      <FormattedMessage {...messages.save} />
+                    <button type="submit" className="btn btn-primary" disabled={updating || !dirty}>
+                      <FormattedMessage {...messages.save} /> {updating && <i className="fa fa-spinner fa-spin" />}
                     </button>
+                    {this.renderUpdateStatus()}
                   </div>
                 </div>
               </form>
@@ -127,8 +148,7 @@ class FormAccountBasic extends Component {
           image={this.state.img}
           width={250}
           height={250}
-          onCrop={this.props.uploadAvatar} />
-        }
+          onCrop={this.props.uploadAvatar} />}
       </div>
     )
   }

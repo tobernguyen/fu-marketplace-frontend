@@ -3,13 +3,16 @@ import * as UserActionTypes from '../actions/user';
 import * as FeedActionTypes from '../actions/feed';
 import * as ShopActionTypes from '../actions/shop';
 import * as OrderActionTypes from '../actions/order';
+import { UPDATE_STATUS } from 'app/shared/statusCode';
 import _ from 'lodash';
+
 
 const INITIAL_STATE = {
   currentUser: {},
   currentViewedShop: {},
   cartItems: [],
-  avatarUploading: false
+  avatarUploading: false,
+  userUpdateStatus: UPDATE_STATUS.NOTHING
 };
 
 export const user = (state = INITIAL_STATE, action) => {
@@ -18,6 +21,11 @@ export const user = (state = INITIAL_STATE, action) => {
     case ActionTypes.CURRENT_USER_SUCCESS:
       return _.assign({}, state, {
         currentUser: response
+      });
+    case UserActionTypes.RESET_UPDATE_STATUS:
+      return _.assign({}, state, {
+        avatarUploading: false,
+        userUpdateStatus: UPDATE_STATUS.NOTHING
       });
     case UserActionTypes.UPLOAD_AVATAR_SUCCESS:
       const newAvatar = response.avatar;
@@ -31,10 +39,21 @@ export const user = (state = INITIAL_STATE, action) => {
       return _.assign({}, state, {
         avatarUploading: true
       });
+    case UserActionTypes.UPDATE_USER_INFO_REQUEST:
+      return _.assign({}, state, {
+        userUpdateStatus: UPDATE_STATUS.UPDATING
+      });
     case UserActionTypes.UPDATE_USER_INFO_SUCCESS:
       return _.assign({}, state, {
-        currentUser: response,
-        userUpdated: true
+        currentUser: _.assign({}, state.currentUser, {
+          phone: response.phone,
+          room: response.room
+        }),
+        userUpdateStatus: UPDATE_STATUS.UPDATED
+      });
+    case UserActionTypes.UPDATE_USER_INFO_FAILURE:
+      return _.assign({}, state, {
+        userUpdateStatus: UPDATE_STATUS.FAILED
       });
     case UserActionTypes.USER_GET_SHOP_SUCCESS:
       // Shop item grouped by category id
@@ -70,7 +89,6 @@ export const user = (state = INITIAL_STATE, action) => {
     }
     case ActionTypes.CURRENT_USER_FAILURE:
     case UserActionTypes.UPLOAD_AVATAR_FAILURE:
-    case UserActionTypes.UPDATE_USER_INFO_FAILURE:
     case UserActionTypes.UPLOAD_IDENTITY_PHOTO_FAILURE:
       return _.assign({}, state, {
         error: error,

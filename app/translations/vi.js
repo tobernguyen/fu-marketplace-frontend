@@ -431,6 +431,8 @@ export default {
   'ticketStatus.opening': 'Báo cáo của bạn về đơn hàng <strong>#{orderId}</strong> tại <strong>{shopName}</strong> đã được mở.',
   'ticketStatus.investigating': 'Báo cáo của bạn về đơn hàng <strong>#{orderId}</strong> tại <strong>{shopName}</strong> đã bắt đầu được điều tra.',
   'ticketStatus.closed': 'Báo cáo của bạn về đơn hàng <strong>#{orderId}</strong> tại <strong>{shopName}</strong> đã đóng lại. Bấm vào thông báo này để xem kết quả.',
+  'account.updateStatus.success': 'Cập nhật thành công',
+  'account.updateStatus.failed': 'Cập nhật không thành công',
   'item.buyNow': 'Mua ngay',
   'item.addToCart': 'Thêm vào giỏ hàng',
   'item.removeFromCart': 'Xoá khỏi giỏ hàng',

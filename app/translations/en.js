@@ -183,6 +183,8 @@ export default {
   'ticketStatus.opening': 'Your report about <strong>#{orderId}</strong> at <strong>{shopName}</strong> was be opened.',
   'ticketStatus.investigating': 'Your report about <strong>#{orderId}</strong> at <strong>{shopName}</strong> was be investigated.',
   'ticketStatus.closed': 'Your report about <strong>#{orderId}</strong> at <strong>{shopName}</strong> was be closed.',
+  'account.updateStatus.success': 'Updated successfully',
+  'account.updateStatus.failed': 'Update failed',
   'item.buyNow': 'Buy now',
   'item.addToCart': 'Add to cart',
   'item.removeFromCart': 'Remove from cart',

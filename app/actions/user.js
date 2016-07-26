@@ -97,3 +97,9 @@ export const CLEAR_CURRENT_VIEWED_SHOP = 'CLEAR_CURRENT_VIEWED_SHOP';
 export const clearCurrentViewedShop = () => ({
   type: CLEAR_CURRENT_VIEWED_SHOP
 });
+
+
+export const RESET_UPDATE_STATUS = 'RESET_UPDATE_STATUS';
+export const resetUpdateStatus = () => ({
+  type: RESET_UPDATE_STATUS
+});

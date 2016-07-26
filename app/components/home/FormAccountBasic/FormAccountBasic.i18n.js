@@ -22,5 +22,15 @@ export const messages = {
   save: {
     id: 'account.form.save',
     defaultMessage: 'Save changes'
+  },
+  updateStatus: {
+    success: {
+      id: 'account.updateStatus.success',
+      defaultMessage: 'Success'
+    },
+    failed: {
+      id: 'account.updateStatus.failed',
+      defaultMessage: 'Failed'
+    }
   }
 };

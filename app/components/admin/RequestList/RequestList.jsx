@@ -39,7 +39,9 @@ class RequestList extends Component {
           {this.props.requests.map(request =>
             <RequestListRow
               key={request.id}
-              request={request} />
+              request={request}
+              adminSelectRequest={this.props.adminSelectRequest}
+              />
           )}
           </tbody>
         </table>

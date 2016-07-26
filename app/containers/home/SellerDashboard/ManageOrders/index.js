@@ -27,9 +27,9 @@ class ManageOrders extends Component {
     if (!isNaN(shopID)) {
       this.state = {
         shopID: parseInt(shopID),
-        status: status,
-        page: page,
-        size: size,
+        status: status || 'all',
+        page: page || 1,
+        size: size || 20,
         showModal: false,
         showRejectModal: false,
         selectedOrder: {
@@ -160,6 +160,7 @@ class ManageOrders extends Component {
                 completeOrder={this.sellerCompleteOrder}
                 abortOrder={this.sellerAbortOrder}
                 shouldUpdateOrderList={this.props.shouldUpdateOrderList}
+                isFetching={this.props.isFetching}
               />
               <ModalViewOrder
                 order={this.state.selectedOrder}
@@ -193,7 +194,8 @@ const mapStateToProps = (state) => {
     hasMore: state.order.hasMore,
     orders: state.order.orders,
     sellerShop: shop.sellerShop,
-    shouldUpdateOrderList: state.order.shouldUpdateOrderList
+    shouldUpdateOrderList: state.order.shouldUpdateOrderList,
+    isFetching: state.order.isFetching
   }
 };
 

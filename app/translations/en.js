@@ -253,5 +253,7 @@ export default {
   'breadCrumb.editPromotion.title': 'Edit promotion',
   'breadCrumb.editPromotion.description': 'Change shop promotion campaign information',
   'breadCrumb.changePassword.title': 'Setting',
-  'breadCrumb.changePassword.description': 'Change settings of administrator site'
+  'breadCrumb.changePassword.description': 'Change settings of administrator site',
+  'formResponseToRequest.responseForm.fields.requestStatus': 'Request status',
+  'formResponseToRequest.responseForm.fields.adminMessage': 'Admin message'
 };

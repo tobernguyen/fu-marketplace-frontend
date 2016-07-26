@@ -47,10 +47,6 @@ class BlockCurrentOrderList extends Component {
   }
 
   render() {
-    const { currentOrders } = this.props;
-    if (currentOrders.length == 0) {
-      return <NoOrderSeller />
-    }
     return (
       <div className="current-order-list">
         {this.state.elements.length > 0 &&
@@ -61,6 +57,9 @@ class BlockCurrentOrderList extends Component {
           loader={<PulseLoader className="feed-loader" color="#C0392B" size="12px" />}>
           {this.state.elements}
         </InfiniteScroll>}
+        {this.state.elements.length == 0 &&
+          <NoOrderSeller />
+        }
       </div>
     );
   }

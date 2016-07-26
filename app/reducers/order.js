@@ -2,6 +2,7 @@ import * as OrderActionTypes from '../actions/order';
 import _ from 'lodash';
 import AsyncResultCode from 'app/shared/asyncResultCodes';
 const INITIAL_STATE = {
+  isFetching: false,
   orders: [],
   currentOrders: [],
   orderResult: '',
@@ -29,15 +30,20 @@ export const order = (state = INITIAL_STATE, action) => {
       return _.merge({}, state, {
         orderResult: AsyncResultCode.PLACE_ORDER_FAIL
       });
+    case OrderActionTypes.SELLER_GET_ORDER_REQUEST:
+      return _.merge({}, state, {
+        isFetching: true,
+        shouldUpdateOrderList: false
+      });
     case OrderActionTypes.SELLER_GET_ORDER_SUCCESS:
       return _.assign({}, state, {
-        orders: action.response.orders,
-        shouldUpdateOrderList: false
+        isFetching: false,
+        orders: action.response.orders
       });
     case OrderActionTypes.SELLER_GET_ORDER_FAILURE:
       return _.merge({}, state, {
-        orders: [],
-        shouldUpdateOrderList: false
+        isFetching: false,
+        orders: []
       });
     case OrderActionTypes.SELLER_ACCEPT_ORDER_SUCCESS:
       return _.merge({}, state, {

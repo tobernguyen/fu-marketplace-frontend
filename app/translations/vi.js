@@ -273,6 +273,8 @@ export default {
   'formResponseToRequest.responseForm.sectionDescription': 'Phản hồi lại yêu cầu của người dùng',
   'formResponseToRequest.responseForm.fields.response': 'Phản hồi',
   'formResponseToRequest.responseForm.fields.reason': 'Lí do',
+  'formResponseToRequest.responseForm.fields.requestStatus': 'Trạng thái yêu cầu',
+  'formResponseToRequest.responseForm.fields.adminMessage': 'Thông điệp của quản trị viên',
   'formResponseToRequest.responseForm.response.accept': 'Chấp nhận',
   'formResponseToRequest.responseForm.response.reject': 'Từ chối',
   'formResponseToRequest.responseForm.button.submitResponse': 'Gửi phản hồi',

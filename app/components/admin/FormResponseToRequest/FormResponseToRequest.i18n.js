@@ -17,6 +17,14 @@ export const messages = {
         reason: {
           id: 'formResponseToRequest.responseForm.fields.reason',
           defaultMessage: 'Reason'
+        },
+        requestStatus: {
+          id: 'formResponseToRequest.responseForm.fields.requestStatus',
+          defaultMessage: 'Request status'
+        },
+        adminMessage: {
+          id: 'formResponseToRequest.responseForm.fields.adminMessage',
+          defaultMessage: 'Admin message'
         }
       },
       response: {

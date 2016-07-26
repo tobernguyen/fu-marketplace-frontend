@@ -457,6 +457,12 @@ export const admin = (state = initialState, action) => {
           submitResult: action.error
         }
       });
+    case AdminActionTypes.ADMIN_SELECT_REQUEST:
+      return _.merge({}, state, {
+        requestManagement: {
+          selectedRequest: action.payload
+        }
+      });
     case AdminActionTypes.ADMIN_REJECT_REQUEST_REQUEST:
       return _.merge({}, state, {
         requestManagement: {

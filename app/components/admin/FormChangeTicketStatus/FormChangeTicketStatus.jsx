@@ -45,6 +45,7 @@ class FormChangeTicketStatus extends Component {
             adminInvestigateTicket={adminInvestigateTicket}
             adminCloseTicket={adminCloseTicket}
             isSubmitting={this.props.isSubmitting}
+            submitResult={this.props.submitResult}
           />
         </div>
       );

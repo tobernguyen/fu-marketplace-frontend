@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import RequestList  from 'app/components/admin/RequestList';
 import NoRequest  from 'app/components/admin/RequestList/NoRequest.jsx';
-import { adminGetRequests } from 'app/actions/admin';
+import { adminGetRequests, adminSelectRequest } from 'app/actions/admin';
 import LoadingSpinner from 'app/components/admin/LoadingSpinner';
 import { withRouter } from 'react-router'
 class ContainerListRequest extends Component {
@@ -58,6 +58,7 @@ class ContainerListRequest extends Component {
             page={page}
             size={size}
             changePageSize={this.changePageSize}
+            adminSelectRequest={this.props.adminSelectRequest}
             />;
         </div>
       }
@@ -84,5 +85,6 @@ ContainerListRequest.description = {
 ContainerListRequest.faIcon = 'fa-envelope';
 
 export default connect(mapStateToProps, {
-  adminGetRequests
+  adminGetRequests,
+  adminSelectRequest
 })(withRouter(ContainerListRequest));

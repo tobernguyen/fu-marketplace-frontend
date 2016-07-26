@@ -61,6 +61,8 @@ class BlockMyOrder extends Component {
         selectedOrder: {},
         showOpenTicketModal: false
       });
+
+      this.props.userCloseNewTicketModal();
     }
 
     this.userCancelOrder = () => {

@@ -176,6 +176,7 @@ export const ticket = (state = INITIAL_STATE, action) => {
         submitResult: AsyncResultCode.REOPEN_TICKET_FAIL
       });
     case TicketActionTypes.USER_CLOSE_TICKET_MODAL:
+    case TicketActionTypes.USER_CLOSE_NEW_TICKET_MODAL:
       return _.merge({}, state, {
         submitResult: '',
         isSubmitting: false,

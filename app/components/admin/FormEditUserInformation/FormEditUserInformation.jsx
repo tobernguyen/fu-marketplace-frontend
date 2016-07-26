@@ -11,7 +11,6 @@ import { FormattedMessage, injectIntl } from 'react-intl';
 import { messages } from 'app/components/admin/FormEditUserInformation/FormEditUserInformation.i18n';
 import { reduxForm } from 'redux-form';
 import AlertSubmitResult from 'app/components/admin/AlertSubmitResult';
-import LoadingSpinner from 'app/components/admin/LoadingSpinner';
 import _ from 'lodash';
 
 const validate = (values) => {
@@ -93,9 +92,6 @@ class FormEditUserInformation extends Component {
       submitResults,
       intl: { formatMessage}
     } = this.props;
-    if(isSubmitting) {
-      return <LoadingSpinner />;
-    }
     return (
       <div className="row">
         <Col lg={3}>
@@ -196,8 +192,8 @@ class FormEditUserInformation extends Component {
                 submitResults !== '' &&
                 <AlertSubmitResult result={submitResults}/>
               }
-              <Button type="submit" bsStyle="success" disabled={submitting || !dirty }>
-                {formatMessage(messages.formEditUserInformation.button.saveChanges)}
+              <Button type="submit" bsStyle="success" disabled={submitting || !dirty || isSubmitting}>
+                {formatMessage(messages.formEditUserInformation.button.saveChanges)}{isSubmitting && <i className="fa fa-spinner fa-spin"></i>}
               </Button>
             </div>
           </form>

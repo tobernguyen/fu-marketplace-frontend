@@ -12,7 +12,6 @@ import { Link } from 'react-router';
 import AlertSubmitResult from 'app/components/admin/AlertSubmitResult';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import { messages } from 'app/components/admin/FormEditShopInformation/FormEditShopInformation.i18n';
-import LoadingSpinner from 'app/components/admin/LoadingSpinner';
 
 const validate = (values) => {
   let errors = {};
@@ -45,9 +44,6 @@ class FormEditShopInformation extends Component {
     if(seller) {
       sellerID = seller.id;
       sellerName = seller.fullName;
-    }
-    if(isSubmitting) {
-      return <LoadingSpinner />;
     }
     return (
       <div className="row">
@@ -112,7 +108,7 @@ class FormEditShopInformation extends Component {
                 <AlertSubmitResult result={submitResult}/>
               }
               <Button type="submit" bsStyle="success" disabled={isSubmitting || !dirty}>
-                <FormattedMessage {...messages.formEditShopInformation.contactInformation.button.saveChanges} />
+                <FormattedMessage {...messages.formEditShopInformation.contactInformation.button.saveChanges} />{isSubmitting && <i className="fa fa-spinner fa-spin"></i>}
               </Button>
             </div>
           </form>

@@ -5,7 +5,6 @@ import DateTime from 'react-datetime';
 import moment from 'moment';
 import shopPromotionCampaignType from 'app/shared/promotionCampaignType';
 import AlertSubmitResult from 'app/components/admin/AlertSubmitResult';
-import LoadingSpinner from 'app/components/admin/LoadingSpinner';
 
 class FormShopPromotionCampaign extends Component {
   constructor(props) {
@@ -115,9 +114,6 @@ class FormShopPromotionCampaign extends Component {
   render() {
     const { intl: { formatMessage }, submitResult, isSubmitting } = this.props;
     const { endDate, startDate, type, isValid } = this.state;
-    if(isSubmitting) {
-      return <LoadingSpinner />;
-    }
     return (
       <div className="row">
         <div className="col-lg-3">
@@ -176,8 +172,8 @@ class FormShopPromotionCampaign extends Component {
               submitResult !== '' &&
               <AlertSubmitResult result={submitResult} />
             }
-            <button type="button" className="btn btn-success" onClick={this.handleSubmit} disabled={!isValid}>
-              <FormattedMessage {...messages.formShopPromotionCampaign.button.createShopPromotionCampaign} />
+            <button type="button" className="btn btn-success" onClick={this.handleSubmit} disabled={!isValid || isSubmitting}>
+              <FormattedMessage {...messages.formShopPromotionCampaign.button.createShopPromotionCampaign} />{isSubmitting && <i className="fa fa-spinner fa-spin"></i>}
             </button>
           </div>
         </div>

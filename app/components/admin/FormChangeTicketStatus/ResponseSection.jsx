@@ -134,9 +134,6 @@ class ResponseSection extends Component {
   render() {
     const { ticket: { selectedTicket }, intl: { formatMessage }, isSubmitting } = this.props;
     const { newTicketStatus, adminMessage, dirty } = this.state;
-    if(isSubmitting) {
-      return <LoadingSpinner />;
-    }
     return (
       <div className="row">
         <div className="col-lg-3">
@@ -182,8 +179,8 @@ class ResponseSection extends Component {
           {
             selectedTicket.status != TicketStatus.CLOSED &&
             <div className="form-actions">
-              <button type="button" className="btn btn-success" onClick={this.handleSubmit} disabled={!dirty || adminMessage.hasErrors}>
-                <FormattedMessage {...messages.formChangeTicketStatus.responseSection.button.saveChanges}/>
+              <button type="button" className="btn btn-success" onClick={this.handleSubmit} disabled={!dirty || adminMessage.hasErrors || isSubmitting}>
+                <FormattedMessage {...messages.formChangeTicketStatus.responseSection.button.saveChanges}/>{isSubmitting && <i className="fa fa-spinner fa-spin"></i>}
               </button>
             </div>
           }

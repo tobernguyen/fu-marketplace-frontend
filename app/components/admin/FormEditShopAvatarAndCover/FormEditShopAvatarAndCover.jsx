@@ -7,7 +7,6 @@ import {
 import { FormattedMessage, injectIntl } from 'react-intl';
 import { messages } from 'app/components/admin/FormEditShopAvatarAndCover/FormEditShopAvatarAndCover.i18n';
 import AlertSubmitResult from 'app/components/admin/AlertSubmitResult';
-import LoadingSpinner from 'app/components/admin/LoadingSpinner';
 import './FormEditShopAvatarAndCover.scss';
 
 class FormEditShopAvatarAndCover extends Component {
@@ -80,9 +79,6 @@ class FormEditShopAvatarAndCover extends Component {
   render() {
     const { shop, submitResult, isSubmitting } = this.props;
     const { isValid } = this.state;
-    if(isSubmitting) {
-      return <LoadingSpinner />
-    }
     return (
       <div className="row">
         <Col lg={3}>
@@ -131,8 +127,8 @@ class FormEditShopAvatarAndCover extends Component {
               submitResult !== '' &&
               <AlertSubmitResult result={submitResult} />
             }
-            <Button type="submit" bsStyle="success" onClick={this.uploadAvatarAndCover} disabled={!isValid}>
-              <FormattedMessage {...messages.formEditShopAvatarAndCover.button.saveChanges}/>
+            <Button type="submit" bsStyle="success" onClick={this.uploadAvatarAndCover} disabled={!isValid || isSubmitting}>
+              <FormattedMessage {...messages.formEditShopAvatarAndCover.button.saveChanges}/>{isSubmitting && <i className="fa fa-spinner fa-spin"></i>}
             </Button>
           </div>
         </Col>

@@ -6,7 +6,6 @@ import {
   ControlLabel,
   Button
 } from 'react-bootstrap';
-import LoadingSpinner from 'app/components/admin/LoadingSpinner';
 import { messages } from 'app/components/admin/FormResponseToRequest/FormResponseToRequest.i18n';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import requestStatus from 'app/shared/requestStatus';

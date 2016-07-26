@@ -9,7 +9,6 @@ import {
 import { FormattedMessage, FormattedHTMLMessage, injectIntl } from 'react-intl';
 import { messages } from 'app/components/admin/FormEditShopBanStatus/FormEditShopBanStatus.i18n';
 import AlertSubmitResult from 'app/components/admin/AlertSubmitResult';
-import LoadingSpinner from 'app/components/admin/LoadingSpinner';
 
 class FormEditShopBanStatus extends Component {
   constructor(props) {
@@ -52,9 +51,6 @@ class FormEditShopBanStatus extends Component {
 
   render() {
     const { shop, isSubmitting, submitResult, intl: { formatMessage } } = this.props;
-    if(isSubmitting) {
-      return <LoadingSpinner />
-    }
     return(
       <div className="row">
         <Col lg={3}>
@@ -100,7 +96,7 @@ class FormEditShopBanStatus extends Component {
                 bsStyle="danger"
                 onClick={this.handleOnClick}
                 disabled={isSubmitting || !this.state.isValid}>
-                {shop.banned ? formatMessage(messages.formEditShopBanStatus.button.release) : formatMessage(messages.formEditShopBanStatus.button.ban)}
+                {shop.banned ? formatMessage(messages.formEditShopBanStatus.button.release) : formatMessage(messages.formEditShopBanStatus.button.ban)}{isSubmitting && <i className="fa fa-spinner fa-spin"></i>}
               </Button>
             </div>
         </Col>

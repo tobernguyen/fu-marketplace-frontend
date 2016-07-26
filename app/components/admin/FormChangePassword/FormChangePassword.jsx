@@ -118,7 +118,7 @@ class FormChangePassword extends Component {
             }
             <div className ="form-actions">
               <Button type="submit" bsStyle="warning" disabled={formStatus.isSubmitting}>
-                <FormattedMessage {...messages.formChangePassword.button.saveChanges}/>
+                <FormattedMessage {...messages.formChangePassword.button.saveChanges}/>{formStatus.isSubmitting && <i className="fa fa-spinner fa-spin"></i>}
               </Button>
             </div>
           </form>

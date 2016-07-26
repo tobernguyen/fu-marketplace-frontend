@@ -11,7 +11,6 @@ import _ from 'lodash';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import { messages } from 'app/components/admin/FormEditShopShipPlaces/FormEditShopShipPlaces.i18n';
 import AlertSubmitResult from 'app/components/admin/AlertSubmitResult';
-import LoadingSpinner from 'app/components/admin/LoadingSpinner';
 
 class FormEditShopShipPlaces extends React.Component {
   constructor(props) {
@@ -80,9 +79,6 @@ class FormEditShopShipPlaces extends React.Component {
   render() {
     const { informationToBeUpdated, isValid } = this.state;
     const { submitResult, isSubmitting, intl: { formatMessage } } = this.props;
-    if (isSubmitting) {
-      return <LoadingSpinner />;
-    }
     return (
       <div className="row">
         <Col lg={3}>
@@ -138,7 +134,7 @@ class FormEditShopShipPlaces extends React.Component {
               <AlertSubmitResult result={submitResult} />
             }
             <Button bsStyle="success" onClick={this.handleSubmit} disabled={isSubmitting || !isValid}>
-              {formatMessage(messages.formEditShopShipPlaces.button.saveChanges)}
+              {formatMessage(messages.formEditShopShipPlaces.button.saveChanges)}{isSubmitting && <i className="fa fa-spinner fa-spin"></i>}
             </Button>
           </div>
         </Col>

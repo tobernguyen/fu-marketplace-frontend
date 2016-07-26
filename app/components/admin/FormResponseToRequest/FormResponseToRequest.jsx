@@ -12,10 +12,12 @@ import { FormattedMessage, injectIntl } from 'react-intl';
 import requestStatus from 'app/shared/requestStatus';
 import LabelRequestStatus from 'app/components/admin/LabelRequestStatus';
 import AlertSubmitResult from 'app/components/admin/AlertSubmitResult';
+import AsyncResultCode from 'app/shared/asyncResultCodes';
 
 class FormResponseToRequest extends React.Component {
   constructor(props) {
     super(props);
+
 
     this.state = {
       isValid: false,
@@ -27,7 +29,7 @@ class FormResponseToRequest extends React.Component {
           hasErrors: false
         }
       },
-      request: {}
+      request: props.request
     }
 
     this.handleOnChange = this.handleOnChange.bind(this);
@@ -48,13 +50,22 @@ class FormResponseToRequest extends React.Component {
     }
   }
 
-  componentWillMount() {
-    const request = this.props.requestList.filter((request) => {
-      return request.id == this.props.requestId
-    });
-    this.setState({
-      request: request[0]
-    });
+  componentWillReceiveProps(nextProps) {
+    const { submitResult } = nextProps;
+    const { request, responseToBeSent: { responseMessage } } = this.state;
+    if(submitResult.message_code === AsyncResultCode.REJECT_REQUEST_SUCCESS) {
+      request.status = requestStatus.REJECTED;
+      request.adminMessage = responseMessage.value;
+      this.setState({
+        request
+      });
+    }
+    if(submitResult.message_code === AsyncResultCode.ACCEPT_REQUEST_SUCCESS) {
+      request.status = requestStatus.ACCEPTED;
+      this.setState({
+        request
+      });
+    }
   }
 
   handleOnChange(e) {
@@ -144,7 +155,7 @@ class FormResponseToRequest extends React.Component {
               bsStyle="warning"
               onClick={this.handleSubmit}
               disabled={isSubmitting || !isValid }>
-              {formatMessage(messages.formResponseToRequest.responseForm.button.submitResponse)}
+              {formatMessage(messages.formResponseToRequest.responseForm.button.submitResponse)}{ isSubmitting && <i className="fa fa-spinner fa-spin"></i>}
               </Button>
           </div>
         </Col>
@@ -152,15 +163,31 @@ class FormResponseToRequest extends React.Component {
     } else {
       return (
         <Col lg={9}>
-          <LabelRequestStatus status={request.status}/>
+          <div className="form-group">
+            <label className="control-label">
+              <FormattedMessage {...messages.formResponseToRequest.responseForm.fields.requestStatus}/>
+            </label>
+            <p className="form-control-static">
+              <LabelRequestStatus status={request.status}/>
+            </p>
+          </div>
+          {
+            request.adminMessage &&
+            <div className="form-group">
+              <label className="control-label">
+                <FormattedMessage {...messages.formResponseToRequest.responseForm.fields.adminMessage}/>
+              </label>
+              <textarea className="form-control" disabled="true" defaultValue={request.adminMessage}/>
+            </div>
+          }
         </Col>
       );
     }
   }
   render() {
-    const { isSubmitting } = this.props;
     const { request } = this.state;
-    if(!request || isSubmitting ) {
+    const seller = request.seller || {};
+    if(!request) {
       return <div className="text-center container-fluid">
           <LoadingSpinner />
         </div>;
@@ -223,7 +250,7 @@ class FormResponseToRequest extends React.Component {
                   <FormattedMessage {...messages.formResponseToRequest.requesterInformation.fields.fullName}/>
                 </ControlLabel>
                 <FormControl.Static>
-                  {request.seller.fullName}
+                  {seller.fullName}
                 </FormControl.Static>
               </FormGroup>
               <FormGroup>
@@ -231,7 +258,7 @@ class FormResponseToRequest extends React.Component {
                   <FormattedMessage {...messages.formResponseToRequest.requesterInformation.fields.phone}/>
                 </ControlLabel>
                 <FormControl.Static>
-                  {request.seller.phone}
+                  {seller.phone}
                 </FormControl.Static>
               </FormGroup>
               <FormGroup>
@@ -239,7 +266,7 @@ class FormResponseToRequest extends React.Component {
                   <FormattedMessage {...messages.formResponseToRequest.requesterInformation.fields.email}/>
                 </ControlLabel>
                 <FormControl.Static>
-                  {request.seller.email}
+                  {seller.email}
                 </FormControl.Static>
               </FormGroup>
               <FormGroup>
@@ -247,7 +274,7 @@ class FormResponseToRequest extends React.Component {
                   <FormattedMessage {...messages.formResponseToRequest.requesterInformation.fields.identityNumber}/>
                 </ControlLabel>
                 <FormControl.Static>
-                  {request.seller.identityNumber}
+                  {seller.identityNumber}
                 </FormControl.Static>
               </FormGroup>
               <FormGroup>
@@ -256,8 +283,8 @@ class FormResponseToRequest extends React.Component {
                 </ControlLabel>
                 <FormControl.Static>
                   <img
-                    src={request.seller.identityPhoto}
-                    alt={`Identity photo of ${request.seller.fullName}`}
+                    src={seller.identityPhoto}
+                    alt={`Identity photo of ${seller.fullName}`}
                     />
                 </FormControl.Static>
               </FormGroup>

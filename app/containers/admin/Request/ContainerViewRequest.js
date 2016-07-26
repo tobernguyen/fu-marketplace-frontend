@@ -11,14 +11,34 @@ import LoadingSpinner from 'app/components/admin/LoadingSpinner';
 class ContainerViewRequest extends Component {
   constructor(props) {
     super(props);
+
+
+
+    const { requestManagement: {selectedRequest}} = props;
+    this.state = {
+      request: selectedRequest
+    }
+
+    if(!selectedRequest.seller) {
+      this.props.adminGetRequests(1, 9999);
+    }
   }
 
-  componentWillMount() {
-    this.props.adminGetRequests();
+  componentWillReceiveProps(nextProps) {
+    const { request } = this.state;
+    const { params: { requestId },requestManagement: { isFetching, requestList } } = nextProps;
+    if(!request.seller && isFetching === false) {
+      const request = requestList.filter((request) => {
+        return request.id == requestId
+      });
+      this.setState({
+        request: request[0]
+      });
+    }
   }
 
   render() {
-    const { params, requestManagement, adminAcceptRequest, adminRejectRequest} = this.props;
+    const { requestManagement, adminAcceptRequest, adminRejectRequest} = this.props;
     if(requestManagement.isFetching) {
       return <div className="text-center container-fluid">
           <LoadingSpinner />
@@ -27,8 +47,7 @@ class ContainerViewRequest extends Component {
       return (
         <div className="container-fluid">
           <FormResponseToRequest
-            requestId={params.requestId}
-            requestList={requestManagement.requestList}
+            request={this.state.request}
             acceptRequest={adminAcceptRequest}
             rejectRequest={adminRejectRequest}
             isSubmitting={requestManagement.isSubmitting}

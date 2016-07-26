@@ -325,8 +325,8 @@ const adminRequestGetRequests = (filter) => ({
   }
 });
 
-export const adminGetRequests = (page = 1, size = 20) => {
-  const filter = `?size=${size}&page=${page}`;
+export const adminGetRequests = (page = 1, size = 20, showAll = true) => {
+  const filter = `?size=${size}&page=${page}&showAll=${showAll}`;
   return (dispatch) => {
     return dispatch(adminRequestGetRequests(filter));
   }
@@ -472,4 +472,11 @@ export const ADMIN_CHANGE_LANGUAGE = 'ADMIN_CHANGE_LANGUAGE';
 export const adminChangeLanguage = (language) => ({
   type: ADMIN_CHANGE_LANGUAGE,
   payload: language
-})
+});
+
+export const ADMIN_SELECT_REQUEST = 'ADMIN_SELECT_REQUEST';
+
+export const adminSelectRequest = (request) => ({
+  type: ADMIN_SELECT_REQUEST,
+  payload: request
+});

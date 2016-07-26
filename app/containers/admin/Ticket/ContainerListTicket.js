@@ -28,7 +28,7 @@ class ComponentListTicket extends Component {
   }
 
   componentWillMount() {
-    this.props.adminGetTickets('OPENING', this.state.page, this.state.size);
+    this.props.adminGetTickets('', this.state.page, this.state.size);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -37,7 +37,7 @@ class ComponentListTicket extends Component {
     const size = query.size || 20;
 
     if(page != this.state.page || size != this.state.size) {
-      this.props.adminGetTickets('OPENING', page, size);
+      this.props.adminGetTickets('', page, size);
       this.setState({
         page,
         size

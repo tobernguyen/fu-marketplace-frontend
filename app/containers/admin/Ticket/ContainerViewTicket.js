@@ -34,6 +34,7 @@ class ContainerViewTicket extends Component {
           adminInvestigateTicket={adminInvestigateTicket}
           adminCloseTicket={adminCloseTicket}
           isSubmitting={ticket.isSubmitting}
+          submitResult={ticket.submitResult}
         />
       </div>
     )

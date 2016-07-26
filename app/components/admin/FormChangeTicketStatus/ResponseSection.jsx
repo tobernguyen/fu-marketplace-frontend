@@ -4,6 +4,7 @@ import { messages } from 'app/components/admin/FormChangeTicketStatus/FormChange
 import TicketStatus from 'app/shared/ticketStatus';
 import LabelTicketStatus from 'app/components/admin/LabelTicketStatus'
 import LoadingSpinner from 'app/components/admin/LoadingSpinner';
+import AsyncResultCode from 'app/shared/asyncResultCodes';
 
 class ResponseSection extends Component {
   constructor(props) {
@@ -62,6 +63,16 @@ class ResponseSection extends Component {
       }
     }
   }
+
+  componentWillReceiveProps(nextProps) {
+    const { submitResult } = nextProps;
+    if(submitResult.message_code === AsyncResultCode.INVESTIGATING_TICKET_SUCCESS) {
+      this.setState({
+        newTicketStatus : TicketStatus.CLOSED
+      });
+    }
+  }
+
   renderNewTicketStatus(status) {
     let output = '';
     switch (status) {

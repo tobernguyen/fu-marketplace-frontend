@@ -157,3 +157,9 @@ export const USER_CLOSE_TICKET_MODAL = 'USER_CLOSE_TICKET_MODAL';
 export const userCloseTicketModal = () => ({
   type: USER_CLOSE_TICKET_MODAL
 });
+
+export const USER_CLOSE_NEW_TICKET_MODAL = 'USER_CLOSE_NEW_TICKET_MODAL';
+
+export const userCloseNewTicketModal = () => ({
+  type: USER_CLOSE_NEW_TICKET_MODAL
+});

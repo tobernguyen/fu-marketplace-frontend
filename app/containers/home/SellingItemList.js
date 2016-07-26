@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import BlockSellingItemList from 'app/components/home/BlockSellingItemList';
 import { addItemToCart } from 'app/actions/user';
 import { getHashCategories } from 'app/selectors';
+import { updateShopItem } from 'app/actions/shop';
 
 class SellingItemList extends Component {
   constructor(props) {
@@ -11,12 +12,20 @@ class SellingItemList extends Component {
     this.handleAddToCart = (item) => {
       this.props.addItemToCart(item);
     };
+
+    this.toggleItemStatus = (item) => {
+      console.log(item);
+      // this.props.updateShopItem(this.props.shopID, item.id, {
+      //   status: Number(!item.checked)
+      // });
+    }
   }
 
   render() {
     const { checkOut, buyNow, sellingItems, shopID, cartItems, sellerMode, allCategories, shopOpening, ownerView } = this.props;
     return (
       <BlockSellingItemList
+        toggleItemStatus={this.toggleItemStatus}
         ownerView={ownerView}
         shopOpening={shopOpening}
         items={sellingItems}
@@ -52,5 +61,6 @@ SellingItemList.propTypes = {
 };
 
 export default connect(mapStateToProps, {
-  addItemToCart
+  addItemToCart,
+  updateShopItem
 })(SellingItemList)

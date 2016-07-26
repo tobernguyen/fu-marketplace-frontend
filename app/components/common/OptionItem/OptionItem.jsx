@@ -3,7 +3,7 @@ import './OptionItem.scss';
 
 export default class OptionItem extends Component {
   render() {
-    const { item } = this.props;
+    const { item, noLabel } = this.props;
     return (
       <div className="option-item">
         <div>
@@ -11,10 +11,11 @@ export default class OptionItem extends Component {
                  className="checkbox-custom"
                  checked={item.checked}
                  type="checkbox"
-                 onChange={() => this.props.toggleItem(item.id)} />
-            <label htmlFor={`checkbox-${item.id}`}
+                 onChange={() => this.props.toggleItem(item)} />
+
+          <label htmlFor={`checkbox-${item.id}`}
                    className="checkbox-custom-label">
-              {item.name}
+            {noLabel ? '' : item.name}
             </label>
         </div>
       </div>

@@ -65,19 +65,6 @@ class SellerDashboard extends Component {
     }]);
   }
 
-  // componentWillReceiveProps(nextProps) {
-  //   if (nextProps.params) {
-  //     const { shopID } = this.props.params;
-  //     if (!isNaN(shopID)) {
-  //       if (shopID != this.state.shopID) {
-  //         this.setState({
-  //           shopID: parseInt(shopID)
-  //         })
-  //       }
-  //     }
-  //   }
-  // }
-
   render() {
     return (
       <div className="container home-body">
@@ -94,7 +81,7 @@ class SellerDashboard extends Component {
                 sellerMode={true}
                 oneSignalRegistered={this.props.oneSignalRegistered}
                 pushNotificationEnabled={this.state.pushNotificationEnabled} />
-              <SellingItemList sellerMode={true} />
+              <SellingItemList shopID={this.props.params.shopID} sellerMode={true} />
             </div>
           </div>
           <div className="col-md-3">

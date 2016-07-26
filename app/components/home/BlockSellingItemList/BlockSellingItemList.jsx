@@ -84,13 +84,14 @@ export default class BlockSellingItemList extends Component {
 
   renderSellingItems() {
     const { currentItems } = this.state;
-    const { sellerMode, addToCart, buyNow, shopID, cartItems, shopOpening, ownerView } = this.props;
+    const { sellerMode, addToCart, buyNow, shopID, cartItems, shopOpening, ownerView, toggleItemStatus } = this.props;
     if (currentItems.length > 0) {
       return (
         <div>
           {this.state.currentItems.map((item) =>
             {if (sellerMode || ownerView) {
               return <BlockSellingItem
+                toggleItemStatus={toggleItemStatus}
                 key={item.id}
                 item={item}
                 shopID={shopID} />

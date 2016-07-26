@@ -63,3 +63,10 @@ export const DESTROY_WEB_SOCKET = 'DESTROY_WEB_SOCKET';
 export const destroyWebSocket = () => ({
   type: DESTROY_WEB_SOCKET
 });
+
+
+export const USER_CHANGES_LANGUAGE = 'USER_CHANGES_LANGUAGE';
+export const saveLanguageChange = (language) => ({
+  type: USER_CHANGES_LANGUAGE,
+  language: language
+});

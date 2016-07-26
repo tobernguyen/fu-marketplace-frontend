@@ -26,5 +26,13 @@ export const buttons = {
   update: {
     id: 'button.update',
     defaultMessage: 'update'
+  },
+  save: {
+    id: 'button.save',
+    defaultMessage: 'save'
+  },
+  cancel: {
+    id: 'button.cancel',
+    defaultMessage: 'cancel'
   }
 };

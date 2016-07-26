@@ -3,7 +3,7 @@ import _ from 'lodash';
 import { languageKey } from 'app/config';
 
 const INITIAL_STATE = {
-  language: localStorage.getItem(languageKey) || 'en'
+  language: localStorage.getItem(languageKey) || 'vi'
 };
 export const language = (state = INITIAL_STATE, action) => {
   return (action.type === ActionTypes.CHANGE_LANGUAGE) ? _.assign({}, state, {

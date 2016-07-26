@@ -98,10 +98,12 @@ class Header extends Component {
             <FormattedMessage {...links.admin} />
           </MenuItem>
         </LinkContainer>}
-        <MenuItem eventKey={3.5}>
-          <i className="fa fa-cog"/>
-          <FormattedMessage {...links.settings} />
-        </MenuItem>
+        <LinkContainer to={{ pathname: '/settings', query: query }}>
+          <MenuItem eventKey={3.5}>
+            <i className="fa fa-cog"/>
+            <FormattedMessage {...links.settings} />
+          </MenuItem>
+        </LinkContainer>
         <LinkContainer to='/goodbye' onSelect={onSignOut}>
           <MenuItem eventKey={3.6}>
             <i className="fa fa-sign-in"/>

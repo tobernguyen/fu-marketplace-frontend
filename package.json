@@ -28,6 +28,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "awesome-bootstrap-checkbox": "^1.0.0-alpha.4",
     "axios": "^0.11.1",
     "blueimp-canvas-to-blob": "^3.3.0",
     "chart.js": "^2.2.0-rc.2",

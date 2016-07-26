@@ -1,0 +1,33 @@
+.block-switch-language {
+  .title {
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-bottom: 5px;
+    font-size: 16px;
+  }
+  .choose-language {
+    padding: 0 30px;
+    .form-language {
+      > .radio {
+        > input {
+          margin-left: 0;
+        }
+        > label {
+          display: block;
+          font-size: 16px;
+        }
+      }
+    }
+  }
+}
+
+.settings {
+  .modal-footer {
+    padding: 8px 15px;
+
+    .btn {
+      min-width: 80px;
+      padding: 5px 10px;
+    }
+  }
+}

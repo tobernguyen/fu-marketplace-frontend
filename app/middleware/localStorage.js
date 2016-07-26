@@ -1,5 +1,6 @@
 import * as ActionTypes from '../actions';
 import * as AdminActionTypes from '../actions/admin';
+import * as CommonActionTypes from '../actions/common';
 import { accessTokenKey, adminAccessTokenKey, languageKey } from 'app/config';
 
 export default () => next => action => {
@@ -38,8 +39,11 @@ export default () => next => action => {
     case AdminActionTypes.ADMIN_CHANGE_PASSWORD_SUCCESS:
       window.localStorage.removeItem(adminAccessTokenKey);
       break;
+    case CommonActionTypes.USER_CHANGES_LANGUAGE:
+      window.localStorage.setItem(languageKey, language);
+      break;
     case ActionTypes.CHANGE_LANGUAGE:
-      localStorage.setItem(languageKey, language);
+      window.localStorage.setItem(languageKey, language);
       break;
     default:
       break;

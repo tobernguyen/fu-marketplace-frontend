@@ -11,6 +11,7 @@ import Home from './containers/home';
 import Wrapper from './containers/home/Wrapper';
 import WrapperDashboard from './containers/home/WrapperDashboard';
 import Account from './containers/home/Account';
+import Settings from './containers/home/Settings';
 import MyOrders from './containers/home/MyOrders';
 import MyTickets from './containers/home/MyTickets';
 import UpdateShop from './containers/home/SellerDashboard/UpdateShop';
@@ -50,6 +51,7 @@ export default (
       <IndexRoute component={Wrapper}/>
       <Route component={Wrapper}>
         <Route path="account" component={displayAsModal(Account)} />
+        <Route path="settings" component={displayAsModal(Settings)} />
         <Route path="orders" component={displayAsModal(MyOrders)} />
         <Route path="tickets" component={displayAsModal(MyTickets)} />
         <Route path="shops/request_create" component={displayAsModal(RequestCreateShop)} />

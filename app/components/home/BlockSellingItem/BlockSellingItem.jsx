@@ -3,10 +3,27 @@ import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { Link } from 'react-router';
 import './BlockSellingItem.scss';
 import { FormattedNumber } from 'react-intl';
+import OptionItem from 'app/components/common/OptionItem';
+import _ from 'lodash';
 
+const ITEM_STATUS = {
+  FOR_SELL: 1,
+  NOT_FOR_SELL: 0
+};
 export default class BlockSellingItem extends Component {
   constructor(props) {
     super(props);
+  }
+
+  renderCheckBox() {
+    const { item, toggleItemStatus } = this.props;
+    const optionItem = {
+      id: item.id,
+      checked: item.status === ITEM_STATUS.FOR_SELL
+    };
+    return (
+      <OptionItem item={optionItem} toggleItem={toggleItemStatus} noLabel={true}/>
+    )
   }
 
   render() {
@@ -22,13 +39,25 @@ export default class BlockSellingItem extends Component {
             <Link to={updateURL} className="item-image">
               <img src={item.image} />
             </Link>
-            <div className="info">
-              <div>
-                <Link to={updateURL} className="name">
-                  {item.name}
-                </Link>
-                <span className="price"><FormattedNumber value={item.price}/> ₫</span>
-              </div>
+
+            <div className="info clearfix">
+              <table>
+                <tbody>
+                <tr>
+                  <td>
+                    <div>
+                      <Link to={updateURL} className="name">
+                        {item.name}
+                      </Link>
+                      <span className="price"><FormattedNumber value={item.price}/> ₫</span>
+                    </div>
+                  </td>
+                  <td>
+                    {this.renderCheckBox()}
+                  </td>
+                </tr>
+                </tbody>
+              </table>
             </div>
           </div>
         </OverlayTrigger>

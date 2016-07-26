@@ -28,6 +28,20 @@
         font-size: 13px;
         color: #999999;
       }
+      table {
+        width: 100%;
+        tr {
+          td:last-child {
+            width: 20px;
+            .option-item .checkbox-custom-label {
+              padding: 0;
+              &:before {
+                margin-right: 0;
+              }
+            }
+          }
+        }
+      }
     }
   }
 }

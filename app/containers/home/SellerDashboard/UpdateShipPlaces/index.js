@@ -24,11 +24,11 @@ class UpdateShipPlaces extends Component {
       this.props.updateShipPlaces(this.props.params.shopID, placeIDs);
     };
 
-    this.toggleShipPlace = (itemID) => {
+    this.toggleShipPlace = (item) => {
       const { shopShipPlaces } = this.state;
       this.setState({
         shopShipPlaces: _.map(shopShipPlaces, (place) => {
-          if (place.id === itemID) {
+          if (place.id === item.id) {
             place.checked = !place.checked;
           }
           return place

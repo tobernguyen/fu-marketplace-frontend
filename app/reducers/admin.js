@@ -57,7 +57,6 @@ const initialState = {
 };
 
 export const admin = (state = initialState, action) => {
-  console.log(action);
   const { type, response, error } = action;
   switch (type) {
     case AdminActionTypes.ADMIN_GET_USERS_REQUEST:

@@ -32,7 +32,9 @@ class ComponentListTicket extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const { page, size } = nextProps.location.query;
+    const { query } = nextProps.location;
+    const page = query.page || 1;
+    const size = query.size || 20;
 
     if(page != this.state.page || size != this.state.size) {
       this.props.adminGetTickets('OPENING', page, size);

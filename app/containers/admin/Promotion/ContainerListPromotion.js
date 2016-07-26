@@ -28,12 +28,13 @@ class ContainerListPromotion extends Component {
   }
 
   componentWillMount() {
-    const { page, size } = this.props.location.query;
-    this.props.adminGetShopPromotionCampaign(page || 1, size || 20);
+    this.props.adminGetShopPromotionCampaign(this.state.page, this.state.size);
   }
 
   componentWillReceiveProps(nextProps) {
-    const { page, size } = nextProps.location.query;
+    const { query } = nextProps.location;
+    const page = query.page || 1;
+    const size = query.size || 20;
     if(page != this.state.page || size != this.state.size) {
       this.props.adminGetShopPromotionCampaign(page, size);
       this.setState({

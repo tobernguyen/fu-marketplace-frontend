@@ -8,6 +8,7 @@ import BlockCurrentOrderListAction from './BlockCurrentOrderListAction.jsx';
 import LabelCustomerInformation from 'app/components/home/LabelCustomerInformation';
 import OrderStatus from 'app/shared/orderStatus';
 import LabelItem from './LabelItem.jsx';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 class BlockCurrentOrderListRow extends Component {
   constructor(props) {
@@ -15,7 +16,8 @@ class BlockCurrentOrderListRow extends Component {
 
     this.state = {
       order: props.order,
-      isExpand: false
+      canceled: false,
+      countingDown: false
     };
     this.acceptOrder = () => {
       const { order } = this.state;
@@ -42,6 +44,10 @@ class BlockCurrentOrderListRow extends Component {
       this.setState({
         order
       });
+      this.hideOrder();
+      setTimeout(() => {
+        this.props.removeOrder(order.id);
+      }, 7000);
     };
 
     this.rejectOrder = (formData) => {
@@ -54,6 +60,10 @@ class BlockCurrentOrderListRow extends Component {
       this.setState({
         order
       });
+      this.hideOrder();
+      setTimeout(() => {
+        this.props.removeOrder(order.id);
+      }, 7000);
     };
 
     this.abortOrder = (formData) => {
@@ -67,12 +77,25 @@ class BlockCurrentOrderListRow extends Component {
         order
       });
     }
+
+    this.hideOrder = () => {
+      this.setState({
+        countingDown: true
+      });
+      setTimeout(() => {
+        this.setState({
+          canceled: true,
+          countingDown: false
+        });
+      }, 6000);
+    }
   }
 
-  onMouseEnter() {
-    this.setState({
-      isExpand: true
-    });
+  componentWillReceiveProps(nextProps) {
+    const { order } = nextProps;
+    if(order.status === OrderStatus.CANCELED ) {
+      this.hideOrder();
+    }
   }
 
   calculateTotalAmount(order) {
@@ -83,14 +106,23 @@ class BlockCurrentOrderListRow extends Component {
   }
 
   render() {
+    const { order, countingDown } = this.state;
     const orderCardClass = classNames({
-      'order-card': true,
-      'is-expand': this.state.isExpand
+      'order-card': true
     });
 
-    const { order } = this.state;
-    return (
-      <li className={orderCardClass}>
+    const shrinkingClassName = classNames({
+      'shrinking': true,
+      'hide': !countingDown
+    });
+    const output = (
+      <div className={orderCardClass} key={order.id}>
+        {
+          countingDown === true &&
+          <div className="timerwrapper">
+            <div className={shrinkingClassName}></div>
+          </div>
+        }
         <div className="preview clearfix">
           <div className="col-sm-8">
             <div><strong><FormattedMessage {...messages.modalViewOrder.body.orderId}/>: </strong> {order.id}</div>
@@ -141,7 +173,17 @@ class BlockCurrentOrderListRow extends Component {
           abortOrder={this.abortOrder}
         />
         </div>
-      </li>
+      </div>
+    );
+
+    return (
+      <ReactCSSTransitionGroup
+        transitionName="dynamicOrderCard"
+        transitionEnterTimeout={1000}
+        transitionLeaveTimeout={1000}
+        >
+        { !this.state.canceled && output}
+      </ReactCSSTransitionGroup>
     );
   }
 }

@@ -40,6 +40,7 @@
     "moment-range": "^2.2.0",
     "randomcolor": "^0.4.4",
     "react": "~15.1.0",
+    "react-addons-css-transition-group": "^15.2.1",
     "react-bootstrap": "^0.29.5",
     "react-chartjs": "git://github.com/reactjs/react-chartjs.git#chartjs-v2",
     "react-datepicker": "^0.28.1",

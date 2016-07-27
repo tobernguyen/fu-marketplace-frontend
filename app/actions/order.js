@@ -216,3 +216,36 @@ export const CLEAR_CURRENT_ORDERS = 'CLEAR_CURRENT_ORDERS';
 export const clearCurrentOrders = () => ({
   type: CLEAR_CURRENT_ORDERS
 });
+
+export const UPDATE_ORDER_STATUS = 'UPDATE_ORDER_STATUS';
+export const updateOrderStatus = (orderId, status) => ({
+  type: UPDATE_ORDER_STATUS,
+  payload: {
+    orderId,
+    status
+  }
+});
+
+export const REMOVE_ORDER = 'REMOVE_ORDER';
+export const removeOrder = (orderId) => ({
+  type: REMOVE_ORDER,
+  payload: orderId
+});
+
+export const SELLER_GET_NEW_ORDER_REQUEST = 'SELLER_GET_NEW_ORDER_REQUEST';
+export const SELLER_GET_NEW_ORDER_SUCCESS = 'SELLER_GET_NEW_ORDER_SUCCESS';
+export const SELLER_GET_NEW_ORDER_FAILURE = 'SELLER_GET_NEW_ORDER_FAILURE';
+
+const requestGetNewOrder = (orderId) => ({
+  [CALL_API]: {
+    types: [SELLER_GET_NEW_ORDER_REQUEST, SELLER_GET_NEW_ORDER_SUCCESS, SELLER_GET_NEW_ORDER_FAILURE],
+    method: HTTP_METHODS.GET,
+    url: `/api/v1/seller/orders/${orderId}`
+  }
+});
+
+export const getNewOrder = (orderId) => {
+  return (dispatch) => {
+    dispatch(requestGetNewOrder(orderId));
+  }
+}

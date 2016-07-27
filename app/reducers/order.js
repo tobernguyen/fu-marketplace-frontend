@@ -101,6 +101,40 @@ export const order = (state = INITIAL_STATE, action) => {
         hasMore: INITIAL_STATE.hasMore
       });
     }
+    case OrderActionTypes.UPDATE_ORDER_STATUS:
+    {
+      const { currentOrders } = state;
+      const { payload: { orderId, status } } = action;
+      const index = _.findIndex(currentOrders, (order) => {
+        return order.id == orderId
+      });
+      const targetOrder = currentOrders[index];
+      targetOrder.status = status;
+      currentOrders.splice(index, 1, targetOrder);
+      return _.merge({}, state, {
+        currentOrders
+      });
+    }
+    case OrderActionTypes.REMOVE_ORDER:
+    {
+      const { currentOrders } = state;
+      const { payload } = action;
+      const updatedCurrentOrders = _.remove(currentOrders, (order) => {
+        return order.id != payload
+      });
+      return _.assign({}, state, {
+        currentOrders: updatedCurrentOrders
+      });
+    }
+    case OrderActionTypes.SELLER_GET_NEW_ORDER_SUCCESS:
+    {
+      const { currentOrders } = state;
+      const { response } = action;
+      const updatedCurrentOrders = _.concat(currentOrders, response);
+      return _.merge({}, state, {
+        currentOrders: updatedCurrentOrders
+      });
+    }
     default:
       return state;
   }

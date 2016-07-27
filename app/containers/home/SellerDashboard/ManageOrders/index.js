@@ -12,7 +12,10 @@ import {
   sellerCompleteOrder,
   sellerAbortOrder,
   getOrdersOfPage,
-  clearCurrentOrders
+  clearCurrentOrders,
+  updateOrderStatus,
+  getNewOrder,
+  removeOrder
 } from 'app/actions/order';
 import Sticky from 'react-stickynode';
 import { withRouter } from 'react-router'
@@ -142,13 +145,17 @@ class ManageOrders extends Component {
 
   render() {
     const { query } = this.props.location;
-    const { currentOrders, orders, hasMore, clearCurrentOrders } = this.props;
+    const { socket, currentOrders, orders, hasMore, clearCurrentOrders, updateOrderStatus, getNewOrder, removeOrder } = this.props;
     return (
       <div className="container home-body">
         <div className="seller-dashboard">
           <div className="col-md-9">
             <div className="row">
               <BlockOrderList
+                socket={socket}
+                updateOrderStatus={updateOrderStatus}
+                getNewOrder={getNewOrder}
+                removeOrder={removeOrder}
                 clearCurrentOrders={clearCurrentOrders}
                 hasMore={hasMore}
                 shopID ={this.props.params.shopID}
@@ -200,7 +207,8 @@ const mapStateToProps = (state) => {
     orders: state.order.orders,
     sellerShop: shop.sellerShop,
     shouldUpdateOrderList: state.order.shouldUpdateOrderList,
-    isFetching: state.order.isFetching
+    isFetching: state.order.isFetching,
+    socket: state.common.socket
   }
 };
 
@@ -213,5 +221,8 @@ export default withRouter(connect(mapStateToProps, {
   sellerCompleteOrder,
   sellerAbortOrder,
   getOrdersOfPage,
-  clearCurrentOrders
+  clearCurrentOrders,
+  updateOrderStatus,
+  getNewOrder,
+  removeOrder
 })(ManageOrders))

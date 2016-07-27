@@ -34,7 +34,7 @@ class BlockOrderList extends Component {
 
 
   render() {
-    const { shopID, currentOrders, orders, query, changePageSize, getOrdersOfPage } = this.props;
+    const { socket, shopID, currentOrders, orders, query, changePageSize, removeOrder, getOrdersOfPage, updateOrderStatus, getNewOrder } = this.props;
     const size = query.size || 10;
     const hasNextPage = orders.length < size;
     const { isCurrent } = this.state;
@@ -45,6 +45,10 @@ class BlockOrderList extends Component {
             isCurrent={this.state.isCurrent}
             changeOrderListDisplay={this.changeOrderListDisplay}/>
             <BlockCurrentOrderList
+              socket={socket}
+              removeOrder={removeOrder}
+              updateOrderStatus={updateOrderStatus}
+              getNewOrder={getNewOrder}
               shopID={this.props.shopID}
               currentOrders={currentOrders}
               getOrdersOfPage={getOrdersOfPage}

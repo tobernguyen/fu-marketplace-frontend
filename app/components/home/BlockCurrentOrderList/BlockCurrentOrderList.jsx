@@ -4,13 +4,17 @@ import './BlockCurrentOrderList.scss';
 import { PulseLoader } from 'halogen';
 import InfiniteScroll from 'app/components/common/InfiniteScroll';
 import NoOrderSeller from 'app/components/home/NoOrderSeller';
+import { EVENTS } from 'app/shared/socketIOEvents';
+import { NOTIFICATION_TYPE } from 'app/shared/notificationMessages';
+import OrderStatus from 'app/shared/orderStatus';
 
 class BlockCurrentOrderList extends Component {
   constructor(props) {
     super(props);
 
     this.state= {
-      elements: []
+      elements: [],
+      socketLoaded: false
     };
 
     this.loadMore = (page) => {
@@ -37,6 +41,7 @@ class BlockCurrentOrderList extends Component {
             order={order}
             acceptOrder={this.props.acceptOrder}
             rejectOrder={this.props.rejectOrder}
+            removeOrder={this.props.removeOrder}
             startShippingOrder={this.props.startShippingOrder}
             completeOrder={this.props.completeOrder}
             abortOrder={this.props.abortOrder}
@@ -44,9 +49,42 @@ class BlockCurrentOrderList extends Component {
         )
       });
     }
+
+    const { socket } = nextProps;
+    const { shopID } = nextProps;
+     if(socket && !this.state.socketLoaded) {
+      this.setState({
+        socketLoaded: true
+      });
+
+      socket.on(EVENTS.NEW_NOTIFICATION, (packet) => {
+        const { data } = packet;
+        if(data.shopId == shopID) {
+          if(packet.type === NOTIFICATION_TYPE.USER_PLACE_ORDER) {
+            this.props.getNewOrder(data.orderId);
+          }
+          if(packet.type === NOTIFICATION_TYPE.USER_CANCEL_ORDER) {
+            this.props.updateOrderStatus(data.orderId, OrderStatus.CANCELED);
+            setTimeout(() => {
+              this.props.removeOrder(data.orderId);
+            }, 7000);
+          }
+        }
+      });
+    }
+  }
+
+  componentWillUnmount() {
+    const { socket } = this.props;
+    if(socket) {
+      socket.off(EVENTS.NEW_NOTIFICATION);
+    }
   }
 
   render() {
+    if(this.props.currentOrders.length === 0) {
+      return <NoOrderSeller />
+    }
     return (
       <div className="current-order-list">
         {this.state.elements.length > 0 &&
@@ -57,9 +95,6 @@ class BlockCurrentOrderList extends Component {
           loader={<PulseLoader className="feed-loader" color="#C0392B" size="12px" />}>
           {this.state.elements}
         </InfiniteScroll>}
-        {this.state.elements.length == 0 &&
-          <NoOrderSeller />
-        }
       </div>
     );
   }

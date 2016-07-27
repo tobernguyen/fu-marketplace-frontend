@@ -3,15 +3,22 @@
   margin: 0;
   padding: 0;
   .order-card {
-
     width: 100%;
-    height: 270px;
+    height: 280px;
     margin: 10px 0;
     background-color: #ffffff;
     border: 1px solid #e7e7e7;
-    padding: 10px;
-    transition: all 0.7s ease;
+    transition: all 1s cubic-bezier(.36,-0.64,.34,1.76);
+    &.canceled {
+      opacity: 0;
+      transform: rotateY(-90deg);
+    }
+
+    &.disappear {
+      height: 0;
+    }
     .preview {
+      padding: 5px;
       .title {
         display: none;
       }
@@ -37,10 +44,80 @@
     }
 
     hr {
-      margin: 15px 0;
+      margin: 10px 0;
     }
     .current-order-action {
       padding: 0 15px;
     }
   }
 }
+
+.dynamicOrderCard-enter {
+  opacity: 0.01;
+}
+
+.dynamicOrderCard-enter.dynamicOrderCard-enter-active {
+  opacity: 1;
+  transition: all 1000ms ease-in;
+}
+
+.dynamicOrderCard-leave {
+  opacity: 1;
+  margin-left: -200px;
+}
+
+.dynamicOrderCard-leave.dynamicOrderCard-leave-active {
+  opacity: 0.01;
+  margin-left: -200px;
+  transition: all 1000ms ease-in;
+}
+
+.timerwrapper {
+  height: 5px;
+  width: 100%;
+  background: #ffffff;
+  position: relative;
+  margin: auto;
+}
+.shrinking{
+    width: 100%;
+    height: 5px;
+    position: absolute;
+    bottom: 0;
+/*    animation: fillBar 1s ease-in infinite; */
+    -webkit-animation-name: fillBar;
+        animation-name: fillBar;
+    -webkit-animation-duration: 6s;
+            animation-duration: 6s;
+    -webkit-animation-timing-function: ease-in;
+            animation-timing-function: ease-in;
+/*    animation-delay: 2s; */
+    -webkit-animation-iteration-count: 1;
+            animation-iteration-count: 1;
+    -webkit-animation-direction: alternate;
+            animation-direction: alternate;
+    background-image: linear-gradient(to right, #c0392b, #c0392b);
+
+}
+
+@-webkit-keyframes fillBar {
+      0% {
+        width: 100%;
+      }
+      100% {
+        width: 0%;
+      }
+  }
+  @keyframes fillBar {
+      0% {
+        width: 100%;
+      }
+      100% {
+        width: 0%;
+      }
+  }
+
+  .timerwrapper-placeholder {
+    height: 5px;
+    width: 100%;
+  }

@@ -10,6 +10,7 @@ export default {
   'navigation.support': 'Support',
   'navigation.reportIssue': 'Report an issue',
   'navigation.admin': 'Admin area',
+  'navigation.ticket': 'Tickets',
   'account.form.phone.placeholder': 'Phone number',
   'account.form.phone.label': 'Phone',
   'account.form.roomNo.placeholder': 'Room number',
@@ -265,5 +266,6 @@ export default {
   'formCheckOut.tableHead.total': 'Total',
   'formCheckOut.tableHead.shipTo': 'Ship to',
   'formCheckOut.button.placeOrder': 'Place Order',
-  'formCheckOut.validation.shipAddress.blank': 'Ship address is required'
+  'formCheckOut.validation.shipAddress.blank': 'Ship address is required',
+  'noTicket.message': 'There is not any ticket'
 };

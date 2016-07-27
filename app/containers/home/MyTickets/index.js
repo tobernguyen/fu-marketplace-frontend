@@ -9,6 +9,7 @@ import {
   userCloseTicket
 } from 'app/actions/ticket';
 import BlockMyTicket from 'app/components/home/BlockMyTicket';
+import NoTicket from 'app/components/home/NoTicket';
 
 const FIRST_PAGE = 1;
 const DEFAULT_SIZE = 5;
@@ -58,6 +59,9 @@ class MyTickets extends Component {
       const { userCloseTicket, userCloseTicketModal, ticket: { tickets, isFetching, isSubmitting, submitResult }, userReopenTicket } = this.props;
       if(isFetching) {
         return null;
+      }
+      if( tickets.length === 0 ) {
+        return <NoTicket />
       }
       return <BlockMyTicket
         page={page}

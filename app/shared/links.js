@@ -17,6 +17,12 @@ export const links = {
     description: 'Request to open shop',
     defaultMessage: 'Open shop'
   },
+  ticket: {
+    to: '/tickets',
+    id: 'navigation.ticket',
+    description: 'Ticket',
+    defaultMessage: 'Tickets'
+  },
   settings: {
     to: '/settings',
     id: 'navigation.settings',

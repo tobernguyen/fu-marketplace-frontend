@@ -50,7 +50,9 @@ class CheckOutPage extends Component {
             submitOrder={this.handleCheckOutSubmit}
             removeFromCartItem={this.handleRemoveFromCartItem}
             items={this.props.items}
-            hideModal={this.props.onHide}/>
+            hideModal={this.props.onHide}
+            isSubmitting={this.props.isSubmitting}
+            />
         </Modal.Body>
       </Modal>
     )
@@ -60,7 +62,8 @@ class CheckOutPage extends Component {
 const mapStateToProps = (state) => {
   const { user } = state;
   return {
-    items: user.cartItems
+    items: user.cartItems,
+    isSubmitting: state.order.isSubmitting
   }
 };
 
@@ -72,4 +75,3 @@ export default connect(mapStateToProps, {
   removeItemFromCart,
   placeOrder
 })(CheckOutPage)
-

@@ -1,13 +1,16 @@
 import React, { Component } from 'react'
 import './FormCheckOut.scss';
 import AsyncResultCode from 'app/shared/asyncResultCodes';
+import { FormattedMessage, injectIntl } from 'react-intl';
+import { messages } from './FormCheckOut.i18n';
 
 class FormCheckOut extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      orderPlaced: false
+      orderPlaced: false,
+      items: []
     };
 
     const { fields: { items }, removeFromCartItem } = this.props;
@@ -19,7 +22,8 @@ class FormCheckOut extends Component {
     this.submitOrder = (formData) => {
       this.props.submitOrder(formData);
       this.setState({
-        orderPlaced: true
+        orderPlaced: true,
+        items: formData.items
       });
     }
   }
@@ -27,28 +31,32 @@ class FormCheckOut extends Component {
   renderNoCartItemMessage() {
     return (
       <div className="alert alert-warning">
-        Your cart is empty.
-        Click <a href="#" onClick={(e) =>{ e.preventDefault(); this.props.hideModal();}}>here</a> to continue shopping
+        <FormattedMessage {...messages.formCheckOut.emptyCart}/>{'. '}
+        <a href="#" onClick={(e) =>{ e.preventDefault(); this.props.hideModal();}}>
+          <FormattedMessage {...messages.formCheckOut.continueShopping}/>
+        </a>
       </div>
     )
   }
 
   renderSuccessPlaceOrder() {
-    const { fields: { items } } = this.props;
+    const { items } = this.state;
     return (
       <div>
       <div className="alert alert-success">
-        Your order is placed.
-        Click <a href="#" onClick={(e) =>{ e.preventDefault(); this.props.hideModal();}}>here</a> to continue shopping
+        <FormattedMessage {...messages.formCheckOut.orderPlaced}/>{'. '}
+        <a href="#" onClick={(e) =>{ e.preventDefault(); this.props.hideModal();}}>
+          <FormattedMessage {...messages.formCheckOut.continueShopping}/>
+        </a>
       </div>
       <table className="table table-responsive order-items">
           <thead>
           <tr>
             <th>#</th>
-            <th>Item</th>
-            <th>Quantity</th>
-            <th>Note</th>
-            <th>Total</th>
+            <th><FormattedMessage {...messages.formCheckOut.tableHead.item}/></th>
+            <th><FormattedMessage {...messages.formCheckOut.tableHead.quantity}/></th>
+            <th><FormattedMessage {...messages.formCheckOut.tableHead.note}/></th>
+            <th><FormattedMessage {...messages.formCheckOut.tableHead.total}/></th>
             <th/>
           </tr>
           </thead>
@@ -56,7 +64,7 @@ class FormCheckOut extends Component {
           {items.map((item, index) => {
             const { name, price, image } = item;
             return (
-              <tr key={index}>
+              <tr key={items.id}>
                 <td>
                   {index + 1}
                 </td>
@@ -64,22 +72,22 @@ class FormCheckOut extends Component {
                   <div className="as-table">
                     <div>
                       <div className="image">
-                        <img className="thumbnail" src={image.value} />
+                        <img className="thumbnail" src={image} />
                       </div>
                       <div className="info">
-                        <h4>{name.value}</h4>
+                        {name}
                       </div>
                     </div>
                   </div>
                 </td>
                 <td className="quantity">
-                  <p>{item.quantity.value}</p>
+                  <p>{item.quantity}</p>
                 </td>
                 <td className="note">
-                  <p>{item.note.value}</p>
+                  <p>{item.note}</p>
                 </td>
                 <td>
-                  <p>{Number(item.quantity.value) * Number(price.value)}₫</p>
+                  <p>{Number(item.quantity) * Number(price)}₫</p>
                 </td>
               </tr>
             );
@@ -91,12 +99,12 @@ class FormCheckOut extends Component {
   }
 
   renderCheckOutForm() {
-    const { fields: { note, shipAddress, items }, handleSubmit, submitting, dirty, invalid, orderResult } = this.props;
+    const { fields: { note, shipAddress, items }, handleSubmit, dirty, invalid, orderResult, isSubmitting } = this.props;
     return (
       <form className="form-horizontal" onSubmit={handleSubmit(this.submitOrder)}>
         <div className={`form-group has-feedback  ${shipAddress.touched && shipAddress.invalid ? 'has-error' : ''}`}>
           <label className="col-sm-2 control-label">
-            Ship To
+            <FormattedMessage {...messages.formCheckOut.tableHead.shipTo}/>
           </label>
           <div className="col-sm-10 ship-address">
             <input
@@ -105,14 +113,14 @@ class FormCheckOut extends Component {
               {...shipAddress} />
             <span className="glyphicon glyphicon-flag form-control-feedback"/>
             <div className="help-block">
-              {shipAddress.touched ? shipAddress.error : ''}
+              {shipAddress.touched && shipAddress.error? <FormattedMessage {...shipAddress.error}/> : ''}
             </div>
           </div>
 
         </div>
         <div className='form-group'>
           <label className="col-sm-2 control-label">
-            Note
+            <FormattedMessage {...messages.formCheckOut.tableHead.note}/>
           </label>
             <div className="col-sm-10">
               <textarea
@@ -127,9 +135,9 @@ class FormCheckOut extends Component {
           <thead>
           <tr>
             <th>#</th>
-            <th>Item</th>
-            <th>Quantity</th>
-            <th>Note</th>
+            <th><FormattedMessage {...messages.formCheckOut.tableHead.item} /></th>
+            <th><FormattedMessage {...messages.formCheckOut.tableHead.quantity} /></th>
+            <th><FormattedMessage {...messages.formCheckOut.tableHead.note} /></th>
             <th/>
           </tr>
           </thead>
@@ -204,8 +212,8 @@ class FormCheckOut extends Component {
         {orderResult === AsyncResultCode.PLACE_ORDER_FAIL && <div className="alert alert-danger">Error occured!</div>}
         <button type="submit"
                 className="btn btn-danger btn-block"
-                disabled={submitting || !dirty || invalid }>
-          Place order
+                disabled={isSubmitting || !dirty || invalid }>
+          <FormattedMessage {...messages.formCheckOut.button.placeOrder} />{' '}{isSubmitting && <i className="fa fa-spinner fa-spin"></i>}
         </button>
       </form>
     );
@@ -237,4 +245,4 @@ class FormCheckOut extends Component {
   }
 }
 
-export default FormCheckOut
+export default injectIntl(FormCheckOut);

@@ -255,5 +255,15 @@ export default {
   'breadCrumb.changePassword.title': 'Setting',
   'breadCrumb.changePassword.description': 'Change settings of administrator site',
   'formResponseToRequest.responseForm.fields.requestStatus': 'Request status',
-  'formResponseToRequest.responseForm.fields.adminMessage': 'Admin message'
+  'formResponseToRequest.responseForm.fields.adminMessage': 'Admin message',
+  'formCheckOut.emptyCart': 'Your cart is empty',
+  'formCheckOut.continueShopping': 'Continue shopping',
+  'formCheckOut.orderPlaced': 'Your order is placed successfully',
+  'formCheckOut.tableHead.item': 'Item',
+  'formCheckOut.tableHead.quantity': 'Quantity',
+  'formCheckOut.tableHead.note': 'Note',
+  'formCheckOut.tableHead.total': 'Total',
+  'formCheckOut.tableHead.shipTo': 'Ship to',
+  'formCheckOut.button.placeOrder': 'Place Order',
+  'formCheckOut.validation.shipAddress.blank': 'Ship address is required'
 };

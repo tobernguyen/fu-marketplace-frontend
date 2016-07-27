@@ -516,5 +516,15 @@ export default {
   'breadCrumb.editPromotion.title': 'Thay đổi thông tin chiến dịch quảng bá',
   'breadCrumb.editPromotion.description': 'Thay đổi thông tin chiến dịch quảng bá của cửa hàng',
   'breadCrumb.changePassword.title': 'Cài đặt',
-  'breadCrumb.changePassword.description': 'Thay đổi thiết lập của trang quản trị viên'
+  'breadCrumb.changePassword.description': 'Thay đổi thiết lập của trang quản trị viên',
+  'formCheckOut.emptyCart': 'Giỏ hàng của bạn trống',
+  'formCheckOut.continueShopping': 'Tiếp tục mua hàng',
+  'formCheckOut.orderPlaced': 'Bạn đã đặt hàng thành công',
+  'formCheckOut.tableHead.item': 'Sản phẩm',
+  'formCheckOut.tableHead.quantity': 'Số lượng',
+  'formCheckOut.tableHead.note': 'Ghi chú',
+  'formCheckOut.tableHead.total': 'Tổng',
+  'formCheckOut.tableHead.shipTo': 'Địa chỉ',
+  'formCheckOut.button.placeOrder': 'Đặt hàng',
+  'formCheckOut.validation.shipAddress.blank': 'Địa chỉ chuyển hàng không được để trống'
 };

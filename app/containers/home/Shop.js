@@ -109,7 +109,9 @@ class Shop extends Component {
         onHide={this.close}
         bsSize={this.state.bsSize}
         item={this.state.item}
-        handleExpressOrder={this.handleExpressOrder} />
+        handleExpressOrder={this.handleExpressOrder}
+        isSubmitting={this.props.isOrdering}
+        />
     } else {
       orderForm = <CheckOutPage
         oneSignalRegistered={this.props.oneSignalRegistered}
@@ -160,7 +162,8 @@ const mapStateToProps = (state) => {
     sellingItems: sellingItems,
     oneSignalRegistered: oneSignalRegistered,
     currentUser: getUser(state),
-    query: state.common.query
+    query: state.common.query,
+    isOrdering: state.order.isSubmitting
   }
 };
 

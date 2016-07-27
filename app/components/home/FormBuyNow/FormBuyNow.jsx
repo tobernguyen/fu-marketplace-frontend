@@ -28,7 +28,7 @@ class FormBuyNow extends Component {
       dirty,
       handleSubmit,
       item,
-      submitting,
+      isSubmitting,
       placeOrderResult
     } = this.props;
     return (
@@ -58,7 +58,7 @@ class FormBuyNow extends Component {
             <span className="glyphicon glyphicon-flag form-control-feedback"/>
 
             <div className="help-block">
-              {shipAddress.touched ? shipAddress.error : ''}
+              {shipAddress.touched && shipAddress.error ? <FormattedMessage {...shipAddress.error}/> : ''}
             </div>
           </div>
 
@@ -102,8 +102,9 @@ class FormBuyNow extends Component {
         {placeOrderResult === AsyncResultCode.PLACE_ORDER_FAIL && <div className="alert alert-danger">
           <FormattedMessage {...messages.formBuyNow.modalBody.message.error}/>
         </div>}
-        <button type="submit" className="btn btn-danger btn-block" disabled={submitting || !dirty}>
-          <FormattedMessage {...messages.formBuyNow.modalBody.button.placeOrder} />
+        <button type="submit" className="btn btn-danger btn-block" disabled={isSubmitting || !dirty}>
+          <FormattedMessage {...messages.formBuyNow.modalBody.button.placeOrder} />{' '}
+          {isSubmitting && <i className="fa fa-spinner fa-spin"></i>}
         </button>
       </form>
       </div>

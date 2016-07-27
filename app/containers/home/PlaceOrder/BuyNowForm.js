@@ -6,7 +6,10 @@ const validate = values => {
   const errors = {};
 
   if (!values.shipAddress) {
-    errors.shipAddress = 'shipAddress required';
+    errors.shipAddress = {
+      id: 'formCheckOut.validation.shipAddress.blank',
+      defaultMessage: 'Ship address is required'
+    };
   }
 
   if (!values.quantity) {

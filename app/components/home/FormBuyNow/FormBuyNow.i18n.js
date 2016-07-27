@@ -37,13 +37,6 @@ export const messages = {
         error: {
           id: 'formBuyNow.modalBody.message.error',
           defaultMessage: 'Error occurred!'
-        },
-        formValidation: {
-          shipAddress: {
-            isRequired: {
-              id: 'formBuyNow.modalBody.message.formValidation.shipAddress.isRequired'
-            }
-          }
         }
       }
     }

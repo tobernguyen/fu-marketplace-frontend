@@ -16,7 +16,10 @@ const validate = values => {
   const errors = {};
 
   if (!values.shipAddress) {
-    errors.shipAddress = 'shipAddress required';
+    errors.shipAddress = {
+      id: 'formCheckOut.validation.shipAddress.blank',
+      defaultMessage: 'Ship address is required'
+    };
   }
 
   if (values.items && values.items.length === 0) {
@@ -52,6 +55,3 @@ export default reduxForm({
   fields,
   validate
 }, mapStateToProps)(FormCheckOut)
-
-
-

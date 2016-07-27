@@ -5,6 +5,7 @@ const INITIAL_STATE = {
   isFetching: false,
   orders: [],
   currentOrders: [],
+  isSubmitting: false,
   orderResult: '',
   shouldUpdateOrderList: false,
   hasMore: true,
@@ -16,18 +17,25 @@ const INITIAL_STATE = {
 
 export const order = (state = INITIAL_STATE, action) => {
   const { type, response } = action;
+  console.log(action);
   switch(type) {
-    case OrderActionTypes.USER_PLACE_ORDER_REQUEST:
     case OrderActionTypes.CLEAR_ORDER_RESULT:
       return _.merge({}, state, {
         orderResult: ''
       });
+    case OrderActionTypes.USER_PLACE_ORDER_REQUEST:
+      return _.merge({}, state, {
+        isSubmitting: true,
+        orderResult: ''
+      });
     case OrderActionTypes.USER_PLACE_ORDER_SUCCESS:
       return _.merge({}, state, {
+        isSubmitting: false,
         orderResult: AsyncResultCode.PLACE_ORDER_SUCCESS
       });
     case OrderActionTypes.USER_PLACE_ORDER_FAILURE:
       return _.merge({}, state, {
+        isSubmitting: false,
         orderResult: AsyncResultCode.PLACE_ORDER_FAIL
       });
     case OrderActionTypes.SELLER_GET_ORDER_REQUEST:

@@ -2,14 +2,6 @@ import React, { Component, PropTypes } from 'react';
 import './LoginForm.scss';
 
 class LoginForm extends Component {
-  componentWillMount() {
-    document.body.classList.add('admin-page');
-  }
-
-  componentWillUnmount() {
-    document.body.classList.remove('admin-page');
-  }
-
   render() {
     const { fields: {email, password}, handleSubmit, submitting } = this.props;
 

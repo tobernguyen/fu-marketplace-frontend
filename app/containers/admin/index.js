@@ -15,6 +15,11 @@ class Admin extends Component {
 
   componentWillMount() {
     this.props.checkAdminAuthStatus();
+    document.body.classList.add('admin-page');
+  }
+
+  componentWillUnmount() {
+    document.body.classList.remove('admin-page');
   }
 
   componentWillReceiveProps(nextProps) {

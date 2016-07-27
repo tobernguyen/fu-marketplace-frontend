@@ -6,6 +6,7 @@ import BlockSalesStatistic from 'app/components/home/BlockSalesStatistic';
 import BlockItemSoldStatistic from 'app/components/home/BlockItemSoldStatistic';
 import BlockStatisticsHeader from 'app/components/home/BlockStatisticsHeader';
 import Sticky from 'react-stickynode';
+import { updateShopInfo } from 'app/actions/shop';
 import { calculateOrdersStatisticData, calculateSalesStatistic, calculateItemSoldStatistic } from 'app/selectors';
 import { getShopStatistics, STATISTIC_TYPE } from '../../../../actions/statistic';
 import _ from 'lodash';
@@ -33,6 +34,10 @@ class Statistics extends Component {
 
     this.reloadData = () => {
       this.props.getShopStatistics(this.props.params.shopID, STATISTIC_MODE[this.state.activeMode]);
+    };
+
+    this.handleShopInfoChanged = (shopData) => {
+      this.props.updateShopInfo(shopData, this.props.params.shopID);
     }
   }
 
@@ -64,7 +69,8 @@ class Statistics extends Component {
           <div className="col-md-3">
             <Sticky enabled={true} top={60}>
               <BlockSellerDashboardSideBar
-                sellerShop={this.props.sellerShop} />
+                sellerShop={this.props.sellerShop}
+                shopInfoChanged={this.handleShopInfoChanged}/>
             </Sticky>
           </div>
         </div>
@@ -85,5 +91,6 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps, {
-  getShopStatistics
+  getShopStatistics,
+  updateShopInfo
 })(Statistics)

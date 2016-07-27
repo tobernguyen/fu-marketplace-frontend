@@ -31,7 +31,10 @@ export default class BlockItemSoldStatistic extends Component {
           stacked: true,
         }],
         yAxes: [{
-          stacked: true
+          stacked: true,
+          ticks: {
+            stepSize: 1
+          }
         }]
       }
     };

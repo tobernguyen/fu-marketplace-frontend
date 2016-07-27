@@ -115,6 +115,10 @@ class ManageOrders extends Component {
 
     this.handleGetOrdersOfPage = (params) => {
       this.props.getOrdersOfPage(shopID, params);
+    };
+
+    this.handleShopInfoChanged = (shopData) => {
+      this.props.updateShopInfo(shopData, this.props.params.shopID);
     }
   }
 
@@ -178,7 +182,8 @@ class ManageOrders extends Component {
           <div className="col-md-3">
             <Sticky enabled={true} top={60}>
               <BlockSellerDashboardSideBar
-                sellerShop={this.props.sellerShop} />
+                sellerShop={this.props.sellerShop}
+                shopInfoChanged={this.handleShopInfoChanged}/>
             </Sticky>
           </div>
         </div>

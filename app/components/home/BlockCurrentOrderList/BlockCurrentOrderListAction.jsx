@@ -31,11 +31,11 @@ const BlockCurrentOrderListAction = ({ order, acceptOrder, rejectOrder, startShi
   switch (order.status) {
     case OrderStatus.NEW:
       output = <div className="btn-toolbar">
-          <button type="button" className="btn btn-accept" onClick={() => acceptOrder(order.id)}>
+          <button type="button" className="btn btn-success" onClick={() => acceptOrder(order.id)}>
             <FormattedMessage {...messages.modalViewOrder.button.accept} />
           </button>
           <OverlayTrigger trigger="click" placement="right" overlay={rejectForm} rootClose>
-          <button type="button" className="btn btn-reject">
+          <button type="button" className="btn btn-danger">
             <FormattedMessage {...messages.modalViewOrder.button.reject} />
           </button>
           </OverlayTrigger>

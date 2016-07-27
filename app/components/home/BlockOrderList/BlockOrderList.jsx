@@ -60,6 +60,7 @@ class BlockOrderList extends Component {
               shouldUpdateOrderList={this.props.shouldUpdateOrderList}
               hasMore={this.props.hasMore}
               isFetching={this.props.isFetching}
+              viewOrder={this.props.viewOrder}
               />
         </div>)
 

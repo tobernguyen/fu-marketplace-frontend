@@ -45,6 +45,7 @@ class BlockCurrentOrderList extends Component {
             startShippingOrder={this.props.startShippingOrder}
             completeOrder={this.props.completeOrder}
             abortOrder={this.props.abortOrder}
+            viewOrder={this.props.viewOrder}
           />
         )
       });

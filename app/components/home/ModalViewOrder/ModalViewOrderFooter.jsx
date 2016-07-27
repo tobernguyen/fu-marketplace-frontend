@@ -32,11 +32,11 @@ const ModalViewOrderFooter = ({ order, acceptOrder, rejectOrder, startShippingOr
   switch (order.status) {
     case OrderStatus.NEW:
       output = <div className="btn-toolbar">
-          <button type="button" className="btn btn-accept" onClick={() => acceptOrder(order.id)}>
+          <button type="button" className="btn btn-success" onClick={() => acceptOrder(order.id)}>
             <FormattedMessage {...messages.modalViewOrder.button.accept} />
           </button>
           <OverlayTrigger trigger="click" placement="right" overlay={rejectForm} rootClose>
-          <button type="button" className="btn btn-reject" bsRole="toggle">
+          <button type="button" className="btn btn-danger" bsRole="toggle">
             <FormattedMessage {...messages.modalViewOrder.button.reject} />
           </button>
           </OverlayTrigger>
@@ -64,7 +64,7 @@ const ModalViewOrderFooter = ({ order, acceptOrder, rejectOrder, startShippingOr
             <FormattedMessage {...messages.modalViewOrder.button.complete}/>
           </button>
           <OverlayTrigger trigger="click" placement="right" overlay={abortForm} rootClose>
-          <button type="button" className="btn btn-reject" bsRole="toggle">
+          <button type="button" className="btn btn-danger" bsRole="toggle">
             <FormattedMessage {...messages.modalViewOrder.button.abort} />
           </button>
           </OverlayTrigger>

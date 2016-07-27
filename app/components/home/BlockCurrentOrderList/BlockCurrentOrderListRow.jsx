@@ -118,10 +118,10 @@ class BlockCurrentOrderListRow extends Component {
     const output = (
       <div className={orderCardClass} key={order.id}>
         {
-          countingDown === true &&
+          countingDown ?
           <div className="timerwrapper">
             <div className={shrinkingClassName}></div>
-          </div>
+          </div> : <div className="timerwrapper-placeholder"></div>
         }
         <div className="preview clearfix">
           <div className="col-sm-8">
@@ -155,11 +155,16 @@ class BlockCurrentOrderListRow extends Component {
               {order.note == '' ? <FormattedMessage {...messages.modalViewOrder.body.noNote}/> : order.note}
             </div>
             </div>
-          <div className="col-sm-4">
+          <div className="col-sm-3">
             <p>
               <strong><FormattedMessage {...messages.modalViewOrder.body.orderStatus}/>: </strong>
               <LabelOrderStatus status={order.status}/>
             </p>
+          </div>
+          <div className="col-sm-1">
+            <button type="button" className="btn btn-warning" style={{ 'padding': '1px 6px'}}onClick={() => this.props.viewOrder(order)}>
+              <i className="fa fa-eye"></i>
+            </button>
           </div>
         </div>
         <hr />

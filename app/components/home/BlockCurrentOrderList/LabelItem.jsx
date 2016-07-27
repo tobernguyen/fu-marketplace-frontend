@@ -12,7 +12,7 @@ const LabelItem = ({ orderLine, intl: { formatMessage } }) => {
   });
   if (!hasNote) {
     return (
-      <span className={labelClassName}>{orderLine.item.name}({orderLine.quantity})</span>
+      <span className={labelClassName}>{orderLine.item.name} - {orderLine.quantity}</span>
     );
   }
 
@@ -21,7 +21,7 @@ const LabelItem = ({ orderLine, intl: { formatMessage } }) => {
   </Popover>;
 
   return (
-    <OverlayTrigger trigger="click" rootClose placement="top" overlay={note}>
+    <OverlayTrigger trigger={['hover', 'focus']} rootClose placement="top" overlay={note}>
       <span className={labelClassName}>{orderLine.item.name}({orderLine.quantity})</span>
     </OverlayTrigger>
   );

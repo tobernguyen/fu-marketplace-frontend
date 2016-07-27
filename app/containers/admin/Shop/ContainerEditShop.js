@@ -23,6 +23,9 @@ class ContainerEditShop extends Component {
   constructor(props) {
     super(props);
 
+    this.props.getShipPlaces();
+    this.props.adminGetShop(props.params.shopId);
+
     this.handleSubmitShopInformation = this.handleSubmitShopInformation.bind(this);
     this.uploadAvatar = this.uploadAvatar.bind(this);
     this.uploadCover = this.uploadCover.bind(this);
@@ -73,10 +76,6 @@ class ContainerEditShop extends Component {
     this.props.adminCreateShopPromotionCampaign(shopId, startDate, endDate, type);
   }
 
-  componentWillMount() {
-    this.props.getShipPlaces();
-    this.props.adminGetShop(this.props.params.shopId);
-  }
   render() {
     const { shopManagement } = this.props;
     if(shopManagement.isFetching) {

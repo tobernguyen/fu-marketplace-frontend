@@ -13,6 +13,10 @@ export const messages = {
         id: 'formEditShopShipPlaces.fields.open',
         defaultMessage: 'Open status'
       },
+      publish: {
+        id: 'formEditShopShipPlaces.fields.publish',
+        defaultMessage: 'Publish status'
+      },
       shipPlaces: {
         id: 'formEditShopShipPlaces.fields.shipPlaces',
         defaultMessage: 'Ship places'
@@ -26,6 +30,16 @@ export const messages = {
       close: {
         id: 'formEditShopShipPlaces.openingStatus.close',
         defaultMessage: 'Close'
+      }
+    },
+    publishStatus: {
+      published: {
+        id: 'shopStatus.published',
+        defaultMessage: 'Published'
+      },
+      unpublished: {
+        id: 'shopStatus.unpublished',
+        defaultMessage: 'Unpublished'
       }
     },
     button: {

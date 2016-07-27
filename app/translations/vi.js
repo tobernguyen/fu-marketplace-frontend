@@ -294,6 +294,7 @@ export default {
   'formEditShopShipPlaces.sectionName': 'Thông tin vận hành',
   'formEditShopShipPlaces.sectionDescription': 'Thông tin liên quan đến hoạt động của cửa hàng',
   'formEditShopShipPlaces.fields.open': 'Mở cửa',
+  'formEditShopShipPlaces.fields.publish': 'Trạng thái công khai',
   'formEditShopShipPlaces.fields.shipPlaces': 'Địa điểm chuyển hàng',
   'formEditShopShipPlaces.openingStatus.open': 'Mở',
   'formEditShopShipPlaces.openingStatus.close': 'Đóng',

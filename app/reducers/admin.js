@@ -270,7 +270,7 @@ export const admin = (state = initialState, action) => {
     case AdminActionTypes.ADMIN_UPDATE_SHOP_OPENING_REQUEST:
       return _.merge({}, state, {
         shopManagement: {
-          submitResultShopShipPlace: true
+          isSubmittingShopShipPlace: true
         }
       });
     case AdminActionTypes.ADMIN_UPDATE_SHOP_OPENING_SUCCESS:

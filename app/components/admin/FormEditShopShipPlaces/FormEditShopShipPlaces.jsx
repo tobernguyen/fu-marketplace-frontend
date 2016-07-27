@@ -22,6 +22,7 @@ class FormEditShopShipPlaces extends React.Component {
       isValid: false,
       informationToBeUpdated: {
         openStatus: shop.opening,
+        publishStatus: shop.status,
         shipPlaces: shop.shipPlaces
       }
     };
@@ -34,8 +35,8 @@ class FormEditShopShipPlaces extends React.Component {
   handleSubmit() {
     const { shop } = this.props;
     const { informationToBeUpdated } = this.state;
-    if(informationToBeUpdated.openStatus != shop.opening) {
-      this.props.submitOpeningStatus({ opening: informationToBeUpdated.openStatus });
+    if(informationToBeUpdated.openStatus != shop.opening || informationToBeUpdated.publishStatus != shop.status) {
+      this.props.submitOpeningStatus({ opening: informationToBeUpdated.openStatus, status: Number(informationToBeUpdated.publishStatus) });
     }
     if(informationToBeUpdated.shipPlaces !== shop.shipPlaces) {
       this.props.submitShipPlaces({shipPlaces: informationToBeUpdated.shipPlaces});
@@ -107,6 +108,24 @@ class FormEditShopShipPlaces extends React.Component {
               </option>
               <option value={false}>
                 {formatMessage(messages.formEditShopShipPlaces.openingStatus.close)}
+              </option>
+            </FormControl>
+          </FormGroup>
+          <FormGroup>
+            <ControlLabel>
+              <FormattedMessage {...messages.formEditShopShipPlaces.fields.publish}/>
+            </ControlLabel>
+            <FormControl
+              componentClass="select"
+              name="publishStatus"
+              defaultValue={informationToBeUpdated.publishStatus || 0}
+              onChange={this.handleOnChange}
+              >
+              <option value={1}>
+                {formatMessage(messages.formEditShopShipPlaces.publishStatus.published)}
+              </option>
+              <option value={0}>
+                {formatMessage(messages.formEditShopShipPlaces.publishStatus.unpublished)}
               </option>
             </FormControl>
           </FormGroup>

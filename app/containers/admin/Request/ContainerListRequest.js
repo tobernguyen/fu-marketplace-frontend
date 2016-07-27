@@ -52,15 +52,13 @@ class ContainerListRequest extends Component {
       if(requestList.length === 0) {
         output = <NoRequest />
       } else {
-        output = <div>
-          <RequestList
+        output = <RequestList
             requests={requestList}
             page={page}
             size={size}
             changePageSize={this.changePageSize}
             adminSelectRequest={this.props.adminSelectRequest}
-            />;
-        </div>
+            />
       }
 
     }

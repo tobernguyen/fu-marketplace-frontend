@@ -56,11 +56,7 @@ class ContainerListPromotion extends Component {
       if(promotionList.length === 0) {
         output = <NoPromotion />;
       } else {
-        output = (
-          <div>
-            <PromotionList promotions={promotionList} page={page} size={size} changePageSize={this.changePageSize}/>
-          </div>
-        );
+        output = <PromotionList promotions={promotionList} page={page} size={size} changePageSize={this.changePageSize}/>;
       }
 
     }

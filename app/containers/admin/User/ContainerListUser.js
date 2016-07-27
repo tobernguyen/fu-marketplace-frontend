@@ -51,15 +51,12 @@ class UserListContainer extends React.Component {
         </div>
       );
     } else {
-      return (
-        <div>
-          <UserList users={userManagement.userList}
+      return <UserList users={userManagement.userList}
             page={page}
             size={size}
             changePageSize={this.changePageSize}
           />
-        </div>
-      );
+
     }
   }
 }

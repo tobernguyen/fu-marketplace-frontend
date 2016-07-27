@@ -73,7 +73,6 @@ class RequestList extends Component {
           </div>
         </nav>
       </div>
-
     );
   }
 }

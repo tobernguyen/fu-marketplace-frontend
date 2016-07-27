@@ -17,7 +17,6 @@ const INITIAL_STATE = {
 
 export const order = (state = INITIAL_STATE, action) => {
   const { type, response } = action;
-  console.log(action);
   switch(type) {
     case OrderActionTypes.CLEAR_ORDER_RESULT:
       return _.merge({}, state, {

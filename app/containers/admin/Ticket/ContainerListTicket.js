@@ -56,12 +56,7 @@ class ComponentListTicket extends Component {
     if(tickets.length === 0) {
       return <NoTicket />
     }
-    return (
-
-      <div>
-        <TicketList tickets={tickets} isFetching={isFetching} page={page} size={size} changePageSize={this.changePageSize}/>;
-      </div>
-    );
+    return <TicketList tickets={tickets} isFetching={isFetching} page={page} size={size} changePageSize={this.changePageSize}/>
   }
 }
 

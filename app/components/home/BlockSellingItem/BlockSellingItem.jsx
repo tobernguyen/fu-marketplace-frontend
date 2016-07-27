@@ -4,7 +4,7 @@ import { Link } from 'react-router';
 import './BlockSellingItem.scss';
 import { FormattedNumber } from 'react-intl';
 import OptionItem from 'app/components/common/OptionItem';
-import _ from 'lodash';
+import classNames from 'classnames';
 
 const ITEM_STATUS = {
   FOR_SELL: 1,
@@ -27,19 +27,19 @@ export default class BlockSellingItem extends Component {
   }
 
   render() {
-    const { item, shopID } = this.props;
+    const { item, shopID, sellerMode } = this.props;
     const tooltip = (
       item.description ? <Tooltip id="tooltip">{item.description}</Tooltip> : <span/>
     );
+    const notForSell = (item.status === ITEM_STATUS.NOT_FOR_SELL);
     const updateURL = `/dashboard/shops/${shopID}/items/${item.id}/update`;
     return (
-      <div className="block-selling-item col-md-3 col-xs-4">
+      <div className={classNames('block-selling-item col-md-3 col-xs-4', { 'not-for-sell': notForSell })}>
         <OverlayTrigger placement="top" overlay={tooltip}>
           <div className="row item">
             <Link to={updateURL} className="item-image">
               <img src={item.image} />
             </Link>
-
             <div className="info clearfix">
               <table>
                 <tbody>
@@ -52,9 +52,9 @@ export default class BlockSellingItem extends Component {
                       <span className="price"><FormattedNumber value={item.price}/> ₫</span>
                     </div>
                   </td>
-                  <td>
+                  {sellerMode && <td>
                     {this.renderCheckBox()}
-                  </td>
+                  </td>}
                 </tr>
                 </tbody>
               </table>

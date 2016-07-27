@@ -1,4 +1,18 @@
 .block-selling-item {
+  &.not-for-sell {
+    .item-image {
+      img {
+        -webkit-filter: grayscale(100%);
+        filter: grayscale(100%);
+      }
+    }
+    .info {
+      a.name {
+        color: #666;
+      }
+    }
+
+  }
   .item {
     padding: 5px;
     a {
@@ -35,6 +49,7 @@
             width: 20px;
             .option-item .checkbox-custom-label {
               padding: 0;
+              margin: 0;
               &:before {
                 margin-right: 0;
               }

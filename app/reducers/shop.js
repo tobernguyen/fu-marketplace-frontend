@@ -75,7 +75,9 @@ export const shop = (state = INITIAL_STATE, action) => {
         formSubmitting: false
       });
     }
-    case ShopActionTypes.SELLER_UPDATE_SHOP_ITEM_SUCCESS: {
+    case ShopActionTypes.SELLER_UPDATE_SHOP_ITEM_SUCCESS:
+    case ShopActionTypes.SELLER_SET_ITEM_STATUS_SUCCESS:
+    {
       const { sellingItems } = state;
       const { categoryId } = response;
       const updatedCategoryItems = sellingItems[categoryId];

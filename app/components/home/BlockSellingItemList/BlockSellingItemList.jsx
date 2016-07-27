@@ -92,6 +92,7 @@ export default class BlockSellingItemList extends Component {
             {if (sellerMode || ownerView) {
               return <BlockSellingItem
                 toggleItemStatus={toggleItemStatus}
+                sellerMode={sellerMode}
                 key={item.id}
                 item={item}
                 shopID={shopID} />

@@ -234,6 +234,26 @@ export const updateShopItem = (shopID, itemID, formValues) => {
   }
 };
 
+export const SELLER_SET_ITEM_STATUS_REQUEST = 'SELLER_SET_ITEM_STATUS_REQUEST';
+export const SELLER_SET_ITEM_STATUS_SUCCESS = 'SELLER_SET_ITEM_STATUS_SUCCESS';
+export const SELLER_SET_ITEM_STATUS_FAILURE = 'SELLER_SET_ITEM_STATUS_FAILURE';
+const requestSetItemStatus = (shopID, itemID, status) => ({
+  [CALL_API]: {
+    types: [SELLER_SET_ITEM_STATUS_REQUEST, SELLER_SET_ITEM_STATUS_SUCCESS, SELLER_SET_ITEM_STATUS_FAILURE],
+    url: `/api/v1/seller/shops/${shopID}/items/${itemID}/setStatus`,
+    method: HTTP_METHODS.PUT,
+    params: {
+      status: status
+    }
+  }
+});
+
+export const setItemStatus = (shopID, itemID, status) => {
+  return (dispatch) => {
+    return dispatch(requestSetItemStatus(shopID, itemID, status))
+  }
+};
+
 
 export const REMOVE_SHOP_ITEM_FROM_LIST = 'REMOVE_SHOP_ITEM_FROM_LIST';
 export const removeShopItemFromList = (itemID) => ({

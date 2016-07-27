@@ -44,7 +44,8 @@ export const notification = (state = INITIAL_STATE, action) => {
     case NotificationTypes.MARK_NOTIFICATION_AS_READ_SUCCESS:
     {
       return _.assign({}, state, {
-        markAsReadSuccessful: true
+        markAsReadSuccessful: true,
+        unreadCount: state.unreadCount - 1
       });
     }
     case NotificationTypes.MARK_ALL_NOTIFICATIONS_AS_READ_SUCCESS:

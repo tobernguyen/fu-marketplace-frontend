@@ -29,6 +29,7 @@ export default {
   'button.save': 'Lưu',
   'button.cancel': 'Huỷ',
   'page.settings': 'Thiết đặt',
+  'lastUpdatedAt': 'Cập nhật lúc:',
   'shop.form.identityNo.placeholder': 'Số chứng minh thư nhân dân',
   'shop.form.identityNo.label': 'Số chứng minh thư',
   'shop.form.shopName.placeholder': 'Tên shop',

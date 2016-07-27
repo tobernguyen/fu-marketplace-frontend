@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
-import { FormattedDate } from 'react-intl';
-import Chart from 'react-chartjs';
+import { FormattedDate, FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
+import ChartItemSold from './ChartItemSold';
 
 export default class BlockItemSoldStatistic extends Component {
   constructor(props) {
@@ -19,30 +19,11 @@ export default class BlockItemSoldStatistic extends Component {
   render() {
     const { itemSoldStatistic, fetchingData } = this.props;
 
-    const chartData = {
-      labels: itemSoldStatistic.labels,
-      datasets: itemSoldStatistic.datasets
-    };
-
-    const chartOptions = {
-      responsive: true,
-      scales: {
-        xAxes: [{
-          stacked: true,
-        }],
-        yAxes: [{
-          stacked: true,
-          ticks: {
-            stepSize: 1
-          }
-        }]
-      }
-    };
     return (
       <div className="block-item-sold-statistic statistic">
-        <Chart.Bar data={chartData} options={chartOptions} width="600" height="250"/>
+        <ChartItemSold itemSoldStatistic={itemSoldStatistic} />
         {itemSoldStatistic.updatedAt && <p className="last-updated-at">
-          Last updated at: <FormattedDate
+          <FormattedMessage {...{ id: 'lastUpdatedAt', defaultMessage: 'Last Updated At:' }} /> <FormattedDate
           value={new Date(itemSoldStatistic.updatedAt)}
           hour='numeric'
           minute='numeric'

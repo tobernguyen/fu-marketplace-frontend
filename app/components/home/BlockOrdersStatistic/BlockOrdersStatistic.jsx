@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react';
-import Chart from 'react-chartjs';
-import { FormattedDate } from 'react-intl';
+import { FormattedDate, FormattedMessage } from 'react-intl';
 import './BlockOrdersStatistic.scss';
 import classNames from 'classnames';
+import ChartOrders from './ChartOrders';
 
 export default class BlockOrdersStatistic extends Component {
   constructor(props) {
@@ -15,26 +15,16 @@ export default class BlockOrdersStatistic extends Component {
   }
 
   shouldComponentUpdate(nextProps) {
-    return this.props.ordersStatistic.updatedAt !== nextProps.ordersStatistic.updatedAt  || this.props.fetchingData !== nextProps.fetchingData;
+    return this.props.ordersStatistic.updatedAt !== nextProps.ordersStatistic.updatedAt || this.props.fetchingData !== nextProps.fetchingData;
   }
 
   render() {
     const { ordersStatistic, fetchingData } = this.props;
-
-    const chartData = {
-      labels: ordersStatistic.labels,
-      datasets: ordersStatistic.datasets
-    };
-
-    const chartOptions = {
-      responsive: true
-    };
-
     return (
       <div className="block-orders-statistic statistic">
-        <Chart.Line data={chartData} options={chartOptions} width="600" height="250"/>
+        <ChartOrders ordersStatistic={ordersStatistic} />
         {ordersStatistic.updatedAt && <p className="last-updated-at">
-          Last updated at: <FormattedDate
+          <FormattedMessage {...{ id: 'lastUpdatedAt', defaultMessage: 'Last Updated At:' }} /> <FormattedDate
           value={new Date(ordersStatistic.updatedAt)}
           hour='numeric'
           minute='numeric'

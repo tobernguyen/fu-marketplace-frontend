@@ -29,6 +29,7 @@ export default {
   'button.save': 'Save',
   'button.cancel': 'Cancel',
   'page.settings': 'Settings',
+  'lastUpdatedAt': 'Last updated at:',
   'shop.form.identityNo.placeholder': 'Identity number',
   'shop.form.identityNo.label': 'Identity no',
   'shop.form.shopName.placeholder': 'Shop name',

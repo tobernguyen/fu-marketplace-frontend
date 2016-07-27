@@ -19,7 +19,13 @@ const UserListRow = ({ user }) => {
           {user.fullName || 'N/A'}
         </td>
         <td>
-          <LabelUserRole role={user.roles[0]}/>
+          {user.roles.map(role =>
+            <LabelUserRole role={role}/>
+          )}
+          {
+            user.roles.length === 0 &&
+            <LabelUserRole />
+          }
         </td>
         <td className="actions">
           <Link className="btn btn-warning" to={`/admin/users/${user.id}/edit`} bsStyle="warning">

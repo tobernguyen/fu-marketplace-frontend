@@ -7,6 +7,7 @@ const UserListRow = ({ user }) => {
   const rowClassName = classNames({
     'banned': user.banned
   })
+  let roleIndex = 0;
   return (
     <tr className={rowClassName}>
         <td>
@@ -20,7 +21,7 @@ const UserListRow = ({ user }) => {
         </td>
         <td>
           {user.roles.map(role =>
-            <LabelUserRole role={role}/>
+            <LabelUserRole key={++roleIndex} role={role}/>
           )}
           {
             user.roles.length === 0 &&

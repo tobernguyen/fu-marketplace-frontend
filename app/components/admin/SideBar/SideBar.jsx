@@ -41,8 +41,8 @@ class SideBar extends Component {
         <div className="sidebar-collapse">
           <ul className="nav">
             <li className={navHeaderClass}>
-              <Link to="/admin" className={fullTitleClass}>FU Marketplace</Link>
-              <Link to="/admin" className={shortTitleClass}>FUM</Link>
+              <Link to="/" className={fullTitleClass}>FU Marketplace</Link>
+              <Link to="/" className={shortTitleClass}>FUM</Link>
             </li>
             <li>
               <Link to="/admin/users" activeClassName="active">

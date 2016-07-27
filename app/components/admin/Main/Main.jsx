@@ -8,7 +8,7 @@ export default class Main extends Component {
   render() {
     const adminMainClass = ClassNames({
       'admin-main': true,
-      'margin-left-220px': this.props.sideBarIsExpanded,
+      'margin-left-250px': this.props.sideBarIsExpanded,
       'margin-left-60px': !this.props.sideBarIsExpanded
     });
 

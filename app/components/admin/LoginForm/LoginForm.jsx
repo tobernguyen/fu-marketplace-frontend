@@ -7,7 +7,7 @@ class LoginForm extends Component {
   }
 
   componentWillUnmount() {
-    document.body.classList.add('admin-page');
+    document.body.classList.remove('admin-page');
   }
 
   render() {

@@ -4,6 +4,7 @@ import './BlockSellingItemForUser.scss';
 import classNames from 'classnames';
 import { messages } from './BlockSellingItemForUser.i18n';
 import { FormattedMessage, FormattedNumber, injectIntl } from 'react-intl';
+import ImageLoader from 'app/components/common/ImageLoader';
 
 class BlockSellingItemForUser extends Component {
   constructor(props) {
@@ -52,7 +53,7 @@ class BlockSellingItemForUser extends Component {
         <OverlayTrigger placement="top" overlay={tooltip}>
           <div className="row item">
             <a className="item-image">
-              <img src={item.image} />
+              <ImageLoader imageSource={item.image}/>
               {shopOpening && <div className="actions">
                 <p>
                   <strong className="buyNow" onClick={this.handleBuyNow}>

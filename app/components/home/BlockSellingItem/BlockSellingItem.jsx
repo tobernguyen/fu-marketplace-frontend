@@ -5,6 +5,7 @@ import './BlockSellingItem.scss';
 import { FormattedNumber } from 'react-intl';
 import OptionItem from 'app/components/common/OptionItem';
 import classNames from 'classnames';
+import ImageLoader from 'app/components/common/ImageLoader';
 
 const ITEM_STATUS = {
   FOR_SELL: 1,
@@ -38,7 +39,7 @@ export default class BlockSellingItem extends Component {
         <OverlayTrigger placement="top" overlay={tooltip}>
           <div className="row item">
             <Link to={updateURL} className="item-image">
-              <img src={item.image} />
+              <ImageLoader imageSource={item.image}/>
             </Link>
             <div className="info clearfix">
               <table>

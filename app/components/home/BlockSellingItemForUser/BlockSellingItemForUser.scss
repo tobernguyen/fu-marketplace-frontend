@@ -5,6 +5,12 @@
     .item-image {
       position: relative;
       cursor: default;
+      .loading {
+        background: #EEEEEE;
+        .fa {
+          margin: 5px;
+        }
+      }
       .actions {
         position: absolute;
         top: 40%;

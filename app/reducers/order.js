@@ -16,7 +16,6 @@ const INITIAL_STATE = {
 };
 
 export const order = (state = INITIAL_STATE, action) => {
-  console.log(action);
   const { type, response } = action;
   switch(type) {
     case OrderActionTypes.CLEAR_ORDER_RESULT:

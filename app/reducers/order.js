@@ -16,6 +16,7 @@ const INITIAL_STATE = {
 };
 
 export const order = (state = INITIAL_STATE, action) => {
+  console.log(action);
   const { type, response } = action;
   switch(type) {
     case OrderActionTypes.CLEAR_ORDER_RESULT:
@@ -86,10 +87,21 @@ export const order = (state = INITIAL_STATE, action) => {
       return _.merge({}, state, {
         shouldUpdateOrderList: true
       });
+    case OrderActionTypes.GET_ORDERS_OF_PAGE_REQUEST:
+    {
+      const { isFetching } = state;
+      if(!isFetching) {
+        return _.merge({}, state, {
+          isFetching: true
+        });
+      }
+      return state;
+    }
     case OrderActionTypes.GET_ORDERS_OF_PAGE_SUCCESS:
     {
       const { orders } = response;
       return _.assign({}, state, {
+        isFetching: false,
         currentOrders: _.concat(state.currentOrders, orders),
         hasMore: orders.length !== 0
       });

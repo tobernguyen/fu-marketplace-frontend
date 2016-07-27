@@ -83,6 +83,18 @@ class BlockCurrentOrderList extends Component {
   }
 
   render() {
+    const { isFetching } = this.props;
+    if(this.props.currentOrders.length === 0 && isFetching) {
+      return (
+        <div className="text-center" style={{
+          'height': '50px',
+          'width': '100%',
+          'padding': '20px'
+        }}>
+          <PulseLoader className="feed-loader" color="#C0392B" size="12px" />
+        </div>
+      );
+    }
     if(this.props.currentOrders.length === 0) {
       return <NoOrderSeller />
     }

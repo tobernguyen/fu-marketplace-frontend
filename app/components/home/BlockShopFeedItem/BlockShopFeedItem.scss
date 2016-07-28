@@ -26,6 +26,11 @@
       top: 0;
       width: 60px;
 
+      img {
+        -ms-transform: rotate(8deg); /* IE 9 */
+        -webkit-transform: rotate(8deg); /* Chrome, Safari, Opera */
+        transform: rotate(8deg);
+      }
     }
     h3 {
       margin-top: 10px;

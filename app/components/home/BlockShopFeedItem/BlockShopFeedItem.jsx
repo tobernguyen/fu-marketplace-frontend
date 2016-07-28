@@ -66,13 +66,13 @@ export default class BlockShopFeedItem extends Component {
         </div>
         <div className="col-md-9 col-sm-8">
           <div className="row content">
+            {!opening && <div className="shop-closed">
+              <img src={require('app/images/shop-closed.png')}/>
+            </div>}
             <h3>
               <Link to={{ pathname: `shops/${id}`, query: query }}>
                 {name}
               </Link>
-              <span className={classNames('status', { 'opening' : opening})}>
-                <i className="fa fa fa-circle"/>
-              </span>
             </h3>
             <BlockStars
               name={'averageRating'}

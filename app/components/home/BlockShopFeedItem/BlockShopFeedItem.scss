@@ -20,6 +20,13 @@
 
   .content {
     padding-left: 10px;
+    .shop-closed {
+      position: absolute;
+      right: 10px;
+      top: 0;
+      width: 60px;
+
+    }
     h3 {
       margin-top: 10px;
       margin-bottom: 3px;

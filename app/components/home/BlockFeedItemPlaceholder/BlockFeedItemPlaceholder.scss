@@ -1,0 +1,72 @@
+.block-feed-item-placeholder {
+  .animated-background {
+    height: 200px;
+  }
+  .background-masker.first-delim {
+    top: 0;
+    bottom: 0;
+    left: 212px;
+    height: auto;
+    width: 10px;
+  }
+
+  .background-masker.first-line {
+    top: 0;
+    right: 0;
+    height: 35px;
+    width: 400px;
+  }
+  .background-masker.second-delim {
+    top: 35px;
+    left: 212px;
+    right: 0;
+    height: 6px;
+    width: auto;
+  }
+
+  .background-masker.second-line {
+    top: 41px;
+    right: 0;
+    height: 25px;
+    width: 500px;
+  }
+
+  .background-masker.third-delim {
+    top: 66px;
+    left: 212px;
+    right: 0;
+    height: 6px;
+    width: auto;
+  }
+
+  .background-masker.third-line {
+    top: 72px;
+    right: 0;
+    height: 25px;
+    width: 300px;
+  }
+
+  .background-masker.forth-delim {
+    top: 97px;
+    left: 212px;
+    right: 0;
+    height: 6px;
+    width: auto;
+  }
+
+  .background-masker.fifth-delim {
+    top: 103px;
+    right: 0;
+    height: 15px;
+    width: 100px;
+  }
+
+  .background-masker.forth-line {
+    top: 118px;
+    right: 0;
+    left: 212px;
+    height: 15px;
+    width: auto;
+  }
+
+}

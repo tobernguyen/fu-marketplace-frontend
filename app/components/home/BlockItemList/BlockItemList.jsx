@@ -3,6 +3,9 @@ import './BlockItemList.scss';
 import { Link } from 'react-router';
 import classNames from 'classnames';
 import _ from 'lodash';
+import { FormattedMessage } from 'react-intl';
+import { messages } from './BlockItemList.i18n';
+
 
 export default class BlockItemList extends Component {
   render() {
@@ -14,7 +17,7 @@ export default class BlockItemList extends Component {
     return (
       <div className="block-item-list block">
         <h3 className="title">
-          <span>Thể loại</span>
+          <FormattedMessage {...messages.category} />
         </h3>
         <div className="clearfix body">
           <div className="category-list">
@@ -26,7 +29,7 @@ export default class BlockItemList extends Component {
                     })
                   }}
               className={classNames('btn', 'btn-default', { active: categoryID === undefined })}>
-              Tất cả <span className="badge">{totalCategory}</span>
+              <FormattedMessage {...messages.all} /> <span className="badge">{totalCategory}</span>
             </Link>
             {categories.map(category =>
               <Link

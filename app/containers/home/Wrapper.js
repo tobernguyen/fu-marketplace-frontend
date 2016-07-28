@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import BlockItemList from 'app/components/home/BlockItemList';
 import BlockDormList from 'app/components/home/BlockDormList';
+import BlockContentPlaceholder from 'app/components/home/BlockContentPlaceholder';
 import CarouselPinnedItems from 'app/components/home/CarouselPinnedItems';
 import ShopsFeed from './ShopsFeed';
 import { getShops, getTopFeedSlideShow } from 'app/actions/feed';
@@ -34,20 +35,22 @@ class Wrapper extends Component {
         },
       query
     } = this.props;
+    const loaded = categories.length > 0;
     return (
       <div className="container home-body">
         <div className="row">
           <div className="col-md-3">
-            <BlockItemList
+            {loaded ? <BlockItemList
               query={query}
               categories={categories}
               categoryCounter={category}
-              totalCategory={total} />
-            <BlockDormList
+              totalCategory={total} /> : <BlockContentPlaceholder />}
+
+            {loaded ? <BlockDormList
               query={query}
               shipPlaces={shipPlaces}
               shipPlaceCounter={shipPlace}
-              totalShipPlace={total} />
+              totalShipPlace={total} /> : <BlockContentPlaceholder />}
           </div>
           <div className="col-md-9">
             <div className="row">

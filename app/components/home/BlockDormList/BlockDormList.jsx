@@ -3,6 +3,8 @@ import './BlockDormList.scss';
 import { Link } from 'react-router';
 import classNames from 'classnames';
 import _ from 'lodash';
+import { FormattedMessage } from 'react-intl';
+import { messages } from './BlockDormList.i18n';
 
 export default class BlockDormList extends Component {
   render() {
@@ -14,7 +16,7 @@ export default class BlockDormList extends Component {
     return (
       <div className="block-dorm-list block">
         <h3 className="title">
-          <span>Ship places</span>
+          <FormattedMessage {...messages.shipPlace} />
         </h3>
         <div className="clearfix body">
           <div className="tag-list">
@@ -26,7 +28,7 @@ export default class BlockDormList extends Component {
                     })
                   }}
               className={classNames('btn', 'btn-default', { active: placeID === undefined })}>
-              Tất cả <span className="badge">{totalShipPlace}</span>
+              <FormattedMessage {...messages.all} /> <span className="badge">{totalShipPlace}</span>
             </Link>
             {shipPlaces.map(shipPlace =>
               <Link

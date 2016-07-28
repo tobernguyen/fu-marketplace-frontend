@@ -12,6 +12,7 @@ const INITIAL_STATE = {
   total: 0,
   hasMore: true,
   pinnedShops: [],
+  firstLoad: true
 };
 
 export const feed = (state = INITIAL_STATE, action) => {
@@ -27,7 +28,8 @@ export const feed = (state = INITIAL_STATE, action) => {
       const { result: { shops } } = response;
       return _.assign({}, state, {
         shops: _.concat(state.shops, shops),
-        hasMore: shops.length !== 0
+        hasMore: shops.length !== 0,
+        firstLoad: false
       });
     }
     case FeedActionTypes.CLEAR_SHOPS_FEED: {

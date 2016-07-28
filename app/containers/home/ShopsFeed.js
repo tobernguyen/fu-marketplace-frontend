@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import InfiniteScroll from 'app/components/common/InfiniteScroll';
 import BlockShopFeedItem from 'app/components/home/BlockShopFeedItem';
+import BlockFeedItemPlaceholder from 'app/components/home/BlockFeedItemPlaceholder';
 import { getShopsOfPage, clearShopsFeed, updateShop } from 'app/actions/feed';
 import { getShopsFeed } from 'app/selectors';
 import { PulseLoader } from 'halogen';
@@ -91,6 +92,7 @@ class ShopsFeed extends Component {
             loader={<PulseLoader className="feed-loader" color="#C0392B" size="12px" />}>
             {this.state.elements}
           </InfiniteScroll>}
+        {this.props.firstLoad && <BlockFeedItemPlaceholder />}
       </div>
     );
   }
@@ -102,7 +104,8 @@ const mapStateToProps = (state) => {
     shops: getShopsFeed(state),
     hasMore: feed.hasMore,
     socket: state.common.socket,
-    query: state.common.query
+    query: state.common.query,
+    firstLoad: feed.firstLoad
   }
 };
 

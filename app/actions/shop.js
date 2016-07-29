@@ -171,7 +171,10 @@ const requestGetSellerShopItems = (shopID) => ({
   [CALL_API]: {
     types: [SELLER_GET_SHOP_ITEM_LIST_REQUEST, SELLER_GET_SHOP_ITEM_LIST_SUCCESS, SELLER_GET_SHOP_ITEM_LIST_FAILURE],
     url: `/api/v1/seller/shops/${shopID}/items`,
-    method: HTTP_METHODS.GET
+    method: HTTP_METHODS.GET,
+    params: {
+      size: 1000
+    }
   }
 });
 

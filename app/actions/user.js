@@ -67,7 +67,10 @@ const requestGetUserShop = (shopID) => ({
   [CALL_API]: {
     types: [USER_GET_SHOP_REQUEST, USER_GET_SHOP_SUCCESS, USER_GET_SHOP_FAILURE],
     url: `/api/v1/shops/${shopID}`,
-    method: HTTP_METHODS.GET
+    method: HTTP_METHODS.GET,
+    params: {
+      size: 1000
+    }
   }
 });
 

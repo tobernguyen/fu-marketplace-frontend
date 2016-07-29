@@ -17,9 +17,9 @@
 
   img {
     opacity: 0;
-    -moz-transition: opacity 2s; /* Firefox 4 */
-    -webkit-transition: opacity 2s; /* Safari and Chrome */
-    -o-transition: opacity 2s;
-    transition: opacity 2s;
+    -moz-transition: opacity 1s; /* Firefox 4 */
+    -webkit-transition: opacity 1s; /* Safari and Chrome */
+    -o-transition: opacity 1s;
+    transition: opacity 1s;
   }
 }

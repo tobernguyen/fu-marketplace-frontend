@@ -95,6 +95,10 @@ export const user = (state = INITIAL_STATE, action) => {
         error: error,
         avatarUploading: false
       });
+    case ActionTypes.GOOGLE_SIGN_OUT:
+      return _.assign({}, state, {
+        error: undefined
+      });
     case UserActionTypes.UPLOAD_IDENTITY_PHOTO_SUCCESS:
       return _.assign({}, state, {
         identityPhoto: response.identityPhoto

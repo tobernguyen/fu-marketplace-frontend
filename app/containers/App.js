@@ -14,6 +14,7 @@ const ADMIN_PATH = '/admin';
 class App extends Component {
   constructor(props) {
     super(props);
+
     this.handleSignIn = (authResult) => {
       this.props.signInGoogle(authResult['code']);
     };
@@ -31,7 +32,16 @@ class App extends Component {
   }
 
   render() {
+
     const { language, children, isAuthenticated, location: { pathname } } = this.props;
+    if (isAuthenticated === null) {
+      return (
+        <div>
+          Initializing
+        </div>
+      )
+    }
+
     let inAdminPath = false;
     if (pathname && pathname.substring(0, ADMIN_PATH.length) === ADMIN_PATH) {
       inAdminPath = true;
@@ -51,12 +61,10 @@ class App extends Component {
 }
 
 App.propTypes = {
-  // Injected by React Redux
-  errorMessage: PropTypes.string,
-  // Injected by React Router
-  children: PropTypes.node,
+  errorMessage: PropTypes.string, // Injected by React Redux
+  children: PropTypes.node, // Injected by React Router
   checkAuthStatus:  PropTypes.func.isRequired,
-  isAuthenticated:  PropTypes.bool.isRequired
+  isAuthenticated:  PropTypes.bool
 };
 
 const mapStateToProps = state => {

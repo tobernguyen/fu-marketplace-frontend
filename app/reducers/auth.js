@@ -3,7 +3,7 @@ import * as AdminActionTypes from '../actions/admin';
 import _ from 'lodash';
 
 const INITIAL_STATE = {
-  isAuthenticated: false,
+  isAuthenticated: null,
   isAdminAuthenticated: false,
   authenticating: false
 };

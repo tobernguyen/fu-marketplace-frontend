@@ -1,10 +1,10 @@
-import React, { PropTypes, Component } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Modal } from 'react-bootstrap';
 
 const displayAsModal = (ComposedComponent) => {
   const mapStateToProps = (state) => ({
-    modalSize: state.common.modalSize,
+    modalSize: state.common.modalSize
   });
 
   class ModalComponent extends Component {

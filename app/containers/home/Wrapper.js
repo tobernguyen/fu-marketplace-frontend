@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import BlockItemList from 'app/components/home/BlockItemList';
 import BlockDormList from 'app/components/home/BlockDormList';

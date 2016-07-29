@@ -76,7 +76,7 @@ export const messages = {
     closed: {
       id: 'ticketStatus.closed',
       defaultMessage: 'your report about #{orderId} at {shopName} was closed. Click to see results.'
-    },
+    }
   }
 };
 

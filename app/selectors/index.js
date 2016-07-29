@@ -57,21 +57,21 @@ const CHART_DATA_HOLDER = {
   fill: false,
   lineTension: 0.1,
   backgroundColor: 'rgba(236, 240, 241,1.0)',
-  borderColor: "transparent",
+  borderColor: 'transparent',
   borderCapStyle: 'butt',
   borderDash: [],
   borderDashOffset: 0.0,
   borderJoinStyle: 'miter',
   pointBorderColor: 'rgba(127, 140, 141,1.0)',
-  pointBackgroundColor: "#fff",
+  pointBackgroundColor: '#fff',
   pointBorderWidth: 1,
   pointHoverRadius: 5,
-  pointHoverBackgroundColor: "rgba(75,192,192,1)",
+  pointHoverBackgroundColor: 'rgba(75,192,192,1)',
   pointHoverBorderColor: 'rgba(41, 128, 185,1.0)',
   pointHoverBorderWidth: 2,
   pointRadius: 3,
   pointHitRadius: 10,
-  spanGaps: false,
+  spanGaps: false
 };
 
 export const calculateOrdersStatisticData = createSelector(
@@ -166,7 +166,7 @@ export const calculateSalesStatistic = createSelector(
         backgroundColor: 'rgba(255, 99, 132, 0.2)',
         borderColor: 'rgba(255,99,132,1)',
         borderWidth: 1,
-        data: fullWeekData,
+        data: fullWeekData
       }
     ];
     calculatedData['updatedAt'] = salesStatistic['updatedAt'];

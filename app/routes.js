@@ -25,7 +25,6 @@ import ShopReviews from './containers/home/ShopReviews';
 import Admin from './containers/admin';
 import RequestCreateShop from './containers/home/RequestCreateShop';
 import SellerDashboard from './containers/home/SellerDashboard';
-import Dashboard from './containers/admin/Dashboard';
 import RequestManagement from './containers/admin/RequestManagement';
 import ContainerListRequest from './containers/admin/Request/ContainerListRequest';
 import ContainerViewRequest from './containers/admin/Request/ContainerViewRequest';

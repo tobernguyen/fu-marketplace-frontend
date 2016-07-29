@@ -15,6 +15,11 @@ const INITIAL_STATE = {
   firstLoad: true
 };
 
+const SHOP_STATUS = {
+  PUBLISHED: 1,
+  UN_PUBLISHED: 0
+};
+
 export const feed = (state = INITIAL_STATE, action) => {
   const { type, response, payload } = action;
   switch (type) {
@@ -50,9 +55,9 @@ export const feed = (state = INITIAL_STATE, action) => {
       );
 
       switch (shopStatus) {
-        case 1: // Published
+        case SHOP_STATUS.PUBLISHED:
           return state;
-        case 0: // Unpublished
+        case SHOP_STATUS.UN_PUBLISHED:
           if (existingShopIndex > -1) {
             return _.assign({}, state, {
               shops: _.concat(
@@ -64,14 +69,18 @@ export const feed = (state = INITIAL_STATE, action) => {
             return state;
           }
         default:
-          const updatedShop = _.assign({}, state.shops[existingShopIndex], shop);
-          return _.assign({}, state, {
-            shops: _.concat(
-              _.slice(state.shops, 0, existingShopIndex),
-              updatedShop,
-              _.slice(state.shops, existingShopIndex + 1, state.shops.length)
-            )
-          });
+          if (existingShopIndex > -1) {
+            const updatedShop = _.assign({}, state.shops[existingShopIndex], shop);
+            return _.assign({}, state, {
+              shops: _.concat(
+                _.slice(state.shops, 0, existingShopIndex),
+                updatedShop,
+                _.slice(state.shops, existingShopIndex + 1, state.shops.length)
+              )
+            });
+          } else {
+            return state;
+          }
       }
     }
     case FeedActionTypes.GET_TOP_FEED_SLIDE_SHOW_SUCCESS:

@@ -9,7 +9,7 @@ class BlockOrderListBodyRow extends Component {
   renderItemNameListWithQuantity(order) {
     let names = [];
     order.orderLines.map(orderLine => {
-      names = _.concat(names, `${orderLine.item.name}(${orderLine.quantity})`);
+      names = _.concat(names, `${orderLine.item.name}`);
     });
     return _.join(names, ', ');
   }

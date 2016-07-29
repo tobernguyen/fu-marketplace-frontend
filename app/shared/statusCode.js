@@ -4,3 +4,8 @@ export const UPDATE_STATUS = {
   UPDATED: 2,
   FAILED: -1
 };
+
+export const HTTP_STATUS_CODE = {
+  INVALID_TOKEN: 440,
+  INTERNAL_SERVER_ERROR: 500
+};

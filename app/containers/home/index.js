@@ -12,7 +12,7 @@ import { getNotificationMessage } from 'app/shared/notificationMessages';
 import { injectIntl, intlShape } from 'react-intl';
 import { getCategories } from 'app/selectors';
 import { accessTokenKey } from 'app/config';
-import AuthorizeStatusCode from 'app/shared/authorizeStatusCode';
+import { HTTP_STATUS_CODE } from 'app/shared/statusCode';
 
 
 class Home extends Component {
@@ -78,7 +78,7 @@ class Home extends Component {
 
     if (nextProps.error) {
       const { status } = nextProps.error;
-      if (status === AuthorizeStatusCode.TOKEN_EXPIRED) {
+      if (HTTP_STATUS_CODE.INVALID_TOKEN <= status && status < HTTP_STATUS_CODE.INTERNAL_SERVER_ERROR) {
         this.props.signOutGoogle();
       }
     }

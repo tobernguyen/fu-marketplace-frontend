@@ -3,14 +3,14 @@ import { connect } from 'react-redux';
 import { checkAdminAuthStatus, adminAuthStatusIsUpdated, signOutAdmin, getCurrentUser } from '../../actions';
 import LoginPage from './LoginPage';
 import AdminPage from './AdminPage';
-import AuthorizeStatusCode from 'app/shared/authorizeStatusCode';
+import { HTTP_STATUS_CODE } from 'app/shared/statusCode';
 
 class Admin extends Component {
   constructor(props) {
     super(props);
     this.state = {
       unauthorized: false
-    }
+    };
 
     this.props.getCurrentUser();
   }
@@ -27,7 +27,8 @@ class Admin extends Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps.error) {
       const { status } = nextProps.error;
-      if (status === AuthorizeStatusCode.TOKEN_EXPIRED && !this.state.unauthorized) {
+      if ((HTTP_STATUS_CODE.INVALID_TOKEN <= status && status < HTTP_STATUS_CODE.INTERNAL_SERVER_ERROR)
+        && !this.state.unauthorized) {
         this.props.signOutAdmin();
         this.setState({
           unauthorized: true

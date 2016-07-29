@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import FormChangePassword from 'app/components/admin/FormChangePassword';
 import FormChangeLanguage from 'app/components/admin/FormChangeLanguage';
 import { adminChangePassword } from 'app/actions/admin';
@@ -33,6 +33,7 @@ class ChangePassword extends Component {
         <FormChangePassword
           onSubmit={this.handleChangePassword}
           formStatus={this.props.admin.changePasswordFormStatus}
+          currentUserEmail={this.props.currentUserEmail}
           />
         <hr />
         <FormChangeLanguage
@@ -56,7 +57,8 @@ ChangePassword.description = {
 ChangePassword.faIcon = 'fa-cogs';
 
 const mapStateToProps = (state) => ({
-  admin: state.admin
+  admin: state.admin,
+  currentUserEmail: state.user.currentUser.email
 });
 
 export default connect(mapStateToProps, {

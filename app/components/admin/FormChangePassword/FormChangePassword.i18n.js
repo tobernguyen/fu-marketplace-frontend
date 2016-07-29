@@ -27,6 +27,10 @@ export const messages = {
         id: 'formChangePassword.button.saveChanges',
         defaultMessage: 'Save changes'
       }
+    },
+    message: {
+      id: 'formChangePassword.message',
+      defaultMessage: 'Administrator who login by using FPT University account can not change password'
     }
   }
 }

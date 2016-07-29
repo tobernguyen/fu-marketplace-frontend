@@ -326,6 +326,7 @@ export default {
   'formChangePassword.fields.newPassword': 'Mật khẩu mới',
   'formChangePassword.fields.confirmPassword': 'Xác nhận mật khẩu mới',
   'formChangePassword.button.saveChanges': 'Lưu thay đổi',
+  'formChangePassword.message': 'Quản trị viên đăng nhập bằng tài khoản FPT không thể thay đổi mật khẩu',
   'sideBar.dashboard': 'Dashboard',
   'sideBar.userManagement': 'Quản lý người dùng',
   'sideBar.shopManagement': 'Quản lý cửa hàng',

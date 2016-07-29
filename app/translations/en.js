@@ -271,5 +271,6 @@ export default {
   'formCheckOut.tableHead.shipTo': 'Ship to',
   'formCheckOut.button.placeOrder': 'Place Order',
   'formCheckOut.validation.shipAddress.blank': 'Ship address is required',
-  'noTicket.message': 'There is not any ticket'
+  'noTicket.message': 'There is not any ticket',
+  'formChangePassword.message': 'Administrator who login by using FPT University account can not change password'
 };

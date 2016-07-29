@@ -58,8 +58,76 @@ const validate = (values) => {
 }
 
 class FormChangePassword extends Component {
+  constructor(props) {
+    super(props);
+
+    const currentUserEmail = props.currentUserEmail || '';
+
+    this.state = {
+      isLoginByFPTEmail: currentUserEmail.indexOf('@fpt.edu.vn') !== -1
+    };
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      isLoginByFPTEmail: nextProps.currentUserEmail.indexOf('@fpt.edu.vn') !== -1
+    });
+  }
+
   render() {
+    const { isLoginByFPTEmail} = this.state;
     const { fields: { oldPassword, newPassword, repeatPassword }, handleSubmit, formStatus, intl: { formatMessage }} = this.props;
+    const changePasswordForm = (
+      <form onSubmit={handleSubmit}>
+        <FormGroup className={`${oldPassword.touched && oldPassword.invalid ? 'has-error' : ''}`}>
+          <ControlLabel>
+            <FormattedMessage {...messages.formChangePassword.fields.oldPassword}/>
+          </ControlLabel>
+          <FormControl
+            type="password"
+            placeholder={formatMessage(messages.formChangePassword.fields.oldPassword)}
+            {...oldPassword}
+            />
+          <HelpBlock>
+            {oldPassword.touched && oldPassword.error ? <FormattedMessage {...oldPassword.error}/> : '' }
+          </HelpBlock>
+        </FormGroup>
+        <FormGroup className={`${newPassword.touched && newPassword.invalid ? 'has-error' : ''}`}>
+          <ControlLabel>
+            <FormattedMessage {...messages.formChangePassword.fields.newPassword}/>
+          </ControlLabel>
+          <FormControl
+            type="password"
+            placeholder={formatMessage(messages.formChangePassword.fields.newPassword)}
+            {...newPassword}
+            />
+            <HelpBlock>
+              {newPassword.touched && newPassword.error ? <FormattedMessage {...newPassword.error}/> : '' }
+            </HelpBlock>
+        </FormGroup>
+        <FormGroup className={`${repeatPassword.touched && repeatPassword.invalid ? 'has-error' : ''}`}>
+          <ControlLabel>
+            <FormattedMessage {...messages.formChangePassword.fields.confirmPassword}/>
+          </ControlLabel>
+          <FormControl
+          type="password"
+          placeholder={formatMessage(messages.formChangePassword.fields.confirmPassword)}
+          {...repeatPassword} />
+          <HelpBlock>
+            {repeatPassword.touched && repeatPassword.error ? <FormattedMessage {...repeatPassword.error}/> : '' }
+          </HelpBlock>
+        </FormGroup>
+        {
+          formStatus.submitResult !== '' &&
+          <AlertSubmitResult result={formStatus.submitResult} formName="formChangePassword"/>
+        }
+        <div className ="form-actions">
+          <Button type="submit" bsStyle="warning" disabled={formStatus.isSubmitting}>
+            <FormattedMessage {...messages.formChangePassword.button.saveChanges}/>{formStatus.isSubmitting && <i className="fa fa-spinner fa-spin"></i>}
+          </Button>
+        </div>
+      </form>
+    );
     return (
       <div className="row">
         <Col lg={3}>
@@ -73,55 +141,7 @@ class FormChangePassword extends Component {
           </p>
         </Col>
         <Col lg={9}>
-          <form onSubmit={handleSubmit}>
-            <FormGroup className={`${oldPassword.touched && oldPassword.invalid ? 'has-error' : ''}`}>
-              <ControlLabel>
-                <FormattedMessage {...messages.formChangePassword.fields.oldPassword}/>
-              </ControlLabel>
-              <FormControl
-                type="password"
-                placeholder={formatMessage(messages.formChangePassword.fields.oldPassword)}
-                {...oldPassword}
-                />
-              <HelpBlock>
-                {oldPassword.touched && oldPassword.error ? <FormattedMessage {...oldPassword.error}/> : '' }
-              </HelpBlock>
-            </FormGroup>
-            <FormGroup className={`${newPassword.touched && newPassword.invalid ? 'has-error' : ''}`}>
-              <ControlLabel>
-                <FormattedMessage {...messages.formChangePassword.fields.newPassword}/>
-              </ControlLabel>
-              <FormControl
-                type="password"
-                placeholder={formatMessage(messages.formChangePassword.fields.newPassword)}
-                {...newPassword}
-                />
-                <HelpBlock>
-                  {newPassword.touched && newPassword.error ? <FormattedMessage {...newPassword.error}/> : '' }
-                </HelpBlock>
-            </FormGroup>
-            <FormGroup className={`${repeatPassword.touched && repeatPassword.invalid ? 'has-error' : ''}`}>
-              <ControlLabel>
-                <FormattedMessage {...messages.formChangePassword.fields.confirmPassword}/>
-              </ControlLabel>
-              <FormControl
-              type="password"
-              placeholder={formatMessage(messages.formChangePassword.fields.confirmPassword)}
-              {...repeatPassword} />
-              <HelpBlock>
-                {repeatPassword.touched && repeatPassword.error ? <FormattedMessage {...repeatPassword.error}/> : '' }
-              </HelpBlock>
-            </FormGroup>
-            {
-              formStatus.submitResult !== '' &&
-              <AlertSubmitResult result={formStatus.submitResult} formName="formChangePassword"/>
-            }
-            <div className ="form-actions">
-              <Button type="submit" bsStyle="warning" disabled={formStatus.isSubmitting}>
-                <FormattedMessage {...messages.formChangePassword.button.saveChanges}/>{formStatus.isSubmitting && <i className="fa fa-spinner fa-spin"></i>}
-              </Button>
-            </div>
-          </form>
+          {!isLoginByFPTEmail ? changePasswordForm : <FormattedMessage {...messages.formChangePassword.message}/>}
         </Col>
       </div>
     )

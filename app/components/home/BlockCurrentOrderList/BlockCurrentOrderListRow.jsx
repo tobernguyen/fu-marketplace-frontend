@@ -92,8 +92,12 @@ class BlockCurrentOrderListRow extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const { order } = nextProps;
-    if(order.status === OrderStatus.CANCELED ) {
+    if(nextProps.order.status === OrderStatus.CANCELED ) {
+      const { order } = this.state;
+      order['status'] = OrderStatus.CANCELED;
+      this.setState({
+        order
+      });
       this.hideOrder();
     }
   }

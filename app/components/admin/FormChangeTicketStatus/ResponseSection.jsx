@@ -3,7 +3,6 @@ import { FormattedMessage, injectIntl } from 'react-intl';
 import { messages } from 'app/components/admin/FormChangeTicketStatus/FormChangeTicketStatus.i18n';
 import TicketStatus from 'app/shared/ticketStatus';
 import LabelTicketStatus from 'app/components/admin/LabelTicketStatus'
-import LoadingSpinner from 'app/components/admin/LoadingSpinner';
 import AsyncResultCode from 'app/shared/asyncResultCodes';
 
 class ResponseSection extends Component {
@@ -11,7 +10,7 @@ class ResponseSection extends Component {
     super(props);
 
     this.state = {
-      newTicketStatus: props.ticket.selectedTicket.status == TicketStatus.INVESTIGATING ? TicketStatus.CLOSED : '',
+      newTicketStatus: props.ticket.selectedTicket.status == TicketStatus.INVESTIGATING ? TicketStatus.CLOSED : TicketStatus.INVESTIGATING,
       dirty: false,
       adminMessage: {
         value: '',
@@ -62,6 +61,8 @@ class ResponseSection extends Component {
         }
       }
     }
+
+    this.renderResponse = this.renderResponse.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -131,9 +132,58 @@ class ResponseSection extends Component {
 
     return output;
   }
+
+  renderResponse(status) {
+    const { intl: { formatMessage }, isSubmitting } = this.props;
+    const { adminMessage, dirty } = this.state;
+    let output = '';
+
+    switch (status) {
+      case TicketStatus.OPENING:
+        output = (
+          <div className="form-actions">
+            <button type="button" className="btn btn-warning" onClick={this.handleSubmit} disabled={isSubmitting}>
+              <FormattedMessage {...messages.formChangeTicketStatus.responseSection.button.startInvestigate}/>{isSubmitting && <i className="fa fa-spinner fa-spin"></i>}
+            </button>
+          </div>
+        );
+        break;
+      case TicketStatus.INVESTIGATING:
+        output = (
+          <div>
+            <div className={`form-group ${adminMessage.hasErrors ? 'has-error': ''}`}>
+              <label className="control-label">
+                <FormattedMessage {...messages.formChangeTicketStatus.responseSection.fields.adminMessage}/>
+              </label>
+              <textarea
+                className="form-control"
+                placeholder={formatMessage(messages.formChangeTicketStatus.responseSection.placeholder.adminMessage)}
+                value={adminMessage.value}
+                onChange={this.handleAdminMessageChange}
+                />
+              {
+                adminMessage.hasErrors &&
+                <div className="help-block">
+                  <FormattedMessage {...adminMessage.error}/>
+                </div>
+              }
+            </div>
+            <div className="form-actions">
+              <button type="button" className="btn btn-warning" onClick={this.handleSubmit} disabled={!dirty || adminMessage.hasErrors || isSubmitting}>
+                <FormattedMessage {...messages.formChangeTicketStatus.responseSection.button.closeTicket}/>{isSubmitting && <i className="fa fa-spinner fa-spin"></i>}
+              </button>
+            </div>
+          </div>
+        );
+      default:
+
+    }
+
+    return output;
+  }
+
   render() {
-    const { ticket: { selectedTicket }, intl: { formatMessage }, isSubmitting } = this.props;
-    const { newTicketStatus, adminMessage, dirty } = this.state;
+    const { ticket: { selectedTicket }} = this.props;
     return (
       <div className="row">
         <div className="col-lg-3">
@@ -155,49 +205,7 @@ class ResponseSection extends Component {
               <LabelTicketStatus status={selectedTicket.status} />
             </p>
           </div>
-          {this.renderNewTicketStatus(selectedTicket.status)}
-          {
-            newTicketStatus == TicketStatus.CLOSED && selectedTicket.status != TicketStatus.CLOSED &&
-            <div className={`form-group ${adminMessage.hasErrors ? 'has-error': ''}`}>
-              <label className="control-label">
-                <FormattedMessage {...messages.formChangeTicketStatus.responseSection.fields.adminMessage}/>
-              </label>
-              <textarea
-                className="form-control"
-                placeholder={formatMessage(messages.formChangeTicketStatus.responseSection.placeholder.adminMessage)}
-                value={adminMessage.value}
-                onChange={this.handleAdminMessageChange}
-                />
-              {
-                adminMessage.hasErrors &&
-                <div className="help-block">
-                  <FormattedMessage {...adminMessage.error}/>
-                </div>
-              }
-            </div>
-          }
-          {
-            selectedTicket.status != TicketStatus.CLOSED &&
-            <div className="form-actions">
-              <button type="button" className="btn btn-success" onClick={this.handleSubmit} disabled={!dirty || adminMessage.hasErrors || isSubmitting}>
-                <FormattedMessage {...messages.formChangeTicketStatus.responseSection.button.saveChanges}/>{isSubmitting && <i className="fa fa-spinner fa-spin"></i>}
-              </button>
-            </div>
-          }
-          {
-            selectedTicket.status == TicketStatus.CLOSED &&
-            <div className="form-group">
-              <label className="control-label">
-                <FormattedMessage {...messages.formChangeTicketStatus.responseSection.fields.adminMessage}/>
-              </label>
-              <textarea
-                className="form-control"
-                placeholder={formatMessage(messages.formChangeTicketStatus.responseSection.placeholder.adminMessage)}
-                defaultValue={selectedTicket.adminComment}
-                disabled="true"
-                />
-            </div>
-          }
+          {this.renderResponse(selectedTicket.status)}
         </div>
       </div>
     );

@@ -272,5 +272,7 @@ export default {
   'formCheckOut.button.placeOrder': 'Place Order',
   'formCheckOut.validation.shipAddress.blank': 'Ship address is required',
   'noTicket.message': 'There is not any ticket',
-  'formChangePassword.message': 'Administrator who login by using FPT University account can not change password'
+  'formChangePassword.message': 'Administrator who login by using FPT University account can not change password',
+  'formChangeTicketStatus.responseSection.button.startInvestigate': 'Start investigation',
+  'formChangeTicketStatus.responseSection.button.closeTicket': 'Close ticket'
 };

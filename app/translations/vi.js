@@ -418,6 +418,8 @@ export default {
   'formChangeTicketStatus.responseSection.placeholder.adminMessage': 'Kết luận sau khi điều tra và lí do đóng báo cáo sai phạm này...',
   'formChangeTicketStatus.responseSection.button.saveChanges': 'Lưu thay đổi',
   'formChangeTicketStatus.responseSection.error.blank': 'Thông điệp của quản trị viên không được bỏ trống',
+  'formChangeTicketStatus.responseSection.button.startInvestigate': 'Bắt đầu điều tra',
+  'formChangeTicketStatus.responseSection.button.closeTicket': 'Đóng báo cáo sai phạm',
   'blockMyTicket.table.header.orderId': 'Mã đơn hàng',
   'blockMyTicket.table.header.shop': 'Cửa hàng',
   'blockMyTicket.table.header.status': 'Trạng thái',

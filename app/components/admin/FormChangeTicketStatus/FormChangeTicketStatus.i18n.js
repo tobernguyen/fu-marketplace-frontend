@@ -16,6 +16,14 @@ export const messages = {
         }
       },
       button: {
+        startInvestigate: {
+          id: 'formChangeTicketStatus.responseSection.button.startInvestigate',
+          defaultMessage: 'Start Investigation'
+        },
+        closeTicket: {
+          id: 'formChangeTicketStatus.responseSection.button.closeTicket',
+          defaultMessage: 'Close ticket'
+        },
         saveChanges: {
           id: 'formChangeTicketStatus.responseSection.button.saveChanges',
           defaultMessage: 'Save changes'

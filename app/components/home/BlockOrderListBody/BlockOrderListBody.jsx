@@ -6,6 +6,12 @@ import BlockOrderListBodyRow from './BlockOrderListBodyRow.jsx';
 import { PulseLoader } from 'halogen';
 
 class BlockOrderListBody extends Component {
+  componentWillMount() {
+    const { isFetching, sellerGetOrder, status, page, size, shopID } = this.props;
+    if(!isFetching) {
+      sellerGetOrder(shopID, status, page, size);
+    }
+  }
   render() {
     if(this.props.isFetching) {
       const style ={

@@ -34,8 +34,7 @@ class BlockOrderList extends Component {
 
 
   render() {
-    const { socket, shopID, currentOrders, orders, query, changePageSize, removeOrder, getOrdersOfPage, updateOrderStatus, getNewOrder } = this.props;
-    const size = query.size || 10;
+    const { status, size, page, socket, shopID, currentOrders, orders, changePageSize, removeOrder, getOrdersOfPage, updateOrderStatus, getNewOrder } = this.props;
     const hasNextPage = orders.length < size;
     const { isCurrent } = this.state;
     if(isCurrent) {
@@ -69,17 +68,26 @@ class BlockOrderList extends Component {
       <div>
         <BlockManageOrderHeader isCurrent={this.state.isCurrent} changeOrderListDisplay={this.changeOrderListDisplay}/>
         <div className="block-order-list clearfix">
-          <BlockOrderListHeader shopID={shopID}/>
+          <BlockOrderListHeader changeStatus={this.props.changeStatus} status={status}/>
           <BlockOrderListBody
             orders={orders}
             viewOrder={this.props.viewOrder}
             isFetching={this.props.isFetching}
+            sellerGetOrder={this.props.sellerGetOrder}
+            shopID={shopID}
+            status={status}
+            size={size}
+            page={page}
             />
           <BlockOrderListFooter
             shopID={shopID}
-            query={query}
+            status={status}
+            size={size}
+            page={page}
             hasNextPage={hasNextPage}
             changePageSize={changePageSize}
+            prevPage={this.props.prevPage}
+            nextPage={this.props.nextPage}
             />
         </div>
       </div>

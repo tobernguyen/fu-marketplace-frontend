@@ -18,18 +18,27 @@ class BlockCurrentOrderList extends Component {
     };
 
     this.loadMore = (page) => {
-      this.props.getOrdersOfPage({
-        page: page,
-        type: 'ACTIVE'
-      });
+      const { isFetching } = this.props;
+      if(!isFetching) {
+        this.props.getOrdersOfPage({
+          size: 5,
+          page: page,
+          type: 'ACTIVE'
+        });
+      }
     };
   }
 
   componentWillMount() {
-    this.props.getOrdersOfPage({
-      page: 1,
-      type: 'ACTIVE'
-    });
+    const { isFetching } = this.props;
+    if(!isFetching) {
+      this.props.getOrdersOfPage({
+        size: 5,
+        page: 1,
+        type: 'ACTIVE'
+      });
+    }
+
   }
 
   componentWillReceiveProps(nextProps) {

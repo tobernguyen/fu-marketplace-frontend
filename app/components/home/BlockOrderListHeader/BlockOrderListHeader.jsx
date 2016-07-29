@@ -3,34 +3,34 @@ import { Link } from 'react-router';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import { messages } from 'app/components/home/BlockOrderList/BlockOrderList.i18n';
 
-const BlockOrderListHeader = ({ shopID }) => {
+const BlockOrderListHeader = ({ shopID, status, changeStatus }) => {
   const ordersPath = `/dashboard/shops/${shopID}/orders`;
   return (
     <div className="header clearfix">
         <ul className="nav nav-pills">
           <li>
-            <Link to={{ pathname: ordersPath, query: { status: 'all'} }} activeClassName="active"><FormattedMessage {...messages.orderList.tableBody.orderStatus.all}/></Link>
+            <Link className={`${status === 'all'? 'active' : ''}`} to={{ pathname: ordersPath }} onClick={(e) => {e.preventDefault(); changeStatus('all'); }}><FormattedMessage {...messages.orderList.tableBody.orderStatus.all}/></Link>
           </li>
           <li>
-            <Link to={{ pathname: ordersPath, query: { status: 'new'} }} activeClassName="active"><FormattedMessage {...messages.orderList.tableBody.orderStatus.new}/></Link>
+            <Link className={`${status === 'new'? 'active' : ''}`} to={{ pathname: ordersPath }} onClick={(e) => {e.preventDefault(); changeStatus('new'); }}><FormattedMessage {...messages.orderList.tableBody.orderStatus.new}/></Link>
           </li>
           <li>
-            <Link to={{ pathname: ordersPath, query: { status: 'accepted'} }} activeClassName="active"><FormattedMessage {...messages.orderList.tableBody.orderStatus.accepted}/></Link>
+            <Link className={`${status === 'accepted' ? 'active' : ''}`} to={{ pathname: ordersPath }} onClick={(e) => {e.preventDefault(); changeStatus('accepted'); }}><FormattedMessage {...messages.orderList.tableBody.orderStatus.accepted}/></Link>
           </li>
           <li>
-            <Link to={{ pathname: ordersPath, query: { status: 'shipping'} }} activeClassName="active"><FormattedMessage {...messages.orderList.tableBody.orderStatus.shipping}/></Link>
+            <Link className={`${status === 'shipping'? 'active' : ''}`} to={{ pathname: ordersPath }} onClick={(e) => {e.preventDefault(); changeStatus('shipping'); }}><FormattedMessage {...messages.orderList.tableBody.orderStatus.shipping}/></Link>
           </li>
           <li>
-            <Link to={{ pathname: ordersPath, query: { status: 'completed'} }} activeClassName="active"><FormattedMessage {...messages.orderList.tableBody.orderStatus.completed}/></Link>
+            <Link className={`${status === 'completed'? 'active' : ''}`} to={{ pathname: ordersPath }} onClick={(e) => {e.preventDefault(); changeStatus('completed'); }}><FormattedMessage {...messages.orderList.tableBody.orderStatus.completed}/></Link>
           </li>
           <li>
-            <Link to={{ pathname: ordersPath, query: { status: 'rejected'} }} activeClassName="active"><FormattedMessage {...messages.orderList.tableBody.orderStatus.rejected}/></Link>
+            <Link className={`${status === 'rejected'? 'active' : ''}`} to={{ pathname: ordersPath }} onClick={(e) => {e.preventDefault(); changeStatus('rejected'); }}><FormattedMessage {...messages.orderList.tableBody.orderStatus.rejected}/></Link>
           </li>
           <li>
-            <Link to={{ pathname: ordersPath, query: { status: 'canceled'} }} activeClassName="active"><FormattedMessage {...messages.orderList.tableBody.orderStatus.canceled}/></Link>
+            <Link className={`${status === 'canceled'? 'active' : ''}`} to={{ pathname: ordersPath }} onClick={(e) => {e.preventDefault(); changeStatus('canceled'); }}><FormattedMessage {...messages.orderList.tableBody.orderStatus.canceled}/></Link>
           </li>
           <li>
-            <Link to={{ pathname: ordersPath, query: { status: 'aborted'} }} activeClassName="active"><FormattedMessage {...messages.orderList.tableBody.orderStatus.aborted}/></Link>
+            <Link className={`${status === 'aborted'? 'active' : ''}`} to={{ pathname: ordersPath }} onClick={(e) => {e.preventDefault(); changeStatus('aborted'); }}><FormattedMessage {...messages.orderList.tableBody.orderStatus.aborted}/></Link>
           </li>
         </ul>
       </div>

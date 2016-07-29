@@ -4,11 +4,7 @@ import { FormattedMessage, injectIntl } from 'react-intl';
 import { messages } from 'app/components/home/BlockOrderListFooter/BlockOrderListFooter.i18n';
 import './BlockOrderListFooter.scss';
 import classNames from 'classnames';
-const BlockOrderListFooter = ({ shopID, query, hasNextPage, changePageSize }) => {
-  const status = query.status || 'all';
-  const size = query.size || 20;
-  const page = query.page || 1;
-
+const BlockOrderListFooter = ({ shopID, page, size , hasNextPage, changePageSize, nextPage, prevPage }) => {
   const previousButtonClass=classNames({
     'disabled': Number(page) === 1
   });
@@ -21,12 +17,12 @@ const BlockOrderListFooter = ({ shopID, query, hasNextPage, changePageSize }) =>
       <div className="pull-left">
         <ul>
           <li>
-          <Link className={previousButtonClass} to={`/dashboard/shops/${shopID}/orders`} query={{ status, size, page: Number(page) - 1 }}>
+          <Link className={previousButtonClass} to={`/dashboard/shops/${shopID}/orders`} onClick={prevPage}>
             <span aria-hidden="true">&larr;</span><FormattedMessage {...messages.orderListFooter.previous}/>
           </Link>
           </li>
           <li>
-            <Link className={nextButtonClass} to={`/dashboard/shops/${shopID}/orders`} query={{ status, size, page: Number(page) + 1 }}>
+            <Link className={nextButtonClass} to={`/dashboard/shops/${shopID}/orders`} onClick={nextPage}>
               <FormattedMessage {...messages.orderListFooter.next}/><span aria-hidden="true">&rarr;</span>
             </Link>
           </li>

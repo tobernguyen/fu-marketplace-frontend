@@ -146,6 +146,20 @@ export const order = (state = INITIAL_STATE, action) => {
         currentOrders: updatedCurrentOrders
       });
     }
+    case OrderActionTypes.CHANGE_ORDER_STATUS:
+    {
+      const { orders } = state;
+      const { payload: { orderId, status } } = action;
+      const index = _.findIndex(orders, (order) => {
+        return order.id == orderId
+      });
+      const targetOrder = orders[index];
+      targetOrder.status = status;
+      orders.splice(index, 1, targetOrder);
+      return _.merge({}, state, {
+        orders
+      });
+    }
     default:
       return state;
   }

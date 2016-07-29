@@ -7,6 +7,7 @@ import ModalSellerMessage from './ModalSellerMessage.jsx';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import { messages } from 'app/components/home/BlockMyOrder/BlockMyOrder.i18n';
 import { Link } from 'react-router';
+import { EVENTS } from 'app/shared/socketIOEvents';
 import BlockMyOrderRow from './BlockMyOrderRow.jsx';
 
 class BlockMyOrder extends Component {
@@ -18,7 +19,8 @@ class BlockMyOrder extends Component {
       showSellerMessageModal: false,
       showOpenTicketModal: false,
       selectedOrderID: null,
-      selectedOrder: {}
+      selectedOrder: {},
+      socketLoaded: false
     };
 
     this.openModal = (orderID) => {
@@ -74,6 +76,23 @@ class BlockMyOrder extends Component {
     };
 
     this.renderOrderList = this.renderOrderList.bind(this);
+  }
+
+  componentWillMount() {
+    const { socket } = this.props;
+    if(socket) {
+     socket.on(EVENTS.NEW_NOTIFICATION, (packet) => {
+       const { data: { orderId, newStatus } } = packet;
+       this.props.changeOrderStatus(orderId, newStatus);
+     });
+    }
+  }
+
+  componentWillUnmount() {
+    const { socket } = this.props;
+    if(socket) {
+      socket.off(EVENTS.NEW_NOTIFICATION);
+    }
   }
 
   renderOrderList(orders) {

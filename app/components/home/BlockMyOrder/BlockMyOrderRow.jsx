@@ -8,6 +8,20 @@ import LabelOrderStatus from 'app/components/home/LabelOrderStatus';
 import { Tooltip, OverlayTrigger} from 'react-bootstrap';
 
 class BlockMyOrderRow extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      justUpdated: false
+    };
+
+    this.updateOrder = () => {
+      this.setState({
+        justUpdated: true
+      });
+    }
+  }
+
   renderItemNameList(order) {
     let names = [];
     order.orderLines.map(orderLine => {
@@ -64,6 +78,7 @@ class BlockMyOrderRow extends Component {
 
   render() {
     const { order } = this.props;
+    const { justUpdated } = this.state;
     const tooltip = (
       <Tooltip id="tooltip">
         <div>
@@ -72,7 +87,7 @@ class BlockMyOrderRow extends Component {
       </Tooltip>
     );
     return (
-      <tr>
+      <tr className={`${justUpdated ? 'just-update' : ''}`}>
         <td>{order.id}</td>
         <td>
           <OverlayTrigger placement="top" overlay={tooltip}>

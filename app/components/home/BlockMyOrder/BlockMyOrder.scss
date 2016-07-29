@@ -68,3 +68,27 @@
     margin-bottom: 10px;
   }
 }
+
+.just-update {
+  -webkit-animation-name: updateOrder;
+  -webkit-animation-duration: 5000ms;
+  -webkit-animation-iteration-count: 1;
+  -webkit-animation-timing-function: ease-in-out;
+}
+
+@-webkit-keyframes updateOrder {
+  0% {
+    background-color: #f6cf55;
+  }
+  100% {
+    background-color: transparent;
+  }
+}
+@keyframes updateOrder {
+  0% {
+    background-color: #f6cf55;
+  }
+  100% {
+    background-color: #transparent;
+  }
+}

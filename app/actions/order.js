@@ -249,3 +249,12 @@ export const getNewOrder = (orderId) => {
     dispatch(requestGetNewOrder(orderId));
   }
 }
+
+export const CHANGE_ORDER_STATUS = 'CHANGE_ORDER_STATUS';
+export const changeOrderStatus = (orderId, status) => ({
+  type: CHANGE_ORDER_STATUS,
+  payload: {
+    orderId,
+    status
+  }
+});

@@ -290,7 +290,11 @@ export const getCurrentViewedShop = createSelector(
       return _.indexOf(['items', 'shipPlaces', 'seller', 'groupItems'], key) === -1
     });
     const seller = _.get(currentViewedShop, 'seller');
-    const sellingItems = _.get(currentViewedShop, 'groupItems');
+    let sellingItems = _.get(currentViewedShop, 'groupItems');
+    const allItems = _.get(currentViewedShop, 'allItems');
+    if (sellingItems && allItems) {
+      sellingItems[0] = allItems
+    }
 
     return {
       shopInfo: shopInfo,

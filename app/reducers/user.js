@@ -59,7 +59,8 @@ export const user = (state = INITIAL_STATE, action) => {
       // Shop item grouped by category id
       const groupItems = _.groupBy(response.items, 'categoryId');
       const modifiedShop = _.assign({}, response, {
-        groupItems: groupItems
+        groupItems: groupItems,
+        allItems: response.items
       });
       return _.merge({}, state, {
         currentViewedShop: modifiedShop

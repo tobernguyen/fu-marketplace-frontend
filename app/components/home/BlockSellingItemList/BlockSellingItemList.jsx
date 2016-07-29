@@ -6,9 +6,9 @@ import './BlockSellingItemList.scss';
 import _ from 'lodash';
 import classNames from 'classnames';
 import { messages } from './BlockSellingItemList.i18n';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 
-export default class BlockSellingItemList extends Component {
+class BlockSellingItemList extends Component {
   constructor(props) {
     super(props);
 
@@ -61,6 +61,7 @@ export default class BlockSellingItemList extends Component {
 
   renderHeader() {
     const { allCategories, items } = this.props;
+    const { formatMessage } = this.props.intl;
     const categories = _.map(items, (value, key) => ({
       id: key,
       itemCount: value.length
@@ -73,7 +74,8 @@ export default class BlockSellingItemList extends Component {
           return (
             <li key={category.id} className={classNames({'active': isActive})}>
               <a onClick={() => this.categoryChanged(category.id)}>
-                {allCategories[category.id]}{' '}
+                {category.id == 0 ? formatMessage(messages.all) : allCategories[category.id]}
+                {' '}
                 <span>{category.itemCount}</span></a>
             </li>
           )
@@ -148,5 +150,8 @@ export default class BlockSellingItemList extends Component {
 
 BlockSellingItemList.propTypes = {
   items: PropTypes.object.isRequired,
-  sellerMode: PropTypes.bool.isRequired
+  sellerMode: PropTypes.bool.isRequired,
+  intl: intlShape.isRequired
 };
+
+export default injectIntl(BlockSellingItemList);

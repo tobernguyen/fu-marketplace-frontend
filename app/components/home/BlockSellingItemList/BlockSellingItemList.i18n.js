@@ -8,5 +8,9 @@ export const messages = {
       id: 'message.user.noItem',
       defaultMessage: 'No selling items'
     }
+  },
+  all: {
+    id: 'all',
+    defaultMessage: 'All'
   }
 };

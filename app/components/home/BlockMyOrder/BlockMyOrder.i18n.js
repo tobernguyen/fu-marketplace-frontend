@@ -108,7 +108,7 @@ export const messages = {
       button: {
         accept: {
           id: 'myOrder.cancelOrderModal.button.accept',
-          defaultMessage: 'OK'
+          defaultMessage: 'Yes'
         },
         cancel: {
           id: 'myOrder.cancelOrderModal.button.cancel',

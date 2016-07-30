@@ -1,5 +1,7 @@
 import React, { PropTypes, Component } from 'react';
 import './FormRequestCreateShopIntro.scss';
+import { messages } from './FormRequestCreateShopIntro.i18n';
+import { FormattedMessage } from 'react-intl';
 
 
 class FormRequestCreateShopIntro extends Component {
@@ -11,25 +13,32 @@ class FormRequestCreateShopIntro extends Component {
           <div className="arrow"></div>
           <div className="circle orange">
             <h5>1<br/>
-              <span>Đăng ký</span>
+              <FormattedMessage {...messages.step1.title} />
             </h5>
-            <p>Mở shop bán hàng</p>
+            <p>
+              <FormattedMessage {...messages.step1.description} />
+            </p>
           </div>
           <div className="circle green">
             <h5>2<br/>
-              <span>Đợi accept</span>
+              <FormattedMessage {...messages.step2.title} />
             </h5>
-            <p>Phản hồi tối đa trong 24 giờ</p>
+            <p>
+              <FormattedMessage {...messages.step2.description} />
+            </p>
           </div>
           <div className="circle yellow">
             <h5>3<br/>
-              <span>Bán hàng</span>
+              <FormattedMessage {...messages.step3.title} />
             </h5>
-            <p>Bắt đầu bán hàng luôn!</p>
+            <p>
+              <FormattedMessage {...messages.step3.description} />
+            </p>
           </div>
         </div>
         <button type="submit" disabled={!loaded} className="btn btn-primary" onClick={this.props.nextPage}>
-          Đăng ký ngay hôm nay ! {!loaded && <i className="fa fa-spinner fa-spin" />}
+          <FormattedMessage {...messages.registerNow} />{' '}
+          {!loaded && <i className="fa fa-spinner fa-spin" />}
         </button>
       </div>
     );

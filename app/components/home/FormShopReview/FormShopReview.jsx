@@ -1,12 +1,14 @@
 import React, { Component, PropTypes } from 'react';
 import BlockStars from '../BlockStars';
+import { injectIntl, intlShape } from 'react-intl';
+import { messages } from './FormShopReview.i18n';
 
 const MAX_LENGTH_COMMENT = 150;
 const DEFAULT_RATING_STAR = 0;
 const BACKSPACE_KEY_CODE = 8;
 const DELETE_KEY_CODE = 46;
 const INITIAL_STAR_NUMBER = 0;
-export default class FormShopReview extends Component {
+class FormShopReview extends Component {
   constructor(props) {
     super(props);
 
@@ -56,6 +58,7 @@ export default class FormShopReview extends Component {
     }
   }
   render() {
+    const { formatMessage } = this.props.intl;
     return (
       <div className="review-box clearfix">
         <label className="col-sm-2 user-avatar" htmlFor="input-review">
@@ -69,13 +72,13 @@ export default class FormShopReview extends Component {
               onChange={this.commentChanged}
               onKeyDown={this.handleOnKeyDown}
               className="form-control input-review"
-              placeholder="Review (optional)"/>
+              placeholder={formatMessage(messages.inputPlaceholder)}/>
             <BlockStars
               name={'user_review'}
               onStarClick={this.handleOnStarClick}
               value={this.props.stars} />
             <span className="pull-right">
-            {this.state.maxLength} characters left
+            {this.state.maxLength} {formatMessage(messages.charactersLeft)}
           </span>
           </div>
           <div className="col-sm-2 submit-btn">
@@ -94,5 +97,8 @@ export default class FormShopReview extends Component {
 
 FormShopReview.propTypes = {
   reviewer: PropTypes.object.isRequired,
-  handleSubmitReview: PropTypes.func.isRequired
+  handleSubmitReview: PropTypes.func.isRequired,
+  intl: intlShape
 };
+
+export default injectIntl(FormShopReview)

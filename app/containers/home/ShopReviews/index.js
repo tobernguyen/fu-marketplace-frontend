@@ -5,6 +5,7 @@ import { Link } from 'react-router';
 import { getCurrentViewedShop, getUser } from 'app/selectors';
 import BlockShopReviews from 'app/components/home/BlockShopReviews';
 import { rateShop, getShopReviews, clearReviewStatus } from 'app/actions/shop';
+import { FormattedMessage } from 'react-intl';
 
 class ShopReviews extends Component {
 
@@ -55,7 +56,7 @@ class ShopReviews extends Component {
         <Modal.Header>
           <Link to={`/shops/${this.props.params.shopID}`} className="close"><span aria-hidden="true">×</span></Link>
           <Modal.Title>
-            Shop reviews
+            <FormattedMessage {...{ id: 'shopReviews.title', defaultMessage: 'Shop reviews' }}/>
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>

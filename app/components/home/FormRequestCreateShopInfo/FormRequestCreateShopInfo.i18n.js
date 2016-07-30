@@ -38,5 +38,10 @@ export const messages = {
       id: 'shop.form.shopPhone.label',
       defaultMessage: 'shop phone'
     }
+  },
+  shopInfo: {
+    id: 'shop.info',
+    defaultMessage: 'Shop information'
   }
+
 };

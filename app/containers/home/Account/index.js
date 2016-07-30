@@ -5,6 +5,7 @@ import dataURLtoBlob from 'blueimp-canvas-to-blob';
 import { updateUserInfo, uploadAvatar, resetUpdateStatus } from 'app/actions/user';
 import { updateModalSize } from 'app/actions/common';
 import AccountBasicForm from './AccountBasicForm';
+import { injectIntl, intlShape } from 'react-intl';
 
 class Account extends Component {
   constructor(props) {
@@ -45,9 +46,13 @@ class Account extends Component {
         }
       }
     }
+
+    const { formatMessage } = this.props.intl;
     return (
       <div>
-        <ModalHeader query={this.props.query} title="Tài khoản" subHeader="Thay đổi thông tin cơ bản."/>
+        <ModalHeader query={this.props.query}
+                     title={formatMessage({ id: 'account.header.title', defaultMessage: 'Account' })}
+                     subHeader={formatMessage({ id: 'account.header.subTitle', defaultMessage: 'Change basic information' })}/>
         <div className="modal-body">
           <AccountBasicForm
             userUpdateStatus={this.props.userUpdateStatus}
@@ -70,9 +75,13 @@ const mapStateToProps = (state) => {
   }
 };
 
-export default connect(mapStateToProps, {
+Account.propTypes = {
+   intl: intlShape.isRequired
+};
+
+export default injectIntl(connect(mapStateToProps, {
   uploadAvatar,
   updateUserInfo,
   updateModalSize,
   resetUpdateStatus
-})(Account)
+})(Account))

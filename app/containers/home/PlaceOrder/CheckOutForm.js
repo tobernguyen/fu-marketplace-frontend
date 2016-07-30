@@ -40,10 +40,11 @@ const mapStateToProps = (state, ownProps) => {
       image: item.image
     }
   });
+  const shipAddress = state.user.currentUser.room || '';
   return {
     initialValues: {
       note:  '',
-      shipAddress: '',
+      shipAddress: shipAddress,
       items: items
     },
     orderResult: state.order.orderResult

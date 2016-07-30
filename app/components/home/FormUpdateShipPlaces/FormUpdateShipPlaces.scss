@@ -1,8 +1,16 @@
 .form-update-ship-places {
   .places {
     li {
-      position: relative;
-      border-bottom: 1px solid #ededed;
+      float: left;
+      padding: 0 5px;
+      margin-bottom: 10px;
+      width: 25%;
+
+      .checkbox-ship-place {
+        width: 100%;
+        padding: 15px 0;
+        font-size: 16px;
+      }
     }
   }
 }

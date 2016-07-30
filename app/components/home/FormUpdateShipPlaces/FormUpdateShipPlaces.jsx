@@ -1,12 +1,12 @@
 import React, { Component, PropTypes } from 'react';
 import { Modal } from 'react-bootstrap';
 import ModalHeader from '../ModalHeader';
-import OptionItem from 'app/components/common/OptionItem';
 import './FormUpdateShipPlaces.scss';
 import { Alert } from 'react-bootstrap';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import { buttons } from 'app/shared/buttons';
 import { messages } from './FormUpdateShipPlaces.i18n';
+import CheckBoxShipPlace from './CheckBoxShipPlace';
 
 class FormUpdateShipPlaces extends Component {
   render() {
@@ -27,7 +27,7 @@ class FormUpdateShipPlaces extends Component {
               <ul className="places nav">
                 {places.map(place =>
                   <li key={place.id}>
-                    <OptionItem item={place} toggleItem={toggleShipPlace} />
+                    <CheckBoxShipPlace place={place} toggleShipPlace={toggleShipPlace} />
                   </li>
                 )}
               </ul>

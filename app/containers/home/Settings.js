@@ -31,7 +31,10 @@ class Settings extends Component {
 
     this.closeModal = (e) => {
       e.preventDefault();
-
+      this.props.router.push({
+        pathname: '/',
+        query: this.props.query
+      })
     }
   }
 

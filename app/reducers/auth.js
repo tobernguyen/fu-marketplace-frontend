@@ -5,10 +5,12 @@ import _ from 'lodash';
 const INITIAL_STATE = {
   isAuthenticated: null,
   isAdminAuthenticated: false,
-  authenticating: false
+  authenticating: false,
+  isSignInByEmailAndPassword: false
 };
 
 export const auth = (state = INITIAL_STATE, action) => {
+  console.log(action);
   const { type, token, adminToken, error } = action;
   switch (type) {
     case ActionTypes.CHECK_AUTH_STATUS:
@@ -42,6 +44,10 @@ export const auth = (state = INITIAL_STATE, action) => {
         isAdminAuthenticated: (adminToken != null)
       });
     case ActionTypes.ADMIN_SIGN_IN_SUCCESS:
+      return _.assign({}, state, {
+        shouldUpdateAdminAuthStatus: true,
+        isSignInByEmailAndPassword: true
+      });
     case ActionTypes.ADMIN_SIGN_OUT:
     case AdminActionTypes.ADMIN_CHANGE_PASSWORD_SUCCESS:
       return _.assign({}, state, {

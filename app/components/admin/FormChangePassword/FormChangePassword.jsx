@@ -58,25 +58,8 @@ const validate = (values) => {
 }
 
 class FormChangePassword extends Component {
-  constructor(props) {
-    super(props);
-
-    const currentUserEmail = props.currentUserEmail || '';
-
-    this.state = {
-      isLoginByFPTEmail: currentUserEmail.indexOf('@fpt.edu.vn') !== -1
-    };
-  }
-
-  componentWillReceiveProps(nextProps) {
-    this.setState({
-      isLoginByFPTEmail: nextProps.currentUserEmail.indexOf('@fpt.edu.vn') !== -1
-    });
-  }
-
   render() {
-    const { isLoginByFPTEmail} = this.state;
-    const { fields: { oldPassword, newPassword, repeatPassword }, handleSubmit, formStatus, intl: { formatMessage }} = this.props;
+    const { fields: { oldPassword, newPassword, repeatPassword }, handleSubmit, formStatus, intl: { formatMessage }, isSignInByEmailAndPassword} = this.props;
     const changePasswordForm = (
       <form onSubmit={handleSubmit}>
         <FormGroup className={`${oldPassword.touched && oldPassword.invalid ? 'has-error' : ''}`}>
@@ -141,7 +124,7 @@ class FormChangePassword extends Component {
           </p>
         </Col>
         <Col lg={9}>
-          {!isLoginByFPTEmail ? changePasswordForm : <FormattedMessage {...messages.formChangePassword.message}/>}
+          {isSignInByEmailAndPassword ? changePasswordForm : <FormattedMessage {...messages.formChangePassword.message}/>}
         </Col>
       </div>
     )

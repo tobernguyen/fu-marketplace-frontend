@@ -76,6 +76,10 @@ class BlockCurrentOrderListRow extends Component {
       this.setState({
         order
       });
+      this.hideOrder();
+      setTimeout(() => {
+        this.props.removeOrder(order.id);
+      }, 7000);
     }
 
     this.hideOrder = () => {

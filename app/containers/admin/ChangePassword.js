@@ -33,7 +33,7 @@ class ChangePassword extends Component {
         <FormChangePassword
           onSubmit={this.handleChangePassword}
           formStatus={this.props.admin.changePasswordFormStatus}
-          currentUserEmail={this.props.currentUserEmail}
+          isSignInByEmailAndPassword={this.props.isSignInByEmailAndPassword}
           />
         <hr />
         <FormChangeLanguage
@@ -58,7 +58,7 @@ ChangePassword.faIcon = 'fa-cogs';
 
 const mapStateToProps = (state) => ({
   admin: state.admin,
-  currentUserEmail: state.user.currentUser.email
+  isSignInByEmailAndPassword: state.auth.isSignInByEmailAndPassword
 });
 
 export default connect(mapStateToProps, {

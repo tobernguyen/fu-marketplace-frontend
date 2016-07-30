@@ -22,11 +22,13 @@ const validate = values => {
 };
 
 const mapStateToProps = (state) => {
+  const { user } = state;
+  const shipAddress = user.currentUser.room || '';
   return {
     initialValues: {
       quantity:  1,
       note: '',
-      shipAddress: ''
+      shipAddress: shipAddress
     },
     placeOrderResult: state.order.orderResult
   }

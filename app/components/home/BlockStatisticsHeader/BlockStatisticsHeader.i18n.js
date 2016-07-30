@@ -1,4 +1,8 @@
 export const messages = {
+  title: {
+    id: 'shopStatistic.title',
+    defaultMessage: 'Statistics'
+  },
   ordersStatistic: {
     id: 'ordersStatistic',
     defaultMessage: 'orders'

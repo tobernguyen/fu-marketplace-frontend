@@ -289,5 +289,6 @@ export default {
   'noTicket.message': 'There is not any ticket',
   'formChangePassword.message': 'Administrator who login by using FPT University account can not change password',
   'formChangeTicketStatus.responseSection.button.startInvestigate': 'Start investigation',
-  'formChangeTicketStatus.responseSection.button.closeTicket': 'Close ticket'
+  'formChangeTicketStatus.responseSection.button.closeTicket': 'Close ticket',
+  'shopStatistic.title': 'Statistics'
 };

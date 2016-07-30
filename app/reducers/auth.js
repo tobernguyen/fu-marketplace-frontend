@@ -10,7 +10,6 @@ const INITIAL_STATE = {
 };
 
 export const auth = (state = INITIAL_STATE, action) => {
-  console.log(action);
   const { type, token, adminToken, error } = action;
   switch (type) {
     case ActionTypes.CHECK_AUTH_STATUS:

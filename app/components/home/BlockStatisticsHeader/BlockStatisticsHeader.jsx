@@ -9,7 +9,7 @@ class BlockStatisticsHeader extends Component {
     return (
       <div className="block-statistics-header clearfix">
         <h4 className="title">
-          Statistics
+          <FormattedMessage {...messages.title}/>
         </h4>
         <div className="btn-group switch-mode pull-right">
           {this.props.statisticModes.map((mode, index) =>

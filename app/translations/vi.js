@@ -551,5 +551,6 @@
   'formCheckOut.tableHead.total': 'Tổng',
   'formCheckOut.tableHead.shipTo': 'Địa chỉ',
   'formCheckOut.button.placeOrder': 'Đặt hàng',
-  'formCheckOut.validation.shipAddress.blank': 'Địa chỉ chuyển hàng không được để trống'
+  'formCheckOut.validation.shipAddress.blank': 'Địa chỉ chuyển hàng không được để trống',
+  'shopStatistic.title': 'Thống kê'
 };

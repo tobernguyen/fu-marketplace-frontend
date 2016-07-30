@@ -1,11 +1,12 @@
 import React, { Component, PropTypes } from 'react';
 import './BlockShopReviews.scss';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import FormShopReview from '../FormShopReview';
 import BlockShopUserReview from '../BlockShopUserReview';
 import _ from 'lodash';
+import { messages } from './BlockShopReviews.i18n';
 
-export default class BlockShopReviews extends Component {
+class BlockShopReviews extends Component {
 
   constructor(props) {
     super(props);
@@ -32,6 +33,7 @@ export default class BlockShopReviews extends Component {
 
   render() {
     const { shop, seller, currentUser, reviews } = this.props;
+    const { formatMessage } = this.props.intl;
     let ownerView = false;
     if (!_.isEmpty(currentUser) && !_.isEmpty(seller)) {
       ownerView = (currentUser.id === seller.id)
@@ -65,7 +67,7 @@ export default class BlockShopReviews extends Component {
                 </span>
                 <cite>
                   <div>
-                    Chủ shop
+                    {formatMessage(messages.shopOwner)}
                   </div>
                   <strong>{seller.fullName}</strong>
                 </cite>
@@ -74,7 +76,7 @@ export default class BlockShopReviews extends Component {
                 <span><i className="fa fa-phone"/></span>
                 <cite>
                   <div>
-                    Điện thoại
+                    {formatMessage(messages.shopPhone)}
                   </div>
                   <strong>{seller.phone}</strong>
                 </cite>
@@ -83,7 +85,7 @@ export default class BlockShopReviews extends Component {
                 <span><i className="fa fa-flag"/></span>
                 <cite>
                   <div>
-                    Địa chỉ
+                    {formatMessage(messages.shopAddress)}
                   </div>
                   <strong>{shop.address}</strong>
                 </cite>
@@ -96,7 +98,9 @@ export default class BlockShopReviews extends Component {
           <div className="row reviews-row">
             <div className="col-sm-offset-1 col-sm-10">
               {!this.state.reviewStatus &&
-              <FormShopReview handleSubmitReview={this.props.handleSubmitReview} reviewer={currentUser} />}
+              <FormShopReview
+                handleSubmitReview={this.props.handleSubmitReview}
+                reviewer={currentUser} />}
 
               <div className="clearfix col-sm-8 col-sm-offset-2">
                 {this.state.reviewStatus && <h5 className="review-status">
@@ -123,5 +127,9 @@ BlockShopReviews.propTypes = {
   shop: PropTypes.object.isRequired,
   seller: PropTypes.object.isRequired,
   currentUser: PropTypes.object.isRequired,
-  handleSubmitReview: PropTypes.func.isRequired
+  handleSubmitReview: PropTypes.func.isRequired,
+  intl: intlShape.isRequired
 };
+
+
+export default injectIntl(BlockShopReviews)

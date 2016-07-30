@@ -18,5 +18,9 @@ export const messages = {
   shopClosed: {
     id: 'sellerDashboard.shopClosed',
     defaultMessage: 'shop closed'
+  },
+  seeReviews: {
+    id: 'seeReviews',
+    defaultMessage: 'see reviews'
   }
 };

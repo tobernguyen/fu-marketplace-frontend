@@ -162,7 +162,7 @@ export default class BlockShopHeader extends Component {
                 <div className="row shop-basic-info">
                   <h4 className="title">{name} {this.renderOpeningStatus()}</h4>
                   <Link to={`/shops/${id}/reviews`} className="rating">
-                    {this.renderStars()} See reviews
+                    {this.renderStars()} <FormattedMessage {...messages.seeReviews} />
                   </Link>
                 </div>
               </div>

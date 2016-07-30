@@ -19,6 +19,11 @@ const validate = (values, props) => {
         id: 'shopItem.quantity.validation.number',
         defaultMessage: 'quantity value must be number'
       };
+    } else if (values.quantity < 0) {
+      errors.quantity = {
+        id: 'shopItem.quantity.validation.notNegative',
+        defaultMessage: 'quantity must be greater than 0'
+      };
     }
   }
 

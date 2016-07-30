@@ -27,6 +27,11 @@ class Settings extends Component {
       this.props.saveLanguageChange(this.state.language);
       this.props.router.push('/');
       window.location.reload();
+    };
+
+    this.closeModal = (e) => {
+      e.preventDefault();
+
     }
   }
 
@@ -49,7 +54,7 @@ class Settings extends Component {
           <BlockSwitchLanguage handleLanguageChanged={this.handleLanguageChanged} language={this.state.language} />
         </div>
         <div className="modal-footer">
-          <button className="btn btn-default">
+          <button className="btn btn-default" onClick={this.closeModal}>
             <FormattedMessage {...buttons.cancel} />
           </button>
           <button className="btn btn-primary" onClick={this.saveLanguageChange}>

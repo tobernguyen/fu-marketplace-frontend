@@ -54,7 +54,7 @@ class Wrapper extends Component {
           </div>
           <div className="col-md-9">
             <div className="row">
-              <CarouselPinnedItems pinnedShops={pinnedShops} />
+              <CarouselPinnedItems query={query} pinnedShops={pinnedShops} />
               <div className="main-column col-md-12">
                 <ShopsFeed/>
               </div>

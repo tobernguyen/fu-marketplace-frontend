@@ -290,5 +290,9 @@ export default {
   'formChangePassword.message': 'Administrator who login by using FPT University account can not change password',
   'formChangeTicketStatus.responseSection.button.startInvestigate': 'Start investigation',
   'formChangeTicketStatus.responseSection.button.closeTicket': 'Close ticket',
-  'shopStatistic.title': 'Statistics'
+  'shopStatistic.title': 'Statistics',
+  'blockEnablePushSuggestion.message.seller': 'You can receive a notification instantly whenever there is an new order or order status updates from your customer by enabling our notifcation service',
+  'blockEnablePushSuggestion.message.buyer': 'You can receive a notification about updates of your orders instantly by enabling our notification service.',
+  'blockEnablePushSuggestion.enable': 'Awesome! Turn on notification',
+  'blockEnablePushSuggestion.success': 'You have turned on browser notification'
 };

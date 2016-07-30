@@ -214,7 +214,7 @@
   'shopItem.update': 'Sửa thông tin sản phẩm',
   'shopItem.add': 'Thêm sản phẩm',
   'shop.updateShipPlaces': 'Sửa địa điểm ship',
-  'shop.shipPlaces.updated': 'Đã cập nhật địa điểm ship',
+  'shop.shipPlaces.updated': 'Địa điểm ship đã được cập nhật',
   'formBuyNow.modalHeader.title': 'Đặt hàng ngay',
   'formBuyNow.modalBody.shipTo': 'Địa chỉ',
   'formBuyNow.modalBody.quantity': 'Số lượng',
@@ -552,5 +552,9 @@
   'formCheckOut.tableHead.shipTo': 'Địa chỉ',
   'formCheckOut.button.placeOrder': 'Đặt hàng',
   'formCheckOut.validation.shipAddress.blank': 'Địa chỉ chuyển hàng không được để trống',
-  'shopStatistic.title': 'Thống kê'
+  'shopStatistic.title': 'Thống kê',
+  'blockEnablePushSuggestion.message.seller': 'Bạn có thể nhận thông báo mỗi khi có order mới hoặc order bị thay đổi trạng thái từ phía khách hàng của mình theo thời gian thực bằng cách bật tính năng Gửi thông báo qua trình duyệt.',
+  'blockEnablePushSuggestion.message.buyer': 'Bạn có thể nhận thông tin về đơn hàng của mình đã được xử lý/ship hay chưa theo thời gian thực bằng cách bật tính năng Gửi thông báo qua trình duyệt.',
+  'blockEnablePushSuggestion.enable': 'Quá tuyệt. Bật ngay!',
+  'blockEnablePushSuggestion.success': 'Bạn đã đăng ký nhận thông báo qua trình duyệt thành công!'
 };

@@ -18,6 +18,8 @@
   'account.header.title': 'Tài khoản',
   'account.header.subTitle': 'Thay đổi thông tin cơ bản.',
   'account.form.save': 'Lưu thông tin',
+   'page.title.myOrders': 'Đơn hàng',
+   'page.subHeader.myOrders': 'Danh sách tất cả các đơn hàng.',
   'seeReviews': 'Xem đánh giá',
   'page.title.openShop': 'Đăng ký mở shop bán hàng',
   'formRequestShopIntro.step1.title': 'Đăng ký',

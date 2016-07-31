@@ -18,6 +18,8 @@ export default {
   'account.header.title': 'Account',
   'account.header.subTitle': 'Change your basic information.',
   'account.form.save': 'Save changes',
+  'page.title.myOrders': 'My orders',
+  'page.subHeader.myOrders': 'List of my orders.',
   'seeReviews': 'See reviews',
   'page.title.openShop': 'Request to open shop',
   'formRequestShopIntro.step1.title': 'Register',

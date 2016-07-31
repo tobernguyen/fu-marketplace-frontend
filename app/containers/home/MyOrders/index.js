@@ -7,6 +7,7 @@ import { userOpenTicket, userCloseNewTicketModal } from 'app/actions/ticket';
 import { connect } from 'react-redux';
 import { updateModalSize } from 'app/actions/common';
 import { withRouter } from 'react-router'
+import { injectIntl, intlShape } from 'react-intl';
 
 const FIRST_PAGE = 1;
 const DEFAULT_SIZE = 5;
@@ -90,9 +91,12 @@ class MyOrders extends Component {
   }
 
   render() {
+    const { formatMessage } = this.props.intl;
     return (
       <div>
-        <ModalHeader query={this.props.query} title="Đơn hàng" subHeader="Danh sách tất cả đơn hàng"/>
+        <ModalHeader query={this.props.query}
+                     title={formatMessage({ id: 'page.title.myOrders', defaultMessage: 'My Orders' })}
+                     subHeader={formatMessage({ id: 'page.subHeader.myOrders', defaultMessage: 'All orders' })} />
         <div className="modal-body my-order">
         {this.renderBody()}
         </div>
@@ -111,7 +115,11 @@ const mapStateToProps = (state) => {
   }
 };
 
-export default connect(mapStateToProps, {
+MyOrders.propTypes = {
+  intl: intlShape.isRequired
+};
+
+export default injectIntl(connect(mapStateToProps, {
   updateModalSize,
   userGetOrder,
   userCancelOrder,
@@ -119,4 +127,4 @@ export default connect(mapStateToProps, {
   userOpenTicket,
   changeOrderStatus,
   userCloseNewTicketModal
-})(withRouter(MyOrders))
+})(withRouter(MyOrders)))

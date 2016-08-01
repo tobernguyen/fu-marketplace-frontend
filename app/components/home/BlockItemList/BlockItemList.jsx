@@ -41,7 +41,7 @@ export default class BlockItemList extends Component {
                     })
                   }}
                 className={classNames('btn', 'btn-default', { active: categoryID && categoryID === category.id })}>
-                {category.name} <span className="badge">{categoryCounter[category.id]}</span>
+                <span>{category.name}</span> <span className="badge">{categoryCounter[category.id]}</span>
               </Link>
             )}
           </div>

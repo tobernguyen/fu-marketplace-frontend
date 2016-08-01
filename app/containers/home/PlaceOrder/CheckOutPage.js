@@ -6,6 +6,7 @@ import _ from 'lodash';
 import { connect } from 'react-redux';
 import { removeItemFromCart } from 'app/actions/user';
 import { placeOrder } from 'app/actions/order';
+import { FormattedMessage } from 'react-intl';
 
 
 class CheckOutPage extends Component {
@@ -41,7 +42,7 @@ class CheckOutPage extends Component {
         bsSize={this.props.bsSize}>
         <Modal.Header closeButton>
           <Modal.Title>
-            Check out
+            <FormattedMessage {...{id: 'cart.title', defaultMessage: 'Shopping cart'}} />
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>

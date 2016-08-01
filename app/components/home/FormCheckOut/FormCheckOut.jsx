@@ -209,11 +209,11 @@ class FormCheckOut extends Component {
           })}
           </tbody>
         </table>
-        {orderResult === AsyncResultCode.PLACE_ORDER_FAIL && <div className="alert alert-danger">Error occured!</div>}
+        {orderResult === AsyncResultCode.PLACE_ORDER_FAIL && <div className="alert alert-danger">Error occurred!</div>}
         <button type="submit"
                 className="btn btn-danger btn-block"
-                disabled={isSubmitting || !dirty || invalid }>
-          <FormattedMessage {...messages.formCheckOut.button.placeOrder} />{' '}{isSubmitting && <i className="fa fa-spinner fa-spin"></i>}
+                disabled={isSubmitting || invalid }>
+          <FormattedMessage {...messages.formCheckOut.button.placeOrder} />{' '}{isSubmitting && <i className="fa fa-spinner fa-spin"/>}
         </button>
       </form>
     );

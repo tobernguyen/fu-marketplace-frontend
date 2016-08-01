@@ -102,9 +102,9 @@ class FormBuyNow extends Component {
         {placeOrderResult === AsyncResultCode.PLACE_ORDER_FAIL && <div className="alert alert-danger">
           <FormattedMessage {...messages.formBuyNow.modalBody.message.error}/>
         </div>}
-        <button type="submit" className="btn btn-danger btn-block" disabled={isSubmitting || !dirty}>
+        <button type="submit" className="btn btn-danger btn-block" disabled={isSubmitting}>
           <FormattedMessage {...messages.formBuyNow.modalBody.button.placeOrder} />{' '}
-          {isSubmitting && <i className="fa fa-spinner fa-spin"></i>}
+          {isSubmitting && <i className="fa fa-spinner fa-spin"/>}
         </button>
       </form>
       </div>

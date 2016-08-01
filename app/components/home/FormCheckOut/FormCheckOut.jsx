@@ -99,7 +99,7 @@ class FormCheckOut extends Component {
   }
 
   renderCheckOutForm() {
-    const { fields: { note, shipAddress, items }, handleSubmit, dirty, invalid, orderResult, isSubmitting } = this.props;
+    const { fields: { note, shipAddress, items }, handleSubmit, invalid, orderResult, isSubmitting } = this.props;
     return (
       <form className="form-horizontal" onSubmit={handleSubmit(this.submitOrder)}>
         <div className={`form-group has-feedback  ${shipAddress.touched && shipAddress.invalid ? 'has-error' : ''}`}>

@@ -25,7 +25,7 @@ class FormBuyNow extends Component {
   renderFormBuyNow() {
     const {
       fields: { shipAddress, quantity, note },
-      dirty,
+      invalid,
       handleSubmit,
       item,
       isSubmitting,
@@ -102,7 +102,7 @@ class FormBuyNow extends Component {
         {placeOrderResult === AsyncResultCode.PLACE_ORDER_FAIL && <div className="alert alert-danger">
           <FormattedMessage {...messages.formBuyNow.modalBody.message.error}/>
         </div>}
-        <button type="submit" className="btn btn-danger btn-block" disabled={isSubmitting}>
+        <button type="submit" className="btn btn-danger btn-block" disabled={isSubmitting || invalid}>
           <FormattedMessage {...messages.formBuyNow.modalBody.button.placeOrder} />{' '}
           {isSubmitting && <i className="fa fa-spinner fa-spin"/>}
         </button>

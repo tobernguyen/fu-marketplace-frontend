@@ -3,7 +3,7 @@ import FormChangePassword from 'app/components/admin/FormChangePassword';
 import FormChangeLanguage from 'app/components/admin/FormChangeLanguage';
 import FormSignOut from 'app/components/admin/FormSignOut';
 import { adminChangePassword } from 'app/actions/admin';
-import { signOutAdmin } from 'app/actions';
+import { signOutAdmin, checkLoginByGoogle } from 'app/actions';
 import { changeLanguage } from 'app/actions';
 import { connect } from 'react-redux';
 
@@ -12,7 +12,7 @@ class ChangePassword extends Component {
     super(props);
 
     this.handleChangePassword = this.handleChangePassword.bind(this);
-
+    this.props.checkLoginByGoogle();
     this.changeLanguage = (language) => {
       this.props.changeLanguage(language);
 
@@ -35,7 +35,7 @@ class ChangePassword extends Component {
         <FormChangePassword
           onSubmit={this.handleChangePassword}
           formStatus={this.props.admin.changePasswordFormStatus}
-          isSignInByEmailAndPassword={this.props.isSignInByEmailAndPassword}
+          isLoginByGoogle={this.props.isLoginByGoogle}
           />
         <hr />
         <FormChangeLanguage
@@ -64,11 +64,12 @@ ChangePassword.faIcon = 'fa-cogs';
 
 const mapStateToProps = (state) => ({
   admin: state.admin,
-  isSignInByEmailAndPassword: state.auth.isSignInByEmailAndPassword
+  isLoginByGoogle: state.auth.isLoginByGoogle
 });
 
 export default connect(mapStateToProps, {
   adminChangePassword,
   changeLanguage,
-  signOutAdmin
+  signOutAdmin,
+  checkLoginByGoogle
 })(ChangePassword);

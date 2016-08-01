@@ -78,6 +78,8 @@ class ContainerEditShop extends Component {
 
   render() {
     const { shopManagement } = this.props;
+    let selectedShop = shopManagement.selectedShop || {};
+    let availableShipPlaces = shopManagement.availableShipPlaces || [];
     if(shopManagement.isFetching) {
       return <div className="text-center container-fluid">
           <LoadingSpinner />
@@ -89,20 +91,20 @@ class ContainerEditShop extends Component {
           onSubmit={this.handleSubmitShopInformation}
           submitResult={shopManagement.submitResultShopInformation}
           isSubmitting={shopManagement.isSubmittingShopInformation}
-          seller={shopManagement.selectedShop.seller}
+          seller={selectedShop.seller}
         />
         <hr />
         <FormEditShopShipPlaces
-          shop={shopManagement.selectedShop}
+          shop={selectedShop}
           submitOpeningStatus={this.handleSubmitShopOpeningStatus}
           submitShipPlaces={this.handleSubmitShipPlaces}
           submitResult={shopManagement.submitResultShopShipPlace}
           isSubmitting={shopManagement.isSubmittingShopShipPlace}
-          availableShipPlaces = {shopManagement.availableShipPlaces}
+          availableShipPlaces = {availableShipPlaces}
         />
         <hr />
         <FormEditShopAvatarAndCover
-          shop={shopManagement.selectedShop}
+          shop={selectedShop}
           uploadAvatar={this.uploadAvatar}
           uploadCover={this.uploadCover}
           submitResult={shopManagement.submitResultAvatarAndCover}
@@ -116,7 +118,7 @@ class ContainerEditShop extends Component {
         />
         <hr />
         <FormEditShopBanStatus
-          shop={shopManagement.selectedShop}
+          shop={selectedShop}
           adminBanShop={this.banShop}
           adminUnbanShop={this.unbanShop}
           submitResult={shopManagement.submitResultShopBanStatus}

@@ -16,6 +16,7 @@ export default () => next => action => {
       break;
     case ActionTypes.ADMIN_SIGN_IN_SUCCESS:
       if (response.token) {
+        window.localStorage.setItem('isLoginByGoogle', false);
         window.localStorage.setItem(adminAccessTokenKey, response.token);
       }
       break;
@@ -34,6 +35,7 @@ export default () => next => action => {
       }
       break;
     case ActionTypes.ADMIN_SIGN_OUT:
+      window.localStorage.removeItem('isLoginByGoogle');
       window.localStorage.removeItem(adminAccessTokenKey);
       break;
     case AdminActionTypes.ADMIN_CHANGE_PASSWORD_SUCCESS:
@@ -44,6 +46,9 @@ export default () => next => action => {
       break;
     case ActionTypes.CHANGE_LANGUAGE:
       window.localStorage.setItem(languageKey, language);
+      break;
+    case ActionTypes.CHECK_LOGIN_BY_GOOGLE:
+      action.payload = window.localStorage.getItem('isLoginByGoogle') === null ? true : false;
       break;
     default:
       break;

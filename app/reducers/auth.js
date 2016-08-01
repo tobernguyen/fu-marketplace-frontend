@@ -6,7 +6,7 @@ const INITIAL_STATE = {
   isAuthenticated: null,
   isAdminAuthenticated: false,
   authenticating: false,
-  isSignInByEmailAndPassword: false
+  isLoginByGoogle: true
 };
 
 export const auth = (state = INITIAL_STATE, action) => {
@@ -43,10 +43,6 @@ export const auth = (state = INITIAL_STATE, action) => {
         isAdminAuthenticated: (adminToken != null)
       });
     case ActionTypes.ADMIN_SIGN_IN_SUCCESS:
-      return _.assign({}, state, {
-        shouldUpdateAdminAuthStatus: true,
-        isSignInByEmailAndPassword: true
-      });
     case ActionTypes.ADMIN_SIGN_OUT:
     case AdminActionTypes.ADMIN_CHANGE_PASSWORD_SUCCESS:
       return _.assign({}, state, {
@@ -55,6 +51,10 @@ export const auth = (state = INITIAL_STATE, action) => {
     case ActionTypes.ADMIN_AUTH_STATUS_IS_UPDATED:
       return _.assign({}, state, {
         shouldUpdateAdminAuthStatus: false
+      });
+    case ActionTypes.CHECK_LOGIN_BY_GOOGLE:
+      return _.merge({}, state, {
+        isLoginByGoogle: action.payload
       });
     default:
       return state;

@@ -67,7 +67,7 @@ const validate = (values) => {
 
 class FormChangePassword extends Component {
   render() {
-    const { fields: { oldPassword, newPassword, repeatPassword }, handleSubmit, formStatus, intl: { formatMessage }, isSignInByEmailAndPassword} = this.props;
+    const { fields: { oldPassword, newPassword, repeatPassword }, handleSubmit, formStatus, intl: { formatMessage }, isLoginByGoogle} = this.props;
     const changePasswordForm = (
       <form onSubmit={handleSubmit}>
         <FormGroup className={`${oldPassword.touched && oldPassword.invalid ? 'has-error' : ''}`}>
@@ -132,7 +132,7 @@ class FormChangePassword extends Component {
           </p>
         </Col>
         <Col lg={9}>
-          {isSignInByEmailAndPassword ? changePasswordForm : <FormattedMessage {...messages.formChangePassword.message}/>}
+          {!isLoginByGoogle ? changePasswordForm : <FormattedMessage {...messages.formChangePassword.message}/>}
         </Col>
       </div>
     )

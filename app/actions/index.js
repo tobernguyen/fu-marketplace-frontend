@@ -113,5 +113,7 @@ export function changeLanguage(language) {
   };
 }
 
-
-
+export const CHECK_LOGIN_BY_GOOGLE = 'CHECK_LOGIN_BY_GOOGLE';
+export const checkLoginByGoogle = () => ({
+  type: CHECK_LOGIN_BY_GOOGLE
+});

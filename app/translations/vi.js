@@ -566,6 +566,7 @@
   'admin.form.editShopInformation.validation.name.long': 'Tên cửa hàng không được dài hơn 255 kí tự',
   'admin.form.editShopInformation.validation.description.long': 'Mô tả cửa hàng không được dài hơn 255 kí tự',
   'myOrder.openTicketModal.validation.message.long': 'Lời nhắn không thể dài hơn 255 kí tự',
+  'imageFileOnly': 'Hãy tải lên định dạng ảnh (jpg, png).',
   'formCheckOut.total': 'Tổng',
   'myTicket.title': 'Báo cáo sai phạm',
   'myTicket.description': 'Danh sách tất cả báo cáo sai phạm'

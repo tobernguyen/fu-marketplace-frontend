@@ -32,5 +32,9 @@ export const messages = {
       id: 'account.updateStatus.failed',
       defaultMessage: 'Failed'
     }
+  },
+  errorAvatarFile: {
+    id: 'imageFileOnly',
+    defaultMessage: 'Avatar image error'
   }
 };

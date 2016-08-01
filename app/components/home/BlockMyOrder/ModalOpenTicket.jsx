@@ -39,6 +39,16 @@ class ModalOpenTicket extends React.Component {
         message['hasErrors'] = false;
         message['error'] = ''
       }
+
+      if (e.target.value.trim().length > 255) {
+        message['hasErrors'] = true;
+        message['error'] = messages.myOrder.openTicketModal.validation.message.long
+        dirty = false;
+      } else {
+        message['hasErrors'] = false;
+        message['error'] = ''
+      }
+
       this.setState({
         dirty,
         message

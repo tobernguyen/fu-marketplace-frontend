@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import FormChangePassword from 'app/components/admin/FormChangePassword';
 import FormChangeLanguage from 'app/components/admin/FormChangeLanguage';
+import FormSignOut from 'app/components/admin/FormSignOut';
 import { adminChangePassword } from 'app/actions/admin';
+import { signOutAdmin } from 'app/actions';
 import { changeLanguage } from 'app/actions';
 import { connect } from 'react-redux';
 
@@ -39,6 +41,10 @@ class ChangePassword extends Component {
         <FormChangeLanguage
           adminChangeLanguage={this.changeLanguage}
           />
+        <hr />
+        <FormSignOut
+          adminSignOut={this.props.signOutAdmin}
+        />
       </div>
     );
   }
@@ -63,5 +69,6 @@ const mapStateToProps = (state) => ({
 
 export default connect(mapStateToProps, {
   adminChangePassword,
-  changeLanguage
+  changeLanguage,
+  signOutAdmin
 })(ChangePassword);

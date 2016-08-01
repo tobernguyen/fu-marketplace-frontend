@@ -6,6 +6,10 @@ export const messages = {
           blank: {
             id: 'myOrder.openTicketModal.validation.message.blank',
             defaultMessage: 'Please provide more information'
+          },
+          long: {
+            id: 'myOrder.openTicketModal.validation.message.long',
+            defaultMessage: 'Message can\'t be longer than 255 characters'
           }
         }
       },

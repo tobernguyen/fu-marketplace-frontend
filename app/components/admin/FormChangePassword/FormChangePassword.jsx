@@ -33,7 +33,15 @@ const validate = (values) => {
   if(values.newPassword && values.newPassword.length < 8) {
     errors.newPassword = {
       id: 'admin.form.changePassword.newPassword.short',
-      defaultMessage: 'New password cannot be shorter than 8 character'
+      defaultMessage: 'New password cannot be shorter than 8 characters'
+    };
+    hasErrors = true;
+  }
+
+  if(values.newPassword && values.newPassword.length > 255) {
+    errors.newPassword = {
+      id: 'admin.form.changePassword.newPassword.long',
+      defaultMessage: 'New password cannot be longer than 255 characters'
     };
     hasErrors = true;
   }

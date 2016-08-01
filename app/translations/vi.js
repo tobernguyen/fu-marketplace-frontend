@@ -560,5 +560,10 @@
   'blockEnablePushSuggestion.message.seller': 'Bạn có thể nhận thông báo mỗi khi có order mới hoặc order bị thay đổi trạng thái từ phía khách hàng của mình theo thời gian thực bằng cách bật tính năng Gửi thông báo qua trình duyệt.',
   'blockEnablePushSuggestion.message.buyer': 'Bạn có thể nhận thông tin về đơn hàng của mình đã được xử lý/ship hay chưa theo thời gian thực bằng cách bật tính năng Gửi thông báo qua trình duyệt.',
   'blockEnablePushSuggestion.enable': 'Quá tuyệt. Bật ngay!',
-  'blockEnablePushSuggestion.success': 'Bạn đã đăng ký nhận thông báo qua trình duyệt thành công!'
+  'blockEnablePushSuggestion.success': 'Bạn đã đăng ký nhận thông báo qua trình duyệt thành công!',
+  'formSignOut.sectionName': 'Đăng xuất',
+  'admin.form.changePassword.newPassword.long': 'Mật khẩu mới không thể dài hơn 255 kí tự',
+  'admin.form.editShopInformation.validation.name.long': 'Tên cửa hàng không được dài hơn 255 kí tự',
+  'admin.form.editShopInformation.validation.description.long': 'Mô tả cửa hàng không được dài hơn 255 kí tự',
+  'myOrder.openTicketModal.validation.message.long': 'Lời nhắn không thể dài hơn 255 kí tự'
 };

@@ -25,6 +25,20 @@ const validate = (values) => {
     hasErrors = true;
   }
 
+  if(values.name && values.name.trim().length > 255) {
+    errors.name ={
+      id: 'admin.form.editShopInformation.validation.name.long',
+      defaultMessage: 'Shop name can not be longer than 255 characters'
+    }
+  }
+
+  if(values.description && values.description.trim().length > 255) {
+    errors.description = {
+      id: 'admin.form.editShopInformation.validation.description.long',
+      defaultMessage: 'Shop description can not be longer than 255 characters'
+    }
+  }
+
   if(!values.address || values.address.trim() === '') {
     errors.address = {
       id: 'admin.form.editShopInformation.validation.address.blank',

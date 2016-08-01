@@ -155,6 +155,10 @@ class BlockCurrentOrderListRow extends Component {
               }
             </div>
             <div>
+              <strong><FormattedMessage {...messages.modalViewOrder.body.shipAddress}/>: </strong>
+              {order.shipAddress}
+            </div>
+            <div>
               <strong><FormattedMessage {...messages.modalViewOrder.body.table.total}/>: </strong>
               {this.calculateTotalAmount(order)}₫
             </div>

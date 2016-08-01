@@ -22,7 +22,7 @@ const LabelItem = ({ orderLine, intl: { formatMessage } }) => {
 
   return (
     <OverlayTrigger trigger={['hover', 'focus']} rootClose placement="top" overlay={note}>
-      <span className={labelClassName}>{orderLine.item.name} - <strong>{orderLine.quantity}</strong></span>
+      <div className={labelClassName}>{orderLine.item.name} - <strong>{orderLine.quantity}</strong></div>
     </OverlayTrigger>
   );
 }

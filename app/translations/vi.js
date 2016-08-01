@@ -565,5 +565,6 @@
   'admin.form.changePassword.newPassword.long': 'Mật khẩu mới không thể dài hơn 255 kí tự',
   'admin.form.editShopInformation.validation.name.long': 'Tên cửa hàng không được dài hơn 255 kí tự',
   'admin.form.editShopInformation.validation.description.long': 'Mô tả cửa hàng không được dài hơn 255 kí tự',
-  'myOrder.openTicketModal.validation.message.long': 'Lời nhắn không thể dài hơn 255 kí tự'
+  'myOrder.openTicketModal.validation.message.long': 'Lời nhắn không thể dài hơn 255 kí tự',
+  'formCheckOut.total': 'Tổng'
 };

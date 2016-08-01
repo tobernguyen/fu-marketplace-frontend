@@ -4,7 +4,7 @@
   padding: 0;
   .order-card {
     width: 100%;
-    height: 290px;
+    height: 100%;
     margin: 10px 0;
     background-color: #ffffff;
     border: 1px solid #e7e7e7;
@@ -12,6 +12,10 @@
     &.canceled {
       opacity: 0;
       transform: rotateY(-90deg);
+    }
+
+    .btn-toolbar {
+      margin-bottom: 10px;
     }
 
     &.disappear {
@@ -22,19 +26,20 @@
       .title {
         display: none;
       }
-      > div > div {
-        margin: 0 0 20px;
+
+      .row {
+        margin-top: 10px;
       }
 
-      .order-item {
-        margin: 20px 0;
+      > div > div {
+        margin: 0 0 10px;
       }
 
       .label-item {
         padding: 5px 10px;
-        margin: 0px 5px;
+        margin: 5px 5px;
         background-color: #f5f5f5;
-
+        display: inline-block;
         &.has-note {
           color: #ffffff;
           background-color: #558abb;

@@ -132,32 +132,47 @@ class BlockCurrentOrderListRow extends Component {
           </div> : <div className="timerwrapper-placeholder"></div>
         }
         <div className="preview clearfix">
-          <div className="col-sm-8">
-            <div><strong><FormattedMessage {...messages.modalViewOrder.body.orderId}/>: </strong> {order.id}</div>
-            <div>
-              <div className="row">
-                <span className="col-sm-6">
-                  <strong><FormattedMessage {...messages.modalViewOrder.body.buyer}/></strong>:{' '}
-                  <LabelCustomerInformation buyer={order.user}/>
-                </span>
-                <span className="col-sm-6">
-                <strong><FormattedMessage {...messages.modalViewOrder.body.createdAt}/></strong>
-                <FormattedRelative value={new Date(order.createdAt)}/>
-                </span>
+          <div>
+            <div className="col-sm-8">
+              <div><strong><FormattedMessage {...messages.modalViewOrder.body.orderId}/>: </strong> {order.id}</div>
+              <div>
+                <div className="row">
+                  <span className="col-sm-6">
+                    <strong><FormattedMessage {...messages.modalViewOrder.body.buyer}/></strong>:{' '}
+                    <LabelCustomerInformation buyer={order.user}/>
+                  </span>
+                  <span className="col-sm-6">
+                  <strong><FormattedMessage {...messages.modalViewOrder.body.createdAt}/></strong>
+                  <FormattedRelative value={new Date(order.createdAt)}/>
+                  </span>
+                </div>
+              </div>
+              <div>
+                <div className="row">
+                  <span className="col-sm-6">
+                  <strong><FormattedMessage {...messages.modalViewOrder.body.shipAddress}/>: </strong>
+                  {order.shipAddress}
+                  </span>
+                  <span className="col-sm-6">
+                  <strong><FormattedMessage {...messages.modalViewOrder.body.table.total}/>: </strong>
+                  {this.calculateTotalAmount(order)}₫
+                  </span>
+                </div>
               </div>
             </div>
-            <div>
-              <div className="row">
-                <span className="col-sm-6">
-                <strong><FormattedMessage {...messages.modalViewOrder.body.shipAddress}/>: </strong>
-                {order.shipAddress}
-                </span>
-                <span className="col-sm-6">
-                <strong><FormattedMessage {...messages.modalViewOrder.body.table.total}/>: </strong>
-                {this.calculateTotalAmount(order)}₫
-                </span>
-              </div>
+            <div className="col-sm-3">
+              <p>
+                <strong><FormattedMessage {...messages.modalViewOrder.body.orderStatus}/>: </strong>
+                <LabelOrderStatus status={order.status}/>
+              </p>
             </div>
+            <div className="col-sm-1">
+              <button type="button" className="btn btn-warning" style={{ 'padding': '1px 6px'}}onClick={() => this.props.viewOrder(order)}>
+                <i className="fa fa-eye"></i>
+              </button>
+            </div>
+          </div>
+          <div className="col-sm-12">
             <div className="order-item">
               <strong><FormattedMessage {...messages.modalViewOrder.body.table.item}/>: </strong>
               {
@@ -170,17 +185,6 @@ class BlockCurrentOrderListRow extends Component {
               <strong><FormattedMessage {...messages.modalViewOrder.body.note}/>: </strong>
               {order.note == '' ? <FormattedMessage {...messages.modalViewOrder.body.noNote}/> : order.note}
             </div>
-            </div>
-          <div className="col-sm-3">
-            <p>
-              <strong><FormattedMessage {...messages.modalViewOrder.body.orderStatus}/>: </strong>
-              <LabelOrderStatus status={order.status}/>
-            </p>
-          </div>
-          <div className="col-sm-1">
-            <button type="button" className="btn btn-warning" style={{ 'padding': '1px 6px'}}onClick={() => this.props.viewOrder(order)}>
-              <i className="fa fa-eye"></i>
-            </button>
           </div>
         </div>
         <hr />

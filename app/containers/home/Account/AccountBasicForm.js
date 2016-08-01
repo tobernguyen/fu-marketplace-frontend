@@ -6,9 +6,15 @@ export const fields = [ 'room', 'phone' ];
 const validate = values => {
   const errors = {};
   if (!values.phone) {
-    errors.phone = 'user.account_basic.form.validation.phone.required';
+    errors.phone = {
+      id: 'shop.form.validation.phone.required',
+      defaultMessage: 'Phone number is required'
+    };
   } else if (isNaN(Number(values.phone))) {
-    errors.phone = 'common.form.validation.phone.number';
+    errors.phone = {
+      id: 'common.form.validation.phone.number',
+      defaultMessage: 'Phone number must be numeric string'
+    };
   }
 
   return errors;

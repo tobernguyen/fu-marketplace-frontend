@@ -110,7 +110,7 @@ class FormAccountBasic extends Component {
                            placeholder={formatMessage(messages.phone.placeholder)}
                     {...phone} />
                     <div className="help-block">
-                      {phone.touched ? phone.error : ''}
+                      {phone.touched && phone.error ? formatMessage(phone.error) : ''}
                     </div>
                   </div>
                 </div>

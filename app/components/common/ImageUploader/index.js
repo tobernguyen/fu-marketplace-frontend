@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import { IMAGE_TYPES } from 'app/shared/mimeTypes';
 
 export default class ImageUploader extends Component {
   constructor(props) {
@@ -8,6 +9,11 @@ export default class ImageUploader extends Component {
       var file = e.target.files[0];
 
       if (!file) {
+        return;
+      }
+
+      if (IMAGE_TYPES.indexOf(file.type) === -1) {
+        this.props.handleFileError();
         return;
       }
 
@@ -27,5 +33,6 @@ export default class ImageUploader extends Component {
 }
 
 ImageUploader.propTypes = {
-  handleFileChange: PropTypes.func.isRequired
+  handleFileChange: PropTypes.func.isRequired,
+  handleFileError: PropTypes.func.isRequired
 };

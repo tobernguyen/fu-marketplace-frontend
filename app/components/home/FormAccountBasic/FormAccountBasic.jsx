@@ -6,7 +6,6 @@ import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import './FormAccountBasic.scss';
 import Select from 'react-select';
 import { UPDATE_STATUS } from 'app/shared/statusCode';
-import classNames from 'classnames';
 
 class FormAccountBasic extends Component {
   constructor(props) {
@@ -19,13 +18,15 @@ class FormAccountBasic extends Component {
     this.state = {
       modalCropImageShown: false,
       img: null,
-      userAvatar: userAvatar
+      userAvatar: userAvatar,
+      error: null
     };
 
     this.handleFileChange = (dataURI) => {
       this.setState({
         modalCropImageShown: true,
-        img: dataURI
+        img: dataURI,
+        error: null
       })
     };
 
@@ -40,6 +41,11 @@ class FormAccountBasic extends Component {
       this.props.fields.room.onChange(roomNo);
     };
 
+    this.handleFileError = () => {
+      this.setState({
+        error: messages.errorAvatarFile
+      })
+    }
   }
 
   componentWillReceiveProps(nextProps) {
@@ -83,7 +89,7 @@ class FormAccountBasic extends Component {
       <div className="form-account-basic">
         <div className="row">
           <div className="col-md-5 user-avatar">
-            <ImageUploader handleFileChange={this.handleFileChange} />
+            <ImageUploader handleFileChange={this.handleFileChange} handleFileError={this.handleFileError} />
             <img
               src={this.state.userAvatar} />
             <span className="camera-icon">
@@ -92,6 +98,9 @@ class FormAccountBasic extends Component {
             {avatarUploading && <span className="uploading-avatar">
               <i className="fa fa-spinner fa-spin fa-2x fa-fw"/>
             </span>}
+            {this.state.error && <div className="error">
+              <FormattedMessage {...this.state.error} />
+            </div>}
           </div>
           <div className="col-md-7 user-info">
             <div className="header">

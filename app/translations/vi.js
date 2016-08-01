@@ -569,5 +569,7 @@
   'imageFileOnly': 'Hãy tải lên định dạng ảnh (jpg, png).',
   'formCheckOut.total': 'Tổng',
   'myTicket.title': 'Báo cáo sai phạm',
-  'myTicket.description': 'Danh sách tất cả báo cáo sai phạm'
+  'myTicket.description': 'Danh sách tất cả báo cáo sai phạm',
+   'sessionEnded': 'Phiên đăng nhập của bạn đã kết thúc. Hãy đăng nhập lại.',
+   'notSignedIn': 'Thông báo'
 };

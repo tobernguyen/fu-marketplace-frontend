@@ -569,5 +569,7 @@ export default {
   'imageFileOnly': 'Please upload image file (jpg, png).',
   'formCheckOut.total': 'Total',
   'myTicket.title': 'Report tickets',
-  'myTicket.description': 'List of reported ticket'
+  'myTicket.description': 'List of reported ticket',
+  'sessionEnded': 'You session has been ended. Please sign in again.',
+  'notSignedIn': 'Not signed in'
 };

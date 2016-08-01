@@ -12,8 +12,14 @@ export default () => next => action => {
       }
       break;
     case ActionTypes.GOOGLE_SIGN_OUT:
+    {
       window.localStorage.removeItem(accessTokenKey);
+      const currentAdminToken = window.localStorage.getItem(adminAccessTokenKey);
+      if (currentAdminToken) {
+        window.localStorage.removeItem(adminAccessTokenKey);
+      }
       break;
+    }
     case ActionTypes.ADMIN_SIGN_IN_SUCCESS:
       if (response.token) {
         window.localStorage.setItem('isLoginByGoogle', false);
@@ -25,7 +31,7 @@ export default () => next => action => {
       const currentAdminToken = window.localStorage.getItem(adminAccessTokenKey);
       const currentUserToken = window.localStorage.getItem(accessTokenKey);
       if (isAdmin) {
-        if (currentUserToken !== null && currentAdminToken === null) {
+        if (currentUserToken !== null) {
           window.localStorage.setItem(adminAccessTokenKey, currentUserToken);
         }
       } else {
@@ -48,7 +54,7 @@ export default () => next => action => {
       window.localStorage.setItem(languageKey, language);
       break;
     case ActionTypes.CHECK_LOGIN_BY_GOOGLE:
-      action.payload = window.localStorage.getItem('isLoginByGoogle') === null ? true : false;
+      action.payload = window.localStorage.getItem('isLoginByGoogle') === null;
       break;
     default:
       break;

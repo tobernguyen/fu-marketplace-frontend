@@ -13,6 +13,8 @@ import { injectIntl, intlShape } from 'react-intl';
 import { getCategories } from 'app/selectors';
 import { accessTokenKey } from 'app/config';
 import { HTTP_STATUS_CODE } from 'app/shared/statusCode';
+import { Modal, Button } from 'react-bootstrap';
+import { FormattedMessage } from 'react-intl';
 
 
 class Home extends Component {
@@ -20,7 +22,8 @@ class Home extends Component {
     super(props);
 
     this.state = {
-      notification: null
+      notification: null,
+      errorMessage: null
     };
 
     this.floatNotification = null;
@@ -79,8 +82,17 @@ class Home extends Component {
     if (nextProps.error) {
       const { status } = nextProps.error;
       if (HTTP_STATUS_CODE.INVALID_TOKEN <= status && status < HTTP_STATUS_CODE.INTERNAL_SERVER_ERROR) {
-        this.props.signOutGoogle();
+        this.setState({
+          errorMessage: {
+            id: 'sessionEnded',
+            defaultMessage: 'You session has been ended. Please sign in again.'
+          }
+        })
       }
+    } else {
+      this.setState({
+        errorMessage: null
+      })
     }
 
     if (nextProps.location) {
@@ -111,6 +123,20 @@ class Home extends Component {
         {this.props.children}
 
         <NotificationSystem ref="notificationSystem" />
+
+        {this.state.errorMessage && <Modal show={true} bsSize="sm">
+          <Modal.Header>
+            <Modal.Title>
+              <FormattedMessage {...{ id: 'notSignedIn', defaultMessage: 'Not signed in' }} />
+            </Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <FormattedMessage {...this.state.errorMessage} />
+          </Modal.Body>
+          <Modal.Footer className="error-modal-footer">
+            <Button bsStyle="primary" onClick={() => this.props.signOutGoogle()}>OK</Button>
+          </Modal.Footer>
+        </Modal>}
       </div>
     );
   }
@@ -122,9 +148,9 @@ Home.propTypes = {
 };
 
 const mapStateToProps = (state) => {
-  const { user, notification, auth } = state;
+  const { notification, auth, common } = state;
   return {
-    error:            user.error,
+    error:            common.error,
     notification:     notification.promptNotification,
     categories:       getCategories(state),
     query:            state.common.query,

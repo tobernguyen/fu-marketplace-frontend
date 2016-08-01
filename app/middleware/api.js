@@ -73,12 +73,18 @@ export default () => next => action => {
     const finalAction = Object.assign({}, action, data);
     delete finalAction[CALL_API];
 
-    // TODO: Need some improvements
-    if (String(finalAction.type).endsWith('_FAILURE') && String(finalAction.type).startsWith('ADMIN_')) {
-      const adminGotErrorAction = Object.assign({}, finalAction, {
-        type: 'ADMIN_GOT_ERROR'
-      });
-      next(adminGotErrorAction);
+    if (String(finalAction.type).endsWith('_FAILURE')) {
+      if (String(finalAction.type).startsWith('ADMIN_')) {
+        const adminGotErrorAction = Object.assign({}, finalAction, {
+          type: 'ADMIN_GOT_ERROR'
+        });
+        next(adminGotErrorAction);
+      } else {
+        const userGotErrorAction = Object.assign({}, finalAction, {
+          type: 'REQUEST_ERROR'
+        });
+        next(userGotErrorAction);
+      }
     }
 
     return finalAction;

@@ -10,6 +10,7 @@ import {
 } from 'app/actions/ticket';
 import BlockMyTicket from 'app/components/home/BlockMyTicket';
 import NoTicket from 'app/components/home/NoTicket';
+import { injectIntl } from 'react-intl';
 
 const FIRST_PAGE = 1;
 const DEFAULT_SIZE = 5;
@@ -93,9 +94,18 @@ class MyTickets extends Component {
   }
 
   render() {
+    const title = {
+      id: 'myTicket.title',
+      defaultMessage: 'Report tickets'
+    };
+    const description = {
+      id: 'myTicket.description',
+      defaultMessage: 'List of reported ticket'
+    };
+    const { intl: { formatMessage }} = this.props;
     return (
       <div>
-        <ModalHeader title="Báo cáo sai phạm" subHeader="Danh sách tất cả báo cáo sai phạm"/>
+        <ModalHeader title={formatMessage(title)} subHeader={formatMessage(description)}/>
         <div className="modal-body my-ticket">
         {this.renderBody()}
         </div>
@@ -116,4 +126,4 @@ export default connect(mapStateToProps, {
   userReopenTicket,
   userCloseTicketModal,
   userCloseTicket
-})(MyTickets);
+})(injectIntl(MyTickets));

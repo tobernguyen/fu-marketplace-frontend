@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import './FormCheckOut.scss';
 import AsyncResultCode from 'app/shared/asyncResultCodes';
-import { FormattedMessage, injectIntl } from 'react-intl';
+import { FormattedMessage, FormattedNumber, injectIntl } from 'react-intl';
 import { messages } from './FormCheckOut.i18n';
+import _ from 'lodash';
 
 class FormCheckOut extends Component {
   constructor(props) {
@@ -39,6 +40,13 @@ class FormCheckOut extends Component {
     )
   }
 
+  renderTotal(items) {
+    const total = _.reduce(items, (sum, item) => {
+      return sum + (item.price.value * item.quantity.value);
+    }, 0);
+    return <FormattedNumber value={total}/>;
+  }
+
   renderSuccessPlaceOrder() {
     const { items } = this.state;
     return (
@@ -64,7 +72,7 @@ class FormCheckOut extends Component {
           {items.map((item, index) => {
             const { name, price, image } = item;
             return (
-              <tr key={items.id}>
+              <tr key={item.id}>
                 <td>
                   {index + 1}
                 </td>
@@ -87,7 +95,7 @@ class FormCheckOut extends Component {
                   <p>{item.note}</p>
                 </td>
                 <td>
-                  <p>{Number(item.quantity) * Number(price)}₫</p>
+                  <p><FormattedNumber value={Number(item.quantity) * Number(price)} />₫</p>
                 </td>
               </tr>
             );
@@ -130,7 +138,6 @@ class FormCheckOut extends Component {
                 {...note} />
             </div>
         </div>
-
         <table className="table table-responsive order-items">
           <thead>
           <tr>
@@ -157,7 +164,7 @@ class FormCheckOut extends Component {
                       </div>
                       <div className="info">
                         <h4>{name.value}</h4>
-                        <p>{price.value}₫</p>
+                        <p><FormattedNumber value={price.value} />₫</p>
                       </div>
                     </div>
                   </div>
@@ -169,7 +176,7 @@ class FormCheckOut extends Component {
                             type="button"
                             className="btn btn-warning btn-number"
                             onClick={() => {
-                              if( item.quantity.value > 0 ) {
+                              if( item.quantity.value > 1 ) {
                                 item.quantity.onChange(Number(item.quantity.value) -1);
                               }
                             }}>
@@ -209,6 +216,13 @@ class FormCheckOut extends Component {
           })}
           </tbody>
         </table>
+        <div className="total">
+          <strong>
+            <FormattedMessage {...messages.formCheckOut.total}/>:  {' '}
+          </strong>
+          {this.renderTotal(items)}₫
+        </div>
+        <hr />
         {orderResult === AsyncResultCode.PLACE_ORDER_FAIL && <div className="alert alert-danger">Error occurred!</div>}
         <button type="submit"
                 className="btn btn-danger btn-block"

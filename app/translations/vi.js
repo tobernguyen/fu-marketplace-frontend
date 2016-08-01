@@ -223,7 +223,7 @@
   'formBuyNow.modalBody.quantity': 'Số lượng',
   'formBuyNow.modalBody.note': 'Ghi chú',
   'formBuyNow.modalBody.button.placeOrder': 'Đặt hàng',
-  'formBuyNow.modalBody.message.orderSuccess': 'Đơn hàng đã được đặt.',
+  'formBuyNow.modalBody.message.orderSuccess': 'Bạn đã đặt hàng thành công.',
   'formBuyNow.modalBody.message.continueShopping': 'Tiếp tục mua hàng',
   'formBuyNow.modalBody.message.error': 'Đặt hàng không thành công, xin hãy thử lại.',
   'userList.tableHead.email': 'Email',
@@ -566,5 +566,8 @@
   'admin.form.editShopInformation.validation.name.long': 'Tên cửa hàng không được dài hơn 255 kí tự',
   'admin.form.editShopInformation.validation.description.long': 'Mô tả cửa hàng không được dài hơn 255 kí tự',
   'myOrder.openTicketModal.validation.message.long': 'Lời nhắn không thể dài hơn 255 kí tự',
-  'imageFileOnly': 'Hãy tải lên định dạng ảnh (jpg, png).'
+  'imageFileOnly': 'Hãy tải lên định dạng ảnh (jpg, png).',
+  'formCheckOut.total': 'Tổng',
+  'myTicket.title': 'Báo cáo sai phạm',
+  'myTicket.description': 'Danh sách tất cả báo cáo sai phạm'
 };

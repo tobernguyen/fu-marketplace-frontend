@@ -12,6 +12,10 @@ export const messages = {
       id: 'formCheckOut.orderPlaced',
       defaultMessage: 'Your order is placed'
     },
+    total: {
+      id: 'formCheckOut.total',
+      defaultMessage: 'Total'
+    },
     tableHead: {
       item: {
         id: 'formCheckOut.tableHead.item',

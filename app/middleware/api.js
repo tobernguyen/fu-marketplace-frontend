@@ -97,7 +97,6 @@ export default () => next => action => {
   if (token) {
     authHeader = { 'X-Access-Token': token };
   }
-
   return fetch(method, url, params || {}, authHeader).then(
     response => next(actionWith({
       response,

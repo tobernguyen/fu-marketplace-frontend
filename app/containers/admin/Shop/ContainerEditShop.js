@@ -14,9 +14,9 @@ import {
   adminUpdateShopCover,
   adminUpdateShopShipPlaces,
   adminUpdateShopOpeningStatus,
-  adminCreateShopPromotionCampaign
+  adminCreateShopPromotionCampaign,
+  getShipPlaces
 } from 'app/actions/admin';
-import { getShipPlaces } from 'app/actions/common';
 import LoadingSpinner from 'app/components/admin/LoadingSpinner';
 
 class ContainerEditShop extends Component {

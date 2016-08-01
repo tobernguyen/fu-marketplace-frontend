@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { checkAdminAuthStatus, adminAuthStatusIsUpdated, signOutAdmin, getCurrentUser } from '../../actions';
+import { checkAdminAuthStatus, adminAuthStatusIsUpdated, signOutAdmin } from '../../actions';
 import LoginPage from './LoginPage';
 import AdminPage from './AdminPage';
 import { HTTP_STATUS_CODE } from 'app/shared/statusCode';
@@ -11,8 +11,6 @@ class Admin extends Component {
     this.state = {
       unauthorized: false
     };
-
-    this.props.getCurrentUser();
   }
 
   componentWillMount() {
@@ -83,6 +81,5 @@ Admin.propTypes = {
 export default connect(mapStateToProps, {
   checkAdminAuthStatus,
   adminAuthStatusIsUpdated,
-  signOutAdmin,
-  getCurrentUser
+  signOutAdmin
 })(Admin)

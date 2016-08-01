@@ -1,5 +1,4 @@
 import * as AdminActionTypes from '../actions/admin';
-import * as CommonActionTypes from '../actions/common';
 import AsyncResultCode from 'app/shared/asyncResultCodes';
 import _ from 'lodash';
 
@@ -577,7 +576,7 @@ export const admin = (state = initialState, action) => {
         }
       });
 
-    case CommonActionTypes.GET_SHIP_PLACES_SUCCESS:
+    case AdminActionTypes.ADMIN_GET_SHIP_PLACES_SUCCESS:
       return _.merge({}, state, {
         shopManagement: {
           availableShipPlaces: response.shipPlaces

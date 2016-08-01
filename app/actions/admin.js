@@ -480,3 +480,20 @@ export const adminSelectRequest = (request) => ({
   type: ADMIN_SELECT_REQUEST,
   payload: request
 });
+
+export const ADMIN_GET_SHIP_PLACES_REQUEST = 'ADMIN_GET_SHIP_PLACES_REQUEST';
+export const ADMIN_GET_SHIP_PLACES_SUCCESS = 'ADMIN_GET_SHIP_PLACES_SUCCESS';
+export const ADMIN_GET_SHIP_PLACES_FAILURE = 'ADMIN_GET_SHIP_PLACES_FAILURE';
+const getShipPlacesRequest = () => ({
+  [CALL_API]: {
+    types: [ADMIN_GET_SHIP_PLACES_REQUEST, ADMIN_GET_SHIP_PLACES_SUCCESS, ADMIN_GET_SHIP_PLACES_FAILURE],
+    url: '/api/v1/shipPlaces',
+    method: HTTP_METHODS.GET
+  }
+});
+
+export const getShipPlaces = () => {
+  return (dispatch) => {
+    return dispatch(getShipPlacesRequest());
+  }
+};

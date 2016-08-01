@@ -146,6 +146,18 @@ class BlockCurrentOrderListRow extends Component {
                 </span>
               </div>
             </div>
+            <div>
+              <div className="row">
+                <span className="col-sm-6">
+                <strong><FormattedMessage {...messages.modalViewOrder.body.shipAddress}/>: </strong>
+                {order.shipAddress}
+                </span>
+                <span className="col-sm-6">
+                <strong><FormattedMessage {...messages.modalViewOrder.body.table.total}/>: </strong>
+                {this.calculateTotalAmount(order)}₫
+                </span>
+              </div>
+            </div>
             <div className="order-item">
               <strong><FormattedMessage {...messages.modalViewOrder.body.table.item}/>: </strong>
               {
@@ -153,14 +165,6 @@ class BlockCurrentOrderListRow extends Component {
                   <LabelItem orderLine={orderLine} key={orderLine.item.id}/>
                 )
               }
-            </div>
-            <div>
-              <strong><FormattedMessage {...messages.modalViewOrder.body.shipAddress}/>: </strong>
-              {order.shipAddress}
-            </div>
-            <div>
-              <strong><FormattedMessage {...messages.modalViewOrder.body.table.total}/>: </strong>
-              {this.calculateTotalAmount(order)}₫
             </div>
             <div>
               <strong><FormattedMessage {...messages.modalViewOrder.body.note}/>: </strong>

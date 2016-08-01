@@ -22,9 +22,9 @@ export const messages = {
           id: 'blockMyTicket.modalViewTicket.button.reopen',
           defaultMessage: 'Reopen'
         },
-        close: {
-          id: 'blockMyTicket.modalViewTicket.button.close',
-          defaultMessage: 'Close'
+        closeTicket: {
+          id: 'blockMyTicket.modalViewTicket.button.closeTicket',
+          defaultMessage: 'Close ticket'
         }
       },
       ticketInformation: {

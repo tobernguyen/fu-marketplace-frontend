@@ -109,7 +109,7 @@ class ModalViewTicket extends Component {
           {
             ticket.status != TicketStatus.CLOSED &&
             <button className="btn btn-danger" onClick={close} disabled={isSubmitting}>
-              <FormattedMessage {...messages.blockMyTicket.modalViewTicket.button.close}/>{isSubmitting && <i className="fa fa-spinner fa-spin"></i>}
+              <FormattedMessage {...messages.blockMyTicket.modalViewTicket.button.closeTicket}/>{isSubmitting && <i className="fa fa-spinner fa-spin"></i>}
             </button>
           }
           <button className="btn btn-close" onClick={closeModal}>

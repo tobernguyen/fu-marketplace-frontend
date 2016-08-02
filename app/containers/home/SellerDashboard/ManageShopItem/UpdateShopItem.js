@@ -17,7 +17,6 @@ class UpdateShopItem extends Component {
   constructor(props) {
     super(props);
 
-
     const { shopID, itemID } = this.props.params;
 
     this.state = {

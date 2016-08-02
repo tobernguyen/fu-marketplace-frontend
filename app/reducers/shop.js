@@ -43,7 +43,11 @@ export const shop = (state = INITIAL_STATE, action) => {
       });
     case ShopActionTypes.SELLER_GET_SHOP_ITEM_LIST_SUCCESS:
       // Shop item grouped by category id
-      const groupItems = _.groupBy(response.items, 'categoryId');
+      let groupItems = _.groupBy(response.items, 'categoryId');
+
+      if (groupItems && response.items) {
+        groupItems[0] = response.items;
+      }
       return _.assign({}, state, {
         sellingItems: groupItems
       });

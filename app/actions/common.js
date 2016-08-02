@@ -70,3 +70,9 @@ export const saveLanguageChange = (language) => ({
   type: USER_CHANGES_LANGUAGE,
   language: language
 });
+
+
+export const RESET_REQUEST_ERROR = 'RESET_REQUEST_ERROR';
+export const resetRequestError = () => ({
+  type: RESET_REQUEST_ERROR
+});

@@ -20,6 +20,7 @@ import AddShopItem from './containers/home/SellerDashboard/ManageShopItem/AddSho
 import UpdateShopItem from './containers/home/SellerDashboard/ManageShopItem/UpdateShopItem';
 import ManageOrders from './containers/home/SellerDashboard/ManageOrders';
 import Statistics from './containers/home/SellerDashboard/Statistics';
+import NotFoundPage from './containers/home/NotFoundPage';
 import Shop from './containers/home/Shop';
 import ShopReviews from './containers/home/ShopReviews';
 import Admin from './containers/admin';
@@ -69,6 +70,8 @@ export default (
         <Route path="shops/:shopID/statistics" component={Statistics} />
         <Route path="shops/:shopID/orders" component={ManageOrders} />
       </Route>
+
+      <Route path="/404" component={NotFoundPage}/>
     </Route>
 
     <Redirect from="goodbye" to="/" />

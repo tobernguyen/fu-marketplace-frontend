@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { getMetadata, updateQuery, createWebSocket } from 'app/actions/common';
+import { getMetadata, updateQuery, createWebSocket, resetRequestError } from 'app/actions/common';
 import NavigationBar from './NavigationBar';
 import { signOutGoogle } from 'app/actions';
 import _ from 'lodash';
@@ -88,6 +88,11 @@ class Home extends Component {
             defaultMessage: 'You session has been ended. Please sign in again.'
           }
         })
+      } else if (status === HTTP_STATUS_CODE.NOT_FOUND) {
+        this.props.resetRequestError();
+        this.props.router.push({
+          pathname: '/404'
+        })
       }
     } else {
       this.setState({
@@ -163,5 +168,6 @@ export default injectIntl(withRouter(connect(mapStateToProps, {
   getMetadata,
   signOutGoogle,
   updateQuery,
-  createWebSocket
+  createWebSocket,
+  resetRequestError
 })(Home)))

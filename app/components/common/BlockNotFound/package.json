@@ -1,0 +1,6 @@
+{
+  "name": "BlockNotFound",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./BlockNotFound.jsx"
+}

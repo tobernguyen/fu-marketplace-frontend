@@ -38,6 +38,7 @@ export const common = (state = INITIAL_STATE, action) => {
       return _.assign({}, state, {
         error: error
       });
+    case CommonActionTypes.RESET_REQUEST_ERROR:
     case ActionTypes.GOOGLE_SIGN_IN_SUCCESS:
       return _.assign({}, state, {
         error: null

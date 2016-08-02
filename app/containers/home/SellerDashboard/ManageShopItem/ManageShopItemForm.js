@@ -71,8 +71,7 @@ const mapStateToProps = (state, ownProps) => {
   };
 
   if (ownProps.updateMode) {
-    const { shop: { toBeUpdatedItem } } = state;
-    const { id, name, description, price, quantity, categoryId, image } = toBeUpdatedItem || {};
+    const { id, name, description, price, quantity, categoryId, image } = shop.toBeUpdatedItem || {};
     newState.oldItemImage = image;
     newState.initialValues = {
       id: id || '',

@@ -60,7 +60,7 @@ class BlockSellingItemList extends Component {
   }
 
   renderHeader() {
-    const { allCategories, items } = this.props;
+    const { allCategories, items, sellerMode, isFetchingItems } = this.props;
     const { formatMessage } = this.props.intl;
     const categories = _.map(items, (value, key) => ({
       id: key,
@@ -80,6 +80,9 @@ class BlockSellingItemList extends Component {
             </li>
           )
         })}
+        {(sellerMode && isFetchingItems) && <li>
+          <a><i className="fa fa-refresh fa-spin" /></a>
+        </li>}
       </ul>
     )
   }
@@ -122,7 +125,6 @@ class BlockSellingItemList extends Component {
               <FormattedMessage {...messages.noItem.user} />
             </span>}
           </p>
-
         </div>
       )
     }

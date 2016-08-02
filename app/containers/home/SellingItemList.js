@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import BlockSellingItemList from 'app/components/home/BlockSellingItemList';
 import { addItemToCart } from 'app/actions/user';
 import { getHashCategories } from 'app/selectors';
-import { setItemStatus } from 'app/actions/shop';
+import { setItemStatus, getSellerShopItems } from 'app/actions/shop';
 
 class SellingItemList extends Component {
   constructor(props) {
@@ -18,10 +18,29 @@ class SellingItemList extends Component {
     }
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.shouldRefresh === true) {
+      this.props.getSellerShopItems(this.props.shopID);
+    }
+  }
+
   render() {
-    const { checkOut, buyNow, sellingItems, shopID, cartItems, sellerMode, allCategories, shopOpening, ownerView } = this.props;
+    const {
+      checkOut,
+      buyNow,
+      sellingItems,
+      shopID,
+      cartItems,
+      sellerMode,
+      allCategories,
+      shopOpening,
+      ownerView,
+      isFetchingItems
+    } = this.props;
+
     return (
       <BlockSellingItemList
+        isFetchingItems={isFetchingItems}
         toggleItemStatus={this.toggleItemStatus}
         ownerView={ownerView}
         shopOpening={shopOpening}
@@ -38,11 +57,22 @@ class SellingItemList extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  const { shop: { sellingItems }, user: { cartItems } } = state;
+  const {
+    shop: {
+      sellingItems,
+      shouldRefresh,
+      isFetchingItems
+    },
+    user: {
+      cartItems
+    }
+  } = state;
   if (ownProps.sellerMode) {
     return {
       sellingItems: sellingItems,
-      allCategories: getHashCategories(state)
+      allCategories: getHashCategories(state),
+      shouldRefresh: shouldRefresh,
+      isFetchingItems: isFetchingItems
     }
   } else {
     return {
@@ -59,5 +89,6 @@ SellingItemList.propTypes = {
 
 export default connect(mapStateToProps, {
   addItemToCart,
-  setItemStatus
+  setItemStatus,
+  getSellerShopItems
 })(SellingItemList)

@@ -6,7 +6,6 @@ import { connect } from 'react-redux';
 import _ from 'lodash';
 import {
   deleteShopItem,
-  removeShopItemFromList,
   setToBeUpdatedItem,
   updateShopItem,
   resetUpdatedItemStatus
@@ -59,12 +58,7 @@ class UpdateShopItem extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.itemDeleted) {
-      this.props.removeShopItemFromList(this.state.toBeUpdatedItemID);
-      this.props.router.push(`/dashboard/shops/${this.props.params.shopID}`);
-    }
-
-    if (nextProps.itemUpdated) {
+    if (nextProps.itemDeleted || nextProps.itemUpdated) {
       this.props.router.push(`/dashboard/shops/${this.props.params.shopID}`);
       this.props.resetUpdatedItemStatus();
     }
@@ -107,7 +101,6 @@ const mapStateToProps = (state) => {
 export default withRouter(connect(mapStateToProps, {
   getItemCategories,
   deleteShopItem,
-  removeShopItemFromList,
   setToBeUpdatedItem,
   updateShopItem,
   resetUpdatedItemStatus

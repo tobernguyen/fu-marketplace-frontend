@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ManageShopItemForm from './ManageShopItemForm';
 import { connect } from 'react-redux';
-import { createShopItem, resetUpdatedItemStatus } from 'app/actions/shop';
+import { createShopItem } from 'app/actions/shop';
 import { getItemCategories } from 'app/actions/item';
 import { withRouter } from 'react-router';
 
@@ -22,7 +22,6 @@ class AddShopItem extends Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps.newlyItemAdded) {
       this.props.router.push(`/dashboard/shops/${this.props.params.shopID}`);
-      this.props.resetUpdatedItemStatus();
     }
   }
 
@@ -43,6 +42,5 @@ const mapStateToProps = (state) => {
 
 export default withRouter(connect(mapStateToProps, {
   createShopItem,
-  getItemCategories,
-  resetUpdatedItemStatus
+  getItemCategories
 })(AddShopItem))

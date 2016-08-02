@@ -11,7 +11,9 @@ const INITIAL_STATE = {
   itemUpdated: false,
   shipPlacesUpdated: false,
   places: [],
-  formSubmitting: false
+  formSubmitting: false,
+  shouldRefresh: false,
+  isFetchingItems: false
 };
 
 export const shop = (state = INITIAL_STATE, action) => {
@@ -41,6 +43,12 @@ export const shop = (state = INITIAL_STATE, action) => {
         shipPlacesUpdated: false,
         formSubmitting: true
       });
+    case ShopActionTypes.SELLER_GET_SHOP_ITEM_LIST_REQUEST:
+    case ShopActionTypes.SELLER_GET_SHOP_ITEM_LIST_FAILURE:
+      return _.assign({}, state, {
+        shouldRefresh: false,
+        isFetchingItems: true
+      });
     case ShopActionTypes.SELLER_GET_SHOP_ITEM_LIST_SUCCESS:
       // Shop item grouped by category id
       let groupItems = _.groupBy(response.items, 'categoryId');
@@ -49,7 +57,11 @@ export const shop = (state = INITIAL_STATE, action) => {
         groupItems[0] = response.items;
       }
       return _.assign({}, state, {
-        sellingItems: groupItems
+        sellingItems: groupItems,
+        itemUpdated: false,
+        itemDeleted: false,
+        newlyItemAdded: false,
+        isFetchingItems: false
       });
     case ShopActionTypes.SHOP_CREATE_ITEM_REQUEST:
     case ShopActionTypes.SELLER_UPDATE_SHOP_ITEM_REQUEST:
@@ -58,7 +70,8 @@ export const shop = (state = INITIAL_STATE, action) => {
       return _.assign({}, state, {
         formSubmitting: true
       });
-    case ShopActionTypes.SHOP_CREATE_ITEM_SUCCESS: {
+    case ShopActionTypes.SHOP_CREATE_ITEM_SUCCESS:
+    {
       const { categoryId } = response;
       let newSellingItems = {};
       if (_.isEmpty(state.sellingItems)) {
@@ -76,10 +89,10 @@ export const shop = (state = INITIAL_STATE, action) => {
       return _.assign({}, state, {
         sellingItems: _.assign({}, state.sellingItems, newSellingItems),
         newlyItemAdded: true,
-        formSubmitting: false
+        formSubmitting: false,
+        shouldRefresh: true
       });
     }
-    case ShopActionTypes.SELLER_UPDATE_SHOP_ITEM_SUCCESS:
     case ShopActionTypes.SELLER_SET_ITEM_STATUS_SUCCESS:
     {
       const { sellingItems } = state;
@@ -95,27 +108,30 @@ export const shop = (state = INITIAL_STATE, action) => {
         _.slice(updatedCategoryItems, updatedItemIndex + 1, updatedCategoryItems.length)
       );
 
-      return _.assign({}, state, {
-        sellingItems: newSellingItems,
-        itemUpdated: true,
-        formSubmitting: false
-      });
-    }
-    case ShopActionTypes.REMOVE_SHOP_ITEM_FROM_LIST: {
-      const { sellingItems } = state;
-      const itemArray = _.flatMap(state.sellingItems);
-      const toBeRemovedItem = _.find(itemArray, (item) =>
-        item.id === payload.itemID
-      );
-      const { id, categoryId } = toBeRemovedItem;
-      let newSellingItems = _.assign({}, sellingItems);
-      newSellingItems[categoryId] = _.filter(sellingItems[categoryId], (item) =>
-        item.id !== id
-      );
+      if (newSellingItems[0]) {
+        let allSellingItems = newSellingItems[0];
+        const updatedItemIndex = _.findIndex(allSellingItems, (p => {
+          return p.id === response.id
+        }));
+
+        allSellingItems = _.concat(
+          _.slice(allSellingItems, 0, updatedItemIndex),
+          response,
+          _.slice(allSellingItems, updatedItemIndex + 1, allSellingItems.length)
+        );
+        newSellingItems[0] = allSellingItems;
+      }
 
       return _.assign({}, state, {
-        sellingItems: newSellingItems,
-        itemDeleted: false
+        sellingItems: newSellingItems
+      });
+    }
+    case ShopActionTypes.SELLER_UPDATE_SHOP_ITEM_SUCCESS:
+    {
+      return _.assign({}, state, {
+        itemUpdated: true,
+        shouldRefresh: true,
+        formSubmitting: false
       });
     }
     case CommonActionTypes.GET_SHIP_PLACES_SUCCESS:
@@ -128,13 +144,12 @@ export const shop = (state = INITIAL_STATE, action) => {
       });
     case ShopActionTypes.RESET_UPDATED_ITEM_STATUS:
       return _.assign({}, state, {
-        newlyItemAdded: false,
-        itemUpdated: false,
-        shipPlacesUpdated: false
+
       });
     case ShopActionTypes.SELLER_DELETE_SHOP_ITEM_SUCCESS:
       return _.assign({}, state, {
         itemDeleted: true,
+        shouldRefresh: true,
         formSubmitting: false
       });
     case ShopActionTypes.UPLOAD_SHOP_AVATAR_SUCCESS:

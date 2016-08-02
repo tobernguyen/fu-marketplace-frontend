@@ -258,15 +258,6 @@ export const setItemStatus = (shopID, itemID, status) => {
 };
 
 
-export const REMOVE_SHOP_ITEM_FROM_LIST = 'REMOVE_SHOP_ITEM_FROM_LIST';
-export const removeShopItemFromList = (itemID) => ({
-  type: REMOVE_SHOP_ITEM_FROM_LIST,
-  payload: {
-    itemID: itemID
-  }
-});
-
-
 export const SET_TO_BE_UPDATED_ITEM = 'SET_TO_BE_UPDATED_ITEM';
 export const setToBeUpdatedItem = (item) => ({
   type: SET_TO_BE_UPDATED_ITEM,

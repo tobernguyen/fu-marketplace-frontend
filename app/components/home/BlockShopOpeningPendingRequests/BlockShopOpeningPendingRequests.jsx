@@ -7,7 +7,9 @@ export default class BlockShopOpeningPendingRequests extends Component {
   render() {
     return (
       <div className="block-shop-opening-pending-requests">
-        <h4 className="page-header">Yêu cầu mở shop đang chờ đồng ý</h4>
+        <h4 className="page-header">
+          <FormattedMessage {...{ id: 'shop.opening.request.pending', defaultMessage: 'Pending request to open shop.' }}/>
+        </h4>
         <div className="table-responsive">
           <table className="table table-bordered">
             <thead>

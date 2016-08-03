@@ -367,9 +367,9 @@ export default {
   'formShopPromotionCampaign.button.createShopPromotionCampaign': 'Create shop promotion campaign',
   'formShopPromotionCampaign.submitResult.success': 'Shop promotion campaign created successfully',
   'formShopPromotionCampaign.submitResult.fail': 'Error occurred. Please try again later',
-  'blockManageOrderHeader.name': 'Orders Management',
-  'blockManageOrderHeader.button.all': 'All order',
-  'blockManageOrderHeader.button.current': 'Active order',
+  'blockManageOrderHeader.name': 'Order Management',
+  'blockManageOrderHeader.button.all': 'All orders',
+  'blockManageOrderHeader.button.current': 'Active orders',
   'labelPromotionType.topFeedSlideShow': 'Top feed carousel',
   'admin.form.validation.endDateMustAfterStartDate': 'End date must be after start date',
   'admin.form.validation.startDateMustBeforeEndDate': 'Start date must be before end date',
@@ -575,5 +575,6 @@ export default {
   'myTicket.title': 'Report tickets',
   'myTicket.description': 'List of reported ticket',
   'sessionEnded': 'You session has been ended. Please sign in again.',
-  'notSignedIn': 'Not signed in'
+  'notSignedIn': 'Not signed in',
+  'formRejectOrder.validation.reject.blank': 'Please provide reason'
 };

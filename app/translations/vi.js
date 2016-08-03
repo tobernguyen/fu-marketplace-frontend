@@ -575,5 +575,6 @@
   'myTicket.title': 'Báo cáo sai phạm',
   'myTicket.description': 'Danh sách tất cả báo cáo sai phạm',
    'sessionEnded': 'Phiên đăng nhập của bạn đã kết thúc. Hãy đăng nhập lại.',
-   'notSignedIn': 'Thông báo'
+   'notSignedIn': 'Thông báo',
+   'formRejectOrder.validation.reject.blank': 'Hãy cung cấp lí do'
 };

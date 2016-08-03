@@ -16,11 +16,11 @@ class FormRejectOrder extends Component {
             <input
               type="text"
               placeholder={formatMessage(messages.modalViewOrder.rejectForm.placeholder)}
-              className="form-control"
+              className="form-control reject-reason"
               {...reason}
               />
             <div className="help-block">
-              {reason.touched ? reason.error : ''}
+              {reason.touched && reason.error ? <FormattedMessage {...reason.error}/> : ''}
             </div>
           </div>
           <button type="submit" className="btn btn-sm btn-danger" disabled={!dirty}>

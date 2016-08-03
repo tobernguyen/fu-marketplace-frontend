@@ -8,7 +8,10 @@ const validate = values => {
   let hasErrors = false;
 
   if(!values.reason) {
-    errors.reason = 'reason is required';
+    errors.reason = {
+      id: 'formRejectOrder.validation.reject.blank',
+      defaultMessage: 'Reason is required'
+    };
     hasErrors = true;
   }
 

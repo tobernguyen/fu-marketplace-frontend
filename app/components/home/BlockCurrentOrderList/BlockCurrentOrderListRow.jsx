@@ -10,6 +10,11 @@ import OrderStatus from 'app/shared/orderStatus';
 import LabelItem from './LabelItem.jsx';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
+const CARD_SLIDE_LEFT_TIME = 6000;
+const CONTAINER_SLIDE_UP_TIME = 7000;
+const REMOVE_TIME = 9000;
+
+
 class BlockCurrentOrderListRow extends Component {
   constructor(props) {
     super(props);
@@ -17,7 +22,8 @@ class BlockCurrentOrderListRow extends Component {
     this.state = {
       order: props.order,
       canceled: false,
-      countingDown: false
+      countingDown: false,
+      containerSlideUp: false
     };
     this.acceptOrder = () => {
       const { order } = this.state;
@@ -47,7 +53,7 @@ class BlockCurrentOrderListRow extends Component {
       this.hideOrder();
       setTimeout(() => {
         this.props.removeOrder(order.id);
-      }, 7000);
+      }, REMOVE_TIME);
     };
 
     this.rejectOrder = (formData) => {
@@ -63,7 +69,7 @@ class BlockCurrentOrderListRow extends Component {
       this.hideOrder();
       setTimeout(() => {
         this.props.removeOrder(order.id);
-      }, 7000);
+      }, REMOVE_TIME);
     };
 
     this.abortOrder = (formData) => {
@@ -79,7 +85,7 @@ class BlockCurrentOrderListRow extends Component {
       this.hideOrder();
       setTimeout(() => {
         this.props.removeOrder(order.id);
-      }, 7000);
+      }, REMOVE_TIME);
     }
 
     this.hideOrder = () => {
@@ -91,7 +97,12 @@ class BlockCurrentOrderListRow extends Component {
           canceled: true,
           countingDown: false
         });
-      }, 6000);
+      }, CARD_SLIDE_LEFT_TIME);
+      setTimeout(() => {
+        this.setState({
+          containerSlideUp: true
+        });
+      }, CONTAINER_SLIDE_UP_TIME);
     }
   }
 
@@ -202,13 +213,15 @@ class BlockCurrentOrderListRow extends Component {
     );
 
     return (
-      <ReactCSSTransitionGroup
-        transitionName="dynamicOrderCard"
-        transitionEnterTimeout={1000}
-        transitionLeaveTimeout={1000}
-        >
-        { !this.state.canceled && output}
-      </ReactCSSTransitionGroup>
+      <div className={`current-order-card-container ${this.state.containerSlideUp ? 'slide-up' : '' }`}>
+        <ReactCSSTransitionGroup
+          transitionName="dynamicOrderCard"
+          transitionEnterTimeout={1000}
+          transitionLeaveTimeout={1000}
+          >
+          { !this.state.canceled && output}
+        </ReactCSSTransitionGroup>
+      </div>
     );
   }
 }

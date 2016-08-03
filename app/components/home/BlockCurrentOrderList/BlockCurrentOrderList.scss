@@ -5,7 +5,6 @@
   .order-card {
     width: 100%;
     height: 100%;
-    margin: 10px 0;
     background-color: #ffffff;
     border: 1px solid #e7e7e7;
     transition: all 1s cubic-bezier(.36,-0.64,.34,1.76);
@@ -68,13 +67,13 @@
 
 .dynamicOrderCard-leave {
   opacity: 1;
-  margin-left: -200px;
+  margin-left: -1500px;
 }
 
 .dynamicOrderCard-leave.dynamicOrderCard-leave-active {
   opacity: 0.01;
-  margin-left: -200px;
-  transition: all 1000ms ease-in;
+  margin-left: -1500px;
+  transition: all 2s ease;
 }
 
 .timerwrapper {
@@ -106,23 +105,36 @@
 }
 
 @-webkit-keyframes fillBar {
-      0% {
-        width: 100%;
-      }
-      100% {
-        width: 0%;
-      }
-  }
-  @keyframes fillBar {
-      0% {
-        width: 100%;
-      }
-      100% {
-        width: 0%;
-      }
-  }
+    0% {
+      width: 100%;
+    }
+    100% {
+      width: 0%;
+    }
+}
+@keyframes fillBar {
+    0% {
+      width: 100%;
+    }
+    100% {
+      width: 0%;
+    }
+}
 
-  .timerwrapper-placeholder {
-    height: 5px;
-    width: 100%;
+.timerwrapper-placeholder {
+  height: 5px;
+  width: 100%;
+}
+
+.current-order-card-container {
+  transition-property: all;
+	transition-duration: 2s;
+	transition-timing-function: ease;
+  min-height: 276px;
+  padding: 10px 0;
+
+  &.slide-up {
+    padding: 0;
+    min-height: 0;
   }
+}

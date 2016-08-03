@@ -12,6 +12,18 @@ export const fields = [
   'items[].image'
 ];
 
+const validateItemNote = item => {
+  const errors = {};
+  if(item.note && item.note.length > 255) {
+    errors.note = {
+      id: 'formCheckOut.validation.note.long',
+      defaultMessage: 'Order note must be shorter than 255 characters'
+    };
+  }
+
+  return errors;
+}
+
 const validate = values => {
   const errors = {};
 
@@ -26,6 +38,14 @@ const validate = values => {
     errors.items = 'no item to check out';
   }
 
+  errors.items = values.items.map(validateItemNote);
+
+  if (values.note && values.note.length > 255) {
+    errors.note = {
+      id: 'formCheckOut.validation.note.long',
+      defaultMessage: 'Order note must be shorter than 255 characters'
+    };
+  }
   return errors;
 };
 

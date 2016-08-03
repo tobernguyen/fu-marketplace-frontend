@@ -576,5 +576,6 @@ export default {
   'myTicket.description': 'List of reported ticket',
   'sessionEnded': 'You session has been ended. Please sign in again.',
   'notSignedIn': 'Not signed in',
-  'formRejectOrder.validation.reject.blank': 'Please provide reason'
+  'formRejectOrder.validation.reject.blank': 'Please provide reason',
+  'formCheckOut.validation.note.long': 'Order note must be shorter than 255 characters'
 };

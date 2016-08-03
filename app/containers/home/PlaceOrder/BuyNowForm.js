@@ -12,10 +12,11 @@ const validate = values => {
     };
   }
 
-  if (!values.quantity) {
-    errors.quantity = 'quantity required';
-  } else if (values.quantity && isNaN(Number(values.quantity))) {
-    errors.quantity = 'number only';
+  if (values.note && values.note.length > 255 ) {
+    errors.note = {
+      id: 'formCheckOut.validation.note.long',
+      defaultMessage: 'Order note must be shorter than 255 characters'
+    };
   }
 
   return errors;

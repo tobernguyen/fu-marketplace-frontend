@@ -95,7 +95,7 @@ class FormBuyNow extends Component {
                       className="form-control"
               {...note} />
               <div className="help-block">
-                {note.touched ? note.error : ''}
+                {note.touched && note.error ? <FormattedMessage {...note.error}/> : ''}
               </div>
           </div>
         </div>

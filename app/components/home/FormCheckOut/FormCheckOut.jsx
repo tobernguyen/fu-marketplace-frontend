@@ -126,7 +126,7 @@ class FormCheckOut extends Component {
           </div>
 
         </div>
-        <div className='form-group'>
+        <div className={`form-group has-feedback  ${note.touched && note.invalid ? 'has-error' : ''}`}>
           <label className="col-sm-2 control-label">
             <FormattedMessage {...messages.formCheckOut.tableHead.note}/>
           </label>
@@ -136,6 +136,9 @@ class FormCheckOut extends Component {
                 className="form-control"
                 placeholder=""
                 {...note} />
+                <div className="help-block">
+                  {note.touched && note.error? <FormattedMessage {...note.error}/> : ''}
+                </div>
             </div>
         </div>
         <table className="table table-responsive order-items">
@@ -196,12 +199,15 @@ class FormCheckOut extends Component {
                       </span>
                   </div>
                 </td>
-                <td className="note">
+                <td className={`note form-group has-feedback  ${item.note.touched && item.note.invalid ? 'has-error' : ''}`}>
                     <textarea
                       type="text"
                       className="form-control"
                       placeholder=""
                       {...item.note} />
+                      <div className="help-block">
+                        {item.note.touched && item.note.error? <FormattedMessage {...item.note.error}/> : ''}
+                      </div>
                 </td>
                 <td className="delete">
                   <button

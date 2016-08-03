@@ -569,7 +569,7 @@ export default {
   'admin.form.changePassword.newPassword.long': 'New password can\'t be longer than 255 characters',
   'admin.form.editShopInformation.validation.name.long': 'Shop name can\'t be longer than 255 characters',
   'admin.form.editShopInformation.validation.description.long': 'Shop description can\'t be longer than 255 characters',
-  'myOrder.openTicketModal.validation.message.long': 'Message can\'t be longer than 255 characters',
+  'myOrder.openTicketModal.validation.message.long': 'Message can\'t be longer than 65000 characters',
   'imageFileOnly': 'Please upload image file (jpg, png).',
   'formCheckOut.total': 'Total',
   'myTicket.title': 'Report tickets',

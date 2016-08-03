@@ -178,7 +178,7 @@
   'modalViewOrder.orderStatus.noStatus': 'Đơn hàng không có trạng thái, xin hãy liên lạc với người điều hành.',
   'myOrder.emptyOrderList.message.text': 'Bạn đang không có đơn hàng nào.',
   'myOrder.emptyOrderList.link': 'Bắt đầu mua hàng.',
-  'myOrder.button.abort': 'Hủy',
+  'myOrder.button.cancel': 'Hủy',
   'myOrder.cancelOrderModal.title': 'Hủy đơn hàng',
   'myOrder.cancelOrderModal.message': 'Bạn có chắc là bạn muốn hủy đơn hàng này?',
   'myOrder.cancelOrderModal.button.accept': 'Đồng ý hủy',

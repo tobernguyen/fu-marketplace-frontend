@@ -121,9 +121,9 @@ export const messages = {
       }
     },
     button: {
-      abort: {
-        id: 'myOrder.button.abort',
-        defaultMessage: 'Abort'
+      cancel: {
+        id: 'myOrder.button.cancel',
+        defaultMessage: 'Cancel'
       },
       report: {
         id: 'myOrder.button.report',

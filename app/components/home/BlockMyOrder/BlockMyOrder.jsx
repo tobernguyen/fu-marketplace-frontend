@@ -101,7 +101,7 @@ class BlockMyOrder extends Component {
         <thead>
           <tr>
             <th>#</th>
-            <th className="col-lg-2"><FormattedMessage {...messages.myOrder.tableHead.item}/></th>
+            <th className="col-lg-3"><FormattedMessage {...messages.myOrder.tableHead.item}/></th>
             <th className="col-lg-2"><FormattedMessage {...messages.myOrder.tableHead.shop}/></th>
             <th className="col-lg-1"><FormattedMessage {...messages.myOrder.tableHead.total} /></th>
             <th className="col-lg-2"><FormattedMessage {...messages.myOrder.tableHead.time} /></th>

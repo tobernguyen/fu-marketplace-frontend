@@ -178,7 +178,7 @@ export default {
   'modalViewOrder.orderStatus.noStatus': 'No status found, please report to admin.',
   'myOrder.emptyOrderList.message.text': 'No active order',
   'myOrder.emptyOrderList.link': 'Start shopping.',
-  'myOrder.button.abort': 'Abort',
+  'myOrder.button.cancel': 'Cancel',
   'myOrder.cancelOrderModal.title': 'Cancel order',
   'myOrder.cancelOrderModal.message': 'Are you sure canceling this order?',
   'myOrder.cancelOrderModal.button.accept': 'Yes',

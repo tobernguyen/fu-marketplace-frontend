@@ -60,7 +60,7 @@ class BlockMyOrderRow extends Component {
       case OrderStatus.ACCEPTED:
         output = (
           <button type="button" className="btn btn-warning order-status" onClick={() => this.props.openModal(order.id)}>
-            <FormattedMessage {...messages.myOrder.button.abort} />
+            <FormattedMessage {...messages.myOrder.button.cancel} />
           </button>
         );
         break;

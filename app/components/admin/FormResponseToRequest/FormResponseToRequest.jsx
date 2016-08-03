@@ -13,6 +13,8 @@ import LabelRequestStatus from 'app/components/admin/LabelRequestStatus';
 import AlertSubmitResult from 'app/components/admin/AlertSubmitResult';
 import AsyncResultCode from 'app/shared/asyncResultCodes';
 
+import './FormResponseToRequest.scss';
+
 class FormResponseToRequest extends React.Component {
   constructor(props) {
     super(props);
@@ -282,6 +284,7 @@ class FormResponseToRequest extends React.Component {
                 </ControlLabel>
                 <FormControl.Static>
                   <img
+                    className="identity-photo"
                     src={seller.identityPhoto}
                     alt={`Identity photo of ${seller.fullName}`}
                     />

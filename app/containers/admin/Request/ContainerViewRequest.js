@@ -19,15 +19,14 @@ class ContainerViewRequest extends Component {
       request: selectedRequest
     }
 
-    if(!selectedRequest.seller) {
+    if(!selectedRequest || !selectedRequest.seller) {
       this.props.adminGetRequests(1, 9999);
     }
   }
 
   componentWillReceiveProps(nextProps) {
-    const { request } = this.state;
     const { params: { requestId },requestManagement: { isFetching, requestList } } = nextProps;
-    if(!request.seller && isFetching === false) {
+    if(isFetching === false) {
       const request = requestList.filter((request) => {
         return request.id == requestId
       });

@@ -579,5 +579,6 @@ export default {
   'sessionEnded': 'You session has been ended. Please sign in again.',
   'notSignedIn': 'Not signed in',
   'formRejectOrder.validation.reject.blank': 'Please provide reason',
-  'formCheckOut.validation.note.long': 'Order note must be shorter than 255 characters'
+  'formCheckOut.validation.note.long': 'Order note must be shorter than 255 characters',
+  'number.tooLarge': 'Number is too large'
 };

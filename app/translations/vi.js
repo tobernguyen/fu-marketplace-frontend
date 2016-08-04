@@ -579,5 +579,6 @@
    'sessionEnded': 'Phiên đăng nhập của bạn đã kết thúc. Hãy đăng nhập lại.',
    'notSignedIn': 'Thông báo',
    'formRejectOrder.validation.reject.blank': 'Hãy cung cấp lí do',
-   'formCheckOut.validation.note.long': 'Ghi chú không thể dài hơn 255 kí tự'
+   'formCheckOut.validation.note.long': 'Ghi chú không thể dài hơn 255 kí tự',
+   'number.tooLarge': 'Số lớn quá'
 };

@@ -1,5 +1,6 @@
 import { reduxForm } from 'redux-form';
 import FormManageShopItem from 'app/components/home/FormManageShopItem';
+import { DATABASE, SALE_ITEM } from 'app/shared/threshold';
 
 export const fields = [ 'id', 'name', 'description', 'quantity', 'price', 'imageData', 'categoryId' ];
 
@@ -11,7 +12,7 @@ const validate = (values, props) => {
       id: 'shopItem.name.validation.required',
       defaultMessage: 'name required'
     };
-  } else if (values.name.length > 50) {
+  } else if (values.name.length > SALE_ITEM.MAX_ITEM_NAME_LENGTH) {
     errors.name = {
       id: 'shopItem.name.validation.maxLength',
       defaultMessage: 'item length must be shorter than 50 characters'
@@ -29,10 +30,15 @@ const validate = (values, props) => {
         id: 'shopItem.quantity.validation.notNegative',
         defaultMessage: 'quantity must be greater than 0'
       };
+    } else if (values.quantity > DATABASE.MAX_INTEGER_NUMBER) {
+      errors.quantity = {
+        id: 'number.tooLarge',
+        defaultMessage: 'Number too large'
+      };
     }
   }
 
-  if (values.description && values.description.length > 125) {
+  if (values.description && values.description.length > SALE_ITEM.MAX_ITEM_DESCRIPTION_LENGTH) {
     errors.description = {
       id: 'shopItem.description.validation.maxLength',
       defaultMessage: 'shop description must be shorter than 50 characters'
@@ -53,6 +59,11 @@ const validate = (values, props) => {
     errors.price = {
       id: 'shopItem.price.validation.notNegative',
       defaultMessage: 'price must be greater than 0'
+    };
+  } else if (values.price > DATABASE.MAX_INTEGER_NUMBER) {
+    errors.price = {
+      id: 'number.tooLarge',
+      defaultMessage: 'Number too large'
     };
   }
 

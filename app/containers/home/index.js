@@ -87,7 +87,11 @@ class Home extends Component {
             id: 'sessionEnded',
             defaultMessage: 'You session has been ended. Please sign in again.'
           }
-        })
+        });
+        const { socket } = this.props;
+        if (socket) {
+          socket.disconnect();
+        }
       } else if (status === HTTP_STATUS_CODE.NOT_FOUND) {
         this.props.resetRequestError();
         this.props.router.push({
@@ -158,7 +162,8 @@ const mapStateToProps = (state) => {
     error:            common.error,
     notification:     notification.promptNotification,
     categories:       getCategories(state),
-    query:            state.common.query,
+    query:            common.query,
+    socket:           common.socket,
     isAuthenticated:  auth.isAuthenticated
   }
 };

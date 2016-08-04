@@ -1,6 +1,10 @@
 import React from 'react';
 
 const LabelCustomerInformation = ({ buyer }) => {
+  let fullName = '';
+  if(buyer) {
+    fullName = buyer.fullName;
+  }
   const divStyle = {
     display: 'inline'
   };
@@ -15,7 +19,7 @@ const LabelCustomerInformation = ({ buyer }) => {
   return (
     <div style={divStyle}>
       <img src={avatar} className="img-circle" style={avatarStyle}/>{' '}
-      <span>{buyer.fullName}</span>
+      <span>{fullName}</span>
     </div>
   )
 }

@@ -19,8 +19,7 @@ class Statistics extends Component {
 
     this.state = {
       statisticModes: _.values(STATISTIC_TYPE),
-      activeMode: 0,
-      shopID: this.props.params.shopID
+      activeMode: 0
     };
 
     this.handleSwitchMode = (mode) => {

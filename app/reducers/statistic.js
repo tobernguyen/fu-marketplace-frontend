@@ -29,7 +29,7 @@ export const statistic = (state = INITIAL_STATE, action) => {
         fetchingData: true
       });
     case StatisticActionTypes.CLEAR_STATISTICS:
-      return _.merge({}, state, INITIAL_STATE);
+      return _.assign({}, state, INITIAL_STATE);
     default:
       return state;
   }

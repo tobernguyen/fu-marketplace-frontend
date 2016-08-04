@@ -31,6 +31,7 @@ export const common = (state = INITIAL_STATE, action) => {
         socket: payload.socket
       });
     case CommonActionTypes.DESTROY_WEB_SOCKET:
+    case ActionTypes.GOOGLE_SIGN_OUT:
       return _.assign({}, state, {
         socket: INITIAL_STATE.socket
       });

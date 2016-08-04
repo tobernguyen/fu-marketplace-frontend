@@ -2,7 +2,6 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import Header from 'app/components/home/Header';
 import { signOutGoogle, getCurrentUser } from 'app/actions';
-import { destroyWebSocket } from 'app/actions/common';
 import { withRouter } from 'react-router'
 import {
   getNotifications,
@@ -74,10 +73,9 @@ class NavigationBar extends Component {
     };
 
     this.handleSignOutGoogle = () => {
-      const { socket, signOutGoogle, destroyWebSocket } = this.props;
+      const { socket, signOutGoogle } = this.props;
       if (socket) {
         socket.disconnect();
-        destroyWebSocket();
       }
       signOutGoogle();
     }
@@ -161,6 +159,5 @@ export default withRouter(connect(mapStateToProps, {
   markNotificationAsRead,
   markAllNotificationsAsRead,
   newNotification,
-  clearNotifications,
-  destroyWebSocket
+  clearNotifications
 })(NavigationBar))

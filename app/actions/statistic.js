@@ -22,3 +22,8 @@ export const getShopStatistics = (shopID, type) => {
     return dispatch(requestGetShopStatistics(shopID, type))
   }
 };
+
+export const CLEAR_STATISTICS = 'CLEAR_STATISTICS';
+export const clearStatistics = () => ({
+  type: CLEAR_STATISTICS,
+});

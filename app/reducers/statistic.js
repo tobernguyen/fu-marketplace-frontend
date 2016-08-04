@@ -28,6 +28,8 @@ export const statistic = (state = INITIAL_STATE, action) => {
       return _.merge({}, state, {
         fetchingData: true
       });
+    case StatisticActionTypes.CLEAR_STATISTICS:
+      return _.merge({}, state, INITIAL_STATE);
     default:
       return state;
   }

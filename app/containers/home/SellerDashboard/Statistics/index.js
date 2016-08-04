@@ -8,7 +8,7 @@ import BlockStatisticsHeader from 'app/components/home/BlockStatisticsHeader';
 import Sticky from 'react-stickynode';
 import { updateShopInfo } from 'app/actions/shop';
 import { calculateOrdersStatisticData, calculateSalesStatistic, calculateItemSoldStatistic } from 'app/selectors';
-import { getShopStatistics, STATISTIC_TYPE } from '../../../../actions/statistic';
+import { getShopStatistics, STATISTIC_TYPE, clearStatistics } from 'app/actions/statistic';
 import _ from 'lodash';
 
 const STATISTIC_MODE = _.toArray(STATISTIC_TYPE);
@@ -19,7 +19,8 @@ class Statistics extends Component {
 
     this.state = {
       statisticModes: _.values(STATISTIC_TYPE),
-      activeMode: 0
+      activeMode: 0,
+      shopID: this.props.params.shopID
     };
 
     this.handleSwitchMode = (mode) => {
@@ -45,6 +46,10 @@ class Statistics extends Component {
     if (this.props[STATISTIC_MODE[this.state.activeMode]]['updatedAt'] === null) {
       this.props.getShopStatistics(this.props.params.shopID, STATISTIC_MODE[this.state.activeMode]);
     }
+  }
+
+  componentWillUnmount() {
+    this.props.clearStatistics();
   }
 
   render() {
@@ -92,5 +97,6 @@ const mapStateToProps = (state) => {
 
 export default connect(mapStateToProps, {
   getShopStatistics,
-  updateShopInfo
+  updateShopInfo,
+  clearStatistics
 })(Statistics)

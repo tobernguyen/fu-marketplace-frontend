@@ -41,9 +41,9 @@ class FormAccountBasic extends Component {
       this.props.fields.room.onChange(roomNo);
     };
 
-    this.handleFileError = () => {
+    this.handleFileError = (error) => {
       this.setState({
-        error: messages.errorAvatarFile
+        error: messages[error]
       })
     }
   }

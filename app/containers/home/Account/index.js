@@ -20,12 +20,6 @@ class Account extends Component {
     this.handleUpdateAccount = (formValues) => {
       this.props.updateUserInfo(formValues);
     };
-
-    this.handleUploadAvatar = (avatarDataURL) => {
-      let formFileData = new FormData();
-      formFileData.append('file', dataURLtoBlob(avatarDataURL));
-      this.props.uploadAvatar(formFileData);
-    };
   }
 
   componentWillMount() {

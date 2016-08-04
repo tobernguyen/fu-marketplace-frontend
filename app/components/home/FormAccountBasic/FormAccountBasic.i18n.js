@@ -36,5 +36,9 @@ export const messages = {
   errorAvatarFile: {
     id: 'imageFileOnly',
     defaultMessage: 'Avatar image error'
+  },
+  errorAvatarTooBig: {
+    id: 'avatar.tooBig',
+    defaultMessage: 'Avatar is too big'
   }
 };

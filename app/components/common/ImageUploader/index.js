@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { IMAGE_TYPES } from 'app/shared/mimeTypes';
+import { FILE_SIZE } from 'app/shared/threshold';
 
 export default class ImageUploader extends Component {
   constructor(props) {
@@ -13,7 +14,12 @@ export default class ImageUploader extends Component {
       }
 
       if (IMAGE_TYPES.indexOf(file.type) === -1) {
-        this.props.handleFileError();
+        this.props.handleFileError('errorAvatarFile');
+        return;
+      }
+
+      if (file.size > FILE_SIZE.MAX_AVATAR_COVER_SIZE) {
+        this.props.handleFileError('errorAvatarTooBig');
         return;
       }
 

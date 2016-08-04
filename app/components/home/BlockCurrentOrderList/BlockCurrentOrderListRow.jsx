@@ -12,7 +12,7 @@ import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 const CARD_SLIDE_LEFT_TIME = 6000;
 const CONTAINER_SLIDE_UP_TIME = 7000;
-const REMOVE_TIME = 9000;
+const REMOVE_TIME = 8000;
 
 
 class BlockCurrentOrderListRow extends Component {

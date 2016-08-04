@@ -3,10 +3,13 @@ import { Link } from 'react-router';
 import './UserListRow.scss';
 import LabelUserRole from 'app/components/admin/LabelUserRole';
 import classNames from 'classnames'
+import _ from 'lodash';
+
 const UserListRow = ({ user }) => {
   const rowClassName = classNames({
     'banned': user.banned
-  })
+  });
+  const roles = _.sortBy(user.roles, (role) => { return role });
   let roleIndex = 0;
   return (
     <tr className={rowClassName}>
@@ -20,7 +23,7 @@ const UserListRow = ({ user }) => {
           {user.fullName || 'N/A'}
         </td>
         <td>
-          {user.roles.map(role =>
+          {roles.map(role =>
             <LabelUserRole key={++roleIndex} role={role}/>
           )}
           {

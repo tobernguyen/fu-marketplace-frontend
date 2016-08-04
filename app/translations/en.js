@@ -80,6 +80,8 @@ export default {
   'shopItem.name.label': 'Name',
   'shopItem.name.placeholder': 'What\'s product or service will you sell?',
   'shopItem.name.validation.required': 'Please enter item name',
+  'shopItem.name.validation.maxLength': 'Item name must be shorter than 50 characters',
+  'shopItem.description.validation.maxLength': 'Item description must be shorter than 125 characters',
   'shopItem.quantity.validation.number': 'Quantity must be a number',
   'shopItem.price.validation.required': 'Please enter item price',
   'shopItem.quantity.validation.notNegative': 'Quantity must be non-negative number',

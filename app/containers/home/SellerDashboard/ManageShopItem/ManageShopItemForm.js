@@ -11,6 +11,11 @@ const validate = (values, props) => {
       id: 'shopItem.name.validation.required',
       defaultMessage: 'name required'
     };
+  } else if (values.name.length > 50) {
+    errors.name = {
+      id: 'shopItem.name.validation.maxLength',
+      defaultMessage: 'item length must be shorter than 50 characters'
+    };
   }
 
   if (values.quantity && values.quantity.length > 0) {
@@ -25,6 +30,13 @@ const validate = (values, props) => {
         defaultMessage: 'quantity must be greater than 0'
       };
     }
+  }
+
+  if (values.description && values.description.length > 125) {
+    errors.description = {
+      id: 'shopItem.description.validation.maxLength',
+      defaultMessage: 'shop description must be shorter than 50 characters'
+    };
   }
 
   if (!values.price) {

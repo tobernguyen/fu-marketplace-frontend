@@ -80,6 +80,8 @@
   'shopItem.name.label': 'Tên',
   'shopItem.name.placeholder': 'Bạn sẽ bán hoặc cung cấp dịch vụ gì?',
   'shopItem.name.validation.required': 'Hãy điền tên sản phẩm',
+  'shopItem.name.validation.maxLength': 'Tên sản phẩm/dịch vụ phải ngắn hơn 50 kí tự',
+  'shopItem.description.validation.maxLength': 'Miêu tả sản phẩm phải ngắn hơn 125 kí tự',
   'shopItem.quantity.validation.number': 'Số lượng phải là số',
   'shopItem.price.validation.required': 'Hãy điền giá sản phẩm',
    'shopItem.quantity.validation.notNegative': 'Số lượng phải lớn hơn 0',

@@ -7,6 +7,7 @@ import { messages } from './BlockShopHeader.i18n';
 import { FormattedMessage } from 'react-intl';
 import BlockStars from '../BlockStars';
 import { Link } from 'react-router';
+import { FILE_SIZE } from 'app/shared/threshold';
 
 export default class BlockShopHeader extends Component {
   constructor(props) {
@@ -30,11 +31,24 @@ export default class BlockShopHeader extends Component {
     };
 
     this.onAvatarChange = (files) => {
+      this.setState({
+        error: null
+      });
+
       const reader = new FileReader();
       var file = files[0];
       if (!file) {
         return;
       }
+
+      if (file.size > FILE_SIZE.MAX_AVATAR_COVER_SIZE) {
+        this.setState({
+          error: messages.tooBigAvatar
+        });
+
+        return;
+      }
+
       reader.onload = (image) => {
         this.refs.dropzoneAvatar.value = '';
 
@@ -54,6 +68,14 @@ export default class BlockShopHeader extends Component {
       const reader = new FileReader();
       var file = files[0];
       if (!file) {
+        return;
+      }
+
+      if (file.size > FILE_SIZE.MAX_AVATAR_COVER_SIZE) {
+        this.setState({
+          error: messages.tooBigCover
+        });
+
         return;
       }
       reader.onload = (imageData) => {
@@ -172,7 +194,6 @@ export default class BlockShopHeader extends Component {
                   <li><i className="fa fa-map-marker" /> {address}</li>
                 </ul>
               </div>
-
             </div>
           </div>
           {this.state.error && <div className="status-message">

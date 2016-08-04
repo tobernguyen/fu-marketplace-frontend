@@ -22,5 +22,13 @@ export const messages = {
   seeReviews: {
     id: 'seeReviews',
     defaultMessage: 'see reviews'
+  },
+  tooBigCover: {
+    id: 'cover.tooBig',
+    defaultMessage: 'cover image is too large. it must be smaller than 3MB'
+  },
+  tooBigAvatar: {
+    id: 'avatar.tooBig',
+    defaultMessage: 'avatar image is too large. it must be smaller than 3MB'
   }
 };

@@ -581,5 +581,7 @@ export default {
   'formRejectOrder.validation.reject.blank': 'Please provide reason',
   'formCheckOut.validation.note.long': 'Order note must be shorter than 255 characters',
   'number.tooLarge': 'Number is too large',
-  'shopItem.image.maxSize': 'Maximum item image size allowed: <strong>{allowedSize}MB</strong>.'
+  'shopItem.image.maxSize': 'Maximum item image size allowed: <strong>{allowedSize}MB</strong>.',
+  'avatar.tooBig': 'Maximum avatar image size allowed: 3MB.',
+  'cover.tooBig': 'Maximum cover image size allowed: 3MB.'
 };

@@ -580,5 +580,6 @@
    'notSignedIn': 'Thông báo',
    'formRejectOrder.validation.reject.blank': 'Hãy cung cấp lí do',
    'formCheckOut.validation.note.long': 'Ghi chú không thể dài hơn 255 kí tự',
-   'number.tooLarge': 'Số lớn quá'
+   'number.tooLarge': 'Số lớn quá',
+   'shopItem.image.maxSize': 'Kích thước tối đa cho ảnh sản phẩm: <strong>{allowedSize}MB</strong>.'
 };

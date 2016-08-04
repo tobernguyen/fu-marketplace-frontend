@@ -580,5 +580,6 @@ export default {
   'notSignedIn': 'Not signed in',
   'formRejectOrder.validation.reject.blank': 'Please provide reason',
   'formCheckOut.validation.note.long': 'Order note must be shorter than 255 characters',
-  'number.tooLarge': 'Number is too large'
+  'number.tooLarge': 'Number is too large',
+  'shopItem.image.maxSize': 'Maximum item image size allowed: <strong>{allowedSize}MB</strong>.'
 };

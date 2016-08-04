@@ -2,16 +2,34 @@ import React, { Component, PropTypes } from 'react';
 import ModalHeader from '../ModalHeader';
 import { Modal, ButtonToolbar } from 'react-bootstrap';
 import Dropzone from 'react-dropzone';
-import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
+import { FormattedMessage, FormattedHTMLMessage, injectIntl, intlShape } from 'react-intl';
 import { messages } from './FormManageShopItem.i18n';
 import { buttons } from 'app/shared/buttons';
+import { SALE_ITEM } from 'app/shared/threshold';
 
 class FormManageShopItem extends Component {
   constructor(props) {
     super(props);
 
+    this.state = {
+      imageError: null
+    };
+
     this.onDrop = files => {
-      this.props.fields.imageData.onChange(files[0])
+      const image = files[0];
+      if (image.size > SALE_ITEM.MAX_ITEM_PHOTO_SIZE) {
+        this.setState({
+          imageError: {
+            id: 'shopItem.image.maxSize',
+            defaultMessage: 'Item image size must be smaller than 6MB',
+            values: {
+              allowedSize: SALE_ITEM.MAX_ITEM_PHOTO_SIZE / (1000 * 1000)
+            }
+          }
+        });
+        return;
+      }
+      this.props.fields.imageData.onChange(image);
     };
 
     this.handleDelete = (e) => {
@@ -141,6 +159,7 @@ class FormManageShopItem extends Component {
                 </Dropzone>
                 <div className="help-block">
                   {imageData.error ? <FormattedMessage {...imageData.error} /> : ''}
+                  {this.state.imageError && <FormattedHTMLMessage {...this.state.imageError} />}
                 </div>
               </div>
             </div>

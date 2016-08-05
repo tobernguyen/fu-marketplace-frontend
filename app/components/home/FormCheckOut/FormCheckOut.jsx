@@ -47,6 +47,13 @@ class FormCheckOut extends Component {
     return <FormattedNumber value={total}/>;
   }
 
+  renderTotalInvoice(items) {
+    const total = _.reduce(items, (sum, item) => {
+      return sum + (item.price * item.quantity);
+    }, 0);
+    return <FormattedNumber value={total}/>;
+  }
+
   renderSuccessPlaceOrder() {
     const { items } = this.state;
     return (
@@ -102,6 +109,12 @@ class FormCheckOut extends Component {
           })}
           </tbody>
         </table>
+        <div className="total">
+          <strong>
+            <FormattedMessage {...messages.formCheckOut.total}/>:  {' '}
+          </strong>
+          {this.renderTotalInvoice(items)}₫
+        </div>
       </div>
     )
   }

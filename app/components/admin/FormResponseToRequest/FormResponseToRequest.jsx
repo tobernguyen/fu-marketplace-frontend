@@ -225,10 +225,18 @@ class FormResponseToRequest extends React.Component {
               </FormGroup>
               <FormGroup>
                 <ControlLabel>
-                  <FormattedMessage {...messages.formResponseToRequest.requestDetail.fields.address}/>
+                  <FormattedMessage {...messages.formResponseToRequest.requesterInformation.fields.phone}/>
                 </ControlLabel>
                 <FormControl.Static>
                   {request.address}
+                </FormControl.Static>
+              </FormGroup>
+              <FormGroup>
+                <ControlLabel>
+                  <FormattedMessage {...messages.formResponseToRequest.requesterInformation.fields.phone}/>
+                </ControlLabel>
+                <FormControl.Static>
+                  {request.phone}
                 </FormControl.Static>
               </FormGroup>
             </Col>

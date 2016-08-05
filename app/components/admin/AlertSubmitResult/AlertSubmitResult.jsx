@@ -92,6 +92,9 @@ const AlertSubmitResult = ({ result }) => {
     case AsyncResultCode.EDIT_PROMOTION_SUCCESS:
       alertMessage = <FormattedMessage {...messages.EDIT_PROMOTION_SUCCESS}/>
       break;
+    case AsyncResultCode.NOT_CAPABLE_TO_BECOME_A_SELLER:
+      alertMessage = <FormattedMessage {...messages.NOT_CAPABLE_TO_BECOME_A_SELLER}/>
+      break;
     case AsyncResultCode.UNKNOWN_ERROR:
       alertMessage = <FormattedMessage {...messages.UNKNOWN_ERROR}/>;
       break;

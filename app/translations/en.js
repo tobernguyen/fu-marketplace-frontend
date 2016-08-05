@@ -583,5 +583,6 @@ export default {
   'number.tooLarge': 'Number is too large',
   'shopItem.image.maxSize': 'Maximum item image size allowed: <strong>{allowedSize}MB</strong>.',
   'avatar.tooBig': 'Maximum avatar image size allowed: 3MB.',
-  'cover.tooBig': 'Maximum cover image size allowed: 3MB.'
+  'cover.tooBig': 'Maximum cover image size allowed: 3MB.',
+  'admin.async.error.notCapableToBecomeASeller': 'User doesn\'t have enough information to become a seller'
 };

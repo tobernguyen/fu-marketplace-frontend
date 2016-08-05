@@ -70,5 +70,9 @@ export const messages = {
   EDIT_PROMOTION_SUCCESS: {
     id: 'admin.async.success.editPromotion',
     defaultMessage: 'Shop promotion campaign information is updated successfully'
+  },
+  NOT_CAPABLE_TO_BECOME_A_SELLER: {
+    id: 'admin.async.error.notCapableToBecomeASeller',
+    defaultMessage: 'User doesn\'t have enough information to become a seller'
   }
 }

@@ -16,7 +16,7 @@ class PromotionList extends Component {
     });
     const { promotions, adminSelectShopPromotionCampaign } = this.props;
     return(
-      <div>
+      <div className="container-fluid">
         <table className="table table-striped">
           <thead>
             <tr>

@@ -170,7 +170,7 @@ export const admin = (state = initialState, action) => {
     case AdminActionTypes.ADMIN_BAN_USER_FAILURE:
       return _.merge({}, state, {
         userManagement: {
-          submitResultBanStatus: action.error || LOST_CONNECTION,
+          submitResultBanStatus: action.error || action.errors || LOST_CONNECTION,
           isSubmittingBanStatus: false
         }
       });
@@ -194,7 +194,7 @@ export const admin = (state = initialState, action) => {
     case AdminActionTypes.ADMIN_UNBAN_USER_FAILURE:
       return _.merge({}, state, {
         userManagement: {
-          submitResult: action.error || LOST_CONNECTION,
+          submitResult: action.error || action.errors || LOST_CONNECTION,
           isSubmitting: false
         }
       });
@@ -263,7 +263,7 @@ export const admin = (state = initialState, action) => {
       return _.merge({}, state, {
         shopManagement: {
           isSubmittingShopInformation: false,
-          submitResultShopInformation: action.error || LOST_CONNECTION
+          submitResultShopInformation: action.error || action.errors || LOST_CONNECTION
         }
       });
     case AdminActionTypes.ADMIN_UPDATE_SHOP_OPENING_REQUEST:
@@ -335,7 +335,7 @@ export const admin = (state = initialState, action) => {
       return _.merge({}, state, {
         shopManagement: {
           isSubmittingAvatarAndCover: false,
-          submitResultAvatarAndCover: action.error || LOST_CONNECTION
+          submitResultAvatarAndCover: action.error || action.errors || LOST_CONNECTION
         }
       });
     case AdminActionTypes.ADMIN_UPDATE_SHOP_COVER_REQUEST:
@@ -359,7 +359,7 @@ export const admin = (state = initialState, action) => {
       return _.merge({}, state, {
         shopManagement: {
           isSubmittingAvatarAndCover: false,
-          submitResultAvatarAndCover: action.error || LOST_CONNECTION
+          submitResultAvatarAndCover: action.error || action.errors || LOST_CONNECTION
         }
       });
     case AdminActionTypes.ADMIN_BAN_SHOP_REQUEST:
@@ -406,7 +406,7 @@ export const admin = (state = initialState, action) => {
     case AdminActionTypes.ADMIN_UNBAN_SHOP_FAILURE:
       return _.merge({}, state, {
         shopManagement: {
-          submitResultShopBanStatus: action.error || LOST_CONNECTION,
+          submitResultShopBanStatus: action.error || action.errors || LOST_CONNECTION,
           isSubmittingShopBanStatus: false
         }
       });
@@ -523,7 +523,7 @@ export const admin = (state = initialState, action) => {
     case AdminActionTypes.ADMIN_CREATE_SHOP_PROMOTION_CAMPAIGN_FAILURE:
       return _.merge({}, state,{
         shopManagement: {
-          submitResultShopPromotion: action.error || LOST_CONNECTION,
+          submitResultShopPromotion: action.error || action.errors || LOST_CONNECTION,
           isSubmittingShopPromotion: false
         }
       });

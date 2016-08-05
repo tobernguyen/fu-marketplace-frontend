@@ -59,6 +59,7 @@ class FormEditShopInformation extends Component {
       sellerID = seller.id;
       sellerName = seller.fullName;
     }
+    console.log(submitResult);
     return (
       <div className="row">
         <Col lg={3}>

@@ -24,7 +24,7 @@ class RequestList extends Component {
       'disabled': this.props.requests.length < size
     });
     return (
-      <div>
+      <div className="container-fluid">
         <table className="table table-striped">
           <thead>
             <tr>

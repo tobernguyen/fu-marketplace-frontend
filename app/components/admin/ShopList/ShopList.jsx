@@ -22,10 +22,10 @@ class ShopList extends Component {
         <Table striped condensed hover>
           <thead>
             <tr>
-              <th className="col-lg-1">#</th>
-              <th className="col-lg-2"><FormattedMessage {...messages.shopList.tableHead.name}/></th>
-              <th className="col-lg-1"><FormattedMessage {...messages.shopList.tableHead.owner}/></th>
-              <th className="col-lg-4"><FormattedMessage {...messages.shopList.tableHead.shipPlaces}/></th>
+              <th>#</th>
+              <th className="col-lg-3"><FormattedMessage {...messages.shopList.tableHead.name}/></th>
+              <th className="col-lg-2"><FormattedMessage {...messages.shopList.tableHead.owner}/></th>
+              <th className="col-lg-3"><FormattedMessage {...messages.shopList.tableHead.shipPlaces}/></th>
               <th className="col-lg-1"><FormattedMessage {...messages.shopList.tableHead.opening}/></th>
               <th className="col-lg-1"><FormattedMessage {...messages.shopList.tableHead.status}/></th>
               <th className="col-lg-1"><FormattedMessage {...messages.shopList.tableHead.action}/></th>

@@ -27,10 +27,10 @@ class UserList extends Component {
           <thead>
             <tr>
               <th className="col-lg-1">#</th>
-              <th className="col-lg-2"><FormattedMessage {...messages.userList.tableHead.email} /></th>
+              <th className="col-lg-3"><FormattedMessage {...messages.userList.tableHead.email} /></th>
               <th className="col-lg-3"><FormattedMessage {...messages.userList.tableHead.fullName} /></th>
-              <th className="col-lg-2"><FormattedMessage {...messages.userList.tableHead.role} /></th>
-              <th><FormattedMessage {...messages.userList.tableHead.action} /></th>
+              <th className="col-lg-3"><FormattedMessage {...messages.userList.tableHead.role} /></th>
+              <th className="col-lg-1"><FormattedMessage {...messages.userList.tableHead.action} /></th>
             </tr>
           </thead>
           <tbody>

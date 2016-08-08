@@ -39,7 +39,7 @@ class NavigationBar extends Component {
         {
           const SHOP_OPENING_REQUEST_IS_ACCEPTED = 2;
           if (data.status === SHOP_OPENING_REQUEST_IS_ACCEPTED) {
-            this.props.router.push(`/dashboard/shops/${data.id}`);
+            this.props.router.push(`/dashboard/shops/${data.shopId}`);
           }
           break;
         }

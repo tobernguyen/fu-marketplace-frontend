@@ -142,7 +142,7 @@ class Header extends Component {
           <Navbar.Header>
             <Navbar.Brand>
               <Link to="/">
-                FU Marketplace
+                <img src={require('app/images/logo.png')}/>
               </Link>
             </Navbar.Brand>
             <Navbar.Toggle />

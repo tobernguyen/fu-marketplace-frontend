@@ -15,7 +15,7 @@ class BlockSellingItemList extends Component {
     this.state = {
       groupItems: {},
       currentItems: [],
-      selectedCategory: -1
+      selectedCategory: 0
     };
 
     this.handleCheckOut = () => {
@@ -40,19 +40,19 @@ class BlockSellingItemList extends Component {
         this.setState({
           groupItems: {},
           currentItems: [],
-          selectedCategory: -1
+          selectedCategory: 0
         });
       } else {
         const { selectedCategory } = this.state;
-        const firstKey = _.keys(items)[0];
-        this.setState({
-          groupItems: items,
-          currentItems: selectedCategory === -1 ? items[firstKey] : items[selectedCategory]
-        });
-
-        if (selectedCategory === -1) {
+        if (items[selectedCategory]) {
           this.setState({
-            selectedCategory: firstKey
+            groupItems: items,
+            currentItems: items[selectedCategory]
+          });
+        } else {
+          this.setState({
+            selectedCategory: 0,
+            currentItems: items[0]
           })
         }
       }
@@ -69,8 +69,8 @@ class BlockSellingItemList extends Component {
 
     return (
       <ul className="nav nav-pills">
-        {categories.map((category, index) => {
-          const isActive = category.id === this.state.selectedCategory;
+        {categories.map((category) => {
+          const isActive = category.id == this.state.selectedCategory;
           return (
             <li key={category.id} className={classNames({'active': isActive})}>
               <a onClick={() => this.categoryChanged(category.id)}>
@@ -90,7 +90,7 @@ class BlockSellingItemList extends Component {
   renderSellingItems() {
     const { currentItems } = this.state;
     const { sellerMode, addToCart, buyNow, shopID, cartItems, shopOpening, ownerView, toggleItemStatus } = this.props;
-    if (currentItems.length > 0) {
+    if (currentItems && currentItems.length > 0) {
       return (
         <div>
           {this.state.currentItems.map((item) =>

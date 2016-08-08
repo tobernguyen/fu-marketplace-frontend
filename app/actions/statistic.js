@@ -25,5 +25,5 @@ export const getShopStatistics = (shopID, type) => {
 
 export const CLEAR_STATISTICS = 'CLEAR_STATISTICS';
 export const clearStatistics = () => ({
-  type: CLEAR_STATISTICS,
+  type: CLEAR_STATISTICS
 });

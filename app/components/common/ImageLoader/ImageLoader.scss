@@ -1,5 +1,6 @@
 .image-loader {
-
+  border: 1px solid #ccc;
+  min-height: 201px !important;
   &.is-loading {
     background-color: #EEEEEE;
   }
@@ -9,17 +10,17 @@
     left: 6px;
   }
 
-  &.is-visible {
-    img {
-      opacity:1;
-    }
-  }
-
-  img {
-    opacity: 0;
-    -moz-transition: opacity 1s; /* Firefox 4 */
-    -webkit-transition: opacity 1s; /* Safari and Chrome */
-    -o-transition: opacity 1s;
-    transition: opacity 1s;
-  }
+  //&.is-visible {
+  //  img {
+  //    opacity:1;
+  //  }
+  //}
+  //
+  //img {
+  //  opacity: 0;
+  //  -moz-transition: opacity 1s; /* Firefox 4 */
+  //  -webkit-transition: opacity 1s; /* Safari and Chrome */
+  //  -o-transition: opacity 1s;
+  //  transition: opacity 1s;
+  //}
 }

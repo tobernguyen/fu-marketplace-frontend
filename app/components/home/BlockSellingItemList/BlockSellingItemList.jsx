@@ -7,6 +7,7 @@ import _ from 'lodash';
 import classNames from 'classnames';
 import { messages } from './BlockSellingItemList.i18n';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
+import Masonry from 'react-masonry-component';
 
 class BlockSellingItemList extends Component {
   constructor(props) {
@@ -92,7 +93,7 @@ class BlockSellingItemList extends Component {
     const { sellerMode, addToCart, buyNow, shopID, cartItems, shopOpening, ownerView, toggleItemStatus } = this.props;
     if (currentItems && currentItems.length > 0) {
       return (
-        <div>
+        <Masonry>
           {this.state.currentItems.map((item) =>
             {if (sellerMode || ownerView) {
               return <BlockSellingItem
@@ -112,7 +113,7 @@ class BlockSellingItemList extends Component {
                 cartItems={cartItems} />
             }}
           )}
-        </div>
+        </Masonry>
       )
     } else {
       return (

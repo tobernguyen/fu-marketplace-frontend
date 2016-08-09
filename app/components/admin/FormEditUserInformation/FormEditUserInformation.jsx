@@ -111,13 +111,9 @@ class FormEditUserInformation extends Component {
               <ControlLabel>
                 <FormattedMessage {...messages.formEditUserInformation.fields.email} />
               </ControlLabel>
-              <FormControl
-                type="email"
-                placeholder={formatMessage(messages.formEditUserInformation.fields.email)}
-                {...email} />
-              <HelpBlock>
-                {email.touched && email.error ? <FormattedMessage {...email.error}/>: '' }
-              </HelpBlock>
+              <FormControl.Static>
+              {email.value}
+              </FormControl.Static>
             </FormGroup>
             <FormGroup
               className={`${fullName.touched && fullName.invalid ? 'has-error' : ''}`}>

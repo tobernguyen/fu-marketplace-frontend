@@ -538,7 +538,8 @@ export const admin = (state = initialState, action) => {
       return _.merge({}, state, {
         promotionManagement: {
           isFetching: false,
-          promotionList: response.shopPromotionCampaigns
+          promotionList: response.shopPromotionCampaigns,
+          submitResult: ''
         }
       });
     case AdminActionTypes.ADMIN_GET_SHOP_PROMOTION_CAMPAIGN_FAILURE:

@@ -35,12 +35,14 @@ class FormEditShopPromotionCampaign extends Component {
 
     this.handleStartDateChange = (newStartDate) => {
       const {  selectedPromotion: {startDate, endDate} } = this.state;
+      let isValid = false;
       startDate['value'] = newStartDate;
       if(startDate.value.isBefore(endDate.value)) {
         startDate['hasErrors'] = false;
         startDate['error'] = null;
         endDate['hasErrors'] = false;
         endDate['error'] = null;
+        isValid = true;
       } else {
         startDate['hasErrors'] = true;
         startDate['error'] = {
@@ -52,18 +54,21 @@ class FormEditShopPromotionCampaign extends Component {
       selectedPromotion['startDate'] = startDate;
       selectedPromotion['endDate'] = endDate;
       this.setState({
-        selectedPromotion
+        selectedPromotion,
+        isValid
       });
     }
 
     this.handleEndDateChange = (newEndDate) => {
       const {  selectedPromotion: {startDate, endDate} } = this.state;
+      let isValid = false;
       endDate['value'] = newEndDate;
       if(endDate.value.isAfter(startDate.value)) {
         endDate['hasErrors'] = false;
         endDate['error'] = null;
         startDate['hasErrors'] = false;
         startDate['error'] = null;
+        isValid = true;
       } else {
         endDate['hasErrors'] = true;
         endDate['error'] = {
@@ -76,7 +81,8 @@ class FormEditShopPromotionCampaign extends Component {
       selectedPromotion['startDate'] = startDate;
       selectedPromotion['endDate'] = endDate;
       this.setState({
-        selectedPromotion
+        selectedPromotion,
+        isValid
       });
     }
 

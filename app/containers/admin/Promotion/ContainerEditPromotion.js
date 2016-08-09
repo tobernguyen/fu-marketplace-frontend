@@ -9,7 +9,7 @@ import LoadingSpinner from 'app/components/admin/LoadingSpinner';
 
 class ContainerEditPromotion extends Component {
   componentWillMount() {
-    this.props.adminGetShopPromotionCampaign();
+    this.props.adminGetShopPromotionCampaign(1, 9999);
   }
   render() {
     const { adminUpdateShopPromotionCampaign, promotionManagement: { isFetching, promotionList, submitResult, isSubmitting }, params: { promotionId }} = this.props;

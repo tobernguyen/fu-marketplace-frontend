@@ -110,17 +110,17 @@ export const calculateOrdersStatisticData = createSelector(
       return data.incompleteOrders
     });
 
-    const completedOrdersDataSet = _.assign({}, CHART_DATA_HOLDER, {
-      data: completedOrdersData,
+    const completedOrdersDataSet = {
       label: 'Completed orders',
-      borderColor: 'rgba(39, 174, 96,1.0)'
-    });
+      data: completedOrdersData,
+      backgroundColor: '#4CAF50'
+    };
 
-    const inCompletedOrdersDataSet = _.assign({}, CHART_DATA_HOLDER, {
-      data: inCompletedOrdersData,
+    const inCompletedOrdersDataSet = {
       label: 'In-completed orders',
-      borderColor: 'rgba(192, 57, 43,1.0)'
-    });
+      data: inCompletedOrdersData,
+      backgroundColor: '#F44336'
+    };
 
     calculatedData['labels'] = dayArray;
     calculatedData['datasets'] = [completedOrdersDataSet, inCompletedOrdersDataSet];
@@ -219,6 +219,7 @@ export const calculateItemSoldStatistic = createSelector(
       }
     });
 
+    console.log(categoryLabels);
     const dataSets = _.fill(Array(allCategoryIDs.length), CHART_DATA_HOLDER).map((data, index) => {
       return _.merge({}, data, {
         label: categoryLabels[index]['name'],

@@ -14,11 +14,22 @@ export default class ChartOrders extends Component {
     };
 
     const chartOptions = {
-      responsive: true
+      responsive: true,
+      scales: {
+        xAxes: [{
+          stacked: true
+        }],
+        yAxes: [{
+          stacked: true,
+          ticks: {
+            stepSize: 1
+          }
+        }]
+      }
     };
 
     return (
-      <Chart.Line data={chartData} options={chartOptions} width="600" height="250"/>
+      <Chart.Bar data={chartData} options={chartOptions} width="600" height="250"/>
     )
   }
 }

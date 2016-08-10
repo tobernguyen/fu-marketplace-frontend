@@ -1,16 +1,26 @@
 import React, { Component, PropTypes } from 'react';
 import Chart from 'react-chartjs';
+import { messages } from './ChartOrders.i18n';
+import assign from 'lodash.assign';
+import { injectIntl } from 'react-intl';
 
-export default class ChartOrders extends Component {
+class ChartOrders extends Component {
   shouldComponentUpdate(nextProps) {
     return this.props.ordersStatistic.updatedAt !== nextProps.ordersStatistic.updatedAt
   }
 
   render() {
+    const { formatMessage } = this.props.intl;
     const { ordersStatistic } = this.props;
+    const translatedDataSets = ordersStatistic.datasets.map(dataSet => {
+      return assign({}, dataSet, {
+        label: formatMessage(messages[dataSet.label])
+      })
+    });
+
     const chartData = {
       labels: ordersStatistic.labels,
-      datasets: ordersStatistic.datasets
+      datasets: translatedDataSets
     };
 
     const chartOptions = {
@@ -37,3 +47,5 @@ export default class ChartOrders extends Component {
 ChartOrders.propTypes = {
   ordersStatistic: PropTypes.object
 };
+
+export default injectIntl(ChartOrders);

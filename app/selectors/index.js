@@ -110,13 +110,13 @@ export const calculateOrdersStatisticData = createSelector(
     });
 
     const completedOrdersDataSet = {
-      label: 'Completed orders',
+      label: 'completedOrders',
       data: completedOrdersData,
       backgroundColor: '#4CAF50'
     };
 
     const inCompletedOrdersDataSet = {
-      label: 'Uncompleted orders',
+      label: 'incompleteOrders',
       data: inCompletedOrdersData,
       backgroundColor: '#F44336'
     };
@@ -161,7 +161,7 @@ export const calculateSalesStatistic = createSelector(
     calculatedData['labels'] = dayArray;
     calculatedData['datasets'] = [
       {
-        label: 'Total sales',
+        label: 'totalSales',
         backgroundColor: 'rgba(255, 99, 132, 0.2)',
         borderColor: 'rgba(255,99,132,1)',
         borderWidth: 1,

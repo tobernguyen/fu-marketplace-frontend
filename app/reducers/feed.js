@@ -25,7 +25,7 @@ export const feed = (state = INITIAL_STATE, action) => {
   switch (type) {
     case FeedActionTypes.GET_SHOPS_SUCCESS:
       const { result } = response;
-      return _.merge({}, state, {
+      return _.assign({}, state, {
         aggregations: result.aggregations,
         total: result.total
       });

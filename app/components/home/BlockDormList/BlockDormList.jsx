@@ -8,7 +8,7 @@ import { messages } from './BlockDormList.i18n';
 
 export default class BlockDormList extends Component {
   render() {
-    const { shipPlaces, shipPlaceCounter, totalShipPlace, query } = this.props;
+    const { shipPlaces, query } = this.props;
     let placeID;
     if (query && query.hasOwnProperty('ship_to')) {
       placeID = parseInt(query.ship_to);
@@ -28,7 +28,7 @@ export default class BlockDormList extends Component {
                     })
                   }}
               className={classNames('btn', 'btn-default', { active: placeID === undefined })}>
-              <FormattedMessage {...messages.all} /> <span className="badge">{totalShipPlace}</span>
+              <FormattedMessage {...messages.all} />
             </Link>
             {shipPlaces.map(shipPlace =>
               <Link
@@ -40,7 +40,7 @@ export default class BlockDormList extends Component {
                   })
                 }}
                 className={classNames('btn', 'btn-default', { active: placeID && placeID === shipPlace.id })}>
-                {shipPlace.name} <span className="badge">{shipPlaceCounter[shipPlace.id]}</span>
+                {shipPlace.name}
               </Link>
             )}
           </div>
@@ -51,7 +51,5 @@ export default class BlockDormList extends Component {
 }
 
 BlockDormList.propTypes = {
-  shipPlaces: PropTypes.array.isRequired,
-  shipPlaceCounter: PropTypes.object.isRequired,
-  totalShipPlace: PropTypes.number.isRequired
+  shipPlaces: PropTypes.array.isRequired
 };

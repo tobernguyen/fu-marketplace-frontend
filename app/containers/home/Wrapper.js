@@ -13,7 +13,7 @@ class Wrapper extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      query: null
+      queryLoaded: false
     };
   }
 
@@ -21,6 +21,34 @@ class Wrapper extends Component {
     this.props.getShops();
     this.props.getTopFeedSlideShow();
   }
+
+  componentWillReceiveProps(nextProps) {
+    const nextQuery = nextProps.query;
+    const currentQuery = this.props.query;
+
+    if (nextQuery && !this.state.queryLoaded) {
+      this.setState({
+        queryLoaded: true
+      });
+
+      let query = {};
+      if (nextQuery.category) query.categoryIds = [parseInt(nextQuery.category)];
+      if (nextQuery.keyword) query.keyword = nextQuery.keyword;
+      
+      this.props.getShops(query);
+    }
+
+    if (currentQuery && currentQuery) {
+      if (nextQuery.category !== currentQuery.category || nextQuery.keyword !== currentQuery.keyword) {
+        let query = {};
+        if (nextQuery.category) query.categoryIds = [parseInt(nextQuery.category)];
+        if (nextQuery.keyword) query.keyword = nextQuery.keyword;
+
+        this.props.getShops(query);
+      }
+    }
+  }
+
 
   render() {
     const {
@@ -30,7 +58,6 @@ class Wrapper extends Component {
       aggregations:
         {
           category,
-          shipPlace,
           total
         },
       query
@@ -48,9 +75,7 @@ class Wrapper extends Component {
 
             {loaded ? <BlockDormList
               query={query}
-              shipPlaces={shipPlaces}
-              shipPlaceCounter={shipPlace}
-              totalShipPlace={total} /> : <BlockContentPlaceholder />}
+              shipPlaces={shipPlaces} /> : <BlockContentPlaceholder />}
           </div>
           <div className="col-md-9">
             <div className="row">
@@ -66,6 +91,7 @@ class Wrapper extends Component {
     )
   }
 }
+
 
 const mapStateToProps = (state) => {
   return {

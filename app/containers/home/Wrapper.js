@@ -33,10 +33,8 @@ class Wrapper extends Component {
 
       let query = {};
       if (nextQuery.keyword) {
-        if (nextQuery.category) query.categoryIds = [parseInt(nextQuery.category)];
         query.keyword = nextQuery.keyword;
       }
-
       this.props.getShops(query);
     }
 
@@ -45,10 +43,8 @@ class Wrapper extends Component {
 
         let query = {};
         if (nextQuery.keyword) {
-          if (nextQuery.category) query.categoryIds = [parseInt(nextQuery.category)];
           query.keyword = nextQuery.keyword;
         }
-
         this.props.getShops(query);
       }
     }

@@ -42,9 +42,12 @@ class Wrapper extends Component {
 
     if (currentQuery && currentQuery) {
       if (nextQuery.keyword !== currentQuery.keyword) {
+
         let query = {};
-        if (nextQuery.category) query.categoryIds = [parseInt(nextQuery.category)];
-        if (nextQuery.keyword) query.keyword = nextQuery.keyword;
+        if (nextQuery.keyword) {
+          if (nextQuery.category) query.categoryIds = [parseInt(nextQuery.category)];
+          query.keyword = nextQuery.keyword;
+        }
 
         this.props.getShops(query);
       }

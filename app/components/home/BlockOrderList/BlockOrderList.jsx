@@ -34,13 +34,14 @@ class BlockOrderList extends Component {
 
 
   render() {
-    const { status, size, page, socket, shopID, currentOrders, orders, changePageSize, removeOrder, getOrdersOfPage, updateOrderStatus, getNewOrder } = this.props;
+    const { status, size, page, socket, shopID, currentOrders, orders, changePageSize, removeOrder, getOrdersOfPage, updateOrderStatus, getNewOrder, sellerShop } = this.props;
     const hasNextPage = orders.length < size;
     const { isCurrent } = this.state;
     if(isCurrent) {
       return (
         <div>
           <BlockManageOrderHeader
+            sellerShop={sellerShop}
             isCurrent={this.state.isCurrent}
             changeOrderListDisplay={this.changeOrderListDisplay}/>
             <BlockCurrentOrderList

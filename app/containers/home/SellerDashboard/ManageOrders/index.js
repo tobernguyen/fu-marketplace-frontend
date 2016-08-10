@@ -160,7 +160,7 @@ class ManageOrders extends Component {
   }
 
   render() {
-    const { socket, currentOrders, orders, hasMore, clearCurrentOrders, updateOrderStatus, getNewOrder, removeOrder, sellerGetOrder } = this.props;
+    const { socket, currentOrders, orders, hasMore, clearCurrentOrders, updateOrderStatus, getNewOrder, removeOrder, sellerGetOrder, sellerShop } = this.props;
     const { page, size, status } = this.state;
     return (
       <div className="container home-body">
@@ -168,6 +168,7 @@ class ManageOrders extends Component {
           <div className="col-md-9">
             <div className="row">
               <BlockOrderList
+                sellerShop={sellerShop}
                 socket={socket}
                 sellerGetOrder={sellerGetOrder}
                 updateOrderStatus={updateOrderStatus}

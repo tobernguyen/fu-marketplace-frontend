@@ -53,13 +53,14 @@ class Statistics extends Component {
 
   render() {
     const { activeMode } = this.state;
-    const { ordersStatistic, salesStatistic, itemSoldStatistic, fetchingData } = this.props;
+    const { ordersStatistic, salesStatistic, itemSoldStatistic, fetchingData, sellerShop } = this.props;
     return (
       <div className="container home-body">
         <div className="seller-dashboard">
           <div className="col-md-9">
             <div className="row">
               <BlockStatisticsHeader
+                sellerShop={sellerShop}
                 activeMode={this.state.activeMode}
                 statisticModes={this.state.statisticModes}
                 switchMode={this.handleSwitchMode} />

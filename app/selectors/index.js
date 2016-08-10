@@ -1,6 +1,5 @@
 import { createSelector } from 'reselect';
 import _ from 'lodash';
-import randomcolor from 'randomcolor';
 import moment from 'moment';
 require('moment-range');
 require('frozen-moment');
@@ -117,7 +116,7 @@ export const calculateOrdersStatisticData = createSelector(
     };
 
     const inCompletedOrdersDataSet = {
-      label: 'In-completed orders',
+      label: 'Uncompleted orders',
       data: inCompletedOrdersData,
       backgroundColor: '#F44336'
     };
@@ -175,6 +174,13 @@ export const calculateSalesStatistic = createSelector(
   }
 );
 
+const COLORS = [
+  '#F44336', '#E91E63', '#9C27B0', '#673AB7', '#3F51B5',
+  '#2196F3', '#03A9F4', '#00BCD4', '#009688', '#4CAF50',
+  '#8BC34A', '#CDDC39', '#FFEB3B', '#FFC107', '#FF9800',
+  '#FF5722', '#795548', '#9E9E9E', '#607D8B', '#000000'
+];
+
 export const calculateItemSoldStatistic = createSelector(
   [itemSoldStatisticSelector, categoriesSelector],
   (itemSoldStatistic, categories) => {
@@ -219,14 +225,11 @@ export const calculateItemSoldStatistic = createSelector(
       }
     });
 
-    console.log(categoryLabels);
     const dataSets = _.fill(Array(allCategoryIDs.length), CHART_DATA_HOLDER).map((data, index) => {
       return _.merge({}, data, {
         label: categoryLabels[index]['name'],
         data: itemSoldData[categoryLabels[index]['id']] || itemSoldDataHolder,
-        backgroundColor: randomcolor({
-          seed: `${categoryLabels[index]['id'] * 26}_${categoryLabels[index]['name']}`
-        })
+        backgroundColor: COLORS[index] || '#000000'
       })
     });
 

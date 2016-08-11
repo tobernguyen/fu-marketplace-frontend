@@ -67,6 +67,7 @@ export const shop = (state = INITIAL_STATE, action) => {
     case ShopActionTypes.SELLER_UPDATE_SHOP_ITEM_REQUEST:
     case ShopActionTypes.SELLER_UPDATE_SHIP_PLACES_REQUEST:
     case ShopActionTypes.UPDATE_SHOP_INFO_REQUEST:
+    case ShopActionTypes.UPLOAD_SHOP_AVATAR_REQUEST:
       return _.assign({}, state, {
         formSubmitting: true
       });
@@ -157,7 +158,8 @@ export const shop = (state = INITIAL_STATE, action) => {
       const modifiedResponse = response;
       modifiedResponse.avatar = newAvatar;
       return _.assign({}, state, {
-        sellerShop: modifiedResponse
+        sellerShop: modifiedResponse,
+        formSubmitting: false
       });
     case ShopActionTypes.UPLOAD_SHOP_COVER_SUCCESS:
       const newCover = response.cover;

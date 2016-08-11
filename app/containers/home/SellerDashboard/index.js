@@ -72,6 +72,7 @@ class SellerDashboard extends Component {
           <div className="col-md-9">
             <div className="row">
               <BlockShopHeader
+                formSubmitting={this.props.formSubmitting}
                 shopOwner={this.props.currentUser}
                 shop={this.props.sellerShop}
                 sellerMode={true}
@@ -110,7 +111,8 @@ const mapStateToProps = (state) => {
     sellerShop: shop.sellerShop,
     currentUser: getUser(state),
     allCategories: getHashCategories(state),
-    oneSignalRegistered: oneSignalRegistered
+    oneSignalRegistered: oneSignalRegistered,
+    formSubmitting: shop.formSubmitting
   }
 };
 

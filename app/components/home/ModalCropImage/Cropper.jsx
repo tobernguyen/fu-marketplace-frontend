@@ -2,6 +2,8 @@ import React, { Component, PropTypes } from 'react';
 import { isDataURL } from './utils';
 import { Button } from 'react-bootstrap';
 import './Cropper.scss';
+import { FormattedMessage } from 'react-intl';
+import { buttons } from 'app/shared/buttons';
 
 export default class Cropper extends Component {
   constructor(props) {
@@ -245,9 +247,12 @@ export default class Cropper extends Component {
           </div>
         </div>
         <div className='modal-footer'>
-          <Button onClick={this.props.onRequestHide}>Cancel</Button>
-          <Button bsStyle='primary' onClick={this.handleCrop.bind(this)}>
-            Save
+          <Button onClick={this.props.onRequestHide}>
+            <FormattedMessage {...buttons.cancel} />
+          </Button>
+          <Button bsStyle='primary' onClick={this.handleCrop.bind(this)} disabled={this.props.formSubmitting}>
+            <FormattedMessage {...buttons.save} />
+            {this.props.formSubmitting && <span> <i className="fa fa-spin fa-spinner"/></span>}
           </Button>
         </div>
       </div>

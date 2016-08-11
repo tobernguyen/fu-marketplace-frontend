@@ -587,5 +587,6 @@
    'admin.async.error.notCapableToBecomeASeller': 'Người dùng không có đủ thông tin để trở thành chủ shop',
    'completedOrders': 'Đơn hàng hoàn thành',
    'incompleteOrders': 'Đơn hàng chưa hoàn thành',
-   'totalSales': 'Doanh thu'
+   'totalSales': 'Doanh thu',
+   'positionAndSize': 'Đặt lại vị trí và kích thước avatar'
 };

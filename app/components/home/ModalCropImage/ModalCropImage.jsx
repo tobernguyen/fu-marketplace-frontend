@@ -1,6 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { Modal } from 'react-bootstrap';
 import Cropper from './Cropper.jsx';
+import { FormattedMessage } from 'react-intl';
+import { messages } from './ModalCropImage.i18n';
 
 export default class ModalCropImage extends Component {
   render() {
@@ -9,11 +11,14 @@ export default class ModalCropImage extends Component {
         onHide={this.props.onRequestHide}
         show={this.props.modalCropImageShown}>
         <Modal.Header closeButton>
-          <Modal.Title>Position and size your photo</Modal.Title>
+          <Modal.Title>
+            <FormattedMessage {...messages.title}/>
+          </Modal.Title>
         </Modal.Header>
 
         <div className="modal-body">
           <Cropper
+            formSubmitting={this.props.formSubmitting}
             image={this.props.image}
             width={this.props.width}
             height={this.props.height}

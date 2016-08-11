@@ -587,5 +587,6 @@ export default {
   'admin.async.error.notCapableToBecomeASeller': 'User doesn\'t have enough information to become a seller',
   'completedOrders': 'Completed orders',
   'incompleteOrders': 'Incomplete order',
-  'totalSales': 'Total sales'
+  'totalSales': 'Total sales',
+  'positionAndSize': 'Position and size your photo'
 };

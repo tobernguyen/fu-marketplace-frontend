@@ -101,7 +101,8 @@ export default class BlockShopHeader extends Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps.shop && this.state.sellerMode) {
       let shopAvatar = nextProps.shop.avatar || '';
-      if (shopAvatar !== this.state.shopAvatar) {
+
+      if (shopAvatar !== this.state.shopAvatar && !nextProps.formSubmitting) {
         this.setState({
           userAvatar: shopAvatar,
           modalCropImageShown: false
@@ -220,6 +221,7 @@ export default class BlockShopHeader extends Component {
         </div>
         {this.state.modalCropImageShown &&
         <ModalCropImage
+          formSubmitting={this.props.formSubmitting}
           onRequestHide={this.handleRequestHide}
           modalCropImageShown={this.state.modalCropImageShown}
           image={this.state.image}

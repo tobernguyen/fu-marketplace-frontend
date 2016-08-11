@@ -32,19 +32,31 @@ class Wrapper extends Component {
       });
 
       let query = {};
+
       if (nextQuery.keyword) {
         query.keyword = nextQuery.keyword;
       }
+
+      if (nextQuery.ship_to && !isNaN(nextQuery.ship_to)) {
+        query.shipPlaceId = parseInt(nextQuery.ship_to);
+      }
+
       this.props.getShops(query);
     }
 
     if (currentQuery && currentQuery) {
-      if (nextQuery.keyword !== currentQuery.keyword) {
+      if (nextQuery.keyword !== currentQuery.keyword || nextQuery.ship_to !== currentQuery.ship_to) {
 
         let query = {};
+
         if (nextQuery.keyword) {
           query.keyword = nextQuery.keyword;
         }
+
+        if (nextQuery.ship_to && !isNaN(nextQuery.ship_to)) {
+          query.shipPlaceId = parseInt(nextQuery.ship_to);
+        }
+
         this.props.getShops(query);
       }
     }

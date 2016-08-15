@@ -5,12 +5,16 @@ import { FormattedMessage } from 'react-intl';
 import { messages } from 'app/components/home/BlockManageOrderHeader/BlockManageOrderHeader.i18n';
 
 const BlockManageOrderHeader = ({ isCurrent = true, changeOrderListDisplay, sellerShop}) => {
+  let sellerName = '';
+  if(sellerShop) {
+    sellerName = sellerShop.name;
+  }
   return (
     <div className="manage-order-header clearfix">
       <h4 className="title">
         <FormattedMessage {...messages.blockManageOrderHeader.name} />
         <p className="shop-name">
-          {sellerShop.name}
+          {sellerName}
         </p>
       </h4>
       <div className="btn-group switch-mode pull-right">

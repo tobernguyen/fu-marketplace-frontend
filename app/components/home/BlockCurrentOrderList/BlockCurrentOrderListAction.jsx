@@ -47,6 +47,11 @@ const BlockCurrentOrderListAction = ({ order, acceptOrder, rejectOrder, startShi
           <button type="button" className="btn btn-shipping" onClick={() => startShippingOrder(order.id)}>
             <FormattedMessage {...messages.modalViewOrder.button.startShipping}/>
           </button>
+          <OverlayTrigger trigger="click" placement="right" overlay={abortForm} rootClose>
+          <button type="button" className="btn btn-reject" bsRole="toggle">
+            <FormattedMessage {...messages.modalViewOrder.button.abort} />
+          </button>
+          </OverlayTrigger>
         </div>
       );
       break;

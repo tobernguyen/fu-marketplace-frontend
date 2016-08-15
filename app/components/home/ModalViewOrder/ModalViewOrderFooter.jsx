@@ -48,6 +48,11 @@ const ModalViewOrderFooter = ({ order, acceptOrder, rejectOrder, startShippingOr
           <button type="button" className="btn btn-shipping" onClick={() => startShippingOrder(order.id)}>
             <FormattedMessage {...messages.modalViewOrder.button.startShipping}/>
           </button>
+          <OverlayTrigger trigger="click" placement="right" overlay={abortForm} rootClose>
+          <button type="button" className="btn btn-danger" bsRole="toggle">
+            <FormattedMessage {...messages.modalViewOrder.button.abort} />
+          </button>
+          </OverlayTrigger>
         </div>
       );
       break;

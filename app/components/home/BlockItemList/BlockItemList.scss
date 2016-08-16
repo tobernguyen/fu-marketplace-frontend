@@ -4,15 +4,15 @@
       padding-top: 10px;
     }
     .category-list .btn {
-      width: 50%;
+      display: block;
       color: #66757f;
       text-align: left;
       border: 0;
 
-      span:nth-child(1) {
-        float: left;
-      }
-
+      //span:nth-child(1) {
+      //  float: left;
+      //}
+      //
       .badge {
         float: right;
         background-color: #666;

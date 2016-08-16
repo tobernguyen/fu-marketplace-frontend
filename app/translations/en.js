@@ -109,6 +109,7 @@ export default {
   'sellerDashboard.sidebar.updateShop': 'Update shop information',
   'sellerDashboard.sidebar.addShopItem': 'Add shop item',
   'sellerDashboard.sidebar.statistics': 'Statistics',
+  'sellerDashboard.sidebar.itemList': 'List of items',
   'shopReviews.title': 'Shop reviews',
   'shopReviews.shopOwner': 'Shop owner',
   'shopReviews.shopPhone': 'Phone',

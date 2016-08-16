@@ -89,7 +89,7 @@ class ShopsFeed extends Component {
             pageStart={1}
             loadMore={this.loadMore}
             hasMore={this.props.hasMore}
-            loader={<PulseLoader className="feed-loader" color="#C0392B" size="12px" />}>
+            loader={<PulseLoader className="feed-loader" color="#b1211e" size="12px" />}>
             {this.state.elements}
           </InfiniteScroll>}
         {this.props.firstLoad && <BlockFeedItemPlaceholder />}

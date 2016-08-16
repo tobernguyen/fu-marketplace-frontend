@@ -1,9 +1,10 @@
+@import 'app/styles/variables.scss';
+
 .ship-place-span {
     display: inline-block;
     padding: 2px 5px;
     margin: 2px;
-    color: #66757f;
-    background-color: #c0392b;
+    background-color: $primary-color;
     color: #ffffff;
     border-radius: 3px;
 }

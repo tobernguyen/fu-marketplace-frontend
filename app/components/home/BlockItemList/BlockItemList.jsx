@@ -28,7 +28,7 @@ export default class BlockItemList extends Component {
                       category: undefined
                     })
                   }}
-              className={classNames('btn', 'btn-default', { active: categoryID === undefined })}>
+              className={classNames('btn', 'btn-default', 'col-lg-6 col-md-12', { active: categoryID === undefined })}>
               <FormattedMessage {...messages.all} /> <span className="badge">{totalCategory}</span>
             </Link>
             {categories.map(category =>
@@ -40,7 +40,7 @@ export default class BlockItemList extends Component {
                       category: category.id
                     })
                   }}
-                className={classNames('btn', 'btn-default', { active: categoryID && categoryID === category.id })}>
+                className={classNames('btn', 'btn-default', 'col-lg-6 col-md-12', { active: categoryID && categoryID === category.id })}>
                 <span>{category.name}</span> <span className="badge">{categoryCounter[category.id] || 0}</span>
               </Link>
             )}

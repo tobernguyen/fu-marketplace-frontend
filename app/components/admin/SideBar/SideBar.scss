@@ -28,10 +28,14 @@
       }
     }
     li.nav-header {
-      height: 50px;
+      height: 48px;
+      background-color: $primary-color;
       a {
         color: #FFF;
+        &:hover {
+          background-color: transparent;
 
+        }
       }
     }
     li.active > a {

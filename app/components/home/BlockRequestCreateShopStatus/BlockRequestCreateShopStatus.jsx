@@ -35,7 +35,7 @@ export default class BlockRequestCreateShopStatus extends Component {
   render() {
     return (
       <div className="block-request-create-shop-status">
-        {this.state.loading && <DotLoader className="loader" color="#C0392B" size="120px" margin="4px"/>}
+        {this.state.loading && <DotLoader className="loader" color="#b1211e" size="120px" margin="4px"/>}
         {this.state.error && <div className="error">
           <div className="row">
             <i className="fa fa-exclamation-circle error-icon"/>

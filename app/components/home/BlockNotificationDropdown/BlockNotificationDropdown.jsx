@@ -93,7 +93,7 @@ export default class BlockNotificationDropdown extends Component {
             pageStart={1}
             loadMore={this.loadMore}
             hasMore={hasMoreNotifications}
-            loader={<PulseLoader className="feed-loader" color="#C0392B" size="12px" />}
+            loader={<PulseLoader className="feed-loader" color="#b1211e" size="12px" />}
             threshold={1}
             useWindow={false}>
             {this.state.elements}

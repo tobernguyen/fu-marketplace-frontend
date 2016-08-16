@@ -109,6 +109,7 @@
   'sellerDashboard.sidebar.updateShop': 'Thông tin shop',
   'sellerDashboard.sidebar.addShopItem': 'Thêm sản phẩm',
   'sellerDashboard.sidebar.statistics': 'Thống kê',
+   'sellerDashboard.sidebar.itemList': 'Danh sách sản phẩm',
   'shopReviews.title': 'Đánh giá về shop',
   'shopReviews.shopOwner': 'Chủ shop',
   'shopReviews.shopPhone': 'Điện thoại',

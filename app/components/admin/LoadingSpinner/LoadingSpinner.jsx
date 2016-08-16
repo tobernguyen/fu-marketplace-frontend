@@ -4,7 +4,7 @@ import { ClipLoader } from 'halogen';
 const LoadingSpinner = () => {
   return (
     <div className="container-fluid text-center">
-      <ClipLoader color="#c0392b" size="40px" />
+      <ClipLoader color="#b1211e" size="40px" />
     </div>
   );
 };

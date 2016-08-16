@@ -1,3 +1,5 @@
+@import 'app/styles/variables.scss';
+
 .block-request-create-shop-status {
   .loader {
     > div {
@@ -9,7 +11,7 @@
 
   .error {
     text-align: center;
-    color: #c0392b;
+    color: $primary-color;
     .error-icon {
       font-size: 12em;
     }

@@ -1,25 +1,4 @@
-/*
-ul.navbar-nav > li {
-  position: relative;
-}
-ul.navbar-nav > li .badge {
-  background: #ff2d55;
-  border-radius: 9px;
-  font-size: 10px !important;
-  font-weight: 400;
-  text-align: center;
-  padding: 3px 5px;
-  z-index: 100;
-  min-width: 18px;
-  height: 18px;
-}
-
-ul.navbar-nav > li .badge {
-  position: absolute;
-  right: 5px;
-  top: 10px;
-}
-*/
+@import 'app/styles/variables.scss';
 
 .block-notification-dropdown {
   &.open {
@@ -47,7 +26,7 @@ ul.navbar-nav > li .badge {
       position: absolute;
       right: -7px;
       top: -7px;
-      border: 2px solid #c0392b;
+      border: 2px solid $primary-color;
     }
   }
   a {

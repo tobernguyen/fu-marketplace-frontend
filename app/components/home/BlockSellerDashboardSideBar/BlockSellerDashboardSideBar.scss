@@ -26,6 +26,11 @@
     }
   }
 
+  .list-group-item.active, .list-group-item.active:hover, .list-group-item.active:focus {
+    background-color: #2e3d4a;
+    border-color: #2e3d4a;
+  }
+
   .icon-green {
     background-color: #5cb85c;
   }
@@ -48,5 +53,9 @@
 
   .icon-yellow {
     background-color: #FFC517;
+  }
+
+  .icon-violet {
+    background-color: #8871B5;
   }
 }

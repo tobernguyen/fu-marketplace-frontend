@@ -69,6 +69,18 @@ export default class BlockSellerDashboardSideBar extends Component {
           </div>
 
         </ListGroupItem>
+        <LinkContainer to={`/dashboard/shops/${shopID}`}>
+          <ListGroupItem>
+            <div className="clearfix action">
+              <div className="icon icon-violet">
+                <i className="fa fa-book"/>
+              </div>
+              <div className="title">
+                <FormattedMessage {...messages.itemList} />
+              </div>
+            </div>
+          </ListGroupItem>
+        </LinkContainer>
         <LinkContainer to={`/dashboard/shops/${shopID}/info`}>
           <ListGroupItem>
             <div className="clearfix action">

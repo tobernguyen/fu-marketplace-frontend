@@ -21,7 +21,7 @@ class BlockOrderListBody extends Component {
       };
       return (
         <div className="text-center" style={style}>
-          <PulseLoader className="feed-loader" color="#C0392B" size="12px" />
+          <PulseLoader className="feed-loader" color="#b1211e" size="12px" />
         </div>
       );
     }
@@ -40,7 +40,7 @@ class BlockOrderListBody extends Component {
               <th className="col-lg-2"><FormattedMessage {...messages.orderList.tableHead.shipAddress}/></th>
               <th className="col-lg-2"><FormattedMessage {...messages.orderList.tableHead.time}/></th>
               <th className="col-lg-2"><FormattedMessage {...messages.orderList.tableHead.status}/></th>
-              <th className="col-lg-1"></th>
+              <th className="col-lg-1"/>
             </tr>
           </thead>
           <tbody>

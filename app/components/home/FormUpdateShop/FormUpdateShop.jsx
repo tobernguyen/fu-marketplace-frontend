@@ -52,12 +52,14 @@ class FormUpdateShop extends Component {
                 </div>
               </div>
             </div>
-            <button type="submit"
-                    className="btn btn-primary"
-                    disabled={formSubmitting || !dirty}>
-              <FormattedMessage {...buttons.submit}/>{' '}
-              {formSubmitting && <i className="fa fa-spinner fa-spin"/>}
-            </button>
+            <div className="col-sm-9 col-sm-offset-3 action">
+              <button type="submit"
+                      className="btn btn-primary"
+                      disabled={formSubmitting || !dirty}>
+                <FormattedMessage {...buttons.submit}/>{' '}
+                {formSubmitting && <i className="fa fa-spinner fa-spin"/>}
+              </button>
+            </div>
           </form>
         </Modal.Body>
       </div>

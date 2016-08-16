@@ -100,7 +100,7 @@ class BlockCurrentOrderList extends Component {
           'width': '100%',
           'padding': '20px'
         }}>
-          <PulseLoader className="feed-loader" color="#C0392B" size="12px" />
+          <PulseLoader className="feed-loader" color="#b1211e" size="12px" />
         </div>
       );
     }
@@ -114,7 +114,7 @@ class BlockCurrentOrderList extends Component {
           pageStart={1}
           loadMore={this.loadMore}
           hasMore={this.props.hasMore}
-          loader={<PulseLoader className="feed-loader" color="#C0392B" size="12px" />}>
+          loader={<PulseLoader className="feed-loader" color="#b1211e" size="12px" />}>
           {this.state.elements}
         </InfiniteScroll>}
       </div>

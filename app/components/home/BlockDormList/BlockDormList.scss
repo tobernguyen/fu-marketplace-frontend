@@ -1,24 +1,21 @@
 .block-dorm-list {
-  h3.title {
-    border-bottom: 0;
-  }
   .body {
-    .tag-list .btn{
-      margin:2px;
-      color: #666;
-      border: 1px dashed #CCC;
-      padding: 5px 8px;
+    .tag-list {
+      padding-top: 8px;
 
-      .badge {
-        background-color: #666;
-      }
+      .btn {
+        margin:2px;
+        color: #666;
+        border: 1px solid #eee;
+        padding: 5px 8px;
 
-      &:hover {
-        background-color: #EEEEEE;
-      }
+        &:hover {
+          background-color: #f4f4f4;
+        }
 
-      &.active {
-        box-shadow: none;
+        &.active {
+          box-shadow: none;
+        }
       }
     }
   }

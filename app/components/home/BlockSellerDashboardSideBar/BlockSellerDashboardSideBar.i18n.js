@@ -22,5 +22,9 @@ export const messages = {
   statistics: {
     id: 'sellerDashboard.sidebar.statistics',
     defaultMessage: 'statistics'
+  },
+  itemList: {
+    id: 'sellerDashboard.sidebar.itemList',
+    defaultMessage: 'item list'
   }
 };

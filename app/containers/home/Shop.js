@@ -14,6 +14,8 @@ import { getCurrentViewedShop, getUser } from 'app/selectors';
 import OneSignal from 'onesignal';
 import { Modal } from 'react-bootstrap';
 import _ from 'lodash';
+import { withRouter } from 'react-router';
+
 
 class Shop extends Component {
   constructor(props) {
@@ -27,6 +29,10 @@ class Shop extends Component {
         pushNotificationEnabled: false
       };
       this.props.getUserShop(shopID);
+    } else {
+      this.state = {
+        invalidShopID: true
+      }
     }
 
     this.handleCheckOut = () => {
@@ -58,10 +64,13 @@ class Shop extends Component {
       };
       this.props.placeOrder(shopID, order);
     };
-
   }
 
   componentWillMount() {
+    if (this.state.invalidShopID) {
+      this.props.router.push('/404');
+      return;
+    }
     this.props.updateModalSize('lg');
     if (!this.state.pushNotificationEnabled) {
       OneSignal.push(() => {
@@ -78,7 +87,6 @@ class Shop extends Component {
       });
     }
   }
-
 
   componentWillUnmount() {
     this.props.clearCurrentViewedShop();
@@ -167,11 +175,11 @@ const mapStateToProps = (state) => {
   }
 };
 
-export default connect(mapStateToProps, {
+export default withRouter(connect(mapStateToProps, {
   updateModalSize,
   getUserShop,
   placeOrder,
   clearOrderResult,
   clearCurrentViewedShop,
   registerOneSignal
-})(Shop)
+})(Shop))

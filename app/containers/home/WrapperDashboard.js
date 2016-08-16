@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getSellerShop, getSellerShopItems } from 'app/actions/shop';
+import { withRouter } from 'react-router';
 
 class WrapperDashboard extends Component {
   constructor(props) {
@@ -12,6 +13,16 @@ class WrapperDashboard extends Component {
         shopID: shopID
       };
       this.fetchData();
+    } else {
+      this.state = {
+        invalidShopID: true
+      }
+    }
+  }
+
+  componentWillMount() {
+    if (this.state.invalidShopID) {
+      this.props.router.push('/404');
     }
   }
 
@@ -47,7 +58,7 @@ class WrapperDashboard extends Component {
   }
 }
 
-export default connect(undefined, {
+export default withRouter(connect(undefined, {
   getSellerShop,
   getSellerShopItems
-})(WrapperDashboard)
+})(WrapperDashboard))

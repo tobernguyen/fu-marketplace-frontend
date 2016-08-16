@@ -76,7 +76,7 @@ export default (
 
     <Redirect from="goodbye" to="/" />
 
-    <Route name="admin" path="admin" component={Admin}>
+    <Route name="admin" path="/admin" component={Admin}>
       <IndexRedirect to="users" />
       <Route path="requests" component={RequestManagement}>
         <IndexRoute component={ContainerListRequest} />
@@ -100,5 +100,7 @@ export default (
       </Route>
       <Route path="setting" component={ChangePassword} />
     </Route>
+
+    <Route path="*" component={NotFoundPage}/>
   </Route>
 )

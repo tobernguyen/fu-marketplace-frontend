@@ -57,11 +57,12 @@
       position: absolute;
       bottom: 0;
       height: 160px;
+      width: 100%;
 
       .shop-avatar-wrapper {
         .shop-avatar {
           z-index: 2;
-          padding: 16px 20px;
+          padding: 20px;
           position: relative;
           img {
             border: 2px solid #e7e7e7;

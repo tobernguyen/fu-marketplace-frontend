@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import './BlockShopFeedItem.scss';
 import { Link } from 'react-router';
-import classNames from 'classnames';
 import BlockStars from '../BlockStars';
 
 export default class BlockShopFeedItem extends Component {
@@ -53,7 +52,7 @@ export default class BlockShopFeedItem extends Component {
 
     return (
       <div className="block row block-shop-feed-item">
-        <div className="col-md-3 col-sm-4">
+        <div className="col-md-3 col-sm-2 col-xs-2">
           <div className="row thumbnail">
             <Link to={{ pathname: `shops/${id}`, query: query }}>
               <img
@@ -64,7 +63,7 @@ export default class BlockShopFeedItem extends Component {
             </Link>
           </div>
         </div>
-        <div className="col-md-9 col-sm-8">
+        <div className="col-md-9 col-sm-10 col-xs-10">
           <div className="row content">
             {!opening && <div className="shop-closed animated swing">
               <img src={require('app/images/shop-closed.png')}/>

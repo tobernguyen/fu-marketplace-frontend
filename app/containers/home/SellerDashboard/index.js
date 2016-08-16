@@ -69,7 +69,7 @@ class SellerDashboard extends Component {
     return (
       <div className="container home-body">
         <div className="seller-dashboard">
-          <div className="col-md-9">
+          <div className="col-sm-9">
             <div className="row">
               <BlockShopHeader
                 formSubmitting={this.props.formSubmitting}
@@ -85,7 +85,7 @@ class SellerDashboard extends Component {
               <SellingItemList shopID={this.props.params.shopID} sellerMode={true} />
             </div>
           </div>
-          <div className="col-md-3">
+          <div className="col-sm-3">
             <Sticky enabled={true} top={60}>
               <BlockSellerDashboardSideBar
                 sellerShop={this.props.sellerShop}

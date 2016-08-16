@@ -79,18 +79,20 @@ class Wrapper extends Component {
     return (
       <div className="container home-body">
         <div className="row">
-          <div className="col-md-3">
+          <div className="col-sm-3 filter-tools">
             {loaded ? <BlockItemList
+              className="col-md-6"
               query={query}
               categories={categories}
               categoryCounter={category}
               totalCategory={total} /> : <BlockContentPlaceholder />}
 
             {loaded ? <BlockDormList
+              className="col-md-6"
               query={query}
               shipPlaces={shipPlaces} /> : <BlockContentPlaceholder />}
           </div>
-          <div className="col-md-9">
+          <div className="col-sm-9">
             <div className="row">
               <CarouselPinnedItems query={query} pinnedShops={pinnedShops} />
               <div className="main-column col-md-12">

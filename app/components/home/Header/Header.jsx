@@ -80,7 +80,7 @@ class Header extends Component {
           <LinkContainer key={shop.id} to={`/dashboard/shops/${shop.id}`}>
             <MenuItem eventKey={3.2}>
               <i className="shop-init">{shop.name[0]}</i>
-              {shop.name}
+              <span>{shop.name}</span>
             </MenuItem>
           </LinkContainer>
         )}

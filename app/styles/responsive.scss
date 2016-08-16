@@ -1,0 +1,406 @@
+/*==========  Mobile First Method  ==========*/
+
+/* Custom, iPhone Retina */
+@media only screen and (min-width : 375px) and (max-width: 425px) {
+  .home-header {
+    .navbar {
+      .navbar-collapse {
+        border-color: transparent;
+      }
+      .search-form {
+        margin-right: 0;
+        margin-left: 0;
+        height: 33px;
+        border-color: transparent;
+        .form-group {
+          float: left;
+
+          .form-control {
+            width: 328px;
+          }
+        }
+
+        button {
+          margin-top: 2px;
+        }
+      }
+
+      .navbar-nav {
+        margin: 0;
+        > li {
+          float: left;
+          width: 33%;
+          a {
+            display: block;
+          }
+
+          &.navbar-user {
+            .user-avatar {
+              display: none;
+            }
+
+            &.open {
+              > a {
+                background-color: transparent;
+              }
+            }
+
+            .dropdown-menu {
+              float: left;
+              position: relative;
+              left: -250px;
+              width: 375px;
+              padding-bottom: 10px;
+
+              &:before {
+                content: none;
+              }
+              > li {
+                float: left;
+                width: 25%;
+
+                a {
+                  padding: 5px;
+                  color: #FFF;
+                  text-align: center;
+                  float: left;
+                  white-space: normal;
+                  i {
+                    width: 100%;
+                    padding: 15px 0;
+                    line-height: 14px;
+                    float: left;
+                    font-size: 30px;
+
+                  }
+                  span {
+                    float: left;
+                    width: 100%;
+                    line-height: 14px;
+                  }
+                }
+
+                &.divider {
+                  display: none;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .home-body {
+    .filter-tools {
+      padding-left: 0;
+      padding-right: 0;
+    }
+    .block-shop-feed-item {
+      > div {
+        > .thumbnail {
+          padding: 1px;
+        }
+        > .content {
+          h3 {
+            margin-top: 3px;
+            font-size: 20px;
+          }
+          .dv-star-rating {
+            label {
+              margin-bottom: 0;
+              i {
+                font-size: 16px;
+              }
+            }
+          }
+          .category {
+            a {
+              margin-bottom: 5px;
+            }
+          }
+          .description.quote {
+            padding: .8em 5px;
+            margin: 2px 0;
+          }
+          .ship-dorms {
+            a {
+              margin-top: 2px;
+              margin-bottom: 5px;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .shop-detail-modal {
+    > div > a.close {
+      right: 6px;
+      top: -3px;
+      opacity: 1;
+    }
+    .block-shop-header {
+      .shop-cover {
+        > img {
+          height: auto;
+        }
+        .shop-info-wrapper {
+          bottom: 55px;
+          height: auto;
+
+          .shop-avatar-wrapper {
+            .shop-avatar {
+              padding: 10px;
+              img {
+                border-radius: 3px;
+              }
+            }
+          }
+        }
+        .shop-nav-wrapper {
+          height: 55px;
+          background-color: #222;
+          color: #FFF;
+
+          .shop-basic-info {
+            padding: 0 10px;
+
+            .rating {
+              color: #FFEB3B;
+            }
+
+            .title {
+              margin: 6px 0;
+            }
+          }
+          ul.shop-info {
+            display: none;
+            li {
+              float: left;
+              margin-right: 10px;
+            }
+          }
+        }
+      }
+
+      .description-wrapper {
+        padding: 0;
+        .quote {
+          margin: 0;
+          padding: .8em 10px;
+        }
+      }
+    }
+  }
+
+  .block-selling-item-list {
+    .header {
+      > div {
+        padding: 10px 0;
+        ul.nav {
+          li {
+            a {
+              padding: 2px 5px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+/* Extra Small Devices, Phones */
+@media only screen and (min-width : 480px) {
+
+}
+
+/* Small Devices, Tablets */
+@media only screen and (min-width : 768px) {
+  .home-header {
+    .navbar {
+      .search-form > .form-group > .form-control {
+        width: 240px;
+      }
+    }
+  }
+  .home-body {
+    .block-dorm-list {
+      > .body {
+        > .tag-list {
+          > .btn {
+            display: block;
+          }
+        }
+      }
+    }
+
+    .block-shop-feed-item {
+      .thumbnail {
+        padding: 1px;
+      }
+      .content {
+        > h3 {
+          margin-top: 3px;
+        }
+        > .description {
+          margin: 3px 0;
+          padding: .8em 5px;
+        }
+        > .dv-star-rating {
+          > label {
+            margin-bottom: 0;
+          }
+        }
+      }
+    }
+
+    .seller-dashboard {
+      .block-shop-header {
+        .shop-info-wrapper {
+          height: 138px;
+          .shop-avatar-wrapper {
+            .shop-avatar {
+              padding: 14px;
+
+              .upload-avatar {
+                padding: 0 14px;
+                bottom: 14px;
+              }
+            }
+          }
+        }
+
+        .description-wrapper {
+          padding: 0 10px;
+
+          .quote {
+            margin: 5px 0;
+            padding: 1em 10px;
+            background-color: transparent;
+          }
+        }
+
+        .shop-cover {
+          .shop-nav-wrapper {
+            .row {
+              > div {
+                padding-left: 5px;
+                padding-right: 5px;
+              }
+            }
+          }
+        }
+      }
+
+      .block-seller-dashboard-sidebar {
+        .list-group-item {
+          padding: 5px;
+
+          .action {
+            .icon {
+              display: none;
+            }
+            .control {
+              margin: 2px 0;
+            }
+            .title {
+              padding: 2px 3px;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .shop-detail-modal {
+    .block-shop-header {
+      .shop-cover {
+        .shop-nav-wrapper {
+          position: absolute;
+          width: 100%;
+          bottom: 0;
+          background: rgba(1, 1, 1, .8);
+          color: #FFF;
+          a.rating {
+            color: #FFF;
+          }
+
+          .shop-basic-info {
+
+            h4.title {
+
+            }
+          }
+        }
+        .shop-info-wrapper {
+          .shop-avatar-wrapper {
+            .shop-avatar {
+              padding: 0 10px;
+              img {
+                border-width: 1px;
+              }
+            }
+          }
+        }
+      }
+      .description-wrapper {
+        padding: 0 10px;
+
+        .quote {
+          margin: 5px 0;
+          padding: 1em 10px;
+        }
+      }
+    }
+  }
+
+  .block-selling-item-list {
+    .header {
+      ul.nav {
+        li > a {
+          padding: 5px 10px;
+        }
+      }
+    }
+  }
+}
+
+/* Medium Devices, Desktops */
+@media only screen and (min-width : 992px) {
+
+}
+
+/* Large Devices, Wide Screens */
+@media only screen and (min-width : 1200px) {
+
+}
+
+
+
+/*==========  Non-Mobile First Method  ==========*/
+
+/* Large Devices, Wide Screens */
+@media only screen and (max-width : 1200px) {
+
+}
+
+/* Medium Devices, Desktops */
+@media only screen and (max-width : 992px) {
+
+}
+
+/* Small Devices, Tablets */
+@media only screen and (max-width : 768px) {
+
+}
+
+/* Extra Small Devices, Phones */
+@media only screen and (max-width : 480px) {
+
+}
+
+/* Custom, iPhone Retina */
+@media only screen and (max-width : 320px) {
+
+}

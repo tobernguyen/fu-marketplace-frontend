@@ -136,10 +136,10 @@ class BlockSellingItemList extends Component {
     return (
       <div className="block-selling-item-list clearfix">
         <div className="header clearfix">
-          <div className={classNames({'col-md-9 col-xs-8': !sellerMode})}>
+          <div className={classNames({'col-sm-10 col-md-9 col-xs-8': !sellerMode})}>
             {this.renderHeader()}
           </div>
-          {(!sellerMode && shopOpening && !ownerView) && <div className="col-md-3 col-xs-4 row">
+          {(!sellerMode && shopOpening && !ownerView) && <div className="col-sm-2 col-md-3 col-xs-4 row">
             <BlockShoppingCart cartItems={this.props.cartItems} checkOut={this.handleCheckOut} />
           </div>}
         </div>

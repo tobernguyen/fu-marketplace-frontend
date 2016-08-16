@@ -165,7 +165,7 @@ export default class BlockShopHeader extends Component {
           <img src={shopCover} />
           <div className="shop-info-wrapper col-md-12">
             <div className="shop-avatar-wrapper row">
-              <div className="col-sm-3 shop-avatar">
+              <div className="col-sm-3 col-xs-3 shop-avatar">
                 <img src={shopAvatar}/>
                 {sellerMode && <div className="upload-avatar">
                   <Dropzone ref="dropzoneAvatar"
@@ -181,7 +181,7 @@ export default class BlockShopHeader extends Component {
           </div>
           <div className="col-md-12 shop-nav-wrapper">
             <div className="row">
-              <div className={classNames('col-md-offset-3', { 'col-md-6': !isLongName }, { 'col-md-5': isLongName })}>
+              <div className={classNames('col-sm-offset-3', { 'col-sm-6': !isLongName }, { 'col-sm-5': isLongName })}>
                 <div className="row shop-basic-info">
                   <h4 className="title">{name} {this.renderOpeningStatus()}</h4>
                   <Link to={`/shops/${id}/reviews`} className="rating">
@@ -189,7 +189,7 @@ export default class BlockShopHeader extends Component {
                   </Link>
                 </div>
               </div>
-              <div className={classNames({'col-md-3': !isLongName}, {'col-md-4': isLongName})}>
+              <div className={classNames({'col-sm-3': !isLongName}, {'col-sm-4': isLongName})}>
                 <ul className="nav shop-info">
                   <li><i className="fa fa-user" /> {shopOwner.fullName}</li>
                   <li><i className="fa fa-map-marker" /> {address}</li>

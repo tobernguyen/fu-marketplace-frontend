@@ -66,7 +66,7 @@ export default class BlockShopFeedItem extends Component {
         </div>
         <div className="col-md-9 col-sm-8">
           <div className="row content">
-            {!opening && <div className="shop-closed">
+            {!opening && <div className="shop-closed animated swing">
               <img src={require('app/images/shop-closed.png')}/>
             </div>}
             <h3>

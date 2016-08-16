@@ -32,7 +32,7 @@ class BlockShoppingCart extends Component {
 
   render() {
     return (
-      <div className="block-shopping-cart">
+      <div className={classNames('block-shopping-cart', {'animated rubberBand': this.props.cartItems.length > 0})}>
         <a onClick={this.props.checkOut} className={classNames({'has-pointer': this.props.cartItems.length > 0})}>
           <h4>
             <span className="total">

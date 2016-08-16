@@ -30,7 +30,7 @@ class Account extends Component {
   render() {
     let roomList = [];
     for (let dorm of ['A', 'B', 'C', 'D', 'E', 'F']) {
-      for (let floor of [1, 2, 3, 4]) {
+      for (let floor of [1, 2, 3, 4, 5]) {
         for (let floorRoomNo = 1; floorRoomNo <= 14; floorRoomNo ++) {
           const roomNo = `${dorm}${floor * 100 + floorRoomNo}`;
           roomList.push({

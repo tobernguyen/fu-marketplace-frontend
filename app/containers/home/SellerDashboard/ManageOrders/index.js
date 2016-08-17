@@ -126,7 +126,7 @@ class ManageOrders extends Component {
         page: FIRST_PAGE
       });
       this.props.sellerGetOrder(shopID, status, FIRST_PAGE, size);
-    }
+    };
 
     this.prevPage = (e) => {
       e.preventDefault();
@@ -209,7 +209,7 @@ class ManageOrders extends Component {
               />
             </div>
           </div>
-          <div className="col-md-3">
+          <div className="col-md-3 seller-dashboard-sidebar">
             <Sticky enabled={true} top={60}>
               <BlockSellerDashboardSideBar
                 sellerShop={this.props.sellerShop}

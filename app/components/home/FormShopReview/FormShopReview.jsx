@@ -61,11 +61,11 @@ class FormShopReview extends Component {
     const { formatMessage } = this.props.intl;
     return (
       <div className="review-box clearfix">
-        <label className="col-sm-2 user-avatar" htmlFor="input-review">
+        <label className="col-sm-2 col-xs-2 user-avatar" htmlFor="input-review">
           <img src={this.props.reviewer.avatar} className="img-circle img-responsive"/>
         </label>
         <form onSubmit={this.handleSubmit}>
-          <div className="col-sm-8 comment-box">
+          <div className="col-sm-8 col-xs-8 comment-box">
             <textarea
               id="input-review"
               value={this.state.comment}
@@ -81,7 +81,7 @@ class FormShopReview extends Component {
             {this.state.maxLength} {formatMessage(messages.charactersLeft)}
           </span>
           </div>
-          <div className="col-sm-2 submit-btn">
+          <div className="col-sm-2 col-xs-2 submit-btn">
             <button
               type="submit"
               disabled={this.state.stars === INITIAL_STAR_NUMBER}

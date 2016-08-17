@@ -71,7 +71,7 @@ class Statistics extends Component {
               {activeMode === 2 && <BlockItemSoldStatistic fetchingData={fetchingData} reloadData={this.reloadData} itemSoldStatistic={itemSoldStatistic} />}
             </div>
           </div>
-          <div className="col-md-3">
+          <div className="col-md-3 seller-dashboard-sidebar">
             <Sticky enabled={true} top={60}>
               <BlockSellerDashboardSideBar
                 sellerShop={this.props.sellerShop}

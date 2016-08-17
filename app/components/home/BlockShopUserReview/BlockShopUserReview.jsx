@@ -10,10 +10,10 @@ export default class BlockShopUserReview extends Component {
 
     return (
       <div className="review-box clearfix">
-        <label className="col-sm-2 user-avatar">
+        <label className="col-sm-2 col-xs-2 user-avatar">
           <img src={user.avatar} className="img-circle img-responsive"/>
         </label>
-        <div className="col-sm-10 comment-box">
+        <div className="col-sm-10 col-xs-10 comment-box">
           <p className="review-content">
             {ReactEmoji.emojify(review.comment)}
           </p>

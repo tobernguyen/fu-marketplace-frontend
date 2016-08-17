@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getSellerShop, getSellerShopItems } from 'app/actions/shop';
 import { withRouter } from 'react-router';
+import _ from 'lodash';
 
 class WrapperDashboard extends Component {
   constructor(props) {
@@ -27,16 +28,15 @@ class WrapperDashboard extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
+
     if (nextProps.params) {
       const { shopID } = nextProps.params;
       if (shopID && !isNaN(shopID)) {
-        if (shopID !== this.state.shopID) {
-          this.setState({
-            shopID: shopID
-          }, () => {
-            this.fetchData();
-          })
-        }
+        this.setState({
+          shopID: shopID
+        }, () => {
+          this.fetchData();
+        })
       }
     }
   }
@@ -44,8 +44,13 @@ class WrapperDashboard extends Component {
   fetchData() {
     const { shopID } = this.state;
     if (shopID) {
-      this.props.getSellerShop(shopID);
-      this.props.getSellerShopItems(shopID);
+      if (_.isEmpty(this.props.sellerShop)) {
+        this.props.getSellerShop(shopID);
+      }
+
+      if (_.isEmpty(this.props.sellingItems)) {
+        this.props.getSellerShopItems(shopID);
+      }
     }
   }
 
@@ -58,7 +63,14 @@ class WrapperDashboard extends Component {
   }
 }
 
-export default withRouter(connect(undefined, {
+const mapStateToProps = (state) => {
+  return {
+    sellerShop: state.shop.sellerShop,
+    sellingItems: state.shop.sellingItems
+  }
+};
+
+export default withRouter(connect(mapStateToProps, {
   getSellerShop,
   getSellerShopItems
 })(WrapperDashboard))

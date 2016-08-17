@@ -36,6 +36,15 @@ class BlockSellingItemList extends Component {
 
   componentWillReceiveProps(nextProps) {
     const { items } = nextProps;
+    this.calculateData(items)
+  }
+
+  componentWillMount() {
+    const { items } = this.props;
+    this.calculateData(items)
+  }
+
+  calculateData(items) {
     if (items) {
       if (_.isEmpty(items)) {
         this.setState({

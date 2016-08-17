@@ -42,10 +42,10 @@ class BlockShopReviews extends Component {
       <div className="block-shop-reviews">
         <div className="row first-row">
           <div className="col-sm-10 col-sm-offset-1">
-            <div className="col-sm-4 avatar">
+            <div className="col-sm-4 col-xs-3 avatar">
               <img src={shop.avatar} className="img-circle img-responsive"/>
             </div>
-            <div className="col-sm-8 shop-info">
+            <div className="col-sm-8 col-xs-9 shop-info">
               <h3 className="title">
                 {shop.name}
               </h3>
@@ -59,7 +59,7 @@ class BlockShopReviews extends Component {
         </div>
         <hr/>
         <div className="row second-row">
-          <div className="col-sm-12">
+          <div className="col-sm-12 col-xs-10 col-xs-offset-2">
             <ul className="group-info nav">
               <li>
                 <span className="img-avatar">

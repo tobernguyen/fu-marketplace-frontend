@@ -88,7 +88,7 @@ class FormAccountBasic extends Component {
     return (
       <div className="form-account-basic">
         <div className="row">
-          <div className="col-sm-5 user-avatar">
+          <div className="col-sm-5 col-xs-4 user-avatar">
             <ImageUploader handleFileChange={this.handleFileChange} handleFileError={this.handleFileError} />
             <img
               src={this.state.userAvatar} />
@@ -102,7 +102,7 @@ class FormAccountBasic extends Component {
               <FormattedMessage {...this.state.error} />
             </div>}
           </div>
-          <div className="col-sm-7 user-info">
+          <div className="col-sm-7 col-xs-8 user-info">
             <div className="header">
               <h3>{fullName}</h3>
               <p>{email}</p>

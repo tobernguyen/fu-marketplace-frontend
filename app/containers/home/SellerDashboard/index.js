@@ -85,7 +85,7 @@ class SellerDashboard extends Component {
               <SellingItemList shopID={this.props.params.shopID} sellerMode={true} />
             </div>
           </div>
-          <div className="col-sm-3">
+          <div className="col-sm-3 seller-dashboard-sidebar">
             <Sticky enabled={true} top={60}>
               <BlockSellerDashboardSideBar
                 sellerShop={this.props.sellerShop}

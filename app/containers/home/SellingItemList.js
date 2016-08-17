@@ -24,6 +24,7 @@ class SellingItemList extends Component {
     }
   }
 
+
   render() {
     const {
       checkOut,

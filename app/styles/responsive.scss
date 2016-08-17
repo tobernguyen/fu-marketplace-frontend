@@ -6,6 +6,59 @@
     .navbar {
       .navbar-collapse {
         border-color: transparent;
+
+        .block-notification-dropdown {
+          &.open {
+            #notifications-dropdown {
+              background-color: transparent;
+            }
+            .icon-notification .badge {
+              border: 2px solid #b1211e;
+            }
+            > .dropdown-menu {
+              position: relative;
+              left: -127px;
+              width: 383px;
+              margin-top: 37px;
+
+              > .header {
+                color: #FFF;
+
+                .title {
+                  margin: 2px 0;
+                }
+
+                .actions {
+                  a {
+                    color: #FFF;
+                  }
+                }
+              }
+              a {
+                border-bottom: 0;
+              }
+
+              .infinite-scroll {
+                height: 216px;
+                 .block-notification-item {
+                   margin-bottom: 5px;
+                   padding: 5px 10px;
+                   border-radius: 3px;
+                   > .buyer-avatar {
+                     display: none;
+                   }
+                   > .content {
+                     padding-left: 0;
+                   }
+                 }
+              }
+
+              &:before {
+                content: none;
+              }
+            }
+          }
+        }
       }
       .search-form {
         margin-right: 0;
@@ -91,7 +144,104 @@
     }
   }
 
+  .block-shop-reviews {
+    hr {
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+    .first-row {
+      .shop-info {
+        .title {
+          margin: 5px 0 !important;
+          font-size: 20px;
+        }
+        .description {
+          .quote {
+            padding: .6em 5px;
+            margin: 5px 0;
+          }
+        }
+      }
+    }
+
+    .second-row {
+      .group-info.nav {
+        li {
+          width: 100%;
+          padding: 5px 0;
+        }
+      }
+    }
+
+    .all-reviews {
+
+    }
+  }
+
   .home-body {
+    .seller-dashboard {
+      .block-shop-header {
+        .shop-cover {
+          > img {
+            height: auto;
+          }
+
+          .shop-info-wrapper {
+            height: auto;
+            bottom: 50px;
+
+            .shop-avatar-wrapper {
+              .shop-avatar {
+                padding: 10px;
+                > img {
+                  border-width: 1px;
+                }
+
+                .upload-avatar {
+                  padding: 0 10px;
+                  bottom: 13px;
+                  .file-select {
+                    padding: 3px 10px;
+
+                    span {
+                      display: none;
+                    }
+                  }
+                }
+              }
+            }
+          }
+
+          .shop-nav-wrapper {
+            .shop-basic-info {
+              padding: 0 10px;
+            }
+            ul.nav.shop-info {
+              display: none;
+            }
+          }
+        }
+
+        .description-wrapper {
+          padding: 0;
+
+          .quote {
+            padding: .8em 10px;
+            margin: 5px 0;
+          }
+        }
+      }
+
+      .seller-dashboard-sidebar {
+        padding: 0;
+        margin-top: 5px;
+        .block-seller-dashboard-sidebar {
+
+        }
+      }
+
+    }
+
     .filter-tools {
       padding-left: 0;
       padding-right: 0;
@@ -216,7 +366,7 @@
 }
 
 /* Small Devices, Tablets */
-@media only screen and (min-width : 768px) {
+@media only screen and (min-width : 768px) and (max-width: 1024px) {
   .home-header {
     .navbar {
       .search-form > .form-group > .form-control {
@@ -336,7 +486,7 @@
         .shop-info-wrapper {
           .shop-avatar-wrapper {
             .shop-avatar {
-              padding: 0 10px;
+              padding: 17px 10px;
               img {
                 border-width: 1px;
               }
@@ -360,6 +510,23 @@
       ul.nav {
         li > a {
           padding: 5px 10px;
+        }
+      }
+    }
+  }
+
+  .block-shop-reviews {
+    .first-row {
+      .shop-info {
+        .title {
+          margin: 5px 0 !important;
+        }
+
+        .description {
+          .quote {
+            margin: 5px 0;
+            padding: .8em 5px;
+          }
         }
       }
     }

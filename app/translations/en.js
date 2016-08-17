@@ -318,6 +318,7 @@ export default {
   'formEditShopInformation.contactInformation.fields.name': 'Shop name',
   'formEditShopInformation.contactInformation.fields.description': 'Shop description',
   'formEditShopInformation.contactInformation.fields.address': 'Address',
+  'formEditShopInformation.contactInformation.fields.phone': 'Phone',
   'formEditShopInformation.contactInformation.button.saveChanges': 'Save changes',
   'formEditShopInformation.contactInformation.submitResult.success': 'Shop information has been saved',
   'formEditShopInformation.contactInformation.submitResult.fail': 'Error occurred. Please try again later',
@@ -568,7 +569,7 @@ export default {
   'blockEnablePushSuggestion.message.buyer': 'You can receive a notification about updates of your orders instantly by enabling our notification service.',
   'blockEnablePushSuggestion.enable': 'Awesome! Turn on notification',
   'blockEnablePushSuggestion.success': 'You have turned on browser notification',
-  'formSignOut.sectionName': 'Logout',
+  'formSignOut.sectionName': 'Sign out',
   'admin.form.changePassword.newPassword.long': 'New password can\'t be longer than 255 characters',
   'admin.form.editShopInformation.validation.name.long': 'Shop name can\'t be longer than 255 characters',
   'admin.form.editShopInformation.validation.description.long': 'Shop description can\'t be longer than 255 characters',
@@ -589,5 +590,11 @@ export default {
   'completedOrders': 'Completed orders',
   'incompleteOrders': 'Incomplete order',
   'totalSales': 'Total sales',
-  'positionAndSize': 'Position and size your photo'
+  'positionAndSize': 'Position and size your photo',
+  'adminLogin.failure': 'Invalid email or password',
+  'loginForm.button.signIn': 'Sign in',
+  'loginForm.fields.password': 'Password',
+  'loginForm.fields.email': 'Email',
+  'loginForm.validation.email.blank': 'Email can\'t be blank',
+  'loginForm.validation.password.blank': 'Password can\'t be blank'
 };

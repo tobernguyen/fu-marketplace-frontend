@@ -52,7 +52,7 @@ const validate = (values) => {
 
 class FormEditShopInformation extends Component {
   render() {
-    const { fields: { name, description, address }, handleSubmit, isSubmitting, dirty, submitResult , seller, intl: { formatMessage }} = this.props;
+    const { fields: { name, description, phone, address }, handleSubmit, isSubmitting, dirty, submitResult , seller, intl: { formatMessage }} = this.props;
     let sellerName = '';
     let sellerID = 0;
     if(seller) {
@@ -106,6 +106,17 @@ class FormEditShopInformation extends Component {
               <HelpBlock>{description.touched ? description.error: '' }</HelpBlock>
             </FormGroup>
             <FormGroup
+              className={`${phone.touched && phone.invalid ? 'has-error' : ''}`}>
+              <ControlLabel>
+                <FormattedMessage {...messages.formEditShopInformation.contactInformation.fields.phone}/>
+              </ControlLabel>
+              <FormControl
+                type="text"
+                placeholder={formatMessage(messages.formEditShopInformation.contactInformation.fields.phone)}
+                {...phone} />
+              <HelpBlock>{phone.touched && phone.error ? <FormattedMessage {...phone.error}/>: '' }</HelpBlock>
+            </FormGroup>
+            <FormGroup
               className={`${address.touched && address.invalid ? 'has-error' : ''}`}>
               <ControlLabel>
                 <FormattedMessage {...messages.formEditShopInformation.contactInformation.fields.address}/>
@@ -138,7 +149,7 @@ const mapStateToProps = (state) => ({
 
 export default reduxForm({
   form: 'FormEditShopInformation',
-  fields: ['name', 'description', 'address'],
+  fields: ['name', 'description', 'phone', 'address'],
   asyncBlurFields: ['name', 'description', 'opening'],
   validate
 }, mapStateToProps, null)(injectIntl(FormEditShopInformation));

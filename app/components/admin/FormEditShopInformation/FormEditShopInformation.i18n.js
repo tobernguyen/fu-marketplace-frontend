@@ -25,6 +25,10 @@ export const messages = {
         address: {
           id: 'formEditShopInformation.contactInformation.fields.address',
           defaultMessage: 'Address'
+        },
+        phone: {
+          id: 'formEditShopInformation.contactInformation.fields.phone',
+          defaultMessage:'Phone'
         }
       },
       button: {

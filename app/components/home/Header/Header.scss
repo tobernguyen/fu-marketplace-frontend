@@ -12,7 +12,11 @@
 
     .navbar-brand {
       height: 42px;
-      padding: 1px 15px;
+      padding: 3px 15px;
+
+      img {
+        height: 35px;
+      }
     }
 
     .navbar-user {
@@ -111,20 +115,28 @@
     padding: 0;
     border-radius: 3px;
     margin-top: 6px;
+    display: table;
+    width: 400px;
+
     > .form-group {
+      display: table-cell;
+      width: 100%;
       > .form-control {
         border: none;
         padding: 4px 8px;
-        width: 334px;
+        width: 100%;
         box-shadow: none;
         height: 30px;
       }
     }
     > button {
+      display: table-cell;
       border: 0;
       padding: 3px 20px;
       background-color: #EEEEEE;
-      margin-right: 2px;
+      margin: 2px;
+      width: 70px;
+
       &:hover {
         background-color: #CCCCCC;
       }

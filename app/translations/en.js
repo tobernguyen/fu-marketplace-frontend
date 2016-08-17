@@ -318,6 +318,7 @@ export default {
   'formEditShopInformation.contactInformation.fields.name': 'Shop name',
   'formEditShopInformation.contactInformation.fields.description': 'Shop description',
   'formEditShopInformation.contactInformation.fields.address': 'Address',
+  'formEditShopInformation.contactInformation.fields.phone': 'Phone',
   'formEditShopInformation.contactInformation.button.saveChanges': 'Save changes',
   'formEditShopInformation.contactInformation.submitResult.success': 'Shop information has been saved',
   'formEditShopInformation.contactInformation.submitResult.fail': 'Error occurred. Please try again later',

@@ -318,6 +318,7 @@
   'formEditShopInformation.contactInformation.fields.name': 'Tên shop',
   'formEditShopInformation.contactInformation.fields.description': 'Miêu tả',
   'formEditShopInformation.contactInformation.fields.address': 'Địa chỉ',
+  'formEditShopInformation.contactInformation.fields.phone': 'Số điện thoại',
   'formEditShopInformation.contactInformation.button.saveChanges': 'Lưu thay đổi',
   'formEditShopInformation.contactInformation.submitResult.success': 'Thông tin liên lạc của shop đã được lưu.',
   'formEditShopInformation.contactInformation.submitResult.fail': 'Có lỗi xảy ra. Vui lòng thử lại sau.',

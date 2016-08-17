@@ -6,7 +6,7 @@ import { FormattedMessage } from 'react-intl';
 
 class FormRequestCreateShopIntro extends Component {
   render() {
-    const { loaded } = this.props;
+    const { loaded, intro } = this.props;
     return (
       <div className="form-request-create-shop-intro">
         <div className="action-points">
@@ -36,17 +36,18 @@ class FormRequestCreateShopIntro extends Component {
             </p>
           </div>
         </div>
-        <button type="submit" disabled={!loaded} className="btn btn-primary" onClick={this.props.nextPage}>
+        {!intro && <button type="submit" disabled={!loaded} className="btn btn-primary" onClick={this.props.nextPage}>
           <FormattedMessage {...messages.registerNow} />{' '}
           {!loaded && <i className="fa fa-spinner fa-spin" />}
-        </button>
+        </button>}
       </div>
     );
   }
 }
 
 FormRequestCreateShopIntro.propTypes = {
-  loaded: PropTypes.bool.isRequired
+  loaded: PropTypes.bool,
+  intro: PropTypes.bool
 };
 
 export default FormRequestCreateShopIntro;

@@ -1,4 +1,15 @@
 .slideshow {
+  position: relative;
+
+  .mask-overlay {
+    background: rgba(0,0,0,.7);
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 1;
+  }
   .carousel-inner {
     .item {
       img {
@@ -12,11 +23,23 @@
   .intro {
     position: absolute;
     width: 100%;
-    top: 160px;
-    h1 {
-      color: #ffffff;
-      font-weight: 300;
-      padding-bottom: 26px;
+    top: 50%;
+    z-index: 2;
+
+    .logo-wrapper {
+
+      background: url('../../../images/bg-pattern.png') rgba(177, 33, 30, .9);
+      width: 184px;
+      height: 184px;
+      margin: -150px auto 0;
+      border-radius: 50%;
+
+      .logo-image {
+        background: url('../../../images/logo.png') no-repeat center center;
+        width: 180px;
+        height: 180px;
+
+      }
     }
   }
 
@@ -32,5 +55,76 @@
       color: #FFFFFF;
       font-size: 14px;
     }
+  }
+}
+
+.section {
+  .header {
+    text-align: center;
+    color: #fff;
+
+    .title {
+      margin-top: 30px;
+      margin-bottom: 20px;
+    }
+  }
+}
+
+.user-benefits {
+  background: url('../../../images/shattered-pattern.png') #b1211e;
+  padding-bottom: 30px;
+
+  .body {
+    .feature {
+      color: #f5f5f5;
+      .icon {
+        padding-top: 10px;
+      }
+      .content {
+        color: #e1e1e1;
+        h4 {
+          color: #070707;
+          font-weight: 700;
+        }
+      }
+    }
+  }
+}
+
+.seller-benefits {
+  background: #fff;
+  min-height: 90px;
+  padding-bottom: 20px;
+  .title {
+    color: #444;
+  }
+
+  .header {
+    .title.additional-feature {
+      margin-top: 0;
+      margin-bottom: 30px;
+    }
+  }
+
+  .additional-features {
+    .feature {
+      margin-bottom: 10px;
+
+      .icon {
+        padding-top: 10px;
+      }
+    }
+  }
+}
+
+.footer {
+  background: url('../../../images/shattered-pattern.png') #171717;
+
+  p {
+    text-align: center;
+    color: #999999;
+    font-size: 14px;
+    line-height: 22px;
+    padding: 28px 0;
   }
 }

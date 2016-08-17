@@ -25,7 +25,7 @@
   'formRequestShopIntro.step1.title': 'Đăng ký',
   'formRequestShopIntro.step1.description': 'Thông tin shop',
   'formRequestShopIntro.step2.title': 'Đợi duyệt',
-  'formRequestShopIntro.step2.description': 'Phản hồi trong 24',
+  'formRequestShopIntro.step2.description': 'Phản hồi trong 24 giờ',
   'formRequestShopIntro.step3.title': 'Bán hàng',
   'formRequestShopIntro.step3.description': 'Bắt đầu bán hàng',
   'formRequestShopIntro.registerNow': 'Đăng ký ngay!',

@@ -5,6 +5,7 @@ import { messages } from 'app/components/home/BlockMyOrder/BlockMyOrder.i18n';
 import LabelOrderStatus from 'app/components/home/LabelOrderStatus';
 import { Link } from 'react-router';
 import AsyncResultCode from 'app/shared/asyncResultCodes';
+import LabelItem from 'app/components/home/BlockCurrentOrderList/LabelItem.jsx';
 
 class ModalOpenTicket extends React.Component {
   constructor(props) {
@@ -65,7 +66,7 @@ class ModalOpenTicket extends React.Component {
       return (
         <span>
         {orderLines.map(orderLine =>
-          <span key={orderLine.item.id} className="ordered-item">{orderLine.item.name}({orderLine.quantity})</span>
+          <LabelItem orderLine={orderLine} key={orderLine.item.id}/>
         )}
         </span>
       );
@@ -96,7 +97,7 @@ class ModalOpenTicket extends React.Component {
               </div>
               <div>
                 <strong><FormattedMessage {...messages.myOrder.openTicketModal.orderInformation.fields.shop}/></strong>
-                <Link to={`/shops/${order.shopId}`}>Cua hang</Link>
+                <Link to={`/shops/${order.shopId}`}>{order.shopName}</Link>
               </div>
               <div>
                 <strong><FormattedMessage {...messages.myOrder.openTicketModal.orderInformation.fields.orderLines}/></strong>

@@ -34,17 +34,6 @@
         margin: 0 0 10px;
       }
 
-      .label-item {
-        padding: 5px 10px;
-        margin: 5px 5px;
-        background-color: #f5f5f5;
-        display: inline-block;
-        &.has-note {
-          color: #ffffff;
-          background-color: #558abb;
-          cursor: pointer;
-        }
-      }
     }
 
     hr {
@@ -53,6 +42,18 @@
     .current-order-action {
       padding: 0 15px;
     }
+  }
+}
+
+.label-item {
+  padding: 5px 10px;
+  margin: 5px 5px;
+  background-color: #f5f5f5;
+  display: inline-block;
+  &.has-note {
+    color: #ffffff;
+    background-color: #558abb;
+    cursor: pointer;
   }
 }
 

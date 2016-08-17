@@ -590,5 +590,11 @@
    'completedOrders': 'Đơn hàng hoàn thành',
    'incompleteOrders': 'Đơn hàng chưa hoàn thành',
    'totalSales': 'Doanh thu',
-   'positionAndSize': 'Đặt lại vị trí và kích thước avatar'
+   'positionAndSize': 'Đặt lại vị trí và kích thước avatar',
+   'adminLogin.failure': 'Sai email hoặc mật khẩu',
+   'loginForm.button.signIn': 'Đăng nhập',
+   'loginForm.fields.password': 'Mật khẩu',
+   'loginForm.fields.email': 'Thư điện tử',
+   'loginForm.validation.email.blank': 'Thư điện tử không được bỏ trống',
+   'loginForm.validation.password.blank': 'Mật khẩu không được bỏ trống'
 };

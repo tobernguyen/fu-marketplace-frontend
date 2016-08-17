@@ -1,10 +1,11 @@
 import React, { Component, PropTypes } from 'react';
 import './LoginForm.scss';
+import { FormattedMessage, injectIntl } from 'react-intl';
+import { messages } from './LoginForm.i18n.js';
 
 class LoginForm extends Component {
   render() {
-    const { fields: {email, password}, handleSubmit, invalid } = this.props;
-
+    const { fields: {email, password}, handleSubmit, invalid, loginResult, intl: { formatMessage } } = this.props;
     return (
       <div>
         <div className="login-page">
@@ -18,26 +19,31 @@ class LoginForm extends Component {
                   <form className="form-horizontal" onSubmit={handleSubmit(this.props.signInAdmin.bind(this))}>
                     <div className={`input-group ${email.touched && email.invalid ? 'has-error' : ''}`}>
                       <span className="input-group-addon"><i className="glyphicon glyphicon-user"/></span>
-                      <input type="text" className="form-control" placeholder="Email" {...email} />
+                      <input type="text" className="form-control" placeholder={formatMessage(messages.loginForm.fields.email)} {...email} />
                     </div>
                     <div className="has-error message">
                       <div className="help-block">
-                        {email.touched ? email.error : ''}
+                        {email.touched && email.error ? <FormattedMessage {...email.error} /> : ''}
                       </div>
                     </div>
                     <div className={`input-group ${password.touched && password.invalid ? 'has-error' : ''}`}>
                       <span className="input-group-addon"><i className="glyphicon glyphicon-lock"/></span>
-                      <input type="password" className="form-control" placeholder="Password" {...password}/>
+                      <input type="password" className="form-control" placeholder={formatMessage(messages.loginForm.fields.password)} {...password}/>
                     </div>
                     <div className="has-error message">
                       <div className="help-block">
-                        {password.touched ? password.error : ''}
+                        {password.touched && password.error ? <FormattedMessage {...password.error} /> : ''}
                       </div>
                     </div>
+                    { loginResult !== '' &&
+                      <div className="alert alert-danger">
+                        <FormattedMessage {...loginResult}/>
+                      </div>
+                    }
                     <div className="form-group">
                       <div className="col-sm-12">
                         <button type="submit" className="btn btn-primary btn-login" disabled={invalid}>
-                          <i className="glyphicon glyphicon-log-in"/> Sign in
+                          <i className="glyphicon glyphicon-log-in"/> <FormattedMessage {...messages.loginForm.button.signIn}/>
                         </button>
                       </div>
                     </div>
@@ -52,4 +58,4 @@ class LoginForm extends Component {
   }
 }
 
-export default LoginForm;
+export default injectIntl(LoginForm);

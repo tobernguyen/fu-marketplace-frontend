@@ -6,6 +6,7 @@ const INITIAL_STATE = {
   isAuthenticated: null,
   isAdminAuthenticated: false,
   authenticating: false,
+  loginResult: '',
   isLoginByGoogle: true
 };
 
@@ -46,7 +47,15 @@ export const auth = (state = INITIAL_STATE, action) => {
     case ActionTypes.ADMIN_SIGN_OUT:
     case AdminActionTypes.ADMIN_CHANGE_PASSWORD_SUCCESS:
       return _.assign({}, state, {
+        loginResult: '',
         shouldUpdateAdminAuthStatus: true
+      });
+    case ActionTypes.ADMIN_SIGN_IN_FAILURE:
+      return _.assign({}, state, {
+        loginResult: {
+          id: 'adminLogin.failure',
+          defaultMessage: 'Invalid email or password'
+        }
       });
     case ActionTypes.ADMIN_AUTH_STATUS_IS_UPDATED:
       return _.assign({}, state, {

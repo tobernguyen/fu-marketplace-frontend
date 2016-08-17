@@ -32,6 +32,14 @@ const validate = (values) => {
     hasErrors = true;
   }
 
+  if(values.fullName && values.fullName.length > 50) {
+    errors.fullName = {
+      id: 'admin.form.userInformation.fullName.long',
+      defaultMessage: 'User full name can\'t be longer than 50 characters'
+    }
+    hasErrors = true;
+  }
+
   if(!values.identityNumber || values.identityNumber.trim() === '') {
     errors.identityNumber = {
       id: 'admin.form.userInformation.identityNumber.blank',
@@ -90,6 +98,7 @@ class FormEditUserInformation extends Component {
       dirty,
       isSubmitting,
       submitResults,
+      invalid,
       intl: { formatMessage}
     } = this.props;
     return (
@@ -188,7 +197,7 @@ class FormEditUserInformation extends Component {
                 submitResults !== '' &&
                 <AlertSubmitResult result={submitResults}/>
               }
-              <Button type="submit" bsStyle="success" disabled={submitting || !dirty || isSubmitting}>
+              <Button type="submit" bsStyle="success" disabled={submitting || invalid || !dirty || isSubmitting}>
                 {formatMessage(messages.formEditUserInformation.button.saveChanges)}{isSubmitting && <i className="fa fa-spinner fa-spin"></i>}
               </Button>
             </div>

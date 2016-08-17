@@ -25,18 +25,28 @@ const validate = (values) => {
     hasErrors = true;
   }
 
-  if(values.name && values.name.trim().length > 255) {
-    errors.name ={
+  if(values.name && values.name.length > 255) {
+    errors.name = {
       id: 'admin.form.editShopInformation.validation.name.long',
       defaultMessage: 'Shop name can not be longer than 255 characters'
     }
+    hasErrors = true;
   }
 
-  if(values.description && values.description.trim().length > 255) {
+  if(!values.description || values.description.trim() === '' ) {
+    errors.description = {
+      id: 'admin.form.editShopInformation.validation.description.blank',
+      defaultMessage: 'Shop description can\'t be blank'
+    }
+    hasErrors = true;
+  }
+
+  if(values.description && values.description.length > 255) {
     errors.description = {
       id: 'admin.form.editShopInformation.validation.description.long',
       defaultMessage: 'Shop description can not be longer than 255 characters'
     }
+    hasErrors = true;
   }
 
   if(!values.address || values.address.trim() === '') {
@@ -47,12 +57,20 @@ const validate = (values) => {
     hasErrors = true;
   }
 
+  if(values.address && values.address.length > 255) {
+    errors.address = {
+      id: 'admin.form.editShopInformation.validation.address.long',
+      defaultMessage: 'Address can\'t be longer than 255 characters'
+    }
+    hasErrors = true;
+  }
+
   return hasErrors && errors;
 }
 
 class FormEditShopInformation extends Component {
   render() {
-    const { fields: { name, description, phone, address }, handleSubmit, isSubmitting, dirty, submitResult , seller, intl: { formatMessage }} = this.props;
+    const { fields: { name, description, phone, address }, handleSubmit, isSubmitting, invalid, dirty, submitResult , seller, intl: { formatMessage }} = this.props;
     let sellerName = '';
     let sellerID = 0;
     if(seller) {
@@ -103,7 +121,7 @@ class FormEditShopInformation extends Component {
                 componentClass="textarea"
                 placeholder={formatMessage(messages.formEditShopInformation.contactInformation.fields.description)}
                 {...description} />
-              <HelpBlock>{description.touched ? description.error: '' }</HelpBlock>
+              <HelpBlock>{description.touched && description.error ? <FormattedMessage {...description.error} />: '' }</HelpBlock>
             </FormGroup>
             <FormGroup
               className={`${phone.touched && phone.invalid ? 'has-error' : ''}`}>
@@ -132,7 +150,7 @@ class FormEditShopInformation extends Component {
                 submitResult !== '' &&
                 <AlertSubmitResult result={submitResult}/>
               }
-              <Button type="submit" bsStyle="success" disabled={isSubmitting || !dirty}>
+              <Button type="submit" bsStyle="success" disabled={isSubmitting || invalid || !dirty}>
                 <FormattedMessage {...messages.formEditShopInformation.contactInformation.button.saveChanges} />{isSubmitting && <i className="fa fa-spinner fa-spin"></i>}
               </Button>
             </div>

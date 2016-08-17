@@ -38,5 +38,6 @@ export default {
   REJECT_REQUEST_SUCCESS: 'success.admin_reject_request',
   OLD_PASSWORD_NOT_CORRECT: 'error.authentication.old_password_is_not_correct',
   NOT_CAPABLE_TO_BECOME_A_SELLER: 'error.model.user_is_not_capable_of_becoming_seller',
+  UNKNOWN_UPLOAD: 'error.upload.unknown_error',
   UNKNOWN_ERROR: 'UNKNOWN_ERROR'
 }

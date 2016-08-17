@@ -74,5 +74,9 @@ export const messages = {
   NOT_CAPABLE_TO_BECOME_A_SELLER: {
     id: 'admin.async.error.notCapableToBecomeASeller',
     defaultMessage: 'User doesn\'t have enough information to become a seller'
+  },
+  UNKNOWN_UPLOAD: {
+    id: 'admin.async.error.unknownUpload',
+    defaultMessage: 'File type isn\'t supported'
   }
 }

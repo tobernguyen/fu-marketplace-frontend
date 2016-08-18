@@ -1,5 +1,5 @@
 #!/bin/bash
-REMOTE_WEBROOT_FOLDER="/var/www/production/"
+REMOTE_WEBROOT_FOLDER="/var/www/fum-web/"
 RANDOM_FILENAME=$(hexdump -n 16 -v -e '/1 "%02X"' /dev/urandom)
 REMOTE_COMMAND="cd $REMOTE_WEBROOT_FOLDER && rm -rf *.* && mv ~/${RANDOM_FILENAME}.tar.gz . && tar -xf ${RANDOM_FILENAME}.tar.gz"
 cd build/ \

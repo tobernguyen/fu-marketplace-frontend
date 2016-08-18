@@ -186,3 +186,80 @@ if(TARGET === 'staging') {
     }
   });
 }
+
+if(TARGET === 'build') {
+  module.exports = merge(common, {
+    entry: {
+      app: PATHS.app,
+      vendor: Object.keys(pkg.dependencies)
+    },
+    except: ['webpackJsonp'],
+    devtool: 'source-map',
+    output: {
+      path: PATHS.build,
+      filename: '[name].[chunkhash].js',
+      chunkFilename: '[chunkhash].js',
+      publicPath: '/'
+    },
+    plugins: [
+      new CleanWebpackPlugin([PATHS.build], {
+        root: process.cwd()
+      }),
+      new HtmlWebpackPlugin({
+        template: 'build_templates/index.html.production'
+      }),
+      new ExtractTextPlugin('styles.[chunkhash].css'),
+      new webpack.optimize.CommonsChunkPlugin({
+        names: ['vendor','manifest']
+      }),
+      new webpack.DefinePlugin({
+        'process.env': {
+          // This affects react lib size
+          'NODE_ENV': JSON.stringify('production')
+        }
+      }),
+      new webpack.optimize.UglifyJsPlugin({
+        beautify: false,
+        comments: false,
+        compress: {
+          warnings: false,
+          drop_console: true
+        },
+        mangle: {
+          except: ['$'],
+          screw_ie8 : true,
+          keep_fnames: true
+        }
+      }),
+      new CompressionPlugin({
+        asset: '[file].gz',
+        minRatio: 0,
+        regExp: /\.(js|html|css)$/
+      }),
+      new CopyWebpackPlugin([
+        { from: path.join(__dirname, 'build_templates', 'manifest.json.production'), to: 'manifest.json' },
+        { from: path.join(__dirname, 'build_templates', 'OneSignalSDKUpdaterWorker.js') },
+        { from: path.join(__dirname, 'build_templates', 'OneSignalSDKWorker.js') },
+      ])
+    ],
+    resolve: {
+      alias: {
+        config: path.join(__dirname, 'config', 'staging')
+      }
+    },
+    module: {
+      loaders: [
+        {
+          test: /\.css$/,
+          loader: ExtractTextPlugin.extract('style', 'css'),
+          include: PATHS.app
+        },
+        {
+          test: /\.scss$/,
+          loader: ExtractTextPlugin.extract('style', 'css!sass'),
+          include: PATHS.app
+        }
+      ]
+    }
+  });
+}

@@ -144,7 +144,7 @@ class BlockMyOrder extends Component {
   }
 
   render() {
-    const { orders, page, changePageSize, size, prevPage, nextPage } = this.props;
+    const { orders, page, changePageSize, size, prevPage, nextPage, hasNextPage } = this.props;
     return (
       <div>
         {this.renderMyOrder(orders)}
@@ -171,6 +171,7 @@ class BlockMyOrder extends Component {
           size={size}
           prevPage={prevPage}
           nextPage={nextPage}
+          hasNextPage={hasNextPage}
           changePageSize={changePageSize} />
       </div>
     );

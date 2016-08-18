@@ -4,11 +4,13 @@ import AsyncResultCode from 'app/shared/asyncResultCodes';
 const INITIAL_STATE = {
   isFetching: false,
   orders: [],
+  nextPageOrders: [],
   currentOrders: [],
   isSubmitting: false,
   orderResult: '',
   shouldUpdateOrderList: false,
   hasMore: true,
+  hasNextPage: false,
   ticket: {
     isSubmitting: false,
     submitResult: ''
@@ -72,16 +74,33 @@ export const order = (state = INITIAL_STATE, action) => {
       return _.merge({}, state, {
         shouldUpdateOrderList: true
       });
+    case OrderActionTypes.USER_GET_ORDER_REQUEST:
+      return _.merge({}, state, {
+        isFetching: true
+      });
     case OrderActionTypes.USER_GET_ORDER_SUCCESS:
       return _.assign({}, state, {
         orders: action.response.orders,
-        shouldUpdateOrderList: false
+        shouldUpdateOrderList: false,
+        isFetching: false
       });
     case OrderActionTypes.USER_GET_ORDER_FAILURE:
       return _.assign({}, state, {
         orders: [],
-        shouldUpdateOrderList: false
+        shouldUpdateOrderList: false,
+        isFetching: false,
+        hasNextPage: false
       });
+    case OrderActionTypes.USER_GET_ORDER_OF_NEXT_PAGE_SUCCESS:
+      const hasNextPage = action.response.orders.length > 0;
+      return _.merge({}, state, {
+        nextPageOrders: action.response.orders,
+        hasNextPage
+      });
+    case OrderActionTypes.USER_NEXT_PAGE_ORDER:
+      const newState = state;
+      newState.orders = newState.nextPageOrders;
+      return _.assign({}, state, newState);
     case OrderActionTypes.USER_CANCEL_ORDER_SUCCESS:
       return _.merge({}, state, {
         shouldUpdateOrderList: true

@@ -3,12 +3,12 @@ import { messages } from 'app/components/home/BlockMyOrder/BlockMyOrder.i18n';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import classNames from 'classnames';
 
-const BlockMyOrderFooter = ({ page = 1, orders = [], size = 5 , changePageSize, nextPage, prevPage}) => {
+const BlockMyOrderFooter = ({ page = 1, size = 5 , changePageSize, nextPage, prevPage, hasNextPage}) => {
   const previousButtonClass = classNames({
     'disabled': Number(page) === 1
   });
   const nextButtonClass = classNames({
-    'disabled': orders.length < size
+    'disabled': !hasNextPage
   });
   return (
     <nav>

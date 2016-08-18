@@ -154,6 +154,32 @@ export const userGetOrder = (page = 1, size = 10, status = '') => {
   }
 };
 
+export const USER_GET_ORDER_OF_NEXT_PAGE_REQUEST = 'USER_GET_ORDER_OF_NEXT_PAGE_REQUEST';
+export const USER_GET_ORDER_OF_NEXT_PAGE_SUCCESS = 'USER_GET_ORDER_OF_NEXT_PAGE_SUCCESS';
+export const USER_GET_ORDER_OF_NEXT_PAGE_FAILURE = 'USER_GET_ORDER_OF_NEXT_PAGE_FAILURE';
+
+const userRequestGetOrderOfNextPage = (filter) => ({
+  [CALL_API]: {
+    types: [USER_GET_ORDER_OF_NEXT_PAGE_REQUEST, USER_GET_ORDER_OF_NEXT_PAGE_SUCCESS, USER_GET_ORDER_OF_NEXT_PAGE_FAILURE],
+    url: `/api/v1/orders${filter}`,
+    method: HTTP_METHODS.GET
+  }
+});
+
+export const USER_NEXT_PAGE_ORDER = 'USER_NEXT_PAGE_ORDER';
+
+export const userNextPageOrder = () => ({
+  type: USER_NEXT_PAGE_ORDER
+});
+
+export const userGetOrderOfNextPage = (page = 1, size = 1, status = '') => {
+  let filter = `?size=${size}&page=${page + 1}&status=${status}`;
+
+  return (dispatch) => {
+    return dispatch(userRequestGetOrderOfNextPage(filter));
+  }
+};
+
 export const USER_CANCEL_ORDER_REQUEST = 'USER_CANCEL_ORDER_REQUEST';
 export const USER_CANCEL_ORDER_SUCCESS = 'USER_CANCEL_ORDER_SUCCESS';
 export const USER_CANCEL_ORDER_FAILURE = 'USER_CANCEL_ORDER_FAILURE';

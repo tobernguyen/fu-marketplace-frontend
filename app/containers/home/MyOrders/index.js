@@ -2,12 +2,13 @@ import React, { Component } from 'react';
 import ModalHeader from 'app/components/home/ModalHeader';
 import BlockMyOrder from 'app/components/home/BlockMyOrder';
 import NoActiveOrder from 'app/components/home/NoActiveOrder';
-import { userGetOrder, userCancelOrder, userRateOrder, changeOrderStatus } from 'app/actions/order';
+import { userGetOrderOfNextPage, userGetOrder, userCancelOrder, userRateOrder, changeOrderStatus,  userNextPageOrder } from 'app/actions/order';
 import { userOpenTicket, userCloseNewTicketModal } from 'app/actions/ticket';
 import { connect } from 'react-redux';
 import { updateModalSize } from 'app/actions/common';
 import { withRouter } from 'react-router'
 import { injectIntl, intlShape } from 'react-intl';
+import { PulseLoader } from 'halogen';
 
 const FIRST_PAGE = 1;
 const DEFAULT_SIZE = 5;
@@ -17,8 +18,8 @@ class MyOrders extends Component {
     super(props);
 
     this.state = {
-      page: 1,
-      size: 5
+      page: FIRST_PAGE,
+      size: DEFAULT_SIZE
     };
 
     this.changePageSize = (e) => {
@@ -29,6 +30,7 @@ class MyOrders extends Component {
           page: FIRST_PAGE
         });
         this.props.userGetOrder(FIRST_PAGE, size);
+        this.props.userGetOrderOfNextPage(FIRST_PAGE, size);
       }
     };
 
@@ -39,6 +41,7 @@ class MyOrders extends Component {
           page: this.state.page - 1
         }, () => {
           this.props.userGetOrder(this.state.page, this.state.size);
+          this.props.userGetOrderOfNextPage(this.state.page, this.state.size);
         })
       }
     };
@@ -48,13 +51,26 @@ class MyOrders extends Component {
       this.setState({
         page: this.state.page + 1
       }, () => {
-        this.props.userGetOrder(this.state.page, this.state.size);
-      })
+        this.props.userGetOrderOfNextPage(this.state.page, this.state.size);
+      });
+      
+      this.props.userNextPageOrder();
     };
 
     this.renderBody = () => {
       const { page, size } = this.state;
-      const { orders } = this.props;
+      const { orders, isFetching, hasNextPage } = this.props;
+      if(isFetching) {
+        return (
+          <div className="text-center" style={{
+            'height': '50px',
+            'width': '100%',
+            'padding': '20px'
+          }}>
+            <PulseLoader className="feed-loader" color="#b1211e" size="12px" />
+          </div>
+        );
+      }
       if( orders.length === 0 )  {
         return <NoActiveOrder />
       }
@@ -62,6 +78,7 @@ class MyOrders extends Component {
           changeOrderStatus={this.props.changeOrderStatus}
           socket={this.props.socket}
           orders={orders}
+          hasNextPage={hasNextPage}
           page={page}
           size={size}
           prevPage={this.prevPage}
@@ -88,6 +105,7 @@ class MyOrders extends Component {
   componentWillMount() {
     this.props.updateModalSize('lg');
     this.props.userGetOrder(FIRST_PAGE, DEFAULT_SIZE);
+    this.props.userGetOrderOfNextPage(FIRST_PAGE, DEFAULT_SIZE);
   }
 
   render() {
@@ -108,6 +126,8 @@ class MyOrders extends Component {
 const mapStateToProps = (state) => {
   return {
     orders: state.order.orders,
+    isFetching: state.order.isFetching,
+    hasNextPage: state.order.hasNextPage,
     ticket: state.ticket,
     shouldUpdateOrderList: state.order.shouldUpdateOrderList,
     query: state.common.query,
@@ -126,5 +146,7 @@ export default injectIntl(connect(mapStateToProps, {
   userRateOrder,
   userOpenTicket,
   changeOrderStatus,
-  userCloseNewTicketModal
+  userCloseNewTicketModal,
+  userGetOrderOfNextPage,
+  userNextPageOrder
 })(withRouter(MyOrders)))

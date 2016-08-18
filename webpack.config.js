@@ -244,7 +244,7 @@ if(TARGET === 'build') {
     ],
     resolve: {
       alias: {
-        config: path.join(__dirname, 'config', 'staging')
+        config: path.join(__dirname, 'config', 'production')
       }
     },
     module: {

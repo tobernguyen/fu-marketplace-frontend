@@ -15,7 +15,8 @@
       persistNotification: false,
       notifyButton: {
         enable: false /* Set to false to hide */
-      }
+      },
+      safari_web_id: 'web.onesignal.auto.01b883ce-5cfa-4aca-8569-bf08de600615'
     }]);
   </script>
 </head>

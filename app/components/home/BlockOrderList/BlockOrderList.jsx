@@ -34,8 +34,7 @@ class BlockOrderList extends Component {
 
 
   render() {
-    const { status, size, page, socket, shopID, currentOrders, orders, changePageSize, removeOrder, getOrdersOfPage, updateOrderStatus, getNewOrder, sellerShop } = this.props;
-    const hasNextPage = orders.length < size;
+    const { status, size, page, socket, shopID, currentOrders, orders, changePageSize, removeOrder, getOrdersOfPage, updateOrderStatus, getNewOrder, sellerShop, hasNextPage } = this.props;
     const { isCurrent } = this.state;
     if(isCurrent) {
       return (
@@ -75,6 +74,7 @@ class BlockOrderList extends Component {
             viewOrder={this.props.viewOrder}
             isFetching={this.props.isFetching}
             sellerGetOrder={this.props.sellerGetOrder}
+            sellerGetOrderOfNextPage={this.props.sellerGetOrderOfNextPage}
             shopID={shopID}
             status={status}
             size={size}

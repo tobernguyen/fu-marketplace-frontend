@@ -54,6 +54,11 @@ export const order = (state = INITIAL_STATE, action) => {
         isFetching: false,
         orders: []
       });
+    case OrderActionTypes.SELLER_GET_ORDER_OF_NEXT_PAGE_SUCCESS:
+      return _.merge({}, state, {
+        hasNextPage: action.response.orders.length > 0,
+        nextPageOrders: action.response.orders
+      });
     case OrderActionTypes.SELLER_ACCEPT_ORDER_SUCCESS:
       return _.merge({}, state, {
         shouldUpdateOrderList: true
@@ -98,6 +103,7 @@ export const order = (state = INITIAL_STATE, action) => {
         hasNextPage
       });
     case OrderActionTypes.USER_NEXT_PAGE_ORDER:
+    case OrderActionTypes.SELLER_NEXT_PAGE_ORDER:
       const newState = state;
       newState.orders = newState.nextPageOrders;
       return _.assign({}, state, newState);

@@ -6,6 +6,7 @@ import ModalViewOrder from 'app/components/home/ModalViewOrder';
 import { updateShopInfo } from 'app/actions/shop';
 import {
   sellerGetOrder,
+  sellerGetOrderOfNextPage,
   sellerAcceptOrder,
   sellerRejectOrder,
   sellerStartShippingOrder,
@@ -15,13 +16,14 @@ import {
   clearCurrentOrders,
   updateOrderStatus,
   getNewOrder,
-  removeOrder
+  removeOrder,
+  sellerNextPageOrder
 } from 'app/actions/order';
 import Sticky from 'react-stickynode';
 import OrderStatus from 'app/shared/orderStatus';
 
 const FIRST_PAGE = 1;
-const DEFAULT_SIZE = 20;
+const DEFAULT_SIZE = 1;
 
 class ManageOrders extends Component {
   constructor(props) {
@@ -116,6 +118,7 @@ class ManageOrders extends Component {
           page: FIRST_PAGE
         });
         this.props.sellerGetOrder(shopID, status, FIRST_PAGE, size);
+        this.props.sellerGetOrderOfNextPage(shopID, status, FIRST_PAGE, size);
       }
     };
 
@@ -126,6 +129,7 @@ class ManageOrders extends Component {
         page: FIRST_PAGE
       });
       this.props.sellerGetOrder(shopID, status, FIRST_PAGE, size);
+      this.props.sellerGetOrderOfNextPage(shopID, status, FIRST_PAGE, size);
     };
 
     this.prevPage = (e) => {
@@ -136,7 +140,8 @@ class ManageOrders extends Component {
           page: this.state.page - 1
         }, () => {
           this.props.sellerGetOrder(shopID, status,this.state.page, this.state.size);
-        })
+          this.props.sellerGetOrderOfNextPage(shopID, status,this.state.page, this.state.size);
+        });
       }
     };
 
@@ -146,8 +151,10 @@ class ManageOrders extends Component {
       this.setState({
         page: this.state.page + 1
       }, () => {
-        this.props.sellerGetOrder(shopID, status, this.state.page, this.state.size);
-      })
+        this.props.sellerGetOrderOfNextPage(shopID, status,this.state.page, this.state.size);
+      });
+
+      this.props.sellerNextPageOrder();
     };
 
     this.handleGetOrdersOfPage = (params) => {
@@ -160,7 +167,7 @@ class ManageOrders extends Component {
   }
 
   render() {
-    const { socket, currentOrders, orders, hasMore, clearCurrentOrders, updateOrderStatus, getNewOrder, removeOrder, sellerGetOrder, sellerShop } = this.props;
+    const { socket, currentOrders, orders, hasMore, clearCurrentOrders, updateOrderStatus, getNewOrder, removeOrder, sellerGetOrder, sellerShop, hasNextPage, sellerGetOrderOfNextPage } = this.props;
     const { page, size, status } = this.state;
     return (
       <div className="container home-body">
@@ -171,6 +178,7 @@ class ManageOrders extends Component {
                 sellerShop={sellerShop}
                 socket={socket}
                 sellerGetOrder={sellerGetOrder}
+                sellerGetOrderOfNextPage={sellerGetOrderOfNextPage}
                 updateOrderStatus={updateOrderStatus}
                 getNewOrder={getNewOrder}
                 removeOrder={removeOrder}
@@ -178,6 +186,7 @@ class ManageOrders extends Component {
                 hasMore={hasMore}
                 shopID ={this.props.params.shopID}
                 orders={orders}
+                hasNextPage={hasNextPage}
                 currentOrders={currentOrders}
                 viewOrder={this.viewOrder}
                 page={page}
@@ -227,6 +236,7 @@ const mapStateToProps = (state) => {
   return {
     currentOrders: state.order.currentOrders,
     hasMore: state.order.hasMore,
+    hasNextPage: state.order.hasNextPage,
     orders: state.order.orders,
     sellerShop: shop.sellerShop,
     shouldUpdateOrderList: state.order.shouldUpdateOrderList,
@@ -238,6 +248,7 @@ const mapStateToProps = (state) => {
 export default connect(mapStateToProps, {
   updateShopInfo,
   sellerGetOrder,
+  sellerGetOrderOfNextPage,
   sellerAcceptOrder,
   sellerRejectOrder,
   sellerStartShippingOrder,
@@ -247,5 +258,6 @@ export default connect(mapStateToProps, {
   clearCurrentOrders,
   updateOrderStatus,
   getNewOrder,
-  removeOrder
+  removeOrder,
+  sellerNextPageOrder
 })(ManageOrders);

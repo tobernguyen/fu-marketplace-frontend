@@ -41,6 +41,36 @@ export const sellerGetOrder = (shopID, status , page = 1, size = 20, type = '') 
   }
 };
 
+export const SELLER_GET_ORDER_OF_NEXT_PAGE_REQUEST = 'SELLER_GET_ORDER_OF_NEXT_PAGE_REQUEST';
+export const SELLER_GET_ORDER_OF_NEXT_PAGE_SUCCESS = 'SELLER_GET_ORDER_OF_NEXT_PAGE_SUCCESS';
+export const SELLER_GET_ORDER_OF_NEXT_PAGE_FAILURE = 'SELLER_GET_ORDER_OF_NEXT_PAGE_FAILURE';
+
+const sellerRequestGetOrderOfNextPage = (shopID, filter) => ({
+  [CALL_API]: {
+    types: [SELLER_GET_ORDER_OF_NEXT_PAGE_REQUEST, SELLER_GET_ORDER_OF_NEXT_PAGE_SUCCESS, SELLER_GET_ORDER_OF_NEXT_PAGE_FAILURE],
+    url: `/api/v1/seller/shops/${shopID}/orders${filter}`,
+    method: HTTP_METHODS.GET
+  }
+});
+
+export const sellerGetOrderOfNextPage = (shopID, status , page = 1, size = 20, type = '') => {
+  let filter = '';
+  if (status === undefined || status === 'all') {
+    filter = `?size=${size}&page=${page + 1}&type${type.toUpperCase()}`;
+  } else {
+    filter = `?size=${size}&page=${page + 1}&status=${status.toUpperCase()}`;
+  }
+  return (dispatch) => {
+    return dispatch(sellerRequestGetOrderOfNextPage(shopID, filter));
+  }
+};
+
+export const SELLER_NEXT_PAGE_ORDER = 'SELLER_NEXT_PAGE_ORDER';
+
+export const sellerNextPageOrder = () => ({
+  type: SELLER_NEXT_PAGE_ORDER
+});
+
 export const SELLER_ACCEPT_ORDER_REQUEST = 'SELLER_ACCEPT_ORDER_REQUEST';
 export const SELLER_ACCEPT_ORDER_SUCCESS = 'SELLER_ACCEPT_ORDER_SUCCESS';
 export const SELLER_ACCEPT_ORDER_FAILURE = 'SELLER_ACCEPT_ORDER_FAILURE';

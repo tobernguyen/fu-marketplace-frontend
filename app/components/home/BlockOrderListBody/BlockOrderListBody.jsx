@@ -7,9 +7,10 @@ import { PulseLoader } from 'halogen';
 
 class BlockOrderListBody extends Component {
   componentWillMount() {
-    const { isFetching, sellerGetOrder, status, page, size, shopID } = this.props;
+    const { isFetching, sellerGetOrder, sellerGetOrderOfNextPage, status, page, size, shopID } = this.props;
     if(!isFetching) {
       sellerGetOrder(shopID, status, page, size);
+      sellerGetOrderOfNextPage(shopID, status, page, size);
     }
   }
   render() {

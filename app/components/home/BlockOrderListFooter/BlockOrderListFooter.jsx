@@ -10,7 +10,7 @@ const BlockOrderListFooter = ({ shopID, page, size , hasNextPage, changePageSize
   });
 
   const nextButtonClass=classNames({
-    'disabled': hasNextPage
+    'disabled': !hasNextPage
   });
   return (
     <div className="order-list-footer header clearfix">

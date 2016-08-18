@@ -5,6 +5,7 @@
   "scripts": {
     "start": "webpack-dev-server",
     "staging": "webpack",
+    "build": "webpack",
     "test": "jest",
     "lint": "eslint ./app",
     "deploy:staging": "npm run staging && sh ./bin/deploy-staging.sh",

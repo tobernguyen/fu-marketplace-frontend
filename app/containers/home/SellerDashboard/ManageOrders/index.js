@@ -23,7 +23,7 @@ import Sticky from 'react-stickynode';
 import OrderStatus from 'app/shared/orderStatus';
 
 const FIRST_PAGE = 1;
-const DEFAULT_SIZE = 1;
+const DEFAULT_SIZE = 20;
 
 class ManageOrders extends Component {
   constructor(props) {

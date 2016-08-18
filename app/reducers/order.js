@@ -54,6 +54,11 @@ export const order = (state = INITIAL_STATE, action) => {
         isFetching: false,
         orders: []
       });
+    case OrderActionTypes.SELLER_GET_ORDER_OF_NEXT_PAGE_REQUEST:
+      return _.merge({}, state, {
+        hasNextPage: false,
+        nextPageOrders: []
+      });
     case OrderActionTypes.SELLER_GET_ORDER_OF_NEXT_PAGE_SUCCESS:
       return _.merge({}, state, {
         hasNextPage: action.response.orders.length > 0,

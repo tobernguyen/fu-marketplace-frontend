@@ -14,7 +14,7 @@ class BlockOrderListBody extends Component {
     }
   }
   render() {
-    if(this.props.isFetching) {
+    if(this.props.isFetching || this.props.isFetchingNextPage) {
       const style ={
         'height': '50px',
         'width': '100%',

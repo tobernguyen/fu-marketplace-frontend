@@ -167,7 +167,7 @@ class ManageOrders extends Component {
   }
 
   render() {
-    const { socket, currentOrders, orders, hasMore, clearCurrentOrders, updateOrderStatus, getNewOrder, removeOrder, sellerGetOrder, sellerShop, hasNextPage, sellerGetOrderOfNextPage } = this.props;
+    const { socket, currentOrders, orders, hasMore, clearCurrentOrders, updateOrderStatus, getNewOrder, removeOrder, sellerGetOrder, sellerShop, hasNextPage, sellerGetOrderOfNextPage, isFetchingNextPage } = this.props;
     const { page, size, status } = this.state;
     return (
       <div className="container home-body">
@@ -187,6 +187,7 @@ class ManageOrders extends Component {
                 shopID ={this.props.params.shopID}
                 orders={orders}
                 hasNextPage={hasNextPage}
+                isFetchingNextPage={isFetchingNextPage}
                 currentOrders={currentOrders}
                 viewOrder={this.viewOrder}
                 page={page}
@@ -241,6 +242,7 @@ const mapStateToProps = (state) => {
     sellerShop: shop.sellerShop,
     shouldUpdateOrderList: state.order.shouldUpdateOrderList,
     isFetching: state.order.isFetching,
+    isFetchingNextPage: state.order.isFetchingNextPage,
     socket: state.common.socket
   }
 };

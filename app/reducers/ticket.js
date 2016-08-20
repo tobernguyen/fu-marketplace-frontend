@@ -137,14 +137,21 @@ export const ticket = (state = INITIAL_STATE, action) => {
         isSubmitting: false,
         submitResult: action.error || LOST_CONNECTION
       });
+    case TicketActionTypes.USER_GET_TICKETS_REQUEST:
+      return _.merge({}, state, {
+        tickets: [],
+        shouldUpdateTicketList: false,
+        isFetching: true
+      });
     case TicketActionTypes.USER_GET_TICKETS_SUCCESS:
       return _.merge({}, state, {
         tickets: action.response.tickets,
-        shouldUpdateTicketList: false
+        isFetching: false
       });
     case TicketActionTypes.USER_GET_TICKETS_FAILURE:
      return _.merge({}, state, {
        tickets: [],
+       isFetching: false,
        shouldUpdateTicketList: false
      });
     case TicketActionTypes.USER_REOPEN_TICKET_REQUEST:

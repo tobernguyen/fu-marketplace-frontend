@@ -2,6 +2,7 @@ import * as OrderActionTypes from '../actions/order';
 import _ from 'lodash';
 import AsyncResultCode from 'app/shared/asyncResultCodes';
 const INITIAL_STATE = {
+  isFetchingNextPage: false,
   isFetching: false,
   orders: [],
   nextPageOrders: [],
@@ -50,19 +51,21 @@ export const order = (state = INITIAL_STATE, action) => {
         orders: action.response.orders
       });
     case OrderActionTypes.SELLER_GET_ORDER_FAILURE:
-      return _.merge({}, state, {
+      return _.assign({}, state, {
         isFetching: false,
         orders: []
       });
     case OrderActionTypes.SELLER_GET_ORDER_OF_NEXT_PAGE_REQUEST:
-      return _.merge({}, state, {
+      return _.assign({}, state, {
         hasNextPage: false,
+        isFetchingNextPage: true,
         nextPageOrders: []
       });
     case OrderActionTypes.SELLER_GET_ORDER_OF_NEXT_PAGE_SUCCESS:
-      return _.merge({}, state, {
+      return _.assign({}, state, {
         hasNextPage: action.response.orders.length > 0,
-        nextPageOrders: action.response.orders
+        nextPageOrders: action.response.orders,
+        isFetchingNextPage: false
       });
     case OrderActionTypes.SELLER_ACCEPT_ORDER_SUCCESS:
       return _.merge({}, state, {
@@ -101,11 +104,16 @@ export const order = (state = INITIAL_STATE, action) => {
         isFetching: false,
         hasNextPage: false
       });
+    case OrderActionTypes.USER_GET_ORDER_OF_NEXT_PAGE_REQUEST:
+      return _.assign({}, state, {
+        isFetchingNextPage: true
+      });
     case OrderActionTypes.USER_GET_ORDER_OF_NEXT_PAGE_SUCCESS:
       const hasNextPage = action.response.orders.length > 0;
-      return _.merge({}, state, {
+      return _.assign({}, state, {
         nextPageOrders: action.response.orders,
-        hasNextPage
+        hasNextPage,
+        isFetchingNextPage: false
       });
     case OrderActionTypes.USER_NEXT_PAGE_ORDER:
     case OrderActionTypes.SELLER_NEXT_PAGE_ORDER:

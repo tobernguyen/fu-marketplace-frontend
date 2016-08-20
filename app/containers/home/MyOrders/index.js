@@ -59,8 +59,8 @@ class MyOrders extends Component {
 
     this.renderBody = () => {
       const { page, size } = this.state;
-      const { orders, isFetching, hasNextPage } = this.props;
-      if(isFetching) {
+      const { orders, isFetching, hasNextPage, isFetchingNextPage } = this.props;
+      if(isFetching || isFetchingNextPage) {
         return (
           <div className="text-center" style={{
             'height': '50px',
@@ -79,6 +79,7 @@ class MyOrders extends Component {
           socket={this.props.socket}
           orders={orders}
           hasNextPage={hasNextPage}
+          isFetchingNextPage={isFetchingNextPage}
           page={page}
           size={size}
           prevPage={this.prevPage}
@@ -127,6 +128,7 @@ const mapStateToProps = (state) => {
   return {
     orders: state.order.orders,
     isFetching: state.order.isFetching,
+    isFetchingNextPage: state.order.isFetchingNextPage,
     hasNextPage: state.order.hasNextPage,
     ticket: state.ticket,
     shouldUpdateOrderList: state.order.shouldUpdateOrderList,

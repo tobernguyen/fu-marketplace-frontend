@@ -59,7 +59,7 @@ class BlockShopReviews extends Component {
         </div>
         <hr/>
         <div className="row second-row">
-          <div className="col-sm-12 col-xs-10 col-xs-offset-2">
+          <div className="col-sm-12 col-xs-10 col-xs-offset-2 col-sm-offset-0">
             <ul className="group-info nav">
               <li>
                 <span className="img-avatar">

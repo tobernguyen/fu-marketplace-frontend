@@ -11,6 +11,7 @@ import {
 import BlockMyTicket from 'app/components/home/BlockMyTicket';
 import NoTicket from 'app/components/home/NoTicket';
 import { injectIntl } from 'react-intl';
+import { PulseLoader } from 'halogen';
 
 const FIRST_PAGE = 1;
 const DEFAULT_SIZE = 5;
@@ -59,7 +60,15 @@ class MyTickets extends Component {
       const { page, size } = this.state;
       const { userCloseTicket, userCloseTicketModal, ticket: { tickets, isFetching, isSubmitting, submitResult }, userReopenTicket } = this.props;
       if(isFetching) {
-        return null;
+        return (
+          <div className="text-center" style={{
+            'height': '50px',
+            'width': '100%',
+            'padding': '20px'
+          }}>
+            <PulseLoader className="feed-loader" color="#b1211e" size="12px" />
+          </div>
+        );
       }
       if( tickets.length === 0 ) {
         return <NoTicket />

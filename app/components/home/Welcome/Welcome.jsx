@@ -60,10 +60,10 @@ export default class Welcome extends Component {
             <div className="col-sm-12">
               <div className="col-sm-6">
                 <div className="clearfix feature">
-                  <div className="col-sm-2 icon">
+                  <div className="col-xs-2 icon">
                     <i className="fa fa-search fa-5x"/>
                   </div>
-                  <div className="col-sm-10 content">
+                  <div className="col-xs-10 content">
                     <h4>Tìm kiếm sản phẩm</h4>
                     <p>
                       Hỗ trợ tìm kiếm sản phẩm theo thể loại, nơi ship tới và tất nhiên là cả tên sản phẩm, tên shop.
@@ -72,10 +72,10 @@ export default class Welcome extends Component {
                 </div>
 
                 <div className="clearfix feature">
-                  <div className="col-sm-2 icon">
+                  <div className="col-xs-2 icon">
                     <i className="fa fa-comments fa-5x"/>
                   </div>
-                  <div className="col-sm-10 content">
+                  <div className="col-xs-10 content">
                     <h4>Khiếu nại về cửa hàng</h4>
                     <p>
                       Bạn có thể khiếu nại về chất lượng sản phẩm, dịch vụ hoặc về một đơn hàng nào đó bất kỳ lúc nào.
@@ -86,10 +86,10 @@ export default class Welcome extends Component {
 
               <div className="col-sm-6">
                 <div className="clearfix feature">
-                  <div className="col-sm-2 icon">
+                  <div className="col-xs-2 icon">
                     <i className="fa fa-bars fa-5x"/>
                   </div>
-                  <div className="col-sm-10 content">
+                  <div className="col-xs-10 content">
                     <h4>Thông tin đơn hàng</h4>
                     <p>
                       Nhận thông tin về trạng thái đơn hàng theo thời gian thực qua hệ thống thông báo của trình duyệt và ngay trên trang web.
@@ -98,10 +98,10 @@ export default class Welcome extends Component {
                 </div>
 
                 <div className="clearfix feature">
-                  <div className="col-sm-2 icon">
+                  <div className="col-xs-2 icon">
                     <i className="fa fa-star fa-5x"/>
                   </div>
-                  <div className="col-sm-10 content">
+                  <div className="col-xs-10 content">
                     <h4>Đánh giá của shop</h4>
                     <p>
                       Bạn có thể đánh giá hoặc xem thông tin đánh giá khách quan về shop từ những người dùng khác.
@@ -109,7 +109,6 @@ export default class Welcome extends Component {
                   </div>
                 </div>
               </div>
-
             </div>
           </div>
         </div>
@@ -121,7 +120,7 @@ export default class Welcome extends Component {
             <h3 className="title">Bạn muốn bán hàng? Đăng ký chỉ với 3 bước!</h3>
           </div>
           <div className="body row">
-            <div className="col-md-6 col-md-offset-3">
+            <div className="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1">
               <FormRequestCreateShopIntro intro={true} />
             </div>
           </div>
@@ -133,10 +132,10 @@ export default class Welcome extends Component {
             <div className="col-md-6 col-md-offset-3">
 
               <div className="clearfix feature">
-                <div className="col-sm-2 icon">
+                <div className="col-xs-2 icon">
                   <i className="fa fa-bell fa-5x"/>
                 </div>
-                <div className="col-sm-10 content">
+                <div className="col-xs-10 content">
                   <h4>Nhận đơn hàng nhanh chóng</h4>
                   <p>
                     Nhận đơn hàng nhanh chóng theo thời gian thực.
@@ -145,10 +144,10 @@ export default class Welcome extends Component {
               </div>
 
               <div className="clearfix feature">
-                <div className="col-sm-2 icon">
+                <div className="col-xs-2 icon">
                   <i className="fa fa-pie-chart fa-5x"/>
                 </div>
-                <div className="col-sm-10 content">
+                <div className="col-xs-10 content">
                   <h4>Xem thống kê bán hàng</h4>
                   <p>
                     Kiểm soát doanh thu bán hàng, thông kê những sản phẩm bán chạy để đưa ra chiến lược kinh doanh phù hợp.
@@ -157,10 +156,10 @@ export default class Welcome extends Component {
               </div>
 
               <div className="clearfix feature">
-                <div className="col-sm-2 icon">
+                <div className="col-xs-2 icon">
                   <i className="fa fa-bars fa-5x"/>
                 </div>
-                <div className="col-sm-10 content">
+                <div className="col-xs-10 content">
                   <h4>Quản lý sản phẩm dễ dàng</h4>
                   <p>
                     Dễ dàng quản lý, cập nhật tình trạng còn hết, số lượng sản phẩm một cách nhanh chóng theo thời gian thực.
@@ -169,10 +168,10 @@ export default class Welcome extends Component {
               </div>
 
               <div className="clearfix feature">
-                <div className="col-sm-2 icon">
+                <div className="col-xs-2 icon">
                   <i className="fa fa-comments fa-5x"/>
                 </div>
-                <div className="col-sm-10 content">
+                <div className="col-xs-10 content">
                   <h4>Nhận ý kiến đóng góp từ khách hàng</h4>
                   <p>
                     Nhận ý kiến đóng góp từ khách hàng để nâng cao chất lượng dịch vụ.
@@ -181,17 +180,16 @@ export default class Welcome extends Component {
               </div>
 
               <div className="clearfix feature">
-                <div className="col-sm-2 icon">
+                <div className="col-xs-2 icon">
                   <i className="fa fa-tachometer fa-5x"/>
                 </div>
-                <div className="col-sm-10 content">
+                <div className="col-xs-10 content">
                   <h4>Quản lý shop hiệu quả</h4>
                   <p>
                     Cùng một tài khoản có thể tạo được nhiều shop và dễ dàng cập nhật thông tin shop.
                   </p>
                 </div>
               </div>
-
             </div>
           </div>
         </div>

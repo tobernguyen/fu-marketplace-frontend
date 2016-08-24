@@ -263,6 +263,11 @@
 }
 
 @media only screen and (min-width: 320px) and (max-width: 375px) {
+  .welcome {
+    .btn-google-sign-in {
+      margin-top: -20px !important;
+    }
+  }
   .home-header {
     .navbar {
       .navbar-header {
@@ -638,11 +643,7 @@
       .seller-dashboard-sidebar {
         padding: 0;
         margin-top: 5px;
-        .block-seller-dashboard-sidebar {
-
-        }
       }
-
     }
 
     .filter-tools {
@@ -764,13 +765,82 @@
   }
 }
 
-/* Extra Small Devices, Phones */
-@media only screen and (min-width : 480px) {
+@media only screen and (max-width : 590px) {
+  .seller-benefits {
+    .container {
+      > div.header:first-child {
+        display: none;
+      }
 
+      .header .title.additional-feature {
+        margin-top: 20px;
+      }
+    }
+    .form-request-create-shop-intro {
+      display: none;
+    }
+  }
+  .welcome {
+    .slideshow {
+      .intro {
+        .logo-wrapper {
+          display: none;
+        }
+        .btn-google-sign-in {
+          margin-top: 0;
+        }
+      }
+    }
+  }
+}
+
+/* Extra Small Devices, Phones */
+@media only screen and (max-width: 768px) {
+  .user-benefits .body .feature .icon {
+    > .fa {
+      font-size: 3.2em;
+    }
+  }
+  .seller-benefits {
+    .body.additional-features {
+      .feature {
+        .icon {
+          > .fa {
+            font-size: 3.2em;
+          }
+        }
+      }
+    }
+  }
+
+  .welcome {
+    .slideshow {
+      .intro {
+        .logo-wrapper {
+          width: 140px;
+          height: 140px;
+
+          .logo-image {
+            width: 140px;
+            height: 140px;
+          }
+        }
+      }
+
+      .carousel {
+        .carousel-indicators {
+          display: none;
+        }
+      }
+    }
+  }
 }
 
 /* Small Devices, Tablets */
 @media only screen and (min-width : 768px) and (max-width: 1024px) {
+  .form-request-create-shop-intro .action-points .circle.green {
+    left: 227px !important;
+  }
   .home-header {
     .navbar {
       .search-form {

@@ -271,6 +271,7 @@
         }
       }
       .navbar-collapse {
+        border-color: transparent;
         .search-form {
           width: 100%;
           margin-left: 0;
@@ -287,8 +288,48 @@
               }
             }
           }
+          > .block-notification-dropdown {
+            #notifications-dropdown {
+              background-color: transparent;
+
+            }
+            > .dropdown-menu {
+              float: left;
+
+              > li.header {
+                padding: 0 15px 7px;
+                color: #FFF;
+                .actions {
+                  a {
+                    color: #FFF;
+                  }
+                }
+              }
+
+              .infinite-scroll {
+                height: 180px;
+                li {
+                  .block-notification-item {
+                    padding: 6px 5px;
+                    .buyer-avatar {
+                      display: none;
+                    }
+                    .content {
+                      padding-left: 0;
+                    }
+                  }
+                }
+              }
+
+
+              &:before {
+                content: none;
+              }
+            }
+          }
           > .navbar-user {
             #basic-nav-dropdown {
+              background-color: transparent;
               .user-avatar {
                 display: block;
               }
@@ -296,6 +337,23 @@
             .dropdown-menu {
               left: -3px;
               width: 100%;
+              float: left;
+
+              li {
+                width: 50%;
+                float: left;
+
+                &.divider {
+                  display: none;
+                }
+                > a {
+                  color: #FFF;
+                }
+              }
+
+              &:before {
+                content: none;
+              }
             }
           }
           > .block-notification-dropdown {
@@ -318,9 +376,16 @@
       }
     }
   }
+
+  .home-body {
+    .filter-tools {
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
 }
 /* Custom, iPhone Retina */
-@media only screen and (min-width : 375px) and (max-width: 425px) {
+@media only screen and (min-width : 375px) and (max-width: 768px) {
   .home-header {
     .navbar-header {
       .navbar-brand {
@@ -437,7 +502,7 @@
               }
               > li {
                 float: left;
-                width: 25%;
+                width: 25% !important;
 
                 a {
                   padding: 5px;
@@ -584,6 +649,7 @@
       padding-left: 0;
       padding-right: 0;
     }
+
     .block-shop-feed-item {
       > div {
         > .thumbnail {

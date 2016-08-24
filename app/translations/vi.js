@@ -600,5 +600,8 @@
    'loginForm.fields.password': 'Mật khẩu',
    'loginForm.fields.email': 'Thư điện tử',
    'loginForm.validation.email.blank': 'Thư điện tử không được bỏ trống',
-   'loginForm.validation.password.blank': 'Mật khẩu không được bỏ trống'
+   'loginForm.validation.password.blank': 'Mật khẩu không được bỏ trống',
+   'shopBannedMessage': 'Shop của bạn đã bị cấm. Nếu bạn nghĩ rằng có gì đó sai sót ở đây xin bạn hãy liên hệ theo địa chỉ email contact@fumarket.net để yêu cầu mở lại.',
+   'buttonReturn': 'Trở lại trang chủ',
+   'message': 'Thông báo'
 };

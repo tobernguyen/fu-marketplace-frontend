@@ -120,7 +120,7 @@ export default class Welcome extends Component {
             <h3 className="title">Bạn muốn bán hàng? Đăng ký chỉ với 3 bước!</h3>
           </div>
           <div className="body row">
-            <div className="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1">
+            <div className="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 animated bounceIn">
               <FormRequestCreateShopIntro intro={true} />
             </div>
           </div>
@@ -128,9 +128,8 @@ export default class Welcome extends Component {
           <div className="header">
             <h3 className="title additional-feature">Những tính năng hỗ trợ bán hàng</h3>
           </div>
-          <div className="body additional-features row">
+          <div className="body additional-features row animated bounceIn">
             <div className="col-md-6 col-md-offset-3">
-
               <div className="clearfix feature">
                 <div className="col-xs-2 icon">
                   <i className="fa fa-bell fa-5x"/>

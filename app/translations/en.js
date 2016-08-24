@@ -600,5 +600,8 @@ export default {
   'loginForm.fields.password': 'Password',
   'loginForm.fields.email': 'Email',
   'loginForm.validation.email.blank': 'Email can\'t be blank',
-  'loginForm.validation.password.blank': 'Password can\'t be blank'
+  'loginForm.validation.password.blank': 'Password can\'t be blank',
+  'shopBannedMessage': 'Your shop has been banned. If you believe this is an error, please contact Customer Support at contact@fumarket.net to request reactivation.',
+  'buttonReturn': 'Return to homepage',
+  'message': 'Announcement'
 };

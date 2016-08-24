@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import dataURLtoBlob from 'blueimp-canvas-to-blob';
 import BlockShopHeader from 'app/components/home/BlockShopHeader';
 import BlockSellerDashboardSideBar from 'app/components/home/BlockSellerDashboardSideBar';
+import BlockShopBannedMessage from 'app/components/home/BlockShopBannedMessage';
 import SellingItemList from '../SellingItemList';
 import { Modal } from 'react-bootstrap';
 import { uploadShopAvatar, uploadShopCover, updateShopInfo } from 'app/actions/shop';
@@ -99,6 +100,10 @@ class SellerDashboard extends Component {
             {this.props.children}
           </Modal>
         </div>}
+
+        {this.props.sellerShop.banned === true && <Modal show={true}>
+          <BlockShopBannedMessage />
+        </Modal>}
       </div>
     );
   }

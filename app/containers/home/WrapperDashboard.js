@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getSellerShop, getSellerShopItems } from 'app/actions/shop';
 import { withRouter } from 'react-router';
-import _ from 'lodash';
+
 
 class WrapperDashboard extends Component {
   constructor(props) {
@@ -13,7 +13,7 @@ class WrapperDashboard extends Component {
       this.state = {
         shopID: shopID
       };
-      this.fetchData();
+      this.props.getSellerShop(shopID);
     } else {
       this.state = {
         invalidShopID: true
@@ -28,28 +28,20 @@ class WrapperDashboard extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-
     if (nextProps.params) {
       const { shopID } = nextProps.params;
-      if (shopID && !isNaN(shopID)) {
-        this.setState({
-          shopID: shopID
-        }, () => {
-          this.fetchData();
-        })
+      if (shopID && !isNaN(shopID) && shopID != this.state.shopID) {
+        if (nextProps.sellerShop.id != shopID) {
+          this.props.getSellerShop(shopID);
+        }
       }
     }
-  }
 
-  fetchData() {
-    const { shopID } = this.state;
-    if (shopID) {
-      if (_.isEmpty(this.props.sellerShop)) {
-        this.props.getSellerShop(shopID);
-      }
-
-      if (_.isEmpty(this.props.sellingItems)) {
-        this.props.getSellerShopItems(shopID);
+    if (nextProps.sellerShop) {
+      if (nextProps.sellerShop.id != this.state.shopID) {
+        this.setState({
+          shopID: nextProps.sellerShop.id
+        })
       }
     }
   }

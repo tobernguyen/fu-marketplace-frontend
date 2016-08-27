@@ -48,7 +48,7 @@ class BlockShoppingCart extends Component {
 }
 
 BlockShoppingCart.propTypes = {
-  intl:       intlShape.isRequired,
+  intl:       intlShape,
   cartItems:  PropTypes.array.isRequired,
   checkOut:   PropTypes.func.isRequired
 };

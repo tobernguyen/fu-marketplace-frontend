@@ -163,7 +163,7 @@ class BlockSellingItemList extends Component {
 BlockSellingItemList.propTypes = {
   items: PropTypes.object.isRequired,
   sellerMode: PropTypes.bool.isRequired,
-  intl: intlShape.isRequired
+  intl: intlShape
 };
 
 export default injectIntl(BlockSellingItemList);

@@ -25,7 +25,8 @@ export const shop = (state = INITIAL_STATE, action) => {
       });
     case ShopActionTypes.SELLER_GET_SHOP_SUCCESS:
       return _.assign({}, state, {
-        sellerShop: response
+        sellerShop: response,
+        shouldRefresh: true
       });
     case ShopActionTypes.UPDATE_SHOP_INFO_SUCCESS:
       return _.assign({}, state, {

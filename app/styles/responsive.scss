@@ -390,7 +390,7 @@
   }
 }
 /* Custom, iPhone Retina */
-@media only screen and (min-width : 375px) and (max-width: 768px) {
+@media only screen and (min-width : 375px) and (max-width: 766px) {
   .home-header {
     .navbar-header {
       .navbar-brand {
@@ -1001,6 +1001,36 @@
             margin: 5px 0;
             padding: .8em 5px;
           }
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1024px) {
+  .shop-detail-modal {
+        .block-shop-header {
+      .shop-cover {
+        > img {
+          height: auto;
+        }
+        .shop-info-wrapper {
+          bottom: 0;
+          height: auto;
+
+          .shop-avatar-wrapper {
+            .shop-avatar {
+              padding: 10px;
+              img {
+                border-radius: 3px;
+              }
+            }
+          }
+        }
+        .shop-nav-wrapper {
+          height: 55px;
+          background-color: #222;
+          color: #FFF;
         }
       }
     }

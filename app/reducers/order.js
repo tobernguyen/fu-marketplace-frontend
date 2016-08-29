@@ -89,18 +89,17 @@ export const order = (state = INITIAL_STATE, action) => {
       });
     case OrderActionTypes.USER_GET_ORDER_REQUEST:
       return _.merge({}, state, {
+        shouldUpdateOrderList: false,
         isFetching: true
       });
     case OrderActionTypes.USER_GET_ORDER_SUCCESS:
       return _.assign({}, state, {
         orders: action.response.orders,
-        shouldUpdateOrderList: false,
         isFetching: false
       });
     case OrderActionTypes.USER_GET_ORDER_FAILURE:
       return _.assign({}, state, {
         orders: [],
-        shouldUpdateOrderList: false,
         isFetching: false,
         hasNextPage: false
       });

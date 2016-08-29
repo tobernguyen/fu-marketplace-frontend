@@ -16,6 +16,11 @@
       notifyButton: {
         enable: false /* Set to false to hide */
       },
+      welcomeNotification: {
+        title: "FU Marketplace",
+        message: "Cảm ơn bạn đã đăng ký nhận thông báo từ FU Marketplace",
+        url: "https://staging.fumarket.net/"
+      },
       safari_web_id: 'web.onesignal.auto.20000090-ae08-4d2f-988d-291912c8a9bf'
     }]);
   </script>

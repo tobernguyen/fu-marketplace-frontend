@@ -138,7 +138,7 @@ class Shop extends Component {
     return (
       <div className={classNames('shop-detail-modal', {'dim': this.state.showModal || this.props.children})}>
         {this.state.shopValid && <div>
-          <BlockShopHeader shopOwner={seller} shop={shop} sellerMode={false} />
+          <BlockShopHeader query={this.props.query} shopOwner={seller} shop={shop} sellerMode={false} />
           <SellingItemList
             ownerView={ownerView}
             shopOpening={shop.opening}

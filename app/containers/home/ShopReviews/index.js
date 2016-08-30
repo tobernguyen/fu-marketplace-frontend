@@ -54,7 +54,7 @@ class ShopReviews extends Component {
     return (
       <div>
         <Modal.Header>
-          <Link to={`/shops/${this.props.params.shopID}`} className="close"><span aria-hidden="true">×</span></Link>
+          <Link to={{pathname: `/shops/${this.props.params.shopID}`, query: this.props.query }} className="close"><span aria-hidden="true">×</span></Link>
           <Modal.Title>
             <FormattedMessage {...{ id: 'shopReviews.title', defaultMessage: 'Shop reviews' }}/>
           </Modal.Title>
@@ -82,7 +82,8 @@ const mapStateToProps = (state) => {
     shop: shopInfo,
     seller: seller,
     reviewStatus: state.shop.reviewStatus,
-    reviews: currentViewedShop.reviews
+    reviews: currentViewedShop.reviews,
+    query: state.common.query
   }
 };
 

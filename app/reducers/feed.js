@@ -12,7 +12,8 @@ const INITIAL_STATE = {
   total: 0,
   hasMore: true,
   pinnedShops: [],
-  firstLoad: true
+  firstLoad: true,
+  noShop: false
 };
 
 const SHOP_STATUS = {
@@ -31,15 +32,18 @@ export const feed = (state = INITIAL_STATE, action) => {
       });
     case FeedActionTypes.GET_SHOPS_OF_PAGE_REQUEST: {
       return _.assign({}, state, {
-        firstLoad: true
+        firstLoad: true,
+        noShop: INITIAL_STATE.noShop
       });
     }
     case FeedActionTypes.GET_SHOPS_OF_PAGE_SUCCESS: {
       const { result: { shops } } = response;
+      const noShopStatus = (shops.length === 0 && state.shops.length === 0);
       return _.assign({}, state, {
         shops: _.concat(state.shops, shops),
         hasMore: shops.length !== 0,
-        firstLoad: false
+        firstLoad: false,
+        noShop: noShopStatus
       });
     }
     case FeedActionTypes.CLEAR_SHOPS_FEED: {

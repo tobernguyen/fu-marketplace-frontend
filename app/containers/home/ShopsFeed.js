@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import InfiniteScroll from 'app/components/common/InfiniteScroll';
 import BlockShopFeedItem from 'app/components/home/BlockShopFeedItem';
 import BlockFeedItemPlaceholder from 'app/components/home/BlockFeedItemPlaceholder';
+import BlockNoShopMessage from 'app/components/home/BlockNoShopMessage';
 import { getShopsOfPage, clearShopsFeed, updateShop } from 'app/actions/feed';
 import { getShopsFeed } from 'app/selectors';
 import { EVENTS } from 'app/shared/socketIOEvents';
@@ -91,6 +92,7 @@ class ShopsFeed extends Component {
             {this.state.elements}
           </InfiniteScroll>}
         {this.props.firstLoad && <BlockFeedItemPlaceholder />}
+        {this.props.noShop && <BlockNoShopMessage />}
       </div>
     );
   }
@@ -103,7 +105,8 @@ const mapStateToProps = (state) => {
     hasMore: feed.hasMore,
     socket: state.common.socket,
     query: state.common.query,
-    firstLoad: feed.firstLoad
+    firstLoad: feed.firstLoad,
+    noShop: feed.noShop
   }
 };
 

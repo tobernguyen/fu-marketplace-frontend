@@ -604,5 +604,5 @@ export default {
   'shopBannedMessage': 'Your shop has been banned. If you believe this is an error, please contact Customer Support at contact@fumarket.net to request reactivation.',
   'buttonReturnHome': 'Return to homepage',
   'message': 'Announcement',
-  'noShop': 'No shop.'
+  'noShop': 'No shop'
 };

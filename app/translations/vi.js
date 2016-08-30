@@ -604,5 +604,5 @@
    'shopBannedMessage': 'Shop của bạn đã bị cấm. Nếu bạn nghĩ rằng có gì đó sai sót ở đây xin bạn hãy liên hệ theo địa chỉ email contact@fumarket.net để yêu cầu mở lại.',
    'buttonReturnHome': 'Trở lại trang chủ',
    'message': 'Thông báo',
-   'noShop': 'Không có cửa hàng.'
+   'noShop': 'Không có cửa hàng'
 };

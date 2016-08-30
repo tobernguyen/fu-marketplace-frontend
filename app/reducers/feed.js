@@ -29,6 +29,11 @@ export const feed = (state = INITIAL_STATE, action) => {
         aggregations: result.aggregations,
         total: result.total
       });
+    case FeedActionTypes.GET_SHOPS_OF_PAGE_REQUEST: {
+      return _.assign({}, state, {
+        firstLoad: true
+      });
+    }
     case FeedActionTypes.GET_SHOPS_OF_PAGE_SUCCESS: {
       const { result: { shops } } = response;
       return _.assign({}, state, {

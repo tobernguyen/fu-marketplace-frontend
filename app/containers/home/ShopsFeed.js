@@ -5,7 +5,6 @@ import BlockShopFeedItem from 'app/components/home/BlockShopFeedItem';
 import BlockFeedItemPlaceholder from 'app/components/home/BlockFeedItemPlaceholder';
 import { getShopsOfPage, clearShopsFeed, updateShop } from 'app/actions/feed';
 import { getShopsFeed } from 'app/selectors';
-import { PulseLoader } from 'halogen';
 import { EVENTS } from 'app/shared/socketIOEvents';
 import { toFilterParams } from 'app/shared/normalizeParams';
 import _ from 'lodash';
@@ -88,8 +87,7 @@ class ShopsFeed extends Component {
           <InfiniteScroll
             pageStart={1}
             loadMore={this.loadMore}
-            hasMore={this.props.hasMore}
-            loader={<PulseLoader className="feed-loader" color="#b1211e" size="12px" />}>
+            hasMore={this.props.hasMore}>
             {this.state.elements}
           </InfiniteScroll>}
         {this.props.firstLoad && <BlockFeedItemPlaceholder />}

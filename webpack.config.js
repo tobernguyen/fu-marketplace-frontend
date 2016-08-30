@@ -163,7 +163,8 @@ if(TARGET === 'staging') {
         { from: path.join(__dirname, 'build_templates', 'manifest.json.staging'), to: 'manifest.json' },
         { from: path.join(__dirname, 'build_templates', 'OneSignalSDKUpdaterWorker.js') },
         { from: path.join(__dirname, 'build_templates', 'OneSignalSDKWorker.js') },
-        { from: path.join(__dirname, 'build_templates', 'logo.png') }
+        { from: path.join(__dirname, 'build_templates', 'logo.png') },
+        { from: path.join(__dirname, 'build_templates/favicon') }
       ])
     ],
     resolve: {

@@ -89,7 +89,7 @@ class BlockMyTicket extends Component {
     );
   }
   render() {
-      const {tickets, page, changePageSize, size, prevPage, nextPage, isSubmitting, submitResult } = this.props;
+      const {tickets, page, changePageSize, size, prevPage, nextPage, isSubmitting, submitResult, hasNextPage } = this.props;
     return (
       <div>
         {this.renderTicketList(tickets)}
@@ -97,6 +97,7 @@ class BlockMyTicket extends Component {
           page={page}
           tickets={tickets}
           size={size}
+          hasNextPage={hasNextPage}
           prevPage={prevPage}
           nextPage={nextPage}
           changePageSize={changePageSize}

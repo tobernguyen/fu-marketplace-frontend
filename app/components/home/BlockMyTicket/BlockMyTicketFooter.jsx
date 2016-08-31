@@ -3,12 +3,12 @@ import { messages } from 'app/components/home/BlockMyTicket/BlockMyTicket.i18n';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import classNames from 'classnames';
 
-const BlockMyTicketFooter = ({ page = 1, tickets = [], size = 5 , changePageSize, nextPage, prevPage}) => {
+const BlockMyTicketFooter = ({ page = 1, tickets = [], size = 5 , changePageSize, nextPage, prevPage, hasNextPage}) => {
   const previousButtonClass = classNames({
     'disabled': Number(page) === 1
   });
   const nextButtonClass = classNames({
-    'disabled': tickets.length < size
+    'disabled': !hasNextPage
   });
   return (
     <nav>

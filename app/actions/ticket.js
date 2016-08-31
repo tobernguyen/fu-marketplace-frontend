@@ -115,6 +115,24 @@ export const userGetTickets = (status = '', page = 1, size = 5) => {
   }
 }
 
+export const USER_GET_NEXT_PAGE_TICKETS_REQUEST = 'USER_GET_NEXT_PAGE_TICKETS_REQUEST';
+export const USER_GET_NEXT_PAGE_TICKETS_SUCCESS = 'USER_GET_NEXT_PAGE_TICKETS_SUCCESS';
+export const USER_GET_NEXT_PAGE_TICKETS_FAILURE = 'USER_GET_NEXT_PAGE_TICKETS_FAILURE';
+
+const userRequestGetNextPageTickets = (status, page, size) => ({
+  [CALL_API]: {
+    types: [USER_GET_NEXT_PAGE_TICKETS_REQUEST, USER_GET_NEXT_PAGE_TICKETS_SUCCESS, USER_GET_NEXT_PAGE_TICKETS_FAILURE],
+    url: `/api/v1/tickets/?status=${status}&size=${size}&page=${Number(page) + 1}`,
+    method: HTTP_METHODS.GET
+  }
+});
+
+export const userGetNextPageTickets  = (status = '', page = 1, size = 5) => {
+  return (dispatch) => {
+    dispatch(userRequestGetNextPageTickets(status, page, size));
+  }
+}
+
 export const USER_REOPEN_TICKET_REQUEST = 'USER_REOPEN_TICKET_REQUEST';
 export const USER_REOPEN_TICKET_SUCCESS = 'USER_REOPEN_TICKET_SUCCESS';
 export const USER_REOPEN_TICKET_FAILURE = 'USER_REOPEN_TICKET_FAILURE';

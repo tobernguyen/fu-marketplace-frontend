@@ -11,7 +11,10 @@ const LOST_CONNECTION = {
 
 const INITIAL_STATE = {
   isFetching: false,
+  isFetchingNextPage: false,
   tickets: [],
+  nextPageTickets: [],
+  hasNextPage: false,
   isSubmitting: false,
   submitResult: '',
   selectedTicket: {},
@@ -138,21 +141,32 @@ export const ticket = (state = INITIAL_STATE, action) => {
         submitResult: action.error || LOST_CONNECTION
       });
     case TicketActionTypes.USER_GET_TICKETS_REQUEST:
-      return _.merge({}, state, {
+      return _.assign({}, state, {
         tickets: [],
         shouldUpdateTicketList: false,
         isFetching: true
       });
     case TicketActionTypes.USER_GET_TICKETS_SUCCESS:
-      return _.merge({}, state, {
+      return _.assign({}, state, {
         tickets: action.response.tickets,
         isFetching: false
       });
+    case TicketActionTypes.USER_GET_NEXT_PAGE_TICKETS_REQUEST:
+      return _.assign({}, state, {
+        isFetchingNextPage: true,
+        hasNextPage: false,
+        nextPageTickets: []
+      });
+    case TicketActionTypes.USER_GET_NEXT_PAGE_TICKETS_SUCCESS:
+      return _.assign({}, state, {
+        isFetchingNextPage: false,
+        hasNextPage: action.response.tickets.length > 0,
+        nextPageTickets: action.response.tickets
+      });
     case TicketActionTypes.USER_GET_TICKETS_FAILURE:
-     return _.merge({}, state, {
+     return _.assign({}, state, {
        tickets: [],
        isFetching: false,
-       shouldUpdateTicketList: false
      });
     case TicketActionTypes.USER_REOPEN_TICKET_REQUEST:
       return _.merge({}, state, {

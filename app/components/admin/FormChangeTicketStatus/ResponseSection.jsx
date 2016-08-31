@@ -10,20 +10,12 @@ class ResponseSection extends Component {
     super(props);
 
     this.state = {
-      newTicketStatus: props.ticket.selectedTicket.status == TicketStatus.INVESTIGATING ? TicketStatus.CLOSED : TicketStatus.INVESTIGATING,
       dirty: false,
       adminMessage: {
         value: '',
         hasErrors: false,
         error: ''
       }
-    }
-
-    this.handleChangeTicketStatus = (e) => {
-      this.setState({
-        newTicketStatus: e.target.value,
-        dirty: true
-      });
     }
 
     this.handleAdminMessageChange = (e) => {
@@ -43,94 +35,28 @@ class ResponseSection extends Component {
       });
     }
 
-    this.handleSubmit = () => {
+    this.handleStartInvestigate = () => {
       const { ticket: { selectedTicket }} = this.props;
-      const { newTicketStatus, adminMessage } = this.state;
-      if(newTicketStatus == TicketStatus.INVESTIGATING) {
-        this.props.adminInvestigateTicket(selectedTicket.id);
-      } else if ( newTicketStatus == TicketStatus.CLOSED) {
-        if(adminMessage.value.trim().length === 0) {
-          adminMessage['hasErrors'] = true;
-          adminMessage['error'] = messages.formChangeTicketStatus.responseSection.error.blank;
-          this.setState({
-            adminMessage,
-            dirty: false
-          });
-        } else {
-          this.props.adminCloseTicket(selectedTicket.id, adminMessage.value);
-        }
+      this.props.adminInvestigateTicket(selectedTicket.id);
+    }
+
+    this.handleCloseTicket = () => {
+      const { ticket: { selectedTicket }} = this.props;
+      const { adminMessage } = this.state;
+      if(adminMessage.value.trim().length === 0) {
+        adminMessage['hasErrors'] = true;
+        adminMessage['error'] = messages.formChangeTicketStatus.responseSection.error.blank;
+        this.setState({
+          adminMessage,
+          dirty: false
+        });
+      } else {
+        this.props.adminCloseTicket(selectedTicket.id, adminMessage.value);
       }
+
     }
 
     this.renderResponse = this.renderResponse.bind(this);
-  }
-
-  componentWillReceiveProps(nextProps) {
-    const { submitResult } = nextProps;
-    if(submitResult.message_code === AsyncResultCode.INVESTIGATING_TICKET_SUCCESS) {
-      this.setState({
-        newTicketStatus : TicketStatus.CLOSED
-      });
-    }
-  }
-
-  renderNewTicketStatus(status) {
-    let output = '';
-    switch (status) {
-      case TicketStatus.OPENING:
-        output = (
-          <div className="form-group">
-            <label className="label-control">
-              <FormattedMessage {...messages.formChangeTicketStatus.responseSection.fields.changeTicketStatus}/>
-            </label>
-            <div class="radio">
-              <label>
-                <input
-                  type="radio"
-                  name="response"
-                  onChange={this.handleChangeTicketStatus}
-                  value={TicketStatus.INVESTIGATING}/>
-                  {' '}<FormattedMessage {...messages.formChangeTicketStatus.responseSection.fields.orderStatus.investigate}/>
-              </label>
-            </div>
-            <div class="radio">
-              <label>
-                <input
-                  type="radio"
-                  name="response"
-                  onChange={this.handleChangeTicketStatus}
-                  value={TicketStatus.CLOSED}/>
-                  {' '}<FormattedMessage {...messages.formChangeTicketStatus.responseSection.fields.orderStatus.close}/>
-              </label>
-            </div>
-          </div>
-        )
-        break;
-      case TicketStatus.INVESTIGATING:
-        output = (
-          <div className="form-group">
-            <label className="label-control">
-              <FormattedMessage {...messages.formChangeTicketStatus.responseSection.fields.changeTicketStatus}/>
-            </label>
-            <div class="radio">
-              <label>
-                <input
-                  type="radio"
-                  name="response"
-                  onChange={this.handleChangeTicketStatus}
-                  value={TicketStatus.CLOSED}
-                  checked="true" />
-                  {' '}<FormattedMessage {...messages.formChangeTicketStatus.responseSection.fields.orderStatus.close}/>
-              </label>
-            </div>
-          </div>
-        );
-        break;
-      default:
-
-    }
-
-    return output;
   }
 
   renderResponse(status) {
@@ -142,7 +68,7 @@ class ResponseSection extends Component {
       case TicketStatus.OPENING:
         output = (
           <div className="form-actions">
-            <button type="button" className="btn btn-warning" onClick={this.handleSubmit} disabled={isSubmitting}>
+            <button type="button" className="btn btn-warning" onClick={this.handleStartInvestigate} disabled={isSubmitting}>
               <FormattedMessage {...messages.formChangeTicketStatus.responseSection.button.startInvestigate}/>{isSubmitting && <i className="fa fa-spinner fa-spin"></i>}
             </button>
           </div>
@@ -169,7 +95,7 @@ class ResponseSection extends Component {
               }
             </div>
             <div className="form-actions">
-              <button type="button" className="btn btn-warning" onClick={this.handleSubmit} disabled={!dirty || adminMessage.hasErrors || isSubmitting}>
+              <button type="button" className="btn btn-warning" onClick={this.handleCloseTicket} disabled={!dirty || adminMessage.hasErrors || isSubmitting}>
                 <FormattedMessage {...messages.formChangeTicketStatus.responseSection.button.closeTicket}/>{isSubmitting && <i className="fa fa-spinner fa-spin"></i>}
               </button>
             </div>

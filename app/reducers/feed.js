@@ -39,8 +39,13 @@ export const feed = (state = INITIAL_STATE, action) => {
     case FeedActionTypes.GET_SHOPS_OF_PAGE_SUCCESS: {
       const { result: { shops } } = response;
       const noShopStatus = (shops.length === 0 && state.shops.length === 0);
+      var newShop = _.concat(state.shops, shops);
+      var newClosedShop = _.remove(newShop, (shop) => {
+        return shop.opening === false;
+      });
+      const sortedNewShop = _.concat(newShop, newClosedShop);
       return _.assign({}, state, {
-        shops: _.concat(state.shops, shops),
+        shops: sortedNewShop,
         hasMore: shops.length !== 0,
         firstLoad: false,
         noShop: noShopStatus

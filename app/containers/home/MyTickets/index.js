@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { updateModalSize } from 'app/actions/common';
 import {
   userGetTickets,
+  userGetNextPageTickets,
   userReopenTicket,
   userCloseTicketModal,
   userCloseTicket
@@ -33,6 +34,7 @@ class MyTickets extends Component {
           page: FIRST_PAGE
         });
         this.props.userGetTickets('', FIRST_PAGE, size);
+        this.props.userGetNextPageTickets('', FIRST_PAGE, size);
       }
     };
 
@@ -43,6 +45,7 @@ class MyTickets extends Component {
           page: this.state.page - 1
         }, () => {
           this.props.userGetTickets('', this.state.page, this.state.size);
+          this.props.userGetNextPageTickets('', this.state.page, this.state.size);
         })
       }
     };
@@ -53,13 +56,14 @@ class MyTickets extends Component {
         page: this.state.page + 1
       }, () => {
         this.props.userGetTickets('', this.state.page, this.state.size);
+        this.props.userGetNextPageTickets('', this.state.page, this.state.size);
       })
     }
 
     this.renderBody = () => {
       const { page, size } = this.state;
-      const { userCloseTicket, userCloseTicketModal, ticket: { tickets, isFetching, isSubmitting, submitResult }, userReopenTicket } = this.props;
-      if(isFetching) {
+      const { userCloseTicket, userCloseTicketModal, ticket: { tickets, isFetching, isFetchingNextPage, hasNextPage, isSubmitting, submitResult }, userReopenTicket } = this.props;
+      if(isFetching || isFetchingNextPage) {
         return (
           <div className="text-center" style={{
             'height': '50px',
@@ -80,6 +84,7 @@ class MyTickets extends Component {
         nextPage={this.nextPage}
         changePageSize={this.changePageSize}
         tickets={tickets}
+        hasNextPage={hasNextPage}
         isSubmitting={isSubmitting}
         submitResult={submitResult}
         userReopenTicket={userReopenTicket}
@@ -92,6 +97,7 @@ class MyTickets extends Component {
   componentWillMount() {
     this.props.updateModalSize('lg');
     this.props.userGetTickets('', FIRST_PAGE, DEFAULT_SIZE);
+    this.props.userGetNextPageTickets('', FIRST_PAGE, DEFAULT_SIZE);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -99,6 +105,7 @@ class MyTickets extends Component {
     const { page, size } = this.state;
     if ( shouldUpdateTicketList ) {
       this.props.userGetTickets('', page,size);
+      this.props.userGetNextPageTickets('', page,size);
     }
   }
 
@@ -132,6 +139,7 @@ const mapStateToProps = (state) => {
 export default connect(mapStateToProps, {
   updateModalSize,
   userGetTickets,
+  userGetNextPageTickets,
   userReopenTicket,
   userCloseTicketModal,
   userCloseTicket

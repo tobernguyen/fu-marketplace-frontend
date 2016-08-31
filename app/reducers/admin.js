@@ -199,7 +199,7 @@ export const admin = (state = initialState, action) => {
         }
       });
     case AdminActionTypes.ADMIN_GET_SHOPS_REQUEST:
-      return _.merge({}, state, {
+      return _.assign({}, state, {
         shopManagement: {
           isFetching: true,
           isSubmittingAvatarAndCover: false,
@@ -214,7 +214,7 @@ export const admin = (state = initialState, action) => {
         }
       });
     case AdminActionTypes.ADMIN_GET_SHOPS_SUCCESS:
-      return _.merge({}, state, {
+      return _.assign({}, state, {
         shopManagement: {
           isFetching: false,
           shopList: response.shops

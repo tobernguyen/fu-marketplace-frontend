@@ -74,7 +74,7 @@ const common = {
 
 // Default configuration. We will return this if
 // Webpack is called outside of npm.
-if(TARGET === 'start' || !TARGET) {
+if(TARGET === 'start' || TARGET === 'docker:development' || !TARGET) {
   module.exports = merge(common, {
     devtool: 'eval-source-map',
     watchOptions: {

@@ -4,6 +4,7 @@
   "description": "",
   "scripts": {
     "start": "webpack-dev-server",
+    "docker:development": "webpack-dev-server --host 0.0.0.0",
     "staging": "webpack",
     "build": "webpack",
     "test": "jest",

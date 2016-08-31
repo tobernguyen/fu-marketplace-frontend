@@ -12,11 +12,19 @@ const ShopListRow = ({ shop }) => {
   });
   const ShipPlacesArray = ['', 'Dom A', 'Dom B', 'Dom C', 'Dom D', 'Dom E', 'Dom F'];
   const shipPlaces = _.sortBy(shop.shipPlaces, (shipPlace) => { return shipPlace });
+  let seller = {
+    id: 0,
+    fullName: "N/A"
+  }
+
+  if(shop.seller) {
+    seller = shop.seller;
+  }
   return (
     <tr className={rowClassName}>
       <td>{shop.id}</td>
       <td>{shop.name}</td>
-      <td><Link to={`/admin/users/${shop.seller.id}/edit`}>{shop.seller.fullName}</Link></td>
+      <td><Link to={`/admin/users/${seller.id}/edit`}>{seller.fullName}</Link></td>
       <td>{shipPlaces.map(shipPlace =>
         <div key={shipPlace} className="ship-place-span text-center">{ShipPlacesArray[shipPlace]}</div>
       )}</td>

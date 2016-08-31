@@ -3,14 +3,31 @@ import { Link } from 'react-router';
 import { FormattedRelative } from 'react-intl';
 import LabelTicketStatus from 'app/components/admin/LabelTicketStatus';
 const TicketListRow = ({ ticket }) => {
+  let user = {
+    id: 0,
+    fullName: "N/A"
+  };
+  let shop = {
+    id: 0,
+    name: "N/A"
+  }
+
+  if(ticket.user) {
+    user = ticket.user;
+  }
+
+  if(ticket.shop) {
+    shop = ticket.shop;
+  }
+
   return(
     <tr>
       <td>{ticket.id}</td>
       <td>
-        <Link to={`/admin/users/${ticket.user.id}/edit`}>{ticket.user.fullName}</Link>
+        <Link to={`/admin/users/${user.id}/edit`}>{user.fullName}</Link>
       </td>
       <td>
-        <Link to={`/admin/shops/${ticket.shop.id}/edit`}>{ticket.shop.name}</Link>
+        <Link to={`/admin/shops/${shop.id}/edit`}>{shop.name}</Link>
       </td>
       <td>
         <LabelTicketStatus status={ticket.status} />
